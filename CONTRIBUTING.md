@@ -1,102 +1,122 @@
 # Contributing
 
-This repository is an implementation-first research prototype. The working
-standard is: every claim should eventually reduce to runnable code, measured
-artifacts, and a named next bottleneck.
+This repository is an implementation-first FHE research prototype. A claim is
+complete only when code, tests, configuration, and evidence agree.
 
-## Local Workflow
-
-Install the development dependencies and pre-commit hook:
+## Development setup
 
 ```bash
-python3 -m pip install --user -e '.[dev]'
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[dev]'
 pre-commit install
 ```
 
-Before committing, run:
+Use the fast gate while iterating:
+
+```bash
+scripts/run_fast_checks.sh
+```
+
+Before a release, tag, or claim-changing merge, run:
 
 ```bash
 scripts/run_checks.sh
 ```
 
-This is the required local gate for ordinary changes. GPU/SLURM probes are
-tracked separately because they require the `high` cluster and a paid B200
-allocation.
+GPU probes are separate because they require OpenFHE/FIDESlib, dedicated
+hardware, and substantial memory. A passing local suite does not validate an
+encrypted B300 claim.
 
-## Versioning
+## Active and compatibility code
 
-Use SemVer. Do not use `version1`, `version2`, date-only names, or milestone
-names as package versions.
+- `fhemamba/` and `native/fideslib_stage0/` are the active Mamba-2 path.
+- `src/fhe_native_mamba3/` remains a shipped compatibility package for
+  historical scripts and the current CLI.
+- New Mamba-2 formula, lowering, packing, and runtime work belongs in the
+  active path. Do not create a third implementation.
+- Removing the compatibility package requires a planned breaking release and
+  migration of its remaining tools.
 
-- Patch bumps are for bug fixes, test additions, process/docs changes, and
-  narrow API hardening inside the current stage.
-- Minor bumps are for a new runnable capability boundary, for example a real
-  checkpoint-to-bundle-to-encrypted-smoke path.
-- `1.0.0` is reserved for loading existing OSS weights and running an
-  end-to-end encrypted inference path with benchmark output.
+## Definition of done
 
-Current expected sequence:
+A change is done when:
 
-- `0.2.x`: backend abstraction, Stage 0 harnesses, layout safety, status gates.
-- `0.3.x`: real Mamba checkpoint to bundle to encrypted recurrence smoke.
-- `0.4.x`: multi-layer/24-layer recurrence smoke with bootstrap scheduling.
-- `0.5.x`: reproducible OpenFHE/FIDESlib Stage 0 benchmark.
-- `1.0.0`: OSS baseline usable by external users.
+- the write scope and claim boundary are explicit;
+- code and tests pass the appropriate local gate;
+- hardware-backed changes have a measured artifact, or clearly state why one
+  is pending;
+- direct result JSON records repository commit and binary identity;
+- README, evidence registry, roadmap, and backlog are updated when behavior or
+  claims change;
+- the next measured bottleneck is named.
 
-## PBI Standard
+Documentation is not a substitute for missing raw evidence. When a measurement
+is known only from notes, label it as documented and create a recovery/rerun
+PBI instead of reconstructing a fake backend artifact.
 
-A PBI should include:
+## Benchmark artifacts
 
-- stage: Stage 0, Stage 1, or Stage 2,
-- priority: P0, P1, P2,
-- dependencies and blockers,
-- parallelization notes,
-- acceptance checks,
-- benchmark or artifact output, when relevant,
-- next bottleneck expected after completion.
+Use `fhemamba/results/` for small curated current artifacts. Large payloads,
+logs, transient campaigns, and historical outputs remain ignored unless a
+specific review requires them.
 
-Definition of Ready:
+A direct backend artifact should include:
 
-- the write scope is clear,
-- dependencies are explicit,
-- there is a runnable acceptance command or artifact target,
-- the expected failure mode is named.
+- artifact/package version and repository commit;
+- native binary SHA-256 where applicable;
+- backend, hardware, CKKS parameters, and security mode;
+- exact input/payload identity;
+- pass/fail status and numerical tolerance;
+- per-token error and decrypt status;
+- setup/evaluation/decrypt timing;
+- rotations, ct-pt/ct-ct products, and bootstrap counts;
+- peak RSS and key/cache configuration;
+- explicit measurement scope and non-claims.
 
-Definition of Done:
+Validate curated artifacts with:
 
-- code and tests are committed,
-- `scripts/run_checks.sh` passes,
-- benchmark/probe JSON is attached or its absence is explicitly explained,
-- README/docs/status are updated when behavior or claims change,
-- the next bottleneck is added to the issue or linked PBI.
+```bash
+python scripts/validate_artifacts.py --require-commit path/to/result.json
+```
 
-## Benchmark Artifacts
+## Versioning and tags
 
-Benchmark JSON should include:
+Use SemVer for package versions.
 
-- repo version and commit,
-- backend, hardware, and input mode,
-- checkpoint or synthetic problem identifier,
-- latency and operation counts,
-- accuracy/error metric,
-- bootstrap count and rotation key count when applicable,
-- measurement scope and non-claims.
+- Patch versions cover fixes, tests, process updates, and narrow optimizations
+  inside a capability boundary.
+- Minor versions mark a new runnable capability such as a longer encrypted
+  horizon, process-separated full-kernel execution, or 128-bit full-chain
+  execution.
+- `1.0.0` is reserved for reproducible interactive generation at 128-bit
+  parameters with an explicit protocol-security statement.
 
-Use `runs/` for local artifacts and `docs/probes/` for curated probe notes. Do
-not treat toy CKKS parameters as Stage 0 target measurements unless the artifact
-explicitly says so.
+Do not create a release tag until:
 
-## Review Checklist
+1. the package version is consistent;
+2. the full local gate passes;
+3. claim-bearing raw artifacts are tracked and validator-clean;
+4. the evidence registry links every headline result.
 
-Review low-level FHE code with these questions first:
+Package version `0.4.5` currently has no tag because the corresponding
+three-token B300 success artifact is still awaiting recovery or an exact rerun.
 
-- Does the ciphertext slot layout have a single explicit contract?
-- Are required rotations reported by the same API that executes the layout?
-- Can a ciphertext from one layout be accidentally passed as another layout?
-- Are encrypted, plaintext, and tracking backend paths semantically aligned?
-- Does a partial check clearly say it is partial?
-- Does the public package API point at the current implementation?
+## Review priorities
 
-For checkpoint work, avoid claiming full Mamba correctness unless the result is
-compared against the actual checkpoint path being claimed.
+For low-level FHE changes, review these first:
 
+- Is each ciphertext slot layout explicit and type-safe?
+- Does the rotation inventory match the executing implementation?
+- Are level drops and bootstrap placement visible in telemetry?
+- Are reference and encrypted paths evaluating the same polynomial circuit?
+- Are exact-model approximation and CKKS execution errors separated?
+- Can a debug decrypt influence subsequent encrypted execution?
+- Is a partial probe described as partial?
+
+For documentation and artifacts:
+
+- Does every number have a source?
+- Is the source raw execution, a derived report, or prose-only measurement?
+- Are security and process-separation boundaries stated next to the result?
+- Does the backlog contain the next executable gate?

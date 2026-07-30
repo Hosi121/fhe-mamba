@@ -3,55 +3,43 @@
 [![CI](https://github.com/Hosi121/fhe-native-mamba3/actions/workflows/ci.yml/badge.svg)](https://github.com/Hosi121/fhe-native-mamba3/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A research prototype for running the real, open-weight `mamba2-130m` language
-model under fully homomorphic encryption. The reference and lowering pipeline
-is written in Python/PyTorch; encrypted execution uses CKKS through OpenFHE and
-FIDESlib-GPU.
+A research prototype for evaluating the real, open-weight `mamba2-130m`
+checkpoint under fully homomorphic encryption. The reference and lowering
+pipeline is written in Python/PyTorch; encrypted execution uses CKKS through
+OpenFHE and FIDESlib-GPU.
 
-The active implementation is [`fhemamba/`](fhemamba/README.md), with the native
+The active research trunk is [`fhemamba/`](fhemamba/README.md), with the native
 GPU kernel in [`native/fideslib_stage0/`](native/fideslib_stage0/). The older
-`src/fhe_native_mamba3` package and `runs/` artifacts are retained as a
-read-only pre-rebuild archive and are not the current architecture.
+`src/fhe_native_mamba3` package remains installed and tested for compatibility
+with historical tooling, but it is not the architecture used for the current
+Mamba-2 result.
 
 ## Current status
 
-Evidence through **2026-07-14** (`v0.4.5`):
+Evidence recorded through **2026-07-14**, at package version `0.4.5`:
 
-| Gate | Result | Scope |
+| Gate | Result | Evidence state |
 |---|---|---|
-| Model quality | WikiText-2 PPL **22.307 → 22.333** (**+0.12%**) | All FHE-hostile Mamba-2 ops replaced by calibrated polynomials/Newton iterations, 280 windows, no finetuning |
-| Lowering parity | **≤ 3e-5** against the reference | Decode operation schedule and CKKS level ledger on the real checkpoint |
-| Full encrypted chain | **PASS**, errors **0.01295 / 0.01173 / 0.03475** at tolerance 0.05 | 24 layers, three sequential autoregressive token steps, real ciphertext state carry, NVIDIA B300 |
-| Full-chain runtime | **145.75 s** evaluation; **26.38 s** average for the two warm carried-state steps | Promoted `out_proj` fusion plus complex-paired state refresh; 469 physical bootstraps, 120.24 GiB peak RSS |
-| 128-bit parameters | **PASS**, errors **0.012 / 0.031**, 197 s/token | Layer 0 only, two tokens, `HEStd_128_classic`, ring `2^17`; this is not yet a full 24-layer protocol result |
-| Key separation | **PASS**, round-trip error **1.79e-12** | Three-process serialization probe with secret-key-free server evaluation; full-kernel promotion remains open |
+| Model quality | WikiText-2 PPL **22.307 -> 22.333** (**+0.12%**) over 280 windows | Tracked result JSON |
+| Lowering parity | **3.1e-5** against the reference decode schedule over five verified tokens | Tracked result JSON |
+| Full encrypted chain | **PASS**, errors **0.01295 / 0.01173 / 0.03475** over 24 layers and three sequential tokens | Measurement documented; raw B300 JSON recovery is open |
+| Full-chain runtime | **145.75 s** evaluation; **26.38 s** average for the two warm carried-state steps | Same documented B300 measurement |
+| 128-bit parameters | Layer 0, two tokens: errors **0.012 / 0.031**, about **197 s/token** | Tracked raw JSON with legacy provenance fields |
+| Key separation | Three-process probe passes at **1.79e-12** round-trip error | Tracked raw JSON |
 
-The full-chain B300 result uses ring `2^16` and `security=not-set`. It is
-feasibility and systems evidence, not a 64-bit or 128-bit security claim.
-Polynomial-circuit error and exact-model approximation error are reported
-separately; decrypted diagnostics are never fed back into ciphertext execution.
+The promoted B300 configuration combines:
 
-### What changed in the latest optimization round
+- input-replicated true BSGS;
+- FIDESlib fused linear transforms for `out_proj` only;
+- complex real/imaginary pairing for recurrent-state refresh;
+- a fully synchronized FIDESlib build;
+- ring `2^16`, `security=not-set`, and a 65 GiB plaintext cache.
 
-- Input-replicated true BSGS, consumption-level plaintext encoding, and a small
-  cache reduced the earlier one-token 24-layer evaluation from 354.88 s to
-  166.39 s while passing the 0.05 error gate.
-- A FIDESlib fused linear-transform path cuts projection work. Fusing only
-  `out_proj` preserves the short-session accuracy/runtime trade-off; fusing
-  both projections also passes when paired refresh is enabled, but is slower
-  over three steps (156.31 s versus 145.75 s).
-- Complex real/imaginary packing lets two normalized recurrent-state
-  ciphertexts share one bootstrap. The three-token gate passes while replacing
-  each pair of physical state refreshes with one.
-- Shared dt/decay head expansion passes at 0.04123 and improves warm head work,
-  but increases setup, key memory, and total three-step runtime. It remains an
-  opt-in long-session experiment.
-- B300 correctness still requires the fully synchronized FIDESlib build. A
-  reduced-barrier build passed bootstrap micro-probes but silently corrupted
-  the full 24-layer computation, so it is not promoted.
-
-The detailed measurements and negative results are in the
-[FHE/Mamba bottleneck survey](docs/research/2026-07-13-fhe-mamba-bottleneck-survey.md).
+The B300 result is feasibility and systems evidence, not a 64-bit or 128-bit
+security claim. See the [evidence registry](docs/evidence.md) for the exact
+provenance state and the
+[bottleneck survey](docs/research/2026-07-13-fhe-mamba-bottleneck-survey.md)
+for measured comparisons and negative results.
 
 ## Claim boundary
 
@@ -60,38 +48,67 @@ This repository does **not** yet claim:
 - a complete 128-bit-secure protocol, including return-path noise flooding;
 - a 24-layer run at 128-bit parameters;
 - long-horizon or interactive encrypted generation;
-- process-separated autoregressive execution of the full kernel;
+- process-separated autoregressive execution of the full Mamba kernel;
 - a measured full-kernel client/server round trip;
 - support for models beyond `mamba2-130m`.
 
-The next milestone is a longer B300 session using the promoted fused-output and
-paired-state path, followed by full client/server separation and 128-bit
-full-chain promotion.
+The immediate milestone is a five-step B300 autoregressive run using the
+promoted fused-output and paired-state configuration. Full-kernel process
+separation and a 128-bit full-chain run follow it. The canonical work order is
+in the [backlog](docs/backlog.md) and [roadmap](docs/roadmap.md).
+
+## Architecture
+
+```text
+client                              server (GPU CKKS)
+------                              -----------------
+tokenize + embed
+encrypt hidden state       ----->   24 x Mamba-2 block + final RMSNorm
+decrypt final hidden state <-----   encrypted hidden state
+lm_head + token selection
+```
+
+Weights are public. Prompt tokens, intermediate activations, recurrent state,
+and returned hidden states are the protected values. Embedding and `lm_head`
+remain client-side because evaluating the public 50k-vocabulary head under FHE
+would add cost without protecting an additional secret.
+
+The encrypted path compares against the same polynomial circuit used by the
+reference implementation. Exact-model approximation error and CKKS execution
+error are reported separately, and decrypted diagnostics are never fed back
+into ciphertext execution.
 
 ## Repository layout
 
 ```text
-fhemamba/                    active reference, lowering, payload, and experiment code
-native/fideslib_stage0/      current FIDESlib/OpenFHE GPU kernel and tests
-scripts/                     local, DGX, and B300 build/run helpers
-fhemamba/results/            small, reviewable benchmark and correctness artifacts
-docs/research/               current measurement-driven design notes
-src/fhe_native_mamba3/       archived pre-July-2026 implementation
-runs/                        ignored legacy/generated experiment artifacts
+fhemamba/                    active reference, lowering, payload, and experiments
+native/fideslib_stage0/      active FIDESlib/OpenFHE GPU kernel and native tests
+scripts/                     local, DGX, B300, and artifact helpers
+fhemamba/results/            small tracked correctness and benchmark artifacts
+docs/research/               current measurement-driven research notes
+src/fhe_native_mamba3/       compatibility package for pre-rebuild tooling
+tests/                       compatibility and repository-level tests
+runs/                        ignored historical/generated experiment outputs
 ```
 
-## Quick start
+## Local development
 
-Python 3.10 or newer is required. The reference tests do not require a GPU:
+Python 3.10 or newer is required. Reference tests do not require a GPU:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[dev]'
-python -m pytest fhemamba/tests -q
+scripts/run_fast_checks.sh
 ```
 
-Run parity and perplexity checks against a local checkpoint:
+The required release gate adds coverage:
+
+```bash
+scripts/run_checks.sh
+```
+
+Checkpoint parity and perplexity require a local checkpoint:
 
 ```bash
 python fhemamba/experiments/run_parity.py \
@@ -100,18 +117,45 @@ python fhemamba/experiments/run_ppl_ladder.py \
   --checkpoint checkpoints/mamba2-130m-hf
 ```
 
-The native GPU path requires a CUDA-capable system plus OpenFHE/FIDESlib. See
-[`scripts/build_b300_fideslib.sh`](scripts/build_b300_fideslib.sh),
-[`scripts/run_b300_mamba2.sh`](scripts/run_b300_mamba2.sh), and the JSON campaign
-runner documented in [`fhemamba/README.md`](fhemamba/README.md).
+See [docs/testing.md](docs/testing.md) for test tiers and GPU limitations.
+
+## B300 five-token campaign
+
+The promoted long-horizon candidate is pinned in
+[`b300_autoregressive_prompt2_generate4.json`](fhemamba/experiments/b300_autoregressive_prompt2_generate4.json).
+Before launching, add prompt-2/generate-4 client assets to the chain payload:
+
+```bash
+python fhemamba/experiments/export_autoregressive_client_payload.py \
+  --checkpoint checkpoints/mamba2-130m-hf \
+  --chain-dir /home/kataiwa/fhemamba-b300/payloads/m2_chain_payload_sqnewton_wiki512_t2 \
+  --prompt-tokens 2 \
+  --generate-tokens 4
+```
+
+On the B300 host, run the resumable campaign:
+
+```bash
+python fhemamba/experiments/run_dgx_campaign.py \
+  --manifest fhemamba/experiments/b300_autoregressive_prompt2_generate4.json \
+  --runner scripts/run_b300_mamba2.sh \
+  --output-json /home/kataiwa/fhemamba-b300/results/b300-p2-g4-campaign.json \
+  --resume
+```
+
+Promotion requires all five steps to decrypt, every polynomial-circuit error
+to remain at or below `0.05`, generated token IDs to match, and the artifact to
+record zero intermediate decrypts, per-token timing, bootstrap counts, peak
+RSS, repository commit, and binary SHA-256.
 
 ## Versioning
 
-- `0.4.x`: real Mamba-2 weights under real encryption. `0.4.5` records the
-  passing 24-layer, three-token B300 path with fused output projection and
-  complex-paired recurrent-state refresh.
-- `1.0.0`: an interactive encrypted-generation demo at 128-bit security
-  parameters with reproducible benchmark artifacts.
+- `0.4.x`: real Mamba-2 weights under real encrypted execution.
+- `0.4.5`: package version for the documented 24-layer, three-token B300
+  milestone. The Git tag remains pending until its raw success artifact is
+  recovered or the baseline is rerun.
+- `1.0.0`: an interactive encrypted-generation demo at 128-bit parameters with
+  reproducible benchmark artifacts.
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for development checks and artifact
-requirements. Licensed under the [MIT License](LICENSE).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for artifact and review requirements.
+Licensed under the [MIT License](LICENSE).

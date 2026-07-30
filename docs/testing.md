@@ -1,68 +1,63 @@
-# Testing Strategy
+# Testing strategy
 
-This project uses a TDD-ish split because not every low-level path can run in
-ordinary pre-commit checks.
+The repository has three verification tiers: local Python/native-contract
+tests, local coverage, and hardware-backed encrypted integration gates.
 
-## Fast Tests
-
-Run:
+## Fast local gate
 
 ```bash
 scripts/run_fast_checks.sh
 ```
 
-If using `uv`, install the project extras with `uv sync --extra dev`. Do not use
-`uv sync --dev` for this repository; the dev tooling is currently modeled as the
-optional `dev` extra in `pyproject.toml`.
+This runs:
 
-This executes:
+- `ruff format --check`;
+- `ruff check`;
+- the complete configured pytest suite without coverage;
+- slow-test duration reporting.
 
-- `ruff format --check`
-- `ruff check`
-- `pytest` without coverage
-- `pytest --durations=10` so slow tests stay visible
+`pyproject.toml` currently includes both `tests/` and `fhemamba/tests/`.
+`tests/` primarily covers the compatibility package and repository tooling;
+`fhemamba/tests/` covers the active Mamba-2 reference/lowering trunk.
 
-Use this while iterating. The slowest tests are currently CLI/subprocess tests,
-so focused runs are often better than a full suite for TDD:
+For focused iteration:
 
 ```bash
-scripts/run_fast_checks.sh tests/test_checkpoint_profile.py
+scripts/run_fast_checks.sh fhemamba/tests/test_state_layout.py
+scripts/run_fast_checks.sh tests/test_native_fideslib_stage0.py
 ```
 
-## Full Checks
+When using `uv`, install with `uv sync --extra dev`. The development tools are
+an optional project extra, not a dependency group.
 
-Run:
+## Full local gate
 
 ```bash
 scripts/run_checks.sh
 ```
 
-This executes ruff and coverage-enabled pytest once. It no longer calls
-`pre-commit run --all-files` by default because that duplicated the ruff and
-pytest work and made every full check pay for the suite twice. To explicitly
-exercise the hook runner:
+This runs formatting, lint, pytest, and the current coverage gate. Coverage is
+still enforced for the compatibility `fhe_native_mamba3` package because the
+historical suite and CLI remain shipped. Adding a separate active-`fhemamba`
+coverage threshold is PBI-OPS-101; until then, the full pytest suite remains the
+active trunk's required local correctness gate.
+
+Parallel execution is available when `pytest-xdist` is installed:
+
+```bash
+CHECK_JOBS=auto scripts/run_checks.sh
+```
+
+To exercise the installed pre-commit hook explicitly:
 
 ```bash
 RUN_PRECOMMIT=1 scripts/run_checks.sh
 ```
 
-Coverage is measured for the Python library code, excluding `cli.py` because the
-CLI tests intentionally exercise it through subprocesses. The current minimum is
-70%.
+## Native C++ contract tests
 
-When `pytest-xdist` is installed, CI and local runs can parallelize pytest:
-
-```bash
-CHECK_JOBS=auto scripts/run_checks.sh
-CHECK_JOBS=auto scripts/run_fast_checks.sh
-```
-
-Pre-commit remains installed as the commit-time guard and runs ruff plus pytest
-once before accepting a commit.
-
-## Native C++ Unit Tests
-
-The native Stage 0 FIDESlib kernel has a small FIDESlib-free layout test:
+The FIDESlib-free C++ tests cover payload parsing, layout, planning, depth,
+process-role restrictions, and artifact emission:
 
 ```bash
 cmake -S native/fideslib_stage0 -B build/stage0-layout-tests \
@@ -72,38 +67,62 @@ cmake --build build/stage0-layout-tests
 ctest --test-dir build/stage0-layout-tests --output-on-failure
 ```
 
-`pytest` runs this automatically through `tests/test_native_layout_cpp.py`.
-These tests cover the pure pieces that are easiest to break:
+Pytest invokes this path through `tests/test_native_layout_cpp.py`.
 
-- rank-major slot layout
-- rank-reduce and rank-local rotation-key inventory
-- reduce/scatter masks
-- dense and rank-local output slot mapping
-- JSON emission for nonfinite decrypted values
+These tests do not execute CKKS on a GPU. They are intended to catch contract
+breakage before an expensive B200/B300 allocation.
 
-## GPU Integration Probes
+## Artifact validation
 
-B200/FIDESlib runs are not part of ordinary pre-commit because they require a
-SLURM allocation:
+Curated benchmark JSON should be checked with:
 
 ```bash
-ssh high 'cd ~/cipher/fhe-native-mamba3 && sbatch slurm/fideslib_stage0.sbatch'
-ssh high 'cd ~/cipher/fhe-native-mamba3 && sbatch slurm/fideslib_stage0_sweep.sbatch'
+python scripts/validate_artifacts.py \
+  --require-commit \
+  path/to/result.json
 ```
 
-These probes produce benchmark JSON and are recorded in
-`docs/probes/2026-05-10-b200-fideslib.md`.
+Direct encrypted backend artifacts must include, where applicable:
 
-## Current Gaps
+- package/artifact version and repository commit;
+- backend, hardware/configuration, and input mode;
+- status and numerical gate;
+- operation and rotation counts;
+- bootstrap count and CKKS level telemetry;
+- setup/evaluation/decrypt timing and peak RSS;
+- a human-readable claim and explicit non-claims.
 
-- The native encrypted kernel itself is still verified by SLURM probes, not by
-  a local C++ test runner.
-- `rank-reduce` readout is verified up to `mimo_rank=2` under the toy CKKS
-  parameters; higher ranks are recorded as known failing configurations.
-  `rank-local` is the scatter-free candidate path for the next B200 sweep.
-- Bootstrap scheduling has symbolic tests, a JSON-emitting OpenFHE bootstrap
-  latency probe, a real-checkpoint one-layer bootstrap smoke, and a
-  bootstrap-enabled segment sample through SLURM. Scheduled bootstrap probes can
-  execute; the remaining integration gap is wiring those refreshes into a true
-  inter-layer ciphertext handoff through checkpoint full-layer gate,
-  out-projection, and residual paths.
+Do not manufacture a summary artifact from prose and present it as a raw
+backend result. Summary/collection artifacts must identify themselves as such.
+
+## GPU integration gates
+
+FIDESlib GPU execution is not part of ordinary CI. Relevant gates are:
+
+1. bootstrap and complex-pair micro-probes;
+2. one-layer/full-width encrypted smokes;
+3. full 24-layer multi-token execution;
+4. process-separated execution;
+5. 128-bit full-chain execution.
+
+A micro-probe cannot promote a synchronization or bootstrap change. The B300
+reduced-barrier build demonstrated why: its bootstrap probe passed while the
+full chain silently produced corrupt finite values.
+
+The current five-step campaign is:
+
+```bash
+python fhemamba/experiments/run_dgx_campaign.py \
+  --manifest fhemamba/experiments/b300_autoregressive_prompt2_generate4.json \
+  --runner scripts/run_b300_mamba2.sh \
+  --output-json /home/kataiwa/fhemamba-b300/results/b300-p2-g4-campaign.json \
+  --resume
+```
+
+## Known gaps
+
+- The documented `0.4.5` three-token B300 success JSON is not currently
+  tracked; recovery or exact rerun is PBI-M4-001.
+- GPU CKKS execution cannot be reproduced by GitHub-hosted CI.
+- Active-`fhemamba` coverage is not yet a separate enforced metric.
+- A full process-separated Mamba run and a 24-layer 128-bit run remain open.

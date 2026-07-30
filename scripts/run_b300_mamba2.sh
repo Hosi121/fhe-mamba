@@ -50,7 +50,16 @@ INPUT_CHAIN="${INPUT_CHAIN:-${ROOT_DIR}/payloads/m2_chain_payload_sqnewton_wiki5
 RESULTS_DIR="${RESULTS_DIR:-${ROOT_DIR}/results}"
 META_BTS_RESIDUAL_LAYERS="${META_BTS_RESIDUAL_LAYERS:-21,22,23}"
 RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
-OUTPUT_JSON="${OUTPUT_JSON:-${RESULTS_DIR}/m2_chain_b300-sm${FIDESLIB_SM}-l${LAYERS}-t${TOKENS}-${RUN_ID}.json}"
+RUN_TAG="${RUN_TAG:-}"
+if [[ -n "${OUTPUT_JSON:-}" ]]; then
+  OUTPUT_JSON="${OUTPUT_JSON}"
+elif [[ -n "${RUN_TAG}" ]]; then
+  # run_dgx_campaign.py predicts this path before starting the runner. Keep the
+  # campaign and direct B300 launch contracts identical when RUN_TAG is set.
+  OUTPUT_JSON="${RESULTS_DIR}/m2_chain_${RUN_TAG}_l${LAYERS}_t${TOKENS}.json"
+else
+  OUTPUT_JSON="${RESULTS_DIR}/m2_chain_b300-sm${FIDESLIB_SM}-l${LAYERS}-t${TOKENS}-${RUN_ID}.json"
+fi
 
 if [[ "${GPU_DEVICE}" != "2" && "${GPU_DEVICE}" != "3" ]]; then
   echo "GPU_DEVICE must be 2 or 3" >&2

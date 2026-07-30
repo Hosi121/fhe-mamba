@@ -1,72 +1,75 @@
-# fhemamba — the active encrypted Mamba-2 trunk
+# `fhemamba`: active encrypted Mamba-2 trunk
 
-`fhemamba` is the reference, lowering, payload-export, and experiment layer for
-running the real `mamba2-130m` checkpoint under CKKS. Language quality is the
-first gate; encrypted execution must then match the same polynomial circuit
-without hiding range failures or feeding decrypted diagnostics back into the
-ciphertext path.
+`fhemamba` contains the reference formula, FHE-friendly operator
+substitutions, CKKS lowering, payload export, and experiment drivers for the
+real `mamba2-130m` checkpoint. The native encrypted implementation lives in
+[`../native/fideslib_stage0/`](../native/fideslib_stage0/).
 
-The native FIDESlib/OpenFHE implementation lives in
-[`../native/fideslib_stage0/`](../native/fideslib_stage0/). The older
-`../src/fhe_native_mamba3` package is an archive, not a second active trunk.
+The design rule is simple: language quality is checked first, then encrypted
+execution must match the same polynomial circuit without clamping values or
+feeding decrypted diagnostics back into the computation.
 
-## Current evidence
+## Current result
 
-As of 2026-07-14 (`v0.4.5`):
+At package version `0.4.5`, the recorded result is:
 
-- the fully polynomial Mamba-2 surrogate changes WikiText-2 perplexity from
-  22.307 to 22.333 (+0.12%, 280 windows, no finetuning);
-- the lowered decode schedule matches the reference to 3e-5;
-- the promoted B300 path passes 24 layers and three sequential autoregressive
-  token steps at per-token polynomial-circuit errors 0.01295, 0.01173, and
-  0.03475 (tolerance 0.05);
-- that path evaluates in 145.75 s, with the two warm carried-state steps
-  averaging 26.38 s, 469 physical bootstraps, and 120.24 GiB peak RSS;
-- layer-0/two-token execution separately passes with OpenFHE-accepted 128-bit
-  parameters, but the full-chain B300 evidence still uses
-  `security=not-set` and is not a protocol-security claim.
+- WikiText-2 PPL `22.307 -> 22.333` over 280 windows;
+- decode lowering parity `3.1e-5` from the reference over five verified tokens;
+- 24 encrypted Mamba-2 layers over three sequential token steps;
+- per-token polynomial-circuit errors `0.01295`, `0.01173`, and `0.03475`;
+- 145.75 seconds total evaluation, with 26.38 seconds average for the two warm
+  carried-state steps;
+- 469 physical bootstraps and 120.24 GiB peak RSS on NVIDIA B300.
 
-The promoted B300 runtime combines `out_proj` linear-transform fusion with
-complex-paired normalized-state refresh. Full projection fusion, shared
-dt/decay head expansion, reduced synchronization, and interval-2 state refresh
-remain explicit experiments because their full-session accuracy or runtime
-trade-offs are not yet better.
+The full-chain run used ring `2^16` with `security=not-set`. A separate
+layer-0/two-token run passes at 128-bit parameters, but no 24-layer 128-bit
+claim is made. The three-token B300 values are documented measurements whose
+raw success JSON still needs to be recovered or regenerated; this distinction
+is tracked in [`../docs/evidence.md`](../docs/evidence.md).
 
-See the root [README](../README.md) for the claim boundary and the
-[bottleneck survey](../docs/research/2026-07-13-fhe-mamba-bottleneck-survey.md)
-for measured comparisons and negative results.
+## Promoted and experimental paths
+
+The B300 runner promotes `out_proj` fusion, complex-paired normalized-state
+refresh, refresh interval 1, a fully synchronized FIDESlib build, and a 65 GiB
+plaintext cache.
+
+The following remain opt-in experiments:
+
+- fusion of both input and output projections;
+- shared dt/decay head expansion;
+- reduced synchronization builds;
+- state-refresh intervals greater than one.
+
+They have useful component-level or short-session results, but none currently
+beats the promoted accuracy/runtime trade-off over the complete measured
+session.
 
 ## Design rules
 
-1. **One formula.** `src/fhemamba/reference.py` is the Mamba math. It reads
-   weights directly from the Transformers model and routes FHE-hostile
-   operations through an injectable `Ops` implementation.
-2. **Substitution is data.** Exact, range-recording, and polynomial behavior
-   share the same formula rather than separate model forks.
-3. **Perplexity is the model-quality gate.** Element-wise MSE is diagnostic;
-   it cannot replace closed-loop WikiText-2 evaluation.
-4. **No clamping.** CKKS cannot secretly clamp values. Range violations are
-   counted and reported.
-5. **Tests use independent expectations.** Torch, official Transformers, and
-   hand-computed results are the ground truth.
-6. **Artifacts are honest.** Small JSON results are tracked, failures remain
-   visible, and polynomial-circuit error is kept separate from exact-model
-   approximation error.
+1. `src/fhemamba/reference.py` is the single Mamba formula.
+2. Exact, range-recording, and polynomial behavior use injectable `Ops`, not
+   separate model forks.
+3. Closed-loop perplexity is the model-quality gate; MSE is diagnostic.
+4. CKKS-incompatible clamping is forbidden. Range misses are measured.
+5. Exact-model approximation error and encrypted polynomial-circuit error are
+   separate metrics.
+6. Small result JSON is tracked; large payloads and generated campaigns stay
+   ignored unless explicitly curated.
 
 ## Layout
 
 ```text
 src/fhemamba/
-  reference.py             exact and FHE-lowerable Mamba-1/Mamba-2 math
-  ops.py                   exact/range/polynomial operator implementations
+  reference.py             exact and FHE-lowerable Mamba-1/Mamba-2 formula
+  ops.py                   exact, range, and polynomial operators
   lowering.py              CKKS operation and level schedule
-  m1_payload.py            real-checkpoint payload and reference export
-  bsgs_layout.py           slot-exact replicated/interleaved BSGS layouts
-  state_layout.py          packed recurrent-state layouts and refresh plans
-  rotation_keys.py         composite/direct rotation-key planning
-tests/                     independent unit and parity gates
-experiments/               local probes and resumable DGX/B300 campaigns
-results/                   small correctness, quality, and performance artifacts
+  m1_payload.py            checkpoint payload and reference export
+  bsgs_layout.py           replicated/interleaved BSGS slot layouts
+  state_layout.py          recurrent-state packing and refresh plans
+  rotation_keys.py         direct/composite rotation-key planning
+tests/                     independent unit and parity tests
+experiments/               local probes and resumable GPU campaigns
+results/                   curated correctness, quality, and performance JSON
 ```
 
 ## Local checks
@@ -80,7 +83,7 @@ python -m pip install -e '.[dev]'
 python -m pytest fhemamba/tests -q
 ```
 
-Checkpoint parity and the PPL ladder:
+Run parity and the PPL ladder against a local checkpoint:
 
 ```bash
 python fhemamba/experiments/run_parity.py \
@@ -89,44 +92,46 @@ python fhemamba/experiments/run_ppl_ladder.py \
   --checkpoint checkpoints/mamba2-130m-hf
 ```
 
-## GPU campaigns
+## Payload preparation
 
-DGX campaigns use JSON manifests so an accuracy miss does not hide subsequent
-candidates, while malformed or missing artifacts still fail fast:
-
-```bash
-python fhemamba/experiments/run_dgx_campaign.py \
-  --manifest fhemamba/experiments/dgx_campaign.example.json \
-  --runner fhemamba/experiments/run_dgx_layer_ladder.sh \
-  --output-json fhemamba/results/dgx/example-campaign.json \
-  --resume
-```
-
-The shared runner defaults live in `experiments/dgx_mamba2_common.sh`. B300
-build and launch helpers live under `../scripts/`; environment flags keep
-unpromoted projection, state-refresh, head-expansion, and synchronization
-experiments opt-in.
-
-Add client embedding and `lm_head` assets to an existing chain payload:
+Add autoregressive client assets to an exported chain payload:
 
 ```bash
 python fhemamba/experiments/export_autoregressive_client_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
-  --chain-dir fhemamba/results/m2_chain_payload \
+  --chain-dir /path/to/m2_chain_payload \
   --prompt-tokens 2 \
   --generate-tokens 4
 ```
 
-Audit carried-state/FIFO bounds before an expensive encrypted run:
+Audit carried state and convolution FIFO bounds before an expensive run:
 
 ```bash
 python fhemamba/experiments/audit_autoregressive_bounds.py \
   --checkpoint checkpoints/mamba2-130m-hf \
-  --chain-dir /path/to/chain-payload \
-  --output-json fhemamba/results/autoregressive-bound-audit.json \
+  --chain-dir /path/to/m2_chain_payload \
+  --output-json /path/to/autoregressive-bound-audit.json \
   --ring-dim 65536 \
   --state-margin 1.1
 ```
 
-The audit exits nonzero when a bound is exceeded; that is a candidate failure,
-not an infrastructure failure.
+A bound failure is a candidate failure, not an infrastructure failure.
+
+## GPU campaigns
+
+The generic campaign runner continues after numerical candidate failures,
+fails on missing/malformed artifacts, performs an idle-resource preflight, and
+supports `--resume`:
+
+```bash
+python fhemamba/experiments/run_dgx_campaign.py \
+  --manifest fhemamba/experiments/b300_autoregressive_prompt2_generate4.json \
+  --runner scripts/run_b300_mamba2.sh \
+  --output-json /home/kataiwa/fhemamba-b300/results/b300-p2-g4-campaign.json \
+  --resume
+```
+
+`scripts/run_b300_mamba2.sh` pins the promoted B300 defaults. Environment
+overrides are intended for named experiments and must be recorded in the
+campaign artifact. Reduced-synchronization binaries are never promotion
+candidates without a passing full 24-layer multi-token gate.

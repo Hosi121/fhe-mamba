@@ -1,5 +1,11 @@
 # Artifact Ledger
 
+> **Historical ledger.** This table records the pre-rebuild Stage 0/1/2 line
+> through the `0.3.x` artifacts. It is retained for provenance and must not be
+> read as the current backlog. Current headline evidence and missing-artifact
+> status live in [evidence.md](evidence.md); current work lives in
+> [backlog.md](backlog.md).
+
 This manual ledger is the seed for PBI-OPS-002. The `runs/` directory is
 gitignored, so artifact paths below are recorded as external/local output
 references only; the files are not tracked in this repository.

@@ -202,13 +202,25 @@ def _terminate_process_group(process: subprocess.Popen[Any]) -> None:
         process.wait()
 
 
-def _gpu_processes(nvidia_smi: str) -> tuple[list[dict[str, int]], str | None]:
+def _nvidia_smi_command(nvidia_smi: str, gpu_index: int | None, *args: str) -> list[str]:
+    command = [nvidia_smi]
+    if gpu_index is not None:
+        command.extend(["-i", str(gpu_index)])
+    command.extend(args)
+    return command
+
+
+def _gpu_processes(
+    nvidia_smi: str,
+    gpu_index: int | None,
+) -> tuple[list[dict[str, int]], str | None]:
     completed = subprocess.run(
-        [
+        _nvidia_smi_command(
             nvidia_smi,
+            gpu_index,
             "--query-compute-apps=pid,used_memory",
             "--format=csv,noheader,nounits",
-        ],
+        ),
         check=False,
         capture_output=True,
         text=True,
@@ -228,13 +240,14 @@ def _gpu_processes(nvidia_smi: str) -> tuple[list[dict[str, int]], str | None]:
     return processes, None
 
 
-def _gpu_utilization(nvidia_smi: str) -> tuple[float, str | None]:
+def _gpu_utilization(nvidia_smi: str, gpu_index: int | None) -> tuple[float, str | None]:
     completed = subprocess.run(
-        [
+        _nvidia_smi_command(
             nvidia_smi,
+            gpu_index,
             "--query-gpu=utilization.gpu",
             "--format=csv,noheader,nounits",
-        ],
+        ),
         check=False,
         capture_output=True,
         text=True,
@@ -273,6 +286,8 @@ def _wait_for_idle_gpu(config: dict[str, Any] | None) -> tuple[float, str | None
     if not config or not bool(config.get("required")):
         return 0.0, None
     nvidia_smi = str(config.get("nvidia_smi", "nvidia-smi"))
+    gpu_index_value = config.get("gpu_index")
+    gpu_index = None if gpu_index_value is None else int(gpu_index_value)
     poll_seconds = float(config.get("poll_seconds", 30))
     timeout_seconds = float(config.get("timeout_seconds", 7200))
     max_utilization = float(config.get("max_utilization_percent", 5))
@@ -285,15 +300,16 @@ def _wait_for_idle_gpu(config: dict[str, Any] | None) -> tuple[float, str | None
         or max_utilization < 0
         or min_mem_available_gib < 0
         or stable_polls <= 0
+        or (gpu_index is not None and gpu_index < 0)
     ):
         raise ValueError("GPU preflight thresholds and polling values are invalid")
     started_at = time.monotonic()
     idle_polls = 0
     while True:
-        processes, issue = _gpu_processes(nvidia_smi)
+        processes, issue = _gpu_processes(nvidia_smi, gpu_index)
         if issue:
             return time.monotonic() - started_at, issue
-        utilization, issue = _gpu_utilization(nvidia_smi)
+        utilization, issue = _gpu_utilization(nvidia_smi, gpu_index)
         if issue:
             return time.monotonic() - started_at, issue
         mem_available_gib, issue = _mem_available_gib(meminfo_path)
