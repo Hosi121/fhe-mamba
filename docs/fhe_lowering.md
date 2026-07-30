@@ -1,5 +1,11 @@
 # FHE Lowering Notes
 
+> **Compatibility-era note.** This document describes the pre-rebuild
+> `src/fhe_native_mamba3` lowering model. It remains useful for historical cost
+> and scheduling context, but it is not the current status or backlog. The
+> active lowering is under `fhemamba/src/fhemamba`, with current work tracked in
+> [roadmap.md](roadmap.md) and [backlog.md](backlog.md).
+
 This prototype separates three research tracks.
 
 ## Symbolic CKKS First

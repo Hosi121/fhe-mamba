@@ -2,6 +2,7 @@ import re
 from pathlib import Path
 
 import fhe_native_mamba3
+import fhemamba
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -11,3 +12,4 @@ def test_source_tree_version_matches_pyproject() -> None:
     match = re.search(r'(?m)^version\s*=\s*"([^"]+)"\s*$', text)
     assert match is not None
     assert fhe_native_mamba3.__version__ == match.group(1)
+    assert fhemamba.__version__ == match.group(1)

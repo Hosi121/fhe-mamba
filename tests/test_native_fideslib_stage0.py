@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,6 +51,32 @@ def test_b300_sync_profiles_keep_experimental_builds_isolated() -> None:
     assert 'COMPLEX_STATE_PAIRING="${COMPLEX_STATE_PAIRING:-1}"' in runner
     assert 'if [[ "${SHARED_HEAD_EXPANSION}" == "1" ]]' in runner
     assert 'PT_CACHE_GIB="${PT_CACHE_GIB:-${default_pt_cache_gib}}"' in runner
+
+
+def test_b300_long_horizon_manifest_pins_promoted_path() -> None:
+    manifest_path = ROOT / "fhemamba" / "experiments" / "b300_autoregressive_prompt2_generate4.json"
+    manifest = json.loads(manifest_path.read_text())
+    defaults = manifest["defaults"]
+    acceptance = manifest["acceptance"]
+    preflight = manifest["gpu_preflight"]
+    runner = (ROOT / "scripts" / "run_b300_mamba2.sh").read_text()
+
+    assert defaults["LAYERS"] == "24"
+    assert defaults["TOKENS"] == "5"
+    assert defaults["SECURITY"] == "not-set"
+    assert defaults["FIDESLIB_SYNC_PROFILE"] == "full"
+    assert defaults["FUSED_REPLICATED_LINEAR_TRANSFORM"] == "1"
+    assert defaults["FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE"] == "out-proj"
+    assert defaults["COMPLEX_STATE_PAIRING"] == "1"
+    assert defaults["SHARED_HEAD_EXPANSION"] == "0"
+    assert defaults["STATE_REFRESH_INTERVAL"] == "1"
+    assert defaults["PT_CACHE_GIB"] == "65"
+    assert preflight["gpu_index"] == int(defaults["GPU_DEVICE"])
+    assert preflight["min_mem_available_gib"] > 120.24
+    assert acceptance["max_abs_error_lte"] == 0.05
+    assert acceptance["all_tokens_decrypt"] is True
+    assert acceptance["zero_intermediate_decrypts"] is True
+    assert "m2_chain_${RUN_TAG}_l${LAYERS}_t${TOKENS}.json" in runner
 
 
 def test_mamba2_decode_wires_complex_state_pairing() -> None:

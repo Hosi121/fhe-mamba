@@ -1,5 +1,11 @@
 # Design spec (Phase 0)
 
+> **Historical design log.** This file preserves the pre-`0.4.5` reasoning and
+> measurements as they were recorded. Its statements about current status,
+> pending work, and next actions are not the active project plan. Use
+> [`../README.md`](../README.md), [`../docs/roadmap.md`](../docs/roadmap.md),
+> and [`../docs/evidence.md`](../docs/evidence.md) for the current state.
+
 ## Protocol
 
 Weights are public (open checkpoints); the protected assets are the client's

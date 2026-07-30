@@ -1,5 +1,10 @@
 # Checkpoint Workflows
 
+> **Compatibility workflow.** These commands document the historical
+> `fhe_native_mamba3`/OpenFHE checkpoint path. They remain supported by the
+> compatibility package but are not the promoted B300 Mamba-2 runbook. Use the
+> root [README](../README.md#b300-five-token-campaign) for the current campaign.
+
 These commands assume a local checkpoint at `runs/mamba/checkpoint.pt`. The
 checkpoint argument may also be a Hugging Face model directory containing
 `model.safetensors`, `model.safetensors.index.json`, or `pytorch_model.bin`.

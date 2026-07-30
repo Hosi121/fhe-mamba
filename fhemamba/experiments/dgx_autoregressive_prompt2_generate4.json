@@ -1,6 +1,8 @@
 {
-  "name": "autoregressive-prompt2-generate4",
-  "version": "0.4.5",
+  "name": "legacy-dgx-autoregressive-prompt2-generate4",
+  "version": "0.4.4-legacy",
+  "status": "historical-unpromoted",
+  "notes": "Preserved for historical DGX reproduction. Use b300_autoregressive_prompt2_generate4.json for the current promoted path.",
   "timeout_seconds": 4200,
   "gpu_preflight": {
     "required": true,
