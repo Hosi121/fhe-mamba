@@ -1468,21 +1468,6 @@ def slot_linear_ciphertext(
     return output_ct
 
 
-def linear_bsgs_baby_step(*, input_dim: int, output_dim: int) -> int:
-    """Baby-step width for exact dense slot-linear evaluation."""
-
-    if input_dim <= 0:
-        msg = "input_dim must be positive"
-        raise ValueError(msg)
-    if output_dim <= 0:
-        msg = "output_dim must be positive"
-        raise ValueError(msg)
-    return slot_linear_bsgs_baby_step(
-        source_slots=tuple(range(input_dim)),
-        output_dim=output_dim,
-    )
-
-
 def linear_bsgs_rotation_steps(*, input_dim: int, output_dim: int) -> tuple[int, ...]:
     """Rotation-key inventory for ``_linear_ciphertext``'s BSGS schedule."""
 

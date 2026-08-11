@@ -202,15 +202,3 @@ def plan_keys(
         "per_key_gib": per_key,
     }
     return plan
-
-
-def preset_table(n_layers: int = 24) -> dict[str, dict[str, float]]:
-    """The three operating points for the 128-bit writeup."""
-    inv = mamba2_inventory(n_layers=n_layers)
-    full_keys = len({u.index for u in inv} | {1}) + 34  # direct everything
-    presets = {
-        "compact_dgx": plan_keys(inv, max_direct_keys=0),
-        "balanced_dgx": plan_keys(inv, max_total_gib=60.0),
-        "full_cluster": plan_keys(inv, max_direct_keys=full_keys),
-    }
-    return {name: plan.stats for name, plan in presets.items()}

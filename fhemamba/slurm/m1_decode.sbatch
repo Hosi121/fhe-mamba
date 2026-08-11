@@ -76,7 +76,7 @@ CHAIN_HEADROOM="${CHAIN_HEADROOM:-12}"
 
 export LD_LIBRARY_PATH="${FIDESLIB_PREFIX}/lib:${OPENFHE_PREFIX}/lib:${CUDA_HOME}/lib64:${LD_LIBRARY_PATH:-}"
 ARTIFACT_VERSION="$("${PYTHON}" - <<'PY' 2>/dev/null || echo "0.0.0+unknown"
-from fhe_native_mamba3 import __version__
+from fhemamba import __version__
 
 print(__version__)
 PY
