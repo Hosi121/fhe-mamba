@@ -3,7 +3,7 @@
 import pytest
 import torch
 from fhemamba.ops import Exact, PolyOps, RangeRecorder
-from fhemamba.reference import model_forward
+from fhemamba.reference import _affine_scan, model_forward
 
 transformers = pytest.importorskip("transformers")
 
@@ -52,6 +52,47 @@ def test_chunked_scan_matches_loop(tiny_model, token_ids) -> None:
     loop = model_forward(tiny_model, token_ids, Exact(), scan="loop")
     chunked = model_forward(tiny_model, token_ids, Exact(), scan="chunked")
     assert torch.allclose(loop["logits"], chunked["logits"], atol=1e-4)
+
+
+def test_affine_scan_keeps_per_head_decay_compact() -> None:
+    torch.manual_seed(29)
+    decay = torch.rand(1, 4, 1, 9, 1)
+    update = torch.randn(1, 4, 16, 9, 8)
+
+    cumulative_decay, scanned = _affine_scan(decay, update)
+    state = torch.zeros(1, 4, 16, 8)
+    expected = []
+    for token in range(update.shape[-2]):
+        state = decay[..., token, :] * state + update[..., token, :]
+        expected.append(state)
+
+    assert cumulative_decay.shape == decay.shape
+    assert torch.allclose(scanned, torch.stack(expected, dim=-2), atol=1e-6)
+
+
+def test_forward_can_skip_vocabulary_projection(tiny_model, token_ids) -> None:
+    calls = 0
+
+    def count_call(_module, _inputs, _output) -> None:
+        nonlocal calls
+        calls += 1
+
+    handle = tiny_model.lm_head.register_forward_hook(count_call)
+    try:
+        output = model_forward(
+            tiny_model,
+            token_ids,
+            Exact(),
+            scan="chunked",
+            output_hidden_states=True,
+            output_logits=False,
+        )
+    finally:
+        handle.remove()
+
+    assert calls == 0
+    assert "logits" not in output
+    assert len(output["hidden_states"]) == len(tiny_model.backbone.layers) + 1
 
 
 def test_full_ladder_plumbing_on_mamba2(tiny_model, token_ids) -> None:

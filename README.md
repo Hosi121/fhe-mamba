@@ -22,8 +22,8 @@ Evidence recorded through **2026-07-14**, at package version `0.4.5`:
 |---|---|---|
 | Model quality | WikiText-2 PPL **22.307 -> 22.333** (**+0.12%**) over 280 windows | Tracked result JSON |
 | Lowering parity | **3.1e-5** against the reference decode schedule over five verified tokens | Tracked result JSON |
-| Full encrypted chain | **PASS**, errors **0.01295 / 0.01173 / 0.03475** over 24 layers and three sequential tokens | Measurement documented; raw B300 JSON recovery is open |
-| Full-chain runtime | **145.75 s** evaluation; **26.38 s** average for the two warm carried-state steps | Same documented B300 measurement |
+| Full encrypted chain | Reported pass, errors **0.01295 / 0.01173 / 0.03475** over 24 layers and three sequential tokens | **Documented only**; raw B300 JSON is missing and the result is not independently verifiable from this repository |
+| Full-chain runtime | Reported **145.75 s** evaluation; **26.38 s** average for the two warm carried-state steps | Same documented-only B300 measurement |
 | 128-bit parameters | Layer 0, two tokens: errors **0.012 / 0.031**, about **197 s/token** | Tracked raw JSON with legacy provenance fields |
 | Key separation | Three-process probe passes at **1.79e-12** round-trip error | Tracked raw JSON |
 
@@ -118,6 +118,8 @@ python fhemamba/experiments/run_ppl_ladder.py \
 ```
 
 See [docs/testing.md](docs/testing.md) for test tiers and GPU limitations.
+The [maintenance boundary](docs/maintenance.md) identifies the canonical code
+paths and the retirement plan for compatibility code and historical scripts.
 
 ## B300 five-token campaign
 

@@ -184,7 +184,10 @@ struct Config {
   int bootstrap_level_budget_stc = 5;
   int bootstrap_bsgs_dim_cts = 0;
   int bootstrap_bsgs_dim_stc = 0;
-  std::string security = "not-set";
+  // Library/direct invocations default to a checked security level. Benchmark
+  // campaigns that intentionally reproduce feasibility-only parameters must
+  // opt in explicitly with --security not-set and record that in the artifact.
+  std::string security = "128-classic";
   std::string secret_key_dist = "sparse-ternary";
   // Debug-only: decrypt at phase/bootstrap checkpoints and log value stats
   // (max |value|, non-finite slot count). Voids the zero-intermediate-decrypt

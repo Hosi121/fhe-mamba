@@ -259,8 +259,16 @@ def mixer2_forward(
 
     x_heads = hidden.reshape(batch, seq_len, heads, head_dim)
     rep = heads // groups
-    b_heads = b_sel.reshape(batch, seq_len, groups, state_size).repeat_interleave(rep, dim=2)
-    c_heads = c_sel.reshape(batch, seq_len, groups, state_size).repeat_interleave(rep, dim=2)
+    b_grouped = b_sel.reshape(batch, seq_len, groups, state_size)
+    c_grouped = c_sel.reshape(batch, seq_len, groups, state_size)
+    if groups == 1:
+        # The native payload path requires one group. Keep its B/C expansion as
+        # a broadcast view instead of copying both tensors for every head.
+        b_heads = b_grouped.expand(batch, seq_len, heads, state_size)
+        c_heads = c_grouped.expand(batch, seq_len, heads, state_size)
+    else:
+        b_heads = b_grouped.repeat_interleave(rep, dim=2)
+        c_heads = c_grouped.repeat_interleave(rep, dim=2)
     dt_x = dt[..., None] * x_heads  # Δ·x, (batch, T, heads, head_dim)
 
     if scan == "loop":
@@ -292,15 +300,13 @@ def mixer2_forward(
         pieces = []
         for start in range(0, seq_len, chunk):
             end = min(start + chunk, seq_len)
-            a_c = (
-                decay[:, start:end]
-                .permute(0, 2, 1)[:, :, None, :, None]
-                .expand(batch, heads, head_dim, end - start, state_size)
-            )
+            # Decay is scalar per head. _affine_scan preserves this compact
+            # shape and broadcasts it against the full state update tensor.
+            a_c = decay[:, start:end].permute(0, 2, 1)[:, :, None, :, None]
             u_c = (dt_x[:, start:end, :, :, None] * b_heads[:, start:end, :, None, :]).permute(
                 0, 2, 3, 1, 4
             )
-            a_s, b_s = _affine_scan(a_c.contiguous(), u_c.contiguous())
+            a_s, b_s = _affine_scan(a_c, u_c)
             states = b_s + a_s * carry[:, :, :, None, :]
             pieces.append(torch.einsum("bhpln,blhn->blhp", states, c_heads[:, start:end]))
             carry = states[:, :, :, -1]
@@ -338,11 +344,14 @@ def model_forward(
     scan: str = "loop",
     output_hidden_states: bool = False,
     states: list[LayerState] | None = None,
+    output_logits: bool = True,
 ) -> dict[str, object]:
     """Full causal-LM forward. Hidden-state list matches HF ordering:
     one entry per block output, then the final norm output. With ``states``
     (from ``init_states``), the call consumes and advances per-layer recurrent
-    state, which is the prefill/decode schedule of the interactive protocol."""
+    state, which is the prefill/decode schedule of the interactive protocol.
+    Calibration and diagnostic callers can disable the expensive vocabulary
+    projection with ``output_logits=False``."""
     ops = ops if ops is not None else Exact()
     backbone = model.backbone
     hidden = backbone.embeddings(input_ids)
@@ -360,8 +369,9 @@ def model_forward(
     final = rms_norm_forward(backbone.norm_f, hidden, ops, (n_layers, "rms_invsqrt"))
     if output_hidden_states:
         collected.append(final)
-    logits = model.lm_head(final)
-    out: dict[str, object] = {"logits": logits}
+    out: dict[str, object] = {}
+    if output_logits:
+        out["logits"] = model.lm_head(final)
     if output_hidden_states:
         out["hidden_states"] = collected
     return out

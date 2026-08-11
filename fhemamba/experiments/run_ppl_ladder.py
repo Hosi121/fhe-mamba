@@ -120,8 +120,9 @@ def main() -> None:
     recorder = RangeRecorder()
     for w in range(args.cal_windows):
         chunk = train_ids[:, w * args.window : (w + 1) * args.window].to(args.device)
-        model_forward(model, chunk, recorder, scan="chunked")
-    ranges = recorder.pooled_by_name()
+        model_forward(model, chunk, recorder, scan="chunked", output_logits=False)
+    site_ranges = recorder.ranges
+    ranges = pool_by_name(site_ranges)
     for name, (lo, hi) in sorted(ranges.items()):
         print(f"  {name:12s} [{lo:10.3f}, {hi:10.3f}]")
 
@@ -153,7 +154,7 @@ def main() -> None:
             if not hasattr(mixer, "dt_bias"):
                 continue  # mamba-1 layers: per-(channel,state) A, not per-head
             a_heads = -_torch.exp(mixer.A_log.float())
-            _dt_lo, dt_hi = recorder.ranges[(layer_idx, "dt_softplus")]
+            _dt_lo, dt_hi = site_ranges[(layer_idx, "dt_softplus")]
             dt_max = float(_torch.nn.functional.softplus(_torch.tensor(dt_hi)))
             reach = (a_heads * dt_max).tolist()
             mask = tuple(0.0 if r < thresh else 1.0 for r in reach)
@@ -188,14 +189,14 @@ def main() -> None:
     def closed_loop_fit(enabled):
         """Fit on exact-model ranges, then widen with ranges observed under
         the poly model itself (poly substitutions shift distributions)."""
-        ops = fit_ops(enabled, recorder.ranges, ranges)
+        ops = fit_ops(enabled, site_ranges, ranges)
         if not args.recal:
             return ops
         probe = RecordingPolyOps(polys=ops.polys, enabled=ops.enabled, layer_polys=ops.layer_polys)
         for w in range(args.cal_windows):
             chunk = train_ids[:, w * args.window : (w + 1) * args.window].to(args.device)
-            model_forward(model, chunk, probe, scan="chunked")
-        merged = union_ranges(recorder.ranges, probe.ranges)
+            model_forward(model, chunk, probe, scan="chunked", output_logits=False)
+        merged = union_ranges(site_ranges, probe.ranges)
         return fit_ops(enabled, merged, pool_by_name(merged))
 
     rows = []
