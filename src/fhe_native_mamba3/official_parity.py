@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -274,9 +273,3 @@ def _skipped(
         official_output_shape=None,
         notes=("official parity could not be evaluated",),
     )
-
-
-def parity_result_to_json(result: OfficialMambaParityResult) -> str:
-    """Return a stable pretty-printed JSON representation."""
-
-    return json.dumps(result.to_json_dict(), indent=2, sort_keys=True)

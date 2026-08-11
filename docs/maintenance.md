@@ -18,6 +18,9 @@ which result a test protected.
 
 The installed `fhe-mamba3` command still targets the compatibility package. It
 must not be presented as the entry point for the current native Mamba-2 result.
+The active `fhemamba/src`, `fhemamba/experiments`, and `fhemamba/slurm` trees do
+not import `fhe_native_mamba3`; CI enforces this one-way boundary. The
+compatibility package imports the shared release version from `fhemamba`.
 
 ## Guardrails
 
@@ -36,8 +39,10 @@ must not be presented as the entry point for the current native Mamba-2 result.
 
 ## Retirement queue
 
-1. Inventory imports of `fhe_native_mamba3` from current scripts and classify
-   each as migrate, archive, or delete.
+1. Inventory imports of `fhe_native_mamba3` from root scripts and classify each
+   as migrate, archive, or delete. The active `fhemamba` tree is already
+   dependency-free; the remaining import surface belongs to root compatibility
+   orchestration and the legacy `fhe-mamba3` entry point.
 2. Move reusable artifact/provenance helpers into a small package shared by the
    active path; do not retain the old model implementation for those helpers.
 3. Replace the compatibility CLI with a current `fhemamba` CLI, keeping only
