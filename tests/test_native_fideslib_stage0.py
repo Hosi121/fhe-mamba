@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -115,8 +116,11 @@ def test_mamba2_native_kernel_is_repo_owned() -> None:
 
     assert source.exists()
     assert config.exists()
-    assert "add_executable(stage1_mamba2_decode_fideslib" in cmake.read_text()
+    assert re.search(
+        r"add_executable\s*\(\s*stage1_mamba2_decode_fideslib\b",
+        cmake.read_text(),
+    )
     source_text = source.read_text()
-    assert "full_one_layer_polynomial_output_checked" in source_text
-    assert "ciphertext_recurrent_state_chain" in source_text
+    for process_role in ("client-init", "server-eval", "client-decrypt"):
+        assert f'args.process_role == "{process_role}"' in source_text
     assert "write_runtime_failure_payload" in source_text
