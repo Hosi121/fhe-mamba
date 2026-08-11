@@ -88,7 +88,8 @@ Use SemVer for package versions.
   horizon, process-separated full-kernel execution, or 128-bit full-chain
   execution.
 - Minor versions also mark compatibility-breaking removals while the project is
-  below `1.0.0`; `0.5.0` is the boundary that retired `fhe_native_mamba3`.
+  below `1.0.0`; `0.5.0` is the boundary that retired the old distribution,
+  `fhe_native_mamba3` import package, and `fhe-mamba3` command.
 - `1.0.0` is reserved for reproducible interactive generation at 128-bit
   parameters with an explicit protocol-security statement.
 

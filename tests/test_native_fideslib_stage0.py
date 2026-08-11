@@ -124,3 +124,20 @@ def test_mamba2_native_kernel_is_repo_owned() -> None:
     for process_role in ("client-init", "server-eval", "client-decrypt"):
         assert f'args.process_role == "{process_role}"' in source_text
     assert "write_runtime_failure_payload" in source_text
+
+
+def test_retired_native_executables_are_absent() -> None:
+    native_root = ROOT / "native" / "fideslib_stage0"
+    cmake = (native_root / "CMakeLists.txt").read_text()
+    retired = (
+        "stage0_static_mimo",
+        "stage1_rank_gate_fideslib",
+        "stage1_rank_gate_payload_eval",
+        "stage1_rotation_probe",
+        "stage1_tail_fideslib",
+        "stage1_tail_payload_eval",
+    )
+
+    for name in retired:
+        assert name not in cmake
+        assert not (native_root / "src" / f"{name}.cpp").exists()

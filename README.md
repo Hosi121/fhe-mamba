@@ -151,7 +151,7 @@ RSS, repository commit, and binary SHA-256.
 ## Versioning
 
 - `0.5.0`: compatibility-breaking retirement of the pre-rebuild Python stack;
-  the supported import package and command are both `fhemamba`.
+  the distribution, import package, and command are all `fhemamba`.
 - `0.4.x`: real Mamba-2 weights under real encrypted execution.
 - `0.4.5`: package version for the documented 24-layer, three-token B300
   milestone. The Git tag remains pending until its raw success artifact is

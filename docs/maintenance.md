@@ -18,9 +18,18 @@ of `main`, the wheel, coverage, or the supported command line.
 The installed command is `fhemamba`. The historical `fhe-mamba3` command is
 available only from the archive branch.
 
-The distribution name remains `fhe-native-mamba3` for repository continuity,
-while the supported import package and command are both `fhemamba`. Version
-`0.5.0` records this compatibility-breaking boundary.
+The distribution, import package, and installed command are all named
+`fhemamba`. Version `0.5.0` records the compatibility-breaking retirement of
+the old distribution metadata, import package, and command.
+
+An editable checkout used before `0.5.0` can retain ignored build metadata that
+advertises the removed command. Remove only those generated directories once,
+then resync the environment:
+
+```bash
+rm -rf fhe_native_mamba3.egg-info fhemamba/src/fhe_native_mamba3.egg-info
+uv sync --locked --extra dev
+```
 
 ## Guardrails
 

@@ -376,7 +376,7 @@ struct RecurrenceDebugMetrics {
 
 
 // ---------------------------------------------------------------------------
-// BSGS ct-pt matmul machinery (copied from stage1_rank_gate_fideslib.cpp).
+// BSGS ct-pt matmul machinery for the active decode kernel.
 // ---------------------------------------------------------------------------
 
 // stride == batch_size reproduces the single-stream mask exactly. For
@@ -1185,7 +1185,7 @@ auto main(int argc, char* argv[]) -> int {
         " rotation_keys=" + std::to_string(rotation_indices.size()));
 
     // -----------------------------------------------------------------------
-    // Context setup (ordering per stage1_rank_gate_fideslib.cpp).
+    // Context setup for the active decode kernel.
     // -----------------------------------------------------------------------
     // Mid-circuit bootstrap checkpoints are mandatory under the FIDESlib
     // MAXP=64 depth ceiling, so bootstrapping is always provisioned.

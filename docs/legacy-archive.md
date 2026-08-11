@@ -3,8 +3,9 @@
 The pre-rebuild `fhe_native_mamba3` Python package, its `fhe-mamba3` CLI,
 historical root experiment scripts, Slurm launchers, and compatibility tests
 were removed from `main` after the active `fhemamba` tree became independent.
-The active distribution advances to `0.5.0` because removing the old import
-package and command is a compatibility-breaking change.
+The active distribution is `fhemamba` at `0.5.0` because removing the old
+distribution metadata, import package, and command is a compatibility-breaking
+change.
 
 They remain available on the remote branch:
 

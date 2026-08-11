@@ -14,10 +14,9 @@ Status reflects the job/artifact payload, not automatic backlog closure. A
 passing artifact can support a backlog transition, but `docs/backlog.md` remains
 the canonical PBI status source.
 
-Use `scripts/update_artifact_ledger.py --from-json <collection.json> --write`
-to append validated `ledger_rows` emitted by safe-campaign collection artifacts.
-The updater dry-runs by default and rejects same-job/artifact conflicts so richer
-curated rows are not overwritten accidentally.
+The archived updater and safe-campaign collector that produced this ledger are
+available on `archive/pre-compat-retirement-20260811`. They are not supported
+commands on `main`; edit this historical ledger only to correct provenance.
 
 ## Known high/SLURM Artifacts
 

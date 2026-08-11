@@ -2,8 +2,7 @@
 // ct-ct multiply (with relinearization), rotation, and addition at a chosen
 // ring dimension. Emits one JSON object with the measured means in ms.
 //
-// Context setup mirrors stage1_rank_gate_fideslib.cpp (ring/depth/scale/keys/
-// LoadContext ordering).
+// Context setup mirrors the active decode kernel's ring/depth/scale/key setup.
 
 #include <fideslib.hpp>
 
@@ -272,7 +271,7 @@ auto main(int argc, char* argv[]) -> int {
     std::ostringstream out;
     out << "{";
     out << "\"stage\":\"fideslib-primitive-level-probe\",";
-    out << "\"version\":\"0.5.0\",";
+    out << "\"version\":\"" << FHEMAMBA_VERSION << "\",";
     out << "\"status\":\"passed\",\"passed\":true,";
     out << "\"repo_commit\":\"" << args.repo_commit << "\",";
     out << "\"backend\":{\"name\":\"fideslib\",\"device\":\"cuda\"},";

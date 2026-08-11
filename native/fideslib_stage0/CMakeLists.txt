@@ -9,14 +9,25 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(FHE_STAGE0_BUILD_KERNEL "Build the FIDESlib Stage 0 kernel" ON)
 option(FHE_STAGE0_BUILD_TESTS "Build FIDESlib-free Stage 0 layout tests" OFF)
 
+file(
+  READ
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../fhemamba/src/fhemamba/_version.py"
+  FHEMAMBA_VERSION_SOURCE)
+string(
+  REGEX MATCH
+  "__version__[ \t]*=[ \t]*\"([^\"]+)\""
+  FHEMAMBA_VERSION_MATCH
+  "${FHEMAMBA_VERSION_SOURCE}")
+set(FHEMAMBA_VERSION "${CMAKE_MATCH_1}")
+if(FHEMAMBA_VERSION STREQUAL "")
+  message(FATAL_ERROR "Unable to read fhemamba package version")
+endif()
+
 add_library(stage0_layout INTERFACE)
 target_include_directories(stage0_layout INTERFACE include)
 
 add_library(stage1_tail_payload INTERFACE)
 target_include_directories(stage1_tail_payload INTERFACE include)
-
-add_executable(stage1_tail_payload_eval src/stage1_tail_payload_eval.cpp)
-target_link_libraries(stage1_tail_payload_eval PRIVATE stage1_tail_payload)
 
 add_library(stage1_rank_gate_payload INTERFACE)
 target_include_directories(stage1_rank_gate_payload INTERFACE include)
@@ -41,10 +52,6 @@ target_link_libraries(stage1_mamba2_plan PUBLIC stage1_mamba2_payload)
 
 add_library(stage1_mamba2_process STATIC src/stage1_mamba2_process.cpp)
 target_include_directories(stage1_mamba2_process PUBLIC src)
-
-add_executable(stage1_rank_gate_payload_eval src/stage1_rank_gate_payload_eval.cpp)
-target_link_libraries(
-  stage1_rank_gate_payload_eval PRIVATE stage1_rank_gate_payload stage1_tail_payload)
 
 if(FHE_STAGE0_BUILD_KERNEL)
   find_package(fideslib REQUIRED CONFIG)
@@ -75,21 +82,8 @@ if(FHE_STAGE0_BUILD_KERNEL)
     ${OpenFHE_INCLUDE}/binfhe
     ${OpenFHE_INCLUDE}/third-party/include)
 
-  add_executable(stage0_static_mimo src/stage0_static_mimo.cpp)
-  target_link_libraries(stage0_static_mimo PRIVATE fideslib::fideslib stage0_layout)
-
   add_executable(stage1_bootstrap_probe src/stage1_bootstrap_probe.cpp)
   target_link_libraries(stage1_bootstrap_probe PRIVATE fideslib::fideslib)
-
-  add_executable(stage1_rotation_probe src/stage1_rotation_probe.cpp)
-  target_link_libraries(stage1_rotation_probe PRIVATE fideslib::fideslib)
-
-  add_executable(stage1_tail_fideslib src/stage1_tail_fideslib.cpp)
-  target_link_libraries(stage1_tail_fideslib PRIVATE fideslib::fideslib stage1_tail_payload)
-
-  add_executable(stage1_rank_gate_fideslib src/stage1_rank_gate_fideslib.cpp)
-  target_link_libraries(
-    stage1_rank_gate_fideslib PRIVATE fideslib::fideslib stage1_rank_gate_payload stage1_tail_payload)
 
   add_executable(
     stage1_mamba2_decode_fideslib
@@ -105,6 +99,8 @@ if(FHE_STAGE0_BUILD_KERNEL)
     ${OpenFHE_INCLUDE}/third-party/include)
 
   add_executable(fideslib_client_server_probe src/fideslib_client_server_probe.cpp)
+  target_compile_definitions(
+    fideslib_client_server_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
   target_link_libraries(
     fideslib_client_server_probe PRIVATE fideslib::fideslib CUDA::cudart fideslib_handoff)
   target_include_directories(
@@ -116,6 +112,8 @@ if(FHE_STAGE0_BUILD_KERNEL)
     ${OpenFHE_INCLUDE}/third-party/include)
 
   add_executable(fideslib_ctpt_probe src/fideslib_ctpt_probe.cpp)
+  target_compile_definitions(
+    fideslib_ctpt_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
   target_link_libraries(fideslib_ctpt_probe PRIVATE fideslib::fideslib)
 endif()
 
