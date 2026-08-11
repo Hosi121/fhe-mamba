@@ -57,6 +57,29 @@ def test_safe_slurm_campaign_dry_run_emits_manifest(tmp_path) -> None:
     assert validate_benchmark_artifact(payload).valid is True
 
 
+def test_safe_slurm_campaign_generates_default_run_prefix(tmp_path) -> None:
+    output_json = tmp_path / "campaign.json"
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/submit_safe_slurm_campaign.py",
+            "--dry-run",
+            "--jobs",
+            "source-profile",
+            "--output-json",
+            str(output_json),
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    payload = json.loads(output_json.read_text(encoding="utf-8"))
+    assert payload["run_prefix"].startswith(f"safe-v{__version__}-")
+    assert payload["jobs"][0]["run_name"].startswith(f"{payload['run_prefix']}-source-profile")
+
+
 def test_safe_slurm_campaign_rejects_unknown_job(tmp_path) -> None:
     completed = subprocess.run(
         [

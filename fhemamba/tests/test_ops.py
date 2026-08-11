@@ -2,7 +2,7 @@
 
 import numpy as np
 import torch
-from fhemamba.ops import PolyOps, fit_chebyshev, fit_squared_exp
+from fhemamba.ops import HeadMaskedDecay, PolyOps, RangeRecorder, fit_chebyshev, fit_squared_exp
 from torch.nn import functional as F  # noqa: N812
 
 
@@ -84,6 +84,32 @@ def test_polyops_counts_out_of_range_without_clamping() -> None:
     inside = ops.polys["gate_silu"](x[1:4])
     assert torch.allclose(got[1:4], inside)  # in-range values follow the polynomial
     assert ops.violations["gate_silu"] == [2, 5]  # -10 and 11 counted, not clamped
+
+
+def test_range_recorder_accumulates_before_materializing() -> None:
+    recorder = RangeRecorder()
+    site = (3, "gate_silu")
+    recorder.silu(torch.tensor([-2.0, 1.0]), site)
+    recorder.silu(torch.tensor([-1.0, 4.0]), site)
+
+    assert all(isinstance(value, torch.Tensor) for value in recorder._ranges[site])
+    assert recorder.ranges[site] == (-2.0, 4.0)
+
+
+def test_head_mask_tensor_is_reused_per_device_and_dtype() -> None:
+    operation = HeadMaskedDecay(
+        base=fit_squared_exp(lo=-8.0, degree=8),
+        head_mask=(1.0, 0.0, 1.0),
+    )
+    x = torch.tensor([-1.0, -20.0, -2.0])
+
+    first = operation(x)
+    cached = next(iter(operation._mask_cache.values()))
+    second = operation(x)
+
+    assert len(operation._mask_cache) == 1
+    assert next(iter(operation._mask_cache.values())) is cached
+    assert torch.equal(first, second)
 
 
 def test_polyops_disabled_site_stays_exact() -> None:

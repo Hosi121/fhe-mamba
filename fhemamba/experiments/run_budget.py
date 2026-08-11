@@ -35,11 +35,12 @@ MUL_SEC_OPTIMISTIC = ROTATION_SEC / 8  # no key-switch in ct-pt; pending B200 pr
 def per_layer_squarings(model, ids, reduced_range: float = 8.0) -> list[int]:
     """Calibrate decay-exp input lows per layer -> squaring count per layer."""
     recorder = RangeRecorder()
-    model_forward(model, ids, recorder, scan="chunked")
+    model_forward(model, ids, recorder, scan="chunked", output_logits=False)
+    ranges = recorder.ranges
     n_layers = len(model.backbone.layers)
     ks = []
     for layer in range(n_layers):
-        lo, _ = recorder.ranges[(layer, "decay_exp")]
+        lo, _ = ranges[(layer, "decay_exp")]
         ks.append(max(0, math.ceil(math.log2(max(-lo * 1.3, 1e-9) / reduced_range))))
     return ks
 
@@ -70,7 +71,9 @@ def main() -> None:
     squarings = per_layer_squarings(model, cal_ids)
 
     ref_states = init_states(model)
-    ref = model_forward(model, ids, states=ref_states, output_hidden_states=True)
+    ref = model_forward(
+        model, ids, states=ref_states, output_hidden_states=True, output_logits=False
+    )
     ref_final = ref["hidden_states"][-1][0, -1]
 
     low_states = init_states(model)

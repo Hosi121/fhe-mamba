@@ -63,7 +63,8 @@ DEFAULT_CAL_TEXT = (
 
 
 def _save(out: Path, name: str, tensor: torch.Tensor, manifest: dict) -> None:
-    arr = tensor.detach().float().cpu().numpy().astype("<f4")
+    host = tensor.detach().to(device="cpu", dtype=torch.float32)
+    arr = host.numpy().astype("<f4", copy=False)
     arr.tofile(out / f"{name}.bin")
     manifest[name] = list(arr.shape)
 
@@ -109,38 +110,42 @@ def _calibrate_payload(
     cal_ids = cal_ids.to(model.get_input_embeddings().weight.device)
     recorder = RangeRecorder()
     states = init_states(model)
-    bounds = [
-        {
-            "state_abs_max": 0.0,
-            "state_head_abs_max": [0.0] * int(block.mixer.num_heads),
-            "fifo_abs_max": 0.0,
-        }
-        for block in model.backbone.layers
+    state_head_bounds = [
+        state.ssm.new_zeros(int(block.mixer.num_heads))
+        for block, state in zip(model.backbone.layers, states, strict=True)
     ]
+    state_bounds = [state.ssm.new_zeros(()) for state in states]
+    fifo_bounds = [state.conv.new_zeros(()) for state in states]
     for token in range(cal_ids.shape[1]):
         model_forward(
             model,
             cal_ids[:, token : token + 1],
             recorder,
             scan="loop",
+            output_logits=False,
             states=states,
         )
         for layer, state in enumerate(states):
-            head_maxima = state.ssm.abs().amax(dim=(0, 2, 3)).tolist()
-            bounds[layer]["state_head_abs_max"] = [
-                max(previous, float(current))
-                for previous, current in zip(
-                    bounds[layer]["state_head_abs_max"], head_maxima, strict=True
-                )
-            ]
-            bounds[layer]["state_abs_max"] = max(
-                bounds[layer]["state_abs_max"], float(state.ssm.abs().max())
+            state_head_bounds[layer].copy_(
+                torch.maximum(state_head_bounds[layer], state.ssm.abs().amax(dim=(0, 2, 3)))
             )
-            bounds[layer]["fifo_abs_max"] = max(
-                bounds[layer]["fifo_abs_max"], float(state.conv.abs().max())
-            )
-    for bound in bounds:
-        bound["calibration_tokens"] = int(cal_ids.shape[1])
+            state_bounds[layer].copy_(torch.maximum(state_bounds[layer], state.ssm.abs().amax()))
+            fifo_bounds[layer].copy_(torch.maximum(fifo_bounds[layer], state.conv.abs().amax()))
+
+    head_values = torch.stack(state_head_bounds).cpu().tolist()
+    state_values = torch.stack(state_bounds).cpu().tolist()
+    fifo_values = torch.stack(fifo_bounds).cpu().tolist()
+    bounds = [
+        {
+            "state_abs_max": float(state_max),
+            "state_head_abs_max": [float(value) for value in head_maxima],
+            "fifo_abs_max": float(fifo_max),
+            "calibration_tokens": int(cal_ids.shape[1]),
+        }
+        for head_maxima, state_max, fifo_max in zip(
+            head_values, state_values, fifo_values, strict=True
+        )
+    ]
     checkpoint_names = {
         "residual": "residual",
         "proj": "proj",
@@ -149,14 +154,15 @@ def _calibrate_payload(
         "y": "y",
         "layer_output": "output",
     }
+    ranges = recorder.ranges
     for layer, bound in enumerate(bounds):
         bound["checkpoint_abs_max"] = {
-            output_name: max(abs(value) for value in recorder.ranges[(layer, recorded_name)])
+            output_name: max(abs(value) for value in ranges[(layer, recorded_name)])
             for recorded_name, output_name in checkpoint_names.items()
         }
-        gated_lo, gated_hi = recorder.ranges[(layer, "gated_rms_invsqrt")]
+        gated_lo, gated_hi = ranges[(layer, "gated_rms_invsqrt")]
         bound["gated_variance_range"] = [gated_lo, gated_hi]
-    return recorder.ranges, bounds
+    return ranges, bounds
 
 
 @dataclass(frozen=True)
@@ -228,6 +234,7 @@ def _collect_test_vectors_from_ids(model, ids: torch.Tensor, ops=None) -> _TestV
             ops=ops,
             states=states,
             output_hidden_states=True,
+            output_logits=False,
         )["hidden_states"]
         for layer in range(len(model.backbone.layers)):
             layer_input = embeddings[token] if layer == 0 else hidden_states[layer - 1][0, 0]
@@ -262,6 +269,7 @@ def _collect_autoregressive_trace(
     generate_tokens: int,
     ops=None,
     record_recurrence: bool = False,
+    record_layer_details: bool = True,
 ) -> _AutoregressiveTrace:
     if prompt_tokens < 1 or generate_tokens < 1:
         raise ValueError("autoregressive prompt/generate token counts must be positive")
@@ -282,9 +290,10 @@ def _collect_autoregressive_trace(
 
     def record_step(output) -> None:
         hidden_states = output["hidden_states"]
-        for layer in range(len(model.backbone.layers)):
-            layer_outputs[layer].append(hidden_states[layer][0, 0])
-            layer_states[layer].append(states[layer].ssm[0].clone())
+        if record_layer_details:
+            for layer in range(len(model.backbone.layers)):
+                layer_outputs[layer].append(hidden_states[layer][0, 0])
+                layer_states[layer].append(states[layer].ssm[0].clone())
         expected_final.append(hidden_states[-1][0, 0])
 
     for token_id in prompt_ids:
@@ -335,8 +344,12 @@ def _collect_autoregressive_trace(
         evaluated_ids=evaluated_ids,
         generated_ids=generated_ids,
         embeddings=embeddings,
-        layer_outputs=[torch.stack(values) for values in layer_outputs],
-        layer_states=[torch.stack(values) for values in layer_states],
+        layer_outputs=[torch.stack(values) for values in layer_outputs]
+        if record_layer_details
+        else [],
+        layer_states=[torch.stack(values) for values in layer_states]
+        if record_layer_details
+        else [],
         layer_decays=recurrence_values("decay_output"),
         layer_state_updates=recurrence_values("state_update"),
         layer_state_decayed=recurrence_values("state_decayed"),
@@ -496,6 +509,7 @@ def _export_autoregressive_assets(
         prompt,
         prompt_tokens,
         generate_tokens,
+        record_layer_details=False,
     )
     poly_trace = _collect_autoregressive_trace(
         model,

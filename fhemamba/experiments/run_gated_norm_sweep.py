@@ -57,7 +57,7 @@ def main() -> None:
     recorder = RangeRecorder()
     for window in range(args.cal_windows):
         chunk = train_ids[:, window * args.window : (window + 1) * args.window].to(args.device)
-        model_forward(model, chunk, recorder, scan="chunked")
+        model_forward(model, chunk, recorder, scan="chunked", output_logits=False)
     exact_site_ranges = recorder.ranges
     exact_pooled_ranges = pool_by_name(exact_site_ranges)
 
@@ -92,7 +92,7 @@ def main() -> None:
         )
         for window in range(args.cal_windows):
             chunk = train_ids[:, window * args.window : (window + 1) * args.window].to(args.device)
-            model_forward(model, chunk, probe, scan="chunked")
+            model_forward(model, chunk, probe, scan="chunked", output_logits=False)
         closed_loop_ranges = union_ranges(exact_site_ranges, probe.ranges)
         ops = PolyOps.fit(
             ranges_by_name=pool_by_name(closed_loop_ranges),

@@ -64,6 +64,7 @@ def main() -> None:
             torch.tensor([[token_id]]),
             ops=operations,
             states=states,
+            output_logits=False,
         )
         token_max = 0.0
         for layer, state in enumerate(states):

@@ -40,6 +40,7 @@ auto main() -> int {
   require(defaults.ring_dim == 131072, "unexpected ring dimension default");
   require(defaults.multiplicative_depth == 44, "unexpected depth default");
   require(defaults.pt_cache_gib == 5.0, "unexpected plaintext cache default");
+  require(defaults.security == "128-classic", "native security default must be checked");
 
   const std::string binary_hash(64, 'a');
   const auto provenance = parse({"stage1", "--input", "payload",

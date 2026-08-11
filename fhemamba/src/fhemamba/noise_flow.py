@@ -74,12 +74,22 @@ def measure_amplification(
     # Prefill ONCE; per-probe states are cheap clones (re-prefilling per probe
     # would cost n_layers x probes full prefills).
     prefill_states = init_states(model, batch_size=prompt_ids.shape[0])
-    model_forward(model, prompt_ids[:, :-1], scan="chunked", states=prefill_states)
+    model_forward(
+        model,
+        prompt_ids[:, :-1],
+        scan="chunked",
+        states=prefill_states,
+        output_logits=False,
+    )
 
     base_states = _clone_states(prefill_states)
-    base_hidden = model_forward(model, next_tok, states=base_states, output_hidden_states=True)[
-        "hidden_states"
-    ][-1][0, -1]
+    base_hidden = model_forward(
+        model,
+        next_tok,
+        states=base_states,
+        output_hidden_states=True,
+        output_logits=False,
+    )["hidden_states"][-1][0, -1]
 
     n_layers = len(model.backbone.layers)
     lambda_out = []
@@ -95,9 +105,13 @@ def measure_amplification(
             # maximum coordinate into the reported gain.
             noise = _linf_noise(states[layer].ssm.shape, delta, gen, states[layer].ssm)
             states[layer].ssm = states[layer].ssm + noise
-            hidden = model_forward(model, next_tok, states=states, output_hidden_states=True)[
-                "hidden_states"
-            ][-1][0, -1]
+            hidden = model_forward(
+                model,
+                next_tok,
+                states=states,
+                output_hidden_states=True,
+                output_logits=False,
+            )["hidden_states"][-1][0, -1]
             out_amps.append(float((hidden - base_hidden).abs().max()) / delta)
             # carry = how much of the perturbation survives in the SAME
             # layer's state after one token step.
@@ -146,7 +160,13 @@ def measure_group_amplification(
     gen = torch.Generator().manual_seed(seed)
     next_tok = prompt_ids[:, -1:]
     prefill_states = init_states(model, batch_size=prompt_ids.shape[0])
-    model_forward(model, prompt_ids[:, :-1], scan="chunked", states=prefill_states)
+    model_forward(
+        model,
+        prompt_ids[:, :-1],
+        scan="chunked",
+        states=prefill_states,
+        output_logits=False,
+    )
 
     group_counts = []
     for layer, state in enumerate(prefill_states):
@@ -172,9 +192,13 @@ def measure_group_amplification(
                 raise ValueError(f"state_group_scales[{layer}] must be positive and finite")
 
     base_states = _clone_states(prefill_states)
-    base_outputs = model_forward(model, next_tok, states=base_states, output_hidden_states=True)[
-        "hidden_states"
-    ]
+    base_outputs = model_forward(
+        model,
+        next_tok,
+        states=base_states,
+        output_hidden_states=True,
+        output_logits=False,
+    )["hidden_states"]
     base_final = base_outputs[-1][..., -1, :]
 
     records = []
@@ -189,9 +213,13 @@ def measure_group_amplification(
                 states = _clone_states(prefill_states)
                 target = states[layer].ssm[:, head_start:head_end]
                 target.add_(_linf_noise(target.shape, delta, gen, target))
-                outputs = model_forward(model, next_tok, states=states, output_hidden_states=True)[
-                    "hidden_states"
-                ]
+                outputs = model_forward(
+                    model,
+                    next_tok,
+                    states=states,
+                    output_hidden_states=True,
+                    output_logits=False,
+                )["hidden_states"]
                 boundary_gains.append(
                     float(
                         (outputs[layer][..., -1, :] - base_outputs[layer][..., -1, :]).abs().amax()

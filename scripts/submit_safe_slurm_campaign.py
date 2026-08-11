@@ -253,7 +253,7 @@ def _ledger_row(entry: dict[str, Any]) -> str:
 
 
 def _default_run_prefix() -> str:
-    stamp = dt.datetime.now(dt.UTC).strftime("%Y%m%d-%H%M%S")
+    stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%d-%H%M%S")
     return f"safe-v{__version__}-{stamp}"
 
 

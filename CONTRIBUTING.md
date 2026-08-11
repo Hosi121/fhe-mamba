@@ -37,6 +37,8 @@ encrypted B300 claim.
   active path. Do not create a third implementation.
 - Removing the compatibility package requires a planned breaking release and
   migration of its remaining tools.
+- Follow the [maintenance boundary](docs/maintenance.md): do not add new
+  `sys.path` import shims or compatibility-only model/backend features.
 
 ## Definition of done
 

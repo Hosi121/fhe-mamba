@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import json
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -28,6 +28,7 @@ from torch import Tensor
 from torch.nn import functional as F  # noqa: N812
 
 Site = tuple[int, str]
+DeviceRange = tuple[Tensor, Tensor]
 
 # Site names used by reference.py. One polynomial is fitted per (name) with the
 # range pooled across layers by default. "gated_rms_invsqrt" is Mamba-2's
@@ -62,20 +63,47 @@ class Exact:
         return torch.rsqrt(x)
 
 
+def _record_device_range(ranges: dict[Site, DeviceRange], x: Tensor, site: Site) -> None:
+    """Accumulate a range without materializing CUDA scalars on the host."""
+    lo, hi = torch.aminmax(x.detach())
+    old = ranges.get(site)
+    if old is not None:
+        old_lo, old_hi = old
+        if old_lo.device != x.device:
+            old_lo = old_lo.to(x.device)
+            old_hi = old_hi.to(x.device)
+        lo = torch.minimum(lo, old_lo)
+        hi = torch.maximum(hi, old_hi)
+    ranges[site] = (lo, hi)
+
+
+def _materialize_ranges(ranges: dict[Site, DeviceRange]) -> dict[Site, tuple[float, float]]:
+    """Copy all accumulated scalars to the host once per device."""
+    grouped: dict[torch.device, list[tuple[Site, DeviceRange]]] = {}
+    for site, values in ranges.items():
+        grouped.setdefault(values[0].device, []).append((site, values))
+
+    materialized: dict[Site, tuple[float, float]] = {}
+    for entries in grouped.values():
+        host_values = torch.stack([torch.stack(values) for _, values in entries]).cpu().tolist()
+        for (site, _), (lo, hi) in zip(entries, host_values, strict=True):
+            materialized[site] = (float(lo), float(hi))
+    return materialized
+
+
 class RangeRecorder(Exact):
     """Exact ops that record the observed input range per site."""
 
     def __init__(self) -> None:
-        self.ranges: dict[Site, tuple[float, float]] = {}
+        self._ranges: dict[Site, DeviceRange] = {}
+
+    @property
+    def ranges(self) -> dict[Site, tuple[float, float]]:
+        """Materialized range snapshot; accessing it synchronizes each device once."""
+        return _materialize_ranges(self._ranges)
 
     def _record(self, x: Tensor, site: Site) -> None:
-        lo = float(x.min())
-        hi = float(x.max())
-        if site in self.ranges:
-            old_lo, old_hi = self.ranges[site]
-            self.ranges[site] = (min(lo, old_lo), max(hi, old_hi))
-        else:
-            self.ranges[site] = (lo, hi)
+        _record_device_range(self._ranges, x, site)
 
     def checkpoint(self, x: Tensor, site: Site) -> Tensor:
         self._record(x, site)
@@ -100,7 +128,8 @@ class RangeRecorder(Exact):
     def pooled_by_name(self) -> dict[str, tuple[float, float]]:
         """Union of ranges across layers, keyed by site name."""
         pooled: dict[str, tuple[float, float]] = {}
-        for (_, name), (lo, hi) in self.ranges.items():
+        ranges = self.ranges
+        for (_, name), (lo, hi) in ranges.items():
             if name not in SITE_NAMES:
                 continue
             if name in pooled:
@@ -111,7 +140,8 @@ class RangeRecorder(Exact):
         return pooled
 
     def save(self, path: str | Path) -> None:
-        payload = {f"{layer}:{name}": [lo, hi] for (layer, name), (lo, hi) in self.ranges.items()}
+        ranges = self.ranges
+        payload = {f"{layer}:{name}": [lo, hi] for (layer, name), (lo, hi) in ranges.items()}
         Path(path).write_text(json.dumps(payload, indent=2))
 
     @staticmethod
@@ -230,9 +260,16 @@ class HeadMaskedDecay:
 
     base: SquaredExpPoly
     head_mask: tuple[float, ...]
+    _mask_cache: dict[tuple[torch.device, torch.dtype], Tensor] = field(
+        default_factory=dict, init=False, repr=False, compare=False
+    )
 
     def __call__(self, x: Tensor) -> Tensor:
-        mask = torch.tensor(self.head_mask, dtype=x.dtype, device=x.device)
+        key = (x.device, x.dtype)
+        mask = self._mask_cache.get(key)
+        if mask is None:
+            mask = torch.tensor(self.head_mask, dtype=x.dtype, device=x.device)
+            self._mask_cache[key] = mask
         lo, _ = self.base.interval
         # Clamp ONLY masked heads (their poly output is erased by the zero
         # mask; the clamp just keeps fp finite). Surviving heads are evaluated
@@ -462,7 +499,18 @@ class PolyOps(Exact):
         self.polys = polys
         self.layer_polys = layer_polys or {}
         self.enabled = enabled
-        self.violations: dict[str, list[int]] = {name: [0, 0] for name in enabled}
+        self._violation_counts: dict[str, Tensor] = {}
+        self._violation_totals: dict[str, int] = dict.fromkeys(enabled, 0)
+
+    @property
+    def violations(self) -> dict[str, list[int]]:
+        """Materialized violation snapshot; accessing it may synchronize a device."""
+        return {
+            name: [int(self._violation_counts[name].item()), total]
+            if name in self._violation_counts
+            else [0, total]
+            for name, total in self._violation_totals.items()
+        }
 
     @classmethod
     def fit(
@@ -514,9 +562,15 @@ class PolyOps(Exact):
             return exact_fn(x)
         poly = self.layer_polys.get(site) or self.polys[name]
         lo, hi = _poly_interval(poly)
-        counts = self.violations[name]
-        counts[0] += int(((x < lo) | (x > hi)).sum())
-        counts[1] += x.numel()
+        count = self._violation_counts.get(name)
+        if count is None:
+            count = torch.zeros((), dtype=torch.int64, device=x.device)
+            self._violation_counts[name] = count
+        elif count.device != x.device:
+            count = count.to(x.device)
+            self._violation_counts[name] = count
+        count.add_(((x < lo) | (x > hi)).count_nonzero())
+        self._violation_totals[name] += x.numel()
         return poly(x)
 
     def silu(self, x: Tensor, site: Site) -> Tensor:
@@ -532,9 +586,10 @@ class PolyOps(Exact):
         return self._apply(x, site, torch.rsqrt)
 
     def violation_summary(self) -> dict[str, float]:
+        violations = self.violations
         return {
             name: (counts[0] / counts[1] if counts[1] else 0.0)
-            for name, counts in self.violations.items()
+            for name, counts in violations.items()
         }
 
 
@@ -549,13 +604,14 @@ class RecordingPolyOps(PolyOps):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.ranges: dict[Site, tuple[float, float]] = {}
+        self._ranges: dict[Site, DeviceRange] = {}
+
+    @property
+    def ranges(self) -> dict[Site, tuple[float, float]]:
+        return _materialize_ranges(self._ranges)
 
     def _apply(self, x: Tensor, site: Site, exact_fn) -> Tensor:
-        lo = float(x.min())
-        hi = float(x.max())
-        old = self.ranges.get(site)
-        self.ranges[site] = (min(lo, old[0]), max(hi, old[1])) if old else (lo, hi)
+        _record_device_range(self._ranges, x, site)
         return super()._apply(x, site, exact_fn)
 
 
