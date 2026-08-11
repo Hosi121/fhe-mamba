@@ -51,7 +51,7 @@ A new headline claim requires:
 
 1. a tracked raw artifact or a tracked derived report whose raw inputs are
    named and available;
-2. validation with `scripts/validate_artifacts.py --require-commit`;
+2. validation with `fhemamba validate-artifacts --require-commit`;
 3. matching README, evidence registry, backlog, and package version text;
 4. explicit security, model, token-horizon, process-separation, and hardware
    scope.

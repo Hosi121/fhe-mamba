@@ -23,9 +23,9 @@ Status meanings:
 | PBI-OPT-002 | P1 | Blocked | PBI-M4-002 | Compare `out-proj`-only and all-scope fused transforms on the same five-step payload and binary family. Promote only on passing accuracy plus lower end-to-end evaluation, not projection time alone. |
 | PBI-OPT-003 | P1 | Blocked | PBI-M4-001 | Build an offline bootstrap-placement planner over recorded CKKS level/event traces. It must preserve live-out requirements and emit a replayable candidate schedule before native execution. |
 | PBI-OPT-004 | P2 | Blocked | PBI-M4-002 | Re-test shared dt/decay head expansion in a session long enough to amortize setup and key generation. Track total runtime and RSS, not only warm phase timing. |
-| PBI-OPS-101 | P1 | Open | none | Enforce coverage for the active `fhemamba` package in addition to the compatibility package, with a documented threshold that passes the full suite. |
+| PBI-OPS-101 | P1 | Done | none | Enforce coverage for the active `fhemamba` package with a documented threshold that passes the full suite. |
 | PBI-OPS-102 | P1 | Blocked | PBI-M4-001 | Create the `v0.4.5` Git tag only after the raw three-token success artifact is tracked or regenerated and full checks pass. |
-| PBI-OPS-103 | P2 | Open | none | Define the retirement boundary for `src/fhe_native_mamba3`: list commands still depending on it, move active utilities where appropriate, and remove it from package discovery only in a planned compatibility-breaking release. |
+| PBI-OPS-103 | P2 | Done | none | Preserve the pre-rebuild stack on an archive branch, migrate the artifact validator and native layout oracle, and remove the compatibility package from `main` and package discovery. |
 
 ## Completed current capabilities
 

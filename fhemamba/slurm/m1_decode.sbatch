@@ -13,7 +13,7 @@
 # Full-width Mamba-2 decode step (layer 0) on FIDESlib: builds the ct/pt op
 # probe and the decode kernel, runs the probe at both ring dimensions, then
 # runs the kernel on the exported m1 payload with 4 tokens of ciphertext state
-# carry. Modeled on slurm/fideslib_stage1_rank_gate_existing_payload.sbatch.
+# carry. The older rank-gate runner is preserved on the legacy archive branch.
 #
 # dgx runbook (FIDESlib v2.1.0, fhemamba/results/dgx/*.json):
 # - MAXP=64 constant-memory tower cap: empirical max depth 50 at scale 40,

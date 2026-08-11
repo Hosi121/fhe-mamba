@@ -9,10 +9,9 @@ pipeline is written in Python/PyTorch; encrypted execution uses CKKS through
 OpenFHE and FIDESlib-GPU.
 
 The active research trunk is [`fhemamba/`](fhemamba/README.md), with the native
-GPU kernel in [`native/fideslib_stage0/`](native/fideslib_stage0/). The older
-`src/fhe_native_mamba3` package remains installed and tested for compatibility
-with historical tooling, but it is not the architecture used for the current
-Mamba-2 result.
+GPU kernel in [`native/fideslib_stage0/`](native/fideslib_stage0/). The retired
+pre-rebuild implementation and its orchestration are preserved on
+`archive/pre-compat-retirement-20260811`, not shipped from `main`.
 
 ## Current status
 
@@ -86,8 +85,7 @@ native/fideslib_stage0/      active FIDESlib/OpenFHE GPU kernel and native tests
 scripts/                     local, DGX, B300, and artifact helpers
 fhemamba/results/            small tracked correctness and benchmark artifacts
 docs/research/               current measurement-driven research notes
-src/fhe_native_mamba3/       compatibility package for pre-rebuild tooling
-tests/                       compatibility and repository-level tests
+tests/                       repository/native integration contracts
 runs/                        ignored historical/generated experiment outputs
 ```
 
@@ -119,7 +117,7 @@ python fhemamba/experiments/run_ppl_ladder.py \
 
 See [docs/testing.md](docs/testing.md) for test tiers and GPU limitations.
 The [maintenance boundary](docs/maintenance.md) identifies the canonical code
-paths and the retirement plan for compatibility code and historical scripts.
+paths. See the [legacy archive record](docs/legacy-archive.md) for retired code.
 
 ## B300 five-token campaign
 

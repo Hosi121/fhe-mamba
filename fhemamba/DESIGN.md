@@ -204,13 +204,14 @@ Constraints carried over from the old repo's measurements:
   state size are FHE-favorable; complex/rotational state update needs
   cos/sin polynomial evaluation if data-dependent. Revisit when weights exist.
 
-## Salvage list from `src/fhe_native_mamba3` (port behind quality gates)
+## Salvage list from the archived pre-rebuild stack (port behind quality gates)
 
 - `native/fideslib_stage0/stage1_rank_gate_fideslib.cpp` — GPU CKKS block
   kernel (BSGS matmuls, power-basis poly eval) — Phase 3 trunk.
-- `layout.py` + C++ layout tests — slot packing / rotation inventory.
-- `checkpoint_pre_recurrence.py` poly/Newton machinery — cross-check against
-  `fhemamba.ops` fits.
+- `fhemamba.readout_layout` + C++ layout tests — the slot packing / rotation
+  inventory was migrated because the active native tests still consume it.
+- `checkpoint_pre_recurrence.py` poly/Newton machinery remains on the archive
+  branch; port it only if a current `fhemamba.ops` consumer needs the cross-check.
 - Measured constants in `runs/` (bootstrap latency, rotation costs).
 
 ## Token-1 divergence anatomy and the re-prefill protocol (2026-07-07)
