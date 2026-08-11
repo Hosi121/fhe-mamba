@@ -77,9 +77,7 @@ def test_safe_slurm_campaign_generates_default_run_prefix(tmp_path) -> None:
 
     payload = json.loads(output_json.read_text(encoding="utf-8"))
     assert payload["run_prefix"].startswith(f"safe-v{__version__}-")
-    assert payload["jobs"][0]["run_name"].startswith(
-        f"{payload['run_prefix']}-source-profile"
-    )
+    assert payload["jobs"][0]["run_name"].startswith(f"{payload['run_prefix']}-source-profile")
 
 
 def test_safe_slurm_campaign_rejects_unknown_job(tmp_path) -> None:
