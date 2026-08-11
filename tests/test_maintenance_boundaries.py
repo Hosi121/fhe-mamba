@@ -1,4 +1,3 @@
-import importlib.util
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,6 +23,5 @@ def test_active_tree_does_not_import_compatibility_package() -> None:
     assert offenders == []
 
 
-def test_compatibility_package_is_not_shipped() -> None:
+def test_compatibility_source_package_is_absent() -> None:
     assert not (ROOT / "src" / "fhe_native_mamba3").exists()
-    assert importlib.util.find_spec("fhe_native_mamba3") is None

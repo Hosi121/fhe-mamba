@@ -87,6 +87,8 @@ Use SemVer for package versions.
 - Minor versions mark a new runnable capability such as a longer encrypted
   horizon, process-separated full-kernel execution, or 128-bit full-chain
   execution.
+- Minor versions also mark compatibility-breaking removals while the project is
+  below `1.0.0`; `0.5.0` is the boundary that retired `fhe_native_mamba3`.
 - `1.0.0` is reserved for reproducible interactive generation at 128-bit
   parameters with an explicit protocol-security statement.
 
@@ -97,7 +99,7 @@ Do not create a release tag until:
 3. claim-bearing raw artifacts are tracked and validator-clean;
 4. the evidence registry links every headline result.
 
-Package version `0.4.5` currently has no tag because the corresponding
+Historical version `0.4.5` has no tag because the corresponding
 three-token B300 success artifact is still awaiting recovery or an exact rerun.
 
 ## Review priorities

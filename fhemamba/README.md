@@ -11,7 +11,7 @@ feeding decrypted diagnostics back into the computation.
 
 ## Current result
 
-At package version `0.4.5`, the recorded results below include one
+The recorded results below were produced under package version `0.4.5` and include one
 documented-only B300 milestone whose raw success artifact is still missing:
 
 - WikiText-2 PPL `22.307 -> 22.333` over 280 windows;

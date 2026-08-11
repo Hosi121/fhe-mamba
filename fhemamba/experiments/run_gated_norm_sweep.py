@@ -13,6 +13,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from fhemamba._env import block_broken_torchvision
 
+from fhemamba import __version__
+
 block_broken_torchvision()
 
 import torch  # noqa: E402
@@ -120,7 +122,7 @@ def main() -> None:
         print(json.dumps(row, allow_nan=False), flush=True)
 
     payload = {
-        "version": "0.4.5",
+        "version": __version__,
         "repo_commit": args.repo_commit,
         "stage": "mamba2-gated-norm-sweep-report",
         "backend": "torch-plaintext",

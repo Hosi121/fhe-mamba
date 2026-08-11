@@ -18,10 +18,14 @@ of `main`, the wheel, coverage, or the supported command line.
 The installed command is `fhemamba`. The historical `fhe-mamba3` command is
 available only from the archive branch.
 
+The distribution name remains `fhe-native-mamba3` for repository continuity,
+while the supported import package and command are both `fhemamba`. Version
+`0.5.0` records this compatibility-breaking boundary.
+
 ## Guardrails
 
-- CI measures coverage for both installed packages. A green compatibility suite
-  is not a substitute for exercising `fhemamba`.
+- CI measures coverage for the installed `fhemamba` package. Repository and
+  native contract tests supplement that package-level coverage.
 - Native direct invocations default to `128-classic`. Feasibility campaigns may
   use `not-set` only by setting it explicitly and recording it in their result.
 - Calibration and telemetry must not be included in an inference timing unless
@@ -37,8 +41,9 @@ available only from the archive branch.
 
 - Do not copy the old package back into `main` to recover a helper. Port the
   smallest behavior behind an active test and current naming.
-- Historical commands and Slurm files remain reproducible from the immutable
-  archive branch; they are not supported commands on `main`.
+- Historical commands and Slurm files remain reproducible from the dedicated
+  archive branch pinned to an exact commit in `docs/legacy-archive.md`; they are
+  not supported commands on `main`.
 - Claim-bearing raw artifacts and research notes stay in the main history even
   when their generating implementation is archived.
 
