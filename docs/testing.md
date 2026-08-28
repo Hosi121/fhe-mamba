@@ -116,6 +116,22 @@ python fhemamba/experiments/run_dgx_campaign.py \
   --resume
 ```
 
+The promoted manifest has a fail-closed `acceptance` gate. The campaign exits
+nonzero if the complete artifact set misses its layer/token geometry, error
+tolerance, per-token decrypt, autoregressive-token, zero-intermediate-decrypt,
+or full-synchronization requirements. Missing and malformed artifacts remain
+infrastructure failures; a valid artifact that misses a promotion criterion is
+a candidate failure.
+
+`--resume` verifies artifact schema and provenance before reuse, including the
+artifact version, full repository commit (plus a dirty-tree content
+fingerprint), binary SHA-256, layer/token geometry, synchronization profile,
+and the effective environment recorded in the prior campaign report. A missing
+prior report or any mismatch causes the stale artifact to be rerun.
+Autoregressive client decryption of completed `final_norm` output is recorded
+as a protocol-boundary token-selection operation, not an intermediate
+diagnostic decrypt.
+
 ## Known gaps
 
 - The documented `0.4.5` three-token B300 success JSON is not currently

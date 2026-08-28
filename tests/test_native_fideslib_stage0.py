@@ -42,7 +42,7 @@ def test_b300_sync_profiles_keep_experimental_builds_isolated() -> None:
     assert '--env FIDESLIB_DIR="/workspace/src/${FIDESLIB_SOURCE_NAME}"' in launch_script
     assert '--env B300_SYNC_PROFILE="${B300_SYNC_PROFILE}"' in launch_script
     assert 'FIDESLIB_VARIANT="${FIDESLIB_VARIANT:-sm${FIDESLIB_SM}}"' in runner
-    assert 'inferred_sync_profile="${FIDESLIB_VARIANT#sm${FIDESLIB_SM}-}"' in runner
+    assert 'inferred_sync_profile="${FIDESLIB_VARIANT#sm"${FIDESLIB_SM}"-}"' in runner
     assert "fideslib-stage0-${FIDESLIB_VARIANT}" in runner
     assert 'FUSED_REPLICATED_LINEAR_TRANSFORM="${FUSED_REPLICATED_LINEAR_TRANSFORM:-1}"' in runner
     assert (
@@ -66,6 +66,9 @@ def test_b300_long_horizon_manifest_pins_promoted_path() -> None:
     assert defaults["TOKENS"] == "5"
     assert defaults["SECURITY"] == "not-set"
     assert defaults["FIDESLIB_SYNC_PROFILE"] == "full"
+    assert defaults["BINARY_PATH"].endswith(
+        "/build/fideslib-stage0-sm100/stage1_mamba2_decode_fideslib"
+    )
     assert defaults["FUSED_REPLICATED_LINEAR_TRANSFORM"] == "1"
     assert defaults["FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE"] == "out-proj"
     assert defaults["COMPLEX_STATE_PAIRING"] == "1"
@@ -78,6 +81,23 @@ def test_b300_long_horizon_manifest_pins_promoted_path() -> None:
     assert acceptance["all_tokens_decrypt"] is True
     assert acceptance["zero_intermediate_decrypts"] is True
     assert "m2_chain_${RUN_TAG}_l${LAYERS}_t${TOKENS}.json" in runner
+    assert '--env ARTIFACT_VERSION="${ARTIFACT_VERSION:-}"' in runner
+    assert 'repo_commit="${REPO_COMMIT}"' in runner
+    assert 'binary_sha256="${BINARY_SHA256:-' in runner
+
+
+def test_autoregressive_output_decrypts_are_not_intermediate_debug_decrypts() -> None:
+    source = (
+        ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_decode_fideslib.cpp"
+    ).read_text()
+    zero_decrypt_scope = source.split('out << "\\"zero_intermediate_decrypts\\":"', 1)[1]
+    zero_decrypt_scope = zero_decrypt_scope.split(
+        'out << "\\"autoregressive_client_loop_simulation\\":"', 1
+    )[0]
+
+    assert "args.autoregressive_client_loop" not in zero_decrypt_scope
+    assert '"\\"autoregressive_client_output_decrypt_count\\":"' in source
+    assert '"\\"client_output_decrypts_are_protocol_boundary\\":"' in source
 
 
 def test_mamba2_decode_wires_complex_state_pairing() -> None:

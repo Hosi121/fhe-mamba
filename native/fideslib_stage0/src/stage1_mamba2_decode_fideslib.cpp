@@ -4948,12 +4948,15 @@ auto main(int argc, char* argv[]) -> int {
              args.debug_layer_errors ||
              args.debug_recurrence_layer >= 0 ||
              args.debug_normalized_state_bootstrap_range ||
-             !args.debug_client_reencrypt_before_token.empty() ||
-             args.autoregressive_client_loop)
+             !args.debug_client_reencrypt_before_token.empty())
                 ? "false"
                 : "true")
         << ",";
     out << "\"autoregressive_client_loop_simulation\":"
+        << (args.autoregressive_client_loop ? "true" : "false") << ",";
+    out << "\"autoregressive_client_output_decrypt_count\":"
+        << autoregressive_selected_ids.size() << ",";
+    out << "\"client_output_decrypts_are_protocol_boundary\":"
         << (args.autoregressive_client_loop ? "true" : "false") << ",";
     out << "\"client_server_process_separated\":false,";
     out << "\"debug_client_reencrypt_simulation\":"
