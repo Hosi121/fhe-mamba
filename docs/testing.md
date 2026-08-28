@@ -16,9 +16,9 @@ This runs:
 - the complete configured pytest suite without coverage;
 - slow-test duration reporting.
 
-`pyproject.toml` currently includes both `tests/` and `fhemamba/tests/`.
-`tests/` primarily covers the compatibility package and repository tooling;
-`fhemamba/tests/` covers the active Mamba-2 reference/lowering trunk.
+`pyproject.toml` includes both `tests/` and `fhemamba/tests/`. The root suite
+covers repository/native integration contracts; `fhemamba/tests/` covers the
+active Mamba-2 reference, lowering, CLI, and artifact validation.
 
 For focused iteration:
 
@@ -36,11 +36,8 @@ an optional project extra, not a dependency group.
 scripts/run_checks.sh
 ```
 
-This runs formatting, lint, pytest, and the current coverage gate. Coverage is
-still enforced for the compatibility `fhe_native_mamba3` package because the
-historical suite and CLI remain shipped. Adding a separate active-`fhemamba`
-coverage threshold is PBI-OPS-101; until then, the full pytest suite remains the
-active trunk's required local correctness gate.
+This runs formatting, lint, pytest, and the `fhemamba` coverage gate. Retired
+compatibility code is not included in package discovery or coverage.
 
 Parallel execution is available when `pytest-xdist` is installed:
 
@@ -77,7 +74,7 @@ breakage before an expensive B200/B300 allocation.
 Curated benchmark JSON should be checked with:
 
 ```bash
-python scripts/validate_artifacts.py \
+fhemamba validate-artifacts \
   --require-commit \
   path/to/result.json
 ```
@@ -124,5 +121,4 @@ python fhemamba/experiments/run_dgx_campaign.py \
 - The documented `0.4.5` three-token B300 success JSON is not currently
   tracked; recovery or exact rerun is PBI-M4-001.
 - GPU CKKS execution cannot be reproduced by GitHub-hosted CI.
-- Active-`fhemamba` coverage is not yet a separate enforced metric.
 - A full process-separated Mamba run and a 24-layer 128-bit run remain open.

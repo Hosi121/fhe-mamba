@@ -28,17 +28,13 @@ GPU probes are separate because they require OpenFHE/FIDESlib, dedicated
 hardware, and substantial memory. A passing local suite does not validate an
 encrypted B300 claim.
 
-## Active and compatibility code
+## Active code
 
 - `fhemamba/` and `native/fideslib_stage0/` are the active Mamba-2 path.
-- `src/fhe_native_mamba3/` remains a shipped compatibility package for
-  historical scripts and the current CLI.
 - New Mamba-2 formula, lowering, packing, and runtime work belongs in the
-  active path. Do not create a third implementation.
-- Removing the compatibility package requires a planned breaking release and
-  migration of its remaining tools.
-- Follow the [maintenance boundary](docs/maintenance.md): do not add new
-  `sys.path` import shims or compatibility-only model/backend features.
+  active path. Do not restore the retired pre-rebuild implementation.
+- Historical code is preserved on `archive/pre-compat-retirement-20260811`;
+  follow the [maintenance boundary](docs/maintenance.md) before salvaging code.
 
 ## Definition of done
 
@@ -79,7 +75,7 @@ A direct backend artifact should include:
 Validate curated artifacts with:
 
 ```bash
-python scripts/validate_artifacts.py --require-commit path/to/result.json
+fhemamba validate-artifacts --require-commit path/to/result.json
 ```
 
 ## Versioning and tags
@@ -91,6 +87,9 @@ Use SemVer for package versions.
 - Minor versions mark a new runnable capability such as a longer encrypted
   horizon, process-separated full-kernel execution, or 128-bit full-chain
   execution.
+- Minor versions also mark compatibility-breaking removals while the project is
+  below `1.0.0`; `0.5.0` is the boundary that retired the old distribution,
+  `fhe_native_mamba3` import package, and `fhe-mamba3` command.
 - `1.0.0` is reserved for reproducible interactive generation at 128-bit
   parameters with an explicit protocol-security statement.
 
@@ -101,7 +100,7 @@ Do not create a release tag until:
 3. claim-bearing raw artifacts are tracked and validator-clean;
 4. the evidence registry links every headline result.
 
-Package version `0.4.5` currently has no tag because the corresponding
+Historical version `0.4.5` has no tag because the corresponding
 three-token B300 success artifact is still awaiting recovery or an exact rerun.
 
 ## Review priorities

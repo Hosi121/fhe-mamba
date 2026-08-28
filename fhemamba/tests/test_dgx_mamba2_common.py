@@ -4,6 +4,8 @@ import os
 import subprocess
 from pathlib import Path
 
+from fhemamba import __version__
+
 ROOT = Path(__file__).resolve().parents[2]
 COMMON = ROOT / "fhemamba/experiments/dgx_mamba2_common.sh"
 
@@ -20,7 +22,8 @@ def _common_args(**overrides: str) -> dict[str, str]:
             "bash",
             "-c",
             'source "$1"; init_dgx_mamba2_defaults; '
-            'build_dgx_mamba2_args 24 2; printf "%s\\0" "${DGX_MAMBA2_ARGS[@]}"',
+            "build_dgx_mamba2_args 24 2; "
+            'printf "%s\\0" --artifact-version "$ARTIFACT_VERSION" "${DGX_MAMBA2_ARGS[@]}"',
             "bash",
             str(COMMON),
         ],
@@ -38,6 +41,7 @@ def test_dgx_mamba2_common_defaults_to_promoted_structural_path() -> None:
 
     assert args["--max-layers"] == "24"
     assert args["--tokens"] == "2"
+    assert args["--artifact-version"] == __version__
     assert args["--replicated-true-bsgs"] == "1"
     assert args["--fideslib-sync-profile"] == "unspecified"
     assert args["--fused-replicated-linear-transform"] == "0"

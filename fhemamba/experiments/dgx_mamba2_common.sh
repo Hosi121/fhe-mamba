@@ -2,11 +2,21 @@
 # Shared defaults and native arguments for DGX Mamba-2 runners. Source only.
 
 init_dgx_mamba2_defaults() {
+  local common_dir version_file
+  common_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+  version_file="${common_dir}/../src/fhemamba/_version.py"
+
   ROOT="${FHEMAMBA_REMOTE_ROOT:-$HOME/fhemamba}"
   BINARY="${BINARY:-$ROOT/build_stage0/stage1_mamba2_decode_fideslib}"
   INPUT_CHAIN="${INPUT_CHAIN:-$ROOT/m2_chain_payload_sqnewton_wiki512_t8}"
   RESULTS_DIR="${RESULTS_DIR:-$ROOT/results}"
-  ARTIFACT_VERSION="${ARTIFACT_VERSION:-0.4.5}"
+  if [[ -z "${ARTIFACT_VERSION:-}" ]]; then
+    ARTIFACT_VERSION="$(sed -n 's/^__version__ = "\([^"]*\)"$/\1/p' "${version_file}")"
+  fi
+  if [[ -z "${ARTIFACT_VERSION}" ]]; then
+    echo "failed to read fhemamba version from ${version_file}" >&2
+    return 1
+  fi
   REPO_COMMIT="${REPO_COMMIT:-working-tree}"
   FIDESLIB_SYNC_PROFILE="${FIDESLIB_SYNC_PROFILE:-unspecified}"
 

@@ -598,14 +598,12 @@ wheels = [
 ]
 
 [[package]]
-name = "fhe-native-mamba3"
-version = "0.4.5"
+name = "fhemamba"
+version = "0.5.0"
 source = { editable = "." }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.4.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "packaging" },
-    { name = "safetensors" },
     { name = "torch" },
 ]
 
@@ -624,9 +622,6 @@ experiments = [
     { name = "datasets" },
     { name = "transformers" },
 ]
-fhe = [
-    { name = "openfhe", marker = "python_full_version >= '3.12'" },
-]
 
 [package.metadata]
 requires-dist = [
@@ -634,19 +629,16 @@ requires-dist = [
     { name = "datasets", marker = "extra == 'dev'", specifier = ">=4.0" },
     { name = "datasets", marker = "extra == 'experiments'", specifier = ">=4.0" },
     { name = "numpy", specifier = ">=1.26" },
-    { name = "openfhe", marker = "python_full_version >= '3.12' and extra == 'fhe'", specifier = "==1.5.1.0.24.4" },
-    { name = "packaging", specifier = ">=22" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=3.7" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0" },
     { name = "pytest-xdist", marker = "extra == 'dev'", specifier = ">=3.6" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },
-    { name = "safetensors", specifier = ">=0.4" },
     { name = "torch", specifier = ">=2.2" },
     { name = "transformers", marker = "extra == 'dev'", specifier = ">=5.2" },
     { name = "transformers", marker = "extra == 'experiments'", specifier = ">=5.2" },
 ]
-provides-extras = ["dev", "experiments", "fhe"]
+provides-extras = ["dev", "experiments"]
 
 [[package]]
 name = "filelock"
@@ -1539,14 +1531,6 @@ source = { registry = "https://pypi.org/simple" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c2/f3/d86c845465a2723ad7e1e5c36dcd75ddb82898b3f53be47ebd429fb2fa5d/nvidia_nvtx-13.0.85-py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:4936d1d6780fbe68db454f5e72a42ff64d1fd6397df9f363ae786930fd5c1cd4", size = 148047, upload-time = "2025-09-04T08:29:01.761Z" },
     { url = "https://files.pythonhosted.org/packages/a8/64/3708a90d1ebe202ffdeb7185f878a3c84d15c2b2c31858da2ce0583e2def/nvidia_nvtx-13.0.85-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:cb7780edb6b14107373c835bf8b72e7a178bac7367e23da7acb108f973f157a6", size = 148878, upload-time = "2025-09-04T08:28:53.627Z" },
-]
-
-[[package]]
-name = "openfhe"
-version = "1.5.1.0.24.4"
-source = { registry = "https://pypi.org/simple" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c4/f4/671d48d5e45fd2d7a02e55bcc122dcb4c4509019ba41990c624eab5bcd19/openfhe-1.5.1.0.24.4-py3-none-any.whl", hash = "sha256:b39f50f570ea1236dc8a8c64b01552848eb66c068592c4178fa37249f182106e", size = 3977885, upload-time = "2026-04-10T19:49:31.073Z" },
 ]
 
 [[package]]

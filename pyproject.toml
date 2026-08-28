@@ -3,8 +3,8 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fhe-native-mamba3"
-version = "0.4.5"
+name = "fhemamba"
+version = "0.5.0"
 description = "Encrypted Mamba-2 inference under CKKS with OpenFHE and FIDESlib-GPU."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -12,8 +12,6 @@ license = "MIT"
 authors = [{ name = "cipher research" }]
 dependencies = [
   "numpy>=1.26",
-  "packaging>=22",
-  "safetensors>=0.4",
   "torch>=2.2",
 ]
 
@@ -32,15 +30,11 @@ experiments = [
   "datasets>=4.0",
   "transformers>=5.2",
 ]
-fhe = [
-  "openfhe==1.5.1.0.24.4; python_version >= '3.12'",
-]
-
 [project.scripts]
-fhe-mamba3 = "fhe_native_mamba3.cli:main"
+fhemamba = "fhemamba.cli:main"
 
 [tool.setuptools.packages.find]
-where = ["src", "fhemamba/src"]
+where = ["fhemamba/src"]
 
 [tool.ruff]
 line-length = 100
@@ -76,8 +70,8 @@ testpaths = ["tests", "fhemamba/tests"]
 
 [tool.coverage.run]
 branch = true
-omit = ["src/fhe_native_mamba3/cli.py", "fhemamba/tests/*"]
-source = ["fhe_native_mamba3", "fhemamba"]
+omit = ["fhemamba/tests/*"]
+source = ["fhemamba"]
 
 [tool.coverage.report]
 fail_under = 70

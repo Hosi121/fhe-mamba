@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import subprocess
 
-from fhe_native_mamba3.layout import (
+from fhemamba.readout_layout import (
     readout_output_slots,
     readout_reduce_mask,
     readout_reduce_steps,

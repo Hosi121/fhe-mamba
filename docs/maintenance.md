@@ -1,9 +1,8 @@
 # Maintenance boundary and debt register
 
-This repository contains a current Mamba-2 implementation and an older research
-stack. Keeping both installable without an explicit boundary made it too easy to
-add features to the wrong path and too hard for an external contributor to know
-which result a test protected.
+This repository ships one Mamba-2 implementation. The pre-rebuild research
+stack is preserved on `archive/pre-compat-retirement-20260811` and is not part
+of `main`, the wheel, coverage, or the supported command line.
 
 ## Canonical ownership
 
@@ -13,19 +12,29 @@ which result a test protected.
 | Payload and client-reference export | `fhemamba/src/fhemamba/m1_payload.py` | Active; the historical filename is debt, not a second implementation. |
 | Encrypted GPU execution | `native/fideslib_stage0/` | Active; CPU-only units must remain buildable without FIDESlib. |
 | Current experiments | `fhemamba/experiments/` | Active only when backed by a manifest or documented command. |
-| Pre-rebuild Python stack | `src/fhe_native_mamba3/` | Compatibility-only; no new Mamba-2 math or backend features. |
-| Root `scripts/` and `slurm/` | Historical orchestration and compatibility | Do not copy a script to create a new experiment. |
+| Artifact schema validation | `fhemamba/src/fhemamba/artifacts.py` | Active shared provenance contract. |
+| Root `scripts/` | Local checks and current DGX/B300 helpers only | Keep wrappers narrow; experiments belong under `fhemamba/experiments/`. |
 
-The installed `fhe-mamba3` command still targets the compatibility package. It
-must not be presented as the entry point for the current native Mamba-2 result.
-The active `fhemamba/src`, `fhemamba/experiments`, and `fhemamba/slurm` trees do
-not import `fhe_native_mamba3`; CI enforces this one-way boundary. The
-compatibility package imports the shared release version from `fhemamba`.
+The installed command is `fhemamba`. The historical `fhe-mamba3` command is
+available only from the archive branch.
+
+The distribution, import package, and installed command are all named
+`fhemamba`. Version `0.5.0` records the compatibility-breaking retirement of
+the old distribution metadata, import package, and command.
+
+An editable checkout used before `0.5.0` can retain ignored build metadata that
+advertises the removed command. Remove only those generated directories once,
+then resync the environment:
+
+```bash
+rm -rf fhe_native_mamba3.egg-info fhemamba/src/fhe_native_mamba3.egg-info
+uv sync --locked --extra dev
+```
 
 ## Guardrails
 
-- CI measures coverage for both installed packages. A green compatibility suite
-  is not a substitute for exercising `fhemamba`.
+- CI measures coverage for the installed `fhemamba` package. Repository and
+  native contract tests supplement that package-level coverage.
 - Native direct invocations default to `128-classic`. Feasibility campaigns may
   use `not-set` only by setting it explicitly and recording it in their result.
 - Calibration and telemetry must not be included in an inference timing unless
@@ -37,23 +46,15 @@ compatibility package imports the shared release version from `fhemamba`.
 - Headline results require a tracked raw artifact. Prose-only measurements stay
   visibly labeled as such.
 
-## Retirement queue
+## Archive boundary
 
-1. Inventory imports of `fhe_native_mamba3` from root scripts and classify each
-   as migrate, archive, or delete. The active `fhemamba` tree is already
-   dependency-free; the remaining import surface belongs to root compatibility
-   orchestration and the legacy `fhe-mamba3` entry point.
-2. Move reusable artifact/provenance helpers into a small package shared by the
-   active path; do not retain the old model implementation for those helpers.
-3. Replace the compatibility CLI with a current `fhemamba` CLI, keeping only
-   narrow deprecated aliases for commands with real users.
-4. Archive historical run scripts and non-golden result JSON outside the source
-   tree. Keep a small validator-tested golden corpus in the repository.
-5. Remove the compatibility package and its tests once no supported command or
-   documented workflow imports it.
-
-Deletion is gated by import/use evidence, not by raw test count. Compatibility
-code that is exercised only by compatibility tests is still a removal candidate.
+- Do not copy the old package back into `main` to recover a helper. Port the
+  smallest behavior behind an active test and current naming.
+- Historical commands and Slurm files remain reproducible from the dedicated
+  archive branch pinned to an exact commit in `docs/legacy-archive.md`; they are
+  not supported commands on `main`.
+- Claim-bearing raw artifacts and research notes stay in the main history even
+  when their generating implementation is archived.
 
 ## Native decomposition queue
 

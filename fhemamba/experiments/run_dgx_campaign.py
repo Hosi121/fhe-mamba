@@ -14,6 +14,10 @@ import time
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from fhemamba import __version__
+
 
 class CampaignInterruptedError(Exception):
     def __init__(self, signum: int) -> None:
@@ -401,7 +405,7 @@ def main() -> int:
     root = Path(__file__).resolve().parents[2]
     manifest = _read_object(args.manifest)
     name = str(manifest.get("name", args.manifest.stem))
-    version = str(manifest.get("version", "0.4.5"))
+    version = str(manifest.get("version", __version__))
     default_timeout = _timeout_seconds(manifest.get("timeout_seconds", 0))
     gpu_preflight = manifest.get("gpu_preflight")
     if gpu_preflight is not None and not isinstance(gpu_preflight, dict):

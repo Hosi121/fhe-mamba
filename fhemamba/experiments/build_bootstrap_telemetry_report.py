@@ -12,6 +12,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from fhemamba.bootstrap_telemetry import build_bootstrap_telemetry_report
 
+from fhemamba import __version__
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -23,7 +25,7 @@ def main() -> None:
     report = build_bootstrap_telemetry_report(payload)
     passed = bool(report["telemetry_reconciled"])
     artifact = {
-        "version": "0.4.5",
+        "version": __version__,
         "stage": "mamba2-bootstrap-telemetry-report",
         "backend": "artifact-analysis",
         "encrypted": False,

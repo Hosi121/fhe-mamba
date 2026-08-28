@@ -12,6 +12,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from fhemamba._env import block_broken_torchvision
 
+from fhemamba import __version__
+
 block_broken_torchvision()
 
 import torch  # noqa: E402
@@ -110,7 +112,7 @@ def main() -> None:
     violations = [row for row in rows if row["ratio_to_margin"] > 1.0]
     passed = not violations
     artifact = {
-        "version": "0.4.5",
+        "version": __version__,
         "stage": "autoregressive-carried-bound-audit",
         "backend": "torch-cpu-polynomial-reference",
         "encrypted": False,
