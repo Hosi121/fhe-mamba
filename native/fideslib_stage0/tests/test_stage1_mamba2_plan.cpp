@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <functional>
 #include <limits>
+#include <memory>
 #include <numeric>
 #include <set>
 #include <stdexcept>
@@ -260,5 +261,46 @@ auto main() -> int {
   require_invalid([&] {
     rotation_frequencies(payload, packing, 0, 1, 32768, rep_in, rep_out);
   });
+
+  using TestHandle = std::shared_ptr<int>;
+  std::vector<CachedLevelHandle<TestHandle>> cached_handles = {
+      {std::make_shared<int>(7), 4},
+      {std::make_shared<int>(8), 4},
+      {std::make_shared<int>(9), 4}};
+  int builder_calls = 0;
+  bool cache_hit = false;
+  bool level_bypass = false;
+  for (std::size_t index = 0; index < cached_handles.size(); ++index) {
+    auto resolved = resolve_hit_first_handle(
+        &cached_handles, index, 4,
+        [&]() {
+          ++builder_calls;
+          return std::make_shared<int>(10);
+        },
+        cache_hit, level_bypass);
+    require(cache_hit && !level_bypass &&
+                *resolved == 7 + static_cast<int>(index),
+            "fully cached projection did not resolve its persistent handle");
+  }
+  require(builder_calls == 0,
+          "fully cached projection invoked the mask builder");
+  auto resolved = resolve_hit_first_handle(
+      &cached_handles, 0, 3,
+      [&]() {
+        ++builder_calls;
+        return std::make_shared<int>(10);
+      },
+      cache_hit, level_bypass);
+  require(!cache_hit && level_bypass && builder_calls == 1 && *resolved == 10,
+          "level-incompatible replicated plaintext did not rebuild lazily");
+  resolved = resolve_hit_first_handle(
+      &cached_handles, cached_handles.size(), 4,
+      [&]() {
+        ++builder_calls;
+        return std::make_shared<int>(11);
+      },
+      cache_hit, level_bypass);
+  require(!cache_hit && !level_bypass && builder_calls == 2 && *resolved == 11,
+          "missing replicated plaintext did not build lazily");
   return 0;
 }

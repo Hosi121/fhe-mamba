@@ -52,6 +52,7 @@
 
 #include <algorithm>
 #include <array>
+#include <atomic>
 #include <any>
 #include <chrono>
 #include <cmath>
@@ -87,8 +88,9 @@ namespace fs = std::filesystem;
 
 namespace {
 
-using fhemamba::stage1::Config;
+using fhemamba::stage1::CachedLevelHandle;
 using fhemamba::stage1::ChainPayload;
+using fhemamba::stage1::Config;
 using fhemamba::stage1::M1Payload;
 using fhemamba::stage1::NormalizedStateLayout;
 using fhemamba::stage1::parse_args;
@@ -122,6 +124,7 @@ using fhemamba::stage1::ReplicatedShape;
 using fhemamba::stage1::required_rotations;
 using fhemamba::stage1::resolve_interleaved_replicated_shape;
 using fhemamba::stage1::resolve_replicated_shape;
+using fhemamba::stage1::resolve_hit_first_handle;
 using fhemamba::stage1::rotation_frequencies;
 using fhemamba::stage1::rotation_key_gib_estimate;
 using fhemamba::stage1::require_same_layer_dims;
@@ -336,11 +339,13 @@ struct LayerPlan {
   double y_scale = 1.0;
   std::map<std::string, double> checkpoint_abs_max;
   // Plaintext-cache wiring: key prefix ("L00." ...) for this layer's
-  // token-invariant vectors, and encode-once BSGS diagonal tables (null when
-  // the cache mode excludes them).
+  // token-invariant vectors, plus encode-once legacy and replicated BSGS
+  // tables (null when the cache mode excludes them).
   std::string cache_prefix;
   const std::vector<Plaintext>* in_proj_table = nullptr;
   const std::vector<Plaintext>* out_proj_table = nullptr;
+  const std::vector<CachedLevelHandle<Plaintext>>* replicated_in_proj_table = nullptr;
+  const std::vector<CachedLevelHandle<Plaintext>>* replicated_out_proj_table = nullptr;
 };
 
 // Per-layer persistent ciphertext state carried across tokens.
@@ -1544,6 +1549,43 @@ auto main(int argc, char* argv[]) -> int {
     int pt_miss_consumption_level_min = args.multiplicative_depth;
     int pt_miss_consumption_level_max = 0;
     int pt_cache_order = 0;
+    std::atomic<long long> replicated_mask_builds{0};
+    std::atomic<long long> replicated_mask_bytes_materialized{0};
+    std::atomic<long long> replicated_mask_build_nanoseconds{0};
+    std::atomic<long long> replicated_eval_mask_builds{0};
+    std::atomic<long long> replicated_eval_mask_bytes_materialized{0};
+    std::atomic<long long> replicated_eval_mask_build_nanoseconds{0};
+    long long replicated_cache_hits = 0;
+    long long replicated_cache_misses = 0;
+    long long replicated_cache_level_bypasses = 0;
+    auto materialize_replicated_mask = [&](
+        const std::vector<double>& weights, int output_dim, int input_dim,
+        int k, const ReplicatedShape& shape, bool during_eval) {
+      const auto started = now();
+      auto mask = replicated_bsgs_pre_mask(
+          weights, output_dim, input_dim, k, shape, batch_size);
+      const auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(
+                                   now() - started)
+                                   .count();
+      // Nonzero giant steps materialize both the base and pre-shifted masks.
+      const int giant =
+          (k / shape.baby_step) * shape.baby_step * shape.replicas;
+      const long long materialized_vectors =
+          shape.baby_step > 1 && giant != 0 ? 2 : 1;
+      const auto bytes = static_cast<long long>(mask.size() * sizeof(double)) *
+                         materialized_vectors;
+      replicated_mask_builds.fetch_add(1, std::memory_order_relaxed);
+      replicated_mask_bytes_materialized.fetch_add(bytes, std::memory_order_relaxed);
+      replicated_mask_build_nanoseconds.fetch_add(nanoseconds, std::memory_order_relaxed);
+      if (during_eval) {
+        replicated_eval_mask_builds.fetch_add(1, std::memory_order_relaxed);
+        replicated_eval_mask_bytes_materialized.fetch_add(
+            bytes, std::memory_order_relaxed);
+        replicated_eval_mask_build_nanoseconds.fetch_add(
+            nanoseconds, std::memory_order_relaxed);
+      }
+      return mask;
+    };
     auto register_plain = [&](const std::string& key, int uses_per_token,
                               std::function<std::vector<double>()> build,
                               int encode_level = -1) {
@@ -2681,7 +2723,12 @@ auto main(int argc, char* argv[]) -> int {
     // -----------------------------------------------------------------------
     std::vector<std::vector<Plaintext>> in_proj_tables(layer_plans.size());
     std::vector<std::vector<Plaintext>> out_proj_tables(layer_plans.size());
-    // key -> (layer, 0=in/1=out, table index) links resolved after selection.
+    std::vector<std::vector<CachedLevelHandle<Plaintext>>>
+        replicated_in_proj_tables(layer_plans.size());
+    std::vector<std::vector<CachedLevelHandle<Plaintext>>>
+        replicated_out_proj_tables(layer_plans.size());
+    // key -> (layer, 0=legacy-in/1=legacy-out/2=replicated-in/
+    // 3=replicated-out, table index) links resolved after selection.
     std::vector<std::tuple<std::string, std::size_t, int, std::size_t>> bsgs_links;
     double pt_cache_encode_seconds = 0.0;
     std::size_t pt_cache_entries_cached = 0;
@@ -2784,26 +2831,40 @@ auto main(int argc, char* argv[]) -> int {
       for (std::size_t layer = 0; layer < layer_plans.size(); ++layer) {
         const auto& plan = layer_plans[layer];
         if (rep_in.replicas > 1) {
+          replicated_in_proj_tables[layer].resize(
+              static_cast<std::size_t>(rep_in.per_replica));
           for (int k = 0; k < rep_in.per_replica; ++k) {
-            register_plain(plan.cache_prefix + "bsgsrep_in." + std::to_string(k), 1,
-                           [&plan, k, rep_in, proj_dim, d_model, batch_size]() {
-                             return replicated_bsgs_pre_mask(
+            const auto key =
+                plan.cache_prefix + "bsgsrep_in." + std::to_string(k);
+            register_plain(key, 1,
+                           [&plan, k, rep_in, proj_dim, d_model,
+                            &materialize_replicated_mask]() {
+                             return materialize_replicated_mask(
                                  plan.in_w_folded, proj_dim, d_model, k, rep_in,
-                                 batch_size);
+                                 false);
                            },
                            layer == 0 ? args.pt_cache_level
                                       : args.pt_cache_weight_level);
+            bsgs_links.emplace_back(key, layer, 2,
+                                    static_cast<std::size_t>(k));
           }
         }
         if (rep_out.replicas > 1) {
+          replicated_out_proj_tables[layer].resize(
+              static_cast<std::size_t>(rep_out.per_replica));
           for (int k = 0; k < rep_out.per_replica; ++k) {
-            register_plain(plan.cache_prefix + "bsgsrep_out." + std::to_string(k), 1,
-                           [&plan, k, rep_out, d_model, d_inner, batch_size]() {
-                             return replicated_bsgs_pre_mask(
+            const auto key =
+                plan.cache_prefix + "bsgsrep_out." + std::to_string(k);
+            register_plain(key, 1,
+                           [&plan, k, rep_out, d_model, d_inner,
+                            &materialize_replicated_mask]() {
+                             return materialize_replicated_mask(
                                  plan.out_w_folded, d_model, d_inner, k, rep_out,
-                                 batch_size);
+                                 false);
                            },
                            args.pt_cache_weight_level);
+            bsgs_links.emplace_back(key, layer, 3,
+                                    static_cast<std::size_t>(k));
           }
         }
       }
@@ -2944,8 +3005,15 @@ auto main(int argc, char* argv[]) -> int {
         if (entry == plain_cache.end() || !entry->second.plain) {
           continue;
         }
-        auto& table = which == 0 ? in_proj_tables[layer] : out_proj_tables[layer];
-        table[table_index] = entry->second.plain;
+        if (which == 0 || which == 1) {
+          auto& table = which == 0 ? in_proj_tables[layer] : out_proj_tables[layer];
+          table[table_index] = entry->second.plain;
+        } else {
+          auto& table = which == 2 ? replicated_in_proj_tables[layer]
+                                   : replicated_out_proj_tables[layer];
+          table[table_index] = CachedLevelHandle<Plaintext>{
+              entry->second.plain, entry->second.encode_level};
+        }
       }
       pt_cache_encode_seconds = seconds_since(encode_start);
       log_phase("pt cache encode done cached=" + std::to_string(pt_cache_entries_cached) +
@@ -2960,6 +3028,10 @@ auto main(int argc, char* argv[]) -> int {
       if (pt_cache_mode != "off") {
         layer_plans[layer].in_proj_table = &in_proj_tables[layer];
         layer_plans[layer].out_proj_table = &out_proj_tables[layer];
+        layer_plans[layer].replicated_in_proj_table =
+            &replicated_in_proj_tables[layer];
+        layer_plans[layer].replicated_out_proj_table =
+            &replicated_out_proj_tables[layer];
       }
     }
 
@@ -3021,6 +3093,14 @@ auto main(int argc, char* argv[]) -> int {
             }
             for (auto& table : out_proj_tables) {
               std::fill(table.begin(), table.end(), Plaintext());
+            }
+            for (auto& table : replicated_in_proj_tables) {
+              std::fill(table.begin(), table.end(),
+                        CachedLevelHandle<Plaintext>{});
+            }
+            for (auto& table : replicated_out_proj_tables) {
+              std::fill(table.begin(), table.end(),
+                        CachedLevelHandle<Plaintext>{});
             }
             pt_cache_entries_cached = 0;
             pt_cache_bytes_cached = 0.0;
@@ -3189,7 +3269,8 @@ auto main(int argc, char* argv[]) -> int {
     auto replicated_bsgs = [&](const Ciphertext<DCRTPoly>& input_ct,
                                const std::vector<double>& weights, int output_dim,
                                int input_dim, const ReplicatedShape& shape,
-                               const std::string& key_prefix,
+                               const std::vector<CachedLevelHandle<Plaintext>>*
+                                   plain_table,
                                bool fusion_allowed) -> Ciphertext<DCRTPoly> {
       // In-window cyclic self-extension of the period-n input tile.
       auto extended = input_ct;
@@ -3206,16 +3287,67 @@ auto main(int argc, char* argv[]) -> int {
       // before one rotation per giant group.
       Ciphertext<DCRTPoly> accumulator;
       bool has_accumulator = false;
+      auto resolve_replicated_plain = [&](int k, uint32_t consumption_level,
+                                          bool skip_zero) {
+        ++pt_consumption_count;
+        pt_consumption_level_sum += consumption_level;
+        pt_consumption_level_min = std::min(
+            pt_consumption_level_min, static_cast<int>(consumption_level));
+        pt_consumption_level_max = std::max(
+            pt_consumption_level_max, static_cast<int>(consumption_level));
+        bool cache_hit = false;
+        bool level_bypass = false;
+        auto plain = resolve_hit_first_handle(
+            plain_table, static_cast<std::size_t>(k),
+            static_cast<int>(consumption_level),
+            [&]() -> Plaintext {
+              auto mask = materialize_replicated_mask(
+                  weights, output_dim, input_dim, k, shape, true);
+              if (skip_zero &&
+                  std::all_of(mask.begin(), mask.end(),
+                              [](double value) { return value == 0.0; })) {
+                return {};
+              }
+              if (!args.pt_miss_consumption_level || consumption_level == 0) {
+                return make_plain(mask);
+              }
+              ++pt_miss_consumption_level_encodes;
+              pt_miss_consumption_level_sum += consumption_level;
+              pt_miss_consumption_level_min = std::min(
+                  pt_miss_consumption_level_min,
+                  static_cast<int>(consumption_level));
+              pt_miss_consumption_level_max = std::max(
+                  pt_miss_consumption_level_max,
+                  static_cast<int>(consumption_level));
+              return make_plain_at_level(mask, consumption_level);
+            },
+            cache_hit, level_bypass);
+        if (cache_hit) {
+          ++pt_cache_hits;
+          ++replicated_cache_hits;
+          pt_cache_hit_consumption_level_min = std::min(
+              pt_cache_hit_consumption_level_min,
+              static_cast<int>(consumption_level));
+        } else {
+          ++pt_cache_misses;
+          ++replicated_cache_misses;
+          if (level_bypass) {
+            ++pt_cache_level_bypasses;
+            ++replicated_cache_level_bypasses;
+          }
+        }
+        return plain;
+      };
       if (shape.baby_step <= 1) {
         for (int k = 0; k < shape.per_replica; ++k) {
-          auto mask = replicated_bsgs_pre_mask(weights, output_dim, input_dim, k,
-                                               shape, batch_size);
-          if (std::all_of(mask.begin(), mask.end(),
-                          [](double value) { return value == 0.0; })) {
+          auto plain = resolve_replicated_plain(
+              k, static_cast<uint32_t>(replicated->GetLevel()), true);
+          if (!plain) {
             continue;
           }
           auto rolled = k == 0 ? replicated : rotate(replicated, k * shape.replicas);
-          auto term = mul_mask(rolled, key_prefix + std::to_string(k), mask);
+          auto term = cc->EvalMult(rolled, plain);
+          ++ct_pt_muls;
           if (!has_accumulator) {
             accumulator = term;
             has_accumulator = true;
@@ -3245,11 +3377,8 @@ auto main(int argc, char* argv[]) -> int {
           std::vector<Plaintext> diagonals;
           diagonals.reserve(static_cast<std::size_t>(shape.per_replica));
           for (int k = 0; k < shape.per_replica; ++k) {
-            auto mask = replicated_bsgs_pre_mask(
-                weights, output_dim, input_dim, k, shape, batch_size);
-            diagonals.push_back(cached_plain(
-                key_prefix + std::to_string(k), mask,
-                static_cast<uint32_t>(replicated->GetLevel())));
+            diagonals.push_back(resolve_replicated_plain(
+                k, static_cast<uint32_t>(replicated->GetLevel()), false));
           }
           accumulator = replicated->Clone();
           cc->LinearTransformInPlace(accumulator, shape.per_replica,
@@ -3283,14 +3412,14 @@ auto main(int argc, char* argv[]) -> int {
               if (k >= shape.per_replica) {
                 break;
               }
-              auto mask = replicated_bsgs_pre_mask(
-                  weights, output_dim, input_dim, k, shape, batch_size);
-              if (std::all_of(mask.begin(), mask.end(),
-                              [](double value) { return value == 0.0; })) {
+              auto plain = resolve_replicated_plain(
+                  k, static_cast<uint32_t>(replicated->GetLevel()), true);
+              if (!plain) {
                 continue;
               }
-              auto term = mul_mask(babies[static_cast<std::size_t>(baby)],
-                                   key_prefix + std::to_string(k), mask);
+              auto term = cc->EvalMult(
+                  babies[static_cast<std::size_t>(baby)], plain);
+              ++ct_pt_muls;
               if (!has_inner) {
                 inner = term;
                 has_inner = true;
@@ -3434,8 +3563,9 @@ auto main(int argc, char* argv[]) -> int {
             hidden_ct, inv_block, 1);
         Ciphertext<DCRTPoly> linear;
         if (rep_in.replicas > 1) {
-          linear = replicated_bsgs(linear_input, plan.in_w_folded, proj_dim, d_model, rep_in,
-                                   plan.cache_prefix + "bsgsrep_in.",
+          linear = replicated_bsgs(linear_input, plan.in_w_folded, proj_dim,
+                                   d_model, rep_in,
+                                   plan.replicated_in_proj_table,
                                    args.fused_replicated_linear_transform_scope == "all");
         } else {
           auto babies = slot_bsgs_precompute_baby_rotations(
@@ -3882,8 +4012,9 @@ auto main(int argc, char* argv[]) -> int {
             y_ct, inv_gated, linear_levels);
         Ciphertext<DCRTPoly> linear;
         if (rep_out.replicas > 1) {
-          linear = replicated_bsgs(linear_input, plan.out_w_folded, d_model, d_inner, rep_out,
-                                   plan.cache_prefix + "bsgsrep_out.", true);
+          linear = replicated_bsgs(linear_input, plan.out_w_folded, d_model,
+                                   d_inner, rep_out,
+                                   plan.replicated_out_proj_table, true);
           linear = mul_mask(linear, "mask.out_clean", out_clean_mask);
         } else {
           auto babies = slot_bsgs_precompute_baby_rotations(
@@ -4770,6 +4901,31 @@ auto main(int argc, char* argv[]) -> int {
         << (pt_cache_bytes_cached / (1024.0 * 1024.0 * 1024.0)) << ",";
     out << "\"hits\":" << pt_cache_hits << ",";
     out << "\"misses\":" << pt_cache_misses << ",";
+    out << "\"replicated_cache_hits\":" << replicated_cache_hits << ",";
+    out << "\"replicated_cache_misses\":" << replicated_cache_misses << ",";
+    out << "\"replicated_cache_level_bypasses\":"
+        << replicated_cache_level_bypasses << ",";
+    out << "\"replicated_mask_builds\":"
+        << replicated_mask_builds.load(std::memory_order_relaxed) << ",";
+    out << "\"replicated_mask_bytes_materialized\":"
+        << replicated_mask_bytes_materialized.load(std::memory_order_relaxed)
+        << ",";
+    out << "\"replicated_mask_build_seconds\":"
+        << static_cast<double>(replicated_mask_build_nanoseconds.load(
+               std::memory_order_relaxed)) /
+               1.0e9
+        << ",";
+    out << "\"replicated_eval_mask_builds\":"
+        << replicated_eval_mask_builds.load(std::memory_order_relaxed) << ",";
+    out << "\"replicated_eval_mask_bytes_materialized\":"
+        << replicated_eval_mask_bytes_materialized.load(
+               std::memory_order_relaxed)
+        << ",";
+    out << "\"replicated_eval_mask_build_seconds\":"
+        << static_cast<double>(replicated_eval_mask_build_nanoseconds.load(
+               std::memory_order_relaxed)) /
+               1.0e9
+        << ",";
     out << "\"encode_seconds\":" << pt_cache_encode_seconds << ",";
     out << "\"encode_threads_requested\":" << args.encode_threads << ",";
     out << "\"encode_threads_effective\":" << effective_encode_threads << ",";

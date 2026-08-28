@@ -154,3 +154,9 @@ runner, and manifest. The runner validates the build metadata sidecar before
 allocating the GPU and attaches that provenance to the raw result. Named
 reduced-synchronization builds use separate source snapshots and are never
 promotion candidates without a passing full 24-layer multi-token gate.
+
+Replicated-BSGS projection plaintexts use persistent per-layer hit-first
+handles. A compatible cache hit is resolved before allocating or scanning the
+32,768-slot host mask; misses and level bypasses retain the existing lazy mask
+and encode path. Raw artifacts expose replicated cache hits/misses/bypasses,
+mask builds, materialized bytes, and mask-build seconds under `pt_cache`.

@@ -154,6 +154,21 @@ def test_mamba2_decode_wires_shared_head_expansion() -> None:
     assert '--shared-head-expansion "$SHARED_HEAD_EXPANSION"' in runner
 
 
+def test_replicated_bsgs_uses_hit_first_plaintext_handles() -> None:
+    source = (
+        ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_decode_fideslib.cpp"
+    ).read_text()
+    plan = (ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_plan.hpp").read_text()
+
+    assert "resolve_hit_first_handle" in plan
+    assert "replicated_in_proj_table" in source
+    assert "replicated_out_proj_table" in source
+    assert "resolve_replicated_plain" in source
+    assert '"\\"replicated_eval_mask_builds\\":"' in source
+    assert '"\\"replicated_mask_bytes_materialized\\":"' in source
+    assert '"\\"replicated_mask_build_seconds\\":"' in source
+
+
 def test_mamba2_native_kernel_is_repo_owned() -> None:
     source = ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_decode_fideslib.cpp"
     config = ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_config.cpp"

@@ -2,9 +2,11 @@
 
 #include "stage1_mamba2_payload.hpp"
 
+#include <cstddef>
 #include <cstdint>
 #include <map>
 #include <set>
+#include <utility>
 #include <vector>
 
 namespace fhemamba::stage1 {
@@ -22,6 +24,35 @@ struct ReplicatedShape {
   int guard_windows = 0;  // filled input windows excluded from masks/folding
 };
 
+template <typename Handle>
+struct CachedLevelHandle {
+  Handle handle{};
+  int encode_level = 0;
+};
+
+// Resolve a persistent plaintext handle before invoking the mask builder.
+// The generic form keeps the hit-first contract testable without FIDESlib.
+template <typename Handle, typename Builder>
+auto resolve_hit_first_handle(
+    const std::vector<CachedLevelHandle<Handle>>* table,
+    std::size_t index,
+    int consumption_level,
+    Builder&& builder,
+    bool& cache_hit,
+    bool& level_bypass) -> Handle {
+  cache_hit = false;
+  level_bypass = false;
+  if (table != nullptr && index < table->size()) {
+    const auto& cached = (*table)[index];
+    if (static_cast<bool>(cached.handle) &&
+        cached.encode_level <= consumption_level) {
+      cache_hit = true;
+      return cached.handle;
+    }
+    level_bypass = static_cast<bool>(cached.handle);
+  }
+  return std::forward<Builder>(builder)();
+}
 
 struct PackingDims {
   int batch = 0;
