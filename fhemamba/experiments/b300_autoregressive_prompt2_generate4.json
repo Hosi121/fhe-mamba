@@ -27,6 +27,7 @@
     "GPU_DEVICE": "3",
     "FIDESLIB_SM": "100",
     "FIDESLIB_VARIANT": "sm100",
+    "BINARY_PATH": "/home/kataiwa/fhemamba-b300/build/fideslib-stage0-sm100/stage1_mamba2_decode_fideslib",
     "FIDESLIB_SYNC_PROFILE": "full",
     "LAYERS": "24",
     "TOKENS": "5",

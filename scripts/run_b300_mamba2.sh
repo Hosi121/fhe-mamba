@@ -11,7 +11,7 @@ case "${FIDESLIB_VARIANT}" in
     inferred_sync_profile="full"
     ;;
   "sm${FIDESLIB_SM}-bootstrap-lifetime"|"sm${FIDESLIB_SM}-lifetime"|"sm${FIDESLIB_SM}-none")
-    inferred_sync_profile="${FIDESLIB_VARIANT#sm${FIDESLIB_SM}-}"
+    inferred_sync_profile="${FIDESLIB_VARIANT#sm"${FIDESLIB_SM}"-}"
     ;;
   *)
     inferred_sync_profile="unspecified"
@@ -51,14 +51,14 @@ RESULTS_DIR="${RESULTS_DIR:-${ROOT_DIR}/results}"
 META_BTS_RESIDUAL_LAYERS="${META_BTS_RESIDUAL_LAYERS:-21,22,23}"
 RUN_ID="${RUN_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
 RUN_TAG="${RUN_TAG:-}"
-if [[ -n "${OUTPUT_JSON:-}" ]]; then
-  OUTPUT_JSON="${OUTPUT_JSON}"
-elif [[ -n "${RUN_TAG}" ]]; then
-  # run_dgx_campaign.py predicts this path before starting the runner. Keep the
-  # campaign and direct B300 launch contracts identical when RUN_TAG is set.
-  OUTPUT_JSON="${RESULTS_DIR}/m2_chain_${RUN_TAG}_l${LAYERS}_t${TOKENS}.json"
-else
-  OUTPUT_JSON="${RESULTS_DIR}/m2_chain_b300-sm${FIDESLIB_SM}-l${LAYERS}-t${TOKENS}-${RUN_ID}.json"
+if [[ -z "${OUTPUT_JSON:-}" ]]; then
+  if [[ -n "${RUN_TAG}" ]]; then
+    # run_dgx_campaign.py predicts this path before starting the runner. Keep the
+    # campaign and direct B300 launch contracts identical when RUN_TAG is set.
+    OUTPUT_JSON="${RESULTS_DIR}/m2_chain_${RUN_TAG}_l${LAYERS}_t${TOKENS}.json"
+  else
+    OUTPUT_JSON="${RESULTS_DIR}/m2_chain_b300-sm${FIDESLIB_SM}-l${LAYERS}-t${TOKENS}-${RUN_ID}.json"
+  fi
 fi
 
 if [[ "${GPU_DEVICE}" != "2" && "${GPU_DEVICE}" != "3" ]]; then
@@ -71,11 +71,15 @@ if [[ ! -x "${BINARY_PATH}" ]]; then
 fi
 
 mkdir -p "${RESULTS_DIR}"
-repo_commit="$(git -C "${ROOT_DIR}/cipher" rev-parse --short HEAD 2>/dev/null || echo working-tree)"
-if ! git -C "${ROOT_DIR}/cipher" diff --quiet --ignore-submodules=dirty 2>/dev/null; then
-  repo_commit="${repo_commit}-dirty"
+if [[ -n "${REPO_COMMIT:-}" ]]; then
+  repo_commit="${REPO_COMMIT}"
+else
+  repo_commit="$(git -C "${ROOT_DIR}/cipher" rev-parse HEAD 2>/dev/null || echo working-tree)"
+  if [[ -n "$(git -C "${ROOT_DIR}/cipher" status --porcelain --untracked-files=normal 2>/dev/null)" ]]; then
+    repo_commit="${repo_commit}-dirty"
+  fi
 fi
-binary_sha256="$(sha256sum "${BINARY_PATH}" | cut -d' ' -f1)"
+binary_sha256="${BINARY_SHA256:-$(sha256sum "${BINARY_PATH}" | cut -d' ' -f1)}"
 container_name="fhemamba-b300-${RUN_ID}"
 
 docker run --rm \
@@ -91,6 +95,7 @@ docker run --rm \
   --env RESULTS_DIR=/workspace/results \
   --env META_BTS_RESIDUAL_LAYERS="${META_BTS_RESIDUAL_LAYERS}" \
   --env OUTPUT_JSON="${OUTPUT_JSON/#${ROOT_DIR}/\/workspace}" \
+  --env ARTIFACT_VERSION="${ARTIFACT_VERSION:-}" \
   --env REPO_COMMIT="${repo_commit}" \
   --env LAYERS="${LAYERS}" \
   --env TOKENS="${TOKENS}" \

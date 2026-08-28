@@ -4,9 +4,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
+import re
 import signal
 import subprocess
 import sys
@@ -15,6 +17,8 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+from fhemamba.artifacts import validate_benchmark_artifact
 
 from fhemamba import __version__
 
@@ -30,7 +34,13 @@ def _raise_campaign_signal(signum: int, _frame: Any) -> None:
 
 
 def _read_object(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    def reject_non_finite(value: str) -> Any:
+        raise ValueError(f"non-finite JSON number {value!r} in {path}")
+
+    payload = json.loads(
+        path.read_text(encoding="utf-8"),
+        parse_constant=reject_non_finite,
+    )
     if not isinstance(payload, dict):
         raise ValueError(f"expected a JSON object: {path}")
     return payload
@@ -63,10 +73,135 @@ def _artifact_paths(env: dict[str, str]) -> list[Path]:
     return [results_dir / f"m2_chain_{run_tag}_l{layer}_t{tokens}.json" for layer in layers]
 
 
-def _load_artifacts(paths: list[Path]) -> tuple[list[dict[str, Any]], list[str]]:
+def _file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _is_sha256(value: Any) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-fA-F]{64}", value) is not None
+
+
+def _artifact_expectation(
+    env: dict[str, str],
+    *,
+    version: str,
+    repo_commit: str,
+) -> dict[str, Any]:
+    # Campaign identity is derived from the running checkout, not from
+    # user-editable manifest defaults.
+    env["ARTIFACT_VERSION"] = version
+    env["REPO_COMMIT"] = repo_commit
+    binary_sha256 = env.get("BINARY_SHA256")
+    binary_path_value = env.get("BINARY_PATH") or env.get("BINARY")
+    if binary_path_value:
+        binary_path = Path(binary_path_value)
+        if binary_path.is_file():
+            computed_sha256 = _file_sha256(binary_path)
+            if binary_sha256 is not None and binary_sha256.lower() != computed_sha256:
+                raise ValueError(f"BINARY_SHA256 does not match current binary {binary_path}")
+            binary_sha256 = computed_sha256
+            env["BINARY_SHA256"] = binary_sha256
+    if binary_sha256 is not None and not _is_sha256(binary_sha256):
+        raise ValueError("BINARY_SHA256 must be a 64-digit hexadecimal SHA-256")
+    try:
+        layers = [int(value) for value in env.get("LAYERS", "5 8 12 24").split()]
+        tokens = int(env.get("TOKENS", "1"))
+    except ValueError as exc:
+        raise ValueError("campaign LAYERS and TOKENS must be integers") from exc
+    return {
+        "version": env["ARTIFACT_VERSION"],
+        "repo_commit": env["REPO_COMMIT"],
+        "binary_sha256": binary_sha256,
+        "layers": layers,
+        "tokens": tokens,
+        "sync_profile": env.get("FIDESLIB_SYNC_PROFILE"),
+    }
+
+
+def _artifact_int(payload: dict[str, Any], key: str) -> int | None:
+    parameters = payload.get("parameters", {})
+    scope = payload.get("measurement_scope", {})
+    for source in (parameters, scope):
+        value = source.get(key) if isinstance(source, dict) else None
+        if isinstance(value, int) and not isinstance(value, bool):
+            return value
+    return None
+
+
+def _validate_artifact_identity(
+    payload: dict[str, Any],
+    path: Path,
+    *,
+    expected: dict[str, Any],
+    expected_layer: int,
+    require_binary_match: bool,
+) -> list[str]:
+    issues: list[str] = []
+    expected_versions = {expected["version"], f"{expected['version']}+{path.stem}"}
+    if payload.get("version") not in expected_versions:
+        issues.append(
+            f"artifact version mismatch for {path}: expected one of "
+            f"{sorted(expected_versions)!r}, got {payload.get('version')!r}"
+        )
+    if payload.get("repo_commit") != expected["repo_commit"]:
+        issues.append(
+            f"artifact repo_commit mismatch for {path}: "
+            f"expected {expected['repo_commit']!r}, got {payload.get('repo_commit')!r}"
+        )
+    binary_sha256 = payload.get("binary_sha256")
+    if not _is_sha256(binary_sha256):
+        issues.append(f"artifact binary_sha256 is not a valid SHA-256: {path}")
+    expected_binary = expected.get("binary_sha256")
+    if require_binary_match and not expected_binary:
+        issues.append(
+            f"cannot safely resume {path}: set BINARY_PATH or BINARY_SHA256 "
+            "to identify the current binary"
+        )
+    elif expected_binary and binary_sha256 != expected_binary:
+        issues.append(
+            f"artifact binary_sha256 mismatch for {path}: "
+            f"expected {expected_binary!r}, got {binary_sha256!r}"
+        )
+    layers = _artifact_int(payload, "n_layers_loaded")
+    if layers is None:
+        layers = _artifact_int(payload, "layers_loaded")
+    if layers != expected_layer:
+        issues.append(
+            f"artifact layer count mismatch for {path}: expected {expected_layer}, got {layers!r}"
+        )
+    tokens = _artifact_int(payload, "tokens")
+    if tokens != expected["tokens"]:
+        issues.append(
+            f"artifact token count mismatch for {path}: "
+            f"expected {expected['tokens']}, got {tokens!r}"
+        )
+    expected_sync = expected.get("sync_profile")
+    parameters = payload.get("parameters", {})
+    actual_sync = parameters.get("fideslib_sync_profile") if isinstance(parameters, dict) else None
+    if expected_sync is not None and actual_sync != expected_sync:
+        issues.append(
+            f"artifact sync profile mismatch for {path}: "
+            f"expected {expected_sync!r}, got {actual_sync!r}"
+        )
+    return issues
+
+
+def _load_artifacts(
+    paths: list[Path],
+    *,
+    expected: dict[str, Any],
+    require_binary_match: bool = False,
+) -> tuple[list[dict[str, Any]], list[str]]:
     artifacts: list[dict[str, Any]] = []
     issues: list[str] = []
-    for path in paths:
+    expected_layers = expected["layers"]
+    if len(expected_layers) != len(paths):
+        raise ValueError("artifact paths and expected layers must have the same length")
+    for path, expected_layer in zip(paths, expected_layers, strict=True):
         if not path.is_file():
             issues.append(f"missing artifact: {path}")
             continue
@@ -78,22 +213,47 @@ def _load_artifacts(paths: list[Path]) -> tuple[list[dict[str, Any]], list[str]]
         if "status" not in payload or "passed" not in payload:
             issues.append(f"artifact lacks status/passed: {path}")
             continue
+        validation = validate_benchmark_artifact(payload, require_commit=True)
+        issues.extend(
+            f"invalid artifact {path} at {issue.path}: {issue.message}"
+            for issue in validation.errors
+        )
+        issues.extend(
+            _validate_artifact_identity(
+                payload,
+                path,
+                expected=expected,
+                expected_layer=expected_layer,
+                require_binary_match=require_binary_match,
+            )
+        )
         measurements = payload.get("measurements", {})
         timing = payload.get("timing", {})
         scope = payload.get("measurement_scope", {})
+        parameters = payload.get("parameters", {})
         artifacts.append(
             {
                 "path": str(path),
                 "version": payload.get("version"),
+                "repo_commit": payload.get("repo_commit"),
+                "binary_sha256": payload.get("binary_sha256"),
                 "stage": payload.get("stage"),
                 "status": payload["status"],
                 "passed": payload["passed"],
+                "parameters": {
+                    key: parameters.get(key)
+                    for key in ("n_layers_loaded", "tokens", "fideslib_sync_profile")
+                    if key in parameters
+                },
                 "measurements": {
                     key: measurements.get(key)
                     for key in (
                         "max_abs_error",
                         "per_token_max_abs_error",
                         "per_token_decrypt_ok",
+                        "autoregressive_selected_ids",
+                        "autoregressive_expected_ids",
+                        "autoregressive_tokens_match",
                         "executed_bootstrap_count",
                         "peak_rss_gib",
                     )
@@ -106,20 +266,30 @@ def _load_artifacts(paths: list[Path]) -> tuple[list[dict[str, Any]], list[str]]
                 },
                 "measurement_scope": {
                     key: scope.get(key)
-                    for key in ("zero_intermediate_decrypts", "full_layer_chain")
+                    for key in (
+                        "zero_intermediate_decrypts",
+                        "full_layer_chain",
+                        "layers_loaded",
+                        "tokens",
+                    )
                     if key in scope
                 },
+                "validation": validation.to_json_dict(),
             }
         )
     return artifacts, issues
 
 
 def _max_error(artifacts: list[dict[str, Any]]) -> float:
-    errors = []
+    errors: list[float] = []
     for artifact in artifacts:
         value = artifact.get("measurements", {}).get("max_abs_error")
-        if isinstance(value, (int, float)):
-            errors.append(float(value))
+        if not isinstance(value, (int, float)) or isinstance(value, bool):
+            return float("inf")
+        error = float(value)
+        if not math.isfinite(error) or error < 0:
+            return float("inf")
+        errors.append(error)
     return max(errors, default=float("inf"))
 
 
@@ -128,9 +298,192 @@ def _all_decrypt(artifacts: list[dict[str, Any]]) -> bool:
         return False
     for artifact in artifacts:
         values = artifact.get("measurements", {}).get("per_token_decrypt_ok")
-        if not isinstance(values, list) or not values or not all(bool(value) for value in values):
+        if (
+            not isinstance(values, list)
+            or not values
+            or not all(value is True or (type(value) is int and value == 1) for value in values)
+        ):
             return False
     return True
+
+
+def _artifact_layers(artifact: dict[str, Any]) -> int | None:
+    parameters = artifact.get("parameters", {})
+    scope = artifact.get("measurement_scope", {})
+    for source, key in ((parameters, "n_layers_loaded"), (scope, "layers_loaded")):
+        value = source.get(key) if isinstance(source, dict) else None
+        if isinstance(value, int) and not isinstance(value, bool):
+            return value
+    return None
+
+
+def _artifact_tokens(artifact: dict[str, Any]) -> int | None:
+    parameters = artifact.get("parameters", {})
+    scope = artifact.get("measurement_scope", {})
+    for source in (parameters, scope):
+        value = source.get("tokens") if isinstance(source, dict) else None
+        if isinstance(value, int) and not isinstance(value, bool):
+            return value
+    return None
+
+
+def _validate_acceptance_config(value: Any) -> dict[str, Any] | None:
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError("manifest acceptance must be an object")
+    allowed = {
+        "layers",
+        "tokens",
+        "max_abs_error_lte",
+        "all_tokens_decrypt",
+        "autoregressive_tokens_match",
+        "zero_intermediate_decrypts",
+        "required_sync_profile",
+    }
+    unknown = sorted(set(value) - allowed)
+    if unknown:
+        raise ValueError(f"manifest acceptance has unknown fields: {', '.join(unknown)}")
+    for key in ("layers", "tokens"):
+        if key in value and (
+            not isinstance(value[key], int) or isinstance(value[key], bool) or value[key] <= 0
+        ):
+            raise ValueError(f"manifest acceptance {key} must be a positive integer")
+    if "max_abs_error_lte" in value:
+        threshold = value["max_abs_error_lte"]
+        if (
+            not isinstance(threshold, (int, float))
+            or isinstance(threshold, bool)
+            or not math.isfinite(float(threshold))
+            or float(threshold) < 0
+        ):
+            raise ValueError("manifest acceptance max_abs_error_lte must be non-negative")
+    for key in (
+        "all_tokens_decrypt",
+        "autoregressive_tokens_match",
+        "zero_intermediate_decrypts",
+    ):
+        if key in value and not isinstance(value[key], bool):
+            raise ValueError(f"manifest acceptance {key} must be boolean")
+    if "required_sync_profile" in value and (
+        not isinstance(value["required_sync_profile"], str) or not value["required_sync_profile"]
+    ):
+        raise ValueError("manifest acceptance required_sync_profile must be a non-empty string")
+    return value
+
+
+def _evaluate_acceptance(
+    acceptance: dict[str, Any] | None,
+    experiments: list[dict[str, Any]],
+    *,
+    complete: bool,
+    dry_run: bool,
+) -> dict[str, Any]:
+    if acceptance is None:
+        return {"required": False, "evaluated": False, "passed": None, "issues": []}
+    if not complete or dry_run:
+        return {"required": True, "evaluated": False, "passed": None, "issues": []}
+
+    issues: list[str] = []
+    if any(item.get("infrastructure_ok") is not True for item in experiments):
+        issues.append("one or more experiments have an infrastructure failure")
+    artifacts = [
+        artifact
+        for experiment in experiments
+        for artifact in experiment.get("artifacts", [])
+        if isinstance(artifact, dict)
+    ]
+    if not artifacts:
+        issues.append("campaign produced no artifacts")
+    elif not all(
+        artifact.get("status") == "passed" and artifact.get("passed") is True
+        for artifact in artifacts
+    ):
+        issues.append("one or more candidate artifacts did not pass")
+
+    expected_layers = acceptance.get("layers")
+    if expected_layers is not None:
+        mismatches = [
+            artifact.get("path", "<unknown>")
+            for artifact in artifacts
+            if _artifact_layers(artifact) != expected_layers
+        ]
+        if mismatches:
+            issues.append(
+                f"artifacts do not report the required {expected_layers} layers: "
+                + ", ".join(mismatches)
+            )
+
+    expected_tokens = acceptance.get("tokens")
+    if expected_tokens is not None:
+        mismatches = [
+            artifact.get("path", "<unknown>")
+            for artifact in artifacts
+            if _artifact_tokens(artifact) != expected_tokens
+        ]
+        if mismatches:
+            issues.append(
+                f"artifacts do not report the required {expected_tokens} tokens: "
+                + ", ".join(mismatches)
+            )
+
+    threshold = acceptance.get("max_abs_error_lte")
+    maximum_error = _max_error(artifacts)
+    if threshold is not None and maximum_error > float(threshold):
+        rendered_error = maximum_error if math.isfinite(maximum_error) else "missing"
+        issues.append(f"maximum error {rendered_error} exceeds {threshold}")
+
+    if acceptance.get("all_tokens_decrypt"):
+        if not _all_decrypt(artifacts):
+            issues.append("not every artifact reports successful decryption for every token")
+        elif expected_tokens is not None and any(
+            len(artifact.get("measurements", {}).get("per_token_decrypt_ok", [])) != expected_tokens
+            for artifact in artifacts
+        ):
+            issues.append("per-token decrypt telemetry length does not match required tokens")
+
+    if acceptance.get("autoregressive_tokens_match"):
+        for artifact in artifacts:
+            measurements = artifact.get("measurements", {})
+            selected = measurements.get("autoregressive_selected_ids")
+            expected_ids = measurements.get("autoregressive_expected_ids")
+            if (
+                measurements.get("autoregressive_tokens_match") is not True
+                or not isinstance(selected, list)
+                or not selected
+                or selected != expected_ids
+            ):
+                issues.append(
+                    "autoregressive token IDs do not match for "
+                    + str(artifact.get("path", "<unknown>"))
+                )
+
+    if acceptance.get("zero_intermediate_decrypts") and any(
+        artifact.get("measurement_scope", {}).get("zero_intermediate_decrypts") is not True
+        for artifact in artifacts
+    ):
+        issues.append("one or more artifacts do not prove zero intermediate decrypts")
+
+    expected_sync = acceptance.get("required_sync_profile")
+    if expected_sync is not None:
+        mismatches = [
+            artifact.get("path", "<unknown>")
+            for artifact in artifacts
+            if artifact.get("parameters", {}).get("fideslib_sync_profile") != expected_sync
+        ]
+        if mismatches:
+            issues.append(
+                f"artifacts do not use required sync profile {expected_sync!r}: "
+                + ", ".join(mismatches)
+            )
+
+    return {
+        "required": True,
+        "evaluated": True,
+        "passed": not issues,
+        "criteria": acceptance,
+        "issues": issues,
+    }
 
 
 def _promotion_satisfied(
@@ -166,7 +519,93 @@ def _repo_commit(root: Path) -> str:
         capture_output=True,
         text=True,
     )
-    return completed.stdout.strip() or "working-tree"
+    commit = completed.stdout.strip() or "working-tree"
+    dirty = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=normal"],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if dirty.stdout.strip():
+        digest = hashlib.sha256()
+        tracked_diff = subprocess.run(
+            ["git", "diff", "--binary", "HEAD", "--no-ext-diff"],
+            cwd=root,
+            check=False,
+            capture_output=True,
+        )
+        digest.update(tracked_diff.stdout)
+        untracked = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard", "-z"],
+            cwd=root,
+            check=False,
+            capture_output=True,
+        )
+        for encoded_path in untracked.stdout.split(b"\0"):
+            if not encoded_path:
+                continue
+            digest.update(b"\0untracked\0")
+            digest.update(encoded_path)
+            path = root / os.fsdecode(encoded_path)
+            try:
+                digest.update(path.read_bytes())
+            except OSError as exc:
+                digest.update(f"<unreadable:{exc}>".encode())
+        commit += f"-dirty.{digest.hexdigest()[:16]}"
+    return commit
+
+
+def _resume_context_issues(
+    previous: dict[str, Any] | None,
+    *,
+    campaign_name: str,
+    experiment_name: str,
+    repo_commit: str,
+    environment: dict[str, str],
+    artifact_paths: list[Path],
+) -> list[str]:
+    if previous is None:
+        return ["no prior campaign report is available to verify the effective environment"]
+    issues: list[str] = []
+    if previous.get("stage") != "fhemamba-dgx-campaign-report":
+        issues.append("prior output is not a DGX campaign report")
+    if previous.get("campaign") != campaign_name:
+        issues.append(
+            f"prior campaign name mismatch: expected {campaign_name!r}, "
+            f"got {previous.get('campaign')!r}"
+        )
+    if previous.get("repo_commit") != repo_commit:
+        issues.append(
+            f"prior campaign repo_commit mismatch: expected {repo_commit!r}, "
+            f"got {previous.get('repo_commit')!r}"
+        )
+    prior_records = previous.get("experiments")
+    if not isinstance(prior_records, list):
+        issues.append("prior campaign report has no experiment records")
+        return issues
+    matches = [
+        item
+        for item in prior_records
+        if isinstance(item, dict) and item.get("name") == experiment_name
+    ]
+    if len(matches) != 1:
+        issues.append(f"prior campaign report has {len(matches)} records for {experiment_name!r}")
+        return issues
+    prior_record = matches[0]
+    prior_environment = prior_record.get("environment")
+    if not isinstance(prior_environment, dict):
+        issues.append(f"prior experiment {experiment_name!r} has no effective environment")
+    elif prior_environment != environment:
+        changed_keys = sorted(set(prior_environment) | set(environment))
+        changed_keys = [
+            key for key in changed_keys if prior_environment.get(key) != environment.get(key)
+        ]
+        issues.append("effective environment changed: " + ", ".join(changed_keys))
+    expected_paths = [str(path) for path in artifact_paths]
+    if prior_record.get("artifact_paths") != expected_paths:
+        issues.append(f"artifact paths changed for experiment {experiment_name!r}")
+    return issues
 
 
 def _run_runner(
@@ -347,12 +786,30 @@ def _campaign_payload(
     repo_commit: str,
     started_at: float,
     experiments: list[dict[str, Any]],
+    acceptance: dict[str, Any] | None,
+    complete: bool,
+    dry_run: bool,
 ) -> dict[str, Any]:
     infra_failures = sum(item.get("infrastructure_ok") is False for item in experiments)
     executed = sum(item.get("state") in {"executed", "resumed"} for item in experiments)
     skipped = sum(item.get("state") == "skipped" for item in experiments)
     candidate_passes = sum(item.get("candidate_passed") is True for item in experiments)
-    completed_ok = infra_failures == 0
+    candidate_failures = sum(item.get("candidate_passed") is False for item in experiments)
+    acceptance_result = _evaluate_acceptance(
+        acceptance,
+        experiments,
+        complete=complete,
+        dry_run=dry_run,
+    )
+    infrastructure_ok = infra_failures == 0
+    promotion_ok = acceptance_result["passed"] if acceptance_result["required"] else None
+    completed_ok = infrastructure_ok and (promotion_ok is not False)
+    if not complete:
+        status = "running"
+    elif dry_run:
+        status = "dry-run"
+    else:
+        status = "passed" if completed_ok else "failed"
     return {
         "version": version,
         "stage": "fhemamba-dgx-campaign-report",
@@ -360,9 +817,13 @@ def _campaign_payload(
         "backend": "orchestration",
         "encrypted": False,
         "config": {"input_mode": "campaign-orchestration"},
-        "status": "passed" if completed_ok else "failed",
-        "passed": completed_ok,
+        "status": status,
+        "passed": completed_ok if complete else False,
         "campaign": name,
+        "complete": complete,
+        "infrastructure_ok": infrastructure_ok,
+        "promotion_passed": promotion_ok,
+        "acceptance": acceptance_result,
         "experiments": experiments,
         "measurements": {
             "experiments_total": len(experiments),
@@ -370,6 +831,7 @@ def _campaign_payload(
             "experiments_skipped": skipped,
             "infrastructure_failures": infra_failures,
             "candidate_passes": candidate_passes,
+            "candidate_failures": candidate_failures,
         },
         "timing": {"campaign_seconds": time.monotonic() - started_at},
         "measurement_scope": {
@@ -406,6 +868,8 @@ def main() -> int:
     manifest = _read_object(args.manifest)
     name = str(manifest.get("name", args.manifest.stem))
     version = str(manifest.get("version", __version__))
+    repo_commit = _repo_commit(root)
+    acceptance = _validate_acceptance_config(manifest.get("acceptance"))
     default_timeout = _timeout_seconds(manifest.get("timeout_seconds", 0))
     gpu_preflight = manifest.get("gpu_preflight")
     if gpu_preflight is not None and not isinstance(gpu_preflight, dict):
@@ -419,6 +883,30 @@ def main() -> int:
     records: list[dict[str, Any]] = []
     completed_by_name: dict[str, dict[str, Any]] = {}
     seen: set[str] = set()
+    previous_campaign: dict[str, Any] | None = None
+    previous_campaign_issue: str | None = None
+    if args.resume:
+        if args.output_json.is_file():
+            try:
+                previous_campaign = _read_object(args.output_json)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                previous_campaign_issue = f"cannot read prior campaign report: {exc}"
+        else:
+            previous_campaign_issue = "prior campaign report does not exist"
+
+    def write_campaign(*, complete: bool) -> dict[str, Any]:
+        payload = _campaign_payload(
+            name=name,
+            version=version,
+            repo_commit=repo_commit,
+            started_at=started_at,
+            experiments=records,
+            acceptance=acceptance,
+            complete=complete,
+            dry_run=args.dry_run,
+        )
+        _write_json(args.output_json, payload)
+        return payload
 
     for spec in experiments_spec:
         if not isinstance(spec, dict) or not isinstance(spec.get("name"), str):
@@ -446,16 +934,7 @@ def main() -> int:
             }
             records.append(record)
             completed_by_name[experiment_name] = record
-            _write_json(
-                args.output_json,
-                _campaign_payload(
-                    name=name,
-                    version=version,
-                    repo_commit=_repo_commit(root),
-                    started_at=started_at,
-                    experiments=records,
-                ),
-            )
+            write_campaign(complete=len(records) == len(experiments_spec))
             continue
 
         overrides = spec.get("env", {})
@@ -465,17 +944,42 @@ def main() -> int:
         campaign_env.update({str(key): str(value) for key, value in overrides.items()})
         campaign_env.setdefault("RUN_TAG", experiment_name)
         artifact_paths = _artifact_paths(campaign_env)
+        expected_artifact = _artifact_expectation(
+            campaign_env,
+            version=version,
+            repo_commit=repo_commit,
+        )
 
         artifacts: list[dict[str, Any]] = []
         issues: list[str] = []
+        resume_rejections: list[str] = []
         state = "dry-run" if args.dry_run else "executed"
         returncode: int | None = None
         timed_out = False
         duration = 0.0
         gpu_wait_seconds = 0.0
         if args.resume and not args.dry_run:
-            artifacts, issues = _load_artifacts(artifact_paths)
-            if not issues and len(artifacts) == len(artifact_paths):
+            if previous_campaign_issue is not None:
+                resume_rejections.append(previous_campaign_issue)
+            else:
+                resume_rejections.extend(
+                    _resume_context_issues(
+                        previous_campaign,
+                        campaign_name=name,
+                        experiment_name=experiment_name,
+                        repo_commit=repo_commit,
+                        environment=campaign_env,
+                        artifact_paths=artifact_paths,
+                    )
+                )
+            resume_artifacts, artifact_rejections = _load_artifacts(
+                artifact_paths,
+                expected=expected_artifact,
+                require_binary_match=True,
+            )
+            resume_rejections.extend(artifact_rejections)
+            if not resume_rejections and len(resume_artifacts) == len(artifact_paths):
+                artifacts = resume_artifacts
                 state = "resumed"
         if state not in {"resumed", "dry-run"}:
             gpu_wait_seconds, preflight_issue = _wait_for_idle_gpu(gpu_preflight)
@@ -495,7 +999,10 @@ def main() -> int:
                     timeout_seconds=timeout_seconds,
                 )
                 duration = time.monotonic() - experiment_start
-                artifacts, issues = _load_artifacts(artifact_paths)
+                artifacts, issues = _load_artifacts(
+                    artifact_paths,
+                    expected=expected_artifact,
+                )
                 if timed_out:
                     issues.insert(0, f"runner exceeded timeout of {timeout_seconds} seconds")
 
@@ -517,6 +1024,7 @@ def main() -> int:
             "artifact_paths": [str(path) for path in artifact_paths],
             "artifacts": artifacts,
             "issues": issues,
+            "resume_rejections": resume_rejections,
             "infrastructure_ok": infrastructure_ok,
             "candidate_passed": candidate_passed,
             "max_abs_error": max_error if math.isfinite(max_error) else None,
@@ -524,20 +1032,15 @@ def main() -> int:
         }
         records.append(record)
         completed_by_name[experiment_name] = record
-        _write_json(
-            args.output_json,
-            _campaign_payload(
-                name=name,
-                version=version,
-                repo_commit=_repo_commit(root),
-                started_at=started_at,
-                experiments=records,
-            ),
-        )
+        complete = len(records) == len(experiments_spec)
+        payload = write_campaign(complete=complete)
         if not infrastructure_ok and not bool(spec.get("continue_on_infrastructure_failure")):
+            if not complete:
+                payload = write_campaign(complete=True)
             return 1
 
-    return 0 if all(record.get("infrastructure_ok") is not False for record in records) else 1
+    payload = write_campaign(complete=True)
+    return 0 if payload["passed"] else 1
 
 
 if __name__ == "__main__":

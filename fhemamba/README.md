@@ -132,6 +132,22 @@ python fhemamba/experiments/run_dgx_campaign.py \
   --resume
 ```
 
+Manifests with an `acceptance` object are promotion gates: every artifact must
+match the requested layer/token geometry, numerical tolerance, decrypt and
+autoregressive-token checks, intermediate-decrypt policy, and synchronization
+profile. A missed criterion makes the campaign artifact and process fail.
+Exploratory manifests without `acceptance` retain the infrastructure-only exit
+semantics. Resume reuses an artifact only when its schema, version, repository
+commit (including a dirty-tree content fingerprint), binary SHA-256, geometry,
+synchronization profile, and prior campaign's effective environment match the
+current run; stale artifacts are rejected and rerun. Resume without a matching
+prior campaign report reruns rather than trusting a standalone artifact.
+
+In autoregressive mode, decrypting a completed `final_norm` output for client
+token selection is an explicit protocol-boundary operation. It is counted
+separately and does not violate `zero_intermediate_decrypts`; debug probes and
+debug client re-encryption do.
+
 `scripts/run_b300_mamba2.sh` pins the promoted B300 defaults. Environment
 overrides are intended for named experiments and must be recorded in the
 campaign artifact. Reduced-synchronization binaries are never promotion
