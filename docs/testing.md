@@ -114,6 +114,14 @@ CUDA/SM/profile, FIDESlib commit, patch-set hash, compiler record, and current
 binary SHA-256. The validated metadata is attached to the native result as
 `build_provenance`.
 
+Replicated-BSGS cache A/B runs must keep the payload, rotation keys, circuit
+configuration, and synchronization profile fixed. The `pt_cache` telemetry
+separates replicated cache hits, misses, and level bypasses from host mask
+build counts, bytes, and seconds; fully cached warm projection evaluation
+should report zero `replicated_eval_mask_builds`. Promotion still requires
+unchanged polynomial-circuit error/generated IDs plus measured improvement in
+cold setup, first/warm token, total evaluation, CPU utilization, and peak RSS.
+
 The current five-step campaign is:
 
 ```bash
