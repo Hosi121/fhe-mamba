@@ -13,6 +13,7 @@ of `main`, the wheel, coverage, or the supported command line.
 | Encrypted GPU execution | `native/fideslib_stage0/` | Active; CPU-only units must remain buildable without FIDESlib. |
 | Current experiments | `fhemamba/experiments/` | Active only when backed by a manifest or documented command. |
 | Artifact schema validation | `fhemamba/src/fhemamba/artifacts.py` | Active shared provenance contract. |
+| Promoted B300 platform identity | `config/b300-platform.env` | Versioned authority for image, CUDA, SM, FIDESlib commit/profile, and binary path. |
 | Root `scripts/` | Local checks and current DGX/B300 helpers only | Keep wrappers narrow; experiments belong under `fhemamba/experiments/`. |
 
 The installed command is `fhemamba`. The historical `fhe-mamba3` command is

@@ -106,6 +106,14 @@ A micro-probe cannot promote a synchronization or bootstrap change. The B300
 reduced-barrier build demonstrated why: its bootstrap probe passed while the
 full chain silently produced corrupt finite values.
 
+All B300 entry points resolve `config/b300-platform.env`. Profile builds clone
+the pinned FIDESlib commit into patch-set-addressed source snapshots; they do
+not apply patches to the shared checkout. Before an expensive run, the runner
+validates `<binary>.build.json` against the local container image ID, configured
+CUDA/SM/profile, FIDESlib commit, patch-set hash, compiler record, and current
+binary SHA-256. The validated metadata is attached to the native result as
+`build_provenance`.
+
 The current five-step campaign is:
 
 ```bash
@@ -137,4 +145,6 @@ diagnostic decrypt.
 - The documented `0.4.5` three-token B300 success JSON is not currently
   tracked; recovery or exact rerun is PBI-M4-001.
 - GPU CKKS execution cannot be reproduced by GitHub-hosted CI.
+- A new B300 platform build must pass the micro-probes and full 24-layer
+  multi-token gate before its values can replace the promoted configuration.
 - A full process-separated Mamba run and a 24-layer 128-bit run remain open.

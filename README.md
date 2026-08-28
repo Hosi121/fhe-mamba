@@ -133,6 +133,22 @@ python fhemamba/experiments/export_autoregressive_client_payload.py \
   --generate-tokens 4
 ```
 
+The versioned [`config/b300-platform.env`](config/b300-platform.env) is the
+single source for the promoted image, CUDA release, SM/architecture, pinned
+FIDESlib commit, full-sync profile, and binary path. Build that exact platform
+with:
+
+```bash
+scripts/build_b300_fideslib_image.sh
+scripts/launch_b300_fideslib_build.sh
+```
+
+Each synchronization profile clones the pinned FIDESlib commit into its own
+patch-set-addressed source snapshot and holds a profile build lock. The build
+writes `<binary>.build.json`; the runner refuses to launch if its image ID,
+CUDA/SM/profile, FIDESlib commit, patch-set hash, or binary SHA-256 differs from
+that metadata.
+
 On the B300 host, run the resumable campaign:
 
 ```bash
@@ -146,7 +162,7 @@ python fhemamba/experiments/run_dgx_campaign.py \
 Promotion requires all five steps to decrypt, every polynomial-circuit error
 to remain at or below `0.05`, generated token IDs to match, and the artifact to
 record zero intermediate decrypts, per-token timing, bootstrap counts, peak
-RSS, repository commit, and binary SHA-256.
+RSS, repository commit, binary SHA-256, and validated build provenance.
 
 ## Versioning
 

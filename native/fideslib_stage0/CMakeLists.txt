@@ -68,7 +68,15 @@ if(FHE_STAGE0_BUILD_KERNEL)
     message(FATAL_ERROR "PACKAGE FIDESlib NOT FOUND")
   endif()
 
-  set(CMAKE_CXX_COMPILER ${FIDESLIB_CXX_COMPILER})
+  if(FIDESLIB_CXX_COMPILER)
+    get_filename_component(FIDESLIB_CXX_COMPILER_REAL "${FIDESLIB_CXX_COMPILER}" REALPATH)
+    get_filename_component(CMAKE_CXX_COMPILER_REAL "${CMAKE_CXX_COMPILER}" REALPATH)
+    if(NOT FIDESLIB_CXX_COMPILER_REAL STREQUAL CMAKE_CXX_COMPILER_REAL)
+      message(
+        FATAL_ERROR
+        "Compiler mismatch: configure with -DCMAKE_CXX_COMPILER=${FIDESLIB_CXX_COMPILER}")
+    endif()
+  endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FIDESLIB_CXX_FLAGS}")
 
   add_library(fideslib_handoff STATIC src/fideslib_handoff.cpp)

@@ -81,6 +81,67 @@ def _file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _read_platform_config(path: Path) -> dict[str, str]:
+    values: dict[str, str] = {}
+    for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        match = re.fullmatch(r"([A-Z][A-Z0-9_]*)=([^\s#]+)", line)
+        if match is None:
+            raise ValueError(f"invalid platform config line {path}:{line_number}")
+        key, value = match.groups()
+        if key in values:
+            raise ValueError(f"duplicate platform config key {key} in {path}")
+        values[key] = value
+    required = {
+        "B300_PLATFORM_VERSION",
+        "B300_IMAGE",
+        "B300_CUDA_VERSION",
+        "B300_FIDESLIB_COMMIT",
+        "B300_FIDESLIB_ARCH",
+        "B300_FIDESLIB_SM",
+        "B300_DEFAULT_SYNC_PROFILE",
+        "B300_DEFAULT_VARIANT",
+        "B300_BINARY_RELATIVE_PATH",
+    }
+    missing = sorted(required - values.keys())
+    if missing:
+        raise ValueError(f"platform config lacks: {', '.join(missing)}")
+    return values
+
+
+def _platform_campaign_defaults(
+    path: Path,
+    manifest_defaults: dict[str, Any],
+) -> dict[str, Any]:
+    platform = _read_platform_config(path)
+    root_dir = str(manifest_defaults.get("ROOT_DIR", "/home/kataiwa/fhemamba-b300"))
+    derived = {
+        "B300_PLATFORM_CONFIG": str(path),
+        "B300_PLATFORM_CONFIG_SHA256": _file_sha256(path),
+        "B300_PLATFORM_VERSION": platform["B300_PLATFORM_VERSION"],
+        "B300_CUDA_VERSION": platform["B300_CUDA_VERSION"],
+        "B300_FIDESLIB_COMMIT": platform["B300_FIDESLIB_COMMIT"],
+        "IMAGE": platform["B300_IMAGE"],
+        "FIDESLIB_ARCH": platform["B300_FIDESLIB_ARCH"],
+        "FIDESLIB_SM": platform["B300_FIDESLIB_SM"],
+        "FIDESLIB_SYNC_PROFILE": platform["B300_DEFAULT_SYNC_PROFILE"],
+        "FIDESLIB_VARIANT": platform["B300_DEFAULT_VARIANT"],
+        "BINARY_PATH": str(Path(root_dir) / platform["B300_BINARY_RELATIVE_PATH"]),
+    }
+    conflicts = sorted(
+        key
+        for key, expected in derived.items()
+        if key in manifest_defaults and str(manifest_defaults[key]) != str(expected)
+    )
+    if conflicts:
+        raise ValueError(
+            "manifest overrides authoritative B300 platform fields: " + ", ".join(conflicts)
+        )
+    return {**derived, **manifest_defaults}
+
+
 def _is_sha256(value: Any) -> bool:
     return isinstance(value, str) and re.fullmatch(r"[0-9a-fA-F]{64}", value) is not None
 
@@ -119,6 +180,18 @@ def _artifact_expectation(
         "layers": layers,
         "tokens": tokens,
         "sync_profile": env.get("FIDESLIB_SYNC_PROFILE"),
+        "platform": {
+            "platform_config_version": env.get("B300_PLATFORM_VERSION"),
+            "platform_config_sha256": env.get("B300_PLATFORM_CONFIG_SHA256"),
+            "image": env.get("IMAGE"),
+            "cuda_version": env.get("B300_CUDA_VERSION"),
+            "fideslib_commit": env.get("B300_FIDESLIB_COMMIT"),
+            "fideslib_arch": env.get("FIDESLIB_ARCH"),
+            "fideslib_sm": env.get("FIDESLIB_SM"),
+            "variant": env.get("FIDESLIB_VARIANT"),
+        }
+        if env.get("B300_PLATFORM_VERSION")
+        else None,
     }
 
 
@@ -187,6 +260,32 @@ def _validate_artifact_identity(
             f"artifact sync profile mismatch for {path}: "
             f"expected {expected_sync!r}, got {actual_sync!r}"
         )
+    expected_platform = expected.get("platform")
+    if expected_platform:
+        provenance = payload.get("build_provenance", {})
+        image = provenance.get("image", {}) if isinstance(provenance, dict) else {}
+        cuda = provenance.get("cuda", {}) if isinstance(provenance, dict) else {}
+        fideslib = provenance.get("fideslib", {}) if isinstance(provenance, dict) else {}
+        actual_platform = {
+            "platform_config_version": provenance.get("platform_config_version")
+            if isinstance(provenance, dict)
+            else None,
+            "platform_config_sha256": provenance.get("platform_config_sha256")
+            if isinstance(provenance, dict)
+            else None,
+            "image": image.get("reference") if isinstance(image, dict) else None,
+            "cuda_version": cuda.get("configured_version") if isinstance(cuda, dict) else None,
+            "fideslib_commit": fideslib.get("commit") if isinstance(fideslib, dict) else None,
+            "fideslib_arch": fideslib.get("arch") if isinstance(fideslib, dict) else None,
+            "fideslib_sm": fideslib.get("sm") if isinstance(fideslib, dict) else None,
+            "variant": fideslib.get("variant") if isinstance(fideslib, dict) else None,
+        }
+        for key, expected_value in expected_platform.items():
+            if actual_platform.get(key) != expected_value:
+                issues.append(
+                    f"artifact build provenance {key} mismatch for {path}: "
+                    f"expected {expected_value!r}, got {actual_platform.get(key)!r}"
+                )
     return issues
 
 
@@ -237,6 +336,7 @@ def _load_artifacts(
                 "version": payload.get("version"),
                 "repo_commit": payload.get("repo_commit"),
                 "binary_sha256": payload.get("binary_sha256"),
+                "build_provenance": payload.get("build_provenance"),
                 "stage": payload.get("stage"),
                 "status": payload["status"],
                 "passed": payload["passed"],
@@ -878,6 +978,14 @@ def main() -> int:
     experiments_spec = manifest.get("experiments", [])
     if not isinstance(defaults, dict) or not isinstance(experiments_spec, list):
         raise ValueError("manifest defaults must be an object and experiments must be a list")
+    platform_config = manifest.get("platform_config")
+    if platform_config is not None:
+        if not isinstance(platform_config, str) or not platform_config:
+            raise ValueError("manifest platform_config must be a non-empty path string")
+        platform_path = Path(platform_config)
+        if not platform_path.is_absolute():
+            platform_path = (args.manifest.parent / platform_path).resolve()
+        defaults = _platform_campaign_defaults(platform_path, defaults)
 
     started_at = time.monotonic()
     records: list[dict[str, Any]] = []

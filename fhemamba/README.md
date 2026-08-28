@@ -148,7 +148,9 @@ token selection is an explicit protocol-boundary operation. It is counted
 separately and does not violate `zero_intermediate_decrypts`; debug probes and
 debug client re-encryption do.
 
-`scripts/run_b300_mamba2.sh` pins the promoted B300 defaults. Environment
-overrides are intended for named experiments and must be recorded in the
-campaign artifact. Reduced-synchronization binaries are never promotion
-candidates without a passing full 24-layer multi-token gate.
+`config/b300-platform.env` pins the promoted image/CUDA/SM, FIDESlib commit,
+full-sync profile, and binary path for the image builder, native builder,
+runner, and manifest. The runner validates the build metadata sidecar before
+allocating the GPU and attaches that provenance to the raw result. Named
+reduced-synchronization builds use separate source snapshots and are never
+promotion candidates without a passing full 24-layer multi-token gate.
