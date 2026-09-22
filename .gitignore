@@ -15,6 +15,13 @@ logs/
 runs/
 slurm/*.out
 slurm/*.err
+experiments/slurm/*.out
+experiments/slurm/*.err
+results/m1_payload_l0/
+results/m2_chain_payload*/
+results/tokens_*.pt
+
+# Local payloads left behind by checkouts using the previous layout.
 fhemamba/results/m1_payload_l0/
 fhemamba/results/m2_chain_payload*/
 fhemamba/results/tokens_*.pt

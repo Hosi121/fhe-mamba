@@ -92,7 +92,7 @@ struct Config {
   // outputs must agree (identical data, circuit-independent lineages).
   int streams = 1;
   // Rotation-key plan (128-bit needs ring 2^17 where ~194 direct keys are
-  // ~68 GiB and OOMed dgx; design in fhemamba/src/fhemamba/rotation_keys.py):
+  // ~68 GiB and OOMed dgx; design in src/fhemamba/rotation_keys.py):
   //   full     every required index gets a direct key (current behavior);
   //   compact  only the signed power-of-two base keys that cover the NAF
   //            decompositions actually used;
@@ -107,7 +107,7 @@ struct Config {
   // adjustment already inside FIDESlib EvalAdd/EvalMult. Both alternatives
   // stay opt-in until real-CKKS parity passes.
   std::string level_align_mode = "unity";
-  // Input-replicated BSGS (spec: fhemamba/src/fhemamba/bsgs_layout.py; the
+  // Input-replicated BSGS (spec: src/fhemamba/bsgs_layout.py; the
   // slot-exact simulator is the authority and the C++ schedule is verified
   // bitwise against it). "1" = legacy dense-diagonal path (bit-identical);
   // "auto" = choose_window per matmul (in_proj r=7/window 4608, out_proj

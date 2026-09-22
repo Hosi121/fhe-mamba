@@ -75,8 +75,8 @@ Native event telemetry now reconciles all 84 logical refresh events with the
 108 physical bootstraps and 53.56 s bootstrap timer on the 24-layer gate:
 
 ```bash
-PYTHONPATH=fhemamba/src .venv/bin/python \
-  fhemamba/experiments/build_bootstrap_telemetry_report.py INPUT.json \
+PYTHONPATH=src .venv/bin/python \
+  experiments/build_bootstrap_telemetry_report.py INPUT.json \
   --output-json REPORT.json
 ```
 

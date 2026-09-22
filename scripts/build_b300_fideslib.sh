@@ -178,7 +178,7 @@ cmake --build "${STAGE_BUILD_DIR}" \
   --target stage1_mamba2_decode_fideslib stage1_bootstrap_probe fideslib_client_server_probe \
   -j "${BUILD_JOBS}"
 
-python3 "${REPO_DIR}/fhemamba/experiments/manage_b300_build_metadata.py" write \
+python3 "${REPO_DIR}/experiments/manage_b300_build_metadata.py" write \
   --output "${METADATA_PATH}" \
   --platform-config-version "${B300_PLATFORM_VERSION}" \
   --platform-config-sha256 "${actual_platform_config_sha256}" \

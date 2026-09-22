@@ -40,9 +40,9 @@ IDs to match the polynomial reference.
 
 ## Result
 
-**Pass.** The [native result](../../fhemamba/results/dgx/2026-09-22/client-generation/m2_chain_client-generation-20260922_l24_t5.json),
-[campaign](../../fhemamba/results/dgx/2026-09-22/client-generation/client-generation-campaign.json)
-and [decoded report](../../fhemamba/results/dgx/2026-09-22/client-generation/generation.json)
+**Pass.** The [native result](../../results/dgx/2026-09-22/client-generation/m2_chain_client-generation-20260922_l24_t5.json),
+[campaign](../../results/dgx/2026-09-22/client-generation/client-generation-campaign.json)
+and [decoded report](../../results/dgx/2026-09-22/client-generation/generation.json)
 record four generated IDs `[273, 253, 4687, 273]`, matching both references:
 
 ```text

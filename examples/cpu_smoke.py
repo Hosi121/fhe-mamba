@@ -3,6 +3,7 @@
 import json
 
 import torch
+
 from fhemamba._env import block_broken_torchvision
 from fhemamba.reference import init_states, model_forward
 

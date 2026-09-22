@@ -4,7 +4,7 @@ This offline analysis uses the frozen generation payload and the completed
 42.9-minute periodic-coefficient baseline. It was computed locally while the
 subring generation ran on Spark. The calculator checks the payload
 digest, bundle digest, and all 49 embedded normalization recipes before
-producing [the numerical report](../../fhemamba/results/dgx/2026-09-22/subring-gates/normalization-bounds.json).
+producing [the numerical report](../../results/dgx/2026-09-22/subring-gates/normalization-bounds.json).
 
 ## A bound that allows a different approximation
 
@@ -121,8 +121,8 @@ supported by this calculation or by the earlier failed integration runs.
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
-  .venv/bin/python fhemamba/experiments/analyze_normalization_bounds.py \
-  --native fhemamba/results/dgx/2026-09-22/periodic-gates/m2_chain_periodic-client-generation_l24_t5.json \
+  .venv/bin/python experiments/analyze_normalization_bounds.py \
+  --native results/dgx/2026-09-22/periodic-gates/m2_chain_periodic-client-generation_l24_t5.json \
   --payload runs/client-generation-20260922/payload \
   --bundle config/mamba2-130m-normalization-20260921.json \
   --output runs/normalization-bounds.json

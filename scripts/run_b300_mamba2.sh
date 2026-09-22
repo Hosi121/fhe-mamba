@@ -90,7 +90,7 @@ metadata_expectation=(
   --binary-relative-path "${binary_relative_path}"
   --binary "${BINARY_PATH}"
 )
-python3 "${REPO_DIR}/fhemamba/experiments/manage_b300_build_metadata.py" \
+python3 "${REPO_DIR}/experiments/manage_b300_build_metadata.py" \
   validate "${metadata_expectation[@]}"
 
 mkdir -p "${RESULTS_DIR}"
@@ -147,7 +147,7 @@ docker run --rm \
   bash -lc '
     set -euo pipefail
     unset CUDA_LAUNCH_BLOCKING
-    source /workspace/cipher/fhemamba/experiments/dgx_mamba2_common.sh
+    source /workspace/cipher/experiments/dgx_mamba2_common.sh
     init_dgx_mamba2_defaults
     build_dgx_mamba2_args "${LAYERS}" "${TOKENS}"
     "${BINARY}" "${DGX_MAMBA2_ARGS[@]}" \
@@ -157,7 +157,7 @@ docker run --rm \
       --binary-sha256 "${BINARY_SHA256}"
   '
 
-python3 "${REPO_DIR}/fhemamba/experiments/manage_b300_build_metadata.py" \
+python3 "${REPO_DIR}/experiments/manage_b300_build_metadata.py" \
   attach "${metadata_expectation[@]}" --artifact "${OUTPUT_JSON}"
 
 echo "output_json=${OUTPUT_JSON}"

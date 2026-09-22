@@ -98,7 +98,7 @@ The initial probe used a two-thread limit; its absolute times must not be used
 to predict the model's encoding cost. Final probe binary SHA-256:
 `19ea59aa97d813b1d87a0846429fda5dd5f25446e5ccc3792df72bbb8e69b95c`.
 
-The [raw evidence](../../fhemamba/results/dgx/2026-09-22/subring-gates/) includes
+The [raw evidence](../../results/dgx/2026-09-22/subring-gates/) includes
 both probes, their comparison, and the build manifest. Exact source archives
 and logs are retained under `runs/gate-subring-serial-20260922/` and, for the
 initial adapter, `runs/gate-subring-20260922/`. The initial probe
@@ -169,18 +169,18 @@ measurements do not establish a distribution across keys/prompts or longer
 encrypted horizons. The existing one-process client loop and
 `security=not-set` scope remain the same. The feature stays opt-in.
 
-The [native artifact](../../fhemamba/results/dgx/2026-09-22/subring-gates/m2_chain_subring-client-generation_l24_t5.json),
-[campaign](../../fhemamba/results/dgx/2026-09-22/subring-gates/generation-campaign.json),
-and [derived generation report](../../fhemamba/results/dgx/2026-09-22/subring-gates/generation.json)
+The [native artifact](../../results/dgx/2026-09-22/subring-gates/m2_chain_subring-client-generation_l24_t5.json),
+[campaign](../../results/dgx/2026-09-22/subring-gates/generation-campaign.json),
+and [derived generation report](../../results/dgx/2026-09-22/subring-gates/generation.json)
 validate with zero errors and warnings. The
-[comparison](../../fhemamba/results/dgx/2026-09-22/subring-gates/generation-comparison.json)
+[comparison](../../results/dgx/2026-09-22/subring-gates/generation-comparison.json)
 records all matched conditions. Native binary SHA-256:
 `1d6108e4cde1177fd852c15907ca8ed5c12689caebfcd18ac04658cc0a438b61`;
 native-source SHA-256:
 `16a420fc9a3085352cd1540d2471bbeb6fcadfe2aaa93f3fda5841c632b1bf52`.
 The final source snapshot still matches all 92 archived project files.
 
-The manifest is `fhemamba/experiments/dgx_spark_subring_gate_generation.json`.
+The manifest is `experiments/manifests/dgx_spark_subring_gate_generation.json`.
 Use the matching isolated root above and a new results/output directory for
 another run. The prompt launcher accepts
 `--joint-periodic-coefficients --joint-subring-encoding`.

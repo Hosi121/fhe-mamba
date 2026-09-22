@@ -6,16 +6,19 @@ of `main`, the wheel, coverage, or the supported command line.
 
 ## Canonical ownership
 
+The [repository map](repository.md) documents the directory layout, generated
+files and migration from older paths.
+
 | Concern | Canonical location | Policy |
 |---|---|---|
-| Mamba-2 reference and polynomial operators | `fhemamba/src/fhemamba/` | Active; new model math belongs here. |
-| Payload and client-reference export | `fhemamba/src/fhemamba/m1_payload.py` | Active; the historical filename is debt, not a second implementation. |
+| Mamba-2 reference and polynomial operators | `src/fhemamba/` | Active; new model math belongs here. |
+| Payload and client-reference export | `src/fhemamba/m1_payload.py` | Active; the historical filename is debt, not a second implementation. |
 | Encrypted GPU execution | `native/fideslib_stage0/` | Active; CPU-only units must remain buildable without FIDESlib. |
-| Current experiments | `fhemamba/experiments/` | Active only when backed by a manifest or documented command. |
-| Artifact schema validation | `fhemamba/src/fhemamba/artifacts.py` | Active shared provenance contract. |
+| Current experiments | `experiments/` | Active only when backed by a manifest or documented command. |
+| Artifact schema validation | `src/fhemamba/artifacts.py` | Active shared provenance contract. |
 | Current Spark platform identity | `config/dgx-spark.env` | Versioned CUDA/SM/FIDESlib build with isolated dependencies and source/binary/library validation. |
 | Historical B300 platform identity | `config/b300-platform.env` | Preserved reproduction path; B300 is currently unavailable. |
-| Root `scripts/` | Local checks and current DGX/B300 helpers only | Keep wrappers narrow; experiments belong under `fhemamba/experiments/`. |
+| Root `scripts/` | Local checks and current DGX/B300 helpers only | Keep wrappers narrow; experiments belong under `experiments/`. |
 
 The installed command is `fhemamba`. The historical `fhe-mamba3` command is
 available only from the archive branch.
@@ -52,9 +55,9 @@ uv sync --locked --extra dev
 
 - Do not copy the old package back into `main` to recover a helper. Port the
   smallest behavior behind an active test and current naming.
-- Historical commands and Slurm files remain reproducible from the dedicated
-  archive branch pinned to an exact commit in `docs/legacy-archive.md`; they are
-  not supported commands on `main`.
+- Retired commands and Slurm files remain reproducible from the dedicated
+  archive branch pinned in [legacy implementation](archive/legacy-implementation.md).
+  The active-model cluster launchers are under `experiments/slurm/`.
 - Claim-bearing raw artifacts and research notes stay in the main history even
   when their generating implementation is archived.
 

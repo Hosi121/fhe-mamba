@@ -39,7 +39,7 @@ Documentation = "https://github.com/Hosi121/fhe-native-mamba3/tree/main/docs"
 Issues = "https://github.com/Hosi121/fhe-native-mamba3/issues"
 
 [tool.setuptools.packages.find]
-where = ["fhemamba/src"]
+where = ["src"]
 
 [tool.ruff]
 line-length = 100
@@ -71,12 +71,12 @@ line-ending = "lf"
 
 [tool.pytest.ini_options]
 addopts = "-q"
-testpaths = ["tests", "fhemamba/tests"]
+testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-omit = ["fhemamba/tests/*"]
-source = ["fhemamba"]
+omit = ["tests/*"]
+source_pkgs = ["fhemamba"]
 
 [tool.coverage.report]
 fail_under = 70

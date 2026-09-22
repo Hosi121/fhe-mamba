@@ -1,7 +1,7 @@
 # Backlog
 
 Current work targets DGX Spark and the `fhemamba` 0.5.x package. Historical
-Stage 0/1/2 records remain in Git history and `artifact_ledger.md`.
+Stage 0/1/2 records remain in Git history and the [archived ledger](archive/artifact-ledger.md).
 
 The stabilized prompt-to-text client loop now passes its first complete run.
 Preserve this correctness baseline while reducing its measured runtime;

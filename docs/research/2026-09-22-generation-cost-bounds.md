@@ -8,9 +8,9 @@ There is no single proven minimum
 latency for this FHE model yet. We can already calculate several useful bounds,
 provided their assumptions stay explicit.
 
-The [calculator](../../fhemamba/experiments/analyze_generation_cost.py) checks
+The [calculator](../../experiments/analyze_generation_cost.py) checks
 the complete payload hash against the native artifact, reads every frozen gate
-coefficient, and emits a [reproducible report](../../fhemamba/results/dgx/2026-09-22/subring-gates/cost-model.json).
+coefficient, and emits a [reproducible report](../../results/dgx/2026-09-22/subring-gates/cost-model.json).
 It performs no encrypted evaluation and changes no approximation.
 
 The follow-up [normalization bound](2026-09-22-normalization-bounds.md) also
@@ -159,8 +159,8 @@ minimum in seconds from the marketing FLOPS would be unsupported.
 ## Reproduction
 
 ```sh
-.venv/bin/python fhemamba/experiments/analyze_generation_cost.py \
-  --artifact fhemamba/results/dgx/2026-09-22/periodic-gates/m2_chain_periodic-client-generation_l24_t5.json \
+.venv/bin/python experiments/analyze_generation_cost.py \
+  --artifact results/dgx/2026-09-22/periodic-gates/m2_chain_periodic-client-generation_l24_t5.json \
   --payload runs/client-generation-20260922/payload \
   --output runs/gate-subring-serial-20260922/cost-model.json
 ```

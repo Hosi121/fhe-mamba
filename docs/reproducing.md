@@ -5,6 +5,10 @@ unless a step explicitly says to run on Spark. The small CPU example and
 recorded-artifact inspection need no GPU or model download. New encrypted
 generation needs a DGX Spark host and several minutes per evaluated token.
 
+These commands follow the current checkout layout. The published
+`research-2026-09-22` tag retains the original paths; see the
+[migration map](repository.md#previous-layout) when using that snapshot.
+
 ## 1. Install the Python environment
 
 ```bash
@@ -46,7 +50,7 @@ layout; substituting a similarly named checkpoint does not reproduce it.
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
-  uv run --no-sync python fhemamba/experiments/run_parity.py \
+  uv run --no-sync python experiments/run_parity.py \
   --checkpoint checkpoints/mamba2-130m-hf --device cpu \
   --output runs/parity-mamba2.json
 ```
@@ -63,7 +67,7 @@ The frozen coefficients used by the measured candidate are included:
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
-  uv run --no-sync python fhemamba/experiments/export_m1_payload.py \
+  uv run --no-sync python experiments/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --normalization-bundle config/mamba2-130m-normalization-20260921.json \
   --stabilized-gate-bundle config/mamba2-130m-gates-20260921.npz \
@@ -108,7 +112,7 @@ export FHEMAMBA_SSH_HOST=your-user@your-spark
 export FHEMAMBA_REMOTE_ROOT=/home/your-user/fhemamba
 
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
-  uv run --no-sync python fhemamba/experiments/run_dgx_generation.py \
+  uv run --no-sync python experiments/run_dgx_generation.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --base-chain runs/stabilized-payload \
   --output-dir runs/generation-001 \

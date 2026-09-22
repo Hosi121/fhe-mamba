@@ -8,12 +8,11 @@ complete only when code, tests, configuration, and evidence agree.
 Start with [the reproduction guide](docs/reproducing.md) for an example,
 checkpoint and public coefficient bundles. The repository's active package
 is `fhemamba`; native GPU builds are separate from Python installation.
+Local native contracts require CMake 3.25.2+ and a C++20 compiler.
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[dev]'
-pre-commit install
+uv sync --locked --extra dev
+uv run --no-sync pre-commit install
 ```
 
 Use the fast gate while iterating:
@@ -25,7 +24,8 @@ scripts/run_fast_checks.sh
 Before a release, tag, or claim-changing merge, run:
 
 ```bash
-scripts/run_checks.sh
+OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
+  CHECK_JOBS=2 scripts/run_checks.sh
 ```
 
 GPU probes are separate because they require OpenFHE/FIDESlib, dedicated
@@ -36,7 +36,9 @@ block new Spark experiments.
 
 ## Active code
 
-- `fhemamba/` and `native/fideslib_stage0/` are the active Mamba-2 path.
+- `src/fhemamba/` and `native/fideslib_stage0/` are the active Mamba-2 path.
+- All Python tests live in `tests/`; see the [repository map](docs/repository.md)
+  for experiments, manifests, results and archives.
 - New Mamba-2 formula, lowering, packing, and runtime work belongs in the
   active path. Do not restore the retired pre-rebuild implementation.
 - Historical code is preserved on `archive/pre-compat-retirement-20260811`;
@@ -61,9 +63,10 @@ PBI instead of reconstructing a fake backend artifact.
 
 ## Benchmark artifacts
 
-Use `fhemamba/results/` for small curated current artifacts. Large payloads,
-logs, transient campaigns, and historical outputs remain ignored unless a
-specific review requires them.
+Write fresh output under ignored `runs/<experiment>/`. Use `results/` for
+reviewed, claim-bearing artifacts and preserve their original bytes. The
+[result index](results/README.md) separates current measurements from archived
+evidence. Large payloads, checkpoints and transient logs stay outside Git.
 
 A direct backend artifact should include:
 

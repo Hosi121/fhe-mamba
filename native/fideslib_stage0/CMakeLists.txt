@@ -11,7 +11,7 @@ option(FHE_STAGE0_BUILD_TESTS "Build FIDESlib-free Stage 0 layout tests" OFF)
 
 file(
   READ
-  "${CMAKE_CURRENT_SOURCE_DIR}/../../fhemamba/src/fhemamba/_version.py"
+  "${CMAKE_CURRENT_SOURCE_DIR}/../../src/fhemamba/_version.py"
   FHEMAMBA_VERSION_SOURCE)
 string(
   REGEX MATCH

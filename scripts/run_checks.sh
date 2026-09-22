@@ -26,7 +26,7 @@ fi
 if "${PYTHON}" -c "import pytest_cov" >/dev/null 2>&1; then
   "${PYTHON}" -m pytest \
     "${PYTEST_PARALLEL[@]}" \
-    --cov=fhemamba \
+    --cov \
     --cov-report=term-missing \
     --durations="${PYTEST_DURATIONS}"
 else

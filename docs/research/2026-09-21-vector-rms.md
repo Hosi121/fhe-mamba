@@ -89,7 +89,7 @@ per batch. These are individual runs with fresh keys, not a runtime speedup
 claim. Weighted evaluation uses 47 ct-ct / 21 ct-pt products and level 38,
 with error `8.05316e-8`.
 
-The [all-site campaign](../../fhemamba/results/dgx/2026-09-21/vector-rms/all-sites/campaign.json)
+The [all-site campaign](../../results/dgx/2026-09-21/vector-rms/all-sites/campaign.json)
 passes **49/49** without refresh: **784 vectors / 897,024 active components**.
 The worst absolute error is **`6.95634e-5`**, at layer 17's gated norm; on the
 checkpoint inputs alone it is **`1.17633e-6`**. At the worst site, encrypted
@@ -200,8 +200,8 @@ not a 49-site refresh campaign. All use two physical bootstraps per batch,
 and the output remains at consumed level 23 / scale degree 2.
 
 Raw files, including the failed controls, are retained in the
-[vector result directory](../../fhemamba/results/dgx/2026-09-21/vector-rms/).
-The [input manifest](../../fhemamba/results/vector_rms_probe_inputs_20260921.json)
+[vector result directory](../../results/dgx/2026-09-21/vector-rms/).
+The [input manifest](../../results/vector_rms_probe_inputs_20260921.json)
 binds checkpoint, selected token positions, gamma, recipes and fixtures.
 Final validation: **220 tests**, **11 native host contracts**, **86.32%**
 active-package coverage, and **196** dated artifacts with no validation

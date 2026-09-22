@@ -482,7 +482,7 @@ auto required_rotations(const M1Payload& payload, const PackingDims& dims,
 }
 
 // ---------------------------------------------------------------------------
-// Composite rotation keys (design: fhemamba/src/fhemamba/rotation_keys.py).
+// Composite rotation keys (design: src/fhemamba/rotation_keys.py).
 // naf_steps is an exact port of rotation_keys.naf: the signed powers of two
 // (non-adjacent form) summing to value, e.g. 28 -> {32, -4}. Every rotation
 // then decomposes into applications of base keys +-2^k. EvalRotate is a pure

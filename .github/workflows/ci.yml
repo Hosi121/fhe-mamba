@@ -54,8 +54,8 @@ jobs:
         run: |
           .venv/bin/python examples/cpu_smoke.py
           .venv/bin/fhemamba validate-artifacts --require-commit \
-            fhemamba/results/dgx/2026-09-22/subring-gates/generation.json \
-            fhemamba/results/dgx/2026-09-22/subring-gates/m2_chain_subring-client-generation_l24_t5.json
+            results/dgx/2026-09-22/subring-gates/generation.json \
+            results/dgx/2026-09-22/subring-gates/m2_chain_subring-client-generation_l24_t5.json
 
       - name: Verify installed wheel outside the checkout
         run: |
