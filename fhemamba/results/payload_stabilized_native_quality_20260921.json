@@ -1,0 +1,170 @@
+{
+  "stage": "frozen-payload-quality",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "source_sha256": {
+    "/home/hosi/cipher/fhemamba/experiments/run_payload_quality.py": "7025d6c2c2159505e86aaceb657842351df7bc3ad8469382c6eaf4b22d1239f0",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/reference.py": "186276064ad2f2da532bf8bf0b2bb94156cff0ae86dbd5429f6c126882aeedf0",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/ops.py": "7780957e071fb437f7a168843f5ed404c4d9e5f26d7fd6a86e84c1c37084e292",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/m1_payload.py": "261becf77707c4f002ebec2a9722ec9b1477f43f88fd9d846b94edf7b634ccf2",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/selective_gates.py": "e51c8b7d25c0908a3b4503035e5426f9d301f2690bd1e3f197b088a2a7e2d15a",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/normalization.py": "a42c216102f836e93217fb0a0694f842a6d511cac22d3dd964155e0e41319dae"
+  },
+  "input_payload_sha256": "b40d33b30e018ef91e894aa9e2bd26adb6be6d5e1ae49873e356d78795d5c745",
+  "checkpoint_sha256": {
+    "config.json": "d63815c6a0da127f2d888205f5427b4c5cc652a37190d0019668a6300ebf045f",
+    "model.safetensors": "bc188e3050316757031670438228283928cf721e4e6b0338da614b8d69c7b8b5",
+    "special_tokens_map.json": "aff38493227d813e29fcf8406e8e90062f1f031aa47d589325e9c31d89ac7cc3",
+    "tokenizer.json": "e9f8495abe17234420c02d6406a3fecb4241446c4554962654e38e7236db5d54",
+    "tokenizer_config.json": "4592630aed015b2622d77c0903954cef70870dba56925dc053942125df34b0ad"
+  },
+  "token_file_sha256": "89b2a03584a5e5d5d0348e9a103f131843860de1f17dc2968f597ee1246a5ae2",
+  "data_description": "WikiText-2 raw test; two-newline join; first 1024 and 4096 tokens",
+  "token_offset": 0,
+  "tf32_enabled": false,
+  "stabilized_gate_bundle_sha256": "c15a58e757b928881d11602f162ba095ac597c9de1cc23cb94a09d669cdaf743",
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "device": "cuda",
+  "torch_version": "2.11.0+cu130",
+  "threads": 2,
+  "pruned_heads": 0,
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "encrypted_execution": false,
+    "teacher_forcing": true,
+    "window_resets_state": true,
+    "full_dataset_quality_claimed": false,
+    "claim": "Frozen coefficients and head-mask quality on the recorded token windows."
+  },
+  "rows": [
+    {
+      "window": 1024,
+      "windows": 1,
+      "predicted_tokens": 1023,
+      "evaluated_token_ids_sha256": "9e3d420a819647414fa7fb71f36f4130654af0cb2981ed63a1188efdab3734bd",
+      "circuits": {
+        "exact": {
+          "finite": true,
+          "max_logit_error": 0.0,
+          "seconds": 8.788436381990323,
+          "nll_per_token": 2.5841079965481426,
+          "ppl": 13.251463465349907,
+          "top1_agreement": 1.0
+        },
+        "exact-with-mask": {
+          "finite": true,
+          "max_logit_error": 0.0,
+          "seconds": 6.516038544999901,
+          "nll_per_token": 2.5841079965481426,
+          "ppl": 13.251463465349907,
+          "top1_agreement": 1.0
+        },
+        "exported-poly": {
+          "finite": true,
+          "max_logit_error": 4.5946502685546875,
+          "seconds": 14.792640842992114,
+          "nll_per_token": 2.5837483485306696,
+          "ppl": 13.246698459699756,
+          "top1_agreement": 1.0
+        }
+      },
+      "poly_domain_violations": {
+        "dt_softplus": [
+          0,
+          0
+        ],
+        "decay_exp": [
+          0,
+          0
+        ],
+        "gate_silu": [
+          0,
+          37748736
+        ],
+        "rms_invsqrt": [
+          0,
+          25600
+        ],
+        "conv_silu": [
+          0,
+          44040192
+        ],
+        "gated_rms_invsqrt": [
+          0,
+          24576
+        ],
+        "joint_selective_gates": [
+          0,
+          589824
+        ]
+      },
+      "pruned_head_observations_on_exact_path": []
+    },
+    {
+      "window": 4096,
+      "windows": 1,
+      "predicted_tokens": 4095,
+      "evaluated_token_ids_sha256": "52f3f24e1e42fa4abed302686a75f398377aa350f1f8eae08e15e5c6710c64ef",
+      "circuits": {
+        "exact": {
+          "finite": true,
+          "max_logit_error": 0.0,
+          "seconds": 26.333305051986827,
+          "nll_per_token": 2.856890548687424,
+          "ppl": 17.40731549632394,
+          "top1_agreement": 1.0
+        },
+        "exact-with-mask": {
+          "finite": true,
+          "max_logit_error": 0.0,
+          "seconds": 26.493002389004687,
+          "nll_per_token": 2.856890548687424,
+          "ppl": 17.40731549632394,
+          "top1_agreement": 1.0
+        },
+        "exported-poly": {
+          "finite": true,
+          "max_logit_error": 5.632781982421875,
+          "seconds": 70.34831445099553,
+          "nll_per_token": 2.85672361492674,
+          "ppl": 17.40440987021502,
+          "top1_agreement": 0.999023199023199
+        }
+      },
+      "poly_domain_violations": {
+        "dt_softplus": [
+          0,
+          0
+        ],
+        "decay_exp": [
+          0,
+          0
+        ],
+        "gate_silu": [
+          0,
+          150994944
+        ],
+        "rms_invsqrt": [
+          0,
+          102400
+        ],
+        "conv_silu": [
+          0,
+          176160768
+        ],
+        "gated_rms_invsqrt": [
+          0,
+          98304
+        ],
+        "joint_selective_gates": [
+          0,
+          2359296
+        ]
+      },
+      "pruned_head_observations_on_exact_path": []
+    }
+  ],
+  "complete": true,
+  "status": "measured"
+}

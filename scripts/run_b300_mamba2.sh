@@ -1,24 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+source "${REPO_DIR}/scripts/b300_platform.sh"
+b300_load_platform "${REPO_DIR}"
 ROOT_DIR="${ROOT_DIR:-/home/kataiwa/fhemamba-b300}"
-IMAGE="${IMAGE:-fhemamba-b300:cuda12.8-fideslib}"
+IMAGE="${IMAGE:-${B300_IMAGE}}"
 GPU_DEVICE="${GPU_DEVICE:-3}"
-FIDESLIB_SM="${FIDESLIB_SM:-100}"
-FIDESLIB_VARIANT="${FIDESLIB_VARIANT:-sm${FIDESLIB_SM}}"
-case "${FIDESLIB_VARIANT}" in
-  "sm${FIDESLIB_SM}")
-    inferred_sync_profile="full"
-    ;;
-  "sm${FIDESLIB_SM}-bootstrap-lifetime"|"sm${FIDESLIB_SM}-lifetime"|"sm${FIDESLIB_SM}-none")
-    inferred_sync_profile="${FIDESLIB_VARIANT#sm"${FIDESLIB_SM}"-}"
-    ;;
-  *)
-    inferred_sync_profile="unspecified"
-    ;;
-esac
-FIDESLIB_SYNC_PROFILE="${FIDESLIB_SYNC_PROFILE:-${inferred_sync_profile}}"
-BINARY_PATH="${BINARY_PATH:-${ROOT_DIR}/build/fideslib-stage0-${FIDESLIB_VARIANT}/stage1_mamba2_decode_fideslib}"
+FIDESLIB_SM="${FIDESLIB_SM:-${B300_FIDESLIB_SM}}"
+FIDESLIB_SYNC_PROFILE="${FIDESLIB_SYNC_PROFILE:-${B300_DEFAULT_SYNC_PROFILE}}"
+resolved_variant="$(b300_variant "${FIDESLIB_SYNC_PROFILE}")"
+FIDESLIB_VARIANT="${FIDESLIB_VARIANT:-${resolved_variant}}"
+expected_binary_path="${ROOT_DIR}/build/fideslib-stage0-${FIDESLIB_VARIANT}/stage1_mamba2_decode_fideslib"
+BINARY_PATH="${BINARY_PATH:-${expected_binary_path}}"
+b300_assert_equal image "${IMAGE}" "${B300_IMAGE}"
+b300_assert_equal FIDESlib-SM "${FIDESLIB_SM}" "${B300_FIDESLIB_SM}"
+b300_assert_equal FIDESlib-variant "${FIDESLIB_VARIANT}" "${resolved_variant}"
+b300_assert_equal binary-path "${BINARY_PATH}" "${expected_binary_path}"
+image_id="$(b300_image_id "${IMAGE}")"
+patch_set_sha256="$(b300_patchset_sha256 "${REPO_DIR}" "${FIDESLIB_SYNC_PROFILE}")"
+binary_relative_path="build/fideslib-stage0-${FIDESLIB_VARIANT}/stage1_mamba2_decode_fideslib"
+metadata_path="${BINARY_PATH}.build.json"
+platform_config_sha256="$(sha256sum "${REPO_DIR}/config/b300-platform.env" | cut -d' ' -f1)"
 LAYERS="${LAYERS:-24}"
 TOKENS="${TOKENS:-1}"
 # This B300-specific combination passes the 24-layer/three-token gate while
@@ -66,9 +69,29 @@ if [[ "${GPU_DEVICE}" != "2" && "${GPU_DEVICE}" != "3" ]]; then
   exit 2
 fi
 if [[ ! -x "${BINARY_PATH}" ]]; then
-  echo "missing sm${FIDESLIB_SM} stage binary; run launch_b300_fideslib_build.sh first" >&2
+  echo "missing sm${B300_FIDESLIB_SM} stage binary; run launch_b300_fideslib_build.sh first" >&2
   exit 2
 fi
+
+metadata_expectation=(
+  --metadata "${metadata_path}"
+  --platform-config-version "${B300_PLATFORM_VERSION}"
+  --platform-config-sha256 "${platform_config_sha256}"
+  --image "${B300_IMAGE}"
+  --image-id "${image_id}"
+  --cuda-version "${B300_CUDA_VERSION}"
+  --fideslib-repository "${B300_FIDESLIB_REPOSITORY}"
+  --fideslib-commit "${B300_FIDESLIB_COMMIT}"
+  --fideslib-arch "${B300_FIDESLIB_ARCH}"
+  --fideslib-sm "${B300_FIDESLIB_SM}"
+  --sync-profile "${FIDESLIB_SYNC_PROFILE}"
+  --variant "${FIDESLIB_VARIANT}"
+  --patch-set-sha256 "${patch_set_sha256}"
+  --binary-relative-path "${binary_relative_path}"
+  --binary "${BINARY_PATH}"
+)
+python3 "${REPO_DIR}/fhemamba/experiments/manage_b300_build_metadata.py" \
+  validate "${metadata_expectation[@]}"
 
 mkdir -p "${RESULTS_DIR}"
 if [[ -n "${REPO_COMMIT:-}" ]]; then
@@ -79,7 +102,9 @@ else
     repo_commit="${repo_commit}-dirty"
   fi
 fi
-binary_sha256="${BINARY_SHA256:-$(sha256sum "${BINARY_PATH}" | cut -d' ' -f1)}"
+actual_binary_sha256="$(sha256sum "${BINARY_PATH}" | cut -d' ' -f1)"
+binary_sha256="${BINARY_SHA256:-${actual_binary_sha256}}"
+b300_assert_equal binary-SHA-256 "${binary_sha256}" "${actual_binary_sha256}"
 container_name="fhemamba-b300-${RUN_ID}"
 
 docker run --rm \
@@ -117,7 +142,7 @@ docker run --rm \
   --env PT_MISS_CONSUMPTION_LEVEL="${PT_MISS_CONSUMPTION_LEVEL}" \
   --env ENCODE_THREADS="${ENCODE_THREADS}" \
   --env BINARY_SHA256="${binary_sha256}" \
-  --env LD_LIBRARY_PATH="/workspace/install/fideslib-${FIDESLIB_VARIANT}/lib:/workspace/install/fideslib/lib:/workspace/install/openfhe-fides/lib:/workspace/install/openfhe-fides/lib64" \
+  --env LD_LIBRARY_PATH="/workspace/install/fideslib-${FIDESLIB_VARIANT}/lib:/workspace/install/openfhe-fides/lib:/workspace/install/openfhe-fides/lib64" \
   "${IMAGE}" \
   bash -lc '
     set -euo pipefail
@@ -132,4 +157,8 @@ docker run --rm \
       --binary-sha256 "${BINARY_SHA256}"
   '
 
+python3 "${REPO_DIR}/fhemamba/experiments/manage_b300_build_metadata.py" \
+  attach "${metadata_expectation[@]}" --artifact "${OUTPUT_JSON}"
+
 echo "output_json=${OUTPUT_JSON}"
+echo "build_metadata=${metadata_path}"

@@ -1,8 +1,10 @@
 """Analytic CKKS budget for scan-based prefill vs sequential decode.
 
-Numerical equivalence of the scan schedule is already proven
-(tests/test_reference*: chunked == loop == official); this module prices the
-two schedules so the kernel work can be ordered by measured value.
+This is a structural model, NOT measured encrypted prefill. The native kernel
+currently decodes sequentially. Phase/refresh constants below are historical
+estimates, not a lowering of the current replicated projection circuit.
+The active Mamba-2 reference streams chunks with a SERIAL inter-chunk carry;
+its depth is O(log(chunk) + number_of_chunks), not O(log(sequence_length)).
 
 Key structural facts priced here:
 - Token-parallel phases (norms, BSGS matmuls, conv, gate/dt polys, expands,
@@ -14,10 +16,11 @@ Key structural facts priced here:
   decay is scalar per head — near-free. The B-lineage pays 1 ct-ct + 1
   rotation per state-tile ciphertext per doubling round: MORE raw mults than
   sequential (log2(L) rounds x L-token tiles vs L single-step mults) but
-  depth log2(L) instead of L, which is what kills the bootstrap count.
+  depth log2(L) inside each chunk instead of L. Serial chunk carry adds depth.
 - Memoryless heads (decay==0 by compile-time head clip) drop their state
   lineage entirely: y_h = dt_h * x_h * (C.B), and with n_groups=1 the C.B
-  scalar (rotate-sum + 1 ct-ct) is shared by ALL heads of the layer.
+  scalar (rotate-sum + 1 ct-ct) is shared by ALL heads of the layer. Fractional
+  head savings assume a future compacted layout and default to OFF.
 """
 
 from __future__ import annotations
@@ -37,6 +40,19 @@ class Dims:
     proj_out: int = 3352
     batch_slots: int = 32768
     stream_stride: int = 4096
+
+    def __post_init__(self) -> None:
+        if any(value <= 0 for value in vars(self).values()):
+            raise ValueError("dimensions must be positive")
+        if self.stream_stride > self.batch_slots:
+            raise ValueError("stream stride exceeds available slots")
+
+
+def _validate(n_layers: int, killed_head_fraction: float) -> None:
+    if n_layers <= 0:
+        raise ValueError("n_layers must be positive")
+    if not 0.0 <= killed_head_fraction <= 1.0:
+        raise ValueError("killed_head_fraction must be in [0, 1]")
 
 
 def _bsgs_rotations(n_diags: int) -> int:
@@ -81,6 +97,7 @@ def decode_budget_per_token(
 ) -> dict[str, float]:
     """Sequential decode: every phase once per token per layer; state update
     on ceil(heads*head_dim*state/batch) group ciphertexts."""
+    _validate(n_layers, killed_head_fraction)
     phases = _phase_costs_per_token_group(d, degrees)
     groups = math.ceil(d.heads * d.head_dim * d.state / d.batch_slots)
     live = 1.0 - killed_head_fraction
@@ -103,30 +120,39 @@ def prefill_budget(
     chunk: int = 64,
     time_batch: int = 8,
     killed_head_fraction: float = 0.0,
-) -> dict[str, float]:
-    """Scan prefill for a T-token prompt (totals, not per token)."""
+) -> dict[str, float | str | bool]:
+    """Hypothetical packed prefill with the reference's serial chunk carry."""
+    _validate(n_layers, killed_head_fraction)
+    if seq_len <= 0 or chunk <= 0 or time_batch <= 0:
+        raise ValueError("seq_len, chunk and time_batch must be positive")
+    if time_batch * d.stream_stride > d.batch_slots:
+        raise ValueError("time_batch does not fit the slot layout")
     phases = _phase_costs_per_token_group(d, degrees)
     token_groups = math.ceil(seq_len / time_batch)
     live = 1.0 - killed_head_fraction
 
     # B-lineage tiles: all T states materialized, tiled into batch-slot cts
     state_slots = d.heads * d.head_dim * d.state * live
-    tiles_per_chunk = math.ceil(chunk * state_slots / d.batch_slots)
+    tiles_per_chunk = math.ceil(min(chunk, seq_len) * state_slots / d.batch_slots)
     n_chunks = math.ceil(seq_len / chunk)
-    rounds = math.ceil(math.log2(chunk))
-    scan_ct_ct = n_chunks * tiles_per_chunk * rounds  # B-lineage big mults
-    scan_ct_ct += rounds + math.ceil(math.log2(max(n_chunks, 2)))  # thin A-lineage
-    scan_rot = n_chunks * tiles_per_chunk * rounds + n_chunks * tiles_per_chunk
-    carry_ct_ct = n_chunks * tiles_per_chunk  # inter-chunk carry application
-
-    # Depth: log2(chunk) + log2(n_chunks) instead of seq_len
-    recurrence_depth = rounds + math.ceil(math.log2(max(n_chunks, 2)))
+    scan_ct_ct = scan_rot = carry_ct_ct = state_tiles = recurrence_depth = 0
+    for start in range(0, seq_len, chunk):
+        length = min(chunk, seq_len - start)
+        rounds = (length - 1).bit_length()
+        tiles = math.ceil(length * state_slots / d.batch_slots)
+        thin_tiles = math.ceil(length * d.heads / d.batch_slots)
+        state_tiles += tiles
+        # Each chunk scans independently, including its compact A lineage.
+        scan_ct_ct += (tiles + thin_tiles) * rounds
+        scan_rot += tiles * (rounds + 1)
+        carry_ct_ct += tiles
+        # h_chunk = B_prefix + A_prefix * previous_chunk_final.
+        recurrence_depth = max(rounds, recurrence_depth) + 1
     # Bootstraps scale ~linearly in T here too (every token's data crosses the
     # phases); the win is the per-token constant: ~9 refreshes per GROUP of
     # time_batch tokens instead of per token, plus a few per scan segment.
     bootstraps = n_layers * (
-        9 * token_groups
-        + math.ceil(recurrence_depth / 20) * n_chunks * tiles_per_chunk / time_batch
+        9 * token_groups + math.ceil(recurrence_depth / 20) * state_tiles / time_batch
     )
 
     return {
@@ -137,12 +163,17 @@ def prefill_budget(
         "bootstraps": bootstraps,
         "token_groups": token_groups,
         "tiles_per_chunk": tiles_per_chunk,
+        "state_tiles": state_tiles,
+        "chunks": n_chunks,
+        "carry_schedule": "serial",
+        "native_execution_measured": False,
+        "assumes_compacted_heads": killed_head_fraction > 0,
     }
 
 
 def compare(
-    seq_len: int, degrees: dict[str, int] | None = None, killed_head_fraction: float = 49 / 576
-) -> dict[str, dict[str, float]]:
+    seq_len: int, degrees: dict[str, int] | None = None, killed_head_fraction: float = 0.0
+) -> dict[str, dict[str, float | str | bool]]:
     d = Dims()
     degrees = degrees or {"conv_silu": 96, "gate_silu": 64, "dt_softplus": 64, "decay_exp": 24}
     dec = decode_budget_per_token(d, degrees, killed_head_fraction=killed_head_fraction)

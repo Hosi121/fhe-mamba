@@ -1,5 +1,7 @@
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -9,23 +11,23 @@ def test_b300_build_exposes_fideslib_conjugation() -> None:
     patch = (
         ROOT / "native" / "fideslib_stage0" / "patches" / "fideslib-v2.1.0-conjugate-api.patch"
     ).read_text()
-    build_script = (ROOT / "scripts" / "build_b300_fideslib.sh").read_text()
+    platform_helper = (ROOT / "scripts" / "b300_platform.sh").read_text()
 
     assert "EvalConjugate" in patch
     assert "result_gpu->conjugate(*input_gpu)" in patch
-    assert "fideslib-v2.1.0-conjugate-api.patch" in build_script
+    assert "fideslib-v2.1.0-conjugate-api.patch" in platform_helper
 
 
 def test_b300_build_exposes_ckks_complex_data_type() -> None:
     patch = (
         ROOT / "native" / "fideslib_stage0" / "patches" / "fideslib-v2.1.0-ckks-data-type-api.patch"
     ).read_text()
-    build_script = (ROOT / "scripts" / "build_b300_fideslib.sh").read_text()
+    platform_helper = (ROOT / "scripts" / "b300_platform.sh").read_text()
     probe = (ROOT / "native" / "fideslib_stage0" / "src" / "stage1_bootstrap_probe.cpp").read_text()
 
     assert "SetCKKSDataType" in patch
     assert "params.SetCKKSDataType(data_type_openfhe)" in patch
-    assert "fideslib-v2.1.0-ckks-data-type-api.patch" in build_script
+    assert "fideslib-v2.1.0-ckks-data-type-api.patch" in platform_helper
     assert "SetCKKSDataType(config.complex_pair ? COMPLEX : REAL)" in probe
 
 
@@ -33,16 +35,19 @@ def test_b300_sync_profiles_keep_experimental_builds_isolated() -> None:
     build_script = (ROOT / "scripts" / "build_b300_fideslib.sh").read_text()
     launch_script = (ROOT / "scripts" / "launch_b300_fideslib_build.sh").read_text()
     runner = (ROOT / "scripts" / "run_b300_mamba2.sh").read_text()
+    cmake = (ROOT / "native" / "fideslib_stage0" / "CMakeLists.txt").read_text()
 
-    assert 'B300_SYNC_PROFILE="${B300_SYNC_PROFILE:-full}"' in build_script
-    assert 'test -e "${FIDESLIB_DIR}/.git"' in build_script
-    assert "bootstrap-lifetime)" in build_script
-    assert 'remove_patch_if_applied "${keyswitch_sync_patch}"' in build_script
-    assert 'BUILD_VARIANT="sm${FIDESLIB_SM}-${B300_SYNC_PROFILE}"' in build_script
-    assert '--env FIDESLIB_DIR="/workspace/src/${FIDESLIB_SOURCE_NAME}"' in launch_script
+    assert 'source "${REPO_DIR}/scripts/b300_platform.sh"' in build_script
+    assert "flock -n 9" in build_script
+    assert "build/fideslib-sources/" in build_script
+    assert "git clone --no-hardlinks --no-checkout" in build_script
+    assert 'checkout --detach "${B300_FIDESLIB_COMMIT}"' in build_script
+    assert '--env FIDESLIB_SOURCE_DIR="/workspace/src/${FIDESLIB_SOURCE_NAME}"' in launch_script
     assert '--env B300_SYNC_PROFILE="${B300_SYNC_PROFILE}"' in launch_script
-    assert 'FIDESLIB_VARIANT="${FIDESLIB_VARIANT:-sm${FIDESLIB_SM}}"' in runner
-    assert 'inferred_sync_profile="${FIDESLIB_VARIANT#sm"${FIDESLIB_SM}"-}"' in runner
+    assert "manage_b300_build_metadata.py" in runner
+    assert 'validate "${metadata_expectation[@]}"' in runner
+    assert "set(CMAKE_CXX_COMPILER" not in cmake
+    assert '-DCMAKE_CXX_COMPILER="${CXX_COMPILER}"' in build_script
     assert "fideslib-stage0-${FIDESLIB_VARIANT}" in runner
     assert 'FUSED_REPLICATED_LINEAR_TRANSFORM="${FUSED_REPLICATED_LINEAR_TRANSFORM:-1}"' in runner
     assert (
@@ -54,10 +59,24 @@ def test_b300_sync_profiles_keep_experimental_builds_isolated() -> None:
     assert 'PT_CACHE_GIB="${PT_CACHE_GIB:-${default_pt_cache_gib}}"' in runner
 
 
-def test_b300_long_horizon_manifest_pins_promoted_path() -> None:
+def test_b300_long_horizon_manifest_pins_promoted_path(tmp_path: Path) -> None:
     manifest_path = ROOT / "fhemamba" / "experiments" / "b300_autoregressive_prompt2_generate4.json"
     manifest = json.loads(manifest_path.read_text())
-    defaults = manifest["defaults"]
+    output = tmp_path / "dry-run.json"
+    subprocess.run(
+        [
+            sys.executable,
+            "fhemamba/experiments/run_dgx_campaign.py",
+            "--manifest",
+            str(manifest_path),
+            "--output-json",
+            str(output),
+            "--dry-run",
+        ],
+        cwd=ROOT,
+        check=True,
+    )
+    defaults = json.loads(output.read_text())["experiments"][0]["environment"]
     acceptance = manifest["acceptance"]
     preflight = manifest["gpu_preflight"]
     runner = (ROOT / "scripts" / "run_b300_mamba2.sh").read_text()
@@ -65,6 +84,12 @@ def test_b300_long_horizon_manifest_pins_promoted_path() -> None:
     assert defaults["LAYERS"] == "24"
     assert defaults["TOKENS"] == "5"
     assert defaults["SECURITY"] == "not-set"
+    assert defaults["IMAGE"] == "fhemamba-b300:cuda12.8-fideslib"
+    assert defaults["B300_CUDA_VERSION"] == "12.8"
+    assert len(defaults["B300_PLATFORM_CONFIG_SHA256"]) == 64
+    assert defaults["FIDESLIB_ARCH"] == "100-real"
+    assert defaults["FIDESLIB_SM"] == "100"
+    assert defaults["FIDESLIB_VARIANT"] == "sm100"
     assert defaults["FIDESLIB_SYNC_PROFILE"] == "full"
     assert defaults["BINARY_PATH"].endswith(
         "/build/fideslib-stage0-sm100/stage1_mamba2_decode_fideslib"
@@ -127,6 +152,21 @@ def test_mamba2_decode_wires_shared_head_expansion() -> None:
     assert "extract_shared_head_group" in source
     assert "shared_head_expansion" in source
     assert '--shared-head-expansion "$SHARED_HEAD_EXPANSION"' in runner
+
+
+def test_replicated_bsgs_uses_hit_first_plaintext_handles() -> None:
+    source = (
+        ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_decode_fideslib.cpp"
+    ).read_text()
+    plan = (ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_plan.hpp").read_text()
+
+    assert "resolve_hit_first_handle" in plan
+    assert "replicated_in_proj_table" in source
+    assert "replicated_out_proj_table" in source
+    assert "resolve_replicated_plain" in source
+    assert '"\\"replicated_eval_mask_builds\\":"' in source
+    assert '"\\"replicated_mask_bytes_materialized\\":"' in source
+    assert '"\\"replicated_mask_build_seconds\\":"' in source
 
 
 def test_mamba2_native_kernel_is_repo_owned() -> None:

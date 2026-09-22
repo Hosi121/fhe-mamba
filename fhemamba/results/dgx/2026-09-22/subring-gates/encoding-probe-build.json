@@ -1,0 +1,32 @@
+{
+  "binary_sha256": "19ea59aa97d813b1d87a0846429fda5dd5f25446e5ccc3792df72bbb8e69b95c",
+  "source_sha256": {
+    "native/fideslib_stage0/CMakeLists.txt": "93009cacd0d8b8bf0311e70fbb64ff23455914f2a9c060940c639870b0689c1c",
+    "native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp": "4cccba3e8b1d8a71a4d4a8891bcb737e28a9bb07f4c61b196ddefd4bf5700c76",
+    "fhemamba/src/fhemamba/_version.py": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3",
+    "native/fideslib_stage0/src/fideslib_periodic_encoder.hpp": "b60d7058eccd1b1e50d75b462a63db8e6c74283e5a737583dee35dc0df4cf44b"
+  },
+  "library_sha256": {
+    "/usr/local/cuda-13.0/targets/sbsa-linux/lib/libcudart.so.13.0.96": "7bdba2b5b08cbdc85203c41cc94598adedb1bcfea7cb574ca693ac73599e4e63",
+    "/usr/lib/aarch64-linux-gnu/libcuda.so.580.159.03": "f6fb476bbefda386491dc5151a593a98bedeff6a4eb0ec4ef766e3b2fe3b9032",
+    "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+    "/usr/lib/aarch64-linux-gnu/libm.so.6": "d5b262e559d38769e4959f036a1cc2c4009fa60b4ec836a7a19ca8554aebf5a5",
+    "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": "33c8bcb7d33228fe5101bfeb201bcaff4563d4ecf09497229b9deba522ebaf3d",
+    "/usr/lib/aarch64-linux-gnu/libgcc_s.so.1": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+    "/usr/lib/aarch64-linux-gnu/libc.so.6": "fe5966a43e068ad7cb389c3affa069f4ee6f296e07d7ccc0398a23cfde4f0b7e",
+    "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "393384096ffa869e1be20d2f91fdf08dfadb9f3e531dfe724085d8501d3f85d9",
+    "/usr/lib/aarch64-linux-gnu/libdl.so.2": "97387fb55ccfc0cc109dfe99b81de2b7bbaac723d1c215107dc69a068c4b1fae",
+    "/usr/lib/aarch64-linux-gnu/libpthread.so.0": "97b288827c0ab29659dfcdcfab6c2e9e1225c19fc5abfe106d8a53c2c7b34402",
+    "/usr/lib/aarch64-linux-gnu/librt.so.1": "4b38331a53bc2bd10c1ecf4f02a71c913c40bad13f5fbf93bee5a0e1f25dd493"
+  },
+  "static_library_sha256": {
+    "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f"
+  },
+  "cmake_cache_sha256": "0366bc8122a3d8a16bceb53dd441382fdb98d2aa28b535f6e06a61a430856a79",
+  "architecture": "aarch64",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "builder_source_sha256": "ff90ce6c683ce82ce7834b9cf0d057e2216accd3cab37c79e0fe28c1016a1c8d"
+}

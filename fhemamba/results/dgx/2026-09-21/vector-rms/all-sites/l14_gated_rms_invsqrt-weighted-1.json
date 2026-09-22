@@ -1,0 +1,373 @@
+{
+  "stage": "vector-rms-ckks-probe",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "binary_sha256": "81f76f59de8beea282d5f54a7992d1bf88c0465fbab48d1613ac6b18d4d672c4",
+  "recipe_sha256": "c7c2695e5d613f28b408196010c14fd65c35459981c9b9948bd9153c9fe8213d",
+  "backend": "FIDESlib",
+  "encrypted": true,
+  "passed": true,
+  "status": "passed",
+  "mode": "weighted",
+  "gamma_placement": "before",
+  "refresh": "none",
+  "gate_metric": "vector-rms-output-absolute-error",
+  "error_threshold": 0.0001,
+  "parameters": {
+    "ring_dim": 131072,
+    "slots": 8192,
+    "depth": 40,
+    "scale": 59,
+    "security": "128-classic",
+    "secret_key_dist": "uniform-ternary",
+    "scaling": "FLEXIBLEAUTO",
+    "key_switch": "HYBRID",
+    "large_digits": 3,
+    "first_mod_size": 60
+  },
+  "layout": {
+    "width": 1536,
+    "padded_width": 2048,
+    "lanes": 4,
+    "cases": 16,
+    "application_rotation_keys": 11,
+    "packing": "feature-strided-independent-vectors"
+  },
+  "refresh_bound": 1429.3997394011237,
+  "measurements": {
+    "output": {
+      "max_abs_error": 2.4691689759492874e-07,
+      "max_abs_error_vs_polynomial": 2.4706935164431343e-07,
+      "non_finite": 0
+    },
+    "before_refresh": {
+      "max_abs_error": 2.4691689759492874e-07,
+      "max_abs_error_vs_polynomial": 2.4706935164431343e-07,
+      "non_finite": 0
+    },
+    "checkpoint_inputs": {
+      "max_abs_error": 3.896766243016714e-11,
+      "max_abs_error_vs_polynomial": 3.895736511161374e-11,
+      "non_finite": 0
+    },
+    "synthetic_inputs": {
+      "max_abs_error": 2.4691689759492874e-07,
+      "max_abs_error_vs_polynomial": 2.4706935164431343e-07,
+      "non_finite": 0
+    },
+    "padding_max_abs_error": 2.4817367050289363e-09,
+    "setup_seconds": 7.535470025,
+    "evaluation_seconds": 2.727732325,
+    "refresh_seconds": 0,
+    "bootstraps": 0,
+    "refresh_scalar_products": 0,
+    "peak_rss_gib": 11.66617202758789,
+    "batches": [
+      {
+        "first_case": 0,
+        "cases": 4,
+        "ct_ct_products": 35,
+        "ct_pt_products": 17,
+        "additions": 24,
+        "rotations": 11,
+        "level": 30,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.748777997,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 3.707192886004407e-11,
+          "max_abs_error_vs_polynomial": 3.707201906566482e-11,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 3.707192886004407e-11,
+          "max_abs_error_vs_polynomial": 3.707201906566482e-11,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 4,
+        "cases": 4,
+        "ct_ct_products": 35,
+        "ct_pt_products": 17,
+        "additions": 24,
+        "rotations": 11,
+        "level": 30,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.657901861,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 3.896766243016714e-11,
+          "max_abs_error_vs_polynomial": 3.895736511161374e-11,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 3.896766243016714e-11,
+          "max_abs_error_vs_polynomial": 3.895736511161374e-11,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 8,
+        "cases": 4,
+        "ct_ct_products": 35,
+        "ct_pt_products": 17,
+        "additions": 24,
+        "rotations": 11,
+        "level": 30,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.658485989,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 2.155176659357494e-08,
+          "max_abs_error_vs_polynomial": 2.1548999029619154e-08,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 2.155176659357494e-08,
+          "max_abs_error_vs_polynomial": 2.1548999029619154e-08,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 12,
+        "cases": 4,
+        "ct_ct_products": 35,
+        "ct_pt_products": 17,
+        "additions": 24,
+        "rotations": 11,
+        "level": 30,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.662566478,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 2.4691689759492874e-07,
+          "max_abs_error_vs_polynomial": 2.4706935164431343e-07,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 2.4691689759492874e-07,
+          "max_abs_error_vs_polynomial": 2.4706935164431343e-07,
+          "non_finite": 0
+        }
+      }
+    ]
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "evaluation_decryptions": 0,
+    "real_decoder_noise_enabled": true,
+    "full_vector_rms_reduction_measured": true,
+    "learned_gamma_measured": true,
+    "secret_key_in_benchmark_process": true,
+    "prior_layer_ckks_error_measured": false,
+    "full_model_correctness_claimed": false,
+    "claim": "Packed vector RMSNorm from fresh ciphertexts; optional output refresh, no full-model claim."
+  },
+  "build_provenance": {
+    "binary_sha256": "81f76f59de8beea282d5f54a7992d1bf88c0465fbab48d1613ac6b18d4d672c4",
+    "source_sha256": {
+      "native/fideslib_stage0/CMakeLists.txt": "289e5f5b5607b82373fca588e49a2bf254f668ed9a189dcdeb12fa0cce24ed40",
+      "native/fideslib_stage0/include/stage1_normalization.hpp": "41c20e3aa32ce095bc55e0356ec0f8401a9251df219104beeb1630bb7f160c43",
+      "native/fideslib_stage0/src/stage1_vector_rms_probe.cpp": "c6441376fb1f40860a348006a632a521f6eb81cdd1d5a4056a9805f04fe25f3c",
+      "fhemamba/src/fhemamba/_version.py": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3",
+      "native/fideslib_stage0/include/stage1_vector_rms.hpp": "952ccb62c30f3f96cc3cb20ca4d79353c9d3262cfef7c360fe7ed3a74d9d8609"
+    },
+    "library_sha256": {
+      "/usr/local/cuda-13.0/targets/sbsa-linux/lib/libcudart.so.13.0.96": "7bdba2b5b08cbdc85203c41cc94598adedb1bcfea7cb574ca693ac73599e4e63",
+      "/usr/lib/aarch64-linux-gnu/libcuda.so.580.159.03": "f6fb476bbefda386491dc5151a593a98bedeff6a4eb0ec4ef766e3b2fe3b9032",
+      "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+      "/usr/lib/aarch64-linux-gnu/libm.so.6": "d5b262e559d38769e4959f036a1cc2c4009fa60b4ec836a7a19ca8554aebf5a5",
+      "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": "33c8bcb7d33228fe5101bfeb201bcaff4563d4ecf09497229b9deba522ebaf3d",
+      "/usr/lib/aarch64-linux-gnu/libgcc_s.so.1": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+      "/usr/lib/aarch64-linux-gnu/libc.so.6": "fe5966a43e068ad7cb389c3affa069f4ee6f296e07d7ccc0398a23cfde4f0b7e",
+      "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "393384096ffa869e1be20d2f91fdf08dfadb9f3e531dfe724085d8501d3f85d9",
+      "/usr/lib/aarch64-linux-gnu/libdl.so.2": "97387fb55ccfc0cc109dfe99b81de2b7bbaac723d1c215107dc69a068c4b1fae",
+      "/usr/lib/aarch64-linux-gnu/libpthread.so.0": "97b288827c0ab29659dfcdcfab6c2e9e1225c19fc5abfe106d8a53c2c7b34402",
+      "/usr/lib/aarch64-linux-gnu/librt.so.1": "4b38331a53bc2bd10c1ecf4f02a71c913c40bad13f5fbf93bee5a0e1f25dd493"
+    },
+    "static_library_sha256": {
+      "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f"
+    },
+    "cmake_cache_sha256": "e8465749f2036414870e3443503ae0f885d86ac96d1c557c7e37c3da58f8cf90",
+    "architecture": "aarch64",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "builder_source_sha256": "00da291fb6e47e23b46d44c59ab9c8c0e1f9e5cc83f297cdf479529ec8d54cd3"
+  },
+  "input_provenance": {
+    "layer": 14,
+    "site": "gated_rms_invsqrt",
+    "file": "l14_gated_rms_invsqrt.txt",
+    "sha256": "c7c2695e5d613f28b408196010c14fd65c35459981c9b9948bd9153c9fe8213d",
+    "interval": [
+      9.999999747378752e-06,
+      29.585952758789062
+    ],
+    "certified_relative_error": 1e-07,
+    "weighted_certificate": {
+      "certified": true,
+      "reason": null,
+      "arithmetic": "exact-rational extrema with outward dyadic enclosures",
+      "enclosure_bits": 128,
+      "relative_error_bound": 1e-07,
+      "nonexpansive_in_exact_arithmetic": true,
+      "includes_execution_roundoff": false,
+      "trace": [
+        {
+          "stage": "constant-seed",
+          "u_lower": "115014838663120460617505330003047/340282366920938463463374607431768211456",
+          "u_upper": "85070591730234601220053054484573702625/85070591730234615865843651857942052864"
+        },
+        {
+          "stage": 0,
+          "u_lower": "728005550272326245035423526628441/340282366920938463463374607431768211456",
+          "u_upper": "5316911983129030751216487943198111027/5316911983139663491615228241121378304"
+        },
+        {
+          "stage": 1,
+          "u_lower": "2304008321101612554437619305287197/170141183460469231731687303715884105728",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 2,
+          "u_lower": "7291621366077905971934047737529751/85070591730234615865843651857942052864",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 3,
+          "u_lower": "184584562050668320185810714258378825/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 4,
+          "u_lower": "1167171117124052542723813587459930249/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 5,
+          "u_lower": "7340360267942672613538410525283638067/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 6,
+          "u_lower": "40853384033059535303196207120773162703/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257901629781149167609325255/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 7,
+          "u_lower": "158507256183001395827330316298787973163/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257827917644606881375992081/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 8,
+          "u_lower": "305471939938195729738241180861816362357/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257898296738034575252711803/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 9,
+          "u_lower": "169770160874616467918401924110009650653/170141183460469231731687303715884105728",
+          "u_upper": "21267647932516121630454307044736063213/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 10,
+          "u_lower": "340282062852630360275930392521781928805/340282366920938463463374607431768211456",
+          "u_upper": "170141183460129012728328517788735849377/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 11,
+          "u_lower": "340282366920734682194082062624467374365/340282366920938463463374607431768211456",
+          "u_upper": "340282366920938463463373586964813424323/340282366920938463463374607431768211456"
+        }
+      ],
+      "rounded_ratio_effective_coefficients": [
+        "2656242046612679/1125899906842624",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "93948470468950611458911510506070644608358355965/45671926166590716193865151022383844364247891968",
+        "75223859265100725774608348587754526811833759922858756788328095/51422017416287688817342786954917203280710495801049370729644032",
+        "23884932723463290925055415643267385947277989390096010835944497910155459448805/28948022309329048855892746252171976963317496166410141009864396001978282409984",
+        "141155459377029629604794966340287918677614334779245223445891035626861784901456642635103695675/260740604970814219042361048116400404614587954389239840081425977517360806369707098391474864128",
+        "1176194790421940321065283478303924306745669354409743485236496615920017801184204609730537492365436938183178225/2348542582773833227889480596789337027375682548908319870707290971532209025114608443463698998384768703031934976"
+      ]
+    },
+    "coupled_cost": {
+      "accelerated_stages": 11,
+      "final_recomputed_newton_stages": 1,
+      "ct_ct_products": 33,
+      "ct_ct_critical_depth": 24,
+      "public_scalar_products": 15,
+      "public_scalar_additions": 12,
+      "same_coefficients_recomputed_ct_ct_depth": 33,
+      "same_coefficients_balanced_ct_ct_depth": 22,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "balanced_cost": {
+      "ct_ct_products": 33,
+      "ct_ct_critical_depth": 22,
+      "public_scalar_products": 26,
+      "public_scalar_additions": 1,
+      "ct_ct_additions": 11,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "fixed_newton_same_accuracy": {
+      "stages": 23,
+      "ct_ct_products": 66,
+      "ct_ct_critical_depth": 44,
+      "factored_unbalanced_ct_ct_depth": 66,
+      "same_domain_seed_and_tolerance": true,
+      "includes_encoding_rescale_bootstrap_cost": false
+    }
+  },
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "runner_source_sha256": "44dafed90989adf908be55c26e192d0c5db8d54feb2c3aa73a35ce1eac6cba33",
+  "process_returncode": 0,
+  "process_seconds": 12.745888639241457,
+  "log_sha256": "ce6734530f9434b7d219421fb79411fc40bec76b5896fceeb34addbaa694c39c",
+  "execution_environment": {
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "OMP_NUM_THREADS": "8"
+  },
+  "fixture_provenance": {
+    "file": "l14_gated_rms_invsqrt.vectors.txt",
+    "sha256": "3076ebab49dd4dea23f4d96232b141d10a960a2ad1b831d4ec5acef08f440567",
+    "recipe_file": "l14_gated_rms_invsqrt.txt",
+    "recipe_sha256": "c7c2695e5d613f28b408196010c14fd65c35459981c9b9948bd9153c9fe8213d",
+    "layer": 14,
+    "site": "gated_rms_invsqrt",
+    "width": 1536,
+    "cases": 16,
+    "checkpoint_cases": 8,
+    "synthetic_cases": 8,
+    "variance": [
+      0.5679268637131781,
+      0.16263212876257543,
+      0.22805462591465644,
+      0.19885846149067937,
+      1.7598056683913323,
+      0.8431611480988179,
+      0.20808816191730978,
+      0.3916158522784547,
+      1e-05,
+      1.9999999999979998e-05,
+      0.017200567653037152,
+      29.5859527587299,
+      29.5859527587299,
+      1.9999999999980005e-05,
+      29.5859527587299,
+      29.585952758729896
+    ],
+    "gamma_max_abs": 33.15625,
+    "epsilon": 1e-05
+  },
+  "fixture_manifest_sha256": "5ab819238f4c13b625e8ac639ac19fb9daefe7249358215f5935b38d9141388f"
+}

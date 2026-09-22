@@ -12,7 +12,7 @@ from torch.nn import functional as F  # noqa: N812
 def load_wikitext2(split: str) -> str:
     from datasets import load_dataset
 
-    dataset = load_dataset("wikitext", "wikitext-2-raw-v1", split=split)
+    dataset = load_dataset("Salesforce/wikitext", "wikitext-2-raw-v1", split=split)
     return "\n\n".join(dataset["text"])
 
 

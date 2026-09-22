@@ -68,7 +68,11 @@ auto parse_int_set(std::string_view name, std::string_view value) -> std::set<in
 
 auto should_use_meta_bts(const Config& config, int active_layer,
                          bool carried, bool normalized_state,
-                         std::string_view checkpoint) -> bool {
+                         std::string_view checkpoint,
+                         bool scheduled_normalization) -> bool {
+  // The deeper scheduled norm moves refreshes onto new transient branches.
+  // An inverse repair cannot remove noise already present in its input.
+  if (scheduled_normalization && !carried) return true;
   if (!config.meta_bts ||
       (normalized_state && !config.normalized_state_meta_bts)) {
     return false;
@@ -151,6 +155,14 @@ auto parse_args(int argc, char* argv[]) -> Config {
       config.bsgs_replicas = value;
     } else if (arg == "--replicated-true-bsgs") {
       config.replicated_true_bsgs = parse_bool_arg(arg, value);
+    } else if (arg == "--logarithmic-replication") {
+      config.logarithmic_replication = parse_bool_arg(arg, value);
+    } else if (arg == "--coefficient-aware-ps") {
+      config.coefficient_aware_ps = parse_bool_arg(arg, value);
+    } else if (arg == "--joint-periodic-coefficients") {
+      config.joint_periodic_coefficients = parse_bool_arg(arg, value);
+    } else if (arg == "--joint-subring-encoding") {
+      config.joint_subring_encoding = parse_bool_arg(arg, value);
     } else if (arg == "--fused-replicated-linear-transform") {
       config.fused_replicated_linear_transform = parse_bool_arg(arg, value);
     } else if (arg == "--fused-replicated-linear-transform-scope") {
@@ -203,6 +215,8 @@ auto parse_args(int argc, char* argv[]) -> Config {
       config.state_refresh_interval = parse_int(arg, value);
     } else if (arg == "--normalized-recurrent-state") {
       config.normalized_recurrent_state = parse_bool_arg(arg, value);
+    } else if (arg == "--row-normalized-state") {
+      config.row_normalized_state = parse_bool_arg(arg, value);
     } else if (arg == "--complex-state-pairing") {
       config.complex_state_pairing = parse_bool_arg(arg, value);
     } else if (arg == "--normalized-state-meta-bts") {
@@ -403,10 +417,17 @@ auto parse_args(int argc, char* argv[]) -> Config {
     throw std::invalid_argument(
         "interleaved-replicated-projection requires replicated layout");
   }
+  if (config.row_normalized_state && !config.normalized_recurrent_state) {
+    throw std::invalid_argument(
+        "row-normalized-state requires normalized-recurrent-state");
+  }
   if (config.normalized_state_meta_bts &&
       !config.normalized_recurrent_state) {
     throw std::invalid_argument(
         "normalized-state-meta-bts requires normalized-recurrent-state");
+  }
+  if (config.joint_subring_encoding && !config.joint_periodic_coefficients) {
+    throw std::invalid_argument("joint-subring-encoding requires joint-periodic-coefficients");
   }
   if (config.security != "not-set" && config.security != "128-classic") {
     throw std::invalid_argument("security must be not-set or 128-classic");

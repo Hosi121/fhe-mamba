@@ -1,0 +1,272 @@
+{
+  "stage": "normalization-ckks-probe",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "binary_sha256": "3c9e1775d94b2a6052bcce374c06a46c9d8ff28a30b90992f4ca35936282418b",
+  "recipe_sha256": "5aa74de72e5109ebc1b4f7e6b29829c339258098b6cb80c13e093dfb5b28323d",
+  "backend": "FIDESlib",
+  "encrypted": true,
+  "passed": true,
+  "status": "passed",
+  "mode": "weighted",
+  "input_mode": "normalize",
+  "gate_metric": "normalized-output-absolute-error",
+  "parameters": {
+    "ring_dim": 131072,
+    "slots": 8192,
+    "depth": 40,
+    "scale": 59,
+    "security": "128-classic",
+    "secret_key_dist": "uniform-ternary",
+    "scaling": "FLEXIBLEAUTO",
+    "key_switch": "HYBRID",
+    "large_digits": 3,
+    "first_mod_size": 60
+  },
+  "interval": [
+    9.999999747378752e-06,
+    3.3449363708496094
+  ],
+  "error_threshold": 0.0001,
+  "measurements": {
+    "final": {
+      "max_relative_error_vs_exact": 1.969651214004324e-07,
+      "max_abs_error_vs_polynomial": 5.080044616079249e-07,
+      "max_normalized_error_vs_polynomial": 1.9696512135567563e-07,
+      "worst_variance": 2.806567251594164,
+      "non_finite": 0
+    },
+    "before_final": {
+      "max_relative_error_vs_exact": 9.199804849527012e-07,
+      "max_abs_error_vs_polynomial": 2.0972572656319244e-06,
+      "max_normalized_error_vs_polynomial": 8.732095597636888e-07,
+      "worst_variance": 3.0950349432881175,
+      "non_finite": 0
+    },
+    "host_reference": {
+      "max_relative_error_vs_exact": 4.890434635315931e-15,
+      "max_abs_error_vs_polynomial": 0,
+      "max_normalized_error_vs_polynomial": 0,
+      "worst_variance": 0.00033077068729032516,
+      "non_finite": 0
+    },
+    "normalized_output_max_abs_error": 8.610495649818972e-10,
+    "normalized_output_polynomial_max_abs_error": 8.610479456802631e-10,
+    "normalized_output_non_finite": 0,
+    "input_max_abs_error": 2.0901058661593197e-12,
+    "smallest_input_abs_error": 1.7295496632097063e-13,
+    "ct_ct_products": 32,
+    "ct_pt_products": 14,
+    "scalar_additions": 12,
+    "ct_ct_additions": 0,
+    "bootstraps": 0,
+    "rotations": 0,
+    "stage_levels": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      26
+    ],
+    "stage_scale_degrees": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "final_level": 27,
+    "inverse_level": 26,
+    "setup_seconds": 3.123950873,
+    "evaluation_seconds": 0.570624142,
+    "peak_rss_gib": 6.3258056640625
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "geometric_grid_points": 8192,
+    "evaluation_decryptions": 0,
+    "post_evaluation_diagnostic_decryptions": 4,
+    "real_decoder_noise_enabled": true,
+    "secret_key_in_benchmark_process": true,
+    "bootstrap_error_measured": false,
+    "full_vector_rms_reduction_measured": false,
+    "claim": "Isolated encrypted normalization; sampled precision, not a model or protocol gate."
+  },
+  "build_provenance": {
+    "binary_sha256": "3c9e1775d94b2a6052bcce374c06a46c9d8ff28a30b90992f4ca35936282418b",
+    "source_sha256": {
+      "native/fideslib_stage0/CMakeLists.txt": "d35eb9513e1464b86305f43ef9c6fbd1c2b12c6d0bf3fd597fb18676425f1bba",
+      "native/fideslib_stage0/src/stage1_normalization_probe.cpp": "023b70475a0f9018f18cba7e537e9cc800cc920ec9e7cd125c187d86d8458c37",
+      "native/fideslib_stage0/include/stage1_normalization.hpp": "41c20e3aa32ce095bc55e0356ec0f8401a9251df219104beeb1630bb7f160c43"
+    },
+    "library_sha256": {
+      "/usr/local/cuda-13.0/targets/sbsa-linux/lib/libcudart.so.13.0.96": "7bdba2b5b08cbdc85203c41cc94598adedb1bcfea7cb574ca693ac73599e4e63",
+      "/usr/lib/aarch64-linux-gnu/libcuda.so.580.159.03": "f6fb476bbefda386491dc5151a593a98bedeff6a4eb0ec4ef766e3b2fe3b9032",
+      "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+      "/usr/lib/aarch64-linux-gnu/libm.so.6": "d5b262e559d38769e4959f036a1cc2c4009fa60b4ec836a7a19ca8554aebf5a5",
+      "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": "33c8bcb7d33228fe5101bfeb201bcaff4563d4ecf09497229b9deba522ebaf3d",
+      "/usr/lib/aarch64-linux-gnu/libgcc_s.so.1": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+      "/usr/lib/aarch64-linux-gnu/libc.so.6": "fe5966a43e068ad7cb389c3affa069f4ee6f296e07d7ccc0398a23cfde4f0b7e",
+      "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "393384096ffa869e1be20d2f91fdf08dfadb9f3e531dfe724085d8501d3f85d9",
+      "/usr/lib/aarch64-linux-gnu/libdl.so.2": "97387fb55ccfc0cc109dfe99b81de2b7bbaac723d1c215107dc69a068c4b1fae",
+      "/usr/lib/aarch64-linux-gnu/libpthread.so.0": "97b288827c0ab29659dfcdcfab6c2e9e1225c19fc5abfe106d8a53c2c7b34402",
+      "/usr/lib/aarch64-linux-gnu/librt.so.1": "4b38331a53bc2bd10c1ecf4f02a71c913c40bad13f5fbf93bee5a0e1f25dd493"
+    },
+    "cmake_cache_sha256": "1ffb313d86559b5193a212fd26c078dde3658573a61320a0eef1ed198feeecde",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "architecture": "aarch64",
+    "fideslib_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+    "sync_profile": "full",
+    "cuda_toolkit": "13.0",
+    "gpu_architecture": "121-real",
+    "static_library_sha256": {
+      "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f"
+    }
+  },
+  "input_provenance": {
+    "layer": 0,
+    "site": "rms_invsqrt",
+    "file": "l00_rms_invsqrt.txt",
+    "sha256": "5aa74de72e5109ebc1b4f7e6b29829c339258098b6cb80c13e093dfb5b28323d",
+    "interval": [
+      9.999999747378752e-06,
+      3.3449363708496094
+    ],
+    "certified_relative_error": 1e-07,
+    "weighted_certificate": {
+      "certified": true,
+      "reason": null,
+      "arithmetic": "exact-rational extrema with outward dyadic enclosures",
+      "enclosure_bits": 128,
+      "relative_error_bound": 1e-07,
+      "nonexpansive_in_exact_arithmetic": true,
+      "includes_execution_roundoff": false,
+      "trace": [
+        {
+          "stage": "constant-seed",
+          "u_lower": "254326480833962399665004772117085/85070591730234615865843651857942052864",
+          "u_upper": "21267647932558650156836006857772074455/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 0,
+          "u_lower": "804896876930215962704636069134293/42535295865117307932921825928971026432",
+          "u_upper": "5316911983129030751216487943198111027/5316911983139663491615228241121378304"
+        },
+        {
+          "stage": 1,
+          "u_lower": "40756408585669944956798056340132551/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 2,
+          "u_lower": "257916685112820267886227755302655267/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 3,
+          "u_lower": "815103886823537180222736902407273017/170141183460469231731687303715884105728",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 4,
+          "u_lower": "5077230789398720539806744975332090537/170141183460469231731687303715884105728",
+          "u_upper": "21267647932516113123684755270363182701/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 5,
+          "u_lower": "27101209968097668606970487051795229367/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257791516707159674429488937/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 6,
+          "u_lower": "189231220337493715073374767259184923081/340282366920938463463374607431768211456",
+          "u_upper": "170141183460128916231649265614283183979/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 7,
+          "u_lower": "319176736864611964707558162584891602479/340282366920938463463374607431768211456",
+          "u_upper": "170141183460128937699919506113857875077/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 8,
+          "u_lower": "340020905189079680884169574502808044225/340282366920938463463374607431768211456",
+          "u_upper": "85070591730064472533486352068071963161/85070591730234615865843651857942052864"
+        },
+        {
+          "stage": 9,
+          "u_lower": "340282329222817103480821485728512459963/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257738650456011722146076835/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 10,
+          "u_lower": "85070591730233832794629472517555909153/85070591730234615865843651857942052864",
+          "u_upper": "340282366920938463463373586104373738289/340282366920938463463374607431768211456"
+        }
+      ],
+      "rounded_ratio_effective_coefficients": [
+        "2656242046612679/1125899906842624",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "106608333925289284467606088927570747779051108265/45671926166590716193865151022383844364247891968",
+        "202607690995422710480125866050567913720308324741202812452134995/102844034832575377634685573909834406561420991602098741459288064",
+        "1237100342178148683020172995398232931621775125148920355145864473525150110990025/926336713898529563388567880069503262826159877325124512315660672063305037119488",
+        "6207302397869324792235587291357689508398137224426198031953750561592259724119669458686936028025/8343699359066055009355553539724812947666814540455674882605631280555545803830627148527195652096",
+        "19702531625863563897732750745064075295717572004734587588586019502419943427360038733259718766359526550615423975/37576681324381331646231689548629392438010920782533117931316655544515344401833735095419183974156299248510959616",
+        "169327904363803037047708656390899545964679579042693438037117458211996244489779375162094566255524113689369782494679843097169025/338460656020607282663380637712778772392143197677711984273740183180495765112991409062496875745134225841966700556811959451779072"
+      ]
+    },
+    "coupled_cost": {
+      "accelerated_stages": 10,
+      "final_recomputed_newton_stages": 1,
+      "ct_ct_products": 30,
+      "ct_ct_critical_depth": 22,
+      "public_scalar_products": 14,
+      "public_scalar_additions": 11,
+      "same_coefficients_recomputed_ct_ct_depth": 30,
+      "same_coefficients_balanced_ct_ct_depth": 20,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "balanced_cost": {
+      "ct_ct_products": 30,
+      "ct_ct_critical_depth": 20,
+      "public_scalar_products": 24,
+      "public_scalar_additions": 1,
+      "ct_ct_additions": 10,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "fixed_newton_same_accuracy": {
+      "stages": 20,
+      "ct_ct_products": 57,
+      "ct_ct_critical_depth": 38,
+      "factored_unbalanced_ct_ct_depth": 57,
+      "same_domain_seed_and_tolerance": true,
+      "includes_encoding_rescale_bootstrap_cost": false
+    }
+  },
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "runner_source_sha256": "f374f12bd441e60377cb10e0566be36d5698b0fe40d321a956de823ee53afeb8",
+  "process_returncode": 0,
+  "process_seconds": 5.124931843020022,
+  "log_sha256": "3b7dd22449d29db49e3a834ef77db9eeefc8219c050cbfc9b3b0f0a0f77da902",
+  "execution_environment": {
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "OMP_NUM_THREADS": "8"
+  }
+}

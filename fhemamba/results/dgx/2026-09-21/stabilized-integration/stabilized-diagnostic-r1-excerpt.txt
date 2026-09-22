@@ -1,0 +1,18 @@
+Selected verbatim lines from runs/gate-integration-20260921/native-logs/m2_chain_stabilized-diagnostic-r1_l24_t1.log
+Full log SHA-256: 37539af1260337cf9fa4ae84aabb8064850407a201f0c33cc94ff4a67da8b0c6
+Native artifact: m2_chain_stabilized-diagnostic-r1_l24_t1.json
+This diagnostic uses intermediate decryptions.
+
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L00 error=0.000102 non_finite=0 rss_gib=35.237 peak_rss_gib=35.9079
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L01 error=0.000123 non_finite=0 rss_gib=35.2545 peak_rss_gib=35.9079
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L02 error=0.000151 non_finite=0 rss_gib=35.237 peak_rss_gib=35.9079
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L03 error=0.000148 non_finite=0 rss_gib=35.2528 peak_rss_gib=35.9079
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L04 error=0.000167 non_finite=0 rss_gib=35.2368 peak_rss_gib=35.9079
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L05 error=0.000194 non_finite=0 rss_gib=35.2569 peak_rss_gib=35.9079
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L06 error=0.000189 non_finite=0 rss_gib=35.2389 peak_rss_gib=35.9171
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L07 error=0.000221 non_finite=0 rss_gib=35.2394 peak_rss_gib=35.9171
+[stage1_mamba2_decode_fideslib] DEBUG pre_bootstrap.t0.L08.y_scaled level=40 deg=2 max_abs=0.992739 max_imag=0.000001 non_finite=0 rss_gib=35.2578 peak_rss_gib=35.9171
+[stage1_mamba2_decode_fideslib] DEBUG norm_bootstrap_in.t0.L08.y_scaled level=42 deg=1 max_abs=0.902490 max_imag=0.000001 non_finite=0 rss_gib=35.2577 peak_rss_gib=35.9171
+[stage1_mamba2_decode_fideslib] DEBUG meta_bts_residual.t0.L08.y_scaled level=44 deg=1 max_abs=0.028403 max_imag=0.025045 non_finite=0 rss_gib=35.2577 peak_rss_gib=35.9171
+[stage1_mamba2_decode_fideslib] DEBUG post_bootstrap.t0.L08.y_scaled level=21 deg=2 max_abs=2.825653 max_imag=2.893985 non_finite=0 rss_gib=35.2511 peak_rss_gib=35.9171
+[stage1_mamba2_decode_fideslib] DEBUG boundary t0.L08 error=426947693502388612729500131302264238636804146809878826541893898870069871376937700233638555636028036841536294937478468264919293598765499433129037918061474359563173922015744202021716186478974795241329507512861167976448.000000 non_finite=0 rss_gib=35.2399 peak_rss_gib=35.9171

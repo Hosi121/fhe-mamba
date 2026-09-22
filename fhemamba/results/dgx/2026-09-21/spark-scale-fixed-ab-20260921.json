@@ -1,0 +1,525 @@
+{
+  "acceptance": {
+    "criteria": {
+      "all_tokens_decrypt": true,
+      "layers": 24,
+      "max_abs_error_lte": 0.05,
+      "required_sync_profile": "full",
+      "tokens": 1,
+      "zero_intermediate_decrypts": true
+    },
+    "evaluated": true,
+    "issues": [],
+    "passed": true,
+    "required": true
+  },
+  "backend": "orchestration",
+  "campaign": "dgx-spark-binary-replication-ab",
+  "complete": true,
+  "config": {
+    "input_mode": "campaign-orchestration"
+  },
+  "encrypted": false,
+  "experiments": [
+    {
+      "all_tokens_decrypt": true,
+      "artifact_paths": [
+        "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-linear-r1_l24_t1.json"
+      ],
+      "artifacts": [
+        {
+          "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+          "build_provenance": {
+            "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+            "cuda": {
+              "configured_version": "13.0"
+            },
+            "fideslib": {
+              "arch": "121-real",
+              "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+              "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
+              "sync_profile": "full"
+            },
+            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "platform": "dgx-spark",
+            "schema_version": 1,
+            "shared_libraries": {
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+            },
+            "source_sha256": "f313f30a9e91da647fdd6cd9676f02e8fd72d50912a31cf5cede789acdf4b463",
+            "toolchain": {
+              "cmake": "cmake version 3.28.3",
+              "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+            }
+          },
+          "measurement_scope": {
+            "full_layer_chain": true,
+            "layers_loaded": 24,
+            "tokens": 1,
+            "zero_intermediate_decrypts": true
+          },
+          "measurements": {
+            "autoregressive_expected_ids": [],
+            "autoregressive_selected_ids": [],
+            "autoregressive_tokens_match": true,
+            "executed_bootstrap_count": 98,
+            "max_abs_error": 0.0285729818124,
+            "peak_rss_gib": 41.8863639832,
+            "per_token_decrypt_ok": [
+              1
+            ],
+            "per_token_max_abs_error": [
+              0.0285729818124
+            ]
+          },
+          "parameters": {
+            "fideslib_sync_profile": "full",
+            "n_layers_loaded": 24,
+            "tokens": 1
+          },
+          "passed": true,
+          "path": "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-linear-r1_l24_t1.json",
+          "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+          "stage": "stage1-mamba2-decode-fideslib",
+          "status": "passed",
+          "timing": {
+            "eval_seconds": 130.379743047
+          },
+          "validation": {
+            "error_count": 0,
+            "explicit_non_success_probe": false,
+            "issues": [],
+            "stage": "stage1-mamba2-decode-fideslib",
+            "success_claimed": true,
+            "success_predicate_passed": true,
+            "valid": true,
+            "warning_count": 0
+          },
+          "version": "0.5.0"
+        }
+      ],
+      "candidate_passed": true,
+      "environment": {
+        "ARTIFACT_VERSION": "0.5.0",
+        "AUTO_HEADROOM": "4",
+        "BINARY": "/home/kataiwa/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY_SHA256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+        "COMPLEX_STATE_PAIRING": "1",
+        "DEBUG_DECRYPT": "0",
+        "DEBUG_LAYER_ERRORS": "0",
+        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba",
+        "FIDESLIB_SYNC_PROFILE": "full",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+        "INPUT_CHAIN": "/home/kataiwa/fhemamba/cipher/fhemamba/results/m2_chain_payload_headclip",
+        "INPUT_CHAIN_SHA256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+        "LAYERS": "24",
+        "LEVEL_ALIGN_MODE": "drop",
+        "LOGARITHMIC_REPLICATION": "0",
+        "META_BTS_ALPHA": "6",
+        "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+        "PT_CACHE_GIB": "5",
+        "PT_MISS_CONSUMPTION_LEVEL": "1",
+        "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+        "RESULTS_DIR": "/home/kataiwa/fhemamba/results/scale-fixed",
+        "RUN_TAG": "spark-linear-r1",
+        "SPARK_BUILD_SHA256": "484a75f8ed38e49ea160bd40dd22e9830689919dac89984ff3c9bf834841e0ef",
+        "TOKENS": "1"
+      },
+      "gpu_wait_seconds": 5.112367325462401,
+      "infrastructure_ok": true,
+      "issues": [],
+      "max_abs_error": 0.0285729818124,
+      "name": "spark-linear-r1",
+      "reason": "unconditional",
+      "resume_rejections": [],
+      "returncode": 0,
+      "seconds": 165.04208252578974,
+      "state": "executed",
+      "timed_out": false
+    },
+    {
+      "all_tokens_decrypt": true,
+      "artifact_paths": [
+        "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-binary-r1_l24_t1.json"
+      ],
+      "artifacts": [
+        {
+          "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+          "build_provenance": {
+            "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+            "cuda": {
+              "configured_version": "13.0"
+            },
+            "fideslib": {
+              "arch": "121-real",
+              "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+              "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
+              "sync_profile": "full"
+            },
+            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "platform": "dgx-spark",
+            "schema_version": 1,
+            "shared_libraries": {
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+            },
+            "source_sha256": "f313f30a9e91da647fdd6cd9676f02e8fd72d50912a31cf5cede789acdf4b463",
+            "toolchain": {
+              "cmake": "cmake version 3.28.3",
+              "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+            }
+          },
+          "measurement_scope": {
+            "full_layer_chain": true,
+            "layers_loaded": 24,
+            "tokens": 1,
+            "zero_intermediate_decrypts": true
+          },
+          "measurements": {
+            "autoregressive_expected_ids": [],
+            "autoregressive_selected_ids": [],
+            "autoregressive_tokens_match": true,
+            "executed_bootstrap_count": 98,
+            "max_abs_error": 0.0218768052391,
+            "peak_rss_gib": 36.1684875488,
+            "per_token_decrypt_ok": [
+              1
+            ],
+            "per_token_max_abs_error": [
+              0.0218768052391
+            ]
+          },
+          "parameters": {
+            "fideslib_sync_profile": "full",
+            "n_layers_loaded": 24,
+            "tokens": 1
+          },
+          "passed": true,
+          "path": "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-binary-r1_l24_t1.json",
+          "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+          "stage": "stage1-mamba2-decode-fideslib",
+          "status": "passed",
+          "timing": {
+            "eval_seconds": 129.777717961
+          },
+          "validation": {
+            "error_count": 0,
+            "explicit_non_success_probe": false,
+            "issues": [],
+            "stage": "stage1-mamba2-decode-fideslib",
+            "success_claimed": true,
+            "success_predicate_passed": true,
+            "valid": true,
+            "warning_count": 0
+          },
+          "version": "0.5.0"
+        }
+      ],
+      "candidate_passed": true,
+      "environment": {
+        "ARTIFACT_VERSION": "0.5.0",
+        "AUTO_HEADROOM": "4",
+        "BINARY": "/home/kataiwa/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY_SHA256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+        "COMPLEX_STATE_PAIRING": "1",
+        "DEBUG_DECRYPT": "0",
+        "DEBUG_LAYER_ERRORS": "0",
+        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba",
+        "FIDESLIB_SYNC_PROFILE": "full",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+        "INPUT_CHAIN": "/home/kataiwa/fhemamba/cipher/fhemamba/results/m2_chain_payload_headclip",
+        "INPUT_CHAIN_SHA256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+        "LAYERS": "24",
+        "LEVEL_ALIGN_MODE": "drop",
+        "LOGARITHMIC_REPLICATION": "1",
+        "META_BTS_ALPHA": "6",
+        "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+        "PT_CACHE_GIB": "5",
+        "PT_MISS_CONSUMPTION_LEVEL": "1",
+        "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+        "RESULTS_DIR": "/home/kataiwa/fhemamba/results/scale-fixed",
+        "RUN_TAG": "spark-binary-r1",
+        "SPARK_BUILD_SHA256": "484a75f8ed38e49ea160bd40dd22e9830689919dac89984ff3c9bf834841e0ef",
+        "TOKENS": "1"
+      },
+      "gpu_wait_seconds": 5.101181395351887,
+      "infrastructure_ok": true,
+      "issues": [],
+      "max_abs_error": 0.0218768052391,
+      "name": "spark-binary-r1",
+      "reason": "promotion gate passed",
+      "resume_rejections": [],
+      "returncode": 0,
+      "seconds": 159.36677044909447,
+      "state": "executed",
+      "timed_out": false
+    },
+    {
+      "all_tokens_decrypt": true,
+      "artifact_paths": [
+        "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-binary-r2_l24_t1.json"
+      ],
+      "artifacts": [
+        {
+          "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+          "build_provenance": {
+            "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+            "cuda": {
+              "configured_version": "13.0"
+            },
+            "fideslib": {
+              "arch": "121-real",
+              "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+              "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
+              "sync_profile": "full"
+            },
+            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "platform": "dgx-spark",
+            "schema_version": 1,
+            "shared_libraries": {
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+            },
+            "source_sha256": "f313f30a9e91da647fdd6cd9676f02e8fd72d50912a31cf5cede789acdf4b463",
+            "toolchain": {
+              "cmake": "cmake version 3.28.3",
+              "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+            }
+          },
+          "measurement_scope": {
+            "full_layer_chain": true,
+            "layers_loaded": 24,
+            "tokens": 1,
+            "zero_intermediate_decrypts": true
+          },
+          "measurements": {
+            "autoregressive_expected_ids": [],
+            "autoregressive_selected_ids": [],
+            "autoregressive_tokens_match": true,
+            "executed_bootstrap_count": 98,
+            "max_abs_error": 0.0263087257218,
+            "peak_rss_gib": 36.1691246033,
+            "per_token_decrypt_ok": [
+              1
+            ],
+            "per_token_max_abs_error": [
+              0.0263087257218
+            ]
+          },
+          "parameters": {
+            "fideslib_sync_profile": "full",
+            "n_layers_loaded": 24,
+            "tokens": 1
+          },
+          "passed": true,
+          "path": "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-binary-r2_l24_t1.json",
+          "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+          "stage": "stage1-mamba2-decode-fideslib",
+          "status": "passed",
+          "timing": {
+            "eval_seconds": 131.014178574
+          },
+          "validation": {
+            "error_count": 0,
+            "explicit_non_success_probe": false,
+            "issues": [],
+            "stage": "stage1-mamba2-decode-fideslib",
+            "success_claimed": true,
+            "success_predicate_passed": true,
+            "valid": true,
+            "warning_count": 0
+          },
+          "version": "0.5.0"
+        }
+      ],
+      "candidate_passed": true,
+      "environment": {
+        "ARTIFACT_VERSION": "0.5.0",
+        "AUTO_HEADROOM": "4",
+        "BINARY": "/home/kataiwa/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY_SHA256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+        "COMPLEX_STATE_PAIRING": "1",
+        "DEBUG_DECRYPT": "0",
+        "DEBUG_LAYER_ERRORS": "0",
+        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba",
+        "FIDESLIB_SYNC_PROFILE": "full",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+        "INPUT_CHAIN": "/home/kataiwa/fhemamba/cipher/fhemamba/results/m2_chain_payload_headclip",
+        "INPUT_CHAIN_SHA256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+        "LAYERS": "24",
+        "LEVEL_ALIGN_MODE": "drop",
+        "LOGARITHMIC_REPLICATION": "1",
+        "META_BTS_ALPHA": "6",
+        "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+        "PT_CACHE_GIB": "5",
+        "PT_MISS_CONSUMPTION_LEVEL": "1",
+        "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+        "RESULTS_DIR": "/home/kataiwa/fhemamba/results/scale-fixed",
+        "RUN_TAG": "spark-binary-r2",
+        "SPARK_BUILD_SHA256": "484a75f8ed38e49ea160bd40dd22e9830689919dac89984ff3c9bf834841e0ef",
+        "TOKENS": "1"
+      },
+      "gpu_wait_seconds": 5.100915246643126,
+      "infrastructure_ok": true,
+      "issues": [],
+      "max_abs_error": 0.0263087257218,
+      "name": "spark-binary-r2",
+      "reason": "promotion gate passed",
+      "resume_rejections": [],
+      "returncode": 0,
+      "seconds": 161.75380232464522,
+      "state": "executed",
+      "timed_out": false
+    },
+    {
+      "all_tokens_decrypt": true,
+      "artifact_paths": [
+        "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-linear-r2_l24_t1.json"
+      ],
+      "artifacts": [
+        {
+          "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+          "build_provenance": {
+            "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+            "cuda": {
+              "configured_version": "13.0"
+            },
+            "fideslib": {
+              "arch": "121-real",
+              "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+              "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
+              "sync_profile": "full"
+            },
+            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "platform": "dgx-spark",
+            "schema_version": 1,
+            "shared_libraries": {
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+            },
+            "source_sha256": "f313f30a9e91da647fdd6cd9676f02e8fd72d50912a31cf5cede789acdf4b463",
+            "toolchain": {
+              "cmake": "cmake version 3.28.3",
+              "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+            }
+          },
+          "measurement_scope": {
+            "full_layer_chain": true,
+            "layers_loaded": 24,
+            "tokens": 1,
+            "zero_intermediate_decrypts": true
+          },
+          "measurements": {
+            "autoregressive_expected_ids": [],
+            "autoregressive_selected_ids": [],
+            "autoregressive_tokens_match": true,
+            "executed_bootstrap_count": 98,
+            "max_abs_error": 0.0247557053225,
+            "peak_rss_gib": 41.8231124878,
+            "per_token_decrypt_ok": [
+              1
+            ],
+            "per_token_max_abs_error": [
+              0.0247557053225
+            ]
+          },
+          "parameters": {
+            "fideslib_sync_profile": "full",
+            "n_layers_loaded": 24,
+            "tokens": 1
+          },
+          "passed": true,
+          "path": "/home/kataiwa/fhemamba/results/scale-fixed/m2_chain_spark-linear-r2_l24_t1.json",
+          "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+          "stage": "stage1-mamba2-decode-fideslib",
+          "status": "passed",
+          "timing": {
+            "eval_seconds": 131.927498737
+          },
+          "validation": {
+            "error_count": 0,
+            "explicit_non_success_probe": false,
+            "issues": [],
+            "stage": "stage1-mamba2-decode-fideslib",
+            "success_claimed": true,
+            "success_predicate_passed": true,
+            "valid": true,
+            "warning_count": 0
+          },
+          "version": "0.5.0"
+        }
+      ],
+      "candidate_passed": true,
+      "environment": {
+        "ARTIFACT_VERSION": "0.5.0",
+        "AUTO_HEADROOM": "4",
+        "BINARY": "/home/kataiwa/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY_SHA256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+        "COMPLEX_STATE_PAIRING": "1",
+        "DEBUG_DECRYPT": "0",
+        "DEBUG_LAYER_ERRORS": "0",
+        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba",
+        "FIDESLIB_SYNC_PROFILE": "full",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+        "INPUT_CHAIN": "/home/kataiwa/fhemamba/cipher/fhemamba/results/m2_chain_payload_headclip",
+        "INPUT_CHAIN_SHA256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+        "LAYERS": "24",
+        "LEVEL_ALIGN_MODE": "drop",
+        "LOGARITHMIC_REPLICATION": "0",
+        "META_BTS_ALPHA": "6",
+        "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+        "PT_CACHE_GIB": "5",
+        "PT_MISS_CONSUMPTION_LEVEL": "1",
+        "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+        "RESULTS_DIR": "/home/kataiwa/fhemamba/results/scale-fixed",
+        "RUN_TAG": "spark-linear-r2",
+        "SPARK_BUILD_SHA256": "484a75f8ed38e49ea160bd40dd22e9830689919dac89984ff3c9bf834841e0ef",
+        "TOKENS": "1"
+      },
+      "gpu_wait_seconds": 5.10223937779665,
+      "infrastructure_ok": true,
+      "issues": [],
+      "max_abs_error": 0.0247557053225,
+      "name": "spark-linear-r2",
+      "reason": "promotion gate passed",
+      "resume_rejections": [],
+      "returncode": 0,
+      "seconds": 167.68298218026757,
+      "state": "executed",
+      "timed_out": false
+    }
+  ],
+  "infrastructure_ok": true,
+  "measurement_scope": {
+    "campaign_orchestration_only": true,
+    "candidate_failures_are_not_infrastructure_failures": true,
+    "claim": "Campaign execution and artifact collection only; candidate artifacts carry their own encrypted-correctness claims.",
+    "full_model_correctness_claimed": false
+  },
+  "measurements": {
+    "candidate_failures": 0,
+    "candidate_passes": 4,
+    "experiments_executed_or_resumed": 4,
+    "experiments_skipped": 0,
+    "experiments_total": 4,
+    "infrastructure_failures": 0
+  },
+  "passed": true,
+  "promotion_passed": true,
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.c73c9d80275a8a11",
+  "stage": "fhemamba-dgx-campaign-report",
+  "status": "passed",
+  "timing": {
+    "campaign_seconds": 674.3079875204712
+  },
+  "version": "0.5.0"
+}

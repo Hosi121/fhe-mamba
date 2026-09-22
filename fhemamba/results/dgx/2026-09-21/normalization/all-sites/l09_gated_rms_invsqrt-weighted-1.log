@@ -1,0 +1,20 @@
+ring=131072 depth=40
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+context loaded
+input encrypted
+stage=1 level=4 scale_degree=2
+stage=2 level=6 scale_degree=2
+stage=3 level=8 scale_degree=2
+stage=4 level=10 scale_degree=2
+stage=5 level=12 scale_degree=2
+stage=6 level=14 scale_degree=2
+stage=7 level=16 scale_degree=2
+stage=8 level=18 scale_degree=2
+stage=9 level=20 scale_degree=2
+stage=10 level=22 scale_degree=2
+stage=11 level=24 scale_degree=2
+stage=12 level=26 scale_degree=2
+stage=13 level=28 scale_degree=2
+stage=14 level=32 scale_degree=2
+mode=weighted gate_error=8.77845e-10 level=33 seconds=0.634121

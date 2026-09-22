@@ -1,0 +1,192 @@
+{
+  "version": "0.5.0",
+  "stage": "fhemamba-client-generation",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.683426562504e74e",
+  "binary_sha256": "57636814d5792c3bc87e1c6721a8aaaaaf3aa79946e54ea9e4c956fcc95ce085",
+  "input_payload_sha256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
+  "backend": "fideslib-gpu",
+  "config": {
+    "input_mode": "fhemamba-m1-payload"
+  },
+  "encrypted": true,
+  "status": "passed",
+  "passed": true,
+  "parameters": {
+    "source_payload_sha256": "b40d33b30e018ef91e894aa9e2bd26adb6be6d5e1ae49873e356d78795d5c745",
+    "prompt": "The capital",
+    "prompt_ids": [
+      510,
+      5347
+    ],
+    "prompt_tokens": 2,
+    "generate_tokens": 4,
+    "server_evaluations": 5,
+    "n_layers": 24,
+    "frozen_operators_and_bounds_unchanged": true,
+    "input_payload_sha256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
+    "security": "not-set",
+    "selection": "greedy"
+  },
+  "checks": {
+    "native_passed": true,
+    "encrypted_full_chain": true,
+    "complete_generation": true,
+    "matches_polynomial_tokens": true,
+    "all_outputs_decrypt": true,
+    "all_errors_within_0_05": true,
+    "no_intermediate_diagnostic_decrypts": true,
+    "client_output_decrypts": true,
+    "campaign_passed": true
+  },
+  "text": {
+    "prompt": "The capital",
+    "generated": " of the Republic of",
+    "full": "The capital of the Republic of",
+    "polynomial_reference": " of the Republic of",
+    "exact_reference": " of the Republic of"
+  },
+  "measurements": {
+    "generated_ids": [
+      273,
+      253,
+      4687,
+      273
+    ],
+    "per_token_max_abs_error": [
+      0.000474228297698,
+      0.00432642246381,
+      0.004230645616,
+      0.00232648624818,
+      0.0091917998799
+    ],
+    "per_token_max_abs_error_vs_exact": [
+      0.0116940921658,
+      0.0213753366207,
+      0.0183542695451,
+      0.00712062036256,
+      0.0725723435394
+    ],
+    "matches_exact_tokens": true,
+    "peak_rss_gib": 37.0498695374,
+    "operator_domain_violations": {
+      "conv_silu": [
+        0,
+        215040
+      ],
+      "rms_invsqrt": [
+        0,
+        125
+      ],
+      "gate_silu": [
+        0,
+        184320
+      ],
+      "decay_exp": [
+        0,
+        0
+      ],
+      "dt_softplus": [
+        0,
+        0
+      ],
+      "gated_rms_invsqrt": [
+        0,
+        120
+      ],
+      "joint_selective_gates": [
+        0,
+        2880
+      ]
+    }
+  },
+  "operation_counts": {
+    "rotations": 47667,
+    "rotations_direct": 47667,
+    "rotations_composite_steps": 0,
+    "ct_pt_mul": 273213,
+    "ct_ct_mul": 32701,
+    "adds": 322524,
+    "unity_level_align_muls": 16752,
+    "direct_level_align_drops": 78570,
+    "fused_projection_calls": 120,
+    "fused_projection_fallbacks": 0,
+    "projection_late_level_drops": 240,
+    "bootstraps": 2187
+  },
+  "timing": {
+    "setup_seconds": 23.442485835,
+    "pt_cache_encode_seconds": 0.870354359,
+    "rotate_keygen_seconds": 4.83088019,
+    "bootstrap_precompute_seconds": 3.25075943,
+    "bootstrap_eval_seconds": 1075.82806993,
+    "debug_client_reencrypt_seconds": 0,
+    "autoregressive_client_seconds": 0.21672139,
+    "load_context_seconds": 14.135791498,
+    "eval_seconds": 3038.12100374,
+    "token_step_seconds": [
+      577.171845002,
+      613.149058111,
+      616.927697049,
+      614.407588085,
+      616.464703923
+    ],
+    "initial_state_step_seconds": 577.171845002,
+    "carried_state_step_count": 4,
+    "carried_state_step_mean_seconds": 615.237261792,
+    "decrypt_seconds": 0.034506839
+  },
+  "measurement_scope": {
+    "full_model_correctness_claimed": false,
+    "encrypted_recurrent_state_and_fifo": true,
+    "client_selects_from_full_vocabulary": true,
+    "zero_intermediate_decrypts": true,
+    "client_server_process_separated": false,
+    "fully_encrypted_token_selection": false,
+    "claim": "Single-process interactive generation with client output decryption, full-vocabulary greedy selection and encrypted embedding feedback. This does not establish server key separation or 128-bit full-chain security."
+  },
+  "source_sha256": {
+    "fhemamba/src/fhemamba/__init__.py": "d95b70e17c8f484d3f2478493ae4df58603b5a83e418e5622177b4e653775e88",
+    "fhemamba/src/fhemamba/_env.py": "debf884a3e157cc1967ceea15817b38d41d4cc80f43a3ee98e77b73840846884",
+    "fhemamba/src/fhemamba/_version.py": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3",
+    "fhemamba/src/fhemamba/artifacts.py": "a6b74319e0a720f4b534f0be07fda4972fe1a0cc834cf5232693ec6593e17ff8",
+    "fhemamba/src/fhemamba/bootstrap_telemetry.py": "139c4660ad55b62b73005358c7ae9d2ddf8fd89b08c2d4d05ea4b76366c8d95d",
+    "fhemamba/src/fhemamba/bsgs_layout.py": "7349e8ec8aee139312d4df1d91b8fd305f71da4db7e017f265576eca4d8640ae",
+    "fhemamba/src/fhemamba/cli.py": "67972fecf2a9bbadab2c0d15394313fc8d3c3c0140cc922273d8102ca6f302e5",
+    "fhemamba/src/fhemamba/gated_norm_sweep.py": "065ccb543a4603f58f2b16b4a7b72aa37025cb5021d398b0ffeb832dd794b8b6",
+    "fhemamba/src/fhemamba/generate.py": "886d9f8c20f1584c78c38836b56c5855810a0b6746677179bdef29714f3ccb73",
+    "fhemamba/src/fhemamba/generation.py": "49c7912440301d46da3e08cc2a2cc778c540f4f6529852c6e7fd346d64dae664",
+    "fhemamba/src/fhemamba/lowering.py": "adeee6aacd195e651ab5d1c92fb26e24e1e0c7d8591c8d7b1bfe0b17736ed8d3",
+    "fhemamba/src/fhemamba/m1_payload.py": "202335545f38da8b6c79e8ac36307702f2662a8d383efcf0bbfd7c90d350c4d5",
+    "fhemamba/src/fhemamba/noise_flow.py": "71b31885c822b399562219504caacc5a2281cd707d73f0d2d33b884aaf385bda",
+    "fhemamba/src/fhemamba/normalization.py": "a42c216102f836e93217fb0a0694f842a6d511cac22d3dd964155e0e41319dae",
+    "fhemamba/src/fhemamba/ops.py": "7780957e071fb437f7a168843f5ed404c4d9e5f26d7fd6a86e84c1c37084e292",
+    "fhemamba/src/fhemamba/payload_surrogate.py": "16b215d49108a8bd65fe12c22d8e1e3ec8459dc1f73ca5ac69e2d187a302ae06",
+    "fhemamba/src/fhemamba/phase_algebra.py": "2ad3bb471b6b5a7394f9f66c1a087df1a4521aeaae1a2432b6ff2b8267ed7f76",
+    "fhemamba/src/fhemamba/polynomial_certificate.py": "2845f2aad3178b6a43dbdbc9afd10ac1aa1da5fe27e7f355c539b47527dc846d",
+    "fhemamba/src/fhemamba/ppl.py": "3741f6d77c980747c9c75a5d53cda3e9408185347ce1f1006a3253cec9f6ddac",
+    "fhemamba/src/fhemamba/prefill_budget.py": "9db0f2e4c580216839cdd415d7a9088af3082659ed58868cfed3393028ee3300",
+    "fhemamba/src/fhemamba/readout_layout.py": "88c74158578df65910c2316d245327a75bd21b06672d3d7c0776999c3879887a",
+    "fhemamba/src/fhemamba/reference.py": "186276064ad2f2da532bf8bf0b2bb94156cff0ae86dbd5429f6c126882aeedf0",
+    "fhemamba/src/fhemamba/rotation_keys.py": "332448a97e3cba858a08071f01364737b959c4bb2c23c3ad29335558e736bb42",
+    "fhemamba/src/fhemamba/selective_gates.py": "e51c8b7d25c0908a3b4503035e5426f9d301f2690bd1e3f197b088a2a7e2d15a",
+    "fhemamba/src/fhemamba/ssm_algebra.py": "d116112a9126c399dc65576660e4e8159de223eb64ecbcbec226ac9471251c4a",
+    "fhemamba/src/fhemamba/state_coordinates.py": "9bf1d627925543cdac45334a09a9c7db510c6c0e336712a2ada4059d8218cd75",
+    "fhemamba/src/fhemamba/state_layout.py": "18211b9fab040fa72f699a2099816f917b92300b222f14d7ec6dc59705be3b83",
+    "fhemamba/experiments/run_dgx_generation.py": "c79d4095b6f11bec9fa1e5686a9789c49396aa37ac40a8afe53ed90f4ddd1845",
+    "fhemamba/experiments/manage_dgx_build.py": "01edc92b432ab9550a51b3d5e3b3056a0a2c7fabab3d99f5c5d1d7a70c4f216e",
+    "fhemamba/experiments/dgx_spark_stabilized_generation.json": "14052741a7ee4ec9afc187d782a2befe02add67c3fd616f3097093f819681998"
+  },
+  "native_artifact": {
+    "path": "runs/client-generation-20260922/results/m2_chain_client-generation-20260922_l24_t5.json",
+    "sha256": "825ba4a77178085f0c5799675330a5882b16dad7d0fa8286bdf7fbfc13a442ec"
+  },
+  "report_reconstruction": {
+    "reason": "Explicit input mode and claim scope; numerical evidence unchanged.",
+    "original_report_sha256": "afdb820aa54fc278d74c26d1a22fd9398b11d43a8bba07e26cae59bc7aa4ce95",
+    "source_sha256": {
+      "fhemamba/src/fhemamba/generation.py": "0d547d344987a7c8abece073a40c1583d5073c95cacdb5c23f09fd913aaf9d51",
+      "runs/client-generation-20260922/complete_report.py": "12e1959eb4cd5b00172606a460e1d6bc7ea36e659bf6c887461754276cff0619"
+    },
+    "source_archive_sha256": "9a29600ed74ca3b3efb1896ca543ab775c256668050f3764c253cffe26e440dc"
+  }
+}

@@ -1,4 +1,4 @@
-ARG CUDA_IMAGE=nvidia/cuda:13.0.1-devel-ubuntu24.04
+ARG CUDA_IMAGE=nvidia/cuda:12.8.1-devel-ubuntu24.04
 FROM ${CUDA_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -13,4 +13,6 @@ RUN apt-get update \
         libomp-dev \
         ninja-build \
         pkg-config \
+        python3 \
+        util-linux \
     && rm -rf /var/lib/apt/lists/*

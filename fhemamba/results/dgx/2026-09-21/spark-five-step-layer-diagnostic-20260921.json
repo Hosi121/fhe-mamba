@@ -1,0 +1,204 @@
+{
+  "acceptance": {
+    "evaluated": false,
+    "issues": [],
+    "passed": null,
+    "required": false
+  },
+  "backend": "orchestration",
+  "campaign": "dgx-spark-five-step-layer-diagnostic",
+  "complete": true,
+  "config": {
+    "input_mode": "campaign-orchestration"
+  },
+  "encrypted": false,
+  "experiments": [
+    {
+      "all_tokens_decrypt": true,
+      "artifact_paths": [
+        "/home/kataiwa/fhemamba/results/state-study/m2_chain_spark-five-step-layer-diagnostic_l24_t5.json"
+      ],
+      "artifacts": [
+        {
+          "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+          "build_provenance": {
+            "binary_sha256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+            "cuda": {
+              "configured_version": "13.0"
+            },
+            "fideslib": {
+              "arch": "121-real",
+              "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+              "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
+              "sync_profile": "full"
+            },
+            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "platform": "dgx-spark",
+            "schema_version": 1,
+            "shared_libraries": {
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+            },
+            "source_sha256": "f313f30a9e91da647fdd6cd9676f02e8fd72d50912a31cf5cede789acdf4b463",
+            "toolchain": {
+              "cmake": "cmake version 3.28.3",
+              "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+            }
+          },
+          "measurement_scope": {
+            "full_layer_chain": true,
+            "layers_loaded": 24,
+            "tokens": 5,
+            "zero_intermediate_decrypts": false
+          },
+          "measurements": {
+            "autoregressive_expected_ids": [
+              273,
+              253,
+              4687,
+              273
+            ],
+            "autoregressive_selected_ids": [
+              273,
+              253,
+              4687,
+              273
+            ],
+            "autoregressive_tokens_match": true,
+            "executed_bootstrap_count": 790,
+            "max_abs_error": 0.0897597476807,
+            "peak_rss_gib": 42.3073692322,
+            "per_token_decrypt_ok": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "per_token_max_abs_error": [
+              0.0127097766185,
+              0.0229982364677,
+              0.0535816392004,
+              0.041218076517,
+              0.0897597476807
+            ]
+          },
+          "parameters": {
+            "fideslib_sync_profile": "full",
+            "n_layers_loaded": 24,
+            "tokens": 5
+          },
+          "passed": false,
+          "path": "/home/kataiwa/fhemamba/results/state-study/m2_chain_spark-five-step-layer-diagnostic_l24_t5.json",
+          "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.7f1dbaac23c83d42",
+          "stage": "stage1-mamba2-decode-fideslib",
+          "status": "failed",
+          "timing": {
+            "eval_seconds": 942.353919595
+          },
+          "validation": {
+            "error_count": 0,
+            "explicit_non_success_probe": false,
+            "issues": [],
+            "stage": "stage1-mamba2-decode-fideslib",
+            "success_claimed": false,
+            "success_predicate_passed": false,
+            "valid": true,
+            "warning_count": 0
+          },
+          "version": "0.5.0"
+        }
+      ],
+      "candidate_passed": false,
+      "environment": {
+        "ARTIFACT_VERSION": "0.5.0",
+        "AUTOREGRESSIVE_CLIENT_LOOP": "1",
+        "AUTO_HEADROOM": "4",
+        "BINARY": "/home/kataiwa/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY_SHA256": "b555e22bab5d48d056e41d608ee123663ff87edd875bf9a18d81dd342b59b1af",
+        "BSGS_REPLICAS": "auto",
+        "CARRIED_HEADROOM": "0",
+        "COMPLEX_STATE_PAIRING": "1",
+        "DEBUG_LAYER_ERRORS": "1",
+        "DEBUG_NORMALIZED_STATE_BOOTSTRAP_RANGE": "0",
+        "ENCODE_THREADS": "8",
+        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba",
+        "FIDESLIB_SYNC_PROFILE": "full",
+        "FIRST_MOD_SIZE": "60",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+        "INPUT_CHAIN": "/home/kataiwa/fhemamba/cipher/fhemamba/results/m2_chain_payload_headclip",
+        "INPUT_CHAIN_SHA256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+        "INTERLEAVED_REPLICATED_PROJECTION": "1",
+        "LAYERS": "24",
+        "LEVEL_ALIGN_MODE": "drop",
+        "LOGARITHMIC_REPLICATION": "0",
+        "META_BTS": "1",
+        "META_BTS_ALPHA": "6",
+        "META_BTS_RESIDUAL_ALIGN_MODE": "unity",
+        "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+        "MULTIPLICATIVE_DEPTH": "44",
+        "NORMALIZED_RECURRENT_STATE": "1",
+        "NORMALIZED_STATE_META_BTS": "0",
+        "PROJECTION_LATE_LEVEL": "1",
+        "PT_CACHE_GIB": "5",
+        "PT_CACHE_LEVEL": "0",
+        "PT_CACHE_WEIGHT_LEVEL": "20",
+        "PT_MISS_CONSUMPTION_LEVEL": "1",
+        "REFRESH_RECURRENT_STATE_POST": "0",
+        "REPLICATED_STATE_BLOCKS": "1",
+        "REPLICATED_TRUE_BSGS": "1",
+        "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.7f1dbaac23c83d42",
+        "RESIDUAL_HEADROOM": "0",
+        "RESULTS_DIR": "/home/kataiwa/fhemamba/results/state-study",
+        "RING_DIM": "65536",
+        "ROTATION_KEYS": "balanced",
+        "ROTATION_KEY_GIB": "30",
+        "RUN_TAG": "spark-five-step-layer-diagnostic",
+        "SCALING_MOD_SIZE": "59",
+        "SECURITY": "not-set",
+        "SHARED_HEAD_EXPANSION": "0",
+        "SPARK_BUILD_SHA256": "484a75f8ed38e49ea160bd40dd22e9830689919dac89984ff3c9bf834841e0ef",
+        "STATE_META_BTS_ALPHA": "-1",
+        "STATE_REFRESH_INTERVAL": "1",
+        "TOKENS": "5"
+      },
+      "gpu_wait_seconds": 5.11165283434093,
+      "infrastructure_ok": true,
+      "issues": [],
+      "max_abs_error": 0.0897597476807,
+      "name": "spark-five-step-layer-diagnostic",
+      "reason": "unconditional",
+      "resume_rejections": [],
+      "returncode": 1,
+      "seconds": 977.086948514916,
+      "state": "executed",
+      "timed_out": false
+    }
+  ],
+  "infrastructure_ok": true,
+  "measurement_scope": {
+    "campaign_orchestration_only": true,
+    "candidate_failures_are_not_infrastructure_failures": true,
+    "claim": "Campaign execution and artifact collection only; candidate artifacts carry their own encrypted-correctness claims.",
+    "full_model_correctness_claimed": false
+  },
+  "measurements": {
+    "candidate_failures": 1,
+    "candidate_passes": 0,
+    "experiments_executed_or_resumed": 1,
+    "experiments_skipped": 0,
+    "experiments_total": 1,
+    "infrastructure_failures": 0
+  },
+  "passed": true,
+  "promotion_passed": null,
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.7f1dbaac23c83d42",
+  "stage": "fhemamba-dgx-campaign-report",
+  "status": "passed",
+  "timing": {
+    "campaign_seconds": 982.2346265511587
+  },
+  "version": "0.5.0"
+}

@@ -1,0 +1,7 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+ring=131072 width=1536 lanes=4 setup_seconds=7.59826
+batch=0 error=2.62122e-07 level=36 refreshed_level=-1 seconds=0.799671
+batch=4 error=1.17634e-06 level=36 refreshed_level=-1 seconds=0.70746
+batch=8 error=2.0166e-05 level=36 refreshed_level=-1 seconds=0.708853
+batch=12 error=5.60306e-06 level=36 refreshed_level=-1 seconds=0.707526

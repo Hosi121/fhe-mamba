@@ -13,6 +13,42 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_cli_environment_overrides_are_recorded(tmp_path: Path) -> None:
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        json.dumps(
+            {
+                "name": "portable-spark",
+                "defaults": {"PT_CACHE_GIB": "5"},
+                "experiments": [{"name": "candidate", "env": {"LOGARITHMIC_REPLICATION": "1"}}],
+            }
+        )
+    )
+    output = tmp_path / "campaign.json"
+    subprocess.run(
+        [
+            sys.executable,
+            "fhemamba/experiments/run_dgx_campaign.py",
+            "--manifest",
+            str(manifest),
+            "--output-json",
+            str(output),
+            "--dry-run",
+            "--env",
+            "INPUT_CHAIN=/payloads/with spaces",
+            "--env",
+            "PT_CACHE_GIB=7",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    )
+    environment = json.loads(output.read_text())["experiments"][0]["environment"]
+    assert environment["INPUT_CHAIN"] == "/payloads/with spaces"
+    assert environment["PT_CACHE_GIB"] == "7"
+    assert environment["LOGARITHMIC_REPLICATION"] == "1"
+
+
 def _write_fake_runner(path: Path, *, write_artifact: bool = True) -> None:
     artifact_block = (
         """
@@ -41,6 +77,7 @@ for layer in os.environ["LAYERS"].split():
         "binary_sha256": os.environ.get(
             "FAKE_BINARY_SHA256", os.environ.get("BINARY_SHA256", "f" * 64)
         ),
+        "input_payload_sha256": os.environ.get("INPUT_CHAIN_SHA256"),
         "stage": "stage1-mamba2-decode-fideslib",
         "backend": "fideslib-gpu",
         "encrypted": True,
@@ -474,6 +511,7 @@ def test_promoted_campaign_fails_closed_on_acceptance_miss(
     [
         (None, "repo_commit", "stale-commit", "repo_commit mismatch"),
         (None, "binary_sha256", "e" * 64, "binary_sha256 mismatch"),
+        (None, "input_payload_sha256", "e" * 64, "input payload hash mismatch"),
         (None, "version", "0.0.0-stale", "version mismatch"),
         ("parameters", "tokens", 99, "token count mismatch"),
         ("parameters", "fideslib_sync_profile", "none", "sync profile mismatch"),
@@ -501,6 +539,7 @@ def test_campaign_resume_rejects_stale_artifact_identity(
                     "COUNTER_FILE": str(counter),
                     "BINARY_SHA256": "f" * 64,
                     "FIDESLIB_SYNC_PROFILE": "full",
+                    "INPUT_CHAIN_SHA256": "a" * 64,
                 },
                 "experiments": [{"name": "resume", "env": {"LAYERS": "2"}}],
             }

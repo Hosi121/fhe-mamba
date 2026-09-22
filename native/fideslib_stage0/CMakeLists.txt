@@ -44,7 +44,7 @@ target_include_directories(stage1_mamba2_artifact PUBLIC src)
 target_link_libraries(stage1_mamba2_artifact PUBLIC stage1_mamba2_config)
 
 add_library(stage1_mamba2_payload STATIC src/stage1_mamba2_payload.cpp)
-target_include_directories(stage1_mamba2_payload PUBLIC src)
+target_include_directories(stage1_mamba2_payload PUBLIC src include)
 
 add_library(stage1_mamba2_plan STATIC src/stage1_mamba2_plan.cpp)
 target_include_directories(stage1_mamba2_plan PUBLIC src)
@@ -68,7 +68,15 @@ if(FHE_STAGE0_BUILD_KERNEL)
     message(FATAL_ERROR "PACKAGE FIDESlib NOT FOUND")
   endif()
 
-  set(CMAKE_CXX_COMPILER ${FIDESLIB_CXX_COMPILER})
+  if(FIDESLIB_CXX_COMPILER)
+    get_filename_component(FIDESLIB_CXX_COMPILER_REAL "${FIDESLIB_CXX_COMPILER}" REALPATH)
+    get_filename_component(CMAKE_CXX_COMPILER_REAL "${CMAKE_CXX_COMPILER}" REALPATH)
+    if(NOT FIDESLIB_CXX_COMPILER_REAL STREQUAL CMAKE_CXX_COMPILER_REAL)
+      message(
+        FATAL_ERROR
+        "Compiler mismatch: configure with -DCMAKE_CXX_COMPILER=${FIDESLIB_CXX_COMPILER}")
+    endif()
+  endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FIDESLIB_CXX_FLAGS}")
 
   add_library(fideslib_handoff STATIC src/fideslib_handoff.cpp)
@@ -115,6 +123,34 @@ if(FHE_STAGE0_BUILD_KERNEL)
   target_compile_definitions(
     fideslib_ctpt_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
   target_link_libraries(fideslib_ctpt_probe PRIVATE fideslib::fideslib)
+
+  add_executable(stage1_plaintext_add_probe src/stage1_plaintext_add_probe.cpp)
+  target_compile_definitions(
+    stage1_plaintext_add_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
+  target_link_libraries(stage1_plaintext_add_probe PRIVATE fideslib::fideslib CUDA::cudart)
+
+  add_executable(stage1_coefficient_encoding_probe src/stage1_coefficient_encoding_probe.cpp)
+  target_compile_definitions(
+    stage1_coefficient_encoding_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
+  target_link_libraries(stage1_coefficient_encoding_probe PRIVATE fideslib::fideslib CUDA::cudart)
+
+  add_executable(stage1_subring_encoding_probe src/stage1_subring_encoding_probe.cpp)
+  target_compile_definitions(
+    stage1_subring_encoding_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
+  target_link_libraries(stage1_subring_encoding_probe PRIVATE fideslib::fideslib CUDA::cudart)
+  target_include_directories(stage1_subring_encoding_probe PRIVATE
+    ${OpenFHE_INCLUDE} ${OpenFHE_INCLUDE}/core ${OpenFHE_INCLUDE}/pke
+    ${OpenFHE_INCLUDE}/binfhe ${OpenFHE_INCLUDE}/third-party/include)
+
+  add_executable(stage1_normalization_probe src/stage1_normalization_probe.cpp)
+  target_compile_definitions(
+    stage1_normalization_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
+  target_link_libraries(stage1_normalization_probe PRIVATE fideslib::fideslib CUDA::cudart stage0_layout)
+
+  add_executable(stage1_vector_rms_probe src/stage1_vector_rms_probe.cpp)
+  target_compile_definitions(
+    stage1_vector_rms_probe PRIVATE FHEMAMBA_VERSION="${FHEMAMBA_VERSION}")
+  target_link_libraries(stage1_vector_rms_probe PRIVATE fideslib::fideslib CUDA::cudart stage0_layout)
 endif()
 
 if(FHE_STAGE0_BUILD_TESTS)
@@ -122,6 +158,14 @@ if(FHE_STAGE0_BUILD_TESTS)
   add_executable(test_stage0_layout tests/test_stage0_layout.cpp)
   target_link_libraries(test_stage0_layout PRIVATE stage0_layout)
   add_test(NAME stage0_layout COMMAND test_stage0_layout)
+
+  add_executable(test_stage1_normalization tests/test_stage1_normalization.cpp)
+  target_link_libraries(test_stage1_normalization PRIVATE stage0_layout)
+  add_test(NAME stage1_normalization COMMAND test_stage1_normalization)
+
+  add_executable(test_stage1_vector_rms tests/test_stage1_vector_rms.cpp)
+  target_link_libraries(test_stage1_vector_rms PRIVATE stage0_layout)
+  add_test(NAME stage1_vector_rms COMMAND test_stage1_vector_rms)
 
   add_executable(test_stage1_tail_payload tests/test_stage1_tail_payload.cpp)
   target_link_libraries(test_stage1_tail_payload PRIVATE stage1_tail_payload)
@@ -155,6 +199,10 @@ if(FHE_STAGE0_BUILD_TESTS)
     tests/test_stage1_mamba2_payload.cpp)
   target_link_libraries(test_stage1_mamba2_payload PRIVATE stage1_mamba2_payload)
   add_test(NAME stage1_mamba2_payload COMMAND test_stage1_mamba2_payload)
+
+  add_executable(test_stage1_joint_gates tests/test_stage1_joint_gates.cpp)
+  target_link_libraries(test_stage1_joint_gates PRIVATE stage1_mamba2_depth)
+  add_test(NAME stage1_joint_gates COMMAND test_stage1_joint_gates)
 
   add_executable(
     test_stage1_mamba2_plan

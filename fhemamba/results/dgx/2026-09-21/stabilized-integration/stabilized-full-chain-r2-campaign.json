@@ -1,0 +1,199 @@
+{
+  "acceptance": {
+    "criteria": {
+      "all_tokens_decrypt": true,
+      "layers": 24,
+      "max_abs_error_lte": 0.05,
+      "required_sync_profile": "full",
+      "tokens": 2,
+      "zero_intermediate_decrypts": true
+    },
+    "evaluated": true,
+    "issues": [
+      "one or more candidate artifacts did not pass",
+      "maximum error 4.58083134065e+144 exceeds 0.05"
+    ],
+    "passed": false,
+    "required": true
+  },
+  "backend": "orchestration",
+  "campaign": "dgx-spark-stabilized-chain",
+  "complete": true,
+  "config": {
+    "input_mode": "campaign-orchestration"
+  },
+  "encrypted": false,
+  "experiments": [
+    {
+      "all_tokens_decrypt": true,
+      "artifact_paths": [
+        "/home/kataiwa/fhemamba/gate-integration-20260921/results/m2_chain_stabilized-full-chain-r2_l24_t2.json"
+      ],
+      "artifacts": [
+        {
+          "binary_sha256": "38daf92cd7cccc62d3af0072787a162f52cf33fc254bd7499e349a2774036d12",
+          "build_provenance": {
+            "binary_sha256": "38daf92cd7cccc62d3af0072787a162f52cf33fc254bd7499e349a2774036d12",
+            "cuda": {
+              "configured_version": "13.0"
+            },
+            "fideslib": {
+              "arch": "121-real",
+              "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+              "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
+              "sync_profile": "full"
+            },
+            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "platform": "dgx-spark",
+            "schema_version": 1,
+            "shared_libraries": {
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+            },
+            "source_sha256": "22f910debdebf26dc76fba8a1dba3867fc787fac767d1da69ef8d4d3cb7b78c2",
+            "toolchain": {
+              "cmake": "cmake version 3.28.3",
+              "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+            }
+          },
+          "measurement_scope": {
+            "full_layer_chain": true,
+            "layers_loaded": 24,
+            "tokens": 2,
+            "zero_intermediate_decrypts": true
+          },
+          "measurements": {
+            "autoregressive_expected_ids": [],
+            "autoregressive_selected_ids": [],
+            "autoregressive_tokens_match": true,
+            "executed_bootstrap_count": 787,
+            "max_abs_error": 4.58083134065e+144,
+            "peak_rss_gib": 36.0845298767,
+            "per_token_decrypt_ok": [
+              1,
+              1
+            ],
+            "per_token_max_abs_error": [
+              4.58083134065e+144,
+              4.08560834287e+144
+            ]
+          },
+          "parameters": {
+            "fideslib_sync_profile": "full",
+            "n_layers_loaded": 24,
+            "tokens": 2
+          },
+          "passed": false,
+          "path": "/home/kataiwa/fhemamba/gate-integration-20260921/results/m2_chain_stabilized-full-chain-r2_l24_t2.json",
+          "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.2d923bd5caa1206c",
+          "stage": "stage1-mamba2-decode-fideslib",
+          "status": "failed",
+          "timing": {
+            "eval_seconds": 1166.50330298
+          },
+          "validation": {
+            "error_count": 0,
+            "explicit_non_success_probe": false,
+            "issues": [],
+            "stage": "stage1-mamba2-decode-fideslib",
+            "success_claimed": false,
+            "success_predicate_passed": false,
+            "valid": true,
+            "warning_count": 0
+          },
+          "version": "0.5.0"
+        }
+      ],
+      "candidate_passed": false,
+      "environment": {
+        "ARTIFACT_VERSION": "0.5.0",
+        "AUTOREGRESSIVE_CLIENT_LOOP": "0",
+        "AUTO_HEADROOM": "4",
+        "BINARY": "/home/kataiwa/fhemamba/gate-integration-20260921/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY_SHA256": "38daf92cd7cccc62d3af0072787a162f52cf33fc254bd7499e349a2774036d12",
+        "BSGS_REPLICAS": "auto",
+        "CARRIED_HEADROOM": "0",
+        "COMPLEX_STATE_PAIRING": "1",
+        "DEBUG_LAYER_ERRORS": "0",
+        "DEBUG_NORMALIZED_STATE_BOOTSTRAP_RANGE": "0",
+        "ENCODE_THREADS": "8",
+        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba/gate-integration-20260921",
+        "FIDESLIB_SYNC_PROFILE": "full",
+        "FIRST_MOD_SIZE": "60",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+        "INPUT_CHAIN": "/home/kataiwa/fhemamba/gate-integration-20260921/payload",
+        "INPUT_CHAIN_SHA256": "b40d33b30e018ef91e894aa9e2bd26adb6be6d5e1ae49873e356d78795d5c745",
+        "INTERLEAVED_REPLICATED_PROJECTION": "1",
+        "LAYERS": "24",
+        "LEVEL_ALIGN_MODE": "drop",
+        "LOGARITHMIC_REPLICATION": "1",
+        "META_BTS": "1",
+        "META_BTS_ALPHA": "12",
+        "META_BTS_RESIDUAL_ALIGN_MODE": "unity",
+        "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+        "MULTIPLICATIVE_DEPTH": "44",
+        "NORMALIZED_RECURRENT_STATE": "1",
+        "NORMALIZED_STATE_META_BTS": "0",
+        "PROJECTION_LATE_LEVEL": "1",
+        "PT_CACHE_GIB": "5",
+        "PT_CACHE_LEVEL": "0",
+        "PT_CACHE_WEIGHT_LEVEL": "20",
+        "PT_MISS_CONSUMPTION_LEVEL": "1",
+        "REFRESH_RECURRENT_STATE_POST": "0",
+        "REPLICATED_STATE_BLOCKS": "1",
+        "REPLICATED_TRUE_BSGS": "1",
+        "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.2d923bd5caa1206c",
+        "RESIDUAL_HEADROOM": "0",
+        "RESULTS_DIR": "/home/kataiwa/fhemamba/gate-integration-20260921/results",
+        "RING_DIM": "65536",
+        "ROTATION_KEYS": "balanced",
+        "ROTATION_KEY_GIB": "30",
+        "RUN_TAG": "stabilized-full-chain-r2",
+        "SCALING_MOD_SIZE": "59",
+        "SECURITY": "not-set",
+        "SHARED_HEAD_EXPANSION": "0",
+        "SPARK_BUILD_SHA256": "7b1e84a6989914873abda5d9ed4bd7147ed0eb25bc08759ff43922d8d550e73b",
+        "STATE_META_BTS_ALPHA": "-1",
+        "STATE_REFRESH_INTERVAL": "1",
+        "TOKENS": "2"
+      },
+      "gpu_wait_seconds": 5.11123029794544,
+      "infrastructure_ok": true,
+      "issues": [],
+      "max_abs_error": 4.58083134065e+144,
+      "name": "stabilized-chain",
+      "reason": "unconditional",
+      "resume_rejections": [],
+      "returncode": 1,
+      "seconds": 1195.634936766699,
+      "state": "executed",
+      "timed_out": false
+    }
+  ],
+  "infrastructure_ok": true,
+  "measurement_scope": {
+    "campaign_orchestration_only": true,
+    "candidate_failures_are_not_infrastructure_failures": true,
+    "claim": "Campaign execution and artifact collection only; candidate artifacts carry their own encrypted-correctness claims.",
+    "full_model_correctness_claimed": false
+  },
+  "measurements": {
+    "candidate_failures": 1,
+    "candidate_passes": 0,
+    "experiments_executed_or_resumed": 1,
+    "experiments_skipped": 0,
+    "experiments_total": 1,
+    "infrastructure_failures": 0
+  },
+  "passed": false,
+  "promotion_passed": false,
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.2d923bd5caa1206c",
+  "stage": "fhemamba-dgx-campaign-report",
+  "status": "failed",
+  "timing": {
+    "campaign_seconds": 1200.7590427082032
+  },
+  "version": "0.5.0"
+}

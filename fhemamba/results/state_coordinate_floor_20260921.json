@@ -1,0 +1,147 @@
+{
+  "stage": "state-coordinate-regularization",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "source_sha256": {
+    "/home/hosi/cipher/fhemamba/experiments/regularize_payload_state.py": "e54c3aa9988f47539a3ae1823199b3fdd3ac28d53e704bfbedfb09ffaaa1a65c",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/state_coordinates.py": "9bf1d627925543cdac45334a09a9c7db510c6c0e336712a2ada4059d8218cd75"
+  },
+  "regularization": {
+    "parent_payload_sha256": "e788c496847701fae2bbc5ad8ccff7b670b9d51f5e66594d9d6b2099beeb8c69",
+    "group_heads": 4,
+    "group_scale_floor": 0.125,
+    "maximum_group_to_row_amplification": 8.0,
+    "new_calibration_data": false,
+    "evaluation_references_used_for_scales": false,
+    "uniform_bound_claimed": false
+  },
+  "rows": [
+    {
+      "layer": 0,
+      "raised_rows": 1211,
+      "mean_row_to_group_scale": 0.1586568965258723
+    },
+    {
+      "layer": 1,
+      "raised_rows": 1276,
+      "mean_row_to_group_scale": 0.15011429278838068
+    },
+    {
+      "layer": 2,
+      "raised_rows": 1362,
+      "mean_row_to_group_scale": 0.14562372095521095
+    },
+    {
+      "layer": 3,
+      "raised_rows": 1219,
+      "mean_row_to_group_scale": 0.1563552434673239
+    },
+    {
+      "layer": 4,
+      "raised_rows": 1283,
+      "mean_row_to_group_scale": 0.15445170797838248
+    },
+    {
+      "layer": 5,
+      "raised_rows": 1136,
+      "mean_row_to_group_scale": 0.1583317005367368
+    },
+    {
+      "layer": 6,
+      "raised_rows": 1368,
+      "mean_row_to_group_scale": 0.14423584934298125
+    },
+    {
+      "layer": 7,
+      "raised_rows": 969,
+      "mean_row_to_group_scale": 0.17918145819606943
+    },
+    {
+      "layer": 8,
+      "raised_rows": 1203,
+      "mean_row_to_group_scale": 0.15306341374040547
+    },
+    {
+      "layer": 9,
+      "raised_rows": 1228,
+      "mean_row_to_group_scale": 0.14971363462715517
+    },
+    {
+      "layer": 10,
+      "raised_rows": 1296,
+      "mean_row_to_group_scale": 0.14859301851512827
+    },
+    {
+      "layer": 11,
+      "raised_rows": 1129,
+      "mean_row_to_group_scale": 0.15948480626801045
+    },
+    {
+      "layer": 12,
+      "raised_rows": 1041,
+      "mean_row_to_group_scale": 0.17215823157472854
+    },
+    {
+      "layer": 13,
+      "raised_rows": 1289,
+      "mean_row_to_group_scale": 0.1481293730402247
+    },
+    {
+      "layer": 14,
+      "raised_rows": 1284,
+      "mean_row_to_group_scale": 0.14629900269666613
+    },
+    {
+      "layer": 15,
+      "raised_rows": 1170,
+      "mean_row_to_group_scale": 0.15228110542759413
+    },
+    {
+      "layer": 16,
+      "raised_rows": 1225,
+      "mean_row_to_group_scale": 0.14753369292987412
+    },
+    {
+      "layer": 17,
+      "raised_rows": 1150,
+      "mean_row_to_group_scale": 0.16016850968708102
+    },
+    {
+      "layer": 18,
+      "raised_rows": 1115,
+      "mean_row_to_group_scale": 0.16141441555764402
+    },
+    {
+      "layer": 19,
+      "raised_rows": 1159,
+      "mean_row_to_group_scale": 0.16904791301218292
+    },
+    {
+      "layer": 20,
+      "raised_rows": 1299,
+      "mean_row_to_group_scale": 0.14605365405131535
+    },
+    {
+      "layer": 21,
+      "raised_rows": 1231,
+      "mean_row_to_group_scale": 0.1508180758911243
+    },
+    {
+      "layer": 22,
+      "raised_rows": 964,
+      "mean_row_to_group_scale": 0.18425435037436186
+    },
+    {
+      "layer": 23,
+      "raised_rows": 1082,
+      "mean_row_to_group_scale": 0.1602275849725924
+    }
+  ],
+  "output_payload_sha256": "37911ba0090ea81d701a1737e5383fb4ee521d5ff412645fddb64bc5b9903015",
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "encrypted_execution": false,
+    "claim": "Public conditioning of independently calibrated scales, without new data or reference fitting."
+  }
+}

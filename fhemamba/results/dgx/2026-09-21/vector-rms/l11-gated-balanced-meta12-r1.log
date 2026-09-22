@@ -1,0 +1,10 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 8192 slots.
+Plaintexts loaded: 248 ~ 11284MB
+Rotation keys loaded: 73 ~ 24090MB
+ring=131072 width=1536 lanes=4 setup_seconds=36.1431
+batch=0 error=4.99763e-05 level=34 refreshed_level=23 seconds=2.75522
+batch=4 error=4.51129e-05 level=34 refreshed_level=23 seconds=2.47164
+batch=8 error=4.66277e-05 level=34 refreshed_level=23 seconds=2.47561
+batch=12 error=5.58101e-05 level=34 refreshed_level=23 seconds=2.47674

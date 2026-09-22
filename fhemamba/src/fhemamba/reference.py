@@ -111,10 +111,13 @@ def _affine_scan(a: Tensor, b: Tensor) -> tuple[Tensor, Tensor]:
     length = a.shape[-2]
     offset = 1
     while offset < length:
-        a_prev = torch.cat([torch.ones_like(a[..., :offset, :]), a[..., :-offset, :]], dim=-2)
-        b_prev = torch.cat([torch.zeros_like(b[..., :offset, :]), b[..., :-offset, :]], dim=-2)
-        b = a * b_prev + b
-        a = a * a_prev
+        # Prefix positions below offset are already final for this round.
+        # Slice instead of materializing full shifted state/identity tensors.
+        b = torch.cat(
+            [b[..., :offset, :], b[..., offset:, :] + a[..., offset:, :] * b[..., :-offset, :]],
+            dim=-2,
+        )
+        a = torch.cat([a[..., :offset, :], a[..., offset:, :] * a[..., :-offset, :]], dim=-2)
         offset *= 2
     return a, b
 
@@ -250,12 +253,10 @@ def mixer2_forward(
         hidden_bc, [mixer.intermediate_size, groups * state_size, groups * state_size], dim=-1
     )
 
-    dt = ops.softplus(dt + mixer.dt_bias, (layer_idx, "dt_softplus"))
-    dt = torch.clamp(dt, mixer.time_step_limit[0], mixer.time_step_limit[1])
-    dt = ops.checkpoint(dt, (layer_idx, "dt_out"))
     a_cont = -torch.exp(mixer.A_log.float())  # (heads,)
-    decay = ops.exp(dt * a_cont, (layer_idx, "decay_exp"))  # (batch, T, heads)
-    decay = ops.checkpoint(decay, (layer_idx, "decay_output"))
+    dt, decay = ops.mamba2_gates(
+        dt + mixer.dt_bias, a_cont, layer_idx, mixer.time_step_limit
+    )  # (batch, T, heads)
 
     x_heads = hidden.reshape(batch, seq_len, heads, head_dim)
     rep = heads // groups

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fhemamba"
 version = "0.5.0"
-description = "Encrypted Mamba-2 inference under CKKS with OpenFHE and FIDESlib-GPU."
+description = "FHE Mamba: private language-model inference with CKKS and encrypted recurrent state."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
@@ -32,6 +32,11 @@ experiments = [
 ]
 [project.scripts]
 fhemamba = "fhemamba.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Hosi121/fhe-native-mamba3"
+Documentation = "https://github.com/Hosi121/fhe-native-mamba3/tree/main/docs"
+Issues = "https://github.com/Hosi121/fhe-native-mamba3/issues"
 
 [tool.setuptools.packages.find]
 where = ["fhemamba/src"]

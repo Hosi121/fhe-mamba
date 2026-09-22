@@ -1,0 +1,81 @@
+{
+  "name": "dgx-spark-layer-smoke",
+  "version": "0.5.0",
+  "timeout_seconds": 4200,
+  "gpu_preflight": {
+    "required": true,
+    "gpu_index": 0,
+    "max_utilization_percent": 5,
+    "min_mem_available_gib": 65,
+    "stable_polls": 2,
+    "poll_seconds": 5,
+    "timeout_seconds": 120
+  },
+  "acceptance": {
+    "layers": 1,
+    "tokens": 2,
+    "max_abs_error_lte": 0.05,
+    "all_tokens_decrypt": true,
+    "zero_intermediate_decrypts": true,
+    "required_sync_profile": "full"
+  },
+  "defaults": {
+    "LAYERS": "1",
+    "TOKENS": "2",
+    "RING_DIM": "65536",
+    "MULTIPLICATIVE_DEPTH": "44",
+    "SCALING_MOD_SIZE": "59",
+    "FIRST_MOD_SIZE": "60",
+    "SECURITY": "not-set",
+    "PT_CACHE_GIB": "5",
+    "PT_CACHE_LEVEL": "0",
+    "PT_CACHE_WEIGHT_LEVEL": "20",
+    "PT_MISS_CONSUMPTION_LEVEL": "1",
+    "ENCODE_THREADS": "8",
+    "AUTO_HEADROOM": "4",
+    "RESIDUAL_HEADROOM": "0",
+    "CARRIED_HEADROOM": "0",
+    "META_BTS": "1",
+    "META_BTS_ALPHA": "6",
+    "STATE_META_BTS_ALPHA": "-1",
+    "META_BTS_RESIDUAL_ALIGN_MODE": "unity",
+    "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+    "AUTOREGRESSIVE_CLIENT_LOOP": "0",
+    "REFRESH_RECURRENT_STATE_POST": "0",
+    "NORMALIZED_RECURRENT_STATE": "1",
+    "NORMALIZED_STATE_META_BTS": "0",
+    "COMPLEX_STATE_PAIRING": "1",
+    "STATE_REFRESH_INTERVAL": "1",
+    "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+    "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+    "SHARED_HEAD_EXPANSION": "0",
+    "REPLICATED_TRUE_BSGS": "1",
+    "INTERLEAVED_REPLICATED_PROJECTION": "1",
+    "REPLICATED_STATE_BLOCKS": "1",
+    "PROJECTION_LATE_LEVEL": "1",
+    "ROTATION_KEYS": "balanced",
+    "ROTATION_KEY_GIB": "30",
+    "LEVEL_ALIGN_MODE": "drop",
+    "BSGS_REPLICAS": "auto",
+    "DEBUG_LAYER_ERRORS": "0",
+    "DEBUG_NORMALIZED_STATE_BOOTSTRAP_RANGE": "0",
+    "FIDESLIB_SYNC_PROFILE": "full",
+    "LOGARITHMIC_REPLICATION": "0"
+  },
+  "experiments": [
+    {
+      "name": "spark-smoke-linear",
+      "env": {
+        "LOGARITHMIC_REPLICATION": "0"
+      }
+    },
+    {
+      "name": "spark-smoke-binary",
+      "env": {
+        "LOGARITHMIC_REPLICATION": "1"
+      }
+    }
+  ],
+  "status": "experimental-unpromoted",
+  "platform": "dgx-spark"
+}

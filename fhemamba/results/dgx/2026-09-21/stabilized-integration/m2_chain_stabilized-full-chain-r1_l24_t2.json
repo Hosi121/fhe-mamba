@@ -1,0 +1,68 @@
+{
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.5630a9fe0d46e51b",
+  "binary_sha256": "e86258cf0e634a54c59fcfb87263ca460b47a263c510d0eba70611ca4d149f49",
+  "stage": "stage1-mamba2-decode-fideslib",
+  "backend": "fideslib-gpu",
+  "encrypted": true,
+  "config": {
+    "input_mode": "fhemamba-m1-payload"
+  },
+  "status": "failed",
+  "passed": false,
+  "failure_phase": "runtime",
+  "error_message": "/home/kataiwa/fhe-deps/FIDESlib/deps/openfhe-src/src/pke/lib/encoding/ckkspackedencoding.cpp:l.207:Encode(): Scaling factor too small",
+  "parameters": {
+    "ring_dimension": 65536,
+    "multiplicative_depth": 44,
+    "scaling_mod_size": 59,
+    "tokens": 2,
+    "process_role": "inline",
+    "autoregressive_client_loop": false,
+    "level_align_mode": "drop",
+    "meta_bts_residual_align_mode": "unity",
+    "meta_bts_residual_layers": [
+      21,
+      22,
+      23
+    ],
+    "debug_normalized_state_bootstrap_range": false,
+    "debug_recurrence_token": -1,
+    "debug_recurrence_layer": -1,
+    "bootstrap_before_token": [],
+    "debug_client_reencrypt_before_token": [],
+    "refresh_recurrent_state_post": false,
+    "refresh_recurrent_state_post_layers": []
+  },
+  "measurement_scope": {
+    "non_success_probe": true,
+    "full_model_correctness_claimed": false,
+    "claim": "Native FIDESlib Mamba-2 decode kernel failed before final decrypt; this artifact preserves the failure phase for collection."
+  },
+  "build_provenance": {
+    "schema_version": 1,
+    "platform": "dgx-spark",
+    "source_sha256": "21573bfcf5faf2ec717ee019cc1afe3fc000776fbeb64e921d100647ad6ff16c",
+    "binary_sha256": "e86258cf0e634a54c59fcfb87263ca460b47a263c510d0eba70611ca4d149f49",
+    "cuda": {
+      "configured_version": "13.0"
+    },
+    "fideslib": {
+      "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+      "arch": "121-real",
+      "sync_profile": "full",
+      "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2"
+    },
+    "toolchain": {
+      "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "cmake": "cmake version 3.28.3"
+    },
+    "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+    "shared_libraries": {
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+    }
+  },
+  "input_payload_sha256": "b40d33b30e018ef91e894aa9e2bd26adb6be6d5e1ae49873e356d78795d5c745"
+}

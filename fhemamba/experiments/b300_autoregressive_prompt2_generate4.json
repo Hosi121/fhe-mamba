@@ -1,6 +1,7 @@
 {
   "name": "b300-autoregressive-prompt2-generate4-promoted",
   "version": "0.4.5",
+  "platform_config": "../../config/b300-platform.env",
   "timeout_seconds": 4200,
   "gpu_preflight": {
     "required": true,
@@ -25,10 +26,6 @@
     "RESULTS_DIR": "/home/kataiwa/fhemamba-b300/results",
     "INPUT_CHAIN": "/home/kataiwa/fhemamba-b300/payloads/m2_chain_payload_sqnewton_wiki512_t2",
     "GPU_DEVICE": "3",
-    "FIDESLIB_SM": "100",
-    "FIDESLIB_VARIANT": "sm100",
-    "BINARY_PATH": "/home/kataiwa/fhemamba-b300/build/fideslib-stage0-sm100/stage1_mamba2_decode_fideslib",
-    "FIDESLIB_SYNC_PROFILE": "full",
     "LAYERS": "24",
     "TOKENS": "5",
     "ARTIFACT_VERSION": "0.4.5",

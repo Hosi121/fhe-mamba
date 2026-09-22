@@ -1,0 +1,57 @@
+{
+  "inputs": {
+    "m2_chain_subring-0-1_l1_t2.json": "c9e1b4f011028129c1e8818c24da3457ca1f18e7c9a5b411d041b1d4101f76dd",
+    "m2_chain_subring-0-4_l1_t2.json": "62e3a06e183d57cc4822a77eba9abf7b702c18a70a0f69920b4d415a3d4d7145",
+    "m2_chain_subring-1-2_l1_t2.json": "ea6d9cbd0cbc795994e835e5f725f068c7bfefa79ab840e2810d9e450460d122",
+    "m2_chain_subring-1-3_l1_t2.json": "8d345935b161f17380c12d15dabc812696acaf119cdab71bf33ba14076a9decb"
+  },
+  "campaign_passed": true,
+  "same_levels": true,
+  "same_operation_counts": true,
+  "modes": [
+    {
+      "subring": false,
+      "eval_seconds": [
+        24.035023588,
+        24.196020195
+      ],
+      "joint_gate_seconds": [
+        4.950861246,
+        4.942963735
+      ],
+      "max_error": 0.000288011348168,
+      "peak_rss_gib": 32.6945152283,
+      "subring_encode_calls": [
+        0,
+        0
+      ]
+    },
+    {
+      "subring": true,
+      "eval_seconds": [
+        22.893730135,
+        22.973192406
+      ],
+      "joint_gate_seconds": [
+        3.657361487,
+        3.662541681
+      ],
+      "max_error": 0.000304016574646,
+      "peak_rss_gib": 32.6950759888,
+      "subring_encode_calls": [
+        786,
+        786
+      ]
+    }
+  ],
+  "eval_seconds": {
+    "baseline_mean": 24.115521891500002,
+    "candidate_mean": 22.933461270499997,
+    "reduction_fraction": 0.04901658883097393
+  },
+  "joint_gate_seconds": {
+    "baseline_mean": 4.9469124905,
+    "candidate_mean": 3.659951584,
+    "reduction_fraction": 0.26015437082654413
+  }
+}

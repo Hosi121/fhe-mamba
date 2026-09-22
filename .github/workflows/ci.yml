@@ -3,6 +3,14 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   checks:
@@ -16,14 +24,19 @@ jobs:
 
     env:
       PYTHON: .venv/bin/python
-      CHECK_JOBS: auto
+      CHECK_JOBS: "2"
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+      HF_HUB_OFFLINE: "1"
+      CI: "true"
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@d0d8abe699bfb85fec6de9f7adb5ae17292296ff # v6
         with:
           enable-cache: true
           python-version: "${{ matrix.python-version }}"
@@ -36,3 +49,17 @@ jobs:
 
       - name: Run checks
         run: scripts/run_checks.sh
+
+      - name: Exercise the CPU example and published evidence
+        run: |
+          .venv/bin/python examples/cpu_smoke.py
+          .venv/bin/fhemamba validate-artifacts --require-commit \
+            fhemamba/results/dgx/2026-09-22/subring-gates/generation.json \
+            fhemamba/results/dgx/2026-09-22/subring-gates/m2_chain_subring-client-generation_l24_t5.json
+
+      - name: Verify installed wheel outside the checkout
+        run: |
+          uv pip install --python .venv/bin/python --no-deps --reinstall dist/*.whl
+          cd "$(mktemp -d)"
+          "$GITHUB_WORKSPACE/.venv/bin/fhemamba" --version
+          "$GITHUB_WORKSPACE/.venv/bin/python" -I "$GITHUB_WORKSPACE/examples/cpu_smoke.py"

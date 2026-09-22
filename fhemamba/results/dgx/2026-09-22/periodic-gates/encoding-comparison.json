@@ -1,0 +1,56 @@
+{
+  "stage": "coefficient-encoding-comparison",
+  "aggregation": "median of 32 non-warmup samples per packing and level, two independent processes with ABBA/BAAB blocks",
+  "source_files": [
+    "probe-0-abba.json",
+    "probe-1-baab.json"
+  ],
+  "passed": true,
+  "levels": [
+    {
+      "level": 21,
+      "median_ms": {
+        "32768": {
+          "encode_ms": 11.918199,
+          "upload_multiply_sync_ms": 5.7561634999999995
+        },
+        "32": {
+          "encode_ms": 7.5172445,
+          "upload_multiply_sync_ms": 4.673011000000001
+        }
+      },
+      "encoding_reduction_fraction": 0.36926338450968976
+    },
+    {
+      "level": 26,
+      "median_ms": {
+        "32768": {
+          "encode_ms": 9.4387335,
+          "upload_multiply_sync_ms": 2.8089215000000003
+        },
+        "32": {
+          "encode_ms": 5.771692,
+          "upload_multiply_sync_ms": 2.846298
+        }
+      },
+      "encoding_reduction_fraction": 0.38850990972464683
+    },
+    {
+      "level": 34,
+      "median_ms": {
+        "32768": {
+          "encode_ms": 5.940716,
+          "upload_multiply_sync_ms": 1.5376729999999998
+        },
+        "32": {
+          "encode_ms": 3.437338,
+          "upload_multiply_sync_ms": 1.503433
+        }
+      },
+      "encoding_reduction_fraction": 0.42139331353325093
+    }
+  ],
+  "max_active_error": 6.06981132023066e-11,
+  "max_inactive_error": 2.45933116734646e-10,
+  "full_model_speedup_claimed": false
+}

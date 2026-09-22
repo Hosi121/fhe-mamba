@@ -1,0 +1,175 @@
+{
+  "reviewed_on": "2026-09-21",
+  "purpose": "Source ledger; scope distinguishes full sections from abstract-only research leads.",
+  "sources": [
+    {
+      "title": "Mamba-2 / SSD",
+      "url": "https://arxiv.org/html/2405.21060v1",
+      "reviewed_scope": "SSM recurrence, scalar transition and SSD sections"
+    },
+    {
+      "title": "Mamba-2 official module",
+      "url": "https://github.com/state-spaces/mamba/blob/e9594ce1c732d97440f0332fdc43170a2294dbfa/mamba_ssm/modules/mamba2.py",
+      "reviewed_scope": "Forward/step interface and step lines 295-300: exponential decay with Euler dt*x*B write",
+      "git_commit": "e9594ce1c732d97440f0332fdc43170a2294dbfa"
+    },
+    {
+      "title": "Were RNNs All We Needed?",
+      "url": "https://arxiv.org/html/2410.01201v3",
+      "reviewed_scope": "Sections 2.2 and 3.1: complementary retention/update coefficients and time-independent state scale; no model reproduction or exhaustive novelty review"
+    },
+    {
+      "title": "Mamba-3",
+      "url": "https://arxiv.org/html/2603.15569v1",
+      "reviewed_scope": "Sections 2–3, especially Propositions 1–4; architecture; not a checkpoint reproduction"
+    },
+    {
+      "title": "Mamba-3 official module",
+      "url": "https://raw.githubusercontent.com/state-spaces/mamba/e9594ce1c732d97440f0332fdc43170a2294dbfa/mamba_ssm/modules/mamba3.py",
+      "reviewed_scope": "Module parameterization, preprocessing, step and inference caches",
+      "git_commit": "e9594ce1c732d97440f0332fdc43170a2294dbfa",
+      "sha256": "930c3dfa04dea8444b1c9ee8b6ac9cbbc7ef492dc5ae1f4c83051ef953eca33c"
+    },
+    {
+      "title": "Mamba-3 author discussion",
+      "url": "https://tridao.me/blog/2026/mamba3-part2/",
+      "reviewed_scope": "Discretization, rotating frame, MIMO"
+    },
+    {
+      "title": "ReplaySSM author discussion",
+      "url": "https://tridao.me/blog/2026/replayssm/",
+      "reviewed_scope": "Checkpoint/input history, output-only decode and flush"
+    },
+    {
+      "title": "CKKS",
+      "url": "https://eprint.iacr.org/2016/421",
+      "reviewed_scope": "Construction and approximate arithmetic summary"
+    },
+    {
+      "title": "Full RNS CKKS",
+      "url": "https://eprint.iacr.org/2018/931",
+      "reviewed_scope": "Abstract and implementation scope"
+    },
+    {
+      "title": "Non-sparse-key bootstrapping",
+      "url": "https://eprint.iacr.org/2020/1203",
+      "reviewed_scope": "Abstract: double hoisting, precision and parameterization"
+    },
+    {
+      "title": "Meta-BTS",
+      "url": "https://eprint.iacr.org/2022/1167",
+      "reviewed_scope": "Full-paper Section 3.2 and Algorithms 1/2: residual cancellation, scale and modulus conditions; compared with native implementation",
+      "pdf_sha256": "cd7d946090255ceca93ca1342473955c933e1561d42f75cd132b6add3e6e038d"
+    },
+    {
+      "title": "EvalRound+",
+      "url": "https://eprint.iacr.org/2024/1379",
+      "reviewed_scope": "Full-paper Sections 2/3 and start of Section 4: modulus raising, skip connections and error threshold; no backend reproduction",
+      "pdf_sha256": "8551ce29009e0e0a9a2c54b0862b6e3db68a816fd2042b311306b7821b619e4e"
+    },
+    {
+      "title": "Error-variance-minimizing bootstrap",
+      "url": "https://eprint.iacr.org/2020/1549",
+      "reviewed_scope": "Abstract and lazy polynomial scheduling overview"
+    },
+    {
+      "title": "Generalized composite bootstrap",
+      "url": "https://eprint.iacr.org/2025/429",
+      "reviewed_scope": "Abstract and Algorithm 2 rescale/hoisting integration"
+    },
+    {
+      "title": "RBOOT",
+      "url": "https://www.usenix.org/conference/usenixsecurity26/presentation/yang-zhaomin",
+      "reviewed_scope": "Conference abstract; no independent reproduction"
+    },
+    {
+      "title": "Sparse roots-of-unity bootstrap",
+      "url": "https://arxiv.org/abs/2607.27401",
+      "reviewed_scope": "Abstract only; watchlist, not adopted"
+    },
+    {
+      "title": "BFV",
+      "url": "https://eprint.iacr.org/2012/144",
+      "reviewed_scope": "Construction/abstract; exact modular arithmetic scope"
+    },
+    {
+      "title": "BGV",
+      "url": "https://eprint.iacr.org/2011/277",
+      "reviewed_scope": "Leveled versus bootstrapped arithmetic scope"
+    },
+    {
+      "title": "TFHE",
+      "url": "https://eprint.iacr.org/2018/421",
+      "reviewed_scope": "Logical operations, lookup and circuit bootstrapping overview"
+    },
+    {
+      "title": "Public-Decay HSSM",
+      "url": "https://arxiv.org/abs/2605.16647",
+      "reviewed_scope": "Abstract and evaluated classification boundary"
+    },
+    {
+      "title": "CKKS output security",
+      "url": "https://eprint.iacr.org/2020/1533",
+      "reviewed_scope": "Attack model and stronger-security definition overview"
+    },
+    {
+      "title": "OpenFHE noise flooding",
+      "url": "https://raw.githubusercontent.com/openfheorg/openfhe-development/main/src/pke/examples/CKKS_NOISE_FLOODING.md",
+      "reviewed_scope": "Full document; query/error budget and real-message estimator limitation"
+    },
+    {
+      "title": "OpenFHE scheme switching",
+      "url": "https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/scheme-switching.cpp",
+      "reviewed_scope": "Argmax/argmin example and ciphertext output representations"
+    },
+    {
+      "title": "OpenFHE CKKS real-message decoder in the Spark build",
+      "url": "https://raw.githubusercontent.com/openfheorg/openfhe-development/aa391988d354d4360f390f223a90e0d1b98839d7/src/pke/lib/encoding/ckkspackedencoding.cpp",
+      "reviewed_scope": "Decode real-message branch: imaginary-error standard-deviation estimate and added Gaussian noise; compared with the installed dependency source, not a complete application output-security proof",
+      "git_commit": "aa391988d354d4360f390f223a90e0d1b98839d7"
+    },
+    {
+      "title": "NIST DLMF: Hyperbolic infinite products and partial fractions",
+      "url": "https://dlmf.nist.gov/4.36",
+      "reviewed_scope": "Equations 4.36.2 and 4.36.3; differentiate the cosh product to derive a SiLU partial-fraction identity and identify its nearest complex poles; no new approximation coefficients or encrypted implementation"
+    },
+    {
+      "title": "Root Mean Square Layer Normalization",
+      "url": "https://arxiv.org/abs/1910.07467",
+      "reviewed_scope": "Abstract and rescaling property; checkpoint formula verified in the local reference. The vector Jacobian and component bounds in our note are direct derivations, not a novelty claim."
+    },
+    {
+      "title": "OpenFHE advanced CKKS bootstrapping example",
+      "url": "https://raw.githubusercontent.com/openfheorg/openfhe-development/aa391988d354d4360f390f223a90e0d1b98839d7/src/pke/examples/advanced-ckks-bootstrapping.cpp",
+      "git_commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+      "reviewed_scope": "Parameter setup: uniform ternary secrets, automatic ring selection, scaling and bootstrap budgets; no independent protocol-security proof"
+    },
+    {
+      "title": "Adaptive successive over-relaxation (aSOR)",
+      "url": "https://eprint.iacr.org/2024/1366.pdf",
+      "reviewed_scope": "Section 4.3 / Algorithm 4 inverse-square-root derivation; Section 5 scale management and reported Newton/Goldschmidt tradeoff; Appendix B error-enlarged iteration domains; no benchmark reproduction",
+      "download_sha256": "01625c73518105aaa67f695ef3cdd0d15f8368c4b859698a9f89d6a2e11615a9"
+    },
+    {
+      "title": "THOR: Secure Transformer Inference with Homomorphic Encryption",
+      "url": "https://eprint.iacr.org/2024/1881.pdf",
+      "reviewed_scope": "Sections 5.1–5.2 and Appendix C: aSOR/Goldschmidt inverse and inverse square root; exact update equations reviewed; no matched benchmark reproduction",
+      "download_sha256": "ddb57004b56ee8e00beffc4f563fd0921242753fda6c704065d4900b792439cd"
+    },
+    {
+      "title": "The Polar Express: Optimal Matrix Sign Methods and Their Application to the Muon Algorithm",
+      "url": "https://arxiv.org/html/2505.16932v5",
+      "reviewed_scope": "Sections 1.2, 2, 3.1–3.4; degree-three prior-art attribution and Appendix G finite-precision cushioning; no Muon reproduction"
+    },
+    {
+      "title": "Sylph: Scaling up FHE-based Privacy-Preserving ML, Llama-3-8B (v2)",
+      "url": "https://arxiv.org/html/2601.18511v2",
+      "reviewed_scope": "Abstract, Introduction/Table I, Section IV-C and V, Appendix A setup. Reported 128-private-token and heterogeneous 3968-public+128-private-token settings; no matched reproduction or independent security audit."
+    },
+    {
+      "title": "ROSETTA: hybrid CKKS/TFHE private LLM decoding",
+      "url": "https://arxiv.org/html/2609.16915v1",
+      "reviewed_scope": "Sections 1, 2.4, 5.1, 5.3, 5.4 and Tables 7/8. Module-timing-based one-token decode latency excluding prefill; model PPL is ciphertext-aligned plaintext evaluation. No matched reproduction. Segmented LUT/operator-selection alternative to the current all-CKKS core."
+    }
+  ]
+}

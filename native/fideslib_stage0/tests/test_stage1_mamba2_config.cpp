@@ -41,6 +41,28 @@ auto main() -> int {
   require(defaults.multiplicative_depth == 44, "unexpected depth default");
   require(defaults.pt_cache_gib == 5.0, "unexpected plaintext cache default");
   require(defaults.security == "128-classic", "native security default must be checked");
+  require(!defaults.logarithmic_replication, "binary replication must remain opt-in");
+  require(!defaults.coefficient_aware_ps, "coefficient-aware PS must remain opt-in");
+  require(!defaults.joint_periodic_coefficients, "periodic joint coefficients must remain opt-in");
+  require(parse({"stage1", "--input", "payload", "--joint-periodic-coefficients", "true"}).joint_periodic_coefficients,
+          "periodic joint coefficient flag was not parsed");
+  require(!defaults.joint_subring_encoding, "subring encoding must remain opt-in");
+  require(parse({"stage1", "--input", "payload", "--joint-periodic-coefficients", "true",
+                 "--joint-subring-encoding", "true"}).joint_subring_encoding,
+          "subring encoding flag was not parsed");
+  require_invalid([] {
+    parse({"stage1", "--input", "payload", "--joint-subring-encoding", "true"});
+  });
+  require(parse({"stage1", "--input", "payload", "--coefficient-aware-ps", "true"}).coefficient_aware_ps,
+          "coefficient-aware PS flag was not parsed");
+  require(!defaults.row_normalized_state, "row normalization must remain opt-in");
+  const auto rows = parse({"stage1", "--input", "payload",
+                           "--normalized-recurrent-state", "true",
+                           "--row-normalized-state", "true"});
+  require(rows.row_normalized_state, "row normalization flag was not parsed");
+  require_invalid([] {
+    parse({"stage1", "--input", "payload", "--row-normalized-state", "true"});
+  });
 
   const std::string binary_hash(64, 'a');
   const auto provenance = parse({"stage1", "--input", "payload",
@@ -79,6 +101,7 @@ auto main() -> int {
           "recurrence debug layer was not parsed");
   const auto true_bsgs = parse({"stage1", "--input", "payload", "--bsgs-replicas",
                                 "auto", "--replicated-true-bsgs", "true",
+                                "--logarithmic-replication", "true",
                                 "--fused-replicated-linear-transform", "true",
                                 "--fused-replicated-linear-transform-scope", "out-proj",
                                 "--fideslib-sync-profile", "bootstrap-lifetime",
@@ -87,6 +110,7 @@ auto main() -> int {
                                 "--shared-head-expansion", "true",
                                 "--projection-late-level", "true"});
   require(true_bsgs.replicated_true_bsgs, "true replicated BSGS was not parsed");
+  require(true_bsgs.logarithmic_replication, "binary replication was not parsed");
   require(true_bsgs.fused_replicated_linear_transform,
           "fused replicated linear transform was not parsed");
   require(true_bsgs.fused_replicated_linear_transform_scope == "out-proj",
@@ -135,6 +159,13 @@ auto main() -> int {
   require(fhemamba::stage1::should_use_meta_bts(
               consumption_plain, 20, true, true, "t1.L20.state_post0"),
           "normalized-state Meta-BTS override changed");
+  const auto scheduled = parse({"stage1", "--input", "payload"});
+  require(fhemamba::stage1::should_use_meta_bts(
+              scheduled, 0, false, false, "t0.L00.conv_silu", true),
+          "scheduled normalization must protect new transient refreshes");
+  require(!fhemamba::stage1::should_use_meta_bts(
+              scheduled, 0, true, true, "t1.L00.state_post0", true),
+          "scheduled normalization must retain the carried-state policy");
 
   require_invalid([] { parse({"stage1"}); });
   require_invalid([] {
