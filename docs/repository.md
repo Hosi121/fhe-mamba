@@ -37,7 +37,7 @@ repository content. Public numerical coefficient bundles belong in `config/`.
 ## Previous layout
 
 The file cleanup follows the immutable
-[`research-2026-09-22` snapshot](https://github.com/Hosi121/fhe-native-mamba3/tree/research-2026-09-22).
+[`research-2026-09-22` snapshot](https://github.com/Hosi121/fhe-mamba/tree/research-2026-09-22).
 Use that tag when reproducing commands and source hashes from the original
 measurements. Current guides and launchers use the paths below.
 
@@ -63,3 +63,18 @@ rebuild the native backend after upgrading a checkout across this change.
 
 The installed `fhemamba` API and CLI name are unchanged. For an existing editable
 environment, run `uv sync --locked --extra dev` after updating the checkout.
+
+## Project name
+
+The public repository is `Hosi121/fhe-mamba`, and the project is **FHE Mamba**.
+The implemented and measured checkpoint workload is **Mamba-2-130M**. Mamba-3
+appears in research comparisons and algebra studies; it is not a measured
+full-model backend in this repository.
+
+The repository was renamed from `fhe-native-mamba3` to align its public name
+with that scope. Historical artifact paths, retired package names and recorded
+host directories retain their original names. For an existing clone:
+
+```bash
+git remote set-url origin git@github.com:Hosi121/fhe-mamba.git
+```

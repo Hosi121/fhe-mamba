@@ -12,8 +12,8 @@ These commands follow the current checkout layout. The published
 ## 1. Install the Python environment
 
 ```bash
-git clone https://github.com/Hosi121/fhe-native-mamba3.git
-cd fhe-native-mamba3
+git clone https://github.com/Hosi121/fhe-mamba.git
+cd fhe-mamba
 uv sync --locked --extra experiments
 uv run --no-sync python examples/cpu_smoke.py
 ```

@@ -20,7 +20,7 @@ project checkouts. If matching dependencies are already installed, set
 
 ```bash
 mkdir -p "$HOME/fhemamba" "$HOME/fhe-deps"
-git clone https://github.com/Hosi121/fhe-native-mamba3.git "$HOME/fhemamba/cipher"
+git clone https://github.com/Hosi121/fhe-mamba.git "$HOME/fhemamba/cipher"
 git clone --no-checkout https://github.com/CAPS-UMU/FIDESlib.git "$HOME/fhe-deps/FIDESlib"
 git -C "$HOME/fhe-deps/FIDESlib" checkout --detach cd171f20f510eeca04c71d7b0034ef073829f761
 (

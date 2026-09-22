@@ -14,5 +14,5 @@ claims and work live in [evidence](../evidence.md) and [backlog](../backlog.md).
 Previously tracked outputs from the retired implementation are preserved in
 [`results/archive/`](../../results/archive/README.md). File moves are listed in
 [the repository guide](../repository.md#previous-layout); the published
-[`research-2026-09-22` tag](https://github.com/Hosi121/fhe-native-mamba3/tree/research-2026-09-22)
+[`research-2026-09-22` tag](https://github.com/Hosi121/fhe-mamba/tree/research-2026-09-22)
 retains the original source paths.
