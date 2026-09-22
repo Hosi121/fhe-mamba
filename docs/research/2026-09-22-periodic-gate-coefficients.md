@@ -130,15 +130,15 @@ The isolated candidate checkout/build is
 `/home/kataiwa/fhemamba/gate-periodic-20260922`; it reuses the immutable baseline
 payload and installed FIDESlib/OpenFHE dependencies. The validated baseline
 checkout and binary are preserved. The campaign manifests are
-`fhemamba/experiments/dgx_spark_periodic_gate_smoke.json` and
-`fhemamba/experiments/dgx_spark_periodic_gate_generation.json`.
+`experiments/manifests/dgx_spark_periodic_gate_smoke.json` and
+`experiments/manifests/dgx_spark_periodic_gate_generation.json`.
 
 ```text
 candidate binary SHA-256: ea02d53608a7337ad94b6577bca864ef05eee876276bcc80fc009fc26b12d2b1
 native/config source SHA-256: f98b1eadf70abd972344fa27be84592194dd230ec72ba7d356a143841cde12b8
 ```
 
-The [tracked evidence](../../fhemamba/results/dgx/2026-09-22/periodic-gates/)
+The [tracked evidence](../../results/dgx/2026-09-22/periodic-gates/)
 contains the raw coefficient samples, smoke artifacts, summaries, and build
 identities. The exact source archives and native log are retained under
 `runs/gate-encoding-20260922/` and `runs/gate-periodic-20260922/`.
@@ -178,7 +178,7 @@ parameters, and all recorded ciphertext levels match. Both runs execute
 products. The masked basis adds 2460 scalar ciphertext/plaintext products
 (`273213 -> 275673`) without adding depth or a final mask.
 
-The [comparison report](../../fhemamba/results/dgx/2026-09-22/periodic-gates/generation-comparison.json)
+The [comparison report](../../results/dgx/2026-09-22/periodic-gates/generation-comparison.json)
 binds the two raw artifacts by SHA-256 and checks these conditions. Native,
 campaign, and derived generation artifacts all validate with zero errors and
 zero warnings. The full timings are one run per variant, using the earlier

@@ -127,9 +127,9 @@ these two small samples; balanced is shallower and has lower measured error.
 This is a tradeoff, not a universal schedule preference. Full-model refresh,
 packing, memory and security parameters can reverse the runtime choice.
 Raw measurements are in the
-[ABBA campaign](../../fhemamba/results/dgx/2026-09-21/normalization/abba/campaign.json).
+[ABBA campaign](../../results/dgx/2026-09-21/normalization/abba/campaign.json).
 
-The subsequent [all-site campaign](../../fhemamba/results/dgx/2026-09-21/normalization/all-sites/campaign.json)
+The subsequent [all-site campaign](../../results/dgx/2026-09-21/normalization/all-sites/campaign.json)
 passes **49/49** domains using the same weighted evaluator and fixed depth-40
 parameters. Each site gets a fresh key and 8,192 samples: 401,408 scalar
 normalization outputs in total. Worst sampled absolute error is
@@ -139,7 +139,7 @@ CKKS error certificate nor 49 whole-model layer evaluations.
 
 ## Remaining model error
 
-The [convolution-SiLU ablation](../../fhemamba/results/payload_exact_conv_ablation_20260921.json)
+The [convolution-SiLU ablation](../../results/payload_exact_conv_ablation_20260921.json)
 keeps joint gates, scheduled norms and gate SiLU fixed while making only the
 24 convolution SiLUs exact. At the same 4,096-token development window,
 maximum logit error falls **4.5000 → 0.17742**; all 4,095 next-token argmax

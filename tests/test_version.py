@@ -31,7 +31,7 @@ def test_installed_distribution_metadata_matches_active_package() -> None:
 
 
 def test_runtime_artifact_versions_use_the_package_version_source() -> None:
-    common = (ROOT / "fhemamba/experiments/dgx_mamba2_common.sh").read_text()
+    common = (ROOT / "experiments/dgx_mamba2_common.sh").read_text()
     cmake = (ROOT / "native/fideslib_stage0/CMakeLists.txt").read_text()
     native_sources = [
         (ROOT / "native/fideslib_stage0/src/fideslib_client_server_probe.cpp").read_text(),

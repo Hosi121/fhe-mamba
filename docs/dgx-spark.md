@@ -51,7 +51,7 @@ needed for the native Spark runner. Calibration text and evaluation prompt
 must be separate. Use held-out data representative of the intended workload.
 
 ```bash
-.venv/bin/python fhemamba/experiments/export_m1_payload.py \
+.venv/bin/python experiments/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --output runs/spark-payload --tokens 8 \
   --cal-text-file /path/to/calibration.txt --cal-tokens 512 \
@@ -89,7 +89,7 @@ For the fixed two-token integration payload:
 
 ```bash
 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 .venv/bin/python \
-  fhemamba/experiments/export_m1_payload.py \
+  experiments/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --normalization-bundle config/mamba2-130m-normalization-20260921.json \
   --output runs/scheduled-norm-payload --tokens 2 --cal-tokens 128 --device cpu
@@ -145,9 +145,9 @@ from independent calibration text. This retains the frozen polynomials and
 evaluation references, and replaces only state bounds:
 
 ```bash
-.venv/bin/python fhemamba/experiments/calibrate_state_coordinates.py \
+.venv/bin/python experiments/calibrate_state_coordinates.py \
   --checkpoint checkpoints/mamba2-130m-hf \
-  --payload fhemamba/results/m2_chain_payload_headclip \
+  --payload results/m2_chain_payload_headclip \
   --calibration-text /path/to/train-calibration.txt \
   --calibration-description 'independent training split, first 512 tokens' \
   --tokens 512 --output-chain runs/row-state-payload \
@@ -171,7 +171,7 @@ runs the encrypted recurrence and decodes the actual selected token IDs:
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 .venv/bin/python \
-  fhemamba/experiments/run_dgx_generation.py \
+  experiments/run_dgx_generation.py \
   --base-chain runs/stabilized-payload \
   --output-dir runs/generation-001 \
   --prompt 'The capital' --generate-tokens 4 \
@@ -237,8 +237,8 @@ reported native mode. The two dedicated campaign manifests are
 From the Spark checkout:
 
 ```bash
-python3 fhemamba/experiments/run_dgx_campaign.py \
-  --manifest fhemamba/experiments/dgx_spark_replication_ab.json \
+python3 experiments/run_dgx_campaign.py \
+  --manifest experiments/manifests/dgx_spark_replication_ab.json \
   --runner scripts/run_dgx_spark.sh \
   --env BINARY="$HOME/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib" \
   --env INPUT_CHAIN="$HOME/fhemamba/payloads/mamba2-130m" \
@@ -267,7 +267,7 @@ were encoded at their consumption levels. Mean peak RSS falls from 41.85 to
 in this small sample. See [raw evidence and limitations](evidence.md).
 
 A one-token pass does not test carried-state stability. Follow it with the
-[five-step gate](../fhemamba/experiments/dgx_spark_autoregressive.json), with
+[five-step gate](../experiments/manifests/dgx_spark_autoregressive.json), with
 fused output and paired state explicitly marked as candidates. No numerical
 candidate becomes a default until every step decrypts, every polynomial-circuit
 error is <= 0.05 and generated IDs match with zero diagnostic decrypts.
@@ -301,7 +301,7 @@ to establish a latency improvement. See the linked raw artifacts in
 [the evidence registry](evidence.md).
 
 Keep raw JSON, the campaign record, build metadata and payload identity.
-Curate small results under `fhemamba/results/dgx/`; keep large payloads and logs
+Curate small results under `results/dgx/`; keep large payloads and logs
 outside Git. Validate curated results with:
 
 ```bash

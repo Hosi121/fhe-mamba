@@ -38,7 +38,7 @@ def _run(binary, recipe, output, *extra):
     return subprocess.run(
         [
             sys.executable,
-            "fhemamba/experiments/run_normalization_probe.py",
+            "experiments/run_normalization_probe.py",
             "--binary",
             str(binary),
             "--recipe",

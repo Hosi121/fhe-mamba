@@ -58,6 +58,6 @@ cmake -S "$REPO_DIR/native/fideslib_stage0" -B "$SPARK_DIR/kernel" \
   -Dfideslib_DIR="$prefix/share/fideslib/cmake" -DFHE_STAGE0_BUILD_TESTS=ON
 cmake --build "$SPARK_DIR/kernel" -j "$BUILD_JOBS"
 ctest --test-dir "$SPARK_DIR/kernel" --output-on-failure
-python3 "$REPO_DIR/fhemamba/experiments/manage_dgx_build.py" write \
+python3 "$REPO_DIR/experiments/manage_dgx_build.py" write \
   --root "$ROOT" --fideslib-prefix "$prefix" --openfhe-prefix "$OPENFHE_PREFIX" \
   --patch-set-sha256 "$patch_hash"

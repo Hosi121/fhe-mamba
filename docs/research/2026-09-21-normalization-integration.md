@@ -61,7 +61,7 @@ precision guarantee. The first failed run records `working-tree` in its commit
 field; its exact native source/binary/library hashes and source archive are
 preserved. Subsequent runs record the parent commit and dirty-tree digest.
 
-The [raw artifacts](../../fhemamba/results/dgx/2026-09-21/normalization-integration/)
+The [raw artifacts](../../results/dgx/2026-09-21/normalization-integration/)
 retain both failures and the matched control. Source snapshots and binaries
 are under `~/fhemamba/norm-integration-20260921/history/` on Spark. Local export,
 check logs and payloads are under `runs/norm-integration-20260921/`.
@@ -82,8 +82,8 @@ Both the runtime plan and host ledger share the requirement, and a host
 regression checks that boundary. The variance remains immutable; the fix does
 not reconstruct it from a noisy affine coordinate or decrypt it.
 
-The corrected [24-layer/two-token run](../../fhemamba/results/dgx/2026-09-21/normalization-integration/m2_chain_scheduled-norm-full-chain-live-variance-r1_l24_t2.json)
-and [campaign gate](../../fhemamba/results/dgx/2026-09-21/normalization-integration/full-chain-live-variance-campaign.json)
+The corrected [24-layer/two-token run](../../results/dgx/2026-09-21/normalization-integration/m2_chain_scheduled-norm-full-chain-live-variance-r1_l24_t2.json)
+and [campaign gate](../../results/dgx/2026-09-21/normalization-integration/full-chain-live-variance-campaign.json)
 **pass**, including the dedicated final RMSNorm on both tokens. The recurrent
 state and convolution FIFO remain encrypted between the two fixed input
 tokens; this does not exercise generated-token selection.
@@ -122,7 +122,7 @@ variance input budget.
 
 ## Matching-payload long-window check
 
-The [1,024-token quality screen](../../fhemamba/results/payload_native_scheduled_norm_20260921.json)
+The [1,024-token quality screen](../../results/payload_native_scheduled_norm_20260921.json)
 uses this exact native payload on the first window of the cached WikiText-2
 test tokens. Exact and exact-with-mask controls are finite, with PPL
 13.25128 / 13.24844. The exported polynomial circuit is **non-finite**, so its

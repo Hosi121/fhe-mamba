@@ -52,7 +52,7 @@ maximum degrees 1,024 / 512; no quality text enters coefficient fitting.
 
 ## Quality of the actual exported payload
 
-The [payload-bound quality result](../../fhemamba/results/payload_stabilized_native_quality_20260921.json)
+The [payload-bound quality result](../../results/payload_stabilized_native_quality_20260921.json)
 uses the first 1,024 and 4,096 cached WikiText-2 test tokens. These are
 overlapping prefix windows, not independent samples. Each window resets state,
 uses teacher forcing, and compares exact, exact-with-mask and exported-poly
@@ -78,7 +78,7 @@ in [testing](../testing.md). A byte-identical copy is now included under
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python \
-  fhemamba/experiments/export_m1_payload.py \
+  experiments/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --normalization-bundle config/mamba2-130m-normalization-20260921.json \
   --stabilized-gate-bundle config/mamba2-130m-gates-20260921.npz \
@@ -95,11 +95,11 @@ quality study:
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python \
-  fhemamba/experiments/run_payload_quality.py \
+  experiments/run_payload_quality.py \
   --payload runs/stabilized-payload \
   --tokens-pt runs/state-study-20260921/wikitext2.test.pt \
   --windows 1024 4096 --max-windows 1 --threads 2 --device cuda \
-  --output fhemamba/results/payload_stabilized_native_quality_rerun.json
+  --output results/payload_stabilized_native_quality_rerun.json
 ```
 
 Build and transfer with the [Spark runbook](../dgx-spark.md), using a separate
@@ -112,7 +112,7 @@ not a 128-bit full-chain security result or a separated server protocol.
 
 ## Encrypted integration measurements
 
-The corrected [one-layer/two-token probe](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-smoke-r2_l1_t2.json)
+The corrected [one-layer/two-token probe](../../results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-smoke-r2_l1_t2.json)
 passes with polynomial-circuit errors **0.0001111 / 0.0002910** and exact-model
 errors **0.002256 / 0.009276**. Both outputs are finite, with zero intermediate
 decryptions. Evaluation is **26.97 seconds** after **23.34 seconds** of setup,
@@ -126,7 +126,7 @@ The input payload hash is
 also recorded by the plaintext quality screen. Full-chain results must be
 assessed separately from this one-layer probe.
 
-The subsequent [probe with PS block scaling](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-smoke-r3_l1_t2.json)
+The subsequent [probe with PS block scaling](../../results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-smoke-r3_l1_t2.json)
 also passes: errors **0.0001124 / 0.0003140**, **26.83 seconds** evaluation,
 **32.69 GiB** peak RSS, and **3,302** ct-pt products. Rotations, ct-ct products
 and physical bootstraps remain **732 / 466 / 22**. The additional 24 scalar
@@ -135,7 +135,7 @@ from the preceding run; these observations are not a latency or precision
 improvement claim. This version's binary SHA-256 is
 `38daf92cd7cccc62d3af0072787a162f52cf33fc254bd7499e349a2774036d12`.
 
-The first [completed full-chain run](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-full-chain-r2_l24_t2.json)
+The first [completed full-chain run](../../results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-full-chain-r2_l24_t2.json)
 with this binary **fails numerical accuracy** despite completing all 24 layers
 and both final normalizations. Its finite decrypted outputs have errors
 **4.58e144 / 4.09e144** against the polynomial reference. Evaluation takes
@@ -145,8 +145,8 @@ Zero intermediate decryptions and successful control flow do not make this
 a passing encrypted integration. This failed result is retained separately
 from the one-layer probes and plaintext quality reports.
 
-The [phase diagnostic](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-diagnostic-r1_l24_t1.json)
-and its [verbatim log excerpt](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/stabilized-diagnostic-r1-excerpt.txt)
+The [phase diagnostic](../../results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-diagnostic-r1_l24_t1.json)
+and its [verbatim log excerpt](../../results/dgx/2026-09-21/stabilized-integration/stabilized-diagnostic-r1-excerpt.txt)
 locate the first corruption at `t0.L08.y_scaled`.
 The first eight layer boundaries differ from their references by at most
 `0.000221`. The ninth readout reaches level 40 with maximum real magnitude
@@ -163,7 +163,7 @@ one more when shared head extraction is enabled. This refreshes a level-34
 write before that path rather than sending its readout into the exhausted
 Meta-BTS correction. A host regression replays these levels.
 
-The [nine-layer/one-token confirmation](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-tail-r1_l9_t1.json)
+The [nine-layer/one-token confirmation](../../results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-tail-r1_l9_t1.json)
 passes at polynomial-circuit error **0.0002689** and exact-model error
 **0.0128842**, using the unchanged coefficients and **0.05** threshold with
 zero intermediate decryptions. At layer 8, the joint write now refreshes from
@@ -173,8 +173,8 @@ physical bootstraps. This truncated chain has no final model normalization
 or carried second token. The corrected binary SHA-256 is
 `57636814d5792c3bc87e1c6721a8aaaaaf3aa79946e54ea9e4c956fcc95ce085`.
 
-The corrected [24-layer/two-token result](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-full-chain-r3_l24_t2.json)
-and [campaign](../../fhemamba/results/dgx/2026-09-21/stabilized-integration/stabilized-full-chain-r3-campaign.json)
+The corrected [24-layer/two-token result](../../results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-full-chain-r3_l24_t2.json)
+and [campaign](../../results/dgx/2026-09-21/stabilized-integration/stabilized-full-chain-r3-campaign.json)
 **pass** with the same payload, binary and **0.05** error threshold:
 
 | Measurement | Result |

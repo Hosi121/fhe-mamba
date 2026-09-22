@@ -3,9 +3,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ACTIVE_TREES = (
     ROOT / "scripts",
-    ROOT / "fhemamba" / "src",
-    ROOT / "fhemamba" / "experiments",
-    ROOT / "fhemamba" / "slurm",
+    ROOT / "src",
+    ROOT / "experiments",
 )
 CHECKED_SUFFIXES = {".py", ".sh", ".sbatch"}
 

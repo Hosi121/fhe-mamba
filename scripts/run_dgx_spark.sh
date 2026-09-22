@@ -5,13 +5,13 @@ ROOT="${FHEMAMBA_REMOTE_ROOT:-$HOME/fhemamba}"
 expected_binary="$ROOT/spark/kernel/stage1_mamba2_decode_fideslib"
 BINARY="${BINARY:-$expected_binary}"
 [[ "$BINARY" == "$expected_binary" ]] || { echo 'Use the validated Spark binary' >&2; exit 2; }
-manager="$REPO_DIR/fhemamba/experiments/manage_dgx_build.py"
+manager="$REPO_DIR/experiments/manage_dgx_build.py"
 export LD_LIBRARY_PATH
 LD_LIBRARY_PATH="$(python3 "$manager" library-path --root "$ROOT"):/usr/local/cuda-13.0/lib64"
 export CUDA_LAUNCH_BLOCKING="${CUDA_LAUNCH_BLOCKING:-1}"
 FIDESLIB_SYNC_PROFILE=full
 INPUT_CHAIN="${INPUT_CHAIN:-$ROOT/payloads/mamba2-130m}"
-source "$REPO_DIR/fhemamba/experiments/dgx_mamba2_common.sh"
+source "$REPO_DIR/experiments/dgx_mamba2_common.sh"
 init_dgx_mamba2_defaults
 LAYERS="${LAYERS:-24}"
 TOKENS="${TOKENS:-1}"

@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MANAGER = ROOT / "fhemamba" / "experiments" / "manage_b300_build_metadata.py"
+MANAGER = ROOT / "experiments" / "manage_b300_build_metadata.py"
 
 
 def _platform_values() -> dict[str, str]:

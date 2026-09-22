@@ -74,7 +74,7 @@ input-history principle for ordinary GPU inference; this is not a novelty
 claim. Our proposed FHE lowering must additionally preserve the actual
 polynomial circuit, levels and noise of every factor.
 
-The implementation in [`ssm_algebra.py`](../../fhemamba/src/fhemamba/ssm_algebra.py)
+The implementation in [`ssm_algebra.py`](../../src/fhemamba/ssm_algebra.py)
 updates products directly. It never divides by a prefix product and never
 replaces a product of polynomial decays with an exponential of a sum.
 Those distinctions matter: the current head-clipped surrogate has exact zero
@@ -86,7 +86,7 @@ On factors from the actual 24-layer checkpoint, 64 tokens and windows
 and final-state difference `1.137e-13` in float64. Nonzero initial states,
 zero decays and partial windows have separate tests. This establishes
 reassociation parity, **not encrypted speed or CKKS precision**. The
-[`raw report`](../../fhemamba/results/ssm_algebra_20260921.json) records source
+[`raw report`](../../results/ssm_algebra_20260921.json) records source
 and checkpoint hashes and input token IDs.
 
 For `H=24, P=64, N=128`, dense state is 196,608 scalars. An eight-entry
@@ -198,7 +198,7 @@ bounded by `epsilon M[h,p] ||c_h||_1`, compared with
 not a promised reduction of final model error. Earlier errors, coefficient
 encoding, range escapes, and randomized refresh errors still matter.
 
-The [calibration report](../../fhemamba/results/state_coordinate_calibration_20260921.json)
+The [calibration report](../../results/state_coordinate_calibration_20260921.json)
 uses the first 512 WikiText-2 **train** tokens, taking maxima over both exact
 and frozen-poly trajectories. The mean row/group scale ratio is 0.095974;
 per-layer means range from 0.057 to 0.144. The held-out test split is separate.
@@ -207,7 +207,7 @@ only state bounds change. Compare group and row modes using this **same** new
 payload (`e788c496…`), since comparison with older calibration would confound
 the coordinate map with different bounds. Calibration maxima remain empirical.
 
-The [reference-coverage audit](../../fhemamba/results/state_scale_coverage_20260921.json)
+The [reference-coverage audit](../../results/state_scale_coverage_20260921.json)
 finds an important limitation: the five-step public benchmark stays below
 0.8731 times its group scale, but reaches 9.0716 times some row scales.
 Of 23,592,960 state coordinates over all layer/token pairs, 1,912 exceed the
@@ -346,7 +346,7 @@ without a reciprocal, square root or polynomial normalization. For a *fixed*
 `Mᵀ diag(1,k) M = diag(1,k)`. The invariant is `x²+k y²`; a fixed coordinate
 scaling turns M into a rotation of angle `2 asin(θ/2)`.
 
-The [implemented oracle](../../fhemamba/src/fhemamba/phase_algebra.py) at
+The [implemented oracle](../../src/fhemamba/phase_algebra.py) at
 θ=0.5 over 1,024 steps keeps Euclidean norm between 1.0000 and 1.0328,
 instead of the cubic phasor's collapse to 0.0863. But its frequency error
 accumulates to **5.489 radians**. Preserving amplitude does not preserve
@@ -364,7 +364,7 @@ spectral_radius(F) = 1.018696078 > 1.
 Repeating that public schedule grows along an eigenvector. Each individual
 matrix has unit-modulus eigenvalues, but the product need not. Thus local
 eigenvalue bounds and unit determinant do not establish stability for a
-selective SSM. The [raw screen](../../fhemamba/results/phase_schedules_20260921.json)
+selective SSM. The [raw screen](../../results/phase_schedules_20260921.json)
 and independent tests retain both the useful fixed-angle behavior and the
 counterexample.
 
@@ -393,7 +393,7 @@ This does not bound its maximum. We corrected the contrary explanation in
 `head_pruning_policy=legacy-largest-step-approximation`, without silently
 changing the measured polynomial circuit.
 
-The [payload audit](../../fhemamba/results/decay_composition_20260921.json)
+The [payload audit](../../results/decay_composition_20260921.json)
 finds 47 pruned heads. None has a maximum below `exp(-32)` on its exported
 softplus-input interval; those maxima range from 0.97701 to 0.999999745.
 They are analytic extrema evaluated in float64 on a shared layer interval,
@@ -434,13 +434,13 @@ Direct Bernstein approximation may converge too slowly; constrained fitting
 and conversion to a depth-efficient evaluation basis should be compared.
 No nonconstant polynomial can be bounded on the entire real line.
 
-An implemented [composition screen](../../fhemamba/experiments/probe_decay_composition.py)
+An implemented [composition screen](../../experiments/probe_decay_composition.py)
 fits every layer/head on its exported softplus domain and evaluates on 4,097
 independent uniform points. Among 529 existing active heads, degree 64 reaches
 worst sampled error `1.100e-4`, but 126 heads leave `[0,1]` by more than
 `1e-12`; the overall sampled range is approximately
 `[-2.353e-5, 1.000006603]`. With all 576 heads, worst error is `1.894e-3`.
-These are [negative screening results](../../fhemamba/results/decay_composition_20260921.json),
+These are [negative screening results](../../results/decay_composition_20260921.json),
 not a certified maximum or a reason to silently clip encrypted values. The
 screen approximates the exact composite; it does not claim equality to the
 existing squared/head-clipped surrogate. Constrained fitting or narrower
@@ -566,7 +566,7 @@ On the first 1,024 test tokens, layer 5's gate input reaches `28.5305`, outside
 the fitted SiLU interval `[-22.6745, 25.4530]`. Its degree-64 polynomial produces
 about `4.0213e9`, causing a gated variance of `1.0851e14`. The following
 inverse-square-root polynomial becomes non-finite at token index 756. The
-[operator diagnostic](../../fhemamba/results/payload_domain_20260921.json)
+[operator diagnostic](../../results/payload_domain_20260921.json)
 records each input/output domain without clipping. This is distinct from
 CKKS refresh noise and from the earlier plaintext-addition backend bug.
 
@@ -609,14 +609,14 @@ smaller and could support packed coefficient vectors, at added planner/cache
 complexity. A convolution envelope follows by summing these row bounds with
 the absolute public convolution weights and adding the absolute bias.
 
-The new [rational Bernstein verifier](../../fhemamba/src/fhemamba/polynomial_certificate.py)
+The new [rational Bernstein verifier](../../src/fhemamba/polynomial_certificate.py)
 interprets stored binary64 coefficients as exact rational numbers, transforms
 the Chebyshev polynomial to Bernstein form, and subdivides by exact midpoint
 de Casteljau steps. The convex hull of each segment's Bernstein coefficients
 certifies its range. Unresolved depth/node limits fail closed; endpoint
 violations are exact counterexamples. It verifies `y0>=0` and `v y0^2<=3` for
 all **48** existing block/gated initializers on their declared intervals in
-the [certificate report](../../fhemamba/results/payload_range_certificate_20260921.json).
+the [certificate report](../../results/payload_range_certificate_20260921.json).
 The final RMS reuses the last block's polynomial and interval.
 
 This does **not** establish that private variances stay in those intervals,
@@ -625,7 +625,7 @@ coefficients. Those need explicit numerical slack. The gate-envelope values
 in the report are floating-point estimates of the analytic expression,
 separate from the exact-rational initializer certificates.
 
-The [public-domain gate screen](../../fhemamba/results/public_gate_polynomials_20260921.json)
+The [public-domain gate screen](../../results/public_gate_polynomials_20260921.json)
 uses a 10% numerical margin and 8,193 independent uniform validation points.
 Worst sampled SiLU errors across 24 layers are 0.4720 / 0.08956 / 0.02185 /
 0.004756 / 0.0002425 for degrees 64 / 128 / 192 / 256 / 384. These candidates
@@ -633,7 +633,7 @@ trade more polynomial work for a defensible domain; sampling is not a uniform
 error certificate or a language-quality gate. They are not native defaults.
 
 Changing only the gate fits is insufficient. The
-[degree-384 public-gate diagnostic](../../fhemamba/results/payload_public_gate_domain_20260921.json)
+[degree-384 public-gate diagnostic](../../results/payload_public_gate_domain_20260921.json)
 gets past layer 5 but encounters a second domain failure: layer 11's gated
 variance reaches 8,296.32, outside its interval ending at 7,403.74, and the
 initializer becomes non-finite at token 249. This confirms that certificates
@@ -674,7 +674,7 @@ H still needs a defensible activation bound and CKKS slack, and extra Newton
 steps add depth and refresh cost. No native default changes with this probe.
 
 The first development prefix becomes finite, but the
-[window at offset 16,384](../../fhemamba/results/payload_positive_seed_quality_20260921.json)
+[window at offset 16,384](../../results/payload_positive_seed_quality_20260921.json)
 still fails: layer 13's convolution SiLU receives 20.399 above its upper domain
 15.1154 and extrapolates to approximately -7.8359e24. Extending the public-weight
 envelope to convolution channels is therefore part of the same design,
@@ -682,7 +682,7 @@ not evidence that a norm initializer alone solves the quality problem.
 
 Adding degree-768 convolution SiLU fits over the public depthwise-convolution
 envelopes makes this development window finite. The
-[resulting candidate](../../fhemamba/results/payload_public_activations_quality_20260921.json)
+[resulting candidate](../../results/payload_public_activations_quality_20260921.json)
 has PPL 31.00269 versus exact 30.84142 (+0.5229%) on 1,023 predicted tokens;
 all 313 observed stages stay finite, with no non-decay domain escape.
 This is a small plaintext development
@@ -690,7 +690,7 @@ result with explicitly different polynomials. Its larger degrees and eight
 Newton refinements must be included in any encrypted depth/refresh budget.
 
 The coefficients were then kept fixed for an
-[unused 1,024-token window at offset 32,768](../../fhemamba/results/payload_public_activations_holdout_20260921.json).
+[unused 1,024-token window at offset 32,768](../../results/payload_public_activations_holdout_20260921.json).
 It stays finite with exact/candidate PPL 19.67562/19.65756 and 99.022% argmax
 agreement. All 97 override descriptors and coefficient hashes match the
 development run. These two short windows support continued evaluation of
@@ -703,7 +703,7 @@ The fixed 97-override candidate fails on a new 4,096-token window at offset
 -4.69550; the first non-finite checkpoint is `y`. Exact PPL is 17.56673 and
 candidate PPL is undefined. The two earlier finite 1,024-token windows remain
 valid observations, but do not support a general stability claim. The
-[raw report](../../fhemamba/results/payload_public_activations_long_20260921.json)
+[raw report](../../results/payload_public_activations_long_20260921.json)
 retains all operator ranges and coefficient hashes.
 
 A further calibration attempt uses four disjoint training windows of 256
@@ -735,7 +735,7 @@ Bernstein knots, with `K=D+1/c`, and rounds write coefficients inward when
 necessary. All 576 unpruned heads certify at degrees 32/64/128. Yet at degree
 128 the worst sampled decay error is **0.39630** and write error **2.85355**:
 the simple Bernstein approximation excessively smooths sharp transitions on
-wide public envelopes. See the [probe](../../fhemamba/results/bounded_selective_gates_20260921.json).
+wide public envelopes. See the [probe](../../results/bounded_selective_gates_20260921.json).
 Stability is necessary, but this approximation is rejected for checkpoint
 replacement. Subsequent Chebyshev conversion and CKKS rounding would require
 new certificates; this certificate applies to the Bernstein representation.
@@ -790,7 +790,7 @@ Fraction verifier independently checks its results on small polynomials,
 including subdivision limits and binary-epsilon counterexamples. No roots
 or sampled extrema are trusted to certify the range.
 
-The [fit report](../../fhemamba/results/dissipative_selective_gates_20260921.json)
+The [fit report](../../results/dissipative_selective_gates_20260921.json)
 certifies **all 576 heads**, without pruning. Fitting reads public weights,
 not text or calibration activations. The policy starts at degrees 1,024 / 512
 for p / q, trims trailing coefficient l1 mass up to `1e-11` per head, and
@@ -802,7 +802,7 @@ On 8,193 independent uniform points per head, worst sampled errors are
 The degree-128 Bernstein probe used a different arithmetic budget, so this
 comparison does not establish a cost improvement.
 
-The [first 4,096-token evaluation](../../fhemamba/results/payload_dissipative_long_20260921.json)
+The [first 4,096-token evaluation](../../results/payload_dissipative_long_20260921.json)
 revisits the development failure at offset 65,536. All observed stages are
 finite, with no recorded domain or decay-range escape. Exact PPL is 17.56702,
 candidate PPL 17.65695 (+0.5119%), and top-1 agreement 97.9976%.
@@ -814,18 +814,18 @@ Twenty-two convolution coefficient hashes differ from the earlier CPU
 artifact, so this is not a bit-identical copy of that earlier candidate.
 A separate CUDA control binds the comparison to matching coefficients.
 The 24 joint gates also restore the previously pruned heads.
-The [matched control](../../fhemamba/results/payload_public_activations_cuda_control_20260921.json)
+The [matched control](../../results/payload_public_activations_cuda_control_20260921.json)
 has identical source/dependency hashes and all 97 other coefficients; it
 still fails at layer-0 `y` on the same input.
 
-The [previously unused 4,096-token window at offset 98,304](../../fhemamba/results/payload_dissipative_holdout_20260921.json)
+The [previously unused 4,096-token window at offset 98,304](../../results/payload_dissipative_holdout_20260921.json)
 uses the same bundle and all 121 override descriptors/coefficients as the
 development run. Exact PPL is 15.22679, candidate PPL 15.25058 (+0.1563%),
 top-1 agreement 98.4860%, and maximum logit error 53.8167. All observed stages
 are finite, with zero recorded domain or decay-range escapes. This is a
 fixed-candidate holdout screen within WikiText-2, not a full-dataset result.
 
-An [ablation with only the gates approximated](../../fhemamba/results/dissipative_gate_only_ablation_20260921.json)
+An [ablation with only the gates approximated](../../results/dissipative_gate_only_ablation_20260921.json)
 revisits offset 65,536 and leaves the other nonlinearities exact. It uses the
 same gate bundle, obtains PPL 17.56700 versus 17.56702, preserves all 4,095
 next-token argmax choices, and has maximum logit error 0.025864. Thus the
@@ -844,7 +844,7 @@ is claimed by these plaintext results.
 
 ### Interval-certified normalization schedules
 
-A single-site [exact-normalization ablation](../../fhemamba/results/payload_exact_first_norm_ablation_20260921.json)
+A single-site [exact-normalization ablation](../../results/payload_exact_first_norm_ablation_20260921.json)
 identifies the next major defect. At offset 65,536, replacing only layer 0's
 gated inverse square root reduces maximum logit error **82.6964 → 4.50343**
 and the PPL gap **+0.5119% → +0.00999%**. This diagnostic uses an exact
@@ -901,7 +901,7 @@ It corrects an existing small error quadratically; it does not remove new
 CKKS errors in the final products. It requires three ct-ct products and no
 decryption, input-dependent branch, division or lookup.
 
-The [49-site report](../../fhemamba/results/normalization_schedules_20260921.json)
+The [49-site report](../../results/normalization_schedules_20260921.json)
 certifies `1-1e-7 <= sqrt(v)*y_final <= 1` on every declared interval. Each
 lower endpoint includes the model epsilon rounded to float32; upper endpoints
 remain `4*old_hi`, exactly the previous widened-domain policy. These are
@@ -929,14 +929,14 @@ The frozen bundle's smallest initial `u` is around `1.7e-10`: absolute CKKS nois
 refresh error must be budgeted before native adoption. A float64 certificate
 does not demonstrate an executable CKKS precision schedule.
 
-The [fully polynomial development run](../../fhemamba/results/payload_scheduled_norm_long_20260921.json)
+The [fully polynomial development run](../../results/payload_scheduled_norm_long_20260921.json)
 reproduces the ablation's improvement without an exact-operator substitution:
 PPL **17.56702 → 17.56877 (+0.00994%)**, top-1 agreement **99.8779%**, maximum
 logit error **4.5000**, versus 82.6964 before this normalization replacement.
 All 72 other override descriptors/coefficients, gate bundle and input tokens
 match the preceding joint-gate candidate.
 
-The [fresh window at offset 131,072](../../fhemamba/results/payload_scheduled_norm_holdout_20260921.json)
+The [fresh window at offset 131,072](../../results/payload_scheduled_norm_holdout_20260921.json)
 uses the identical 121 override descriptors and source hashes: PPL
 **14.15001 → 14.15097 (+0.00682%)**, top-1 agreement **99.7314%**, maximum logit
 error **9.1330**. Both 4,096-token runs are finite with no observed domain
@@ -984,7 +984,7 @@ Actual ct-ct products fall from 3,363 to 3,195 and ct-pt products from 13,950
 to 13,404, exactly matching the planner's 168 / 546 savings. Rotations 7,575
 and physical bootstraps 98 are unchanged; direct level drops increase from
 5,867 to 6,620. Evaluation is 129.594 / 128.353 s, one run per arm, so no
-latency claim follows. See the [campaign](../../fhemamba/results/dgx/2026-09-21/spark-chebyshev-ab-20260921.json).
+latency claim follows. See the [campaign](../../results/dgx/2026-09-21/spark-chebyshev-ab-20260921.json).
 The candidate remains opt-in pending carried-state and additional-prompt gates.
 
 ## 7. Cryptographic mechanisms worth testing
@@ -1130,14 +1130,14 @@ correctness against a malicious server are distinct properties. The current
 Reproduce the implemented algebra probe:
 
 ```bash
-.venv/bin/python fhemamba/experiments/probe_ssm_algebra.py \
+.venv/bin/python experiments/probe_ssm_algebra.py \
   --checkpoint checkpoints/mamba2-130m-hf --tokens 64 \
   --output runs/ssm-algebra.json
-.venv/bin/pytest fhemamba/tests/test_ssm_algebra.py
-.venv/bin/python fhemamba/experiments/probe_decay_composition.py \
-  --payload fhemamba/results/m2_chain_payload_headclip \
+.venv/bin/pytest tests/test_ssm_algebra.py
+.venv/bin/python experiments/probe_decay_composition.py \
+  --payload results/m2_chain_payload_headclip \
   --output runs/decay-composition.json
-.venv/bin/python fhemamba/experiments/probe_phase_schedules.py \
+.venv/bin/python experiments/probe_phase_schedules.py \
   --output runs/phase-schedules.json
 ```
 

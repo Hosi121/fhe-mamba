@@ -60,13 +60,13 @@ def test_b300_sync_profiles_keep_experimental_builds_isolated() -> None:
 
 
 def test_b300_long_horizon_manifest_pins_promoted_path(tmp_path: Path) -> None:
-    manifest_path = ROOT / "fhemamba" / "experiments" / "b300_autoregressive_prompt2_generate4.json"
+    manifest_path = ROOT / "experiments/manifests/b300_autoregressive_prompt2_generate4.json"
     manifest = json.loads(manifest_path.read_text())
     output = tmp_path / "dry-run.json"
     subprocess.run(
         [
             sys.executable,
-            "fhemamba/experiments/run_dgx_campaign.py",
+            "experiments/run_dgx_campaign.py",
             "--manifest",
             str(manifest_path),
             "--output-json",
@@ -130,7 +130,7 @@ def test_mamba2_decode_wires_complex_state_pairing() -> None:
         ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_decode_fideslib.cpp"
     ).read_text()
     config = (ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_config.cpp").read_text()
-    runner = (ROOT / "fhemamba" / "experiments" / "dgx_mamba2_common.sh").read_text()
+    runner = (ROOT / "experiments" / "dgx_mamba2_common.sh").read_text()
 
     assert 'arg == "--complex-state-pairing"' in config
     assert "SetCKKSDataType(args.complex_state_pairing ? COMPLEX : REAL)" in source
@@ -145,7 +145,7 @@ def test_mamba2_decode_wires_shared_head_expansion() -> None:
         ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_decode_fideslib.cpp"
     ).read_text()
     config = (ROOT / "native" / "fideslib_stage0" / "src" / "stage1_mamba2_config.cpp").read_text()
-    runner = (ROOT / "fhemamba" / "experiments" / "dgx_mamba2_common.sh").read_text()
+    runner = (ROOT / "experiments" / "dgx_mamba2_common.sh").read_text()
 
     assert 'arg == "--shared-head-expansion"' in config
     assert "place_all_heads" in source

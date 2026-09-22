@@ -7,7 +7,7 @@
 // (--auto-bootstrap-headroom), and the final RMSNorm when the full chain is
 // loaded.
 //
-// Implements the verified per-layer circuit of fhemamba/src/fhemamba/lowering.py
+// Implements the verified per-layer circuit of src/fhemamba/lowering.py
 // looped over tokens with real ciphertext state carry:
 //   block RMSNorm -> in_proj BSGS -> mask splits -> conv FIFO + bias ->
 //   conv SiLU (Chebyshev) -> dt softplus^2 -> decay exp(dt*A) -> slot expands ->
@@ -18,7 +18,7 @@
 // decrypts each completed final_norm for client-side token selection.
 //
 // Payload: fhemamba m1 export (meta.json + <name>.bin float32-LE row-major),
-// produced by fhemamba/src/fhemamba/m1_payload.py.
+// produced by src/fhemamba/m1_payload.py.
 //
 // Packing:
 //   packed layout: vectors in slots 0..k-1 (hidden 768; in_proj output 3352 =
@@ -156,7 +156,7 @@ using fhemamba::handoff::serialize_context;
 
 // dgx-measured FIDESlib v2.1.0 bootstrap output: GetLevel() == 18 after
 // EvalBootstrap at ring 131072/depth 44/scale 59 and ring 65536/depth 28/
-// scale 59 (fhemamba/results/dgx/bootstrap_probe_*.json, which report the
+// scale 59 (results/dgx/bootstrap_probe_*.json, which report the
 // REMAINING levels: 26 and 10). At the default depth 44 that leaves a
 // 26-level segment budget between mid-circuit refresh points. The refresh
 // floor kMinBootstrapGain skips refreshes that cannot usefully lower a
@@ -375,7 +375,7 @@ struct RecurrenceDebugMetrics {
 };
 
 // ---------------------------------------------------------------------------
-// Input-replicated BSGS (authority: fhemamba/src/fhemamba/bsgs_layout.py).
+// Input-replicated BSGS (authority: src/fhemamba/bsgs_layout.py).
 // window = n * ceil((m+n)/n) (multiple of n, >= m+n: no read crosses a window
 // boundary); r = batch/window identical replicas of the period-n input tile.
 // Schedule (verified bitwise against the spec simulator): for each k <
@@ -3385,7 +3385,7 @@ auto main(int argc, char* argv[]) -> int {
 
     // -----------------------------------------------------------------------
     // Input-replicated BSGS matmul: schedule verified bitwise against the
-    // spec simulator (fhemamba/src/fhemamba/bsgs_layout.py). Extension, fill,
+    // spec simulator (src/fhemamba/bsgs_layout.py). Extension, fill,
     // and fold are rotate/add only (0 levels); the matmul is one ct-pt level,
     // so the level ledger matches the legacy path. Requires the input clean
     // outside [0, input_dim) (established invariants for hidden and y).

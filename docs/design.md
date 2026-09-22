@@ -1,6 +1,6 @@
 # Design: encrypted recurrent language models
 
-Updated 2026-09-21. This is the active design; `fhemamba/DESIGN.md` remains a
+Updated 2026-09-21. This is the active design; `docs/archive/phase0-design.md` remains a
 historical log. The immediate reference is the public Mamba-2-130M checkpoint.
 The larger objective is a usable language model whose server-side inference
 never decrypts client data.

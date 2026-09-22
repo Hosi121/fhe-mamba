@@ -8,7 +8,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location(
-    "manage_dgx_build", ROOT / "fhemamba/experiments/manage_dgx_build.py"
+    "manage_dgx_build", ROOT / "experiments/manage_dgx_build.py"
 )
 assert spec is not None
 assert spec.loader is not None
