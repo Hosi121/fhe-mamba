@@ -1,6 +1,6 @@
-# FHE Mamba
+# FHE Mamba (Mamba-2)
 
-[![CI](https://github.com/Hosi121/fhe-native-mamba3/actions/workflows/ci.yml/badge.svg)](https://github.com/Hosi121/fhe-native-mamba3/actions/workflows/ci.yml)
+[![CI](https://github.com/Hosi121/fhe-mamba/actions/workflows/ci.yml/badge.svg)](https://github.com/Hosi121/fhe-mamba/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Research software for **Mamba-2 inference with encrypted activations and recurrent
@@ -8,8 +8,8 @@ state**: a Python/PyTorch reference, certified polynomial operators, and a CKKS
 GPU implementation using OpenFHE and FIDESlib.
 
 The current checkpoint is **Mamba-2-130M** and the measured GPU platform is
-**DGX Spark**. The Python package is `fhemamba`; the repository's historical
-name `fhe-native-mamba3` does not imply Mamba-3 support.
+**DGX Spark**. The project is **FHE Mamba** (`fhe-mamba`); the Python package
+and CLI are both `fhemamba`.
 
 [Reproduce](docs/reproducing.md) · [Documentation](docs/README.md) ·
 [Research and results](docs/research/README.md) · [Contribute](CONTRIBUTING.md)
@@ -20,8 +20,8 @@ Requires Python 3.10+ and [uv](https://docs.astral.sh/uv/getting-started/install
 Run from the repository root:
 
 ```bash
-git clone https://github.com/Hosi121/fhe-native-mamba3.git
-cd fhe-native-mamba3
+git clone https://github.com/Hosi121/fhe-mamba.git
+cd fhe-mamba
 uv sync --locked --extra experiments
 uv run --no-sync python examples/cpu_smoke.py
 ```
@@ -85,6 +85,6 @@ the example, recorded-artifact validation and installed-wheel execution.
 Code and original coefficient bundles are [MIT licensed](LICENSE).
 Checkpoints and native dependencies are downloaded separately; see
 [third-party notices](THIRD_PARTY_NOTICES.md). The immutable
-[September 22 research snapshot](https://github.com/Hosi121/fhe-native-mamba3/releases/tag/research-2026-09-22)
+[September 22 research snapshot](https://github.com/Hosi121/fhe-mamba/releases/tag/research-2026-09-22)
 retains the original measured layout; [path changes](docs/repository.md#previous-layout)
 are documented for readers following older commands.
