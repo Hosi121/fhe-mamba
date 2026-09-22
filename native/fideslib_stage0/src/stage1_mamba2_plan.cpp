@@ -11,6 +11,34 @@
 
 namespace fhemamba::stage1 {
 
+auto rotation_sum_schedule(int count, bool logarithmic)
+    -> std::vector<RotationSumStep> {
+  if (count <= 0) {
+    throw std::invalid_argument("rotation sum count must be positive");
+  }
+  std::vector<RotationSumStep> steps;
+  if (!logarithmic) {
+    for (int offset = 1; offset < count; ++offset) {
+      steps.push_back({offset, false});
+    }
+    return steps;
+  }
+  int bit = 1;
+  while (bit <= count / 2) {
+    bit *= 2;
+  }
+  int filled = 1;
+  for (bit /= 2; bit > 0; bit /= 2) {
+    steps.push_back({filled, true});
+    filled *= 2;
+    if ((count & bit) != 0) {
+      steps.push_back({filled, false});
+      ++filled;
+    }
+  }
+  return steps;
+}
+
 auto resolve_replicated_shape(int output_dim, int input_dim, int batch, int force_r)
     -> ReplicatedShape {
   if (output_dim <= 0 || input_dim <= 0 || batch <= 0 || force_r < 0) {
@@ -19,7 +47,9 @@ auto resolve_replicated_shape(int output_dim, int input_dim, int batch, int forc
   ReplicatedShape shape;
   const int window =
       input_dim * ((output_dim + input_dim + input_dim - 1) / input_dim);
-  int replicas = batch / window;
+  // More replicas than diagonals only fold empty windows; on small matrices
+  // those extra cyclic shifts can wrap into live output slots.
+  int replicas = std::min(input_dim, batch / window);
   if (force_r > 0) {
     replicas = std::min(replicas, force_r);
   }
@@ -40,9 +70,9 @@ auto resolve_interleaved_replicated_shape(int output_dim, int input_dim,
     throw std::invalid_argument(
         "interleaved replicated BSGS dimensions must be positive");
   }
-  const int maximum = force_r > 0
-                          ? std::min(batch / input_dim - 1, force_r)
-                          : batch / input_dim - 1;
+  const int maximum = std::min(
+      input_dim, force_r > 0 ? std::min(batch / input_dim - 1, force_r)
+                            : batch / input_dim - 1);
   for (int replicas = maximum; replicas > 1; --replicas) {
     const int required = output_dim + replicas - 1;
     const int window =
@@ -110,15 +140,16 @@ auto replicated_bsgs_pre_mask(const std::vector<double>& weights, int output_dim
 }
 
 // Rotation indices for one replicated matmul: input self-extension, window
-// fill, per-k diagonal rolls, and the fold (doubling strides when r is a
-// power of two, sequential otherwise) — all NAF-composable.
+// fill, per-k diagonal rolls, and fold. Use the executing schedule so key
+// selection and frequency estimates cannot retain unused linear-fill keys.
 void insert_replicated_rotations(std::set<int32_t>& rotations, int input_dim,
                                  const ReplicatedShape& shape) {
-  for (int t = 1; t < shape.reps; ++t) {
-    rotations.insert(static_cast<int32_t>(-t * input_dim));
+  for (const auto& step : rotation_sum_schedule(shape.reps, shape.logarithmic_replication)) {
+    rotations.insert(static_cast<int32_t>(-step.offset * input_dim));
   }
-  for (int j = 1; j < shape.replicas + shape.guard_windows; ++j) {
-    rotations.insert(static_cast<int32_t>(-j * shape.window));
+  for (const auto& step : rotation_sum_schedule(
+           shape.replicas + shape.guard_windows, shape.logarithmic_replication)) {
+    rotations.insert(static_cast<int32_t>(-step.offset * shape.window));
   }
   if (shape.baby_step > 1) {
     for (int baby = 1; baby < shape.baby_step; ++baby) {
@@ -135,15 +166,10 @@ void insert_replicated_rotations(std::set<int32_t>& rotations, int input_dim,
       rotations.insert(static_cast<int32_t>(k * shape.replicas));
     }
   }
-  if ((shape.replicas & (shape.replicas - 1)) == 0) {
-    for (int step = shape.window + 1; step < shape.replicas * (shape.window + 1);
-         step *= 2) {
-      rotations.insert(static_cast<int32_t>(step));  // fold rotates LEFT
-    }
-  } else {
-    for (int j = 1; j < shape.replicas; ++j) {
-      rotations.insert(static_cast<int32_t>(j * (shape.window + 1)));
-    }
+  for (const auto& step : rotation_sum_schedule(
+           shape.replicas, shape.logarithmic_replication ||
+                               (shape.replicas & (shape.replicas - 1)) == 0)) {
+    rotations.insert(static_cast<int32_t>(step.offset * (shape.window + 1)));
   }
 }
 
@@ -220,27 +246,44 @@ auto build_normalized_state_layout(
     throw std::invalid_argument("invalid normalized-state mask geometry");
   }
 
-  NormalizedStateLayout layout;
-  layout.group_scales.reserve(state_group_abs_max.size());
-  layout.update_masks.reserve(state_group_abs_max.size());
-  layout.readout_masks.reserve(state_group_abs_max.size());
-  for (std::size_t group = 0; group < state_group_abs_max.size(); ++group) {
-    const double measured = state_group_abs_max[group];
-    if (!std::isfinite(measured) || measured < 0.0) {
+  std::vector<double> rows;
+  rows.reserve(state_group_abs_max.size() * group_block);
+  for (const double bound : state_group_abs_max) {
+    rows.insert(rows.end(), group_block, bound);
+  }
+  return build_row_normalized_state_layout(rows, group_block, batch);
+}
+
+auto build_row_normalized_state_layout(
+    const std::vector<double>& state_row_abs_max, int group_block, int batch)
+    -> NormalizedStateLayout {
+  if (state_row_abs_max.empty() || group_block <= 0 || batch <= 0 ||
+      state_row_abs_max.size() % group_block != 0 ||
+      state_row_abs_max.size() > static_cast<std::size_t>(batch)) {
+    throw std::invalid_argument("invalid row-normalized-state mask geometry");
+  }
+  for (const double bound : state_row_abs_max) {
+    if (!std::isfinite(bound) || bound < 0.0) {
       throw std::invalid_argument(
           "normalized-state bounds must be finite and non-negative");
     }
-    const double scale = std::max(measured, 1.0e-6);
-    layout.group_scales.push_back(scale);
-
+  }
+  NormalizedStateLayout layout;
+  const auto groups = state_row_abs_max.size() / group_block;
+  for (std::size_t group = 0; group < groups; ++group) {
+    std::vector<double> scales(static_cast<std::size_t>(group_block));
     std::vector<double> update_mask(static_cast<std::size_t>(batch), 0.0);
-    const auto update_begin = group * static_cast<std::size_t>(group_block);
-    std::fill_n(update_mask.begin() + static_cast<std::ptrdiff_t>(update_begin),
-                group_block, 1.0 / scale);
-    layout.update_masks.push_back(std::move(update_mask));
-
     std::vector<double> readout_mask(static_cast<std::size_t>(batch), 0.0);
-    std::fill_n(readout_mask.begin(), group_block, scale);
+    const auto update_begin = group * static_cast<std::size_t>(group_block);
+    for (int row = 0; row < group_block; ++row) {
+      const double scale = std::max(state_row_abs_max[update_begin + row], 1.0e-6);
+      scales[row] = scale;
+      update_mask[update_begin + row] = 1.0 / scale;
+      readout_mask[row] = scale;
+    }
+    layout.group_scales.push_back(*std::max_element(scales.begin(), scales.end()));
+    layout.row_scales.push_back(std::move(scales));
+    layout.update_masks.push_back(std::move(update_mask));
     layout.readout_masks.push_back(std::move(readout_mask));
   }
   return layout;
@@ -250,9 +293,25 @@ auto packed_state_max_abs_error(
     const std::vector<double>& packed, const std::vector<double>& reference,
     int token, int group, int heads, int group_heads, int head_dim,
     int state_size, double scale) -> double {
+  if (group_heads <= 0 || head_dim <= 0 || !std::isfinite(scale) || scale <= 0.0) {
+    throw std::invalid_argument("invalid packed-state comparison scale");
+  }
+  return packed_state_max_abs_error(
+      packed, reference, token, group, heads, group_heads, head_dim, state_size,
+      std::vector<double>(static_cast<std::size_t>(group_heads * head_dim), scale));
+}
+
+auto packed_state_max_abs_error(
+    const std::vector<double>& packed, const std::vector<double>& reference,
+    int token, int group, int heads, int group_heads, int head_dim,
+    int state_size, const std::vector<double>& row_scales) -> double {
   if (token < 0 || group < 0 || heads <= 0 || group_heads <= 0 ||
       head_dim <= 0 || state_size <= 0 || heads % group_heads != 0 ||
-      group >= heads / group_heads || !std::isfinite(scale) || scale <= 0.0) {
+      group >= heads / group_heads ||
+      row_scales.size() != static_cast<std::size_t>(group_heads * head_dim) ||
+      std::any_of(row_scales.begin(), row_scales.end(), [](double scale) {
+        return !std::isfinite(scale) || scale <= 0.0;
+      })) {
     throw std::invalid_argument("invalid packed-state comparison geometry");
   }
   const auto packed_count = static_cast<std::size_t>(
@@ -275,7 +334,8 @@ auto packed_state_max_abs_error(
             (((token * heads + head) * head_dim + position) * state_size +
              state));
         const double difference =
-            std::abs(packed[packed_index] * scale - reference[reference_index]);
+            std::abs(packed[packed_index] * row_scales[local_head * head_dim + position] -
+                     reference[reference_index]);
         if (!std::isfinite(difference)) {
           return 1.0e308;
         }
@@ -492,11 +552,12 @@ auto rotation_frequencies(const M1Payload& payload, const PackingDims& dims, int
   // BSGS families: legacy babies/giants, or replicated ext/fill/roll/fold
   // (each applied once per matmul per token-layer).
   auto add_replicated = [&](int input_dim, const ReplicatedShape& shape) {
-    for (int t = 1; t < shape.reps; ++t) {
-      add(-t * input_dim, L);
+    for (const auto& step : rotation_sum_schedule(shape.reps, shape.logarithmic_replication)) {
+      add(-step.offset * input_dim, L);
     }
-    for (int j = 1; j < shape.replicas + shape.guard_windows; ++j) {
-      add(-j * shape.window, L);
+    for (const auto& step : rotation_sum_schedule(
+             shape.replicas + shape.guard_windows, shape.logarithmic_replication)) {
+      add(-step.offset * shape.window, L);
     }
     if (shape.baby_step > 1) {
       for (int baby = 1; baby < shape.baby_step; ++baby) {
@@ -512,15 +573,10 @@ auto rotation_frequencies(const M1Payload& payload, const PackingDims& dims, int
         add(k * shape.replicas, L);
       }
     }
-    if ((shape.replicas & (shape.replicas - 1)) == 0) {
-      for (int step = shape.window + 1; step < shape.replicas * (shape.window + 1);
-           step *= 2) {
-        add(step, L);
-      }
-    } else {
-      for (int j = 1; j < shape.replicas; ++j) {
-        add(j * (shape.window + 1), L);
-      }
+    for (const auto& step : rotation_sum_schedule(
+             shape.replicas, shape.logarithmic_replication ||
+                                 (shape.replicas & (shape.replicas - 1)) == 0)) {
+      add(step.offset * (shape.window + 1), L);
     }
   };
   if (rep_in.replicas > 1) {

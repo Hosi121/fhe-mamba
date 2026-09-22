@@ -1,0 +1,49 @@
+{
+  "inputs": {
+    "m2_chain_subring-0-1_l1_t2.json": "0e5296a42e0e26b9a0ac87ad791582949c6230ef6ebde0d726b90472c5fddc33",
+    "m2_chain_subring-0-4_l1_t2.json": "de310bce6c56a7a235de14ca92cd92cafb200b53fe690be4fa33725ce2e50efb",
+    "m2_chain_subring-1-2_l1_t2.json": "4cc72b3730d5f7e3e20d1b5c9ddcd6339f0ffa4676f0da82790a0d004737357b",
+    "m2_chain_subring-1-3_l1_t2.json": "1d85a6aef520f76d322431dbc3edcfc4108ed3632d5f6179b73dda787321b17f"
+  },
+  "campaign_passed": true,
+  "same_levels": true,
+  "same_operation_counts": true,
+  "modes": [
+    {
+      "subring": false,
+      "eval_seconds": [
+        24.114878137,
+        24.263570484
+      ],
+      "joint_gate_seconds": [
+        4.886519351,
+        5.02478781
+      ],
+      "max_error": 0.000345976655311,
+      "peak_rss_gib": 32.695148468
+    },
+    {
+      "subring": true,
+      "eval_seconds": [
+        23.30362098,
+        23.211807408
+      ],
+      "joint_gate_seconds": [
+        4.063431693,
+        4.029493183
+      ],
+      "max_error": 0.000301331933071,
+      "peak_rss_gib": 32.6954154968
+    }
+  ],
+  "eval_seconds": {
+    "baseline_mean": 24.189224310500002,
+    "candidate_mean": 23.257714194000002,
+    "reduction_fraction": 0.038509300858219464
+  },
+  "joint_gate_seconds": {
+    "baseline_mean": 4.9556535805,
+    "candidate_mean": 4.046462438,
+    "reduction_fraction": 0.18346543553358452
+  }
+}

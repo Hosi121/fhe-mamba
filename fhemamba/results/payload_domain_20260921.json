@@ -1,0 +1,1270 @@
+{
+  "stage": "payload-domain-diagnostic",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "source_sha256": "ba2517d2585d51865bb0df0ad8997e8a813c3a193a9963da2925f6101fb1d0da",
+  "input_payload_sha256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+  "token_ids_sha256": "9e3d420a819647414fa7fb71f36f4130654af0cb2981ed63a1188efdab3734bd",
+  "tokens": 1024,
+  "scan": "chunked",
+  "first_failure": "first non-finite operator: (5, 'gated_rms_invsqrt')",
+  "events": [
+    {
+      "layer": 0,
+      "site": "residual",
+      "kind": "checkpoint",
+      "output": {
+        "min": -6.859375,
+        "max": 10.671875,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.00568145476281643,
+        0.8362340927124023
+      ],
+      "input": {
+        "min": 0.05558153986930847,
+        "max": 0.4824845790863037,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 1.4396545886993408,
+        "max": 4.2416486740112305,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "proj",
+      "kind": "checkpoint",
+      "output": {
+        "min": -10.914368629455566,
+        "max": 7.00546407699585,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "conv_silu",
+      "kind": "operator",
+      "interval": [
+        -34.981199741363525,
+        20.54049062728882
+      ],
+      "input": {
+        "min": -25.781757354736328,
+        "max": 10.095293998718262,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846193313598633,
+        "max": 10.094873428344727,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "conv_silu_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": -0.27846193313598633,
+        "max": 10.094873428344727,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "dt_softplus",
+      "kind": "operator",
+      "interval": [
+        -4.695496654510498,
+        -1.5521601676940917
+      ],
+      "input": {
+        "min": -4.15078592300415,
+        "max": -2.138364553451538,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.015629258006811142,
+        "max": 0.1114049032330513,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "dt_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.015629258006811142,
+        "max": 0.1114049032330513,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "decay_exp",
+      "kind": "operator",
+      "interval": [
+        -0.73113973736763,
+        0.0
+      ],
+      "input": {
+        "min": -0.4594161808490753,
+        "max": -0.009612465277314186,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.631652295589447,
+        "max": 0.9904335737228394,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "decay_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.631652295589447,
+        "max": 0.9904335737228394,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "gate_silu",
+      "kind": "operator",
+      "interval": [
+        -7.896831846237182,
+        9.036562776565551
+      ],
+      "input": {
+        "min": -4.4906086921691895,
+        "max": 5.699323654174805,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846455574035645,
+        "max": 5.680304527282715,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "y",
+      "kind": "checkpoint",
+      "output": {
+        "min": -28.447141647338867,
+        "max": 245.450927734375,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "gated_rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        3.5633402876555924e-05,
+        116.5393295288086
+      ],
+      "input": {
+        "min": 0.004375284072011709,
+        "max": 47.67920684814453,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.14482231438159943,
+        "max": 15.116955757141113,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "layer_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.14931297302246,
+        "max": 54.365692138671875,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 1,
+      "site": "residual",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.14931297302246,
+        "max": 54.365692138671875,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 1,
+      "site": "rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.04285731315612793,
+        75.11433410644531
+      ],
+      "input": {
+        "min": 0.4891575276851654,
+        "max": 29.499813079833984,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.18411549925804138,
+        "max": 1.429801106452942,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 1,
+      "site": "proj",
+      "kind": "checkpoint",
+      "output": {
+        "min": -16.253921508789062,
+        "max": 16.71118927001953,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 1,
+      "site": "conv_silu",
+      "kind": "operator",
+      "interval": [
+        -20.22547197341919,
+        18.77549695968628
+      ],
+      "input": {
+        "min": -15.092467308044434,
+        "max": 10.625460624694824,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 10.625202178955078,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 1,
+      "site": "conv_silu_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 10.625202178955078,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 1,
+      "site": "dt_softplus",
+      "kind": "operator",
+      "interval": [
+        -11.465827846527098,
+        13.862637424468993
+      ],
+      "input": {
+        "min": -7.009095668792725,
+        "max": 9.122499465942383,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.0009032197995111346,
+        "max": 9.12260913848877,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 1,
+      "site": "dt_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.0009032197995111346,
+        "max": 9.12260913848877,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 1,
+      "site": "decay_exp",
+      "kind": "operator",
+      "interval": [
+        -8.774464416503907,
+        0.0
+      ],
+      "input": {
+        "min": -2.4780666828155518,
+        "max": -2.7054362362832762e-05,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.08390528708696365,
+        "max": 0.999972939491272,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 1,
+      "site": "decay_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.08390528708696365,
+        "max": 0.999972939491272,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 1,
+      "site": "gate_silu",
+      "kind": "operator",
+      "interval": [
+        -21.662926483154294,
+        22.058152008056638
+      ],
+      "input": {
+        "min": -13.903144836425781,
+        "max": 13.814798355102539,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.2785611152648926,
+        "max": 13.814787864685059,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 1,
+      "site": "y",
+      "kind": "checkpoint",
+      "output": {
+        "min": -114.91266632080078,
+        "max": 1313.673095703125,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 1,
+      "site": "gated_rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.12623719215393067,
+        4233.9013671875
+      ],
+      "input": {
+        "min": 6.692989349365234,
+        "max": 2595.961669921875,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.019626863300800323,
+        "max": 0.38653600215911865,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 1,
+      "site": "layer_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.9948673248291,
+        "max": 64.06685638427734,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 2,
+      "site": "residual",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.9948673248291,
+        "max": 64.06685638427734,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 2,
+      "site": "rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.07112048864364624,
+        78.2071304321289
+      ],
+      "input": {
+        "min": 0.7314159274101257,
+        "max": 30.016895294189453,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.18252278864383698,
+        "max": 1.1692780256271362,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 2,
+      "site": "proj",
+      "kind": "checkpoint",
+      "output": {
+        "min": -15.162252426147461,
+        "max": 14.126272201538086,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 2,
+      "site": "conv_silu",
+      "kind": "operator",
+      "interval": [
+        -14.116003513336182,
+        17.792863368988037
+      ],
+      "input": {
+        "min": -9.832834243774414,
+        "max": 11.474942207336426,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 11.474822998046875,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 2,
+      "site": "conv_silu_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 11.474822998046875,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 2,
+      "site": "dt_softplus",
+      "kind": "operator",
+      "interval": [
+        -16.90573081970215,
+        15.470141983032226
+      ],
+      "input": {
+        "min": -12.59302043914795,
+        "max": 10.141340255737305,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 3.3965591228479752e-06,
+        "max": 10.141378402709961,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 2,
+      "site": "dt_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": 3.3965591228479752e-06,
+        "max": 10.141378402709961,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 2,
+      "site": "decay_exp",
+      "kind": "operator",
+      "interval": [
+        -18.824817657470703,
+        0.0
+      ],
+      "input": {
+        "min": -39.27866744995117,
+        "max": -3.3446913221268915e-06,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.0,
+        "max": 0.9999966621398926,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 21
+    },
+    {
+      "layer": 2,
+      "site": "decay_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.0,
+        "max": 0.9999966621398926,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 2,
+      "site": "gate_silu",
+      "kind": "operator",
+      "interval": [
+        -21.799472332000732,
+        22.489811420440674
+      ],
+      "input": {
+        "min": -13.881558418273926,
+        "max": 14.126272201538086,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27858972549438477,
+        "max": 14.126256942749023,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 2,
+      "site": "y",
+      "kind": "checkpoint",
+      "output": {
+        "min": -140.593505859375,
+        "max": 641.6306762695312,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 2,
+      "site": "gated_rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.11663712501525879,
+        1000.2457275390625
+      ],
+      "input": {
+        "min": 11.920304298400879,
+        "max": 573.6538696289062,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.041751787066459656,
+        "max": 0.2896385192871094,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 2,
+      "site": "layer_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.698537826538086,
+        "max": 91.12748718261719,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 3,
+      "site": "residual",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.698537826538086,
+        "max": 91.12748718261719,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 3,
+      "site": "rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.18583905696868896,
+        81.91576385498047
+      ],
+      "input": {
+        "min": 1.9479551315307617,
+        "max": 31.91043472290039,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.17702460289001465,
+        "max": 0.716490626335144,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 3,
+      "site": "proj",
+      "kind": "checkpoint",
+      "output": {
+        "min": -18.985977172851562,
+        "max": 29.53909683227539,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 3,
+      "site": "conv_silu",
+      "kind": "operator",
+      "interval": [
+        -20.353374481201172,
+        19.26083755493164
+      ],
+      "input": {
+        "min": -12.684646606445312,
+        "max": 13.145711898803711,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 13.145687103271484,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 3,
+      "site": "conv_silu_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 13.145687103271484,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 3,
+      "site": "dt_softplus",
+      "kind": "operator",
+      "interval": [
+        -12.364860153198242,
+        15.838298416137695
+      ],
+      "input": {
+        "min": -8.534431457519531,
+        "max": 11.503793716430664,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.0001965627889148891,
+        "max": 11.503804206848145,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 3,
+      "site": "dt_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.0001965627889148891,
+        "max": 11.503804206848145,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 3,
+      "site": "decay_exp",
+      "kind": "operator",
+      "interval": [
+        -12.083045101165771,
+        0.0
+      ],
+      "input": {
+        "min": -2.3561301231384277,
+        "max": -2.150455657101702e-05,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.09478632360696793,
+        "max": 0.9999784827232361,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 3,
+      "site": "decay_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.09478632360696793,
+        "max": 0.9999784827232361,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 3,
+      "site": "gate_silu",
+      "kind": "operator",
+      "interval": [
+        -23.851140022277832,
+        31.45313549041748
+      ],
+      "input": {
+        "min": -14.036148071289062,
+        "max": 29.53909683227539,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.2795295715332031,
+        "max": 29.539142608642578,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 3,
+      "site": "y",
+      "kind": "checkpoint",
+      "output": {
+        "min": -190.8409423828125,
+        "max": 2385.034912109375,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 3,
+      "site": "gated_rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        2.119505615234375,
+        12823.427734375
+      ],
+      "input": {
+        "min": 69.319091796875,
+        "max": 6700.53271484375,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.012216459028422832,
+        "max": 0.12010841816663742,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 3,
+      "site": "layer_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.684511184692383,
+        "max": 116.22676086425781,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 4,
+      "site": "residual",
+      "kind": "checkpoint",
+      "output": {
+        "min": -26.684511184692383,
+        "max": 116.22676086425781,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 4,
+      "site": "rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.26039278507232666,
+        91.86568450927734
+      ],
+      "input": {
+        "min": 2.6010329723358154,
+        "max": 36.936370849609375,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.16454054415225983,
+        "max": 0.6200504899024963,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 4,
+      "site": "proj",
+      "kind": "checkpoint",
+      "output": {
+        "min": -15.248302459716797,
+        "max": 14.250039100646973,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 4,
+      "site": "conv_silu",
+      "kind": "operator",
+      "interval": [
+        -20.216839694976805,
+        17.472816371917723
+      ],
+      "input": {
+        "min": -13.829072952270508,
+        "max": 10.245919227600098,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 10.245555877685547,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 4,
+      "site": "conv_silu_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": -0.27846479415893555,
+        "max": 10.245555877685547,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 4,
+      "site": "dt_softplus",
+      "kind": "operator",
+      "interval": [
+        -18.98594799041748,
+        20.074031257629393
+      ],
+      "input": {
+        "min": -12.460111618041992,
+        "max": 12.74468994140625,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 3.87782074540155e-06,
+        "max": 12.74468994140625,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 4,
+      "site": "dt_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": 3.87782074540155e-06,
+        "max": 12.74468994140625,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 4,
+      "site": "decay_exp",
+      "kind": "operator",
+      "interval": [
+        -29.548801040649415,
+        0.0
+      ],
+      "input": {
+        "min": -193759.265625,
+        "max": -4.444825396632268e-09,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.0,
+        "max": 1.0,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 1902
+    },
+    {
+      "layer": 4,
+      "site": "decay_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.0,
+        "max": 1.0,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 4,
+      "site": "gate_silu",
+      "kind": "operator",
+      "interval": [
+        -22.947952556610105,
+        21.87971620559692
+      ],
+      "input": {
+        "min": -15.248302459716797,
+        "max": 12.496689796447754,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27861642837524414,
+        "max": 12.496625900268555,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 4,
+      "site": "y",
+      "kind": "checkpoint",
+      "output": {
+        "min": -86.46800994873047,
+        "max": 685.4657592773438,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 4,
+      "site": "gated_rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.520506477355957,
+        660.47900390625
+      ],
+      "input": {
+        "min": 33.809059143066406,
+        "max": 333.39794921875,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.054766952991485596,
+        "max": 0.17198218405246735,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 4,
+      "site": "layer_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": -29.90955924987793,
+        "max": 136.18942260742188,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 5,
+      "site": "residual",
+      "kind": "checkpoint",
+      "output": {
+        "min": -29.90955924987793,
+        "max": 136.18942260742188,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 5,
+      "site": "rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.33121900558471684,
+        105.97599792480469
+      ],
+      "input": {
+        "min": 3.153775453567505,
+        "max": 44.67205047607422,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.14961737394332886,
+        "max": 0.5630987882614136,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 5,
+      "site": "proj",
+      "kind": "checkpoint",
+      "output": {
+        "min": -17.354066848754883,
+        "max": 28.53052520751953,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 5,
+      "site": "conv_silu",
+      "kind": "operator",
+      "interval": [
+        -26.79319896697998,
+        15.712779426574706
+      ],
+      "input": {
+        "min": -17.704111099243164,
+        "max": 8.936105728149414,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846384048461914,
+        "max": 8.934930801391602,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 5,
+      "site": "conv_silu_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": -0.27846384048461914,
+        "max": 8.934930801391602,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 5,
+      "site": "dt_softplus",
+      "kind": "operator",
+      "interval": [
+        -20.235266876220702,
+        18.17751998901367
+      ],
+      "input": {
+        "min": -12.47909164428711,
+        "max": 10.975152969360352,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 3.8063199099269696e-06,
+        "max": 10.975171089172363,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 5,
+      "site": "dt_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": 3.8063199099269696e-06,
+        "max": 10.975171089172363,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 5,
+      "site": "decay_exp",
+      "kind": "operator",
+      "interval": [
+        -19.222715282440188,
+        0.0
+      ],
+      "input": {
+        "min": -5.827733993530273,
+        "max": -3.024308171006851e-06,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.002944742329418659,
+        "max": 0.9999969601631165,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 5,
+      "site": "decay_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.002944742329418659,
+        "max": 0.9999969601631165,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 5,
+      "site": "gate_silu",
+      "kind": "operator",
+      "interval": [
+        -22.6745005607605,
+        25.452982044219972
+      ],
+      "input": {
+        "min": -17.354066848754883,
+        "max": 28.53052520751953,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27877235412597656,
+        "max": 4021338112.0,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 1
+    },
+    {
+      "layer": 5,
+      "site": "y",
+      "kind": "checkpoint",
+      "output": {
+        "min": -576.0763549804688,
+        "max": 408253344.0,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 5,
+      "site": "gated_rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.6162991333007812,
+        2079.18994140625
+      ],
+      "input": {
+        "min": 49.945289611816406,
+        "max": 108509630824448.0,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.03010699711740017,
+        "max": 0.14149880409240723,
+        "non_finite": 1,
+        "first_non_finite_index": [
+          0,
+          756,
+          0
+        ]
+      },
+      "raw_input_outside_interval": 1
+    }
+  ],
+  "measurement_scope": {
+    "encrypted_execution": false,
+    "claim": "First observed non-finite stage; inputs are never clamped or refitted.",
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false
+  },
+  "scope_annotation": {
+    "original_report_sha256": "6815575ee979a300ca419c36547fe35683acba46bad10e5e8d241c5632954540",
+    "note": "Report scope fields added after measurement; numerical results and execution source hashes are unchanged."
+  }
+}

@@ -1,6 +1,7 @@
 """Input-replicated BSGS layout: slot-exact matmul + diagonal-count reduction."""
 
 import numpy as np
+import pytest
 from fhemamba.bsgs_layout import (
     choose_interleaved_window,
     choose_window,
@@ -8,8 +9,63 @@ from fhemamba.bsgs_layout import (
     replicated_bsgs_matmul,
     replicated_cost,
     replicated_matmul,
+    rotation_sum,
+    rotation_sum_schedule,
     verify,
 )
+
+
+def test_binary_rotation_sum_matches_cyclic_definition() -> None:
+    rng = np.random.default_rng(71)
+    values = rng.normal(size=127)
+    for count in range(1, 65):
+        for stride in (-131, -7, 0, 1, 23):
+            expected = sum(np.roll(values, -j * stride) for j in range(count))
+            np.testing.assert_allclose(rotation_sum(values, count, stride), expected, atol=1e-12)
+        assert len(rotation_sum_schedule(count)) <= count - 1
+    with pytest.raises(ValueError, match="positive"):
+        rotation_sum(values, 0, 1)
+
+
+@pytest.mark.parametrize(("m", "n"), [(3352, 768), (768, 1536), (17, 11)])
+def test_binary_replication_dense_parity(m: int, n: int) -> None:
+    rng = np.random.default_rng(91)
+    weights, values = rng.normal(size=(m, n)), rng.normal(size=n)
+    for choose, guard in ((choose_window, 0), (choose_interleaved_window, 1)):
+        window, replicas = choose(m, n, 32768)
+        for multiply in (replicated_matmul, replicated_bsgs_matmul):
+            output = multiply(
+                weights,
+                values,
+                replicas,
+                window,
+                32768,
+                guard_windows=guard,
+                logarithmic_replication=True,
+            )
+            np.testing.assert_allclose(output[:m], weights @ values, atol=1e-9)
+
+
+def test_binary_replication_reduces_projection_rotations_without_more_products() -> None:
+    costs = []
+    for logarithmic in (False, True):
+        pair = []
+        for m, n in ((3352, 768), (768, 1536)):
+            window, replicas = choose_interleaved_window(m, n, 32768)
+            pair.append(
+                replicated_bsgs_cost(
+                    n,
+                    replicas,
+                    32768,
+                    window=window,
+                    guard_windows=1,
+                    logarithmic_replication=logarithmic,
+                )
+            )
+        costs.append(pair)
+    assert sum(c.rotations for c in costs[0]) == 91
+    assert sum(c.rotations for c in costs[1]) == 56
+    assert sum(c.ct_pt_mul for c in costs[0]) == sum(c.ct_pt_mul for c in costs[1]) == 187
 
 
 def test_replicated_matmul_exact_across_shapes() -> None:

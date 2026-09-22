@@ -1,0 +1,36 @@
+{
+  "name": "dgx-spark-numerical-diagnostic",
+  "platform": "dgx-spark",
+  "version": "0.5.0",
+  "timeout_seconds": 1800,
+  "gpu_preflight": {
+    "required": true,
+    "gpu_index": 0,
+    "max_utilization_percent": 5,
+    "min_mem_available_gib": 60,
+    "stable_polls": 2,
+    "poll_seconds": 5,
+    "timeout_seconds": 120
+  },
+  "defaults": {
+    "LAYERS": "7",
+    "TOKENS": "1",
+    "FIDESLIB_SYNC_PROFILE": "full",
+    "PT_CACHE_GIB": "5",
+    "AUTO_HEADROOM": "4",
+    "META_BTS_ALPHA": "6",
+    "LEVEL_ALIGN_MODE": "drop",
+    "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+    "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+    "COMPLEX_STATE_PAIRING": "1",
+    "META_BTS_RESIDUAL_LAYERS": "21,22,23",
+    "DEBUG_LAYER_ERRORS": "1",
+    "DEBUG_DECRYPT": "1",
+    "LOGARITHMIC_REPLICATION": "0"
+  },
+  "experiments": [
+    {"name": "spark-l6-instrumented"},
+    {"name": "spark-l6-unity", "env": {"LEVEL_ALIGN_MODE": "unity"}},
+    {"name": "spark-l6-encode0", "env": {"PT_MISS_CONSUMPTION_LEVEL": "0"}}
+  ]
+}

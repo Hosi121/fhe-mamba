@@ -1,0 +1,14 @@
+ring=262144 depth=56
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0x166f58)[0xb72065546f58]
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0xfceb4)[0xb720654dceb4]
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0xfcf10)[0xb720654dcf10]
+/lib/aarch64-linux-gnu/libgomp.so.1(GOMP_parallel+0x58)[0xe85925087298]
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0x101488)[0xb720654e1488]
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0xf9108)[0xb720654d9108]
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0xf926c)[0xb720654d926c]
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0xa177c)[0xb7206548177c]
+/home/kataiwa/fhemamba/spark/normalization-probe-20260921/stage1_normalization_probe(+0x3e04c)[0xb7206541e04c]
+/lib/aarch64-linux-gnu/libc.so.6(+0x284c4)[0xe85924e984c4]
+Cuda failure /home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/LimbPartitionMGPU.cu:1845: 'an illegal memory access was encountered'

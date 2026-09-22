@@ -1,0 +1,379 @@
+{
+  "stage": "vector-rms-ckks-probe",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "binary_sha256": "81f76f59de8beea282d5f54a7992d1bf88c0465fbab48d1613ac6b18d4d672c4",
+  "recipe_sha256": "2beb02732b6555f587234f2e1c4a960f5782d1b92b72e11039bfa73fc465f807",
+  "backend": "FIDESlib",
+  "encrypted": true,
+  "passed": true,
+  "status": "passed",
+  "mode": "weighted",
+  "gamma_placement": "before",
+  "refresh": "none",
+  "gate_metric": "vector-rms-output-absolute-error",
+  "error_threshold": 0.0001,
+  "parameters": {
+    "ring_dim": 131072,
+    "slots": 8192,
+    "depth": 40,
+    "scale": 59,
+    "security": "128-classic",
+    "secret_key_dist": "uniform-ternary",
+    "scaling": "FLEXIBLEAUTO",
+    "key_switch": "HYBRID",
+    "large_digits": 3,
+    "first_mod_size": 60
+  },
+  "layout": {
+    "width": 1536,
+    "padded_width": 2048,
+    "lanes": 4,
+    "cases": 16,
+    "application_rotation_keys": 11,
+    "packing": "feature-strided-independent-vectors"
+  },
+  "refresh_bound": 626.4570017167978,
+  "measurements": {
+    "output": {
+      "max_abs_error": 2.0075035536137875e-06,
+      "max_abs_error_vs_polynomial": 5.098573119255434e-09,
+      "non_finite": 0
+    },
+    "before_refresh": {
+      "max_abs_error": 2.0075035536137875e-06,
+      "max_abs_error_vs_polynomial": 5.098573119255434e-09,
+      "non_finite": 0
+    },
+    "checkpoint_inputs": {
+      "max_abs_error": 2.0404698375386943e-08,
+      "max_abs_error_vs_polynomial": 1.6174145356373515e-12,
+      "non_finite": 0
+    },
+    "synthetic_inputs": {
+      "max_abs_error": 2.0075035536137875e-06,
+      "max_abs_error_vs_polynomial": 5.098573119255434e-09,
+      "non_finite": 0
+    },
+    "padding_max_abs_error": 3.6504271827553225e-09,
+    "setup_seconds": 7.515604945,
+    "evaluation_seconds": 2.809561249,
+    "refresh_seconds": 0,
+    "bootstraps": 0,
+    "refresh_scalar_products": 0,
+    "peak_rss_gib": 11.665878295898438,
+    "batches": [
+      {
+        "first_case": 0,
+        "cases": 4,
+        "ct_ct_products": 38,
+        "ct_pt_products": 18,
+        "additions": 25,
+        "rotations": 11,
+        "level": 32,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.771020236,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 7.74708297512916e-09,
+          "max_abs_error_vs_polynomial": 1.6174145356373515e-12,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 7.74708297512916e-09,
+          "max_abs_error_vs_polynomial": 1.6174145356373515e-12,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 4,
+        "cases": 4,
+        "ct_ct_products": 38,
+        "ct_pt_products": 18,
+        "additions": 25,
+        "rotations": 11,
+        "level": 32,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.679560506,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 2.0404698375386943e-08,
+          "max_abs_error_vs_polynomial": 1.406683797222641e-12,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 2.0404698375386943e-08,
+          "max_abs_error_vs_polynomial": 1.406683797222641e-12,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 8,
+        "cases": 4,
+        "ct_ct_products": 38,
+        "ct_pt_products": 18,
+        "additions": 25,
+        "rotations": 11,
+        "level": 32,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.678668772,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 2.0075035536137875e-06,
+          "max_abs_error_vs_polynomial": 5.098573119255434e-09,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 2.0075035536137875e-06,
+          "max_abs_error_vs_polynomial": 5.098573119255434e-09,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 12,
+        "cases": 4,
+        "ct_ct_products": 38,
+        "ct_pt_products": 18,
+        "additions": 25,
+        "rotations": 11,
+        "level": 32,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.680311735,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 3.599836428946901e-09,
+          "max_abs_error_vs_polynomial": 3.599835984857691e-09,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 3.599836428946901e-09,
+          "max_abs_error_vs_polynomial": 3.599835984857691e-09,
+          "non_finite": 0
+        }
+      }
+    ]
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "evaluation_decryptions": 0,
+    "real_decoder_noise_enabled": true,
+    "full_vector_rms_reduction_measured": true,
+    "learned_gamma_measured": true,
+    "secret_key_in_benchmark_process": true,
+    "prior_layer_ckks_error_measured": false,
+    "full_model_correctness_claimed": false,
+    "claim": "Packed vector RMSNorm from fresh ciphertexts; optional output refresh, no full-model claim."
+  },
+  "build_provenance": {
+    "binary_sha256": "81f76f59de8beea282d5f54a7992d1bf88c0465fbab48d1613ac6b18d4d672c4",
+    "source_sha256": {
+      "native/fideslib_stage0/CMakeLists.txt": "289e5f5b5607b82373fca588e49a2bf254f668ed9a189dcdeb12fa0cce24ed40",
+      "native/fideslib_stage0/include/stage1_normalization.hpp": "41c20e3aa32ce095bc55e0356ec0f8401a9251df219104beeb1630bb7f160c43",
+      "native/fideslib_stage0/src/stage1_vector_rms_probe.cpp": "c6441376fb1f40860a348006a632a521f6eb81cdd1d5a4056a9805f04fe25f3c",
+      "fhemamba/src/fhemamba/_version.py": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3",
+      "native/fideslib_stage0/include/stage1_vector_rms.hpp": "952ccb62c30f3f96cc3cb20ca4d79353c9d3262cfef7c360fe7ed3a74d9d8609"
+    },
+    "library_sha256": {
+      "/usr/local/cuda-13.0/targets/sbsa-linux/lib/libcudart.so.13.0.96": "7bdba2b5b08cbdc85203c41cc94598adedb1bcfea7cb574ca693ac73599e4e63",
+      "/usr/lib/aarch64-linux-gnu/libcuda.so.580.159.03": "f6fb476bbefda386491dc5151a593a98bedeff6a4eb0ec4ef766e3b2fe3b9032",
+      "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+      "/usr/lib/aarch64-linux-gnu/libm.so.6": "d5b262e559d38769e4959f036a1cc2c4009fa60b4ec836a7a19ca8554aebf5a5",
+      "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": "33c8bcb7d33228fe5101bfeb201bcaff4563d4ecf09497229b9deba522ebaf3d",
+      "/usr/lib/aarch64-linux-gnu/libgcc_s.so.1": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+      "/usr/lib/aarch64-linux-gnu/libc.so.6": "fe5966a43e068ad7cb389c3affa069f4ee6f296e07d7ccc0398a23cfde4f0b7e",
+      "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "393384096ffa869e1be20d2f91fdf08dfadb9f3e531dfe724085d8501d3f85d9",
+      "/usr/lib/aarch64-linux-gnu/libdl.so.2": "97387fb55ccfc0cc109dfe99b81de2b7bbaac723d1c215107dc69a068c4b1fae",
+      "/usr/lib/aarch64-linux-gnu/libpthread.so.0": "97b288827c0ab29659dfcdcfab6c2e9e1225c19fc5abfe106d8a53c2c7b34402",
+      "/usr/lib/aarch64-linux-gnu/librt.so.1": "4b38331a53bc2bd10c1ecf4f02a71c913c40bad13f5fbf93bee5a0e1f25dd493"
+    },
+    "static_library_sha256": {
+      "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f"
+    },
+    "cmake_cache_sha256": "e8465749f2036414870e3443503ae0f885d86ac96d1c557c7e37c3da58f8cf90",
+    "architecture": "aarch64",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "builder_source_sha256": "00da291fb6e47e23b46d44c59ab9c8c0e1f9e5cc83f297cdf479529ec8d54cd3"
+  },
+  "input_provenance": {
+    "layer": 6,
+    "site": "gated_rms_invsqrt",
+    "file": "l06_gated_rms_invsqrt.txt",
+    "sha256": "2beb02732b6555f587234f2e1c4a960f5782d1b92b72e11039bfa73fc465f807",
+    "interval": [
+      9.999999747378752e-06,
+      493.5652160644531
+    ],
+    "certified_relative_error": 1e-07,
+    "weighted_certificate": {
+      "certified": true,
+      "reason": null,
+      "arithmetic": "exact-rational extrema with outward dyadic enclosures",
+      "enclosure_bits": 128,
+      "relative_error_bound": 1e-07,
+      "nonexpansive_in_exact_arithmetic": true,
+      "includes_execution_roundoff": false,
+      "trace": [
+        {
+          "stage": "constant-seed",
+          "u_lower": "6894374790792517775567687838299/340282366920938463463374607431768211456",
+          "u_upper": "2658455991569831386911327384126085945/2658455991569831745807614120560689152"
+        },
+        {
+          "stage": 0,
+          "u_lower": "43639117896612268760797477855431/340282366920938463463374607431768211456",
+          "u_upper": "5316911983129030751216487943198111027/5316911983139663491615228241121378304"
+        },
+        {
+          "stage": 1,
+          "u_lower": "276221163327572312442727928981655/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 2,
+          "u_lower": "874193120109776605332328884050971/170141183460469231731687303715884105728",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 3,
+          "u_lower": "1383325233612317764810155847695827/42535295865117307932921825928971026432",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 4,
+          "u_lower": "35021834554822151206415969929341621/170141183460469231731687303715884105728",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 5,
+          "u_lower": "443182196788066011040400110887257459/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 6,
+          "u_lower": "1399174722720393664335746336464590169/170141183460469231731687303715884105728",
+          "u_upper": "21267647932516117239291363479952096753/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 7,
+          "u_lower": "16932458256229373213249647807983948635/340282366920938463463374607431768211456",
+          "u_upper": "170141183460128936754861224613372003507/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 8,
+          "u_lower": "82911605393453614665440090226949761929/340282366920938463463374607431768211456",
+          "u_upper": "340282366920258067226076727148547348697/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 9,
+          "u_lower": "238119145840965215253147152942086086627/340282366920938463463374607431768211456",
+          "u_upper": "85070591730064459816192388303276336471/85070591730234615865843651857942052864"
+        },
+        {
+          "stage": 10,
+          "u_lower": "332271406474812336144641628728665088177/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257891376557907926378437219/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 11,
+          "u_lower": "170123078488791571641235243130630555005/170141183460469231731687303715884105728",
+          "u_upper": "340282366920258082983045386183579663289/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 12,
+          "u_lower": "5316911937983925999924359699385293757/5316911983139663491615228241121378304",
+          "u_upper": "340282366920938463463373587137353159783/340282366920938463463374607431768211456"
+        }
+      ],
+      "rounded_ratio_effective_coefficients": [
+        "2656242046612679/1125899906842624",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "11962650691366587984980234799395/5070602400912917605986812821504",
+        "12875656558946676052355582117245373098595061965/5708990770823839524233143877797980545530986496",
+        "11629354965626057535503305111917485622158986816822880469429765/6427752177035961102167848369364650410088811975131171341205504",
+        "65690090293126728113395380648552468329802909682692420573381983557436976875385/57896044618658097711785492504343953926634992332820282019728792003956564819968",
+        "335422216940172578156668246301150618719021615202688100089788980438100218322115452066747944005/521481209941628438084722096232800809229175908778479680162851955034721612739414196782949728256",
+        "74709788361496893191090925974730048639260685305371109361865795152501348107842628670550912106202519474779415/146783911423364576743092537299333564210980159306769991919205685720763064069663027716481187399048043939495936"
+      ]
+    },
+    "coupled_cost": {
+      "accelerated_stages": 12,
+      "final_recomputed_newton_stages": 1,
+      "ct_ct_products": 36,
+      "ct_ct_critical_depth": 26,
+      "public_scalar_products": 16,
+      "public_scalar_additions": 13,
+      "same_coefficients_recomputed_ct_ct_depth": 36,
+      "same_coefficients_balanced_ct_ct_depth": 24,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "balanced_cost": {
+      "ct_ct_products": 36,
+      "ct_ct_critical_depth": 24,
+      "public_scalar_products": 28,
+      "public_scalar_additions": 1,
+      "ct_ct_additions": 12,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "fixed_newton_same_accuracy": {
+      "stages": 26,
+      "ct_ct_products": 75,
+      "ct_ct_critical_depth": 50,
+      "factored_unbalanced_ct_ct_depth": 75,
+      "same_domain_seed_and_tolerance": true,
+      "includes_encoding_rescale_bootstrap_cost": false
+    }
+  },
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "runner_source_sha256": "44dafed90989adf908be55c26e192d0c5db8d54feb2c3aa73a35ce1eac6cba33",
+  "process_returncode": 0,
+  "process_seconds": 12.927048150449991,
+  "log_sha256": "b1199f976b23f636c309897c72e3bdc0e8239155cd9ac3e4e0a8fbde4b533c9d",
+  "execution_environment": {
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "OMP_NUM_THREADS": "8"
+  },
+  "fixture_provenance": {
+    "file": "l06_gated_rms_invsqrt.vectors.txt",
+    "sha256": "59dde1aaf98483a6202b258bfbe33b9f389fedd707c52b3a09367e920e9a99a8",
+    "recipe_file": "l06_gated_rms_invsqrt.txt",
+    "recipe_sha256": "2beb02732b6555f587234f2e1c4a960f5782d1b92b72e11039bfa73fc465f807",
+    "layer": 6,
+    "site": "gated_rms_invsqrt",
+    "width": 1536,
+    "cases": 16,
+    "checkpoint_cases": 8,
+    "synthetic_cases": 8,
+    "variance": [
+      39.1454336833312,
+      23.89763673623709,
+      9.022370660389422,
+      42.70898691038145,
+      25.802577573135718,
+      29.6336318890734,
+      14.213060180757463,
+      16.955158342246182,
+      1e-05,
+      1.9999999999979998e-05,
+      0.07025419674741712,
+      493.56521606346604,
+      493.5652160634659,
+      1.9999999999980005e-05,
+      493.5652160634659,
+      493.56521606346604
+    ],
+    "gamma_max_abs": 14.53125,
+    "epsilon": 1e-05
+  },
+  "fixture_manifest_sha256": "5ab819238f4c13b625e8ac639ac19fb9daefe7249358215f5935b38d9141388f"
+}

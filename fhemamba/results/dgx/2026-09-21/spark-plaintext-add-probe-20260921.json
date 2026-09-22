@@ -1,0 +1,37 @@
+{
+  "stage": "plaintext-add-scale-probe",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty",
+  "binary_sha256": "585e72ed875c8f5e9ccd321a2214ddeb1fa6723ba422fe03f2d54dd6a86bf516",
+  "backend": "FIDESlib",
+  "encrypted": true,
+  "passed": true,
+  "status": "passed",
+  "parameters": {
+    "ring_dim": 16384,
+    "depth": 8,
+    "scale": 40,
+    "security": "not-set"
+  },
+  "measurements": {
+    "max_abs_error": 2.16956448085e-07,
+    "uncorrected_max_abs_error": 0.250000149154,
+    "add_scale_reencodes": 3,
+    "levels": [
+      0,
+      1,
+      2
+    ]
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "claim": "Encrypted same-level plaintext-addition regression; not a model or security gate."
+  },
+  "native_source_sha256": "f313f30a9e91da647fdd6cd9676f02e8fd72d50912a31cf5cede789acdf4b463",
+  "shared_libraries": {
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+  }
+}

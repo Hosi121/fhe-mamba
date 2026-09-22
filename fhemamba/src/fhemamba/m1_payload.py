@@ -7,12 +7,14 @@ One directory per export:
 
 Chain exports contain both the exact stateful reference decode and the
 identical plaintext polynomial circuit. The kernel uses the latter for FHE
-correctness and reports the exact-model gap separately; approximation quality
-is certified by the PPL ladder (delta PPL +0.026 in the frozen certificate).
+correctness and reports the exact-model gap separately. Approximation quality
+requires an evaluation tied to the exported coefficients and head masks; the
+historical PPL ladder does not certify a newly exported payload.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 from dataclasses import dataclass
@@ -20,6 +22,7 @@ from pathlib import Path
 
 import torch
 
+from fhemamba.normalization import ScheduledInvSqrt, certify_schedule
 from fhemamba.ops import (
     SITE_NAMES,
     ChebPoly,
@@ -35,6 +38,7 @@ from fhemamba.ops import (
     fit_chebyshev,
     fit_squared_exp,
 )
+from fhemamba.payload_surrogate import gate_from_spec, public_activation_specs, stabilized_specs
 from fhemamba.reference import init_states, model_forward
 
 __all__ = [
@@ -114,6 +118,7 @@ def _calibrate_payload(
         state.ssm.new_zeros(int(block.mixer.num_heads))
         for block, state in zip(model.backbone.layers, states, strict=True)
     ]
+    state_row_bounds = [state.ssm.new_zeros(state.ssm.shape[1:3]) for state in states]
     state_bounds = [state.ssm.new_zeros(()) for state in states]
     fifo_bounds = [state.conv.new_zeros(()) for state in states]
     for token in range(cal_ids.shape[1]):
@@ -126,6 +131,9 @@ def _calibrate_payload(
             states=states,
         )
         for layer, state in enumerate(states):
+            state_row_bounds[layer].copy_(
+                torch.maximum(state_row_bounds[layer], state.ssm.abs().amax(dim=(0, 3)))
+            )
             state_head_bounds[layer].copy_(
                 torch.maximum(state_head_bounds[layer], state.ssm.abs().amax(dim=(0, 2, 3)))
             )
@@ -133,17 +141,19 @@ def _calibrate_payload(
             fifo_bounds[layer].copy_(torch.maximum(fifo_bounds[layer], state.conv.abs().amax()))
 
     head_values = torch.stack(state_head_bounds).cpu().tolist()
+    row_values = torch.stack(state_row_bounds).flatten(1).cpu().tolist()
     state_values = torch.stack(state_bounds).cpu().tolist()
     fifo_values = torch.stack(fifo_bounds).cpu().tolist()
     bounds = [
         {
             "state_abs_max": float(state_max),
             "state_head_abs_max": [float(value) for value in head_maxima],
+            "state_row_abs_max": [float(value) for value in row_maxima],
             "fifo_abs_max": float(fifo_max),
             "calibration_tokens": int(cal_ids.shape[1]),
         }
-        for head_maxima, state_max, fifo_max in zip(
-            head_values, state_values, fifo_values, strict=True
+        for head_maxima, row_maxima, state_max, fifo_max in zip(
+            head_values, row_values, state_values, fifo_values, strict=True
         )
     ]
     checkpoint_names = {
@@ -216,6 +226,14 @@ class _RecurrenceRecordingOps:
 
     def inv_sqrt(self, x: torch.Tensor, site: tuple[int, str]) -> torch.Tensor:
         return self.base.inv_sqrt(x, site)
+
+    def mamba2_gates(self, z, a_cont, layer, time_step_limit):
+        # The base dispatches its own checkpoints. Capture the returned decay
+        # without invoking that checkpoint a second time or bypassing a
+        # joint-gate override with independent softplus/exp calls.
+        write, decay = self.base.mamba2_gates(z, a_cont, layer, time_step_limit)
+        self.records.setdefault((layer, "decay_output"), []).append(decay[0, 0].clone())
+        return write, decay
 
 
 @torch.no_grad()
@@ -358,6 +376,8 @@ def _collect_autoregressive_trace(
 
 
 def _poly_from_export_spec(spec: dict):
+    if spec["kind"] == "scaled-goldschmidt-invsqrt-v1":
+        return ScheduledInvSqrt.from_recipe(spec)
     coeffs = spec.get("coeffs", [])
     base = ChebPoly(tuple(coeffs), float(spec["lo"]), float(spec["hi"])) if coeffs else None
     kind = spec["kind"]
@@ -387,18 +407,28 @@ def _poly_from_export_spec(spec: dict):
     raise ValueError(msg)
 
 
-def _poly_ops_from_export(out: Path, n_layers: int) -> PolyOps:
+def _poly_ops_from_export(out: Path, n_layers: int, final_norm_spec: dict | None = None) -> PolyOps:
     layer_polys = {}
+    joint_gates = {}
     for layer in range(n_layers):
         meta = json.loads((out / f"layer_{layer:02d}" / "meta.json").read_text())
         for name, spec in meta["polys"].items():
             layer_polys[(layer, name)] = _poly_from_export_spec(spec)
-    # The native full-chain circuit reuses the last block RMS fit for norm_f.
-    layer_polys[(n_layers, "rms_invsqrt")] = layer_polys[(n_layers - 1, "rms_invsqrt")]
+        if "joint_gates" in meta:
+            joint_gates[layer] = gate_from_spec(meta["joint_gates"])
+    if final_norm_spec is None and (out / "chain.json").is_file():
+        final_norm_spec = json.loads((out / "chain.json").read_text()).get("final_norm_poly")
+    # Older payloads have no dedicated final fit; retain their exact circuit.
+    layer_polys[(n_layers, "rms_invsqrt")] = (
+        _poly_from_export_spec(final_norm_spec)
+        if final_norm_spec is not None
+        else layer_polys[(n_layers - 1, "rms_invsqrt")]
+    )
     return PolyOps(
         polys={},
         enabled=frozenset(SITE_NAMES),
         layer_polys=layer_polys,
+        joint_gates=joint_gates,
     )
 
 
@@ -500,6 +530,7 @@ def _export_autoregressive_assets(
     generate_tokens: int,
     n_layers: int,
     layer_dirs: list[str],
+    final_norm_spec: dict | None = None,
 ) -> dict:
     if prompt_tokens < 1 or generate_tokens < 1:
         raise ValueError("autoregressive prompt/generate token counts must be positive")
@@ -511,15 +542,24 @@ def _export_autoregressive_assets(
         generate_tokens,
         record_layer_details=False,
     )
+    reference_ops = _poly_ops_from_export(out, n_layers, final_norm_spec)
     poly_trace = _collect_autoregressive_trace(
         model,
         tokenizer,
         prompt,
         prompt_tokens,
         generate_tokens,
-        ops=_poly_ops_from_export(out, n_layers),
+        ops=reference_ops,
         record_recurrence=True,
     )
+    if final_norm_spec is not None and any(
+        reference_ops.violations[site][0] for site in ("rms_invsqrt", "gated_rms_invsqrt")
+    ):
+        raise ValueError(
+            "autoregressive normalization reference inputs leave the certified domains"
+        )
+    if reference_ops.joint_gates and any(value[0] for value in reference_ops.violations.values()):
+        raise ValueError("autoregressive reference inputs leave the exported operator domains")
     embedding_weight = model.get_input_embeddings().weight
     output_embeddings = model.get_output_embeddings()
     lm_head_weight = output_embeddings.weight
@@ -594,6 +634,7 @@ def _export_autoregressive_assets(
         "exact_generated_ids": exact_trace.generated_ids,
         "embedding_lm_head_tied": weights_tied,
         "client_lm_head_bias": output_embeddings.bias is not None,
+        "operator_domain_violations": reference_ops.violations,
     }
 
 
@@ -614,7 +655,7 @@ def export_autoregressive_client_payload(
     out = Path(chain_dir)
     chain_path = out / "chain.json"
     chain = json.loads(chain_path.read_text())
-    if chain.get("format") != "fhemamba-m2-chain-v1":
+    if chain.get("format") not in {"fhemamba-m2-chain-v1", "fhemamba-m2-chain-joint-v1"}:
         raise ValueError("unsupported chain payload format")
     n_layers = int(chain["n_layers"])
     if len(model.backbone.layers) != n_layers:
@@ -630,6 +671,7 @@ def export_autoregressive_client_payload(
         generate_tokens,
         n_layers,
         chain["layer_dirs"],
+        chain.get("final_norm_poly"),
     )
     chain["tensors"] = manifest
     note = "autoregressive assets support client decrypt/lm_head/argmax/re-encrypt"
@@ -725,9 +767,10 @@ def export_m1_payload(
         "lo": p.lo,
         "hi": p.hi,
     }
-    # A is plaintext and scalar per head. Heads whose worst calibrated decay
-    # is below exp(-32) can be replaced by literal zero, avoiding a few extreme
-    # A values that otherwise force 12-15 noise-amplifying squarings.
+    # Legacy surrogate policy: prune heads with extreme A*dt_max to reduce
+    # squaring depth. This is NOT a uniform-negligible-decay certificate:
+    # because A<0, the maximum decay occurs at dt_min. Keep the historical
+    # surrogate explicit until a replacement passes a new model-quality gate.
     _, dt_input_hi = calibration_ranges[(layer_index, "dt_softplus")]
     dt_max = float(F.softplus(torch.tensor(dt_input_hi)))
     reaches = (-torch.exp(m.A_log.detach().float()) * dt_max).tolist()
@@ -745,6 +788,8 @@ def export_m1_payload(
         "squarings": sq.squarings,
         "head_mask": list(decay_head_mask),
         "head_clip_threshold": DECAY_HEAD_CLIP,
+        "head_pruning_policy": "legacy-largest-step-approximation",
+        "head_pruning_uniform_bound_claimed": False,
     }
     lo, hi = calibration_ranges[(layer_index, "rms_invsqrt")]
     base = fit_chebyshev(
@@ -824,6 +869,40 @@ def export_m1_payload(
     return out
 
 
+def _normalization_specs(model, bundle_path: str | Path) -> tuple[dict, str]:
+    """Validate every site before exporting any new payload or reference."""
+    contents = Path(bundle_path).read_bytes()
+    bundle = json.loads(contents)
+    if bundle.get("format") != "fhemamba-normalization-schedules-v1":
+        raise ValueError("unsupported normalization bundle format")
+    layers = len(model.backbone.layers)
+    required = {(i, site) for i in range(layers) for site in ("rms_invsqrt", "gated_rms_invsqrt")}
+    required.add((layers, "rms_invsqrt"))
+    specs = {}
+    for entry in bundle["operators"]:
+        site = (entry["layer"], entry["site"])
+        if site not in required or site in specs:
+            raise ValueError(f"unexpected or duplicate normalization site: {site}")
+        schedule = ScheduledInvSqrt.from_recipe(entry["recipe"])
+        if not certify_schedule(schedule)["certified"]:
+            raise ValueError(f"uncertified normalization schedule: {site}")
+        norm = (
+            model.backbone.norm_f
+            if site[0] == layers
+            else model.backbone.layers[site[0]].mixer.norm
+            if site[1] == "gated_rms_invsqrt"
+            else model.backbone.layers[site[0]].norm
+        )
+        eps = float(norm.variance_epsilon)
+        eps32 = float(torch.tensor(eps, dtype=torch.float32))
+        if not schedule.lo <= min(eps, eps32) <= max(eps, eps32) < schedule.hi:
+            raise ValueError(f"normalization domain does not cover checkpoint epsilon: {site}")
+        specs[site] = schedule.recipe()
+    if specs.keys() != required:
+        raise ValueError("normalization bundle must cover every block, gated and final norm")
+    return specs, hashlib.sha256(contents).hexdigest()
+
+
 @torch.no_grad()
 def export_chain_payload(
     model,
@@ -839,12 +918,29 @@ def export_chain_payload(
     autoregressive_generate_tokens: int = 0,
     gated_init_degree: int | None = None,
     gated_newton_iterations: int | None = None,
+    normalization_bundle: str | Path | None = None,
+    stabilized_gate_bundle: str | Path | None = None,
 ) -> Path:
     """M2 payload: one layer_XX/ subdir per layer (m1 format) plus chain.json
     with the final norm, per-token embeddings, and end-to-end test vectors."""
     out = Path(out_dir)
+    if stabilized_gate_bundle is not None and normalization_bundle is None:
+        raise ValueError("stabilized gates require the matching scheduled normalization bundle")
+    gates, gates_sha = (
+        stabilized_specs(model, stabilized_gate_bundle)
+        if stabilized_gate_bundle is not None
+        else ({}, None)
+    )
+    specs, bundle_sha = (
+        _normalization_specs(model, normalization_bundle)
+        if normalization_bundle is not None
+        else ({}, None)
+    )
+    if normalization_bundle is not None and out.exists():
+        raise ValueError("scheduled normalization export requires a new output directory")
     out.mkdir(parents=True, exist_ok=True)
     n_layers = len(model.backbone.layers)
+    final_norm_spec = specs.get((n_layers, "rms_invsqrt"))
     cal_text = cal_text or DEFAULT_CAL_TEXT
     calibration = _calibrate_payload(model, tokenizer, cal_text, cal_tokens)
     if bound_cal_text is not None and (
@@ -866,18 +962,54 @@ def export_chain_payload(
             _calibration=calibration,
             _test_vectors=test_vectors,
         )
+        if specs:
+            meta_path = out / f"layer_{layer:02d}" / "meta.json"
+            meta = json.loads(meta_path.read_text())
+            for site in ("rms_invsqrt", "gated_rms_invsqrt"):
+                meta["polys"][site] = specs[(layer, site)]
+            meta["normalization_bundle_sha256"] = bundle_sha
+            if gates:
+                meta["format"] = "fhemamba-m1-joint-v1"
+                meta["joint_gates"] = gates[layer]
+                meta["stabilized_gate_bundle_sha256"] = gates_sha
+                meta["polys"].update(public_activation_specs(model.backbone.layers[layer]))
+                # Legacy fits are retained only as inactive provenance; the
+                # versioned joint format prevents old kernels ignoring the hook.
+                meta["polys"]["decay_exp"]["head_mask"] = [1.0] * model.backbone.layers[
+                    layer
+                ].mixer.num_heads
+                meta["notes"].append(
+                    "joint_gates replaces dt_softplus and decay_exp; all heads retained"
+                )
+            meta_path.write_text(json.dumps(meta, indent=2))
 
     # Cryptographic correctness is measured against the identical polynomial
     # circuit evaluated in plaintext. The exact-model vectors remain alongside
     # it for approximation-quality reporting; conflating the two makes an FHE
     # pass impossible whenever the certified surrogate differs by > tolerance.
+    reference_ops = _poly_ops_from_export(out, n_layers, final_norm_spec)
     poly_test_vectors = _collect_test_vectors(
         model,
         tokenizer,
         prompt,
         n_test_tokens,
-        ops=_poly_ops_from_export(out, n_layers),
+        ops=reference_ops,
     )
+    if specs and not all(
+        torch.isfinite(value).all()
+        for value in (
+            poly_test_vectors.expected_final,
+            *poly_test_vectors.layer_outputs,
+            *poly_test_vectors.layer_states,
+        )
+    ):
+        raise ValueError("scheduled normalization payload has non-finite polynomial references")
+    if specs and any(
+        reference_ops.violations[site][0] for site in ("rms_invsqrt", "gated_rms_invsqrt")
+    ):
+        raise ValueError("normalization reference inputs leave the certified domains")
+    if gates and any(count[0] for count in reference_ops.violations.values()):
+        raise ValueError("stabilized reference inputs leave the declared polynomial domains")
     for layer in range(n_layers):
         layer_dir = out / f"layer_{layer:02d}"
         meta_path = layer_dir / "meta.json"
@@ -921,10 +1053,11 @@ def export_chain_payload(
             autoregressive_generate_tokens,
             n_layers,
             [f"layer_{layer:02d}" for layer in range(n_layers)],
+            final_norm_spec,
         )
 
     chain = {
-        "format": "fhemamba-m2-chain-v1",
+        "format": "fhemamba-m2-chain-joint-v1" if gates else "fhemamba-m2-chain-v1",
         "n_layers": n_layers,
         "n_test_tokens": int(test_vectors.embeddings.shape[0]),
         "test_token_ids": test_vectors.token_ids,
@@ -949,5 +1082,18 @@ def export_chain_payload(
             "chain_expected_final remains the exact-model approximation-quality reference",
         ],
     }
+    if final_norm_spec is not None:
+        chain["final_norm_poly"] = final_norm_spec
+        chain["normalization_bundle_sha256"] = bundle_sha
+        chain["reference_domain_violations"] = reference_ops.violations
+        chain["notes"].append(
+            "Scheduled normalization, shared-factor gates and public-envelope SiLU fits; "
+            "domain membership and CKKS error require separate validation."
+            if gates
+            else "Scheduled normalization domains are conditional; other nonlinearities retain "
+            "their exported fits. This is not the jointly stabilized gate surrogate."
+        )
+    if gates:
+        chain["stabilized_gate_bundle_sha256"] = gates_sha
     (out / "chain.json").write_text(json.dumps(chain, indent=2))
     return out

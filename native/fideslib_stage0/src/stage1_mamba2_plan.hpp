@@ -22,7 +22,28 @@ struct ReplicatedShape {
   int per_replica = 0;  // ceil(n / r) diagonals (= masks = encodes)
   int baby_step = 1;    // 1 = direct group rotations; >1 = true BSGS
   int guard_windows = 0;  // filled input windows excluded from masks/folding
+  bool logarithmic_replication = false;
 };
+
+struct RotationSumStep {
+  int offset = 0;  // in units of the caller's signed stride
+  bool accumulated = false;  // rotate the partial sum, or the original input
+};
+
+// Sum count consecutive cyclic shifts. The binary schedule works for every
+// count, including non-powers of two, without masks or multiplicative depth.
+auto rotation_sum_schedule(int count, bool logarithmic)
+    -> std::vector<RotationSumStep>;
+
+template <typename Value, typename Rotate, typename Add>
+auto rotation_sum(const Value& input, int count, int stride, bool logarithmic,
+                  Rotate&& rotate, Add&& add) -> Value {
+  auto sum = input;
+  for (const auto& step : rotation_sum_schedule(count, logarithmic)) {
+    sum = add(sum, rotate(step.accumulated ? sum : input, step.offset * stride));
+  }
+  return sum;
+}
 
 template <typename Handle>
 struct CachedLevelHandle {
@@ -66,7 +87,9 @@ struct PackingDims {
 };
 
 struct NormalizedStateLayout {
+  // Group maxima are summaries. row_scales are the actual coordinate map.
   std::vector<double> group_scales;
+  std::vector<std::vector<double>> row_scales;
   std::vector<std::vector<double>> update_masks;
   std::vector<std::vector<double>> readout_masks;
 };
@@ -92,10 +115,17 @@ auto derive_packing(const M1Payload& payload, int batch) -> PackingDims;
 auto build_normalized_state_layout(
     const std::vector<double>& state_group_abs_max, int group_block, int batch)
     -> NormalizedStateLayout;
+auto build_row_normalized_state_layout(
+    const std::vector<double>& state_row_abs_max, int group_block, int batch)
+    -> NormalizedStateLayout;
 auto packed_state_max_abs_error(
     const std::vector<double>& packed, const std::vector<double>& reference,
     int token, int group, int heads, int group_heads, int head_dim,
     int state_size, double scale) -> double;
+auto packed_state_max_abs_error(
+    const std::vector<double>& packed, const std::vector<double>& reference,
+    int token, int group, int heads, int group_heads, int head_dim,
+    int state_size, const std::vector<double>& row_scales) -> double;
 
 auto packed_head_max_abs_error(
     const std::vector<double>& packed, const std::vector<double>& reference,

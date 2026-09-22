@@ -1,6 +1,7 @@
 #include "stage1_mamba2_payload.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
@@ -153,6 +154,41 @@ auto read_bin_tensor(const std::string& dir, const std::string& name,
 auto parse_poly_spec(const std::string& object_text) -> PolySpec {
   PolySpec spec;
   spec.kind = json_string(object_text, "kind");
+  if (spec.kind == "scaled-goldschmidt-invsqrt-v1") {
+    const auto final_pos = find_key_value_pos(object_text, "final_recomputed_newton");
+    if (final_pos == std::string::npos || object_text.substr(final_pos, 4) != "true" ||
+        json_string(object_text, "oracle_workspace_dtype") != "float64")
+      throw std::runtime_error("unsupported scheduled normalization contract");
+    const double tolerance = json_number(object_text, "tolerance");
+    NormalizationSchedule recipe;
+    recipe.lo = json_number(object_text, "lo");
+    recipe.hi = json_number(object_text, "hi");
+    recipe.seed = json_number(object_text, "seed");
+    if (!std::isfinite(recipe.lo) || !std::isfinite(recipe.hi) ||
+        !std::isfinite(recipe.seed) || !std::isfinite(tolerance) ||
+        !(0 < recipe.lo && recipe.lo < recipe.hi) || recipe.seed <= 0 ||
+        !(0 < tolerance && tolerance < 1))
+      throw std::runtime_error("invalid scheduled normalization parameters");
+    std::istringstream pairs(json_balanced(object_text, "coefficients", '[', ']'));
+    char delimiter = 0;
+    pairs >> delimiter;  // outer '['
+    while (true) {
+      double a = 0, b = 0;
+      char comma = 0, close = 0;
+      if (!(pairs >> delimiter >> a >> comma >> b >> close) || delimiter != '[' ||
+          comma != ',' || close != ']' || !std::isfinite(a) || !std::isfinite(b) ||
+          a <= 0 || b <= 0 || recipe.coefficients.size() >= 64)
+        throw std::runtime_error("invalid scheduled normalization coefficient pair");
+      recipe.coefficients.emplace_back(a, b);
+      if (!(pairs >> delimiter) || (delimiter != ',' && delimiter != ']'))
+        throw std::runtime_error("invalid scheduled normalization coefficient list");
+      if (delimiter == ']') break;
+    }
+    spec.lo = recipe.lo;
+    spec.hi = recipe.hi;
+    spec.normalization = std::move(recipe);
+    return spec;
+  }
   if (find_key_value_pos(object_text, "coeffs") != std::string::npos) {
     spec.coeffs = json_number_list(json_balanced(object_text, "coeffs", '[', ']'));
     spec.lo = json_number(object_text, "lo");
@@ -169,10 +205,36 @@ auto parse_poly_spec(const std::string& object_text) -> PolySpec {
   return spec;
 }
 
+auto parse_joint_gate(const std::string& text, int heads) -> JointGateSpec {
+  if (json_string(text, "kind") != "shared-dissipation-factor-v1" ||
+      json_string(text, "coefficient_layout") != "degree-major-head-minor")
+    throw std::runtime_error("unsupported joint gate recipe");
+  auto list = [&](const char* name) {
+    const auto array = json_balanced(text, name, '[', ']');
+    std::istringstream stream(array);
+    char token;
+    stream >> token;
+    std::vector<double> values;
+    while (true) {
+      double value;
+      if (!(stream >> value >> token) || !std::isfinite(value) ||
+          (token != ',' && token != ']'))
+        throw std::runtime_error("invalid joint gate numeric array");
+      values.push_back(value);
+      if (token == ']') break;
+    }
+    return values;
+  };
+  JointGateSpec spec{list("lo"), list("hi"), list("p"), list("q"), list("rates")};
+  validate_joint_gate(spec, heads);
+  return spec;
+}
+
 auto read_m1_payload(const std::string& dir) -> M1Payload {
   M1Payload payload;
   const auto meta = read_text_file(dir + "/meta.json");
-  if (json_string(meta, "format") != "fhemamba-m1-v1") {
+  const bool joint_format = json_string(meta, "format") == "fhemamba-m1-joint-v1";
+  if (!joint_format && json_string(meta, "format") != "fhemamba-m1-v1") {
     throw std::runtime_error("unexpected payload format (want fhemamba-m1-v1)");
   }
   const auto dims = json_balanced(meta, "dims", '{', '}');
@@ -204,6 +266,15 @@ auto read_m1_payload(const std::string& dir) -> M1Payload {
           throw std::runtime_error("state_head_abs_max length must equal num_heads");
         }
       }
+      if (find_key_value_pos(carried, "state_row_abs_max") != std::string::npos) {
+        payload.state_row_abs_max = json_number_list(
+            json_balanced(carried, "state_row_abs_max", '[', ']'));
+        if (payload.state_row_abs_max.size() !=
+            static_cast<std::size_t>(payload.num_heads * payload.head_dim)) {
+          throw std::runtime_error(
+              "state_row_abs_max length must equal num_heads * head_dim");
+        }
+      }
       payload.fifo_abs_max = json_number(carried, "fifo_abs_max");
       if (find_key_value_pos(carried, "checkpoint_abs_max") != std::string::npos) {
         const auto checkpoints =
@@ -219,9 +290,17 @@ auto read_m1_payload(const std::string& dir) -> M1Payload {
   }
 
   const auto polys = json_balanced(meta, "polys", '{', '}');
+  if (joint_format) {
+    payload.joint_gates = parse_joint_gate(json_balanced(meta, "joint_gates", '{', '}'), payload.num_heads);
+  } else if (find_key_value_pos(meta, "joint_gates") != std::string::npos) {
+    throw std::runtime_error("joint gate payload requires the versioned joint format");
+  }
   for (const auto* name : {"conv_silu", "gate_silu", "dt_softplus", "decay_exp",
                            "rms_invsqrt", "gated_rms_invsqrt"}) {
     payload.polys[name] = parse_poly_spec(json_balanced(polys, name, '{', '}'));
+    if (payload.polys[name].normalization && std::string_view(name) != "rms_invsqrt" &&
+        std::string_view(name) != "gated_rms_invsqrt")
+      throw std::runtime_error("scheduled normalization recipe used at a non-normalization site");
   }
   const auto& decay_head_mask = payload.polys.at("decay_exp").head_mask;
   if (!decay_head_mask.empty() &&
@@ -233,6 +312,9 @@ auto read_m1_payload(const std::string& dir) -> M1Payload {
       })) {
     throw std::runtime_error("decay_exp head_mask values must be zero or one");
   }
+  if (payload.joint_gates && std::any_of(decay_head_mask.begin(), decay_head_mask.end(),
+                                      [](double value) { return value != 1; }))
+    throw std::runtime_error("joint gates retain all heads");
 
   const auto tensors = json_balanced(meta, "tensors", '{', '}');
   for (const auto* name : {"in_proj_w", "conv_w", "conv_b", "dt_bias", "a_log", "d_skip",
@@ -346,12 +428,18 @@ auto read_chain_payload(const std::string& dir,
                         bool load_autoregressive_assets) -> ChainPayload {
   ChainPayload chain;
   const auto meta = read_text_file(dir + "/chain.json");
-  if (json_string(meta, "format") != "fhemamba-m2-chain-v1") {
+  if (json_string(meta, "format") != "fhemamba-m2-chain-v1" &&
+      json_string(meta, "format") != "fhemamba-m2-chain-joint-v1") {
     throw std::runtime_error("unexpected chain payload format (want fhemamba-m2-chain-v1)");
   }
   chain.n_layers = static_cast<int>(json_number(meta, "n_layers"));
   chain.n_test_tokens = static_cast<int>(json_number(meta, "n_test_tokens"));
   chain.final_norm_eps = json_number(meta, "final_norm_eps");
+  if (find_key_value_pos(meta, "final_norm_poly") != std::string::npos) {
+    chain.final_norm_poly = parse_poly_spec(json_balanced(meta, "final_norm_poly", '{', '}'));
+    if (!chain.final_norm_poly->normalization)
+      throw std::runtime_error("dedicated final norm requires a scheduled normalization recipe");
+  }
   chain.layer_dirs = json_string_list(json_balanced(meta, "layer_dirs", '[', ']'));
   if (chain.n_layers <= 0 ||
       chain.layer_dirs.size() != static_cast<std::size_t>(chain.n_layers)) {

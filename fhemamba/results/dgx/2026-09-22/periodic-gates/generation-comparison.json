@@ -1,0 +1,60 @@
+{
+  "baseline_artifact": {
+    "path": "fhemamba/results/dgx/2026-09-22/client-generation/m2_chain_client-generation-20260922_l24_t5.json",
+    "sha256": "825ba4a77178085f0c5799675330a5882b16dad7d0fa8286bdf7fbfc13a442ec"
+  },
+  "candidate_artifact": {
+    "path": "runs/gate-periodic-20260922/generation/results/m2_chain_periodic-client-generation_l24_t5.json",
+    "sha256": "266d32670d573e251e3cc754f3711771b6d8f03eca4b7e3345eb8a90054c95e6"
+  },
+  "matched_conditions": {
+    "same_payload": true,
+    "same_p_degrees": true,
+    "same_q_degrees": true,
+    "same_levels": true,
+    "same_generated_ids": true,
+    "periodic_path_used": true,
+    "same_shared_libraries": true,
+    "same_crypto_parameters": true,
+    "same_rotations": true,
+    "same_ct_ct_mul": true,
+    "same_bootstraps": true
+  },
+  "generation_passed": true,
+  "timing_scope": "One full generation run per variant; earlier baseline, not interleaved full runs. The independent one-layer smoke uses off/on/on/off order.",
+  "timing": {
+    "eval_seconds": {
+      "baseline": 3038.12100374,
+      "candidate": 2573.36589505,
+      "seconds_saved": 464.75510869000027,
+      "reduction_fraction": 0.1529745221200458
+    },
+    "setup_seconds": {
+      "baseline": 23.442485835,
+      "candidate": 24.5411304,
+      "seconds_saved": -1.0986445650000007,
+      "reduction_fraction": -0.04686553178416375
+    },
+    "carried_state_step_mean_seconds": {
+      "baseline": 615.237261792,
+      "candidate": 522.034731057,
+      "seconds_saved": 93.20253073499998,
+      "reduction_fraction": 0.15149038675506943
+    },
+    "bootstrap_eval_seconds": {
+      "baseline": 1075.82806993,
+      "candidate": 1082.1140768,
+      "seconds_saved": -6.286006869999937,
+      "reduction_fraction": -0.005842947442716406
+    }
+  },
+  "peak_rss_gib": {
+    "baseline": 37.0498695374,
+    "candidate": 37.0940246582
+  },
+  "joint_gate_seconds": {
+    "baseline": 1379.3715,
+    "candidate": 908.037138893,
+    "reduction_fraction": 0.3417022615785522
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "stage": "frozen-payload-quality",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "source_sha256": {
+    "/home/hosi/cipher/fhemamba/experiments/run_payload_quality.py": "86a76bb10b6c33e5790302daa43464c0d059920fc87ea2d2826036be7a8ac078",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/reference.py": "186276064ad2f2da532bf8bf0b2bb94156cff0ae86dbd5429f6c126882aeedf0",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/ops.py": "c63f2b70d6493bec3697090ad6ac42b5f95060e2ffa29a002fcd06e7c560df02",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/m1_payload.py": "10c8ae95a39a7240bf8b62b21675c70c973778ab7b8efd00c9ed6b8c6184036c"
+  },
+  "input_payload_sha256": "90ffd42aa49c998016117dd81452faa503e92ae5b8c70b7489b25880dcf691fe",
+  "checkpoint_sha256": {
+    "config.json": "d63815c6a0da127f2d888205f5427b4c5cc652a37190d0019668a6300ebf045f",
+    "model.safetensors": "bc188e3050316757031670438228283928cf721e4e6b0338da614b8d69c7b8b5",
+    "special_tokens_map.json": "aff38493227d813e29fcf8406e8e90062f1f031aa47d589325e9c31d89ac7cc3",
+    "tokenizer.json": "e9f8495abe17234420c02d6406a3fecb4241446c4554962654e38e7236db5d54",
+    "tokenizer_config.json": "4592630aed015b2622d77c0903954cef70870dba56925dc053942125df34b0ad"
+  },
+  "token_file_sha256": "098e1336de0a79d44bb8dda78a7e69cfa0c58d18706a88f3c39b995c677c15a2",
+  "data_description": "Existing cached WikiText-2 test tokens, first 1024-token window; calibration uses the separate built-in public text",
+  "device": "cpu",
+  "torch_version": "2.11.0+cu130",
+  "threads": 4,
+  "pruned_heads": 43,
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "encrypted_execution": false,
+    "teacher_forcing": true,
+    "window_resets_state": true,
+    "full_dataset_quality_claimed": false,
+    "claim": "Frozen coefficients and head-mask quality on the recorded token windows."
+  },
+  "rows": [
+    {
+      "window": 1024,
+      "windows": 1,
+      "predicted_tokens": 1023,
+      "evaluated_token_ids_sha256": "9e3d420a819647414fa7fb71f36f4130654af0cb2981ed63a1188efdab3734bd",
+      "circuits": {
+        "exact": {
+          "finite": true,
+          "max_logit_error": 0.0,
+          "seconds": 53.22040643900982,
+          "nll_per_token": 2.5840943934048144,
+          "ppl": 13.251283205019135,
+          "top1_agreement": 1.0
+        },
+        "exact-with-mask": {
+          "finite": true,
+          "max_logit_error": 9.7266845703125,
+          "seconds": 63.34580379599356,
+          "nll_per_token": 2.583880084234482,
+          "ppl": 13.248443637793141,
+          "top1_agreement": 1.0
+        },
+        "exported-poly": {
+          "finite": false,
+          "max_logit_error": null,
+          "seconds": 66.02074075400014,
+          "nll_per_token": null,
+          "ppl": null,
+          "top1_agreement": null
+        }
+      },
+      "poly_domain_violations": {
+        "conv_silu": [
+          14,
+          44040192
+        ],
+        "gate_silu": [
+          21,
+          37748736
+        ],
+        "dt_softplus": [
+          0,
+          589824
+        ],
+        "gated_rms_invsqrt": [
+          25,
+          24576
+        ],
+        "decay_exp": [
+          2697,
+          589824
+        ],
+        "rms_invsqrt": [
+          0,
+          25600
+        ]
+      },
+      "pruned_head_observations_on_exact_path": [
+        {
+          "layer": 2,
+          "head": 2,
+          "max_observed_exact_decay": 0.9648180603981018
+        },
+        {
+          "layer": 2,
+          "head": 14,
+          "max_observed_exact_decay": 0.9757586717605591
+        },
+        {
+          "layer": 2,
+          "head": 17,
+          "max_observed_exact_decay": 0.974175214767456
+        },
+        {
+          "layer": 4,
+          "head": 8,
+          "max_observed_exact_decay": 0.7452971935272217
+        },
+        {
+          "layer": 4,
+          "head": 13,
+          "max_observed_exact_decay": 0.6102432012557983
+        },
+        {
+          "layer": 4,
+          "head": 23,
+          "max_observed_exact_decay": 0.947058916091919
+        },
+        {
+          "layer": 6,
+          "head": 9,
+          "max_observed_exact_decay": 0.0019406101200729609
+        },
+        {
+          "layer": 10,
+          "head": 0,
+          "max_observed_exact_decay": 0.7515891194343567
+        },
+        {
+          "layer": 10,
+          "head": 14,
+          "max_observed_exact_decay": 1.1824996363429818e-05
+        },
+        {
+          "layer": 14,
+          "head": 22,
+          "max_observed_exact_decay": 0.06738641113042831
+        },
+        {
+          "layer": 16,
+          "head": 13,
+          "max_observed_exact_decay": 0.0016751375515013933
+        },
+        {
+          "layer": 16,
+          "head": 16,
+          "max_observed_exact_decay": 0.0003134322469122708
+        },
+        {
+          "layer": 16,
+          "head": 21,
+          "max_observed_exact_decay": 1.3992900060005816e-21
+        },
+        {
+          "layer": 19,
+          "head": 4,
+          "max_observed_exact_decay": 0.9497826099395752
+        },
+        {
+          "layer": 19,
+          "head": 8,
+          "max_observed_exact_decay": 0.38228681683540344
+        },
+        {
+          "layer": 19,
+          "head": 9,
+          "max_observed_exact_decay": 0.44637858867645264
+        },
+        {
+          "layer": 19,
+          "head": 12,
+          "max_observed_exact_decay": 0.9315414428710938
+        },
+        {
+          "layer": 19,
+          "head": 14,
+          "max_observed_exact_decay": 0.8573105931282043
+        },
+        {
+          "layer": 19,
+          "head": 15,
+          "max_observed_exact_decay": 0.9533158540725708
+        },
+        {
+          "layer": 19,
+          "head": 16,
+          "max_observed_exact_decay": 0.9457808136940002
+        },
+        {
+          "layer": 19,
+          "head": 18,
+          "max_observed_exact_decay": 0.992210865020752
+        },
+        {
+          "layer": 19,
+          "head": 19,
+          "max_observed_exact_decay": 0.9714294075965881
+        },
+        {
+          "layer": 19,
+          "head": 20,
+          "max_observed_exact_decay": 0.9887189269065857
+        },
+        {
+          "layer": 20,
+          "head": 3,
+          "max_observed_exact_decay": 0.1588975191116333
+        },
+        {
+          "layer": 20,
+          "head": 6,
+          "max_observed_exact_decay": 3.3083386030696715e-10
+        },
+        {
+          "layer": 20,
+          "head": 9,
+          "max_observed_exact_decay": 0.008741352707147598
+        },
+        {
+          "layer": 20,
+          "head": 12,
+          "max_observed_exact_decay": 0.6254218220710754
+        },
+        {
+          "layer": 20,
+          "head": 15,
+          "max_observed_exact_decay": 0.5618327260017395
+        },
+        {
+          "layer": 20,
+          "head": 23,
+          "max_observed_exact_decay": 0.9706687331199646
+        },
+        {
+          "layer": 22,
+          "head": 0,
+          "max_observed_exact_decay": 0.7418743371963501
+        },
+        {
+          "layer": 22,
+          "head": 15,
+          "max_observed_exact_decay": 0.24352982640266418
+        },
+        {
+          "layer": 23,
+          "head": 0,
+          "max_observed_exact_decay": 8.352170409280102e-13
+        },
+        {
+          "layer": 23,
+          "head": 2,
+          "max_observed_exact_decay": 1.2307488759688567e-05
+        },
+        {
+          "layer": 23,
+          "head": 3,
+          "max_observed_exact_decay": 0.09033094346523285
+        },
+        {
+          "layer": 23,
+          "head": 4,
+          "max_observed_exact_decay": 0.010817167349159718
+        },
+        {
+          "layer": 23,
+          "head": 5,
+          "max_observed_exact_decay": 1.1030182323068516e-09
+        },
+        {
+          "layer": 23,
+          "head": 12,
+          "max_observed_exact_decay": 0.8499913811683655
+        },
+        {
+          "layer": 23,
+          "head": 15,
+          "max_observed_exact_decay": 0.5701307058334351
+        },
+        {
+          "layer": 23,
+          "head": 16,
+          "max_observed_exact_decay": 0.9876710176467896
+        },
+        {
+          "layer": 23,
+          "head": 20,
+          "max_observed_exact_decay": 0.0007382839103229344
+        },
+        {
+          "layer": 23,
+          "head": 21,
+          "max_observed_exact_decay": 4.9574202382052235e-11
+        },
+        {
+          "layer": 23,
+          "head": 22,
+          "max_observed_exact_decay": 0.12939736247062683
+        },
+        {
+          "layer": 23,
+          "head": 23,
+          "max_observed_exact_decay": 4.92617255076766e-06
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "status": "failed-non-finite"
+}

@@ -1,0 +1,62 @@
+{
+  "baseline_artifact": {
+    "path": "fhemamba/results/dgx/2026-09-22/periodic-gates/m2_chain_periodic-client-generation_l24_t5.json",
+    "sha256": "266d32670d573e251e3cc754f3711771b6d8f03eca4b7e3345eb8a90054c95e6"
+  },
+  "candidate_artifact": {
+    "path": "runs/gate-subring-serial-20260922/generation/results/m2_chain_subring-client-generation_l24_t5.json",
+    "sha256": "ca91e63c9d209f18d3d801db44f1177462abdbc21b3a54802c86184feae44384"
+  },
+  "matched_conditions": {
+    "same_payload": true,
+    "subring_path_used": true,
+    "same_operation_counts": true,
+    "same_p_degrees": true,
+    "same_q_degrees": true,
+    "same_levels": true,
+    "same_generated_ids": true,
+    "periodic_path_used": true,
+    "same_shared_libraries": true,
+    "same_crypto_parameters": true,
+    "same_rotations": true,
+    "same_ct_ct_mul": true,
+    "same_bootstraps": true
+  },
+  "generation_passed": true,
+  "timing_scope": "One full generation run per variant; earlier baseline, not interleaved full runs. The independent one-layer smoke uses off/on/on/off order.",
+  "timing": {
+    "eval_seconds": {
+      "baseline": 2573.36589505,
+      "candidate": 2310.79601048,
+      "seconds_saved": 262.5698845699999,
+      "reduction_fraction": 0.10203363815268807
+    },
+    "setup_seconds": {
+      "baseline": 24.5411304,
+      "candidate": 24.576106124,
+      "seconds_saved": -0.03497572399999882,
+      "reduction_fraction": -0.001425187977486031
+    },
+    "carried_state_step_mean_seconds": {
+      "baseline": 522.034731057,
+      "candidate": 469.105263885,
+      "seconds_saved": 52.929467172000045,
+      "reduction_fraction": 0.10139070070075618
+    },
+    "bootstrap_eval_seconds": {
+      "baseline": 1082.1140768,
+      "candidate": 1081.16164175,
+      "seconds_saved": 0.9524350500000764,
+      "reduction_fraction": 0.0008801614085056642
+    }
+  },
+  "peak_rss_gib": {
+    "baseline": 37.0940246582,
+    "candidate": 37.084941864
+  },
+  "joint_gate_seconds": {
+    "baseline": 908.037138893,
+    "candidate": 643.186485398,
+    "reduction_fraction": 0.29167381173184503
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "platform": "dgx-spark",
+  "source_sha256": "f98b1eadf70abd972344fa27be84592194dd230ec72ba7d356a143841cde12b8",
+  "binary_sha256": "ea02d53608a7337ad94b6577bca864ef05eee876276bcc80fc009fc26b12d2b1",
+  "cuda": {
+    "configured_version": "13.0"
+  },
+  "fideslib": {
+    "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+    "arch": "121-real",
+    "sync_profile": "full",
+    "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2"
+  },
+  "toolchain": {
+    "cxx": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "cmake": "cmake version 3.28.3"
+  },
+  "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+  "shared_libraries": {
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+  }
+}

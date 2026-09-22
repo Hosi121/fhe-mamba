@@ -1,0 +1,76 @@
+{
+  "inputs": {
+    "probe-0-abba.json": "8fead263e173d947a3f5e77225c29f990e805b2087f76d20c53f384e62b4fe62",
+    "probe-1-baab.json": "3b86717c5e29ad3e706729999dfac34b90282729c931f68e52f3b3351ddadd18"
+  },
+  "passed": true,
+  "exact_cases_per_process": [
+    440,
+    440
+  ],
+  "max_active_error": 1.02353681086242e-10,
+  "max_inactive_error": 1.97275442016702e-10,
+  "rows": [
+    {
+      "level": 21,
+      "modes": [
+        {
+          "subring": false,
+          "n": 32,
+          "median_encode_ms": 3.5502785,
+          "median_multiply_ms": 6.214475
+        },
+        {
+          "subring": true,
+          "n": 32,
+          "median_encode_ms": 0.4579685,
+          "median_multiply_ms": 6.192427
+        }
+      ],
+      "encoding_reduction_fraction": 0.871004908488165
+    },
+    {
+      "level": 26,
+      "modes": [
+        {
+          "subring": false,
+          "n": 32,
+          "median_encode_ms": 1.8389715,
+          "median_multiply_ms": 2.6025085
+        },
+        {
+          "subring": true,
+          "n": 32,
+          "median_encode_ms": 0.342233,
+          "median_multiply_ms": 2.5093405
+        }
+      ],
+      "encoding_reduction_fraction": 0.8138997803935515
+    },
+    {
+      "level": 34,
+      "modes": [
+        {
+          "subring": false,
+          "n": 32,
+          "median_encode_ms": 1.608403,
+          "median_multiply_ms": 1.4197065
+        },
+        {
+          "subring": true,
+          "n": 32,
+          "median_encode_ms": 0.204712,
+          "median_multiply_ms": 1.330291
+        }
+      ],
+      "encoding_reduction_fraction": 0.8727234405805013
+    }
+  ],
+  "environment": {
+    "OMP_NUM_THREADS": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "MKL_NUM_THREADS": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  }
+}

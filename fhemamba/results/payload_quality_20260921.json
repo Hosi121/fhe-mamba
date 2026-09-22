@@ -1,0 +1,634 @@
+{
+  "stage": "frozen-payload-quality",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "source_sha256": {
+    "/home/hosi/cipher/fhemamba/experiments/run_payload_quality.py": "eeeeff52a6fda08db91da128927011e16cac33946f2bc0322b13ee67fbb73840",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/reference.py": "3f3edc173cb9d39856f16a76520ce1444215637ac7766a9243d90dcf84f457f0",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/ops.py": "a20ec4f72e86cac5a08d2f0dfab3b8f734cc08e840304f014010db63b23db0b5",
+    "/home/hosi/cipher/fhemamba/src/fhemamba/m1_payload.py": "5f0effc72231f19da5bf5ea824ec44a45d312338619e025b106086bf6bd9d2bd"
+  },
+  "input_payload_sha256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+  "checkpoint_sha256": {
+    "config.json": "d63815c6a0da127f2d888205f5427b4c5cc652a37190d0019668a6300ebf045f",
+    "model.safetensors": "bc188e3050316757031670438228283928cf721e4e6b0338da614b8d69c7b8b5",
+    "special_tokens_map.json": "aff38493227d813e29fcf8406e8e90062f1f031aa47d589325e9c31d89ac7cc3",
+    "tokenizer.json": "e9f8495abe17234420c02d6406a3fecb4241446c4554962654e38e7236db5d54",
+    "tokenizer_config.json": "4592630aed015b2622d77c0903954cef70870dba56925dc053942125df34b0ad"
+  },
+  "token_file_sha256": "89b2a03584a5e5d5d0348e9a103f131843860de1f17dc2968f597ee1246a5ae2",
+  "data_description": "Salesforce/wikitext wikitext-2-raw-v1 test; join with two newlines; first contiguous token windows",
+  "device": "cpu",
+  "torch_version": "2.11.0+cu130",
+  "threads": 4,
+  "pruned_heads": 47,
+  "measurement_scope": {
+    "encrypted_execution": false,
+    "teacher_forcing": true,
+    "window_resets_state": true,
+    "full_dataset_quality_claimed": false,
+    "claim": "Frozen coefficients and head-mask quality on the recorded token windows.",
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false
+  },
+  "rows": [
+    {
+      "window": 1024,
+      "windows": 2,
+      "predicted_tokens": 2046,
+      "evaluated_token_ids_sha256": "97427a5c5ed05dcaee7e8c8da6d347ee884514da59dd0ba744b1db8727b8ea0f",
+      "circuits": {
+        "exact": {
+          "finite": true,
+          "max_logit_error": 0.0,
+          "seconds": 148.67562322299636,
+          "nll_per_token": 2.9121850275690373,
+          "ppl": 18.39695253074926,
+          "top1_agreement": 1.0
+        },
+        "exact-with-mask": {
+          "finite": true,
+          "max_logit_error": 9.856483459472656,
+          "seconds": 157.62890696398972,
+          "nll_per_token": 2.9119752527798144,
+          "ppl": 18.393093718664677,
+          "top1_agreement": 0.9990224828934506
+        },
+        "exported-poly": {
+          "nll_sum": 0.0,
+          "finite": false,
+          "max_logit_error": null,
+          "top1_matches": 0,
+          "seconds": 162.816731421015,
+          "nll_per_token": null,
+          "ppl": null,
+          "top1_agreement": null
+        }
+      },
+      "poly_domain_violations": {
+        "dt_softplus": [
+          0,
+          1179648
+        ],
+        "gate_silu": [
+          3,
+          75497472
+        ],
+        "gated_rms_invsqrt": [
+          5,
+          49152
+        ],
+        "decay_exp": [
+          12803,
+          1179648
+        ],
+        "conv_silu": [
+          0,
+          88080384
+        ],
+        "rms_invsqrt": [
+          16,
+          51200
+        ]
+      },
+      "pruned_head_observations_on_exact_path": [
+        {
+          "layer": 2,
+          "head": 2,
+          "max_observed_exact_decay": 0.9847534894943237
+        },
+        {
+          "layer": 2,
+          "head": 14,
+          "max_observed_exact_decay": 0.9892787337303162
+        },
+        {
+          "layer": 2,
+          "head": 17,
+          "max_observed_exact_decay": 0.9848199486732483
+        },
+        {
+          "layer": 4,
+          "head": 8,
+          "max_observed_exact_decay": 0.7452971935272217
+        },
+        {
+          "layer": 4,
+          "head": 13,
+          "max_observed_exact_decay": 0.6102432012557983
+        },
+        {
+          "layer": 4,
+          "head": 23,
+          "max_observed_exact_decay": 0.947058916091919
+        },
+        {
+          "layer": 6,
+          "head": 9,
+          "max_observed_exact_decay": 0.0019406101200729609
+        },
+        {
+          "layer": 10,
+          "head": 0,
+          "max_observed_exact_decay": 0.7515891194343567
+        },
+        {
+          "layer": 10,
+          "head": 14,
+          "max_observed_exact_decay": 1.1824996363429818e-05
+        },
+        {
+          "layer": 14,
+          "head": 22,
+          "max_observed_exact_decay": 0.06738641113042831
+        },
+        {
+          "layer": 16,
+          "head": 13,
+          "max_observed_exact_decay": 0.0016751375515013933
+        },
+        {
+          "layer": 16,
+          "head": 16,
+          "max_observed_exact_decay": 0.0003134322469122708
+        },
+        {
+          "layer": 16,
+          "head": 21,
+          "max_observed_exact_decay": 1.3992900060005816e-21
+        },
+        {
+          "layer": 19,
+          "head": 4,
+          "max_observed_exact_decay": 0.9636976718902588
+        },
+        {
+          "layer": 19,
+          "head": 8,
+          "max_observed_exact_decay": 0.6915425658226013
+        },
+        {
+          "layer": 19,
+          "head": 9,
+          "max_observed_exact_decay": 0.44637858867645264
+        },
+        {
+          "layer": 19,
+          "head": 10,
+          "max_observed_exact_decay": 0.9760991334915161
+        },
+        {
+          "layer": 19,
+          "head": 12,
+          "max_observed_exact_decay": 0.9618489742279053
+        },
+        {
+          "layer": 19,
+          "head": 14,
+          "max_observed_exact_decay": 0.8748911023139954
+        },
+        {
+          "layer": 19,
+          "head": 15,
+          "max_observed_exact_decay": 0.9647121429443359
+        },
+        {
+          "layer": 19,
+          "head": 16,
+          "max_observed_exact_decay": 0.9617616534233093
+        },
+        {
+          "layer": 19,
+          "head": 18,
+          "max_observed_exact_decay": 0.9949688911437988
+        },
+        {
+          "layer": 19,
+          "head": 19,
+          "max_observed_exact_decay": 0.974445641040802
+        },
+        {
+          "layer": 19,
+          "head": 20,
+          "max_observed_exact_decay": 0.9935619235038757
+        },
+        {
+          "layer": 20,
+          "head": 3,
+          "max_observed_exact_decay": 0.1588975191116333
+        },
+        {
+          "layer": 20,
+          "head": 6,
+          "max_observed_exact_decay": 3.3083386030696715e-10
+        },
+        {
+          "layer": 20,
+          "head": 9,
+          "max_observed_exact_decay": 0.008741352707147598
+        },
+        {
+          "layer": 20,
+          "head": 12,
+          "max_observed_exact_decay": 0.7817413806915283
+        },
+        {
+          "layer": 20,
+          "head": 15,
+          "max_observed_exact_decay": 0.5618327260017395
+        },
+        {
+          "layer": 20,
+          "head": 23,
+          "max_observed_exact_decay": 0.9736515879631042
+        },
+        {
+          "layer": 22,
+          "head": 0,
+          "max_observed_exact_decay": 0.7418743371963501
+        },
+        {
+          "layer": 22,
+          "head": 10,
+          "max_observed_exact_decay": 0.9395813345909119
+        },
+        {
+          "layer": 22,
+          "head": 13,
+          "max_observed_exact_decay": 0.8779215812683105
+        },
+        {
+          "layer": 22,
+          "head": 15,
+          "max_observed_exact_decay": 0.30000588297843933
+        },
+        {
+          "layer": 23,
+          "head": 0,
+          "max_observed_exact_decay": 8.48055946214149e-13
+        },
+        {
+          "layer": 23,
+          "head": 2,
+          "max_observed_exact_decay": 1.2307488759688567e-05
+        },
+        {
+          "layer": 23,
+          "head": 3,
+          "max_observed_exact_decay": 0.09033094346523285
+        },
+        {
+          "layer": 23,
+          "head": 4,
+          "max_observed_exact_decay": 0.010817167349159718
+        },
+        {
+          "layer": 23,
+          "head": 5,
+          "max_observed_exact_decay": 1.0428919949845294e-08
+        },
+        {
+          "layer": 23,
+          "head": 11,
+          "max_observed_exact_decay": 0.7507234215736389
+        },
+        {
+          "layer": 23,
+          "head": 12,
+          "max_observed_exact_decay": 0.8499913811683655
+        },
+        {
+          "layer": 23,
+          "head": 15,
+          "max_observed_exact_decay": 0.6317655444145203
+        },
+        {
+          "layer": 23,
+          "head": 16,
+          "max_observed_exact_decay": 0.9876710176467896
+        },
+        {
+          "layer": 23,
+          "head": 20,
+          "max_observed_exact_decay": 0.004167123697698116
+        },
+        {
+          "layer": 23,
+          "head": 21,
+          "max_observed_exact_decay": 4.9574202382052235e-11
+        },
+        {
+          "layer": 23,
+          "head": 22,
+          "max_observed_exact_decay": 0.12939736247062683
+        },
+        {
+          "layer": 23,
+          "head": 23,
+          "max_observed_exact_decay": 4.92617255076766e-06
+        }
+      ]
+    },
+    {
+      "window": 4096,
+      "windows": 2,
+      "predicted_tokens": 8190,
+      "evaluated_token_ids_sha256": "f1327baa76c0db057de11158c31ca632cd713069bc517eba3ef070b7800c2b3c",
+      "circuits": {
+        "exact": {
+          "finite": true,
+          "max_logit_error": 0.0,
+          "seconds": 561.7561315659987,
+          "nll_per_token": 3.0286479796245422,
+          "ppl": 20.669268417537904,
+          "top1_agreement": 1.0
+        },
+        "exact-with-mask": {
+          "finite": true,
+          "max_logit_error": 23.99159812927246,
+          "seconds": 524.4846816770005,
+          "nll_per_token": 3.0286042191315627,
+          "ppl": 20.668363939952762,
+          "top1_agreement": 0.9971916971916972
+        },
+        "exported-poly": {
+          "nll_sum": 0.0,
+          "finite": false,
+          "max_logit_error": null,
+          "top1_matches": 0,
+          "seconds": 601.4917446179898,
+          "nll_per_token": null,
+          "ppl": null,
+          "top1_agreement": null
+        }
+      },
+      "poly_domain_violations": {
+        "dt_softplus": [
+          2,
+          4718592
+        ],
+        "gate_silu": [
+          30,
+          301989888
+        ],
+        "gated_rms_invsqrt": [
+          21,
+          196608
+        ],
+        "decay_exp": [
+          37519,
+          4718592
+        ],
+        "conv_silu": [
+          0,
+          352321536
+        ],
+        "rms_invsqrt": [
+          33,
+          204800
+        ]
+      },
+      "pruned_head_observations_on_exact_path": [
+        {
+          "layer": 2,
+          "head": 2,
+          "max_observed_exact_decay": 0.9862794876098633
+        },
+        {
+          "layer": 2,
+          "head": 14,
+          "max_observed_exact_decay": 0.9884576201438904
+        },
+        {
+          "layer": 2,
+          "head": 17,
+          "max_observed_exact_decay": 0.9827418327331543
+        },
+        {
+          "layer": 4,
+          "head": 8,
+          "max_observed_exact_decay": 0.7834926843643188
+        },
+        {
+          "layer": 4,
+          "head": 13,
+          "max_observed_exact_decay": 0.6102433204650879
+        },
+        {
+          "layer": 4,
+          "head": 23,
+          "max_observed_exact_decay": 0.9833534955978394
+        },
+        {
+          "layer": 6,
+          "head": 9,
+          "max_observed_exact_decay": 0.2158963531255722
+        },
+        {
+          "layer": 10,
+          "head": 0,
+          "max_observed_exact_decay": 0.7515894174575806
+        },
+        {
+          "layer": 10,
+          "head": 14,
+          "max_observed_exact_decay": 0.0016073768492788076
+        },
+        {
+          "layer": 14,
+          "head": 22,
+          "max_observed_exact_decay": 0.06738641113042831
+        },
+        {
+          "layer": 16,
+          "head": 13,
+          "max_observed_exact_decay": 0.0964960902929306
+        },
+        {
+          "layer": 16,
+          "head": 16,
+          "max_observed_exact_decay": 0.0012132717529311776
+        },
+        {
+          "layer": 16,
+          "head": 21,
+          "max_observed_exact_decay": 4.316020457695302e-11
+        },
+        {
+          "layer": 19,
+          "head": 4,
+          "max_observed_exact_decay": 0.9865502715110779
+        },
+        {
+          "layer": 19,
+          "head": 8,
+          "max_observed_exact_decay": 0.6705257296562195
+        },
+        {
+          "layer": 19,
+          "head": 9,
+          "max_observed_exact_decay": 0.6929877400398254
+        },
+        {
+          "layer": 19,
+          "head": 10,
+          "max_observed_exact_decay": 0.9901135563850403
+        },
+        {
+          "layer": 19,
+          "head": 12,
+          "max_observed_exact_decay": 0.9862682819366455
+        },
+        {
+          "layer": 19,
+          "head": 14,
+          "max_observed_exact_decay": 0.9464545249938965
+        },
+        {
+          "layer": 19,
+          "head": 15,
+          "max_observed_exact_decay": 0.9875399470329285
+        },
+        {
+          "layer": 19,
+          "head": 16,
+          "max_observed_exact_decay": 0.9593275785446167
+        },
+        {
+          "layer": 19,
+          "head": 18,
+          "max_observed_exact_decay": 0.9956707954406738
+        },
+        {
+          "layer": 19,
+          "head": 19,
+          "max_observed_exact_decay": 0.9714294672012329
+        },
+        {
+          "layer": 19,
+          "head": 20,
+          "max_observed_exact_decay": 0.9936395287513733
+        },
+        {
+          "layer": 20,
+          "head": 3,
+          "max_observed_exact_decay": 0.1588975191116333
+        },
+        {
+          "layer": 20,
+          "head": 6,
+          "max_observed_exact_decay": 0.00024156959261745214
+        },
+        {
+          "layer": 20,
+          "head": 9,
+          "max_observed_exact_decay": 0.036967772990465164
+        },
+        {
+          "layer": 20,
+          "head": 12,
+          "max_observed_exact_decay": 0.8030189871788025
+        },
+        {
+          "layer": 20,
+          "head": 15,
+          "max_observed_exact_decay": 0.7119646668434143
+        },
+        {
+          "layer": 20,
+          "head": 23,
+          "max_observed_exact_decay": 0.9833658337593079
+        },
+        {
+          "layer": 22,
+          "head": 0,
+          "max_observed_exact_decay": 0.8680284023284912
+        },
+        {
+          "layer": 22,
+          "head": 10,
+          "max_observed_exact_decay": 0.964386522769928
+        },
+        {
+          "layer": 22,
+          "head": 13,
+          "max_observed_exact_decay": 0.9737375974655151
+        },
+        {
+          "layer": 22,
+          "head": 15,
+          "max_observed_exact_decay": 0.4969054162502289
+        },
+        {
+          "layer": 23,
+          "head": 0,
+          "max_observed_exact_decay": 5.945802072915285e-09
+        },
+        {
+          "layer": 23,
+          "head": 2,
+          "max_observed_exact_decay": 1.2307289580348879e-05
+        },
+        {
+          "layer": 23,
+          "head": 3,
+          "max_observed_exact_decay": 0.09033083915710449
+        },
+        {
+          "layer": 23,
+          "head": 4,
+          "max_observed_exact_decay": 0.05569697171449661
+        },
+        {
+          "layer": 23,
+          "head": 5,
+          "max_observed_exact_decay": 1.2822702899484284e-08
+        },
+        {
+          "layer": 23,
+          "head": 11,
+          "max_observed_exact_decay": 0.750723659992218
+        },
+        {
+          "layer": 23,
+          "head": 12,
+          "max_observed_exact_decay": 0.8986886739730835
+        },
+        {
+          "layer": 23,
+          "head": 15,
+          "max_observed_exact_decay": 0.644121527671814
+        },
+        {
+          "layer": 23,
+          "head": 16,
+          "max_observed_exact_decay": 0.9876710772514343
+        },
+        {
+          "layer": 23,
+          "head": 20,
+          "max_observed_exact_decay": 0.007773267105221748
+        },
+        {
+          "layer": 23,
+          "head": 21,
+          "max_observed_exact_decay": 6.124137641450034e-09
+        },
+        {
+          "layer": 23,
+          "head": 22,
+          "max_observed_exact_decay": 0.38159266114234924
+        },
+        {
+          "layer": 23,
+          "head": 23,
+          "max_observed_exact_decay": 7.046830432955176e-05
+        }
+      ]
+    }
+  ],
+  "scope_annotation": {
+    "original_report_sha256": "97dcd2acdad9baa04fee854a8769ec2538ae7b2ed7a04519eb1f3ad5c3b68a38",
+    "note": "Report scope fields added after measurement; numerical results and execution source hashes are unchanged."
+  }
+}

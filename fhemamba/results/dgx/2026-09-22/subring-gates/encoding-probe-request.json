@@ -1,0 +1,24 @@
+{
+  "binary_sha256": "19ea59aa97d813b1d87a0846429fda5dd5f25446e5ccc3792df72bbb8e69b95c",
+  "orders": [
+    "abba",
+    "baab"
+  ],
+  "preflight": [
+    {
+      "utilization_percent": 0,
+      "mem_available_gib": 114.4411849975586
+    },
+    {
+      "utilization_percent": 0,
+      "mem_available_gib": 114.49750137329102
+    }
+  ],
+  "environment": {
+    "OMP_NUM_THREADS": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "MKL_NUM_THREADS": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  }
+}

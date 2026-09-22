@@ -1,0 +1,385 @@
+{
+  "stage": "vector-rms-ckks-probe",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "binary_sha256": "81f76f59de8beea282d5f54a7992d1bf88c0465fbab48d1613ac6b18d4d672c4",
+  "recipe_sha256": "ed4f46f5dddfa5162ae2f5936946073e54d3dd1fc3928586a2d521ba4231a022",
+  "backend": "FIDESlib",
+  "encrypted": true,
+  "passed": true,
+  "status": "passed",
+  "mode": "weighted",
+  "gamma_placement": "before",
+  "refresh": "none",
+  "gate_metric": "vector-rms-output-absolute-error",
+  "error_threshold": 0.0001,
+  "parameters": {
+    "ring_dim": 131072,
+    "slots": 8192,
+    "depth": 40,
+    "scale": 59,
+    "security": "128-classic",
+    "secret_key_dist": "uniform-ternary",
+    "scaling": "FLEXIBLEAUTO",
+    "key_switch": "HYBRID",
+    "large_digits": 3,
+    "first_mod_size": 60
+  },
+  "layout": {
+    "width": 1536,
+    "padded_width": 2048,
+    "lanes": 4,
+    "cases": 16,
+    "application_rotation_keys": 11,
+    "packing": "feature-strided-independent-vectors"
+  },
+  "refresh_bound": 956.5257445568311,
+  "measurements": {
+    "output": {
+      "max_abs_error": 2.3533959847554797e-07,
+      "max_abs_error_vs_polynomial": 5.22019263371476e-08,
+      "non_finite": 0
+    },
+    "before_refresh": {
+      "max_abs_error": 2.3533959847554797e-07,
+      "max_abs_error_vs_polynomial": 5.22019263371476e-08,
+      "non_finite": 0
+    },
+    "checkpoint_inputs": {
+      "max_abs_error": 4.045301427169079e-09,
+      "max_abs_error_vs_polynomial": 1.362021606610142e-12,
+      "non_finite": 0
+    },
+    "synthetic_inputs": {
+      "max_abs_error": 2.3533959847554797e-07,
+      "max_abs_error_vs_polynomial": 5.22019263371476e-08,
+      "non_finite": 0
+    },
+    "padding_max_abs_error": 2.801385790007771e-09,
+    "setup_seconds": 7.541123052,
+    "evaluation_seconds": 2.906687962,
+    "refresh_seconds": 0,
+    "bootstraps": 0,
+    "refresh_scalar_products": 0,
+    "peak_rss_gib": 11.66672134399414,
+    "batches": [
+      {
+        "first_case": 0,
+        "cases": 4,
+        "ct_ct_products": 41,
+        "ct_pt_products": 19,
+        "additions": 26,
+        "rotations": 11,
+        "level": 34,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.788729693,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 2.8922260142394407e-09,
+          "max_abs_error_vs_polynomial": 1.2470025012589758e-12,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 2.8922260142394407e-09,
+          "max_abs_error_vs_polynomial": 1.2470025012589758e-12,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 4,
+        "cases": 4,
+        "ct_ct_products": 41,
+        "ct_pt_products": 19,
+        "additions": 26,
+        "rotations": 11,
+        "level": 34,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.697078808,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 4.045301427169079e-09,
+          "max_abs_error_vs_polynomial": 1.362021606610142e-12,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 4.045301427169079e-09,
+          "max_abs_error_vs_polynomial": 1.362021606610142e-12,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 8,
+        "cases": 4,
+        "ct_ct_products": 41,
+        "ct_pt_products": 19,
+        "additions": 26,
+        "rotations": 11,
+        "level": 34,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.69882302,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 2.3533959847554797e-07,
+          "max_abs_error_vs_polynomial": 9.472916673303189e-09,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 2.3533959847554797e-07,
+          "max_abs_error_vs_polynomial": 9.472916673303189e-09,
+          "non_finite": 0
+        }
+      },
+      {
+        "first_case": 12,
+        "cases": 4,
+        "ct_ct_products": 41,
+        "ct_pt_products": 19,
+        "additions": 26,
+        "rotations": 11,
+        "level": 34,
+        "scale_degree": 2,
+        "refreshed_level": -1,
+        "evaluation_seconds": 0.722056441,
+        "refresh_seconds": 0,
+        "before": {
+          "max_abs_error": 4.59422153653577e-08,
+          "max_abs_error_vs_polynomial": 5.22019263371476e-08,
+          "non_finite": 0
+        },
+        "after": {
+          "max_abs_error": 4.59422153653577e-08,
+          "max_abs_error_vs_polynomial": 5.22019263371476e-08,
+          "non_finite": 0
+        }
+      }
+    ]
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "evaluation_decryptions": 0,
+    "real_decoder_noise_enabled": true,
+    "full_vector_rms_reduction_measured": true,
+    "learned_gamma_measured": true,
+    "secret_key_in_benchmark_process": true,
+    "prior_layer_ckks_error_measured": false,
+    "full_model_correctness_claimed": false,
+    "claim": "Packed vector RMSNorm from fresh ciphertexts; optional output refresh, no full-model claim."
+  },
+  "build_provenance": {
+    "binary_sha256": "81f76f59de8beea282d5f54a7992d1bf88c0465fbab48d1613ac6b18d4d672c4",
+    "source_sha256": {
+      "native/fideslib_stage0/CMakeLists.txt": "289e5f5b5607b82373fca588e49a2bf254f668ed9a189dcdeb12fa0cce24ed40",
+      "native/fideslib_stage0/include/stage1_normalization.hpp": "41c20e3aa32ce095bc55e0356ec0f8401a9251df219104beeb1630bb7f160c43",
+      "native/fideslib_stage0/src/stage1_vector_rms_probe.cpp": "c6441376fb1f40860a348006a632a521f6eb81cdd1d5a4056a9805f04fe25f3c",
+      "fhemamba/src/fhemamba/_version.py": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3",
+      "native/fideslib_stage0/include/stage1_vector_rms.hpp": "952ccb62c30f3f96cc3cb20ca4d79353c9d3262cfef7c360fe7ed3a74d9d8609"
+    },
+    "library_sha256": {
+      "/usr/local/cuda-13.0/targets/sbsa-linux/lib/libcudart.so.13.0.96": "7bdba2b5b08cbdc85203c41cc94598adedb1bcfea7cb574ca693ac73599e4e63",
+      "/usr/lib/aarch64-linux-gnu/libcuda.so.580.159.03": "f6fb476bbefda386491dc5151a593a98bedeff6a4eb0ec4ef766e3b2fe3b9032",
+      "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+      "/usr/lib/aarch64-linux-gnu/libm.so.6": "d5b262e559d38769e4959f036a1cc2c4009fa60b4ec836a7a19ca8554aebf5a5",
+      "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": "33c8bcb7d33228fe5101bfeb201bcaff4563d4ecf09497229b9deba522ebaf3d",
+      "/usr/lib/aarch64-linux-gnu/libgcc_s.so.1": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+      "/usr/lib/aarch64-linux-gnu/libc.so.6": "fe5966a43e068ad7cb389c3affa069f4ee6f296e07d7ccc0398a23cfde4f0b7e",
+      "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "393384096ffa869e1be20d2f91fdf08dfadb9f3e531dfe724085d8501d3f85d9",
+      "/usr/lib/aarch64-linux-gnu/libdl.so.2": "97387fb55ccfc0cc109dfe99b81de2b7bbaac723d1c215107dc69a068c4b1fae",
+      "/usr/lib/aarch64-linux-gnu/libpthread.so.0": "97b288827c0ab29659dfcdcfab6c2e9e1225c19fc5abfe106d8a53c2c7b34402",
+      "/usr/lib/aarch64-linux-gnu/librt.so.1": "4b38331a53bc2bd10c1ecf4f02a71c913c40bad13f5fbf93bee5a0e1f25dd493"
+    },
+    "static_library_sha256": {
+      "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f"
+    },
+    "cmake_cache_sha256": "e8465749f2036414870e3443503ae0f885d86ac96d1c557c7e37c3da58f8cf90",
+    "architecture": "aarch64",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "builder_source_sha256": "00da291fb6e47e23b46d44c59ab9c8c0e1f9e5cc83f297cdf479529ec8d54cd3"
+  },
+  "input_provenance": {
+    "layer": 4,
+    "site": "gated_rms_invsqrt",
+    "file": "l04_gated_rms_invsqrt.txt",
+    "sha256": "ed4f46f5dddfa5162ae2f5936946073e54d3dd1fc3928586a2d521ba4231a022",
+    "interval": [
+      9.999999747378752e-06,
+      2641.916015625
+    ],
+    "certified_relative_error": 1e-07,
+    "weighted_certificate": {
+      "certified": true,
+      "reason": null,
+      "arithmetic": "exact-rational extrema with outward dyadic enclosures",
+      "enclosure_bits": 128,
+      "relative_error_bound": 1e-07,
+      "nonexpansive_in_exact_arithmetic": true,
+      "includes_execution_roundoff": false,
+      "trace": [
+        {
+          "stage": "constant-seed",
+          "u_lower": "322003383446106505560072343493/85070591730234615865843651857942052864",
+          "u_upper": "42535295865117293154142617009476088525/42535295865117307932921825928971026432"
+        },
+        {
+          "stage": 0,
+          "u_lower": "8152700991117971323509631792237/340282366920938463463374607431768211456",
+          "u_upper": "21267647932516119001532001156869975107/21267647932558653966460912964485513216"
+        },
+        {
+          "stage": 1,
+          "u_lower": "12900976812853421798230382126121/85070591730234615865843651857942052864",
+          "u_upper": "340282366920257887333182331361053158881/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 2,
+          "u_lower": "326635627724677792501621304715383/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257887333182331361053158881/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 3,
+          "u_lower": "1033746059713198081916359852624939/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257887333182331361053158881/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 4,
+          "u_lower": "13086394405313783198816006681917581/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257887333182331361053158881/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 5,
+          "u_lower": "41413294085334350395885079752480749/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257887333182331361053158881/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 6,
+          "u_lower": "524025699723894922635631570479359535/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257887333182331361053158881/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 7,
+          "u_lower": "1653668545705988856555518640748156795/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257887333182331361053158881/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 8,
+          "u_lower": "19791178058623948845248864221985584949/340282366920938463463374607431768211456",
+          "u_upper": "170141183460128993009932411659873569237/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 9,
+          "u_lower": "93816606817220192881984878924130864611/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257914562392897921802319205/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 10,
+          "u_lower": "252223850418291618899646732030754242199/340282366920938463463374607431768211456",
+          "u_upper": "170141183460129007268041343570090993693/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 11,
+          "u_lower": "167310428011984084233174206776958791067/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257916549458122480394980491/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 12,
+          "u_lower": "170132203832117003213692666751061969429/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257785476858395399198828929/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 13,
+          "u_lower": "85070591552510573132790090747423727861/85070591730234615865843651857942052864",
+          "u_upper": "170141183460469231731686793122440577707/170141183460469231731687303715884105728"
+        }
+      ],
+      "rounded_ratio_effective_coefficients": [
+        "5312484093225359/2251799813685248",
+        "5981325345683293790269000939359/2535301200456458802993406410752",
+        "5981325345683293790269000939359/2535301200456458802993406410752",
+        "5981325345683293790269000939359/2535301200456458802993406410752",
+        "5981325345683293790269000939359/2535301200456458802993406410752",
+        "5981325345683293790269000939359/2535301200456458802993406410752",
+        "5981325345683293790269000939359/2535301200456458802993406410752",
+        "5981325345683293790269000939359/2535301200456458802993406410752",
+        "25424445286032414122250721745909025861192771675/11417981541647679048466287755595961091061972992",
+        "45101738112591474097966375058099378503785724544128968513705375/25711008708143844408671393477458601640355247900524685364822016",
+        "248983927310364702870726656470047518384751387032173781850264638550517775836875/231584178474632390847141970017375815706539969331281128078915168015826259279872",
+        "1291069126962850864350330982637116447284537232152516690611134911460312900385932272033623371875/2085924839766513752338888384931203236916703635113918720651407820138886450957656787131798913024",
+        "9512791512501376132101771832553464703011663170344851784563617355412323970856972611624005392553123086659615625/18788340662190665823115844774314696219005460391266558965658327772257672200916867547709591987078149624255479808"
+      ]
+    },
+    "coupled_cost": {
+      "accelerated_stages": 13,
+      "final_recomputed_newton_stages": 1,
+      "ct_ct_products": 39,
+      "ct_ct_critical_depth": 28,
+      "public_scalar_products": 17,
+      "public_scalar_additions": 14,
+      "same_coefficients_recomputed_ct_ct_depth": 39,
+      "same_coefficients_balanced_ct_ct_depth": 26,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "balanced_cost": {
+      "ct_ct_products": 39,
+      "ct_ct_critical_depth": 26,
+      "public_scalar_products": 30,
+      "public_scalar_additions": 1,
+      "ct_ct_additions": 13,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "fixed_newton_same_accuracy": {
+      "stages": 28,
+      "ct_ct_products": 81,
+      "ct_ct_critical_depth": 54,
+      "factored_unbalanced_ct_ct_depth": 81,
+      "same_domain_seed_and_tolerance": true,
+      "includes_encoding_rescale_bootstrap_cost": false
+    }
+  },
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "runner_source_sha256": "44dafed90989adf908be55c26e192d0c5db8d54feb2c3aa73a35ce1eac6cba33",
+  "process_returncode": 0,
+  "process_seconds": 12.70788473635912,
+  "log_sha256": "2a784c206789ae6e216574151dd61d82634b965a463a373de2f7e398f91e8247",
+  "execution_environment": {
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "OMP_NUM_THREADS": "8"
+  },
+  "fixture_provenance": {
+    "file": "l04_gated_rms_invsqrt.vectors.txt",
+    "sha256": "edf64f62ba2819453f1ab3eff1476ac0ac8fabea1f25ede4851b2b48e49772ec",
+    "recipe_file": "l04_gated_rms_invsqrt.txt",
+    "recipe_sha256": "ed4f46f5dddfa5162ae2f5936946073e54d3dd1fc3928586a2d521ba4231a022",
+    "layer": 4,
+    "site": "gated_rms_invsqrt",
+    "width": 1536,
+    "cases": 16,
+    "checkpoint_cases": 8,
+    "synthetic_cases": 8,
+    "variance": [
+      116.20609561558379,
+      134.50117772684106,
+      52.74613476408561,
+      181.3343675939393,
+      77.80546391316356,
+      126.30007481423567,
+      77.67952154720359,
+      110.30488199687908,
+      1e-05,
+      1.9999999999979998e-05,
+      0.16253971870328904,
+      2641.9160156197167,
+      2641.9160156197154,
+      1.9999999999980005e-05,
+      2641.9160156197154,
+      2641.9160156197167
+    ],
+    "gamma_max_abs": 22.1875,
+    "epsilon": 1e-05
+  },
+  "fixture_manifest_sha256": "5ab819238f4c13b625e8ac639ac19fb9daefe7249358215f5935b38d9141388f"
+}

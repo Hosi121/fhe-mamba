@@ -119,6 +119,14 @@ struct Config {
   // Apply a real baby-step/giant-step decomposition to the replicated
   // diagonal groups. Off preserves the measured replicated schedule.
   bool replicated_true_bsgs = false;
+  // Binary rotate-add trees for input extension, replica fill and folding.
+  // Opt in until a matched full-chain multi-token accuracy gate passes.
+  bool logarithmic_replication = false;
+  bool coefficient_aware_ps = false;
+  // Encode per-head joint coefficients with a power-of-two period and keep
+  // their Chebyshev basis supported on the original head lanes.
+  bool joint_periodic_coefficients = false;
+  bool joint_subring_encoding = false;
   // Use FIDESlib's fused LinearTransform for the true-BSGS core. This hoists
   // baby rotations and fuses diagonal products/sums on the GPU. It requires
   // direct keys for every baby and giant rotation; otherwise evaluation
@@ -173,6 +181,9 @@ struct Config {
   // folded into existing plaintext masks, so this changes neither the Mamba
   // formula nor multiplicative depth. It is opt-in until encrypted parity.
   bool normalized_recurrent_state = false;
+  // Per-(head, channel) public scales, folded into the same masks. Requires
+  // independent row calibration; no extra encrypted operations or depth.
+  bool row_normalized_state = false;
   // Pack two real recurrent-state ciphertexts into the real/imaginary
   // components of one CKKS ciphertext for a shared bootstrap, then split
   // them with conjugation. This halves ordinary state-refresh bootstraps.
@@ -254,6 +265,7 @@ auto parse_args(int argc, char* argv[]) -> Config;
 
 auto should_use_meta_bts(const Config& config, int active_layer,
                          bool carried, bool normalized_state,
-                         std::string_view checkpoint) -> bool;
+                         std::string_view checkpoint,
+                         bool scheduled_normalization = false) -> bool;
 
 }  // namespace fhemamba::stage1

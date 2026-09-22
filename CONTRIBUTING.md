@@ -5,6 +5,10 @@ complete only when code, tests, configuration, and evidence agree.
 
 ## Development setup
 
+Start with [the reproduction guide](docs/reproducing.md) for an example,
+checkpoint and public coefficient bundles. The repository's active package
+is `fhemamba`; native GPU builds are separate from Python installation.
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
@@ -26,7 +30,9 @@ scripts/run_checks.sh
 
 GPU probes are separate because they require OpenFHE/FIDESlib, dedicated
 hardware, and substantial memory. A passing local suite does not validate an
-encrypted B300 claim.
+encrypted GPU claim. DGX Spark is the current platform; use the
+[Spark runbook](docs/dgx-spark.md). Historical B300 evidence recovery does not
+block new Spark experiments.
 
 ## Active code
 

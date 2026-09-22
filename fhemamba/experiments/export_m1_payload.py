@@ -42,6 +42,8 @@ def main() -> None:
     parser.add_argument("--autoregressive-generate-tokens", type=int, default=0)
     parser.add_argument("--gated-init-degree", type=int)
     parser.add_argument("--gated-newton-iterations", type=int)
+    parser.add_argument("--normalization-bundle", type=Path)
+    parser.add_argument("--stabilized-gate-bundle", type=Path)
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     args = parser.parse_args()
 
@@ -66,6 +68,8 @@ def main() -> None:
         autoregressive_generate_tokens=args.autoregressive_generate_tokens,
         gated_init_degree=args.gated_init_degree,
         gated_newton_iterations=args.gated_newton_iterations,
+        normalization_bundle=args.normalization_bundle,
+        stabilized_gate_bundle=args.stabilized_gate_bundle,
     )
     print(f"exported {len(model.backbone.layers)} layers to {output}")
 

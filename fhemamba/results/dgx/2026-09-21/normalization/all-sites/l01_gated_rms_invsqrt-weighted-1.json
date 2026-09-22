@@ -1,0 +1,304 @@
+{
+  "stage": "normalization-ckks-probe",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "binary_sha256": "3c9e1775d94b2a6052bcce374c06a46c9d8ff28a30b90992f4ca35936282418b",
+  "recipe_sha256": "967b72d27fd9784efeb81a61c1b9fa8cb0794d449b2ee3e56b08aa7bc98f6faf",
+  "backend": "FIDESlib",
+  "encrypted": true,
+  "passed": true,
+  "status": "passed",
+  "mode": "weighted",
+  "input_mode": "normalize",
+  "gate_metric": "normalized-output-absolute-error",
+  "parameters": {
+    "ring_dim": 131072,
+    "slots": 8192,
+    "depth": 40,
+    "scale": 59,
+    "security": "128-classic",
+    "secret_key_dist": "uniform-ternary",
+    "scaling": "FLEXIBLEAUTO",
+    "key_switch": "HYBRID",
+    "large_digits": 3,
+    "first_mod_size": 60
+  },
+  "interval": [
+    9.999999747378752e-06,
+    16935.60546875
+  ],
+  "error_threshold": 0.0001,
+  "measurements": {
+    "final": {
+      "max_relative_error_vs_exact": 2.450844506214087e-05,
+      "max_abs_error_vs_polynomial": 3.185517016390804e-06,
+      "max_normalized_error_vs_polynomial": 2.4508557747695746e-05,
+      "worst_variance": 13725.811096319763,
+      "non_finite": 0
+    },
+    "before_final": {
+      "max_relative_error_vs_exact": 0.16866541855976203,
+      "max_abs_error_vs_polynomial": 0.012082717700650392,
+      "max_normalized_error_vs_polynomial": 0.16868151304184031,
+      "worst_variance": 13977.352516011188,
+      "non_finite": 0
+    },
+    "host_reference": {
+      "max_relative_error_vs_exact": 1.1650987022350547e-09,
+      "max_abs_error_vs_polynomial": 0,
+      "max_normalized_error_vs_polynomial": 0,
+      "worst_variance": 9.999999747378752e-06,
+      "non_finite": 0
+    },
+    "normalized_output_max_abs_error": 6.11065797961885e-09,
+    "normalized_output_polynomial_max_abs_error": 5.610218513582036e-09,
+    "normalized_output_non_finite": 0,
+    "input_max_abs_error": 1.4733814168721437e-10,
+    "smallest_input_abs_error": 3.356676048227314e-12,
+    "ct_ct_products": 44,
+    "ct_pt_products": 18,
+    "scalar_additions": 16,
+    "ct_ct_additions": 0,
+    "bootstraps": 0,
+    "rotations": 0,
+    "stage_levels": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      34
+    ],
+    "stage_scale_degrees": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "final_level": 35,
+    "inverse_level": 34,
+    "setup_seconds": 3.085594712,
+    "evaluation_seconds": 0.641225714,
+    "peak_rss_gib": 6.325408935546875
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "geometric_grid_points": 8192,
+    "evaluation_decryptions": 0,
+    "post_evaluation_diagnostic_decryptions": 4,
+    "real_decoder_noise_enabled": true,
+    "secret_key_in_benchmark_process": true,
+    "bootstrap_error_measured": false,
+    "full_vector_rms_reduction_measured": false,
+    "claim": "Isolated encrypted normalization; sampled precision, not a model or protocol gate."
+  },
+  "build_provenance": {
+    "binary_sha256": "3c9e1775d94b2a6052bcce374c06a46c9d8ff28a30b90992f4ca35936282418b",
+    "source_sha256": {
+      "native/fideslib_stage0/CMakeLists.txt": "d35eb9513e1464b86305f43ef9c6fbd1c2b12c6d0bf3fd597fb18676425f1bba",
+      "native/fideslib_stage0/src/stage1_normalization_probe.cpp": "023b70475a0f9018f18cba7e537e9cc800cc920ec9e7cd125c187d86d8458c37",
+      "native/fideslib_stage0/include/stage1_normalization.hpp": "41c20e3aa32ce095bc55e0356ec0f8401a9251df219104beeb1630bb7f160c43"
+    },
+    "library_sha256": {
+      "/usr/local/cuda-13.0/targets/sbsa-linux/lib/libcudart.so.13.0.96": "7bdba2b5b08cbdc85203c41cc94598adedb1bcfea7cb574ca693ac73599e4e63",
+      "/usr/lib/aarch64-linux-gnu/libcuda.so.580.159.03": "f6fb476bbefda386491dc5151a593a98bedeff6a4eb0ec4ef766e3b2fe3b9032",
+      "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+      "/usr/lib/aarch64-linux-gnu/libm.so.6": "d5b262e559d38769e4959f036a1cc2c4009fa60b4ec836a7a19ca8554aebf5a5",
+      "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": "33c8bcb7d33228fe5101bfeb201bcaff4563d4ecf09497229b9deba522ebaf3d",
+      "/usr/lib/aarch64-linux-gnu/libgcc_s.so.1": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+      "/usr/lib/aarch64-linux-gnu/libc.so.6": "fe5966a43e068ad7cb389c3affa069f4ee6f296e07d7ccc0398a23cfde4f0b7e",
+      "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "393384096ffa869e1be20d2f91fdf08dfadb9f3e531dfe724085d8501d3f85d9",
+      "/usr/lib/aarch64-linux-gnu/libdl.so.2": "97387fb55ccfc0cc109dfe99b81de2b7bbaac723d1c215107dc69a068c4b1fae",
+      "/usr/lib/aarch64-linux-gnu/libpthread.so.0": "97b288827c0ab29659dfcdcfab6c2e9e1225c19fc5abfe106d8a53c2c7b34402",
+      "/usr/lib/aarch64-linux-gnu/librt.so.1": "4b38331a53bc2bd10c1ecf4f02a71c913c40bad13f5fbf93bee5a0e1f25dd493"
+    },
+    "cmake_cache_sha256": "1ffb313d86559b5193a212fd26c078dde3658573a61320a0eef1ed198feeecde",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "architecture": "aarch64",
+    "fideslib_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+    "sync_profile": "full",
+    "cuda_toolkit": "13.0",
+    "gpu_architecture": "121-real",
+    "static_library_sha256": {
+      "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+      "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f"
+    }
+  },
+  "input_provenance": {
+    "layer": 1,
+    "site": "gated_rms_invsqrt",
+    "file": "l01_gated_rms_invsqrt.txt",
+    "sha256": "967b72d27fd9784efeb81a61c1b9fa8cb0794d449b2ee3e56b08aa7bc98f6faf",
+    "interval": [
+      9.999999747378752e-06,
+      16935.60546875
+    ],
+    "certified_relative_error": 1e-07,
+    "weighted_certificate": {
+      "certified": true,
+      "reason": null,
+      "arithmetic": "exact-rational extrema with outward dyadic enclosures",
+      "enclosure_bits": 128,
+      "relative_error_bound": 1e-07,
+      "nonexpansive_in_exact_arithmetic": true,
+      "includes_execution_roundoff": false,
+      "trace": [
+        {
+          "stage": "constant-seed",
+          "u_lower": "200927187960643207633417546717/340282366920938463463374607431768211456",
+          "u_upper": "340282366920938459494085323571718840875/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 0,
+          "u_lower": "158975357330954019746254371463/42535295865117307932921825928971026432",
+          "u_upper": "170141183460128957995260594790822389803/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 1,
+          "u_lower": "4025046381572309393444812573915/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 2,
+          "u_lower": "50954431053229780407561461096967/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 3,
+          "u_lower": "80631164956730616162582384256393/85070591730234615865843651857942052864",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 4,
+          "u_lower": "2041471140996678873121808603157721/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 5,
+          "u_lower": "807605870009255925649501406858181/21267647932558653966460912964485513216",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 6,
+          "u_lower": "20446059456849198901793819522500587/85070591730234615865843651857942052864",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 7,
+          "u_lower": "258716975224543019899637260324840561/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 8,
+          "u_lower": "408231590805569611361692144358549349/42535295865117307932921825928971026432",
+          "u_upper": "340282366920257928377484509852219305775/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 9,
+          "u_lower": "19560141617396007453836294148448978921/340282366920938463463374607431768211456",
+          "u_upper": "10633823966258057064879476125601235445/10633823966279326983230456482242756608"
+        },
+        {
+          "stage": 10,
+          "u_lower": "23239654962607200943602792576508225727/85070591730234615865843651857942052864",
+          "u_upper": "340282366920258060435182312274074381923/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 11,
+          "u_lower": "15699098677244763369627270793562805583/21267647932558653966460912964485513216",
+          "u_upper": "170141183460129069838288883879028409871/170141183460469231731687303715884105728"
+        },
+        {
+          "stage": 12,
+          "u_lower": "334465507159639389706762150012045121771/340282366920938463463374607431768211456",
+          "u_upper": "340282366920257869603522506785058614173/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 13,
+          "u_lower": "170131699906033499383399569762683709563/170141183460469231731687303715884105728",
+          "u_upper": "340282366920257911474131676600228125597/340282366920938463463374607431768211456"
+        },
+        {
+          "stage": 14,
+          "u_lower": "42535295766001671366025006225917842865/42535295865117307932921825928971026432",
+          "u_upper": "170141183460469231731686793311450443403/170141183460469231731687303715884105728"
+        }
+      ],
+      "rounded_ratio_effective_coefficients": [
+        "1328121023306339/562949953421312",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "2990662672841646534405663507017/1267650600228229401496703205376",
+        "25450004210002956423360940493833285512326502555/11417981541647679048466287755595961091061972992",
+        "5651352102994488155493559864194379052448718095190056928466505/3213876088517980551083924184682325205044405987565585670602752",
+        "61037467913773385751665523702368780775669446862808657354209753182453508345/56539106072908298546665520023773392506479484700019806659891398441363832832",
+        "158040577699363838479271370093479759120353092005600857519607153757093499373001157519256955/254629497041810760783555711051172270131433549208242031329517556169297662470417088272924672",
+        "1161631631694015166760522659937357587816895219510737069443701640694810753270228452954654941011623899337015/2293498615990071511610820895302086940796564989168281123737588839386922876088484808070018553110125686554624"
+      ]
+    },
+    "coupled_cost": {
+      "accelerated_stages": 14,
+      "final_recomputed_newton_stages": 1,
+      "ct_ct_products": 42,
+      "ct_ct_critical_depth": 30,
+      "public_scalar_products": 18,
+      "public_scalar_additions": 15,
+      "same_coefficients_recomputed_ct_ct_depth": 42,
+      "same_coefficients_balanced_ct_ct_depth": 28,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "balanced_cost": {
+      "ct_ct_products": 42,
+      "ct_ct_critical_depth": 28,
+      "public_scalar_products": 32,
+      "public_scalar_additions": 1,
+      "ct_ct_additions": 14,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "fixed_newton_same_accuracy": {
+      "stages": 30,
+      "ct_ct_products": 87,
+      "ct_ct_critical_depth": 58,
+      "factored_unbalanced_ct_ct_depth": 87,
+      "same_domain_seed_and_tolerance": true,
+      "includes_encoding_rescale_bootstrap_cost": false
+    }
+  },
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "runner_source_sha256": "f374f12bd441e60377cb10e0566be36d5698b0fe40d321a956de823ee53afeb8",
+  "process_returncode": 0,
+  "process_seconds": 5.101524007506669,
+  "log_sha256": "c25971de5ef54e7eb65617a5cb5d86f48d800f3d631bc9074c0769bc42bad216",
+  "execution_environment": {
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "OMP_NUM_THREADS": "8"
+  }
+}

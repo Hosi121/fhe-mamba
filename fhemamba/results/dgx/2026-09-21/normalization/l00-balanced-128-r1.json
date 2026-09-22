@@ -1,0 +1,94 @@
+{
+  "stage": "normalization-ckks-probe",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "passed": false,
+  "status": "failed",
+  "mode": "balanced",
+  "parameters": {
+    "depth": 56,
+    "scale": 59,
+    "security": "128-classic"
+  },
+  "failure": "native probe failed before producing measurements",
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "claim": "Failed isolated encrypted normalization probe; see preserved log."
+  },
+  "build_provenance": {
+    "binary_sha256": "9dff3bfee68cd0751b536f0916fff9123cf8d75beba174b5ec4fb6abae22881a",
+    "source_sha256": {
+      "native/fideslib_stage0/CMakeLists.txt": "d35eb9513e1464b86305f43ef9c6fbd1c2b12c6d0bf3fd597fb18676425f1bba",
+      "native/fideslib_stage0/src/stage1_normalization_probe.cpp": "771748eca3e0c0382726a6657326c526a54d2eb649eeb0f12366a6932953f392",
+      "native/fideslib_stage0/include/stage1_normalization.hpp": "61068783646d02c218b8c510115e702ea3c79d8a0a8bb0abac36157107750490"
+    },
+    "library_sha256": {
+      "/usr/local/cuda-13.0/targets/sbsa-linux/lib/libcudart.so.13.0.96": "7bdba2b5b08cbdc85203c41cc94598adedb1bcfea7cb574ca693ac73599e4e63",
+      "/usr/lib/aarch64-linux-gnu/libcuda.so.580.159.03": "f6fb476bbefda386491dc5151a593a98bedeff6a4eb0ec4ef766e3b2fe3b9032",
+      "/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33": "6e3112d35cfc86db7ee85b27e1746f67408e2837ff8628b46386c3eabd5682a4",
+      "/usr/lib/aarch64-linux-gnu/libm.so.6": "d5b262e559d38769e4959f036a1cc2c4009fa60b4ec836a7a19ca8554aebf5a5",
+      "/usr/lib/aarch64-linux-gnu/libgomp.so.1.0.0": "33c8bcb7d33228fe5101bfeb201bcaff4563d4ecf09497229b9deba522ebaf3d",
+      "/usr/lib/aarch64-linux-gnu/libgcc_s.so.1": "f2d3ad2bf0b61f6bc944cc37d7b6ab7f88d2582b41ff989ca164803f56cc5f20",
+      "/usr/lib/aarch64-linux-gnu/libc.so.6": "fe5966a43e068ad7cb389c3affa069f4ee6f296e07d7ccc0398a23cfde4f0b7e",
+      "/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1": "393384096ffa869e1be20d2f91fdf08dfadb9f3e531dfe724085d8501d3f85d9",
+      "/usr/lib/aarch64-linux-gnu/libdl.so.2": "97387fb55ccfc0cc109dfe99b81de2b7bbaac723d1c215107dc69a068c4b1fae",
+      "/usr/lib/aarch64-linux-gnu/libpthread.so.0": "97b288827c0ab29659dfcdcfab6c2e9e1225c19fc5abfe106d8a53c2c7b34402",
+      "/usr/lib/aarch64-linux-gnu/librt.so.1": "4b38331a53bc2bd10c1ecf4f02a71c913c40bad13f5fbf93bee5a0e1f25dd493"
+    },
+    "cmake_cache_sha256": "1ffb313d86559b5193a212fd26c078dde3658573a61320a0eef1ed198feeecde",
+    "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "architecture": "aarch64",
+    "fideslib_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+    "sync_profile": "full",
+    "cuda_toolkit": "13.0",
+    "gpu_architecture": "121-real"
+  },
+  "input_provenance": {
+    "layer": 0,
+    "site": "gated_rms_invsqrt",
+    "file": "l00_gated_rms_invsqrt.txt",
+    "sha256": "e6738265474a122b46f037f98ad5b022bc7b2aba3f3c0d1aadc9357cd099dfb9",
+    "interval": [
+      9.999999747378752e-06,
+      466.1573181152344
+    ],
+    "certified_relative_error": 1e-07,
+    "coupled_cost": {
+      "accelerated_stages": 12,
+      "final_recomputed_newton_stages": 1,
+      "ct_ct_products": 36,
+      "ct_ct_critical_depth": 26,
+      "public_scalar_products": 16,
+      "public_scalar_additions": 13,
+      "same_coefficients_recomputed_ct_ct_depth": 36,
+      "same_coefficients_balanced_ct_ct_depth": 24,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "balanced_cost": {
+      "ct_ct_products": 36,
+      "ct_ct_critical_depth": 24,
+      "public_scalar_products": 28,
+      "public_scalar_additions": 1,
+      "ct_ct_additions": 12,
+      "includes_encoding_rescale_bootstrap_cost": false
+    },
+    "fixed_newton_same_accuracy": {
+      "stages": 26,
+      "ct_ct_products": 75,
+      "ct_ct_critical_depth": 50,
+      "factored_unbalanced_ct_ct_depth": 75,
+      "same_domain_seed_and_tolerance": true,
+      "includes_encoding_rescale_bootstrap_cost": false
+    }
+  },
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "runner_source_sha256": "33d279cc4b34d46487d229bcccb3dc56b63394927610ed3ecc0dd1d71357070f",
+  "process_returncode": 0,
+  "process_seconds": 11.77372508123517,
+  "log_sha256": "e6785ff42d5e639c154f2f8d8613064a4627e261b295a8e6f125a59cfe4bb059",
+  "execution_environment": {
+    "CUDA_LAUNCH_BLOCKING": "1",
+    "OMP_NUM_THREADS": "8"
+  }
+}

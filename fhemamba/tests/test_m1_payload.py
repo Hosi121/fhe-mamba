@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 import torch
 from fhemamba.m1_payload import export_m1_payload
+from fhemamba.ops import PolyOps
 
 transformers = pytest.importorskip("transformers")
 
@@ -47,6 +48,10 @@ def test_export_round_trip(tmp_path) -> None:
     assert cb["state_abs_max"] > 0.0
     assert len(cb["state_head_abs_max"]) == meta["dims"]["num_heads"]
     assert max(cb["state_head_abs_max"]) == pytest.approx(cb["state_abs_max"])
+    row_bounds = np.asarray(cb["state_row_abs_max"]).reshape(
+        meta["dims"]["num_heads"], meta["dims"]["head_dim"]
+    )
+    assert np.allclose(row_bounds.max(axis=1), cb["state_head_abs_max"])
     assert cb["fifo_abs_max"] > 0.0
     assert cb["source"] == "calibration_text"
     assert cb["calibration_tokens"] > 0
@@ -95,7 +100,9 @@ def test_chain_export(tmp_path, monkeypatch) -> None:
     model = transformers.Mamba2ForCausalLM(config).float().eval()
     import fhemamba.m1_payload as payload_module
 
-    monkeypatch.setattr(payload_module, "_poly_ops_from_export", lambda *_args: None)
+    monkeypatch.setattr(
+        payload_module, "_poly_ops_from_export", lambda *_args: PolyOps({}, frozenset())
+    )
     out = payload_module.export_chain_payload(
         model,
         _IdTokenizer(),
@@ -229,7 +236,9 @@ def test_add_autoregressive_assets_to_existing_chain(tmp_path, monkeypatch) -> N
     model = transformers.Mamba2ForCausalLM(config).float().eval()
     import fhemamba.m1_payload as payload_module
 
-    monkeypatch.setattr(payload_module, "_poly_ops_from_export", lambda *_args: None)
+    monkeypatch.setattr(
+        payload_module, "_poly_ops_from_export", lambda *_args: PolyOps({}, frozenset())
+    )
     out = payload_module.export_chain_payload(
         model,
         _IdTokenizer(),

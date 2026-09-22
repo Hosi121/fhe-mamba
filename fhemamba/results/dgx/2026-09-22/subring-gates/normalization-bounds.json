@@ -1,0 +1,872 @@
+{
+  "analysis_kind": "normalization-necessary-bounds-not-a-benchmark",
+  "script_sha256": "01c03a0302132df7264babb3c716e97d61a7bb8beb81d5bfdd0a1758a048ff60",
+  "source_sha256": {
+    "fhemamba/results/dgx/2026-09-22/periodic-gates/m2_chain_periodic-client-generation_l24_t5.json": "266d32670d573e251e3cc754f3711771b6d8f03eca4b7e3345eb8a90054c95e6",
+    "config/mamba2-130m-normalization-20260921.json": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+    "runs/client-generation-20260922/payload/chain.json": "af83762417a7d2dd1ceb0b2044715cafb5453ce021ebdb074a1db4fe6d205e22",
+    "runs/client-generation-20260922/payload/layer_00/meta.json": "b833526376be1dfb6f58e023da61ee3517b5ec98ec2c2f4d5ff56175f1f797b7",
+    "runs/client-generation-20260922/payload/layer_01/meta.json": "cc7272f69888f396b61f228de2ccabc1548f8de112470795c5f674947eee4d1e",
+    "runs/client-generation-20260922/payload/layer_02/meta.json": "94ecd42d227b878d959ad99601ad109c9f6dd1edf5b364d2e691b8839af0a8ed",
+    "runs/client-generation-20260922/payload/layer_03/meta.json": "8bd6829750ab80585c64c8b04e9bab08c78e03dbe951ace5a74f6dfeb3b95665",
+    "runs/client-generation-20260922/payload/layer_04/meta.json": "b3fb81830bf935d9c19b37cc070084933aa46d4440f51acda42e86b8e60150de",
+    "runs/client-generation-20260922/payload/layer_05/meta.json": "c67c4fee7fa5468a6bf848bedb64f3b91ce35bd83184d18e828da60baedcad45",
+    "runs/client-generation-20260922/payload/layer_06/meta.json": "bbd132da6d85ddb1359075f77fed154993ba2769ee62bc847439fca1daaa38e1",
+    "runs/client-generation-20260922/payload/layer_07/meta.json": "d2b8db6b71da77ffa8e3be0824139d9374c7ac0e80f3c9de8e9c94b1070d6d0e",
+    "runs/client-generation-20260922/payload/layer_08/meta.json": "b2f2fffb5317cca05098aa8dd2ccc359c8e8659a27749ad22531c4066fa4adfe",
+    "runs/client-generation-20260922/payload/layer_09/meta.json": "4d082356c63bd597c8d6dc6a9c9d4434aefd8d24a8554e02bf9bfd13c171f4cc",
+    "runs/client-generation-20260922/payload/layer_10/meta.json": "7d00a4c4406ab182a8b60e0b7827a80ce872c9b1c14d5ecbd657b994535179f6",
+    "runs/client-generation-20260922/payload/layer_11/meta.json": "61e597f5ca4784f5a371e7a2b9478589847ee50d4673e23e261e4bbef644d7ff",
+    "runs/client-generation-20260922/payload/layer_12/meta.json": "04bcfd44c1d4fc4c3418d41fe3314d36d73b976841ceef6c1d928d57b0e15b42",
+    "runs/client-generation-20260922/payload/layer_13/meta.json": "23591768e3e6ef6c6623b5bc9901444a75eaa750b5d0bb1d768781befc441bce",
+    "runs/client-generation-20260922/payload/layer_14/meta.json": "01ba7e9e4a960b1e835796acb6cdf144f38fea9a788113306376eef147b67206",
+    "runs/client-generation-20260922/payload/layer_15/meta.json": "c5884435bef60b09ce8d6c085bfb9e10c12b5cb37e35e72ad939fffefec8cae8",
+    "runs/client-generation-20260922/payload/layer_16/meta.json": "3bbfa1f1647a8b81747e4e7d595daf2ee967f03fbdd466b307d18b978f0becbd",
+    "runs/client-generation-20260922/payload/layer_17/meta.json": "5e71e439434edf918fb32e262cae8aefca7a7957c4058d077471bb11e9b7a401",
+    "runs/client-generation-20260922/payload/layer_18/meta.json": "80ba049b908c587a49d8ac3938641ad00662907090c756a990814197d3bc7c3e",
+    "runs/client-generation-20260922/payload/layer_19/meta.json": "8930272c9f65313a32f3aa2a8957df229428de944747973388ca98700d2e7260",
+    "runs/client-generation-20260922/payload/layer_20/meta.json": "2f55e9b42deef60f2c344cbcb1f172537567a0a5e4d91f789ec394713f0c4b7d",
+    "runs/client-generation-20260922/payload/layer_21/meta.json": "2653f6ee7c531dcf70bed1c8f3f8bcfa0022477ab33b100e9c3360d26b09fd03",
+    "runs/client-generation-20260922/payload/layer_22/meta.json": "9d8eabdd6d00f71b3e13f5cd706bfa7a8694310e3eee3eee0aad330d3b463e08",
+    "runs/client-generation-20260922/payload/layer_23/meta.json": "9240fc389d652873039b6a147c575bfd474a9564b2f7f853f8293457508ba0fb"
+  },
+  "payload_sha256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
+  "operator_count": 49,
+  "degree_proof": "d_next=3*d+1 from a*y-b*v*y^3, starting d=0; n scheduled steps plus one repair",
+  "uniform_approximation_bound": {
+    "assumption": "real polynomial p(v), all v in [lo,hi], |sqrt(v)*p(v)-1| <= epsilon",
+    "residual": "r(v)=v*p(v)^2-1; degree<=2*d+1; r(0)=-1; sup|r|<=delta=2*epsilon+epsilon^2",
+    "inequality": "1 <= delta*cosh((2*d+1)*acosh((hi+lo)/(hi-lo)))",
+    "minimum_degree": "ceil((acosh(1/delta)/acosh((hi+lo)/(hi-lo))-1)/2)",
+    "numerical_evaluation": "80/120-digit Decimal evaluations agree on the integer; not an outward interval proof",
+    "sufficiency_claimed": false
+  },
+  "scope": {
+    "encrypted_execution": false,
+    "new_approximation_constructed": false,
+    "includes_ckks_error": false,
+    "includes_scalar_rescaling_or_refresh_depth": false,
+    "bootstrap_minimum_proved": false,
+    "global_domain_membership_proved": false,
+    "bound_applies_to": "polynomials in the variance; unrestricted ordinary binary products and free public scalar operations"
+  },
+  "operators": [
+    {
+      "layer": 0,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        466.1573181152344
+      ],
+      "condition_ratio": 46615732.989135906,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 27512,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 0,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        3.3449363708496094
+      ],
+      "condition_ratio": 334493.64553498116,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 10,
+      "fixed_recipe_degree": 88573,
+      "fixed_recipe_minimum_ct_ct_depth": 17,
+      "balanced_recipe_ct_ct_depth": 20,
+      "any_uniform_polynomial_minimum_degree": 2330,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 12
+    },
+    {
+      "layer": 1,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        16935.60546875
+      ],
+      "condition_ratio": 1693560589.657939,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 165827,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 1,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        300.45733642578125
+      ],
+      "condition_ratio": 30045734.401597217,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 22087,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 2,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        4000.98291015625
+      ],
+      "condition_ratio": 400098301.12295824,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 80600,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 2,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        312.8285217285156
+      ],
+      "condition_ratio": 31282852.9631229,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 22538,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 3,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        51293.7109375
+      ],
+      "condition_ratio": 5129371223.328816,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 15,
+      "fixed_recipe_degree": 21523360,
+      "fixed_recipe_minimum_ct_ct_depth": 25,
+      "balanced_recipe_ct_ct_depth": 30,
+      "any_uniform_polynomial_minimum_degree": 288593,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 19
+    },
+    {
+      "layer": 3,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        327.6630554199219
+      ],
+      "condition_ratio": 32766306.36973871,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 23066,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 4,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        2641.916015625
+      ],
+      "condition_ratio": 264191608.2365414,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 65496,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 4,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        367.4627380371094
+      ],
+      "condition_ratio": 36746274.73199992,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 24426,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 5,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        8316.759765625
+      ],
+      "condition_ratio": 831675997.5724028,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 116207,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 5,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        423.90399169921875
+      ],
+      "condition_ratio": 42390400.24079346,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 26235,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 6,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        493.5652160644531
+      ],
+      "condition_ratio": 49356522.85329595,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 28309,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 6,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        479.5848693847656
+      ],
+      "condition_ratio": 47958488.15000988,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 27905,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 7,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        28368.771484375
+      ],
+      "condition_ratio": 2836877220.1030464,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 214622,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 7,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        606.8910522460938
+      ],
+      "condition_ratio": 60689106.75774517,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 31391,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 8,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        4587.5576171875
+      ],
+      "condition_ratio": 458755773.3078956,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 86307,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 8,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        672.5809936523438
+      ],
+      "condition_ratio": 67258101.06431691,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 33047,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 9,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1488.7872314453125
+      ],
+      "condition_ratio": 148878726.90552422,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 49167,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 9,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        811.0585327148438
+      ],
+      "condition_ratio": 81105855.32039061,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 36289,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 10,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1444.1295166015625
+      ],
+      "condition_ratio": 144412955.30833435,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 48424,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 10,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1018.4115600585938
+      ],
+      "condition_ratio": 101841158.57858343,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 40664,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 11,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        29614.95703125
+      ],
+      "condition_ratio": 2961495777.938676,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 219285,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 11,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1420.5467529296875
+      ],
+      "condition_ratio": 142054678.88157177,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 48027,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 12,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        27873.859375
+      ],
+      "condition_ratio": 2787386007.915293,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 212742,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 12,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1778.9154052734375
+      ],
+      "condition_ratio": 177891545.02126217,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 53744,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 13,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        152.4742431640625
+      ],
+      "condition_ratio": 15247424.701588597,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 15734,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 14
+    },
+    {
+      "layer": 13,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1943.2293701171875
+      ],
+      "condition_ratio": 194322941.92072916,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 56171,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 14,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        29.585952758789062
+      ],
+      "condition_ratio": 2958595.3506193114,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 11,
+      "fixed_recipe_degree": 265720,
+      "fixed_recipe_minimum_ct_ct_depth": 19,
+      "balanced_recipe_ct_ct_depth": 22,
+      "any_uniform_polynomial_minimum_degree": 6931,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 13
+    },
+    {
+      "layer": 14,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1996.00537109375
+      ],
+      "condition_ratio": 199600542.1517088,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 56929,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 15,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        11972.71875
+      ],
+      "condition_ratio": 1197271905.2456324,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 139428,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 15,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        2141.54150390625
+      ],
+      "condition_ratio": 214154155.80061403,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 58968,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 16,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        126.95587921142578
+      ],
+      "condition_ratio": 12695588.241860114,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 14358,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 14
+    },
+    {
+      "layer": 16,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        2756.356201171875
+      ],
+      "condition_ratio": 275635627.0803291,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 66899,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 17,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        4601.15576171875
+      ],
+      "condition_ratio": 460115587.7953724,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 86435,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 17,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        4295.99072265625
+      ],
+      "condition_ratio": 429599083.1182107,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 83519,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 18,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        1150.6343994140625
+      ],
+      "condition_ratio": 115063442.84815331,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 43224,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 18,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        5135.017578125
+      ],
+      "condition_ratio": 513501770.78464586,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 91311,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 19,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        325.4314880371094
+      ],
+      "condition_ratio": 32543149.625820044,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 12,
+      "fixed_recipe_degree": 797161,
+      "fixed_recipe_minimum_ct_ct_depth": 20,
+      "balanced_recipe_ct_ct_depth": 24,
+      "any_uniform_polynomial_minimum_degree": 22987,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 15
+    },
+    {
+      "layer": 19,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        8800.6474609375
+      ],
+      "condition_ratio": 880064768.326056,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 119539,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 17
+    },
+    {
+      "layer": 20,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        846.0095825195312
+      ],
+      "condition_ratio": 84600960.38915315,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 13,
+      "fixed_recipe_degree": 2391484,
+      "fixed_recipe_minimum_ct_ct_depth": 22,
+      "balanced_recipe_ct_ct_depth": 26,
+      "any_uniform_polynomial_minimum_degree": 37063,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 16
+    },
+    {
+      "layer": 20,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        12781.154296875
+      ],
+      "condition_ratio": 1278115461.9754124,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 144058,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 21,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        38.61745834350586
+      ],
+      "condition_ratio": 3861745.931906494,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 11,
+      "fixed_recipe_degree": 265720,
+      "fixed_recipe_minimum_ct_ct_depth": 19,
+      "balanced_recipe_ct_ct_depth": 22,
+      "any_uniform_polynomial_minimum_degree": 7919,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 13
+    },
+    {
+      "layer": 21,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        14979.1357421875
+      ],
+      "condition_ratio": 1497913612.0592306,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 155954,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 22,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        3.054280996322632
+      ],
+      "condition_ratio": 305428.1073480262,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 10,
+      "fixed_recipe_degree": 88573,
+      "fixed_recipe_minimum_ct_ct_depth": 17,
+      "balanced_recipe_ct_ct_depth": 20,
+      "any_uniform_polynomial_minimum_degree": 2227,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 12
+    },
+    {
+      "layer": 22,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        26749.640625
+      ],
+      "condition_ratio": 2674964130.075278,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 14,
+      "fixed_recipe_degree": 7174453,
+      "fixed_recipe_minimum_ct_ct_depth": 23,
+      "balanced_recipe_ct_ct_depth": 28,
+      "any_uniform_polynomial_minimum_degree": 208407,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 18
+    },
+    {
+      "layer": 23,
+      "site": "gated_rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        0.9140379428863525
+      ],
+      "condition_ratio": 91403.79659768938,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 9,
+      "fixed_recipe_degree": 29524,
+      "fixed_recipe_minimum_ct_ct_depth": 15,
+      "balanced_recipe_ct_ct_depth": 18,
+      "any_uniform_polynomial_minimum_degree": 1218,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 11
+    },
+    {
+      "layer": 23,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        58265.8984375
+      ],
+      "condition_ratio": 5826589990.942043,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 15,
+      "fixed_recipe_degree": 21523360,
+      "fixed_recipe_minimum_ct_ct_depth": 25,
+      "balanced_recipe_ct_ct_depth": 30,
+      "any_uniform_polynomial_minimum_degree": 307582,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 19
+    },
+    {
+      "layer": 24,
+      "site": "rms_invsqrt",
+      "interval": [
+        9.999999747378752e-06,
+        58265.8984375
+      ],
+      "condition_ratio": 5826589990.942043,
+      "relative_error_target": 1e-07,
+      "scheduled_stages": 15,
+      "fixed_recipe_degree": 21523360,
+      "fixed_recipe_minimum_ct_ct_depth": 25,
+      "balanced_recipe_ct_ct_depth": 30,
+      "any_uniform_polynomial_minimum_degree": 307582,
+      "any_uniform_polynomial_minimum_ct_ct_depth": 19
+    }
+  ],
+  "recorded_internal_refreshes": {
+    "includes_final_normalization": true,
+    "by_stage": {
+      "5": {
+        "events": 240,
+        "physical_calls": 480,
+        "seconds": 237.17718742800014
+      },
+      "11": {
+        "events": 230,
+        "physical_calls": 460,
+        "seconds": 227.27633463399994
+      }
+    },
+    "physical_calls": 940,
+    "seconds": 464.45352206200005
+  },
+  "conditional_timing_scenarios": [
+    {
+      "assumption": "all_internal_normalization_refresh_cost_zero",
+      "seconds_saved": 464.45352206200005,
+      "remaining_eval_seconds": 2108.912372988,
+      "reduction_fraction": 0.18048483620436565,
+      "accuracy_or_feasibility_proved": false
+    },
+    {
+      "assumption": "stage_11_internal_refresh_cost_zero",
+      "seconds_saved": 227.27633463399994,
+      "remaining_eval_seconds": 2346.089560416,
+      "reduction_fraction": 0.08831870161611201,
+      "accuracy_or_feasibility_proved": false
+    }
+  ]
+}

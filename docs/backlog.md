@@ -1,63 +1,40 @@
 # Backlog
 
-This is the canonical backlog for the active `0.4.x` Mamba-2 line. Historical
-Stage 0/1/2 PBIs remain available in Git history and `docs/artifact_ledger.md`,
-but they are not the current work queue.
+Current work targets DGX Spark and the `fhemamba` 0.5.x package. Historical
+Stage 0/1/2 records remain in Git history and `artifact_ledger.md`.
 
-Status meanings:
+The stabilized prompt-to-text client loop now passes its first complete run.
+Preserve this correctness baseline while reducing its measured runtime;
+broader horizons and client/server separation remain explicit gates.
 
-- **Done**: implementation and accepted evidence are tracked.
-- **In Progress**: the repository contains part of the acceptance path.
-- **Open**: executable and not blocked by missing upstream evidence.
-- **Blocked**: an explicit dependency must close first.
+| ID | Priority | State | Acceptance |
+|---|---|---|---|
+| PBI-SPARK-001 | P0 | Implemented | Isolated CUDA 13 / SM121 build, source/binary/library provenance, calibrated payload, memory-aware preflight and reproducible launch command. See `docs/dgx-spark.md`. |
+| PBI-SPARK-002 | P0 | 24×1 gate passes | Four matched ABBA runs pass with tracked raw JSON: keys 137→103, mean peak RSS 41.85→36.17 GiB. No demonstrated evaluation latency gain; multi-token promotion remains PBI-M4-002. |
+| PBI-SPARK-003 | P0 | Fixed; 24×1 repeated gate passes | Correct same-level plaintext-addition scale degree. GPU micro-probe and four fresh-key, zero-debug 24-layer runs pass; keep negative artifacts. Extend payload/horizon coverage separately. |
+| PBI-QUALITY-001 | P0 | Matching plaintext quality and native 24×2 gates pass | All 576 heads retained; 49 norm certificates. Exported coefficients match all 121 prior recipes. Matching 1,024/4,096-token plaintext prefixes are finite with PPL differences −0.03596%/−0.01669% and no observed domain escapes; max logit errors 4.59/5.63 remain. Native 24×2 error 0.003311, zero intermediate decryptions, security not-set. Next: repeated keys/prompts, longer encrypted horizons, broader free generation and whole-model domain closure. Preserve all legacy and integration failures. |
+| PBI-M4-002 | P0 | Stabilized prompt-to-text gate passes; longer horizons open | Frozen stabilized operators and group state scales pass 24×5 with four generated IDs matching exact/poly references; maximum polynomial-circuit error 0.009192, zero debug decrypts, 3,038.12 s, 37.05 GiB. Full prompt and measured text are reproducible with `run_dgx_generation.py`. Historical row/regularized-row candidates remain unpromoted; preserve their calibration-coverage failures. Repeated keys, new prompts and 16/64/256 steps remain. |
+| PBI-M4-003 | P0 | Open | Measure full-kernel separate client/server roles without server secret-key access; record transfer sizes, server runtime/RSS and key-directory audit. Interactive persistent state follows the fixed-vector gate. |
+| PBI-M4-004 | P0 | Open | 24-layer run at OpenFHE-accepted 128-bit parameters. Record key/cache memory, errors and timing; separate output-security requirements from parameter selection. |
+| PBI-OPT-005 | P1 | Implemented, opt-in | Binary rotate-add replication/folding; slot-exact Python/C++ parity and matching key planner. Default promotion depends on PBI-M4-002 plus measured end-to-end benefit. |
+| PBI-OPT-007 | P1 | 24×1 matched gate passes, opt-in | Coefficient-aware Chebyshev splits reduce ct-ct products 3,363→3,195 and ct-pt 13,950→13,404, exactly matching planner estimates; 98 bootstraps unchanged. Errors 0.01536/0.02299 pass. Multiple keys, carried-state horizons and latency replication remain before promotion. |
+| PBI-OPT-006 | P1 | Open | Native scan prefill: implement and verify chunk-summary carry, slot layout and depth/live-memory model; compare serial and parallel carry before claiming long-context acceleration. |
+| PBI-OPT-003 | P1 | Open | Bootstrap planner over an explicit dataflow DAG, preserving fan-out/live-out level and error constraints. Event-only checkpoint deletion is insufficient. |
+| PBI-OPT-008 | P1 | Subring encoder: probes, repeated smoke and 24×5 generation pass; opt-in | Private 64-point coefficient NTT preserves exact RNS plaintexts. Evaluation 2,573.37→2,310.80 s (−10.2%), joint gates −29.2%; maximum polynomial error 0.016255, unchanged IDs/all operation counts/levels. Preserve frozen baseline roots and extend repeated-key/prompt coverage. Next cost target: certified normalization with fewer internal refreshes; [necessary bounds](research/2026-09-22-normalization-bounds.md) quantify the gap without claiming feasibility. |
+| PBI-OPT-002 | P1 | Open | Compare output-only/all-scope fusion and paired state on Spark with fixed payload, cache and synchronization; measure full-session correctness and runtime. |
+| PBI-ARCH-001 | P1 | Open | Separate FHE-oriented SSM training experiment: bounded gates/decay, structured or smaller state, cheaper normalization; held-out PPL, retrieval, generation and encrypted cost. |
+| PBI-ALG-001 | P1 | Algebra gate passes | Deferred state windows 2/4/8/16 match real checkpoint factors over 64 tokens. Next: slot-exact layouts and encrypted long-horizon state/readout/cost gate; no native speed claim yet. |
+| PBI-ALG-002 | P1 | Joint-gate native 24×2 and generation 24×5 gates pass | Row scaling uses existing masks without added operations/depth. Shared dissipation factors retain the Euler-write target and certify conditional invariants for 576 heads. Vector-coefficient PS uses a shared basis, exact block scaling and the corrected six-level write tail. The fixed-input run costs 552.24 s in joint gates out of 1,192.95 s. The complete generation baseline passes at error 0.009192. Periodic coefficients with a masked basis now pass the same 24×5 request at error 0.011767: evaluation 3,038.12→2,573.37 s (−15.3%), joint gates −34.2%, unchanged generated IDs/depth/2187 bootstraps. The repeated smoke comparison also passes; the mode remains opt-in. Next reduce remaining plaintext conversion/bootstrap costs, extend horizons, certify CKKS slack and calibrate carried-state bounds. |
+| PBI-ALG-003 | P1 | Algebra oracles implemented | Compare direct complex Mamba-3 SISO with a rotating frame, including phase/radial drift and complex-bootstrap/noise-estimation compatibility. Polynomial shear candidate has fixed-angle energy preservation but a switching instability; no checkpoint-quality claim from these tests. |
+| PBI-ALG-004 | P1 | 49/49 vector gates; complete-candidate native 24×2 integration passes | Vector gates at 128-bit parameters reach worst error 6.96e-5; selected output-refresh confirmations pass. RMSNorm-only integration reaches error 0.007136. The complete joint-gate/activation payload now passes with state carry at 0.003311, 831 bootstraps and 36.09 GiB, security not-set. Next: repeat keys/prompts, extend horizons and 128-bit full-chain coverage, and reduce refresh cost. |
+| PBI-LOOP-001 | P1 | Open | Small-vocabulary fully encrypted token selection and embedding loop, then actual vocabulary; define approximation margins, output security and fixed/public generation schedule. |
+| PBI-OPT-004 | P2 | Open | Shared head expansion in longer sessions; count setup, keys, RSS and total time, not only warm operator time. |
+| PBI-M4-001 | P2 | Deferred: B300 unavailable | Recover original B300 `0.4.5` success JSON or rerun that hardware/configuration. Does not block Spark evidence or new optimization. |
+| PBI-OPT-001 | P2 | Deferred: B300 unavailable | Replace B300 global barriers with stream dependencies only behind micro-probes and full-depth multi-token gates. |
+| PBI-OPS-102 | P2 | Deferred | Historical `v0.4.5` tag depends on original B300 evidence closure, not a different Spark measurement. |
+| PBI-OPS-101 | P1 | Done | Active-package coverage gate. |
+| PBI-OPS-103 | P2 | Done | Retire compatibility stack and retain archive branch. |
 
-## Current PBIs
-
-| ID | Priority | Status | Depends on | Acceptance |
-|---|---:|---|---|---|
-| PBI-M4-001 | P0 | In Progress | none | Recover the `0.4.5` 24-layer/three-token B300 raw success JSON and validate the documented values, or rerun the exact promoted baseline and replace the headline values with that measured artifact; require `repo_commit`, `binary_sha256`, full-sync profile, configuration, per-token errors, timing, bootstraps, and peak RSS; track the curated artifact and update `docs/evidence.md`. |
-| PBI-M4-002 | P0 | Blocked | PBI-M4-001 | Run the promoted 24-layer five-step B300 campaign. All steps decrypt, each polynomial-circuit error is `<= 0.05`, generated IDs match, no intermediate decrypt is used, and a validator-clean campaign plus raw result JSON is tracked. |
-| PBI-M4-003 | P0 | Blocked | PBI-M4-002 | Execute the full Mamba kernel as separate `client-init`, secret-key-free `server-eval`, and `client-decrypt` processes. Record serialized ciphertext sizes, server RSS/runtime, round-trip error, and a server-directory secret-key audit. |
-| PBI-M4-004 | P0 | Blocked | PBI-M4-002 | Run all 24 layers at OpenFHE-accepted 128-bit parameters. Record error, runtime, key memory, peak RSS, bootstrap count, and non-claims about return-path noise flooding. |
-| PBI-OPT-001 | P1 | Blocked | PBI-M4-002 | Replace B300 key-switch device barriers with explicit stream dependencies. Bootstrap micro-probes and the complete 24-layer five-step gate must both pass before promotion. |
-| PBI-OPT-002 | P1 | Blocked | PBI-M4-002 | Compare `out-proj`-only and all-scope fused transforms on the same five-step payload and binary family. Promote only on passing accuracy plus lower end-to-end evaluation, not projection time alone. |
-| PBI-OPT-003 | P1 | Blocked | PBI-M4-001 | Build an offline bootstrap-placement planner over recorded CKKS level/event traces. It must preserve live-out requirements and emit a replayable candidate schedule before native execution. |
-| PBI-OPT-004 | P2 | Blocked | PBI-M4-002 | Re-test shared dt/decay head expansion in a session long enough to amortize setup and key generation. Track total runtime and RSS, not only warm phase timing. |
-| PBI-OPS-101 | P1 | Done | none | Enforce coverage for the active `fhemamba` package with a documented threshold that passes the full suite. |
-| PBI-OPS-102 | P1 | Blocked | PBI-M4-001 | Create the `v0.4.5` Git tag only after the raw three-token success artifact is tracked or regenerated and full checks pass. |
-| PBI-OPS-103 | P2 | Done | none | Preserve the pre-rebuild stack on an archive branch, migrate the artifact validator and native layout oracle, and remove the compatibility package from `main` and package discovery. |
-
-## Completed current capabilities
-
-| Capability | State | Evidence |
-|---|---|---|
-| Polynomial Mamba-2 quality | Done | WikiText-2 PPL `22.307 -> 22.333`, tracked result JSON |
-| Reference/lowering parity | Done | `fhemamba/results/decode_budget_mamba2.json` |
-| Full-width native encrypted layer | Done | FIDESlib native kernel and historical Stage 1 artifacts |
-| 24-layer ciphertext residual handoff | Implemented; evidence closure open | Documented B300/DGX measurements; raw current success artifact still PBI-M4-001 |
-| Three-token ciphertext state/FIFO carry | Implemented; evidence closure open | Documented errors `0.01295 / 0.01173 / 0.03475` |
-| Complex-paired state refresh | Done | Native implementation, unit contracts, and B300 measurement note |
-| Three-process key separation probe | Done | `fhemamba/results/dgx/client_server_probe.json` |
-| Layer-0 128-bit two-token probe | Done | `fhemamba/results/dgx/m1_decode_128bit_r131072_d43_s59_t2.json` |
-
-## Execution order
-
-```text
-PBI-M4-001 evidence closure
-          |
-          v
-PBI-M4-002 five-step B300 gate
-      |                 |
-      v                 v
-PBI-M4-003 process      PBI-M4-004 128-bit full chain
-separation
-```
-
-Optimization PBIs may be implemented in parallel, but no candidate becomes a
-default until its required full-chain gate passes.
-
-## Archived backlog policy
-
-Do not append new work to the pre-rebuild Stage 0/1/2 list. When old scripts or
-artifacts are still relevant, reference their existing PBI and artifact-ledger
-row from a current PBI. Git history is the source for the full historical table.
+“Implemented” is not a GPU promotion or a security claim. New evidence belongs
+in `docs/evidence.md`; documentation must not fabricate missing raw artifacts.
+A numerical failure is a useful result and retains its failing status.

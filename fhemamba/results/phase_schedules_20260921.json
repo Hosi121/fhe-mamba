@@ -1,0 +1,52 @@
+{
+  "stage": "phase-schedule-report",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "status": "unpromoted",
+  "source_sha256": {
+    "fhemamba/experiments/probe_phase_schedules.py": "59f693d3d2193bfe9713d113692bd3101deabf42eb7c2a96d1f4e7dab373fa15",
+    "fhemamba/src/fhemamba/phase_algebra.py": "2ad3bb471b6b5a7394f9f66c1a087df1a4521aeaae1a2432b6ff2b8267ed7f76",
+    "fhemamba/src/fhemamba/ssm_algebra.py": "d116112a9126c399dc65576660e4e8159de223eb64ecbcbec226ac9471251c4a"
+  },
+  "constant_angle": {
+    "angle": 0.5,
+    "steps": 1024,
+    "cubic_retained_magnitude": 0.08626784495577101,
+    "shear_norm_min": 1.0000001093750734,
+    "shear_norm_max": 1.0327955325131322,
+    "shear_norm_final": 1.019404074884319,
+    "shear_modified_energy_max_error": 2.886579864025407e-15,
+    "shear_accumulated_frequency_error_radians": 5.489162530977069
+  },
+  "switching_counterexample": {
+    "period": [
+      {
+        "angle": 0.5,
+        "steps": 3
+      },
+      {
+        "angle": 0.1,
+        "steps": 16
+      }
+    ],
+    "period_matrix": [
+      [
+        -1.031133989875799,
+        -0.025719748968007633
+      ],
+      [
+        0.023931579011875193,
+        -0.9692091382961631
+      ]
+    ],
+    "determinant": 1.000000000000001,
+    "trace": -2.000343128171962,
+    "spectral_radius": 1.018696077742121
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "native_execution_measured": false,
+    "claim": "Float64 phase-algebra screen: constant-angle amplitude preservation does not imply correct phase or stability under switching. No checkpoint, CKKS precision or performance claim."
+  }
+}

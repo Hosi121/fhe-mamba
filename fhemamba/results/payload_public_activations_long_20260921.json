@@ -1,0 +1,1134 @@
+{
+  "stage": "payload-domain-diagnostic",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "source_sha256": "15adb55c20b0632573055a0cd357365a1ab54944c053810da10308c5a0928d68",
+  "input_payload_sha256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
+  "token_ids_sha256": "253c88376ad2067dc5418ee80e62bc246b4fb455d5f1fdc4ff8bd45ea4f3cd13",
+  "tokens": 4096,
+  "token_offset": 65536,
+  "scan": "chunked",
+  "first_failure": "first non-finite checkpoint: (0, 'y')",
+  "events": [
+    {
+      "layer": 0,
+      "site": "residual",
+      "kind": "checkpoint",
+      "output": {
+        "min": -8.3671875,
+        "max": 10.4375,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "rms_invsqrt",
+      "kind": "operator",
+      "interval": [
+        0.0,
+        3.3449363708496094
+      ],
+      "input": {
+        "min": 0.05454306676983833,
+        "max": 0.5489354729652405,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 1.3497065305709839,
+        "max": 4.2818379402160645,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "proj",
+      "kind": "checkpoint",
+      "output": {
+        "min": -10.914368629455566,
+        "max": 7.570018291473389,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "conv_silu",
+      "kind": "operator",
+      "interval": [
+        -306.37153442480377,
+        306.37153442480377
+      ],
+      "input": {
+        "min": -26.800418853759766,
+        "max": 10.51005744934082,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.2784423828125,
+        "max": 10.509376525878906,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "conv_silu_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": -0.2784423828125,
+        "max": 10.509376525878906,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "dt_softplus",
+      "kind": "operator",
+      "interval": [
+        -4.695496654510498,
+        -1.5521601676940917
+      ],
+      "input": {
+        "min": -5.011627197265625,
+        "max": -2.115612030029297,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.014865893870592117,
+        "max": 36.659645080566406,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 8
+    },
+    {
+      "layer": 0,
+      "site": "dt_out",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.014865893870592117,
+        "max": 36.659645080566406,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "decay_exp",
+      "kind": "operator",
+      "interval": [
+        -0.73113973736763,
+        0.0
+      ],
+      "input": {
+        "min": -22.54678726196289,
+        "max": -0.011545414105057716,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": 0.631652295589447,
+        "max": 2.049631481046484e+33,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 8
+    },
+    {
+      "layer": 0,
+      "site": "decay_output",
+      "kind": "checkpoint",
+      "output": {
+        "min": 0.631652295589447,
+        "max": 2.049631481046484e+33,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      }
+    },
+    {
+      "layer": 0,
+      "site": "gate_silu",
+      "kind": "operator",
+      "interval": [
+        -62.08859483846779,
+        62.08859483846779
+      ],
+      "input": {
+        "min": -4.721819877624512,
+        "max": 5.9172563552856445,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "output": {
+        "min": -0.27846527099609375,
+        "max": 5.901365280151367,
+        "non_finite": 0,
+        "first_non_finite_index": null
+      },
+      "raw_input_outside_interval": 0
+    },
+    {
+      "layer": 0,
+      "site": "y",
+      "kind": "checkpoint",
+      "output": {
+        "min": -4.04415544227416e+33,
+        "max": 2.4889366321651035e+34,
+        "non_finite": 145600,
+        "first_non_finite_index": [
+          0,
+          1821,
+          448
+        ]
+      }
+    }
+  ],
+  "operator_overrides": [
+    {
+      "layer": 0,
+      "site": "gate_silu",
+      "lo": -62.08859483846779,
+      "hi": 62.08859483846779,
+      "degree": 384,
+      "coefficients_sha256": "4dbd6fa654fe50f8ad12cb4bca35df20be1edcfd84cf94be48f36804da1a1209"
+    },
+    {
+      "layer": 1,
+      "site": "gate_silu",
+      "lo": -117.83795151561016,
+      "hi": 117.83795151561016,
+      "degree": 384,
+      "coefficients_sha256": "7f86c77c0f42f3599c9e8ce11731e345249ae2219fee7ecaba374588816b5a04"
+    },
+    {
+      "layer": 2,
+      "site": "gate_silu",
+      "lo": -105.08465762734305,
+      "hi": 105.08465762734305,
+      "degree": 384,
+      "coefficients_sha256": "6cad187a5f69900ad04e7ba8c32063304c7ea532b03a3ab1f3d3e5fe7203d8ff"
+    },
+    {
+      "layer": 3,
+      "site": "gate_silu",
+      "lo": -128.0021711663315,
+      "hi": 128.0021711663315,
+      "degree": 384,
+      "coefficients_sha256": "131af2d8b2ea2f1fe5c1f2f410465af604e9f269eaff135f3c43dec1f990b999"
+    },
+    {
+      "layer": 4,
+      "site": "gate_silu",
+      "lo": -98.21561394586814,
+      "hi": 98.21561394586814,
+      "degree": 384,
+      "coefficients_sha256": "2b502d9ac1815d8b3ca08e5f471a528db490697a654188232de1971495cbbe29"
+    },
+    {
+      "layer": 5,
+      "site": "gate_silu",
+      "lo": -134.25486807335665,
+      "hi": 134.25486807335665,
+      "degree": 384,
+      "coefficients_sha256": "60487c3a9570e95ad44ec0ebbebdbfd0d2e7defcd88a5614bd41ce77d8fc4b32"
+    },
+    {
+      "layer": 6,
+      "site": "gate_silu",
+      "lo": -104.38367740824357,
+      "hi": 104.38367740824357,
+      "degree": 384,
+      "coefficients_sha256": "d3e7e301bc32cc15c18a0504eb1527969617fcb9ef7d2bfba4a66407aa694271"
+    },
+    {
+      "layer": 7,
+      "site": "gate_silu",
+      "lo": -117.87473697592816,
+      "hi": 117.87473697592816,
+      "degree": 384,
+      "coefficients_sha256": "c4d51115341e077b769fdb216d3e06ebd402bd7c92e49ffd362b0d2b6f49596c"
+    },
+    {
+      "layer": 8,
+      "site": "gate_silu",
+      "lo": -80.87030084737539,
+      "hi": 80.87030084737539,
+      "degree": 384,
+      "coefficients_sha256": "b0ead2b07bb6571fc65a56e729ebc2329e92443b934a54f951fda9c943f05473"
+    },
+    {
+      "layer": 9,
+      "site": "gate_silu",
+      "lo": -78.7119692463682,
+      "hi": 78.7119692463682,
+      "degree": 384,
+      "coefficients_sha256": "95477f066bd0fae21fedd79283ecc37ac2c2d316fcd4ed351fea0da69bfa3a0b"
+    },
+    {
+      "layer": 10,
+      "site": "gate_silu",
+      "lo": -87.68828126046033,
+      "hi": 87.68828126046033,
+      "degree": 384,
+      "coefficients_sha256": "2cd36b362689ed4a88ba643ade033e95fce95516d33a464b5bfa547a0ddaa9f6"
+    },
+    {
+      "layer": 11,
+      "site": "gate_silu",
+      "lo": -82.87921751880526,
+      "hi": 82.87921751880526,
+      "degree": 384,
+      "coefficients_sha256": "4e2d3bf108d87ca414a48f2476f55565c152bd24c964cc11ee59e7d483a35a43"
+    },
+    {
+      "layer": 12,
+      "site": "gate_silu",
+      "lo": -87.75420065681028,
+      "hi": 87.75420065681028,
+      "degree": 384,
+      "coefficients_sha256": "2bd319ee72d490898fbed0ae397edbabd3b837f7c6dd8c906c9a55344ae72311"
+    },
+    {
+      "layer": 13,
+      "site": "gate_silu",
+      "lo": -74.38950623254095,
+      "hi": 74.38950623254095,
+      "degree": 384,
+      "coefficients_sha256": "b62011504daa6019aaa3483854bc1f98e62d94b4b48a424a7c2650c427c0507a"
+    },
+    {
+      "layer": 14,
+      "site": "gate_silu",
+      "lo": -62.7111526780588,
+      "hi": 62.7111526780588,
+      "degree": 384,
+      "coefficients_sha256": "d9364a57b0cff69e167fdc5a0fe8ef1f3480301d5cbabf7dbabe70471e16ec26"
+    },
+    {
+      "layer": 15,
+      "site": "gate_silu",
+      "lo": -73.50382205359887,
+      "hi": 73.50382205359887,
+      "degree": 384,
+      "coefficients_sha256": "179888ca18c52029a8be2a6be7369b35eab0cfe029bd7de7d61c1ff218461629"
+    },
+    {
+      "layer": 16,
+      "site": "gate_silu",
+      "lo": -53.98156951547981,
+      "hi": 53.98156951547981,
+      "degree": 384,
+      "coefficients_sha256": "66fe5d0e3145fd21354264e2865cdf90e2d8baacf7dd32694f12ec0df1b3883b"
+    },
+    {
+      "layer": 17,
+      "site": "gate_silu",
+      "lo": -77.1420327571568,
+      "hi": 77.1420327571568,
+      "degree": 384,
+      "coefficients_sha256": "49e65d6377af50851b23b62ec81afc414e0edacfe5b656bc98f02d2220e74db6"
+    },
+    {
+      "layer": 18,
+      "site": "gate_silu",
+      "lo": -59.01739112182343,
+      "hi": 59.01739112182343,
+      "degree": 384,
+      "coefficients_sha256": "cc5e9c0ad8f37357ce9f271a218c290a96610daec6c5fd9348b3a5dd5afa3ae2"
+    },
+    {
+      "layer": 19,
+      "site": "gate_silu",
+      "lo": -63.50082828376304,
+      "hi": 63.50082828376304,
+      "degree": 384,
+      "coefficients_sha256": "d2df303e5675e2adc565c5fe65f01c216d76b37fcf1b93af1c91d899053c92d8"
+    },
+    {
+      "layer": 20,
+      "site": "gate_silu",
+      "lo": -53.79491739320759,
+      "hi": 53.79491739320759,
+      "degree": 384,
+      "coefficients_sha256": "482b77e06884b1c6f93b9d013d1094093d5a870f0256eba170b3558f7f16e1a9"
+    },
+    {
+      "layer": 21,
+      "site": "gate_silu",
+      "lo": -39.006225919645836,
+      "hi": 39.006225919645836,
+      "degree": 384,
+      "coefficients_sha256": "25edb7d544d8348107a70d62eca02fd6f500f975ff2447b142291a1a848eab76"
+    },
+    {
+      "layer": 22,
+      "site": "gate_silu",
+      "lo": -44.83088554170169,
+      "hi": 44.83088554170169,
+      "degree": 384,
+      "coefficients_sha256": "831f240e18c64c8bb737fa690abaead399178662fcea7c1be498db01fcab5638"
+    },
+    {
+      "layer": 23,
+      "site": "gate_silu",
+      "lo": -44.76798861504796,
+      "hi": 44.76798861504796,
+      "degree": 384,
+      "coefficients_sha256": "529f21a0af3815069fd6a34c4b28b91a532b9409f0a3c83c8e969c752cd1face"
+    },
+    {
+      "layer": 0,
+      "site": "conv_silu",
+      "lo": -306.37153442480377,
+      "hi": 306.37153442480377,
+      "degree": 768,
+      "coefficients_sha256": "b09d4c9d5b8c388dc3204a7ea2e32964a74fd81f13e00ff36bb11c463516a049"
+    },
+    {
+      "layer": 1,
+      "site": "conv_silu",
+      "lo": -211.88277688727163,
+      "hi": 211.88277688727163,
+      "degree": 768,
+      "coefficients_sha256": "aa445ea36414b8a9d257860bc23b0485be8a24c6b6444abbead0c624cc3ab5a8"
+    },
+    {
+      "layer": 2,
+      "site": "conv_silu",
+      "lo": -174.07822937141452,
+      "hi": 174.07822937141452,
+      "degree": 768,
+      "coefficients_sha256": "31483ea4115c8a07aa1a1aaa1cdfe5072d8e43677fcedf809d5e5f02bc7c1ee5"
+    },
+    {
+      "layer": 3,
+      "site": "conv_silu",
+      "lo": -159.28348897748342,
+      "hi": 159.28348897748342,
+      "degree": 768,
+      "coefficients_sha256": "c3759834f101b1da3770eb1152b44dc255c359aee08f42dde40a3512e3831c0c"
+    },
+    {
+      "layer": 4,
+      "site": "conv_silu",
+      "lo": -176.546702255401,
+      "hi": 176.546702255401,
+      "degree": 768,
+      "coefficients_sha256": "f43385ce9e6083bd3ebca4e3951e04c386013d24386927a55baee748c56c8de2"
+    },
+    {
+      "layer": 5,
+      "site": "conv_silu",
+      "lo": -353.90798614027284,
+      "hi": 353.90798614027284,
+      "degree": 768,
+      "coefficients_sha256": "3fd5736597a5c7e3285ef8fc0fde844899656fad408c1cdcf9a7cba34b7cc1da"
+    },
+    {
+      "layer": 6,
+      "site": "conv_silu",
+      "lo": -265.5676160612086,
+      "hi": 265.5676160612086,
+      "degree": 768,
+      "coefficients_sha256": "d2402f6b2620bd344b2d64b0ef0e9f45a4af9dd6f287accf34873b780c7e91fa"
+    },
+    {
+      "layer": 7,
+      "site": "conv_silu",
+      "lo": -237.83990263920697,
+      "hi": 237.83990263920697,
+      "degree": 768,
+      "coefficients_sha256": "6e3ae5e9bb2ba2a6117b44febfaf6d438840073633da32058bdaf2a1a856afef"
+    },
+    {
+      "layer": 8,
+      "site": "conv_silu",
+      "lo": -147.52557703795034,
+      "hi": 147.52557703795034,
+      "degree": 768,
+      "coefficients_sha256": "867ebc556629ae1d745681af7cbb14f4ec8246fa1a371d2069d13805fcf75055"
+    },
+    {
+      "layer": 9,
+      "site": "conv_silu",
+      "lo": -221.7868438933573,
+      "hi": 221.7868438933573,
+      "degree": 768,
+      "coefficients_sha256": "a868e1e561895ca098349dc8012b5af3df62c767944614faf0adcd45a0927738"
+    },
+    {
+      "layer": 10,
+      "site": "conv_silu",
+      "lo": -375.39883403768243,
+      "hi": 375.39883403768243,
+      "degree": 768,
+      "coefficients_sha256": "d5bcce3e66cef6733b2549ae2d66a84b7a3dbc66598ab13a94afc5ff2912a4c5"
+    },
+    {
+      "layer": 11,
+      "site": "conv_silu",
+      "lo": -165.33438050148192,
+      "hi": 165.33438050148192,
+      "degree": 768,
+      "coefficients_sha256": "ec3ce0f070fd25f804c80a1e1e438fad89ed4523486aef644616c3f79a0bb865"
+    },
+    {
+      "layer": 12,
+      "site": "conv_silu",
+      "lo": -136.7953551216166,
+      "hi": 136.7953551216166,
+      "degree": 768,
+      "coefficients_sha256": "43b30245ea363b91598433a3d294b241d33cbd040d417211a5666704c7d2c07b"
+    },
+    {
+      "layer": 13,
+      "site": "conv_silu",
+      "lo": -107.50058794474438,
+      "hi": 107.50058794474438,
+      "degree": 768,
+      "coefficients_sha256": "2fea6780def3b1e0d1ce3486cdcb3cff75125bf9db18d4207f8f86c1c9bb812b"
+    },
+    {
+      "layer": 14,
+      "site": "conv_silu",
+      "lo": -100.46638610043121,
+      "hi": 100.46638610043121,
+      "degree": 768,
+      "coefficients_sha256": "b6493524e44e66dfc4d371be38fb2efdde3e2102b0d4cedba374ed51d15cf6dd"
+    },
+    {
+      "layer": 15,
+      "site": "conv_silu",
+      "lo": -124.85620898902788,
+      "hi": 124.85620898902788,
+      "degree": 768,
+      "coefficients_sha256": "4a3fb6d1fb6f2e505a12c5cadcc1cd6861a9601439613fc80acb9a12eb6a6658"
+    },
+    {
+      "layer": 16,
+      "site": "conv_silu",
+      "lo": -135.19604684628342,
+      "hi": 135.19604684628342,
+      "degree": 768,
+      "coefficients_sha256": "773efba1dfa60ef82e03884d62331a737fa6247caeb23636bc69ec3a5a58404e"
+    },
+    {
+      "layer": 17,
+      "site": "conv_silu",
+      "lo": -130.74659175576372,
+      "hi": 130.74659175576372,
+      "degree": 768,
+      "coefficients_sha256": "db94460299b4d0e1a30c5fdfa17289c923e5e8cb07dbb4a5db117168fb4e9ac4"
+    },
+    {
+      "layer": 18,
+      "site": "conv_silu",
+      "lo": -161.16611761646757,
+      "hi": 161.16611761646757,
+      "degree": 768,
+      "coefficients_sha256": "621470eff6cd64dab0b665f64df207e9eefafbbf53568f51b21c09f1925237c4"
+    },
+    {
+      "layer": 19,
+      "site": "conv_silu",
+      "lo": -285.58015253666895,
+      "hi": 285.58015253666895,
+      "degree": 768,
+      "coefficients_sha256": "62921ebb11b21dbf86be9bdd053f0d134de21a4bd1004712792b514864aee1c7"
+    },
+    {
+      "layer": 20,
+      "site": "conv_silu",
+      "lo": -147.76649657527784,
+      "hi": 147.76649657527784,
+      "degree": 768,
+      "coefficients_sha256": "4164d87a450ff72f625636a43abb3d6a5eac5875ce29e51c198ecf724b77306b"
+    },
+    {
+      "layer": 21,
+      "site": "conv_silu",
+      "lo": -81.19708388937472,
+      "hi": 81.19708388937472,
+      "degree": 768,
+      "coefficients_sha256": "19afcc4b41686f95d3fda6046af86d6630f22504f12e00928e973a40878f9278"
+    },
+    {
+      "layer": 22,
+      "site": "conv_silu",
+      "lo": -74.98407321368549,
+      "hi": 74.98407321368549,
+      "degree": 768,
+      "coefficients_sha256": "3250f91169a3ef2b890064956937bb00927f4b40764fce5730b7d8c2dbc38073"
+    },
+    {
+      "layer": 23,
+      "site": "conv_silu",
+      "lo": -112.97486692080491,
+      "hi": 112.97486692080491,
+      "degree": 768,
+      "coefficients_sha256": "c9e0922233e5b3d07e4ea74b67d8789063f0000edb58f60194dc0e382ddee79f"
+    },
+    {
+      "layer": 0,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 3.3449363708496094,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "cec7c6460423c978cfce652dfdb4fad3bad27b2546d9f3c6dc8a3735c41e7051"
+    },
+    {
+      "layer": 0,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 466.1573181152344,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "c836b39a0430cceea73a81fd9ac930e884b09939bdfb683870c11c9b17b7fd9f"
+    },
+    {
+      "layer": 1,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 300.45733642578125,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "845c1a1e073029436bf355212cdba1a50683897f78ac0f1cdb91cdaff45e7f52"
+    },
+    {
+      "layer": 1,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 16935.60546875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "64652a08bceecae972b887a9a0e855ea7c1c0b1c0231ae8c89e8def30d4b1804"
+    },
+    {
+      "layer": 2,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 312.8285217285156,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "05de566fd07a09ee3a3b5042a2945b6a9e1f5771c5f94c94773d94b25d538ac9"
+    },
+    {
+      "layer": 2,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 4000.98291015625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "d0e9daabb048ff1f858694c6b816134f04b0976ee8cb76dcfd0c534a6124247f"
+    },
+    {
+      "layer": 3,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 327.6630554199219,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "4b39947c317cf5e7bcb0501545d0bb7959911875756d21466c31024696b2f435"
+    },
+    {
+      "layer": 3,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 51293.7109375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "50a6802347774b7cac3f5e219b890129736b282038ff4cea3ef93f0aabf88725"
+    },
+    {
+      "layer": 4,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 367.4627380371094,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "3e2cbdc9604c49215e94ee2c356283f11d702df0c44a899d2fbb9fe0547e35ba"
+    },
+    {
+      "layer": 4,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 2641.916015625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "1199533da9269a37fa702bb351a330848ee31dd4310af114ec24d6653d392915"
+    },
+    {
+      "layer": 5,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 423.90399169921875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "158e8c3c753d1373176d4d58cf4d2c7d7cd590ce91b3ee83940955074c604ef4"
+    },
+    {
+      "layer": 5,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 8316.759765625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "758f6a31711e459ae665c7c932f6db61aa7e7dea65c95ebc4f902e14d5b71e26"
+    },
+    {
+      "layer": 6,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 479.5848693847656,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "4084e8bf4dbf512b3436789496fe2f37a0a50bcbba1b35fe95f69e97796a2f92"
+    },
+    {
+      "layer": 6,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 493.5652160644531,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "ea56f7082d1344ecc30ad777bd028918413e85ef6ba6470931e5d493d7787f4a"
+    },
+    {
+      "layer": 7,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 606.8910522460938,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "a9a5b7dd47d56d75461b4f42e82ce223422c52b96fc932e2685c2bcd2b3492bb"
+    },
+    {
+      "layer": 7,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 28368.771484375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "ebe8f9c9d68d04953890c1e070c035b2d7c45ddc885b531ea3f4f2d4317bf56b"
+    },
+    {
+      "layer": 8,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 672.5809936523438,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "69b20777dde5cd004ea49ab35e66924c27589743456baf4684e2f374c083aeb7"
+    },
+    {
+      "layer": 8,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 4587.5576171875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "28360a5ee2f1104051178eb0bcc6d73e26a1145830d89a35abb4d873a1a1a266"
+    },
+    {
+      "layer": 9,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 811.0585327148438,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "8b9ae8bf91f5df5720a913f117bbbf0869be0e05a87bbd7458eb1d3619fff642"
+    },
+    {
+      "layer": 9,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 1488.7872314453125,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "ad0917e95ff2a551b9cbc73fde78d5091bb4e70246a503d2062ae392ee6417f9"
+    },
+    {
+      "layer": 10,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 1018.4115600585938,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "6870ba0a3f5748c50042d55de922733e5d9aa8044da362159815c77965a80b5e"
+    },
+    {
+      "layer": 10,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 1444.1295166015625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "7607e50da2171a731c7d9c0cf178476fc055a3d47faf0388712d5fc16ca604ae"
+    },
+    {
+      "layer": 11,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 1420.5467529296875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "333da4012c0ee68616f5403dd1c70ea18624a334ee673742e9ee6bcc3c6d3f43"
+    },
+    {
+      "layer": 11,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 29614.95703125,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "a5b15019af27b9a30442125d9f8bf791d0698086b9a1f53df70488fa478e8b0f"
+    },
+    {
+      "layer": 12,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 1778.9154052734375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "3b0d2ce23e527ff5f36bec8a956d777e43e85b87e61d37ee925d10e1ed7be9e9"
+    },
+    {
+      "layer": 12,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 27873.859375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "e7b5f30f9b5099d905a92c8c997bb965736a2171f9f1bb0e5c665d9e68b4e77e"
+    },
+    {
+      "layer": 13,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 1943.2293701171875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "12f56c8b4ea821cfdaeabda6a68d465be06ad2d51803652076232a1a152b3aa8"
+    },
+    {
+      "layer": 13,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 152.4742431640625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "3b48a1ed144d7c2b7a1417c1319de5128aa86a866ef22622205fc3bbddad5336"
+    },
+    {
+      "layer": 14,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 1996.00537109375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "c4de897c5288f2c4b84634fff3d4fe820fe2538124ced920d9324c5e44ffc1a0"
+    },
+    {
+      "layer": 14,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 29.585952758789062,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "d31b8264383ee96505125948c0cc0ad0bae7b95863a067fb56df45ea0fb74b13"
+    },
+    {
+      "layer": 15,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 2141.54150390625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "7d4ed11749f6c5f9d57af2e7c2213ffc4231e00d905e02cddaf2c9cc354bad7b"
+    },
+    {
+      "layer": 15,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 11972.71875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "a0939d7dcdff504b8bb5af87cbdb7271c91d4a7d6c4acde0f5a0c2fe76dd0eb8"
+    },
+    {
+      "layer": 16,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 2756.356201171875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "e611e3e1b7d3f09298bc94c0c8e8f2912f3722578adc3fec0837416104a900bf"
+    },
+    {
+      "layer": 16,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 126.95587921142578,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "d48cbb57ea25527a02afb7c776d8b2ecff6e5147ef52a5a6c0953dd03f1c6a89"
+    },
+    {
+      "layer": 17,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 4295.99072265625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "a96b3c5cde24f6d2814dd70318a106155644ade0e850ff02977a00fd46ccf19c"
+    },
+    {
+      "layer": 17,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 4601.15576171875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "0b73b6a4c15563c24604377a4fd744db2888974cdfaf248ee3cc30ce279b9215"
+    },
+    {
+      "layer": 18,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 5135.017578125,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "7e950a11d772f1a65a4b4ca236054f8d247d6b287b9f06c2480579637fe8844c"
+    },
+    {
+      "layer": 18,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 1150.6343994140625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "24871eba0d7c033bdd60eb1edc83851a19eaf0648fa1fd4080c0409aa0d04b09"
+    },
+    {
+      "layer": 19,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 8800.6474609375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "e2204cc2aa37eddbb2b1c444a8707150dbbc44fa23415010dd76c1e716e7217b"
+    },
+    {
+      "layer": 19,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 325.4314880371094,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "e4c2b7bdad278728983a5e2cfb4ba09f3a25be395321c0da1ca0b04a869919de"
+    },
+    {
+      "layer": 20,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 12781.154296875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "ddd58b7323699d92a6c67ed9657e1def5ab181633bcb2e09d62902cb2b228d7c"
+    },
+    {
+      "layer": 20,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 846.0095825195312,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "77bdc1a051685df4fa1a44fa49ea52235ee91e13dbd168058e8704305fa2d426"
+    },
+    {
+      "layer": 21,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 14979.1357421875,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "bdd3a351ca4c3ff098f0ca967634758ed667c6bc69e0ac3ee14d33a12594223d"
+    },
+    {
+      "layer": 21,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 38.61745834350586,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "935ae4d826930373e5349e109ba626dd0676f714bfde955e6bd2de570f14e8e2"
+    },
+    {
+      "layer": 22,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 26749.640625,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "fd0d9e59a932ce7936ff6d80ee2d9e31e31a0a313199d809a480dc62248549a2"
+    },
+    {
+      "layer": 22,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 3.054280996322632,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "2013e34642430167265f2a65a91fc29166586638b6569b950a9d50568237e8f7"
+    },
+    {
+      "layer": 23,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 58265.8984375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "3746f259c9ef2afe8cd65ea24f0c47247c52e6b4aaa56d60dc94023efc2dc35a"
+    },
+    {
+      "layer": 23,
+      "site": "gated_rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.25,
+      "lo": 0.0,
+      "hi": 0.9140379428863525,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "56b6fde7457295a9121347fa83588749c7b20a2f1b2fa18e2c90923ffb68c48d"
+    },
+    {
+      "layer": 24,
+      "site": "rms_invsqrt",
+      "kind": "positive-binomial-newton",
+      "power": 0.5,
+      "lo": 0.0,
+      "hi": 58265.8984375,
+      "degree": 63,
+      "iterations": 8,
+      "coefficients_sha256": "3746f259c9ef2afe8cd65ea24f0c47247c52e6b4aaa56d60dc94023efc2dc35a"
+    }
+  ],
+  "quality": {
+    "exact_ppl": 17.566726684570312,
+    "candidate_ppl": null,
+    "predicted_tokens": 4095,
+    "candidate_finite": false
+  },
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "encrypted_execution": false,
+    "identical_payload_circuit": false,
+    "language_quality_measured": true,
+    "full_dataset_quality_claimed": false,
+    "claim": "First non-finite stage, with all operator overrides recorded."
+  }
+}

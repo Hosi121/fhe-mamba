@@ -1,7 +1,11 @@
 #pragma once
 
+#include "stage1_normalization.hpp"
+#include "stage1_joint_gates.hpp"
+
 #include <cstddef>
 #include <map>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -17,6 +21,7 @@ struct PolySpec {
   double damping = 1.0;
   double guess = 0.0;
   std::vector<double> head_mask;
+  std::optional<NormalizationSchedule> normalization;
 };
 
 
@@ -37,9 +42,11 @@ struct M1Payload {
   // untrusted (older exports measured the evaluation prompt itself).
   double state_abs_max = -1.0;
   std::vector<double> state_head_abs_max;
+  std::vector<double> state_row_abs_max;
   double fifo_abs_max = -1.0;
   std::map<std::string, double> checkpoint_abs_max;
   std::map<std::string, PolySpec> polys;
+  std::optional<JointGateSpec> joint_gates;
   std::map<std::string, std::vector<double>> tensors;
   std::map<std::string, std::vector<int>> shapes;
 };
@@ -49,6 +56,7 @@ struct ChainPayload {
   int n_layers = 0;
   int n_test_tokens = 0;
   double final_norm_eps = 0.0;
+  std::optional<PolySpec> final_norm_poly;
   std::vector<std::string> layer_dirs;
   std::vector<double> final_norm_w;
   std::vector<double> input_embeddings;  // (tokens, d_model) row-major
@@ -70,6 +78,8 @@ struct ChainPayload {
 };
 
 
+auto parse_poly_spec(const std::string& object_text) -> PolySpec;
+auto parse_joint_gate(const std::string& object_text, int heads) -> JointGateSpec;
 auto read_m1_payload(const std::string& dir) -> M1Payload;
 auto read_chain_payload(const std::string& dir, bool load_autoregressive_assets)
     -> ChainPayload;

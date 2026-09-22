@@ -1,0 +1,786 @@
+{
+  "stage": "state-scale-coverage-audit",
+  "version": "0.5.0",
+  "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
+  "source_sha256": "9a6d8e3f1955941feb88025ebe6757864ea4a22407ec1d1a790c88d140efead1",
+  "input_payload_sha256": "37911ba0090ea81d701a1737e5383fb4ee521d5ff412645fddb64bc5b9903015",
+  "group_heads": 4,
+  "margin": 1.1,
+  "rows": [
+    {
+      "layer": 0,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.17541511858986003,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 0,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.2514513986665128,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 0,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.18055331186739387,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 0,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.2514513986665128,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 1,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.30320745408744904,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 1,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.7585893610777442,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 1,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.37616309504421525,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 1,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.8672999845601,
+      "above_margin": 16,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 2,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.320234029953528,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 2,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.561872239628224,
+      "above_margin": 7,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 2,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.320234029953528,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 2,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.561872239628224,
+      "above_margin": 22,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 3,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.7099031868139556,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 3,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 5.679225494511645,
+      "above_margin": 45,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 3,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.7099031868139556,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 3,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 5.679225494511645,
+      "above_margin": 104,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 4,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.5144698275237227,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 4,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.5487038131719686,
+      "above_margin": 3,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 4,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.8730744827149454,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 4,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.709412963750967,
+      "above_margin": 25,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 5,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.4025832630393949,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 5,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.0877458063492513,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 5,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.4837702532776835,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 5,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.4986401092883928,
+      "above_margin": 1,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 6,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.43982759098548885,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 6,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.0750742313385007,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 6,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.43982759098548885,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 6,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.236680501905592,
+      "above_margin": 6,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 7,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.2028413246044817,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 7,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.0802391398578408,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 7,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.34749472224944267,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 7,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.5801321056827717,
+      "above_margin": 29,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 8,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.297173129008059,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 8,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.7952653620469118,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 8,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.3081568210713384,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 8,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.7995614016987036,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 9,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.4894618733265637,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 9,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.4525434642139257,
+      "above_margin": 1,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 9,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.5376637978658846,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 9,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.4525434642139257,
+      "above_margin": 2,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 10,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.1568621104949956,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 10,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.34805698253657036,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 10,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.30101118095309365,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 10,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.6564356874357625,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 11,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.46152542835476135,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 11,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.6732113989258421,
+      "above_margin": 6,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 11,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.7125226900645532,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 11,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.6732113989258421,
+      "above_margin": 13,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 12,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.30791563595472393,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 12,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.6024046995178712,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 12,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.4581993957638852,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 12,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.1359824088946016,
+      "above_margin": 15,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 13,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.21437982715744647,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 13,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.605633601909918,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 13,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.25471798210684365,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 13,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.8649082782434473,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 14,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.2991128726011025,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 14,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.322129420468299,
+      "above_margin": 1,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 14,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.2991128726011025,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 14,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.322129420468299,
+      "above_margin": 1,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 15,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.20508199918928433,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 15,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.3688434970370158,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 15,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.2868945220186485,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 15,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.0931823706179353,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 16,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.46496862058281496,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 16,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.7517755571422893,
+      "above_margin": 1,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 16,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.46496862058281496,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 16,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.7965988523122778,
+      "above_margin": 5,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 17,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.3045237432413794,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 17,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.9222581533454095,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 17,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.39118648353872054,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 17,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.3690916563912865,
+      "above_margin": 6,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 18,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.2736334091871478,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 18,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.7890928870696214,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 18,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.5335488292809154,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 18,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.481609960731338,
+      "above_margin": 15,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 19,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.07385076627023619,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 19,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.5243460318307881,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 19,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.7350746301298707,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 19,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.3407802225477745,
+      "above_margin": 3,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 20,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.11377653986203981,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 20,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.9102123188963185,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 20,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.2002790057935147,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 20,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.26798684955258,
+      "above_margin": 1,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 21,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.4348791525450299,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 21,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.2902288866471383,
+      "above_margin": 1,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 21,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.4348791525450299,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 21,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 2.2902288866471383,
+      "above_margin": 8,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 22,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.5349628046848529,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 22,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.1597880118740806,
+      "above_margin": 2,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 22,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.6071404214015947,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 22,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.3451241627093138,
+      "above_margin": 5,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 23,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.24405024592731897,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 23,
+      "reference": "test_state_output_poly",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 0.35330347728794625,
+      "above_margin": 0,
+      "scalar_count": 393216
+    },
+    {
+      "layer": 23,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-group",
+      "max_reference_to_scale_ratio": 0.4475510734444603,
+      "above_margin": 0,
+      "scalar_count": 983040
+    },
+    {
+      "layer": 23,
+      "reference": "autoregressive_poly_state_output",
+      "scale_granularity": "head-channel",
+      "max_reference_to_scale_ratio": 1.0202462944339654,
+      "above_margin": 0,
+      "scalar_count": 983040
+    }
+  ],
+  "measurement_scope": {
+    "artifact_level_report": true,
+    "full_model_correctness_claimed": false,
+    "encrypted_execution": false,
+    "calibration_modified": false,
+    "claim": "Reference-state coverage of declared calibration scales, without refitting."
+  }
+}

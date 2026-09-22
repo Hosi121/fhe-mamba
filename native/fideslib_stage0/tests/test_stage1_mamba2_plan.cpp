@@ -74,6 +74,47 @@ auto main() -> int {
               interleaved_out.guard_windows == 1,
           "unexpected interleaved out-projection shape");
 
+  // Compare the executing rotate/add helper with the defining cyclic sum,
+  // including odd counts, negative strides, and wraparound in every slot.
+  const std::vector<double> original{1, -2, 3, 0, 5, 7, -4, 2, 8, 11, -3};
+  const auto roll = [](const std::vector<double>& input, int shift) {
+    std::vector<double> result(input.size());
+    for (int i = 0; i < static_cast<int>(input.size()); ++i) {
+      result[i] = input[python_mod(i + shift, static_cast<int>(input.size()))];
+    }
+    return result;
+  };
+  const auto add = [](const std::vector<double>& a, const std::vector<double>& b) {
+    auto result = a;
+    for (std::size_t i = 0; i < a.size(); ++i) result[i] += b[i];
+    return result;
+  };
+  for (int count = 1; count <= 64; ++count) {
+    for (int stride : {-13, -3, 0, 1, 7, 19}) {
+      std::vector<double> expected(original.size(), 0.0);
+      for (int j = 0; j < count; ++j) expected = add(expected, roll(original, j * stride));
+      require(rotation_sum(original, count, stride, true, roll, add) == expected,
+              "binary rotation sum differs from cyclic-sum definition");
+    }
+    require(rotation_sum_schedule(count, true).size() <= static_cast<std::size_t>(count - 1),
+            "binary replication uses more rotations than linear replication");
+  }
+  require_invalid([] { rotation_sum_schedule(0, true); });
+  auto log_in = interleaved_in;
+  auto log_out = interleaved_out;
+  log_in.baby_step = 10;
+  log_out.baby_step = 8;
+  const auto linear_keys = required_rotations(payload, packing, log_in, log_out, true);
+  log_in.logarithmic_replication = log_out.logarithmic_replication = true;
+  const auto log_keys = required_rotations(payload, packing, log_in, log_out, true);
+  require(log_keys.size() < linear_keys.size(), "binary sums did not reduce key inventory");
+  const std::set<int32_t> log_required(log_keys.begin(), log_keys.end());
+  for (const auto& [index, frequency] : rotation_frequencies(
+           payload, packing, 24, 1, 32768, log_in, log_out, true)) {
+    require(log_required.count(index) == 1 && frequency > 0,
+            "binary sum frequency contains an unplanned rotation");
+  }
+
   const auto normalized =
       build_normalized_state_layout({0.0, 2.0, 4.0}, 4, 16);
   require(normalized.group_scales ==
@@ -94,6 +135,40 @@ auto main() -> int {
     build_normalized_state_layout({std::numeric_limits<double>::quiet_NaN()},
                                   4, 16);
   });
+  const auto row_normalized = build_row_normalized_state_layout(
+      {0.0, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0}, 4, 16);
+  require(row_normalized.group_scales == std::vector<double>({8.0, 128.0}),
+          "row scale summaries must report each group's maximum");
+  require(row_normalized.row_scales[0][0] == 1.0e-6,
+          "zero calibrated rows must have a finite scale floor");
+  for (int group = 0; group < 2; ++group) {
+    // Different row scales must survive state expansion and readout reduction.
+    // Exercise a carried state, including a zero-decay reset, over four steps.
+    std::vector<double> original(16, 0.0), normalized_state(16, 0.0);
+    for (const double decay : {0.2, 0.9, 0.0, 1.0}) {
+      for (int state = 0; state < 4; ++state) {
+        for (int row = 0; row < 4; ++row) {
+          const auto slot = state * 4 + row;
+          const double update = (row + 1.0) * (state + 2.0);
+          original[slot] = decay * original[slot] + update;
+          normalized_state[slot] = decay * normalized_state[slot] +
+              update * row_normalized.update_masks[group][group * 4 + row];
+        }
+      }
+      for (int row = 0; row < 4; ++row) {
+        double expected = 0.0, actual = 0.0;
+        for (int state = 0; state < 4; ++state) {
+          expected += (state + 1.0) * original[state * 4 + row];
+          actual += (state + 1.0) * normalized_state[state * 4 + row];
+        }
+        actual *= row_normalized.readout_masks[group][row];
+        require(std::abs(expected - actual) < 1.0e-10,
+                "row normalization changed the recurrent readout");
+      }
+    }
+  }
+  require_invalid([] { build_row_normalized_state_layout({1.0, 2.0, 3.0}, 2, 16); });
+  require_invalid([] { build_row_normalized_state_layout({1.0, -1.0}, 2, 16); });
 
   // Plain reference is [token, head, position, state], while one encrypted
   // group is packed as [state, local_head, position]. Pin both the axis map
@@ -126,6 +201,20 @@ auto main() -> int {
               packed, state_reference, kToken, kGroup, kHeads, kGroupHeads,
               kHeadDim, kState, kScale) == 0.0,
           "packed-state comparison has the wrong axis map");
+  const std::vector<double> row_scales{1.0, 2.0, 4.0, 8.0, 16.0, 32.0};
+  auto row_packed = packed;
+  for (std::size_t slot = 0; slot < row_packed.size(); ++slot) {
+    row_packed[slot] *= kScale / row_scales[slot % row_scales.size()];
+  }
+  require(packed_state_max_abs_error(
+              row_packed, state_reference, kToken, kGroup, kHeads, kGroupHeads,
+              kHeadDim, kState, row_scales) == 0.0,
+          "packed-state comparison did not restore per-row scales");
+  row_packed[5] += 0.25;
+  require(packed_state_max_abs_error(
+              row_packed, state_reference, kToken, kGroup, kHeads, kGroupHeads,
+              kHeadDim, kState, row_scales) == 8.0,
+          "row scale attribution used a group summary instead of the row");
   packed[5] += 0.25;
   require(packed_state_max_abs_error(
               packed, state_reference, kToken, kGroup, kHeads, kGroupHeads,

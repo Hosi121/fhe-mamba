@@ -9,7 +9,9 @@ MambaForCausalLM on real weights and real text.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -20,8 +22,11 @@ from fhemamba._env import block_broken_torchvision
 block_broken_torchvision()
 
 import torch  # noqa: E402
+from fhemamba.artifacts import current_git_commit  # noqa: E402
 from fhemamba.ops import Exact  # noqa: E402
 from fhemamba.reference import model_forward  # noqa: E402
+
+from fhemamba import __version__  # noqa: E402
 
 SAMPLE_TEXT = (
     "The Voyager 1 spacecraft was launched by NASA on September 5, 1977, as part "
@@ -42,7 +47,10 @@ def main() -> None:
     parser.add_argument("--checkpoint", default="checkpoints/mamba-130m-hf")
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--output", default=None)
+    parser.add_argument("--tolerance", type=float, default=5e-3)
     args = parser.parse_args()
+    if not math.isfinite(args.tolerance) or args.tolerance <= 0:
+        parser.error("--tolerance must be positive and finite")
 
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -64,7 +72,19 @@ def main() -> None:
     official_next = int(official.logits[0, -1].argmax())
     ours_next = int(ours_loop["logits"][0, -1].argmax())
 
+    passed = official_next == ours_next and all(
+        math.isfinite(error) and error <= args.tolerance
+        for error in (*layer_diffs, logits_diff, chunk_vs_loop)
+    )
+    reference_path = Path(__file__).resolve().parents[1] / "src/fhemamba/reference.py"
     result = {
+        "version": __version__,
+        "repo_commit": current_git_commit(),
+        "reference_sha256": hashlib.sha256(reference_path.read_bytes()).hexdigest(),
+        "stage": "reference-parity-report",
+        "status": "passed" if passed else "failed",
+        "passed": passed,
+        "tolerance": args.tolerance,
         "experiment": "parity-vs-official-transformers",
         "checkpoint": args.checkpoint,
         "device": args.device,
@@ -76,6 +96,14 @@ def main() -> None:
         "chunked_vs_loop_logits_max_abs_diff": chunk_vs_loop,
         "next_token_argmax_agrees": official_next == ours_next,
         "next_token": {"official": official_next, "reference": ours_next},
+        "measurement_scope": {
+            "artifact_level_report": True,
+            "full_model_correctness_claimed": False,
+            "claim": (
+                "Plaintext reference parity on one fixed text; "
+                "not encrypted inference or a perplexity certificate."
+            ),
+        },
     }
 
     out_path = Path(
@@ -93,6 +121,8 @@ def main() -> None:
     print(f"chunked vs loop (fp noise)  : {chunk_vs_loop:.3e}")
     print(f"next-token argmax agrees    : {result['next_token_argmax_agrees']}")
     print(f"wrote {out_path}")
+    if not passed:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

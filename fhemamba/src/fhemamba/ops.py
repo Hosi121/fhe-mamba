@@ -27,6 +27,8 @@ import torch
 from torch import Tensor
 from torch.nn import functional as F  # noqa: N812
 
+from .normalization import ScheduledInvSqrt
+
 Site = tuple[int, str]
 DeviceRange = tuple[Tensor, Tensor]
 
@@ -61,6 +63,16 @@ class Exact:
 
     def inv_sqrt(self, x: Tensor, site: Site) -> Tensor:
         return torch.rsqrt(x)
+
+    def mamba2_gates(
+        self, z: Tensor, a_cont: Tensor, layer: int, time_step_limit: tuple[float, float]
+    ) -> tuple[Tensor, Tensor]:
+        """Mamba-2 write/decay hook; default preserves the individual op sites."""
+        dt = self.softplus(z, (layer, "dt_softplus"))
+        dt = torch.clamp(dt, time_step_limit[0], time_step_limit[1])
+        dt = self.checkpoint(dt, (layer, "dt_out"))
+        decay = self.exp(dt * a_cont, (layer, "decay_exp"))
+        return dt, self.checkpoint(decay, (layer, "decay_output"))
 
 
 def _record_device_range(ranges: dict[Site, DeviceRange], x: Tensor, site: Site) -> None:
@@ -189,6 +201,28 @@ def fit_chebyshev(fn, lo: float, hi: float, degree: int) -> ChebPoly:
     return ChebPoly(coeffs=tuple(float(c) for c in series.coef), lo=lo, hi=hi)
 
 
+def positive_binomial_seed(hi: float, degree: int, *, power: float = 0.5) -> ChebPoly:
+    """An inverse-power initializer with no positive lower fitting endpoint.
+
+    Truncate (1-t)^(-power) = sum (power)_k/k! * t^k at
+    t=1-v/hi. For 0<v<=hi all omitted terms are nonnegative, so the
+    exact series is positive and underestimates v^(-power). With power=1/2
+    it seeds Newton directly; with power=1/4 its square seeds Newton.
+    Small v may need more iterations. The Chebyshev conversion below is
+    binary64: certify its actual coefficients before claiming exact bounds.
+    """
+    if not math.isfinite(hi) or hi <= 0 or degree < 0 or power not in (0.25, 0.5):
+        raise ValueError("positive hi, nonnegative degree and power 1/4 or 1/2 are required")
+    terms = [1.0]
+    for k in range(1, degree + 1):
+        terms.append(terms[-1] * (power + k - 1) / k)
+    coefficients = np.polynomial.chebyshev.chebinterpolate(
+        lambda t: hi ** (-power) * np.polynomial.polynomial.polyval((1 - t) / 2, terms),
+        degree,
+    )
+    return ChebPoly(tuple(float(value) for value in coefficients), 0.0, hi)
+
+
 @dataclass(frozen=True)
 class SquaredExpPoly:
     """exp(x) on [lo, 0] via range reduction: p(x/2^k)^(2^k), p ~ exp on [lo/2^k, 0].
@@ -247,15 +281,16 @@ class SquaredPoly:
 class HeadMaskedDecay:
     """Decay poly with a plaintext per-head kill mask.
 
-    A is a model weight, so heads whose A*dt_max is below the kill threshold
-    are known at compile time to have decay < exp(-32) ~ 1e-14: their decay is
-    replaced by literal zero (a plaintext mask under FHE) and the squared-exp
-    fit only needs to cover the surviving heads' much narrower range. This is
-    what collapses 14-squaring layers to <=2-3.
+    The legacy planner prunes heads whose A*dt_max crosses a negative threshold
+    to reduce the squared-exp fit interval. This changes the surrogate: with
+    A<0, dt_max gives MINIMUM decay, not a uniform upper bound. Certifying a
+    negligible decay over an interval instead requires its smallest dt.
+    Long-context quality must therefore be tested independently of short PPL.
 
     Simulation note: masked heads' inputs are floor-clamped before the poly so
-    fp evaluation stays finite; under CKKS the poly output on those heads is
-    bounded garbage that the zero mask erases either way.
+    fp evaluation stays finite. The native kernel suppresses their exponent
+    input and excludes them from decay expansion. Neither path may rely on
+    multiplying an overflowing polynomial result by zero.
     """
 
     base: SquaredExpPoly
@@ -411,6 +446,7 @@ AnyPoly = (
     | PolyInitNewton
     | SquaredPolyInitNewton
     | HeadMaskedDecay
+    | ScheduledInvSqrt
 )
 
 
@@ -491,6 +527,7 @@ class PolyOps(Exact):
         polys: dict[str, AnyPoly],
         enabled: frozenset[str],
         layer_polys: dict[Site, AnyPoly] | None = None,
+        joint_gates: dict | None = None,
     ) -> None:
         unknown = enabled - set(SITE_NAMES)
         if unknown:
@@ -499,8 +536,30 @@ class PolyOps(Exact):
         self.polys = polys
         self.layer_polys = layer_polys or {}
         self.enabled = enabled
+        self.joint_gates = joint_gates or {}
         self._violation_counts: dict[str, Tensor] = {}
         self._violation_totals: dict[str, int] = dict.fromkeys(enabled, 0)
+        if self.joint_gates:
+            self._violation_totals["joint_selective_gates"] = 0
+
+    def mamba2_gates(self, z, a_cont, layer, time_step_limit):
+        if layer not in self.joint_gates:
+            return super().mamba2_gates(z, a_cont, layer, time_step_limit)
+        gate, rates = self.joint_gates[layer]
+        if tuple(time_step_limit) != (0.0, float("inf")) or not np.allclose(
+            -a_cont.detach().cpu().numpy().astype(float), rates, rtol=2e-7, atol=0
+        ):
+            raise ValueError("joint gate checkpoint rates/time-step limits differ")
+        lo = torch.as_tensor(gate.lo.copy(), dtype=torch.float64, device=z.device)
+        hi = torch.as_tensor(gate.hi.copy(), dtype=torch.float64, device=z.device)
+        name = "joint_selective_gates"
+        count = ((z.double() < lo) | (z.double() > hi) | ~z.isfinite()).count_nonzero()
+        self._violation_counts[name] = self._violation_counts.get(name, 0) + count
+        self._violation_totals[name] += z.numel()
+        write, decay = gate(z)
+        return self.checkpoint(write, (layer, "dt_out")), self.checkpoint(
+            decay, (layer, "decay_output")
+        )
 
     @property
     def violations(self) -> dict[str, list[int]]:
