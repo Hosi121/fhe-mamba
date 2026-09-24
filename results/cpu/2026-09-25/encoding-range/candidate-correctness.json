@@ -1,0 +1,1 @@
+{"mode":"compare","benchmarks":[],"passed":true,"cases":120,"encoded_cases":96,"expected_scaling_failures":24,"coefficient_words":167772160,"all_words":167778792,"scope":"Local CPU actual OpenFHE coefficient-root Encode only; no GPU upload, encrypted inference, target FIDESlib integration patches, or model timing."}

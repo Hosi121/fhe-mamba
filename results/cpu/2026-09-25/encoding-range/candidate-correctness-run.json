@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe",
+    "compare",
+    "/home/hosi/cipher/runs/encoding-range-20260925/coefficients.bin",
+    "/home/hosi/cipher/runs/encoding-range-20260925/candidate-correctness.json"
+  ],
+  "returncode": 0,
+  "wall_seconds": 3.4636176049971255,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/hosi/cipher/runs/encoding-range-20260925/lib-candidate"
+  },
+  "binary_sha256": "e6e913f204c238cbd3bbeaef04c52d079b873bdf6d3653bbea890f72972b6623",
+  "source_sha256": "cf6a6fa0bdb4d8b36e03a98632075bf8f642db2ef8cdd4fad696fddc5eb091b7"
+}

@@ -1,0 +1,6 @@
+{
+  "removed": "runs/next-optimization-design-20260925/cache_access_trace",
+  "sha256": "a4c04bfd1035a964e171d747641bad980a83f57bb0d116a6ad8c502f00e94f13",
+  "reason": "Completed local static inventory; source, build command and output retained.",
+  "worktrees_created": 0
+}

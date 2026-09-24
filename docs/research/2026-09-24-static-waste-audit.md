@@ -1,5 +1,11 @@
 # Static waste audit: remaining ciphertext copies and repeated preparation
 
+Follow-up: the first two ownership candidates are implemented and measured in
+the [shared ciphertext ownership study](2026-09-24-owned-arithmetic.md).
+The inventory below describes the pre-implementation snapshot; its raw
+measurements remain unchanged.
+
+
 The strongest next candidate is ownership-aware reuse **inside** linear,
 routing and polynomial evaluators. DAG-level last-use reuse does not cover
 these private temporaries. The current Mamba-3 program contains 91,956 such

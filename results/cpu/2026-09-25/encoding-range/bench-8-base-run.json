@@ -1,0 +1,23 @@
+{
+  "mode": "base",
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe",
+    "bench",
+    "unused",
+    "/home/hosi/cipher/runs/encoding-range-20260925/bench-8-base.json"
+  ],
+  "returncode": 0,
+  "wall_seconds": 2.6728592009967542,
+  "stdout": "passed cases=0 coefficients=0\n",
+  "stderr": "",
+  "ldd": "\tlinux-vdso.so.1 (0x00007ffd203fe000)\n\tlibOPENFHEpke.so.1 => /home/hosi/cipher/runs/encoding-range-20260925/lib-base/libOPENFHEpke.so.1 (0x00007d0bdb400000)\n\tlibOPENFHEcore.so.1 => /home/hosi/cipher/runs/encoding-range-20260925/lib-base/libOPENFHEcore.so.1 (0x00007d0bdb233000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007d0bdae00000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007d0bdb712000)\n\tlibgomp.so.1 => /lib/x86_64-linux-gnu/libgomp.so.1 (0x00007d0bdb1dd000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007d0bdb1af000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007d0bdaa00000)\n\tlibOPENFHEbinfhe.so.1 => /home/hosi/cipher/runs/encoding-range-20260925/lib-base/libOPENFHEbinfhe.so.1 (0x00007d0bdb14c000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007d0bdb857000)\n",
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/hosi/cipher/runs/encoding-range-20260925/lib-base"
+  },
+  "identity_sha256": "a3242229426661233cf5d24a3fc044bda9c8a4c21b4b5a37de345c07e3688abf",
+  "native_sha256": "7bda5ac8f4836f01ae5833bc17627008813665c01fdbd43f9a44ed2024dfe55b"
+}

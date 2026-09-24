@@ -1,0 +1,16 @@
+{
+  "command": [
+    "g++",
+    "-O2",
+    "-std=c++20",
+    "-Inative/fideslib_stage0/include",
+    "-Inative/fideslib_stage0/src",
+    "runs/next-optimization-design-20260925/cache_access_trace.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+    "-o",
+    "runs/next-optimization-design-20260925/cache_access_trace"
+  ],
+  "returncode": 0,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "scope": "Local static analyzer only. This is not an inference build or timing."
+}

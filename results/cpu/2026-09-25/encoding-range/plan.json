@@ -1,0 +1,8 @@
+{
+  "scope": "Local CPU OpenFHE encoding proof only while the DGX ownership binaries remain frozen.",
+  "question": "Does reducing Encode logarithm calls preserve every coefficient and metadata in the actual pinned encoder?",
+  "limit": "One baseline build, one patched build, a finite coefficient/metadata comparison and matched local encode samples. No DGX library replacement or GPU benchmark.",
+  "dependency_commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+  "existing_DGX_dependency": "Same upstream encoding source; DGX carries other FIDESlib integration patches. Local CPU proof is distinct from target integration.",
+  "declared_utc": "2026-09-24T15:01:57.852440+00:00"
+}

@@ -1,0 +1,68 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building in Release mode
+-- BUILD_UNITTESTS:    OFF
+-- BUILD_EXAMPLES:     OFF
+-- BUILD_BENCHMARKS:   OFF
+-- BUILD_EXTRAS:       OFF
+-- BUILD_STATIC:       OFF
+-- BUILD_SHARED:       ON
+-- GIT_SUBMOD_AUTO:    ON
+-- WITH_BE2:           OFF
+-- WITH_BE4:           OFF
+-- WITH_NTL:           OFF
+-- WITH_TCM:           OFF
+-- WITH_OPENMP:        ON
+-- NATIVE_SIZE:        64
+-- CKKS_M_FACTOR:      1
+-- WITH_NATIVEOPT:     OFF
+-- WITH_COVTEST:       OFF
+-- WITH_NOISE_DEBUG:   OFF
+-- WITH_REDUCED_NOISE: OFF
+-- USE_MACPORTS:       OFF
+-- BUILTIN_INFO_AVAILABLE is defined
+***** INSTALL IS AT /usr/local; to change, run cmake with -DCMAKE_INSTALL_PREFIX=/your/path
+-- Architecture is x86_64
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __int128
+-- Check size of __int128 - done
+-- Check size of uint64_t
+-- Check size of uint64_t - done
+-- NATIVEINT is set to 64
+-- MATHBACKEND is set to 4
+-- MATHBACKEND set to 4. Setting WITH_BE4 to ON
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Found Git: /usr/bin/git (found version "2.43.0")
+-- Submodule update
+Submodule 'third-party/cereal' (https://github.com/openfheorg/cereal.git) registered for path 'third-party/cereal'
+Submodule 'third-party/google-benchmark' (https://github.com/google/benchmark.git) registered for path 'third-party/google-benchmark'
+Submodule 'third-party/google-test' (https://github.com/google/googletest.git) registered for path 'third-party/google-test'
+Submodule 'third-party/gperftools' (https://github.com/gperftools/gperftools.git) registered for path 'third-party/gperftools'
+Cloning into '/home/hosi/cipher/runs/encoding-range-20260925/source/third-party/cereal'...
+Cloning into '/home/hosi/cipher/runs/encoding-range-20260925/source/third-party/google-benchmark'...
+Cloning into '/home/hosi/cipher/runs/encoding-range-20260925/source/third-party/google-test'...
+Cloning into '/home/hosi/cipher/runs/encoding-range-20260925/source/third-party/gperftools'...
+Submodule path 'third-party/cereal': checked out '984e3f194862b17916536b5fade40cba6e47a6fe'
+Submodule path 'third-party/google-benchmark': checked out 'eddb0241389718a23a42db6af5f0164b6e0139af'
+Submodule path 'third-party/google-test': checked out '52eb8108c5bdec04579160ae17225d66034bd723'
+Submodule path 'third-party/gperftools': checked out '83edb60836d87cf1b406e8846b9059c03031e8f5'
+-- Configuring done (13.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/hosi/cipher/runs/encoding-range-20260925/build-base

@@ -8,6 +8,9 @@ Use the [evidence registry](../evidence.md) for current claim status and the
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-24 — Shared ciphertext ownership](2026-09-24-owned-arithmetic.md) | Mamba-3 16.27 → 15.82 min (2.79%, adopt); Mamba-2 32.66 → 32.38 min (0.83%, adopt); exact-RNS gates and unchanged model contracts |
+| [2026-09-25 — Preparation and lifetime design](2026-09-25-preparation-design.md) | Static cache admission curve: 2 GiB LRU gives zero identity hits versus 16,384 for a fixed subset; CPU/GPU ownership and refresh scheduling constraints |
+| [2026-09-25 — Encode range scan](2026-09-25-encoding-range.md) | Local CPU prototype: 167,772,160 exact coefficient comparisons, 2.31–3.92% full-encode reduction; not applied to DGX or model inference |
 | [2026-09-24 — Cache integration](2026-09-24-packed-cache-integration.md) | Existing 64-entry cache with the same optimized binary; prefix ABBA 1.35% reduction, full qualification and adoption decision |
 | [2026-09-24 — Borrowed upload and routing](2026-09-24-borrowed-plaintext.md) | Mamba-3 matched full 17.36 → 16.74 minutes (3.53% reduction); 9,120 fewer model rotations; Mamba-2 ABBA 2.73% reduction and full parity |
 | [2026-09-24 — Static waste audit](2026-09-24-static-waste-audit.md) | Remaining internal ciphertext copies, repeated weight preparation and synchronization; source-bound counts, no new speedup claim |

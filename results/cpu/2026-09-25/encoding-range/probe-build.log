@@ -1,0 +1,92 @@
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:34:23: error: template argument 1 is invalid
+   34 | std::shared_ptr<Params> coefficient_params(const CryptoContext<DCRTPoly>& cc, int level) {
+      |                       ^
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp: In function ‘int coefficient_params(lbcrypto::CryptoContext<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > > >&, int)’:
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:40:15: error: parse error in template argument list
+   40 |   return std::make_shared<Params>(2 * cc->GetRingDimension(), moduli, roots);
+      |               ^~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:40:34: error: no matching function for call to ‘make_shared<<expression error> >(uint32_t, std::vector<intnat::NativeIntegerT<long unsigned int> >&, std::vector<intnat::NativeIntegerT<long unsigned int> >&)’
+   40 |   return std::make_shared<Params>(2 * cc->GetRingDimension(), moduli, roots);
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/c++/13/memory:80,
+                 from /home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/openfhe.h:36,
+                 from /home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:2:
+/usr/include/c++/13/bits/shared_ptr.h:1005:5: note: candidate: ‘template<class _Tp, class ... _Args> std::shared_ptr<std::_NonArray<_Tp> > std::make_shared(_Args&& ...)’
+ 1005 |     make_shared(_Args&&... __args)
+      |     ^~~~~~~~~~~
+/usr/include/c++/13/bits/shared_ptr.h:1005:5: note:   template argument deduction/substitution failed:
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:40:34: error: template argument 1 is invalid
+   40 |   return std::make_shared<Params>(2 * cc->GetRingDimension(), moduli, roots);
+      |          ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/c++/13/bits/shared_ptr.h:1037:5: note: candidate: ‘template<class _Tp> std::shared_ptr<std::_UnboundedArray<_Tp> > std::make_shared(size_t)’
+ 1037 |     make_shared(size_t __n)
+      |     ^~~~~~~~~~~
+/usr/include/c++/13/bits/shared_ptr.h:1037:5: note:   candidate expects 1 argument, 3 provided
+/usr/include/c++/13/bits/shared_ptr.h:1053:5: note: candidate: ‘template<class _Tp> std::shared_ptr<std::_UnboundedArray<_Tp> > std::make_shared(size_t, remove_extent_t<_Iter>&)’
+ 1053 |     make_shared(size_t __n, const remove_extent_t<_Tp>& __u)
+      |     ^~~~~~~~~~~
+/usr/include/c++/13/bits/shared_ptr.h:1053:5: note:   candidate expects 2 arguments, 3 provided
+/usr/include/c++/13/bits/shared_ptr.h:1080:5: note: candidate: ‘template<class _Tp> std::shared_ptr<std::_BoundedArray<_Tp> > std::make_shared()’
+ 1080 |     make_shared()
+      |     ^~~~~~~~~~~
+/usr/include/c++/13/bits/shared_ptr.h:1080:5: note:   candidate expects 0 arguments, 3 provided
+/usr/include/c++/13/bits/shared_ptr.h:1095:5: note: candidate: ‘template<class _Tp> std::shared_ptr<std::_BoundedArray<_Tp> > std::make_shared(remove_extent_t<_Iter>&)’
+ 1095 |     make_shared(const remove_extent_t<_Tp>& __u)
+      |     ^~~~~~~~~~~
+/usr/include/c++/13/bits/shared_ptr.h:1095:5: note:   candidate expects 1 argument, 3 provided
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp: In function ‘int main(int, char**)’:
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:104:50: error: no matching function for call to ‘lbcrypto::CryptoContextImpl<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > > >::MakeCKKSPackedPlaintext(const std::vector<std::complex<double> >&, int, int, const int&, int)’
+  104 |           auto warm = cc->MakeCKKSPackedPlaintext(values, 1, 21, params, 32768);
+      |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/openfhe.h:54:
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1186:15: note: candidate: ‘lbcrypto::Plaintext lbcrypto::CryptoContextImpl<Element>::MakeCKKSPackedPlaintext(const std::vector<std::complex<double> >&, size_t, uint32_t, std::shared_ptr<typename Element::Params>, uint32_t) const [with Element = lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > >; lbcrypto::Plaintext = std::shared_ptr<lbcrypto::PlaintextImpl>; size_t = long unsigned int; uint32_t = unsigned int; typename Element::Params = lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> >]’
+ 1186 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<std::complex<double>>& value, size_t noiseScaleDeg = 1,
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1187:91: note:   no known conversion for argument 4 from ‘const int’ to ‘std::shared_ptr<lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> > >’
+ 1187 |                                       uint32_t level = 0, const std::shared_ptr<ParmType> params = nullptr,
+      |                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1206:15: note: candidate: ‘lbcrypto::Plaintext lbcrypto::CryptoContextImpl<Element>::MakeCKKSPackedPlaintext(const std::vector<double>&, size_t, uint32_t, std::shared_ptr<typename Element::Params>, uint32_t) const [with Element = lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > >; lbcrypto::Plaintext = std::shared_ptr<lbcrypto::PlaintextImpl>; size_t = long unsigned int; uint32_t = unsigned int; typename Element::Params = lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> >]’
+ 1206 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<double>& value, size_t noiseScaleDeg = 1, uint32_t level = 0,
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1206:66: note:   no known conversion for argument 1 from ‘const std::vector<std::complex<double> >’ to ‘const std::vector<double>&’
+ 1206 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<double>& value, size_t noiseScaleDeg = 1, uint32_t level = 0,
+      |                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:109:53: error: no matching function for call to ‘lbcrypto::CryptoContextImpl<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > > >::MakeCKKSPackedPlaintext(const std::vector<std::complex<double> >&, int, int, const int&, int)’
+  109 |             auto plain = cc->MakeCKKSPackedPlaintext(values, 1, 21, params, 32768);
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1186:15: note: candidate: ‘lbcrypto::Plaintext lbcrypto::CryptoContextImpl<Element>::MakeCKKSPackedPlaintext(const std::vector<std::complex<double> >&, size_t, uint32_t, std::shared_ptr<typename Element::Params>, uint32_t) const [with Element = lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > >; lbcrypto::Plaintext = std::shared_ptr<lbcrypto::PlaintextImpl>; size_t = long unsigned int; uint32_t = unsigned int; typename Element::Params = lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> >]’
+ 1186 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<std::complex<double>>& value, size_t noiseScaleDeg = 1,
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1187:91: note:   no known conversion for argument 4 from ‘const int’ to ‘std::shared_ptr<lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> > >’
+ 1187 |                                       uint32_t level = 0, const std::shared_ptr<ParmType> params = nullptr,
+      |                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1206:15: note: candidate: ‘lbcrypto::Plaintext lbcrypto::CryptoContextImpl<Element>::MakeCKKSPackedPlaintext(const std::vector<double>&, size_t, uint32_t, std::shared_ptr<typename Element::Params>, uint32_t) const [with Element = lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > >; lbcrypto::Plaintext = std::shared_ptr<lbcrypto::PlaintextImpl>; size_t = long unsigned int; uint32_t = unsigned int; typename Element::Params = lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> >]’
+ 1206 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<double>& value, size_t noiseScaleDeg = 1, uint32_t level = 0,
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1206:66: note:   no known conversion for argument 1 from ‘const std::vector<std::complex<double> >’ to ‘const std::vector<double>&’
+ 1206 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<double>& value, size_t noiseScaleDeg = 1, uint32_t level = 0,
+      |                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:111:43: error: expected primary-expression before ‘>’ token
+  111 |             if (plain->GetElement<DCRTPoly>().GetNumOfElements() != params->GetParams().size())
+      |                                           ^
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:111:45: error: expected primary-expression before ‘)’ token
+  111 |             if (plain->GetElement<DCRTPoly>().GetNumOfElements() != params->GetParams().size())
+      |                                             ^
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:111:75: error: base operand of ‘->’ is not a pointer
+  111 |             if (plain->GetElement<DCRTPoly>().GetNumOfElements() != params->GetParams().size())
+      |                                                                           ^~
+/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp:128:54: error: no matching function for call to ‘lbcrypto::CryptoContextImpl<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > > >::MakeCKKSPackedPlaintext(const std::vector<std::complex<double> >&, int&, int&, const int&, int&)’
+  128 |             try { plain = cc->MakeCKKSPackedPlaintext(values, degree, level, params, slots); }
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1186:15: note: candidate: ‘lbcrypto::Plaintext lbcrypto::CryptoContextImpl<Element>::MakeCKKSPackedPlaintext(const std::vector<std::complex<double> >&, size_t, uint32_t, std::shared_ptr<typename Element::Params>, uint32_t) const [with Element = lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > >; lbcrypto::Plaintext = std::shared_ptr<lbcrypto::PlaintextImpl>; size_t = long unsigned int; uint32_t = unsigned int; typename Element::Params = lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> >]’
+ 1186 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<std::complex<double>>& value, size_t noiseScaleDeg = 1,
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1187:91: note:   no known conversion for argument 4 from ‘const int’ to ‘std::shared_ptr<lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> > >’
+ 1187 |                                       uint32_t level = 0, const std::shared_ptr<ParmType> params = nullptr,
+      |                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1206:15: note: candidate: ‘lbcrypto::Plaintext lbcrypto::CryptoContextImpl<Element>::MakeCKKSPackedPlaintext(const std::vector<double>&, size_t, uint32_t, std::shared_ptr<typename Element::Params>, uint32_t) const [with Element = lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<long unsigned int> > >; lbcrypto::Plaintext = std::shared_ptr<lbcrypto::PlaintextImpl>; size_t = long unsigned int; uint32_t = unsigned int; typename Element::Params = lbcrypto::ILDCRTParams<bigintdyn::ubint<long unsigned int> >]’
+ 1206 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<double>& value, size_t noiseScaleDeg = 1, uint32_t level = 0,
+      |               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include/cryptocontext.h:1206:66: note:   no known conversion for argument 1 from ‘const std::vector<std::complex<double> >’ to ‘const std::vector<double>&’
+ 1206 |     Plaintext MakeCKKSPackedPlaintext(const std::vector<double>& value, size_t noiseScaleDeg = 1, uint32_t level = 0,
+      |                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~

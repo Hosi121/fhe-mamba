@@ -1,0 +1,61 @@
+{
+  "observed_utc": "2026-09-24T16:46:27.672602+00:00",
+  "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "normalized_diff_sha256": "e525c7951facbfad0a834a35d8893e8e09c639e109f09c33239334eae1657b6f",
+  "files": {
+    "api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
+    "api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+    "src/CKKS/Ciphertext.cpp": "a32ddf43c08daf2696b0520d0c8094bf866935579b57e596254e34ead598b951",
+    "src/CKKS/Plaintext.cu": "08feb9adb7a3809db59dd867f39cf79de96df546451d1953724292077659bf31"
+  },
+  "observations": [
+    {
+      "file": "src/CKKS/Ciphertext.cpp",
+      "lines": [
+        86,
+        98
+      ],
+      "fact": "Ciphertext destruction globally synchronizes before returning polynomial buffers; the patch explains reads on output-owned streams."
+    },
+    {
+      "file": "api/CryptoContext.cpp",
+      "lines": [
+        237,
+        253
+      ],
+      "fact": "LoadPlaintext returns for loaded GPU plaintexts, otherwise needs the CPU plaintext representation."
+    },
+    {
+      "file": "api/CryptoContext.cpp",
+      "lines": [
+        1126,
+        1149
+      ],
+      "fact": "GPU EvalMult(ciphertext,plaintext) reads the loaded GPU plaintext and copies the ciphertext result."
+    },
+    {
+      "file": "api/Plaintext.cpp",
+      "lines": [
+        46,
+        51
+      ],
+      "fact": "Plaintext GetLevel reads CPU metadata and returns zero without CPU storage."
+    },
+    {
+      "file": "api/CryptoContext.cpp",
+      "lines": [
+        1861,
+        1886
+      ],
+      "fact": "Device registry lock calls are commented out; concurrent GPU registry access is not a valid assumed preparation worker policy."
+    },
+    {
+      "file": "src/CKKS/Ciphertext.cpp",
+      "lines": [
+        396,
+        416
+      ],
+      "fact": "multPt may create a private adjusted plaintext for differing levels or degree two; immutable cache data cannot simply be mutated."
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+-- Copied demoData files
+[  0%] Built target third-party
+[  1%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/lattice/constants-lattice-impl.cpp.o
+[  2%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/lattice/lattice.cpp.o
+[  3%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/lattice/stdlatticeparms.cpp.o
+[  4%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/lattice/trapdoor-dcrtpoly.cpp.o
+[  5%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/lattice/trapdoor-poly.cpp.o
+[  6%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/chebyshev.cpp.o
+[  6%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/dftransform.cpp.o
+[  7%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/discretegaussiangeneratorgeneric.cpp.o
+[  8%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/distributiongenerator.cpp.o
+[  9%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintdyn/be4-math-impl.cpp.o
+[ 10%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintdyn/mubintvecdyn.cpp.o
+[ 11%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintdyn/ubintdyn.cpp.o
+[ 12%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintfxd/be2-math-impl.cpp.o
+[ 13%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintfxd/mubintvecfxd.cpp.o
+[ 14%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintfxd/ubintfxd.cpp.o
+[ 15%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintntl/be6-math-impl.cpp.o
+[ 15%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintntl/mubintvecntl.cpp.o
+[ 16%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/bigintntl/ubintntl.cpp.o
+[ 17%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/intnat/benative-math-impl.cpp.o
+[ 18%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hal/intnat/mubintvecnat.cpp.o
+[ 19%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/hermite.cpp.o
+[ 20%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/matrix.cpp.o
+[ 21%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/math/nbtheory2.cpp.o
+[ 22%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/blockAllocator/blockAllocator.cpp.o
+[ 23%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/blockAllocator/xallocator.cpp.o
+[ 24%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/debug.cpp.o
+[ 24%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/demangle.cpp.o
+[ 25%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/get-call-stack.cpp.o
+[ 26%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/hashutil.cpp.o
+[ 27%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/inttypes.cpp.o
+[ 28%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/memory.cpp.o
+[ 29%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/openfhebase64.cpp.o
+[ 30%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/parallel.cpp.o
+[ 31%] Building C object src/core/CMakeFiles/coreobj.dir/lib/utils/prng/blake2b-ref.c.o
+[ 32%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/prng/blake2engine.cpp.o
+[ 34%] Building C object src/core/CMakeFiles/coreobj.dir/lib/utils/prng/blake2xb-ref.c.o
+[ 34%] Building CXX object src/core/CMakeFiles/coreobj.dir/lib/utils/utilities.cpp.o
+[ 34%] Built target coreobj
+[ 35%] Linking CXX shared library ../../lib/libOPENFHEcore.so
+[ 35%] Built target OPENFHEcore
+[ 36%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/binfhe-base-scheme.cpp.o
+[ 37%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/binfhe-constants-impl.cpp.o
+[ 38%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/binfhecontext.cpp.o
+[ 39%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/lwe-pke.cpp.o
+[ 40%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/rgsw-acc-cggi.cpp.o
+[ 41%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/rgsw-acc-dm.cpp.o
+[ 41%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/rgsw-acc-lmkcdey.cpp.o
+[ 42%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/rgsw-acc.cpp.o
+[ 43%] Building CXX object src/binfhe/CMakeFiles/binfheobj.dir/lib/rgsw-cryptoparameters.cpp.o
+[ 43%] Built target binfheobj
+[ 43%] Linking CXX shared library ../../lib/libOPENFHEbinfhe.so
+[ 43%] Built target OPENFHEbinfhe
+[ 45%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/constants-impl.cpp.o
+[ 45%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/ciphertext-impl.cpp.o
+[ 46%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/cryptocontextfactory.cpp.o
+[ 47%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/cryptocontext.cpp.o
+[ 48%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/cryptoobject-impl.cpp.o
+[ 49%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/encoding/ckkspackedencoding.cpp.o
+[ 50%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/encoding/coefpackedencoding.cpp.o
+[ 51%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/encoding/encodingparams.cpp.o
+[ 51%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/encoding/packedencoding.cpp.o
+[ 52%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/encoding/stringencoding.cpp.o
+[ 53%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/globals-impl.cpp.o
+[ 54%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/key/evalkey.cpp.o
+[ 55%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/key/evalkeyrelin.cpp.o
+[ 56%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/key/privatekey.cpp.o
+[ 57%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/key/publickey.cpp.o
+[ 58%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/keyswitch/keyswitch-base.cpp.o
+[ 59%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/keyswitch/keyswitch-bv.cpp.o
+[ 60%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/keyswitch/keyswitch-hybrid.cpp.o
+[ 60%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bfvrns/bfvrns-cryptoparameters.cpp.o
+[ 61%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bfvrns/bfvrns-leveledshe.cpp.o
+[ 62%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bfvrns/bfvrns-multiparty.cpp.o
+[ 63%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bfvrns/bfvrns-parametergeneration.cpp.o
+[ 64%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bfvrns/bfvrns-pke.cpp.o
+[ 65%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bfvrns/bfvrns-scheme.cpp.o
+[ 68%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bgvrns/bgvrns-leveledshe.cpp.o
+[ 68%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bgvrns/bgvrns-cryptoparameters.cpp.o
+[ 69%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bgvrns/bgvrns-multiparty.cpp.o
+[ 70%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bgvrns/bgvrns-parametergeneration.cpp.o
+[ 70%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bgvrns/bgvrns-pke.cpp.o
+[ 71%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/bgvrns/bgvrns-scheme.cpp.o
+[ 72%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-advancedshe.cpp.o
+[ 73%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-cryptoparameters.cpp.o
+[ 74%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-fhe.cpp.o
+[ 75%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-leveledshe.cpp.o
+[ 76%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-multiparty.cpp.o
+[ 77%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-parametergeneration.cpp.o
+[ 78%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-pke.cpp.o
+[ 79%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-scheme.cpp.o
+[ 79%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-schemeswitching.cpp.o
+[ 80%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/ckksrns/ckksrns-utils.cpp.o
+[ 81%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/gen-cryptocontext-params-impl.cpp.o
+[ 82%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/gen-cryptocontext-params-validation.cpp.o
+[ 83%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/scheme-id-impl.cpp.o
+[ 84%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/scheme/scheme-swch-params.cpp.o
+[ 85%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-advancedshe.cpp.o
+[ 86%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-cryptoparameters.cpp.o
+[ 87%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-fhe.cpp.o
+[ 88%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-leveledshe.cpp.o
+[ 88%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-multiparty.cpp.o
+[ 89%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-parametergeneration.cpp.o
+[ 90%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-pke.cpp.o
+[ 91%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-pre.cpp.o
+[ 92%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/base-scheme.cpp.o
+[ 93%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemebase/rlwe-cryptoparameters-impl.cpp.o
+[ 94%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemelet/rlwe-mp.cpp.o
+[ 95%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemerns/rns-cryptoparameters.cpp.o
+[ 96%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemerns/rns-leveledshe.cpp.o
+[ 97%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemerns/rns-multiparty.cpp.o
+[ 98%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/schemerns/rns-pke.cpp.o
+[ 98%] Built target pkeobj
+[100%] Linking CXX shared library ../../lib/libOPENFHEpke.so
+[100%] Built target OPENFHEpke

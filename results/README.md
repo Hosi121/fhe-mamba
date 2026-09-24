@@ -19,12 +19,13 @@ text/comparison reports.
 | Shared plaintext preparation | [`shared-plaintext-preparation/`](dgx/2026-09-24/shared-plaintext-preparation/) | [Mamba-2 port and Mamba-3 regression](../docs/research/2026-09-24-shared-plaintext-preparation.md) |
 | Direct plaintext upload | [`packed-resources/m2-full-direct/`](dgx/2026-09-24/packed-resources/m2-full-direct/) | [Shared direct upload and packed resources](../docs/research/2026-09-24-packed-resources.md) |
 | Borrowed plaintext upload | [`borrowed-plaintext/m2-full-borrow/`](dgx/2026-09-24/borrowed-plaintext/m2-full-borrow/) | [Borrowed upload and routing](../docs/research/2026-09-24-borrowed-plaintext.md) |
+| Shared ciphertext ownership | [`owned-arithmetic/m2-full-candidate/`](dgx/2026-09-24/owned-arithmetic/m2-full-candidate/) | [Ownership comparison](../docs/research/2026-09-24-owned-arithmetic.md) |
 
 Inspect the latest recorded completion without a GPU:
 
 ```bash
 uv run --no-sync fhemamba validate-artifacts --require-commit \
-  results/dgx/2026-09-24/borrowed-plaintext/m2-full-borrow/generation.json
+  results/dgx/2026-09-24/owned-arithmetic/m2-full-candidate/generation.json
 ```
 
 This validates a recorded artifact; it does not rerun encrypted inference.
@@ -33,6 +34,9 @@ This validates a recorded artifact; it does not rerun encrypted inference.
 
 | Location | Contents |
 | --- | --- |
+| [`dgx/2026-09-24/owned-arithmetic/`](dgx/2026-09-24/owned-arithmetic/) | Shared scratch ownership: 192 exact-RNS cases, both prefix ABBA controls and qualified fresh full pairs; failed probe revisions retained |
+| [`cpu/2026-09-25/preparation-design/`](cpu/2026-09-25/preparation-design/) | Static public-weight access trace, LRU/fixed-subset calculations, existing profile analysis and source-bound integration constraints; no new speed test |
+| [`cpu/2026-09-25/encoding-range/`](cpu/2026-09-25/encoding-range/) | Actual local OpenFHE encoder comparison: exact coefficients/metadata, two frozen library variants, all eight process samples and portable reproduction recipe; no DGX/model claim |
 | [`dgx/2026-09-24/packed-cache-integration/`](dgx/2026-09-24/packed-cache-integration/) | Existing bounded cache composed with optimized upload/routing; unchanged executable, prefix ABBA and qualified full follow-up |
 | [`dgx/2026-09-24/borrowed-plaintext/`](dgx/2026-09-24/borrowed-plaintext/) | Both exact-RNS configurations, separate/combined controls, full Mamba-3 pair and Mamba-2 parity |
 | [`dgx/2026-09-24/static-waste-audit/`](dgx/2026-09-24/static-waste-audit/) | Static call inventory, remaining copy/encoding/synchronization candidates and unchanged prior measurements; no new speedup claim |

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "runs/next-optimization-design-20260925/cache_access_trace",
+    "runs/mamba3-lm-full-20260924/program.txt"
+  ],
+  "returncode": 0,
+  "wall_seconds": 13.473244256005273,
+  "scope": "Local static program-order inventory; no GPU or model timing.",
+  "cache_access_trace.cpp_sha256": "aec2d62c1e79e4930164f4c2a760de287ad5ffad189034aee0393e9e3840d592",
+  "cache_access_trace_sha256": "a4c04bfd1035a964e171d747641bad980a83f57bb0d116a6ad8c502f00e94f13"
+}

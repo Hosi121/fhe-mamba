@@ -38,72 +38,68 @@ Inspect a recorded encrypted result locally:
 
 ```bash
 uv run --no-sync fhemamba validate-artifacts --require-commit \
-  results/dgx/2026-09-24/borrowed-plaintext/m2-full-borrow/generation.json
+  results/dgx/2026-09-24/owned-arithmetic/m2-full-candidate/generation.json
 ```
 
 For a new encrypted run, follow the [reproduction guide](docs/reproducing.md)
 and [Spark build instructions](docs/dgx-spark.md#build).
 
-## Measured result and scope
+## Measured results and scope
 
-With Mamba-2, the prompt `The capital` produces `The capital of the Republic of`:
-**24 layers, five encrypted evaluations, four generated tokens** on DGX Spark.
+Both trained models complete **five encrypted evaluations and four generated
+tokens** on **DGX Spark GB10**. The latest shared ownership helper reuses
+private ciphertext buffers in both models while preserving arithmetic order,
+operation counts, selected tokens and the existing error gates.
 
-| Implementation | Evaluation time | Maximum CKKS-to-polynomial error |
-| --- | ---: | ---: |
-| [Initial pipeline](docs/research/2026-09-22-client-generation.md) | 50.6 min | 0.009192 |
-| [Periodic coefficients](docs/research/2026-09-22-periodic-gate-coefficients.md) | 42.9 min | 0.011767 |
-| [Subring encoding](docs/research/2026-09-22-subring-gate-encoding.md) | 38.5 min | 0.016255 |
-| [Shared plaintext preparation](docs/research/2026-09-24-shared-plaintext-preparation.md) | 35.70 min | 0.005044 |
-| [Direct plaintext upload](docs/research/2026-09-24-packed-resources.md) | 33.83 min | 0.006424 |
-| [Borrowed plaintext upload](docs/research/2026-09-24-borrowed-plaintext.md) | **32.94 min** | **0.010484** |
+| Model | Layers | Fresh baseline → candidate | Reduction | Generated text |
+| --- | ---: | ---: | ---: | --- |
+| Mamba-2-130M | 24 | 1959.30 → **1942.99 s** (32.38 min) | **0.83%** | `The capital of the Republic of` |
+| Mamba-3 SISO 187M | 12 | 976.48 → **949.26 s** (15.82 min) | **2.79%** | `The capital of the state of` |
 
-These use the same frozen payload, with one full run per variant. A full
-same-binary comparison measures **38.64 → 35.70 min (7.59%)** after sharing
-Mamba-3's fast upload/GPU NTT path with Mamba-2. Additional transfer-copy
-removal passes full generation; its isolated two-layer ABBA measures
-**59.03 → 55.75 s (5.56%)**. That direct-upload candidate peaks at
-**37.06 GiB RSS**; encoder optimizations remain opt-in. Setup and transfer are
-additional. The `0.05` error gate compares CKKS with the matching
-polynomial circuit, not the original floating-point model. The
-[evidence registry](docs/evidence.md) includes raw results, repeated probes,
-quality measurements and failed controls.
+These are native evaluation times, including plaintext encoding and GPU upload
+performed during evaluation. Context/key setup, payload export, input loading
+and external transport are outside that timer. Each full mode has one fresh
+process/key sample. Separate interleaved prefix controls show a **2.76%**
+reduction for Mamba-3 and **0.69%** for Mamba-2 across its eight samples,
+including reversed controls. The small Mamba-2 difference does not establish
+statistical significance. Model sizes, weights and numerical contracts differ;
+this table does not rank architectures.
 
-The additional borrowed-upload Mamba-2 control measures
-**56.03 → 54.50 seconds
-(2.73%)** in ABBA order; the complete candidate
-passes in **32.94 minutes**, peak RSS **37.06 GiB**.
-Coefficient moves remain off for Mamba-2 after their non-improving control.
+Mamba-2 removes **151,315 backend result copies** and has maximum
+CKKS-to-polynomial error **0.003651**, below its unchanged `0.05` gate.
+Mamba-3 reuses **183,912 temporary input buffers**; maximum errors are
+**0.0001395992** versus exact FP64 and **0.0001251919** versus the frozen
+polynomial circuit, both below `0.001`. These comparisons use fresh keys;
+variation in error between runs is not evidence of an accuracy improvement.
+The change passes **286 tests**, including **18 C++ contracts**, plus
+**192 GPU cases with exactly matching ciphertext coefficients and metadata**.
+See the [ownership study](docs/research/2026-09-24-owned-arithmetic.md) for
+commands, raw measurements, failed controls and source/binary identities.
 
-**Mamba-3 SISO 187M** generates `The capital of the state of` through 12 layers
-× five encrypted evaluations. The preceding resource comparison measures
-**18.58 → 17.58 min (5.39%)** with NAF rotations, final-use input reuse,
-direct plaintext upload and lossless compact weights. All four generated IDs
-match; maximum hidden error is **0.0001266** versus exact FP64 and
-**0.0001248** versus frozen
-polynomials, below the unchanged `0.001` gate. Each full mode was measured once;
-a separate mirrored prefix comparison measures a 5.28% reduction. Public matrix
-storage falls **673.3 → 168.3 MiB**, and process peak RSS falls
-**27.9648 → 27.3143 GiB**. See the
-[resource comparison](docs/research/2026-09-24-packed-resources.md) and earlier
-[GPU encoding comparison](docs/research/2026-09-24-mamba3-gpu-encoding.md).
+Earlier milestones remain reproducible:
 
-The latest selected complete Mamba-3 configuration takes **16.27
-minutes**, with maximum exact/polynomial errors
-`0.0001666146` / `0.0001565546`
-and the same four generated IDs. The upload/routing full pair is
-**17.36 → 16.74 minutes
-(3.53% reduction)**. The cache follow-up completes in 16.27 minutes on the same binary; its uncached full baseline precedes intervening Mamba-2 validation.
-Each full mode was measured once; mirrored prefix controls are separate.
-Model rotations fall **59,900 → 50,780**, excluding refresh. Both numerical
-gates stay at 0.001. See the [upload/routing study](docs/research/2026-09-24-borrowed-plaintext.md)
-and [cache integration](docs/research/2026-09-24-packed-cache-integration.md).
+- Mamba-2's [initial complete run](docs/research/2026-09-22-client-generation.md)
+  took 50.6 minutes. [Periodic coefficients](docs/research/2026-09-22-periodic-gate-coefficients.md),
+  [subring encoding](docs/research/2026-09-22-subring-gate-encoding.md) and
+  [shared plaintext preparation](docs/research/2026-09-24-shared-plaintext-preparation.md)
+  reduced successive runs to 42.9, 38.5 and 35.70 minutes.
+- The [resource comparison](docs/research/2026-09-24-packed-resources.md)
+  measures Mamba-3 at 18.58 → 17.58 minutes with NAF rotations, final-use reuse,
+  direct upload and lossless compact weights. Public matrix storage falls
+  **673.3 → 168.3 MiB**.
+- [Borrowed upload and routing](docs/research/2026-09-24-borrowed-plaintext.md)
+  removes more transfer copies and 9,120 Mamba-3 model rotations. The
+  [bounded mask cache](docs/research/2026-09-24-packed-cache-integration.md)
+  remains enabled in the latest Mamba-3 configuration. Coefficient moves stay
+  off for Mamba-2 after their non-improving control.
 
-The earlier [depth/batching study](docs/research/2026-09-24-mamba3-depth-batching.md)
-measured 46.20 → 24.95 min under its own matched conditions. That historical
-timing must not be used to isolate the new encoding change.
-The Mamba-2 and Mamba-3 models and accuracy contracts differ; these are not
-architecture speed rankings.
+Compare variants within each study's matched conditions; historical times do
+not isolate an individual optimization. The [evidence registry](docs/evidence.md)
+links all claims and their validation boundaries. The next
+[public-weight preparation candidate](docs/research/2026-09-25-preparation-design.md)
+has a static cache analysis, but no measured inference speedup yet. The
+[encoder range-scan prototype](docs/research/2026-09-25-encoding-range.md)
+is a separate local CPU experiment and is not applied to DGX inference.
 
 The benchmark is a **single-process client loop** with public weights and
 `security=not-set`. The client decrypts the final hidden vector to select each

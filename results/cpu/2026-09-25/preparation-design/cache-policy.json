@@ -1,0 +1,67 @@
+{
+  "trace_sha256": "3e9fce2b7069041b01005eb29e7f794816cad7120af027d3627e7e84e7454f81",
+  "linear_calls": 240,
+  "accesses": 22440,
+  "unique_identities": 4488,
+  "identical_cycles": 5,
+  "reuse_distance_distinct_identities": 4487,
+  "capacity_curve": [
+    {
+      "entries": 0,
+      "ifft_bytes": 0,
+      "lru_hits": 0,
+      "pinned_subset_hits": 0,
+      "pinned_subset_fraction_of_encodes": 0.0
+    },
+    {
+      "entries": 64,
+      "ifft_bytes": 33554432,
+      "lru_hits": 0,
+      "pinned_subset_hits": 256,
+      "pinned_subset_fraction_of_encodes": 0.01140819964349376
+    },
+    {
+      "entries": 128,
+      "ifft_bytes": 67108864,
+      "lru_hits": 0,
+      "pinned_subset_hits": 512,
+      "pinned_subset_fraction_of_encodes": 0.02281639928698752
+    },
+    {
+      "entries": 512,
+      "ifft_bytes": 268435456,
+      "lru_hits": 0,
+      "pinned_subset_hits": 2048,
+      "pinned_subset_fraction_of_encodes": 0.09126559714795009
+    },
+    {
+      "entries": 1024,
+      "ifft_bytes": 536870912,
+      "lru_hits": 0,
+      "pinned_subset_hits": 4096,
+      "pinned_subset_fraction_of_encodes": 0.18253119429590017
+    },
+    {
+      "entries": 2048,
+      "ifft_bytes": 1073741824,
+      "lru_hits": 0,
+      "pinned_subset_hits": 8192,
+      "pinned_subset_fraction_of_encodes": 0.36506238859180035
+    },
+    {
+      "entries": 4096,
+      "ifft_bytes": 2147483648,
+      "lru_hits": 0,
+      "pinned_subset_hits": 16384,
+      "pinned_subset_fraction_of_encodes": 0.7301247771836007
+    },
+    {
+      "entries": 4488,
+      "ifft_bytes": 2353004544,
+      "lru_hits": 17952,
+      "pinned_subset_hits": 17952,
+      "pinned_subset_fraction_of_encodes": 0.8
+    }
+  ],
+  "scope": "Static program-order identity counts, not runtime hits or speed. The inverse-FFT identity is independent of scale/level; compressed final coefficients additionally need their actual scale/level/degree keys. All resident values remain immutable. Pinned subset is a simple admission policy, not a claim of optimal scheduling."
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "Static source/trace analysis, no new GPU experiment or inference modification. Raw Mamba-3 records copied unchanged from the completed ownership candidate.",
+  "artifacts_sha256": {
+    "m3-native.json": "94cf3d29107686ef21ddef5123d8817adf0b1170933119d095737ad4035cb441",
+    "profile-analysis.json": "44ee3863f11a996aae2ef5db5c97e2ddc5d03b64f4dcbd50a6c5ca28b0e35a2b",
+    "cache-access-trace-run.json": "047fdaadfa2ba99f88678401f9af034d8e41b792341b3f91eed224bdc4e772c1",
+    "backend-observations.json": "c9f3a15f1e3d56c9a1d79910cc8388bb8103334b7476773f471560018799fe54",
+    "cache_access_trace.cpp": "aec2d62c1e79e4930164f4c2a760de287ad5ffad189034aee0393e9e3840d592",
+    "cache-access-trace.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build-command.json": "c755e8e4ff49d1dfda00dd7347b2b20c10d2fb1171f5872e6a965d57534a0cca",
+    "cleanup.json": "58695b8febf8a3a2ea5634a5397beeeaa8f2816616d7d0da36408fb7fd81433e",
+    "cache_policy.py": "88f88c9f3a7e7a25c1a4bc296825dc3d5a7d951dc951d025271592cb8975324c",
+    "source-identities.json": "5c5455a9248f1cc8fe849210b261d07a1cd0c1d7d9136e2e8c041832750cd3e6",
+    "cache-access-trace.json": "3e9fce2b7069041b01005eb29e7f794816cad7120af027d3627e7e84e7454f81",
+    "profile_analysis.py": "20fd81bdbd6749858e2da7b959b9f48a9f90c886c649b6e3ab0dd7b891518238",
+    "cache-policy.json": "6af0b4855ebd4e172916455cb860d375a220b4ed9e9db14cf4fab45f40f14a23",
+    "README.md": "bc7fa9a1366d1a78ecd2b9faaa71fd166471e42cba58b81e9ec7893c927557d2",
+    "m3-run.json": "af2ed29ab691465d02e2649a44e03e1990cb3231a82e228b11f4dc83a60c14ca"
+  }
+}

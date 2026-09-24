@@ -1,0 +1,19 @@
+{
+  "native_sha256": "94cf3d29107686ef21ddef5123d8817adf0b1170933119d095737ad4035cb441",
+  "eval_seconds": 949.257736612,
+  "host_encoding_seconds": 169.527330653,
+  "upload_seconds": 23.244350789,
+  "refresh_seconds": 515.04254127,
+  "eligible_repeat_weight_identities": 17952,
+  "all_host_encodes": 50913,
+  "repeat_identity_fraction_of_all_encodes": 0.3526014966707913,
+  "first_linear_seconds_outside_refresh": 26.543792496,
+  "repeated_linear_seconds_outside_refresh": 104.68059435800001,
+  "two_pass_refresh_events": 363,
+  "grouped_refresh_events": 260,
+  "single_value_refresh_events": 103,
+  "values_in_grouped_refreshes": 1005,
+  "mean_values_per_grouped_refresh": 3.8653846153846154,
+  "largest_group": 8,
+  "scope": "Derived from an existing completed run. Category timers overlap/nest. Cache hits and savings are unmeasured. Singleton refreshes are not asserted to be jointly schedulable."
+}

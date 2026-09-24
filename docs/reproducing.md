@@ -143,6 +143,14 @@ retains periodic subring encoding on the CPU. Borrowing falls back when the
 pinned word layout is unavailable. See the
 [upload/routing study](research/2026-09-24-borrowed-plaintext.md).
 
+The additional ownership change removes 151,315 backend
+result copies in normalization and joint gates. A fresh full pair measures
+**32.66 → 32.38 minutes (0.83%)**;
+the prefix ABBA difference is 0.56%. Counts, selected IDs and the
+0.05 polynomial gate are unchanged. These small differences and one full run
+per mode do not establish statistical significance. See the
+[ownership study](research/2026-09-24-owned-arithmetic.md).
+
 Inspect the result:
 
 ```bash

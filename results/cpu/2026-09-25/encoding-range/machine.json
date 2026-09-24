@@ -1,0 +1,5 @@
+{
+  "machine": "x86_64",
+  "cpu_model": "Intel(R) Core(TM) Ultra 7 255H",
+  "affinity": "CPU 0 for timed native processes; one encoding thread via max_active_levels=0; four OpenMP threads only before the serial encoding scope."
+}

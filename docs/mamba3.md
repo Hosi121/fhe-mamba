@@ -8,15 +8,19 @@ generation path remains available through its existing optimized native kernel.
 The trained **Mamba-3 SISO 187M** loader, all 12 blocks and client generation
 loop pass full CPU/reference parity and complete encrypted generation: five
 evaluations and four actual client-selected tokens.
-The latest selected complete Mamba-3 configuration takes **16.27
-minutes**, with maximum exact/polynomial errors
-`0.0001666146` / `0.0001565546`
-and the same four generated IDs. The upload/routing full pair is
-**17.36 → 16.74 minutes
-(3.53% reduction)**. The cache follow-up completes in 16.27 minutes on the same binary; its uncached full baseline precedes intervening Mamba-2 validation.
-Each full mode was measured once; mirrored prefix controls are separate.
-Model rotations fall **59,900 → 50,780**, excluding refresh. Both numerical
-gates stay at 0.001. See the [upload/routing study](research/2026-09-24-borrowed-plaintext.md)
+The latest shared-ownership implementation completes in **15.82
+minutes**. A fresh full baseline/candidate pair measures
+**16.27 → 15.82 minutes
+(2.79% reduction)**; the separate prefix ABBA measures
+2.76%. It reuses 183,912 temporary input buffers
+and preserves all four generated IDs, operation counts and both 0.001 gates.
+Maximum exact/polynomial errors are `0.0001395992` /
+`0.0001251919`. Each full mode was measured once.
+See the [ownership study](research/2026-09-24-owned-arithmetic.md).
+
+The preceding upload/routing comparison saves 9,120 model rotations
+(59,900 → 50,780); the selected configuration also retains the 64-entry cache.
+See the [upload/routing study](research/2026-09-24-borrowed-plaintext.md)
 and [cache integration](research/2026-09-24-packed-cache-integration.md).
 
 The [recorded small probes](research/2026-09-24-mamba3-siso.md) pass at 4 and 8
@@ -86,6 +90,12 @@ Both modes of the later 21.87/18.59-minute encoding comparison include it.
 The shared coefficient-mask helper now uses contiguous SIMD-capable copies,
 with bitwise parity and a 12.4× local CPU result at 32768 coefficients. See the
 [microkernel study](research/2026-09-24-mamba3-microkernels.md) for scope and profiles.
+
+The same `--inplace-ops` option now consumes final-use accumulator terms
+through the shared ownership helper. Aliases detach before alignment and
+right-input storage stays live through GPU completion. The
+[ownership comparison](research/2026-09-24-owned-arithmetic.md) records
+exact-RNS checks and a fresh full baseline/candidate pair.
 
 `--cache-plaintexts` is an optional, evaluator-local cache for multiplication
 masks containing zeros and one finite nonzero coefficient. It retains up to

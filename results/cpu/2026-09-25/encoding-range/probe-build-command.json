@@ -1,0 +1,19 @@
+[
+  "g++",
+  "-O3",
+  "-std=c++20",
+  "-fopenmp",
+  "-I/home/hosi/cipher/runs/encoding-range-20260925/source/src/core/include",
+  "-I/home/hosi/cipher/runs/encoding-range-20260925/source/src/pke/include",
+  "-I/home/hosi/cipher/runs/encoding-range-20260925/source/src/binfhe/include",
+  "-I/home/hosi/cipher/runs/encoding-range-20260925/build-base/src/core",
+  "-I/home/hosi/cipher/runs/encoding-range-20260925/source/third-party/cereal/include",
+  "/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe.cpp",
+  "-L/home/hosi/cipher/runs/encoding-range-20260925/lib-base",
+  "-lOPENFHEpke",
+  "-lOPENFHEcore",
+  "-lOPENFHEbinfhe",
+  "-Wl,-rpath,/home/hosi/cipher/runs/encoding-range-20260925/lib-base",
+  "-o",
+  "/home/hosi/cipher/runs/encoding-range-20260925/encoding_probe"
+]

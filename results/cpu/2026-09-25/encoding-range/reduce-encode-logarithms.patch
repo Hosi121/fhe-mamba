@@ -1,0 +1,30 @@
+diff --git a/src/pke/lib/encoding/ckkspackedencoding.cpp b/src/pke/lib/encoding/ckkspackedencoding.cpp
+index 93021ca..b703216 100644
+--- a/src/pke/lib/encoding/ckkspackedencoding.cpp
++++ b/src/pke/lib/encoding/ckkspackedencoding.cpp
+@@ -188,21 +188,13 @@ bool CKKSPackedEncoding::Encode() {
+     }
+     DCRTPoly::Integer intPowP = NativeInteger(1) << pBits;
+ #else  // NATIVEINT == 64
+-    int32_t logc = std::numeric_limits<int32_t>::min();
++    double largestComponent = 0.0;
+     for (uint32_t i = 0; i < slots; ++i) {
+         inverse[i] *= scalingFactor;
+-        if (inverse[i].real() != 0.) {
+-            auto logci = static_cast<int32_t>(ceil(log2(std::abs(inverse[i].real()))));
+-            if (logc < logci)
+-                logc = logci;
+-        }
+-        if (inverse[i].imag() != 0.) {
+-            auto logci = static_cast<int32_t>(ceil(log2(std::abs(inverse[i].imag()))));
+-            if (logc < logci)
+-                logc = logci;
+-        }
++        largestComponent = std::max(largestComponent, std::abs(inverse[i].real()));
++        largestComponent = std::max(largestComponent, std::abs(inverse[i].imag()));
+     }
+-    logc = (logc == std::numeric_limits<int32_t>::min()) ? 0 : logc;
++    int32_t logc = largestComponent == 0.0 ? 0 : static_cast<int32_t>(ceil(log2(largestComponent)));
+     if (logc < 0)
+         OPENFHE_THROW("Scaling factor too small");
+ 

@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "complex": false,
+      "pattern": 1,
+      "samples": {
+        "base": [
+          0.01349487616666667,
+          0.013434985375,
+          0.013439665208333331,
+          0.013867623666666669
+        ],
+        "candidate": [
+          0.013355902458333332,
+          0.012737326249999998,
+          0.013420758208333336,
+          0.012779992958333335
+        ]
+      },
+      "base_mean_seconds": 0.013559287604166668,
+      "candidate_mean_seconds": 0.01307349496875,
+      "reduction_percent": 3.5827297834392646
+    },
+    {
+      "complex": false,
+      "pattern": 2,
+      "samples": {
+        "base": [
+          0.012956339041666667,
+          0.012900438166666672,
+          0.013026379,
+          0.013155772041666671
+        ],
+        "candidate": [
+          0.012717262625000003,
+          0.01185412375,
+          0.012768288375,
+          0.012659410666666667
+        ]
+      },
+      "base_mean_seconds": 0.013009732062500003,
+      "candidate_mean_seconds": 0.012499771354166668,
+      "reduction_percent": 3.919840207956893
+    },
+    {
+      "complex": true,
+      "pattern": 1,
+      "samples": {
+        "base": [
+          0.013660016416666669,
+          0.013672865,
+          0.01353081579166667,
+          0.014148054874999998
+        ],
+        "candidate": [
+          0.013411358791666668,
+          0.01310800270833333,
+          0.013684643833333336,
+          0.013538614208333329
+        ]
+      },
+      "base_mean_seconds": 0.013752938020833334,
+      "candidate_mean_seconds": 0.013435654885416665,
+      "reduction_percent": 2.307020761207823
+    },
+    {
+      "complex": true,
+      "pattern": 2,
+      "samples": {
+        "base": [
+          0.013292735583333333,
+          0.013179719750000004,
+          0.013227529708333336,
+          0.013347104791666667
+        ],
+        "candidate": [
+          0.012274957333333336,
+          0.012621955125,
+          0.01316463283333333,
+          0.013206800375
+        ]
+      },
+      "base_mean_seconds": 0.013261772458333335,
+      "candidate_mean_seconds": 0.012817086416666667,
+      "reduction_percent": 3.3531418448311534
+    }
+  ],
+  "exact_cases": 120,
+  "coefficient_words_compared": 167772160,
+  "identity_sha256": "a3242229426661233cf5d24a3fc044bda9c8a4c21b4b5a37de345c07e3688abf",
+  "scope": "OpenFHE MakeCKKSPackedPlaintext with identity roots, 32768 slots, level 21 and degree 1. Input creation, context setup, and plaintext release are outside the Encode construction timer. CPU only; no model speed claim.",
+  "finished_utc": "2026-09-24T15:23:39.994972+00:00"
+}

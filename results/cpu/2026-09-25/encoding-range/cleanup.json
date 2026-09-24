@@ -1,0 +1,29 @@
+{
+  "removed": [
+    {
+      "path": "coefficients.bin",
+      "bytes": 1342230336
+    },
+    {
+      "path": "encoding_probe",
+      "bytes": 436280
+    },
+    {
+      "path": "source",
+      "bytes": null
+    },
+    {
+      "path": "build-base",
+      "bytes": null
+    },
+    {
+      "path": "lib-base",
+      "bytes": null
+    },
+    {
+      "path": "lib-candidate",
+      "bytes": null
+    }
+  ],
+  "retained": "Exact prototype patch and both encoding source revisions, probe, build logs, dependency identities, all correctness and timing records."
+}

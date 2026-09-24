@@ -1,0 +1,10 @@
+-- demoData folder already exists
+[  0%] Built target third-party
+[ 34%] Built target coreobj
+[ 35%] Built target OPENFHEcore
+[ 43%] Built target binfheobj
+[ 43%] Built target OPENFHEbinfhe
+[ 44%] Building CXX object src/pke/CMakeFiles/pkeobj.dir/lib/encoding/ckkspackedencoding.cpp.o
+[ 98%] Built target pkeobj
+[100%] Linking CXX shared library ../../lib/libOPENFHEpke.so
+[100%] Built target OPENFHEpke

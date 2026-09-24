@@ -1,0 +1,17 @@
+{
+  "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "base_commit": "3084ebc32dceb0358bbbe761b5dfb795c2ed5f4c",
+  "source_files": {
+    "native/fideslib_stage0/include/packed_program.hpp": "876e38041605e8a56fbd44a1e8f94052609ff7ba34479e8182baf0fffede8ab6",
+    "native/fideslib_stage0/include/packed_depth.hpp": "546de4d1bf4b162b069752ecfaaa82019363d47215b94483bc1b270a93542deb",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp": "ac19557a2cea47319b4ab5cdc0fec229420a5588894ac5faa6462798e9f354c2",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.hpp": "bdb2bd0de8fdac049218bacb9c01cb333a9abc36740e891cb9217974db40ad03",
+    "native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp": "82ef2700b780687ea5dd6b6bc29769be8d0060d0884ba8750cb3c720307fee75",
+    "native/fideslib_stage0/src/packed_fideslib.cpp": "0899ad397df428b1ddcc32050f16df07889e01b339e9cdf8988666c90670b3b0",
+    "native/fideslib_stage0/include/plaintext_cache.hpp": "5e0b675a7b2e16d76104638fcdf9ca34b540ecd5b6c40a580ff7571530fc99aa"
+  },
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "scope": "Static analysis sources; ownership campaign native sources remain frozen.",
+  "application_source_manifest_sha256": "304fd7ae707e7a762642440fcc2aa80ba69f4adaa363b668299b0b86549a2477",
+  "application_source_manifest": "results/dgx/2026-09-24/owned-arithmetic/compiled-final-sources.json"
+}
