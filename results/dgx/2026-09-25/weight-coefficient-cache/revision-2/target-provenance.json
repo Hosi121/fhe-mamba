@@ -1,0 +1,208 @@
+{
+  "hardware": "NVIDIA GB10, 580.159.03",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "cuda": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:57:39_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+  "backend_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "backend_diff_sha256": "e525c7951facbfad0a834a35d8893e8e09c639e109f09c33239334eae1657b6f",
+  "dependencies_verified": {
+    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/packed_fideslib": "8edf1593688c7aad0c4ede625608600df26ae810bda32731a6a3ab397b989a39",
+    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/packed_plaintext_probe": "c2fb15d9c31a3aafe12051fe58258b4a06838c23ab603c3dd909a5b7fc8f32ec",
+    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/stage1_mamba2_decode_fideslib": "3a1cf98dcb65cd8b19ca63033b96d268bf915370334f6be02b911b1f5c198e65",
+    "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/config_core.h": "b8575b2673947f6d37f86dcf12e690ec89d5517d658217e99c30465eccff12e0",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/math/hal/intnat/ubintnat.h": "22d49038f1b63a88a2da0fd13941b11bd2a255c1dd3e65304600992324b9080a",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/math/hal/intnat/mubintvecnat.h": "3ac888c8165194a627822101d2a9f10ec8d3135e7e2eae8a91c92cb808793889",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Plaintext.cu": "08feb9adb7a3809db59dd867f39cf79de96df546451d1953724292077659bf31",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/RNSPoly.cpp": "83c7234b5e45fe89447b0d524efb455c2e6ecb9680c538bc999d9dca52b07941",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/LimbPartition.cu": "063336a48c4f9db6866d328fd9917b8d804cb5410975490b48a8107a6c633ce0",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Limb.cu": "9e0eccc93e31a92a05db9919d62734b59ae152b70ffe2f30e39277984b2156e3",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/openfhe-interface/RawCiphertext.cu": "1ff5d81255930803de56184b628a902972e8dc67ccf794be1359355d59bde63a"
+  },
+  "baseline_binary": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final/packed_fideslib",
+  "baseline_binary_sha256": "78c9735c4dbe3b0dcaa8cd1b1eae64bda8ec3940b38aa206cf20387c5d7db707",
+  "baseline_source_manifest_sha256": "304fd7ae707e7a762642440fcc2aa80ba69f4adaa363b668299b0b86549a2477",
+  "candidate_source_manifest_sha256": "726e93e95ca62dd09874b439e20a8ab1cb865f628fe8fef5c6cee71939877430",
+  "candidate_binaries_sha256": {
+    "packed_fideslib": "3e679f1d90eaeac2dca5c6bf8cfbd6d284d04acef1cb06af032eb151fb32a5da",
+    "weight_plaintext_probe": "7ba5bb78a6b688fd7102c9464da48a998e90d73fba6fca7a4008f4b4d7ef5acf"
+  },
+  "compile_commands": [
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "output": "CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "output": "CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "output": "CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "output": "CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "output": "CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "output": "CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "output": "CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "output": "CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "output": "CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "output": "CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "output": "CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "output": "CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+      "output": "CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/weight_plaintext_probe.dir/src/weight_plaintext_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/weight_plaintext_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/weight_plaintext_probe.cpp",
+      "output": "CMakeFiles/weight_plaintext_probe.dir/src/weight_plaintext_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "output": "CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "output": "CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "output": "CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "output": "CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "output": "CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "output": "CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "output": "CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o -c /home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "output": "CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o"
+    }
+  ],
+  "payloads": {
+    "lm-full": {
+      "path": "/home/kataiwa/fhemamba/mamba3-20260924/lm-full",
+      "manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+      "files_sha256": {
+        "program.txt": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+        "fixture.npz": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57",
+        "client_head.f32": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+      }
+    },
+    "lm-layer1": {
+      "path": "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1",
+      "manifest_sha256": "f3979518293ac0f29c4638c783b1157d3a02c7a2786d2a76ef0e484d36a8eec4",
+      "files_sha256": {
+        "program.txt": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917",
+        "fixture.npz": "3a42e18b0792173fc3df5630c3d4509f9cc411d46daaa2c10dde40d5186ebc2e",
+        "client_head.f32": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+      }
+    },
+    "lm-layer1-prefix": {
+      "path": "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1-prefix",
+      "manifest_sha256": "f836bff8529a8c0252a4e910253e6f4dc8dc2dde7786be3e70b71b5b1136ef1e",
+      "files_sha256": {
+        "program.txt": "327df6348ae284e613ea8a0493def98cb70499034807b7a92fec4d9da8fcc607",
+        "fixture.npz": "3a42e18b0792173fc3df5630c3d4509f9cc411d46daaa2c10dde40d5186ebc2e"
+      }
+    },
+    "payload": {
+      "path": "/home/kataiwa/fhemamba/mamba3-20260924/payload",
+      "manifest_sha256": "461351e19053c34e36713abcafa206bbbe1549c4c561564a036ccc1e4ac6d872",
+      "files_sha256": {
+        "program.txt": "7e4ad8f9b91b3e885e3b1dae9d2cfd29a2fac92d94b68b4ac72cfe59fc372831",
+        "fixture.npz": "75744a7ff5f30ac80cbecd8fe2da35a6cf0f5a2337c72ee66253cd9b45c7e4bc"
+      }
+    }
+  },
+  "verified_utc": "2026-09-24T17:39:03.214973+00:00"
+}

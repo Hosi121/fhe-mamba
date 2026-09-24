@@ -1,0 +1,6 @@
+verified source, dependencies, executables and four payloads
+START probe-mamba3
+END probe-mamba3 passed= True wall= 9.323281711898744
+START probe-mamba2
+END probe-mamba2 passed= True wall= 9.703618546016514
+{"passed": true, "finished_utc": "2026-09-24T17:39:22.268717+00:00"}

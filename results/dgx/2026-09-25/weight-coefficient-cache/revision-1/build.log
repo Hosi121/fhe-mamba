@@ -1,0 +1,32 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using FIDESlib.
+-- Found CUDAToolkit: /usr/local/cuda/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/weight-preparation-20260925/revision-1/build
+[ 12%] Building CXX object CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o
+[ 25%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+/home/kataiwa/fhemamba/weight-preparation-20260925/revision-1/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp:3:10: fatal error: compact_rns.hpp: No such file or directory
+    3 | #include "compact_rns.hpp"
+      |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[3]: *** [CMakeFiles/fideslib_plaintext_encoder.dir/build.make:76: CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o] Error 1
+gmake[2]: *** [CMakeFiles/Makefile2:388: CMakeFiles/fideslib_plaintext_encoder.dir/all] Error 2
+gmake[2]: *** Waiting for unfinished jobs....
+[ 37%] Linking CXX static library libstage1_mamba2_payload.a
+[ 37%] Built target stage1_mamba2_payload
+gmake[1]: *** [CMakeFiles/Makefile2:369: CMakeFiles/packed_fideslib.dir/rule] Error 2
+gmake: *** [Makefile:241: packed_fideslib] Error 2

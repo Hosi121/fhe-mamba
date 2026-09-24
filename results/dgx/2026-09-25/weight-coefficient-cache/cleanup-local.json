@@ -1,0 +1,11 @@
+{
+  "verified_before_removal": true,
+  "removed": [
+    "runs/weight-preparation-20260925/revision-1/source",
+    "runs/weight-preparation-20260925/revision-2/source",
+    "runs/weight-preparation-20260925/revision-3/source",
+    "runs/weight-preparation-20260925/test_compact_rns"
+  ],
+  "local_integer_contract_binary_sha256": "44511234693543c951d105f77383dfae52c1d54cbbf94291942ef55f84a05d51",
+  "models_and_raw_results": "retained; no worktree created"
+}

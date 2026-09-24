@@ -95,10 +95,12 @@ Earlier milestones remain reproducible:
 
 Compare variants within each study's matched conditions; historical times do
 not isolate an individual optimization. The [evidence registry](docs/evidence.md)
-links all claims and their validation boundaries. The next
-[public-weight preparation candidate](docs/research/2026-09-25-preparation-design.md)
-has a static cache analysis, but no measured inference speedup yet. The
-[encoder range-scan prototype](docs/research/2026-09-25-encoding-range.md)
+links all claims and their validation boundaries. A later
+[compact weight-coefficient cache](docs/research/2026-09-25-weight-coefficient-cache.md)
+passed exact RNS/GPU checks but made the cold three-step probe **1.26% slower**;
+it was not adopted. Actual level changes limited reuse. The
+[inverse-FFT reuse candidate](docs/research/2026-09-25-preparation-design.md)
+remains unimplemented. The [encoder range-scan prototype](docs/research/2026-09-25-encoding-range.md)
 is a separate local CPU experiment and is not applied to DGX inference.
 
 The benchmark is a **single-process client loop** with public weights and

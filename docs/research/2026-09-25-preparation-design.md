@@ -13,6 +13,12 @@ configuration was changed. These counts are not a measured cache speedup.
 
 [Trace, analyzer, policy calculation and source identities](../../results/cpu/2026-09-25/preparation-design/).
 
+The subsequent [compact-coefficient experiment](2026-09-25-weight-coefficient-cache.md)
+checks the final-coefficient alternative on hardware. It passes exact RNS
+checks but regresses 1.26% on the cold three-step model probe: level variants
+produce 825 entries for only 297 hits. That prototype is rejected. The
+inverse-FFT alternative described here remains unimplemented.
+
 ## What repeats, and how much storage it needs
 
 The analyzer reads the same frozen full program, uses the existing liveness

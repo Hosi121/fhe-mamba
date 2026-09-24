@@ -1,0 +1,551 @@
+diff --git a/experiments/run_packed_probe.py b/experiments/run_packed_probe.py
+index a21a426..e59db28 100644
+--- a/experiments/run_packed_probe.py
++++ b/experiments/run_packed_probe.py
+@@ -42,6 +42,7 @@ def _run(
+     profile_evaluation=False,
+     inplace_ops=False,
+     cache_plaintexts=False,
++    weight_cache_mib=0,
+     fast_plaintext_upload=False,
+     gpu_plaintext_ntt=False,
+     direct_plaintext_upload=False,
+@@ -55,6 +56,10 @@ def _run(
+     binary, payload, output = binary.resolve(), payload.resolve(), output.resolve()
+     if not math.isfinite(timeout) or timeout <= 0 or not math.isfinite(tolerance) or tolerance <= 0:
+         raise ValueError("timeout and tolerance must be finite and positive")
++    if not isinstance(weight_cache_mib, int) or weight_cache_mib < 0:
++        raise ValueError("weight cache MiB must be a nonnegative integer")
++    if weight_cache_mib and not (gpu_plaintext_ntt or move_plaintext_coefficients):
++        raise ValueError("weight cache requires GPU plaintext NTT")
+     if bootstrap_passes not in (1, 2):
+         raise ValueError("bootstrap_passes must be 1 or 2")
+     if planned_refresh and legacy_routing:
+@@ -97,6 +102,8 @@ def _run(
+         command.append("--inplace-ops")
+     if cache_plaintexts:
+         command.append("--cache-plaintexts")
++    if weight_cache_mib:
++        command.extend(["--weight-cache-mib", str(weight_cache_mib)])
+     if fast_plaintext_upload:
+         command.append("--fast-plaintext-upload")
+     if gpu_plaintext_ntt:
+@@ -182,6 +189,7 @@ def run(
+     profile_evaluation=False,
+     inplace_ops=False,
+     cache_plaintexts=False,
++    weight_cache_mib=0,
+     fast_plaintext_upload=False,
+     gpu_plaintext_ntt=False,
+     direct_plaintext_upload=False,
+@@ -212,6 +220,7 @@ def run(
+             profile_evaluation=profile_evaluation,
+             inplace_ops=inplace_ops,
+             cache_plaintexts=cache_plaintexts,
++            weight_cache_mib=weight_cache_mib,
+             fast_plaintext_upload=fast_plaintext_upload,
+             gpu_plaintext_ntt=gpu_plaintext_ntt,
+             direct_plaintext_upload=direct_plaintext_upload,
+@@ -263,6 +272,7 @@ def run(
+                 profile_evaluation=profile_evaluation,
+                 inplace_ops=inplace_ops,
+                 cache_plaintexts=cache_plaintexts,
++                weight_cache_mib=weight_cache_mib,
+                 fast_plaintext_upload=fast_plaintext_upload,
+                 gpu_plaintext_ntt=gpu_plaintext_ntt,
+                 direct_plaintext_upload=direct_plaintext_upload,
+@@ -303,6 +313,7 @@ def main():
+     parser.add_argument("--profile-evaluation", action="store_true")
+     parser.add_argument("--inplace-ops", action="store_true")
+     parser.add_argument("--cache-plaintexts", action="store_true")
++    parser.add_argument("--weight-cache-mib", type=int, default=0)
+     parser.add_argument("--fast-plaintext-upload", action="store_true")
+     parser.add_argument("--gpu-plaintext-ntt", action="store_true")
+     parser.add_argument("--direct-plaintext-upload", action="store_true")
+@@ -329,6 +340,7 @@ def main():
+         profile_evaluation=args.profile_evaluation,
+         inplace_ops=args.inplace_ops,
+         cache_plaintexts=args.cache_plaintexts,
++        weight_cache_mib=args.weight_cache_mib,
+         fast_plaintext_upload=args.fast_plaintext_upload,
+         gpu_plaintext_ntt=args.gpu_plaintext_ntt,
+         direct_plaintext_upload=args.direct_plaintext_upload,
+diff --git a/native/fideslib_stage0/CMakeLists.txt b/native/fideslib_stage0/CMakeLists.txt
+index 864097e..f9f7797 100644
+--- a/native/fideslib_stage0/CMakeLists.txt
++++ b/native/fideslib_stage0/CMakeLists.txt
+@@ -98,7 +98,7 @@ if(FHE_STAGE0_BUILD_KERNEL)
+ 
+   add_executable(packed_fideslib src/packed_fideslib.cpp)
+   add_library(fideslib_plaintext_encoder STATIC src/fideslib_plaintext_encoder.cpp)
+-  target_link_libraries(fideslib_plaintext_encoder PUBLIC fideslib::fideslib CUDA::cudart)
++  target_link_libraries(fideslib_plaintext_encoder PUBLIC fideslib::fideslib CUDA::cudart PRIVATE stage0_layout)
+   target_include_directories(fideslib_plaintext_encoder PUBLIC src
+     ${OpenFHE_INCLUDE} ${OpenFHE_INCLUDE}/core ${OpenFHE_INCLUDE}/pke
+     ${OpenFHE_INCLUDE}/binfhe ${OpenFHE_INCLUDE}/third-party/include)
+@@ -107,6 +107,8 @@ if(FHE_STAGE0_BUILD_KERNEL)
+   target_link_libraries(packed_plaintext_probe PRIVATE fideslib_plaintext_encoder)
+   add_executable(owned_arithmetic_probe src/owned_arithmetic_probe.cpp)
+   target_link_libraries(owned_arithmetic_probe PRIVATE fideslib_plaintext_encoder stage0_layout)
++  add_executable(weight_plaintext_probe src/weight_plaintext_probe.cpp)
++  target_link_libraries(weight_plaintext_probe PRIVATE fideslib_plaintext_encoder stage0_layout stage1_mamba2_plan)
+ 
+   add_executable(
+     stage1_mamba2_decode_fideslib
+@@ -170,6 +172,9 @@ endif()
+ 
+ if(FHE_STAGE0_BUILD_TESTS)
+   enable_testing()
++  add_executable(test_compact_rns tests/test_compact_rns.cpp)
++  target_link_libraries(test_compact_rns PRIVATE stage0_layout)
++  add_test(NAME compact_rns COMMAND test_compact_rns)
+   add_executable(test_owned_arithmetic tests/test_owned_arithmetic.cpp)
+   target_link_libraries(test_owned_arithmetic PRIVATE stage0_layout)
+   add_test(NAME owned_arithmetic COMMAND test_owned_arithmetic)
+diff --git a/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp b/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp
+index a3042e1..f447144 100644
+--- a/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp
++++ b/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp
+@@ -1,5 +1,6 @@
+ #include "fideslib_plaintext_encoder.hpp"
+ #include "fideslib_plaintext_ops.hpp"
++#include "compact_rns.hpp"
+ #include <CKKS/Context.cuh>
+ #include <CKKS/Plaintext.cuh>
+ #include <math/dftransform.h>
+@@ -13,6 +14,22 @@
+ 
+ namespace fhemamba {
+ namespace {
++// Restore a previously verified encoding without rerunning floating arithmetic.
++// Keep the public packed values and CPU metadata valid for ordinary FIDES APIs.
++class MaterializedPlaintext final : public lbcrypto::CKKSPackedEncoding {
++ public:
++  MaterializedPlaintext(std::shared_ptr<lbcrypto::DCRTPoly::Params> params,
++      lbcrypto::EncodingParams encoding, const std::vector<double>& values,
++      uint32_t level, uint32_t slots, double scale, lbcrypto::NativeInteger integer_scale,
++      lbcrypto::CKKSDataType data_type)
++      : CKKSPackedEncoding(std::move(params), std::move(encoding),
++          std::vector<std::complex<double>>(values.begin(), values.end()),
++          1, level, scale, slots, data_type) {
++    scalingFactorInt = integer_scale;
++    isEncoded = true;
++  }
++};
++
+ void synchronize() {
+   if (cudaDeviceSynchronize() != 0) throw std::runtime_error("plaintext GPU synchronization failed");
+ }
+@@ -104,10 +121,12 @@ bool load_native_borrowed(FIDESlib::CKKS::Plaintext& gpu, const lbcrypto::Plaint
+ }
+ 
+ CoefficientPlaintextEncoder::CoefficientPlaintextEncoder(Context context, uint32_t slots,
+-                                                       bool move_coefficients)
++                                                       bool move_coefficients,
++                                                       std::size_t cache_bytes)
+     : context_(std::move(context)),
+       cpu_(std::any_cast<lbcrypto::CryptoContext<lbcrypto::DCRTPoly>>(context_->cpu)),
+       slots_(slots), move_coefficients_(move_coefficients) {
++  cache_stats.capacity_bytes = cache_bytes;
+   const auto n = cpu_->GetRingDimension();
+   if (!std::has_single_bit(slots_) || slots_ > n / 2)
+     throw std::invalid_argument("plaintext slots must divide N/2");
+@@ -168,6 +187,73 @@ auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
+   return result;
+ }
+ 
++void CoefficientPlaintextEncoder::clear_cache() {
++  cache_.clear();
++  const auto capacity = cache_stats.capacity_bytes;
++  cache_stats = {};
++  cache_stats.capacity_bytes = capacity;
++}
++
++auto CoefficientPlaintextEncoder::encode_reusable(const std::vector<double>& values,
++    uint32_t level, uint64_t identity) -> fideslib::Plaintext {
++  if (values.size() > slots_ || level >= full_params_.size())
++    throw std::invalid_argument("reusable plaintext values or level out of range");
++#if NATIVEINT != 64
++  ++cache_stats.bypasses;
++  return encode(values, level);
++#else
++  if (!cache_stats.capacity_bytes) { ++cache_stats.bypasses; return encode(values, level); }
++  const auto key = std::make_pair(identity, level);
++  if (auto it = cache_.find(key); it != cache_.end()) {
++    const auto& entry = it->second;
++    auto plaintext = std::make_shared<MaterializedPlaintext>(full_params_[level], entry.encoding,
++        values, level, slots_, entry.scale, entry.integer_scale, entry.data_type);
++    auto& limbs = plaintext->GetElement<lbcrypto::DCRTPoly>().GetAllElements();
++    for (auto& limb : limbs) {
++      const auto q = limb.GetModulus().ConvertToInt();
++      lbcrypto::NativeVector words(entry.words.size(), limb.GetModulus());
++      for (std::size_t j = 0; j < entry.words.size(); ++j)
++        words[j] = expand_signed_coefficient(entry.words[j], q);
++      limb.SetValues(std::move(words), ::Format::COEFFICIENT);
++    }
++    auto context_copy = context_;
++    auto result = std::make_shared<fideslib::PlaintextImpl>(std::move(context_copy));
++    result->cpu = std::make_any<lbcrypto::Plaintext>(std::move(plaintext));
++    ++cache_stats.hits;
++    return result;
++  }
++  ++cache_stats.misses;
++  auto result = encode(values, level);
++  const auto& cpu = std::any_cast<const lbcrypto::Plaintext&>(result->cpu);
++  const auto& poly = cpu->GetElement<lbcrypto::DCRTPoly>();
++  const std::size_t bytes = poly.GetRingDimension() * sizeof(int64_t);
++  if (bytes > cache_stats.capacity_bytes - cache_stats.bytes) {
++    ++cache_stats.bypasses;
++    return result;
++  }
++  const auto& limbs = poly.GetAllElements();
++  if (poly.GetFormat() != ::Format::COEFFICIENT || cpu->GetNoiseScaleDeg() != 1 ||
++      cpu->GetSlots() != slots_) {
++    ++cache_stats.rejected;
++    return result;
++  }
++  auto words = compact_rns(limbs.size(), poly.GetRingDimension(),
++      [&](std::size_t i) { return limbs[i].GetModulus().ConvertToInt(); },
++      [&](std::size_t i, std::size_t j) { return limbs[i].GetValues()[j].ConvertToInt(); });
++  if (!words) { ++cache_stats.rejected; return result; }
++  const auto retained_bytes = words->capacity() * sizeof(int64_t);
++  if (retained_bytes > cache_stats.capacity_bytes - cache_stats.bytes) {
++    ++cache_stats.bypasses;
++    return result;
++  }
++  cache_.emplace(key, CachedCoefficients{std::move(*words), cpu->GetScalingFactor(),
++      cpu->GetScalingFactorInt(), cpu->GetEncodingParams(), cpu->GetCKKSDataType()});
++  cache_stats.bytes += retained_bytes;
++  cache_stats.entries = cache_.size();
++  return result;
++#endif
++}
++
+ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
+                     fideslib::Plaintext& plaintext, int ntt_batch, PlaintextUploadMode mode)
+     -> PlaintextUploadMode {
+@@ -250,8 +336,11 @@ PlaintextPreparation::PlaintextPreparation(Context context, uint32_t slots,
+       move_coefficients_(options.move_coefficients),
+       upload_mode_(options.borrow_upload ? PlaintextUploadMode::Borrowed :
+                    options.direct_upload ? PlaintextUploadMode::Direct : PlaintextUploadMode::Staged) {
++  if (options.weight_cache_bytes && !(options.gpu_ntt || options.move_coefficients))
++    throw std::invalid_argument("weight coefficient cache requires GPU plaintext NTT");
+   if (options.gpu_ntt || options.move_coefficients)
+-    coefficient_ = std::make_unique<CoefficientPlaintextEncoder>(context_, slots_, options.move_coefficients);
++    coefficient_ = std::make_unique<CoefficientPlaintextEncoder>(
++        context_, slots_, options.move_coefficients, options.weight_cache_bytes);
+ }
+ 
+ void PlaintextPreparation::enable_periodic_encoding(uint32_t slots) {
+@@ -275,6 +364,24 @@ auto PlaintextPreparation::encode(const std::vector<double>& values, uint32_t le
+       values, degree, level, nullptr, packing_slots ? packing_slots : slots_);
+ }
+ 
++auto PlaintextPreparation::encode_reusable(const std::vector<double>& values,
++    uint32_t level, uint64_t identity) -> fideslib::Plaintext {
++  if (!coefficient_) return encode(values, level);
++  const auto hits = coefficient_->cache_stats.hits;
++  auto result = coefficient_->encode_reusable(values, level, identity);
++  ++gpu_ntt_encodes;
++  if (move_coefficients_ && coefficient_->cache_stats.hits == hits) ++moved_coefficient_encodes;
++  return result;
++}
++
++auto PlaintextPreparation::cache_stats() const -> CoefficientCacheStats {
++  return coefficient_ ? coefficient_->cache_stats : CoefficientCacheStats{};
++}
++
++void PlaintextPreparation::clear_cache() {
++  if (coefficient_) coefficient_->clear_cache();
++}
++
+ auto PlaintextPreparation::align_addend(const Ciphertext& ciphertext,
+     fideslib::Plaintext plaintext, const std::vector<double>& values,
+     long long& reencodes) -> fideslib::Plaintext {
+diff --git a/native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp b/native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp
+index 6b4667d..6127919 100644
+--- a/native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp
++++ b/native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp
+@@ -4,11 +4,17 @@
+ #include <openfhe.h>
+ #include <any>
+ #include <memory>
++#include <map>
+ #include <vector>
+ #include "fideslib_periodic_encoder.hpp"
+ 
+ namespace fhemamba {
+ 
++struct CoefficientCacheStats {
++  std::size_t hits = 0, misses = 0, bypasses = 0, rejected = 0;
++  std::size_t entries = 0, bytes = 0, capacity_bytes = 0;
++};
++
+ // Preserve OpenFHE FFT, rounding and scale handling while deferring its final
+ // RNS NTT to the GPU. Instances have fixed context/slots and private params.
+ class CoefficientPlaintextEncoder {
+@@ -16,9 +22,17 @@ class CoefficientPlaintextEncoder {
+   using Context = fideslib::CryptoContext<fideslib::DCRTPoly>;
+   using Params = lbcrypto::DCRTPoly::Params;
+   CoefficientPlaintextEncoder(Context context, uint32_t slots,
+-                              bool move_coefficients = false);
++                              bool move_coefficients = false,
++                              std::size_t cache_bytes = 0);
+   auto encode(const std::vector<double>& values, uint32_t level,
+               std::size_t degree = 1) const -> fideslib::Plaintext;
++  // One cache belongs to one immutable context and identity namespace. The
++  // caller guarantees that each identity always denotes identical value bits.
++  // Only degree-one multipliers are admitted; level also keys the scale.
++  auto encode_reusable(const std::vector<double>& values, uint32_t level,
++                       uint64_t identity) -> fideslib::Plaintext;
++  void clear_cache();
++  CoefficientCacheStats cache_stats;
+ 
+  private:
+   Context context_;
+@@ -26,6 +40,14 @@ class CoefficientPlaintextEncoder {
+   uint32_t slots_;
+   bool move_coefficients_;
+   std::vector<std::shared_ptr<Params>> full_params_, coefficient_params_;
++  struct CachedCoefficients {
++    std::vector<int64_t> words;
++    double scale;
++    lbcrypto::NativeInteger integer_scale;
++    lbcrypto::EncodingParams encoding;
++    lbcrypto::CKKSDataType data_type;
++  };
++  std::map<std::pair<uint64_t, uint32_t>, CachedCoefficients> cache_;
+ };
+ 
+ // Internal FIDESlib bridge for the pinned backend. Avoid pass-by-value limb
+@@ -52,6 +74,8 @@ struct PlaintextPreparationOptions {
+   bool direct_upload = false;
+   bool move_coefficients = false;
+   bool borrow_upload = false;
++  // Numeric coefficient payload only; metadata and transient plaintexts are additional.
++  std::size_t weight_cache_bytes = 0;
+ };
+ 
+ class PlaintextPreparation {
+@@ -62,6 +86,10 @@ class PlaintextPreparation {
+   void enable_periodic_encoding(uint32_t slots);
+   auto encode(const std::vector<double>& values, uint32_t level,
+               std::size_t degree = 1, uint32_t packing_slots = 0) -> fideslib::Plaintext;
++  auto encode_reusable(const std::vector<double>& values, uint32_t level,
++                       uint64_t identity) -> fideslib::Plaintext;
++  auto cache_stats() const -> CoefficientCacheStats;
++  void clear_cache();
+   auto encode_addend(const Ciphertext& ciphertext, const std::vector<double>& values,
+                      long long& reencodes) -> fideslib::Plaintext;
+   auto align_addend(const Ciphertext& ciphertext, fideslib::Plaintext plaintext,
+diff --git a/native/fideslib_stage0/src/packed_fideslib.cpp b/native/fideslib_stage0/src/packed_fideslib.cpp
+index a7cda98..bbd5917 100644
+--- a/native/fideslib_stage0/src/packed_fideslib.cpp
++++ b/native/fideslib_stage0/src/packed_fideslib.cpp
+@@ -17,6 +17,8 @@
+ #include <iomanip>
+ #include <iostream>
+ #include <map>
++#include <limits>
++#include <optional>
+ #include <set>
+ #include <cstdint>
+ #include <sys/resource.h>
+@@ -62,6 +64,7 @@ struct PackedEvaluator {
+   long long host_encodes = 0;
+   bool cache_plaintexts = false;
+   fhemamba::MaskPlaintextCache<Plaintext> plaintext_cache{64};
++  std::set<uint32_t> reusable_weights;
+   std::unique_ptr<fhemamba::PlaintextPreparation> plaintexts;
+   struct OperationStats { double seconds = 0, bootstrap_seconds = 0; long long nodes = 0, bootstraps = 0; };
+   std::map<std::string, OperationStats> operation_stats;
+@@ -109,13 +112,16 @@ struct PackedEvaluator {
+         [&](Ct& x, Ct& y) { align_owned(x, y); }, sync_gpu, owned_arithmetic);
+   }
+   auto scalar_add(const Ct& a, double b) -> Ct { ++adds; return cc->EvalAdd(a, b); }
+-  auto plain(const Ct& a, std::vector<double> values, bool multiply) -> Ct {
++  auto plain(const Ct& a, std::vector<double> values, bool multiply,
++             std::optional<uint64_t> reusable_identity = std::nullopt) -> Ct {
+     values.resize(slots);
+     auto encode = [&] {
+       const auto start = profile_evaluation ? Clock::now() : Clock::time_point{};
+-      auto p = multiply ? plaintexts->encode(values, a->GetLevel())
++      const auto cache_hits = plaintexts->cache_stats().hits;
++      auto p = multiply ? reusable_identity ? plaintexts->encode_reusable(values, a->GetLevel(), *reusable_identity)
++                                             : plaintexts->encode(values, a->GetLevel())
+                         : plaintexts->encode_addend(a, values, reencodes);
+-      ++host_encodes;
++      if (plaintexts->cache_stats().hits == cache_hits) ++host_encodes;
+       if (profile_evaluation) host_encoding_seconds += elapsed(start);
+       return p;
+     };
+@@ -339,7 +345,9 @@ struct PackedEvaluator {
+     }
+     return transform(x, masks);
+   }
+-  auto linear(const Ct& x, const fhemamba::PackedNode& node, int columns, bool mask_output = true) -> Ct {
++  auto linear(const Ct& x, const fhemamba::PackedNode& node, int columns,
++              uint32_t weight_id, bool mask_output = true) -> Ct {
++    const bool cache_weight = reusable_weights.contains(weight_id);
+     if (replicated_linear && node.size + columns <= slots) {
+       using namespace fhemamba::stage1;
+       auto shape = resolve_interleaved_replicated_shape(node.size, columns, slots, 0);
+@@ -363,7 +371,11 @@ struct PackedEvaluator {
+           auto mask = replicated_bsgs_pre_mask(node.weights(), node.size, columns,
+                                                first + j, shape, slots, 0.0);
+           if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
+-          auto term = plain(babies[j], std::move(mask), true);
++          // The immutable weight node and diagonal uniquely fix these values
++          // for this program. The preparation cache adds the actual CKKS level.
++          const std::optional<uint64_t> identity = cache_weight ? std::make_optional(
++              (static_cast<uint64_t>(weight_id) << 32) | static_cast<uint32_t>(first + j)) : std::nullopt;
++          auto term = plain(babies[j], std::move(mask), true, identity);
+           inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
+         }
+         auto term = rotate(inner, first * shape.replicas);
+@@ -448,6 +460,8 @@ struct PackedEvaluator {
+     return plain(evaluate(coefficients), mask, true);
+   }
+   auto evaluate(const fhemamba::PackedProgram& program) -> std::vector<Ct> {
++    // Weight identities are program-local. Never reuse them across programs.
++    plaintexts->clear_cache();
+     fhemamba::PackedDepthPlan depth_plan;
+     if (planned_refresh) {
+       if (legacy_routing || !replicated_linear)
+@@ -456,6 +470,18 @@ struct PackedEvaluator {
+       planned_logical_refreshes = depth_plan.refreshes;
+       std::cout << "planned_logical_refreshes=" << depth_plan.refreshes << std::endl;
+     }
++    reusable_weights.clear();
++    if (plaintexts->cache_stats().capacity_bytes) {
++      std::map<uint32_t, int> weight_uses;
++      for (std::size_t i = 0; i < program.nodes.size(); ++i) {
++        const auto& n = program.nodes[i];
++        if (!depth_plan.live.empty() && !depth_plan.live[i]) continue;
++        if (n.operation == "linear" || n.operation == "linear_ref") {
++          const auto id = n.operation == "linear" ? static_cast<uint32_t>(i) : static_cast<uint32_t>(n.data[0]);
++          if (++weight_uses[id] == 2) reusable_weights.insert(id);
++        }
++      }
++    }
+     std::vector<Ct> values(program.nodes.size());
+     std::vector<bool> dirty(program.nodes.size());
+     auto clean = [&](int index) {
+@@ -544,9 +570,10 @@ struct PackedEvaluator {
+       else if (op == "addp" || op == "mulp") out = plain(x, n.data, op == "mulp");
+       else if (op == "gather" || op == "scatter") out = gather(x, n.data, n.size, op == "scatter");
+       else if (op == "linear" || op == "linear_ref") {
+-        const auto& weight = op == "linear" ? n : program.nodes[static_cast<int>(n.data[0])];
++        const auto weight_id = op == "linear" ? i : static_cast<int>(n.data[0]);
++        const auto& weight = program.nodes[weight_id];
+         dirty[i] = planned_refresh && depth_plan.defer_linear_mask[i];
+-        out = linear(x, weight, program.nodes[n.parents[0]].size, !dirty[i]);
++        out = linear(x, weight, program.nodes[n.parents[0]].size, weight_id, !dirty[i]);
+       }
+       else if (op == "cheb") out = chebyshev(x, n);
+       else if (op == "repeat") {
+@@ -639,7 +666,7 @@ struct GenerationClient {
+ 
+ auto main(int argc, char** argv) -> int {
+   try {
+-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--client-head FILE]");
++    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--weight-cache-mib MIB] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--client-head FILE]");
+     bool replicated_linear = true;
+     bool legacy_routing = false;
+     bool trace_levels = false;
+@@ -650,6 +677,7 @@ auto main(int argc, char** argv) -> int {
+     bool naf_rotations = false, reuse_dead_inputs = false;
+     bool compact_weights = false;
+     bool cache_plaintexts = false;
++    std::size_t weight_cache_bytes = 0;
+     bool fast_plaintext_upload = false, gpu_plaintext_ntt = false;
+     bool direct_plaintext_upload = false;
+     bool move_plaintext_coefficients = false;
+@@ -670,6 +698,15 @@ auto main(int argc, char** argv) -> int {
+       else if (option == "--reuse-dead-inputs") reuse_dead_inputs = true;
+       else if (option == "--compact-weights") compact_weights = true;
+       else if (option == "--cache-plaintexts") cache_plaintexts = true;
++      else if (option == "--weight-cache-mib" && i + 1 < argc) {
++        const std::string value = argv[++i];
++        std::size_t end = 0;
++        const auto mib = std::stoull(value, &end);
++        if (value.empty() || value[0] == '-' || end != value.size() ||
++            mib > std::numeric_limits<std::size_t>::max() / (1024 * 1024))
++          throw std::invalid_argument("weight cache MiB must be a nonnegative integer");
++        weight_cache_bytes = mib * 1024 * 1024;
++      }
+       else if (option == "--fast-plaintext-upload") fast_plaintext_upload = true;
+       else if (option == "--direct-plaintext-upload") direct_plaintext_upload = true;
+       else if (option == "--gpu-plaintext-ntt") gpu_plaintext_ntt = true;
+@@ -686,6 +723,8 @@ auto main(int argc, char** argv) -> int {
+     }
+     const double poly_tol = std::stod(argv[3]), exact_tol = std::stod(argv[4]);
+     gpu_plaintext_ntt |= move_plaintext_coefficients;
++    if (weight_cache_bytes && !gpu_plaintext_ntt)
++      throw std::invalid_argument("weight cache requires --gpu-plaintext-ntt");
+     direct_plaintext_upload |= borrow_plaintext_upload;
+     if (gpu_plaintext_ntt || direct_plaintext_upload) fast_plaintext_upload = true;
+     if (reuse_dead_inputs) inplace_ops = true;
+@@ -744,7 +783,8 @@ auto main(int argc, char** argv) -> int {
+         cc, program.slots, fhemamba::PlaintextPreparationOptions{
+             .fast_upload = fast_plaintext_upload, .gpu_ntt = gpu_plaintext_ntt,
+             .profile = profile_evaluation, .direct_upload = direct_plaintext_upload,
+-            .move_coefficients = move_plaintext_coefficients, .borrow_upload = borrow_plaintext_upload});
++            .move_coefficients = move_plaintext_coefficients, .borrow_upload = borrow_plaintext_upload,
++            .weight_cache_bytes = weight_cache_bytes});
+     evaluator.bootstrap_passes = bootstrap_passes;
+     const double setup_seconds = elapsed(setup);
+     std::cout << "setup_seconds=" << setup_seconds << std::endl;
+@@ -833,6 +873,13 @@ auto main(int argc, char** argv) -> int {
+            << ",\"plaintext_cache_misses\":" << evaluator.plaintext_cache.misses
+            << ",\"plaintext_cache_bypasses\":" << evaluator.plaintext_cache.bypasses
+            << ",\"plaintext_cache_evictions\":" << evaluator.plaintext_cache.evictions
++           << ",\"weight_cache_capacity_bytes\":" << evaluator.plaintexts->cache_stats().capacity_bytes
++           << ",\"weight_cache_bytes\":" << evaluator.plaintexts->cache_stats().bytes
++           << ",\"weight_cache_entries\":" << evaluator.plaintexts->cache_stats().entries
++           << ",\"weight_cache_hits\":" << evaluator.plaintexts->cache_stats().hits
++           << ",\"weight_cache_misses\":" << evaluator.plaintexts->cache_stats().misses
++           << ",\"weight_cache_bypasses\":" << evaluator.plaintexts->cache_stats().bypasses
++           << ",\"weight_cache_rejected\":" << evaluator.plaintexts->cache_stats().rejected
+            << ",\"scratch_clones_eliminated\":" << evaluator.scratch_clones_eliminated
+            << ",\"owned_arithmetic_calls\":" << evaluator.owned_arithmetic.calls
+            << ",\"owned_arithmetic_reused_inputs\":" << evaluator.owned_arithmetic.reused_inputs
+diff --git a/tests/test_packed_probe_runner.py b/tests/test_packed_probe_runner.py
+index edbc0c9..3c1fb14 100644
+--- a/tests/test_packed_probe_runner.py
++++ b/tests/test_packed_probe_runner.py
+@@ -164,6 +164,9 @@ def test_budget_requires_both_path_and_limit(kwargs):
+         {"batch_refresh": True},
+         {"planned_refresh": True, "batch_refresh": True, "bootstrap_passes": 1},
+         {"planned_refresh": True, "legacy_routing": True},
++        {"weight_cache_mib": -1},
++        {"weight_cache_mib": 1.5},
++        {"weight_cache_mib": 16},
+     ],
+ )
+ def test_invalid_refresh_options_do_not_start_a_run(tmp_path, options):
+@@ -192,6 +195,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
+         "assert '--naf-rotations' in sys.argv\n"
+         "assert '--reuse-dead-inputs' in sys.argv\n"
+         "assert '--compact-weights' in sys.argv\n"
++        "assert sys.argv[sys.argv.index('--weight-cache-mib') + 1] == '2048'\n"
+     )
+     binary, payload = fixture_files(tmp_path, body)
+     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
+@@ -205,6 +209,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
+         profile_evaluation=True,
+         inplace_ops=True,
+         cache_plaintexts=True,
++        weight_cache_mib=2048,
+         fast_plaintext_upload=True,
+         gpu_plaintext_ntt=True,
+         direct_plaintext_upload=True,
+@@ -224,6 +229,8 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
+         "--profile-evaluation",
+         "--inplace-ops",
+         "--cache-plaintexts",
++        "--weight-cache-mib",
++        "2048",
+         "--fast-plaintext-upload",
+         "--gpu-plaintext-ntt",
+         "--direct-plaintext-upload",

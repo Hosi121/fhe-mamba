@@ -1,0 +1,45 @@
+{
+  "verified_before_removal": true,
+  "revisions": [
+    {
+      "revision": 1,
+      "source_archive_sha256": "6a1eb403c95b298f80afc50fbab3519c54c906fa3a7d600a6741770af9b052ba",
+      "source_files_verified": 118,
+      "removed": [
+        "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-1/source",
+        "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-1/build"
+      ]
+    },
+    {
+      "revision": 2,
+      "source_archive_sha256": "11176937305eae4d2ba35d0285a36874363ce862132d4378979efdfd54f604a3",
+      "source_files_verified": 118,
+      "binaries_sha256": {
+        "packed_fideslib": "3e679f1d90eaeac2dca5c6bf8cfbd6d284d04acef1cb06af032eb151fb32a5da",
+        "weight_plaintext_probe": "7ba5bb78a6b688fd7102c9464da48a998e90d73fba6fca7a4008f4b4d7ef5acf"
+      },
+      "binary_archive_sha256": "672375ad57c2fe0b31b7c1012aaa10f361808cd3be9f8f11d2c56b8f8dd903e4",
+      "binary_archive": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/binaries.tar.gz",
+      "removed": [
+        "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/source",
+        "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-2/build"
+      ]
+    },
+    {
+      "revision": 3,
+      "source_archive_sha256": "a6480986ee4af7d2e3a758931bb922a07472191ae692f274c1f22159a29d5754",
+      "source_files_verified": 118,
+      "binaries_sha256": {
+        "packed_fideslib": "35528f6227f90b2beb1c448447e5a8694dd79b94982336f7cd896481c085fee6",
+        "weight_plaintext_probe": "7ba5bb78a6b688fd7102c9464da48a998e90d73fba6fca7a4008f4b4d7ef5acf"
+      },
+      "binary_archive_sha256": "a7560674c31447746702f9f2772bc628dc08e482895c2af767e5ff9f15b0ae32",
+      "binary_archive": "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-3/binaries.tar.gz",
+      "removed": [
+        "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-3/source",
+        "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-3/build"
+      ]
+    }
+  ],
+  "shared_dependencies_and_payloads": "unchanged"
+}

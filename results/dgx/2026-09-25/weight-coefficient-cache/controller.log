@@ -1,0 +1,26 @@
+verified source, dependencies, executables and four payloads
+START probe-mamba3-revision-3
+END probe-mamba3-revision-3 passed= True wall= 10.03901835437864
+START probe-mamba2-revision-3
+END probe-mamba2-revision-3 passed= True wall= 8.73847439698875
+{"passed": true, "revision": "revision-3", "finished_utc": "2026-09-24T17:43:38.017830+00:00"}
+verified source, dependencies, executables and four payloads
+START lm-layer1-prefix-1-base
+END lm-layer1-prefix-1-base passed= True wall= 42.795624307356775
+START lm-layer1-prefix-2-candidate
+END lm-layer1-prefix-2-candidate passed= True wall= 43.401816971600056
+START lm-layer1-prefix-3-candidate
+END lm-layer1-prefix-3-candidate passed= True wall= 43.242382157593966
+START lm-layer1-prefix-4-base
+END lm-layer1-prefix-4-base passed= True wall= 43.43346992507577
+START lm-layer1-1-base
+END lm-layer1-1-base passed= True wall= 76.82114557735622
+START lm-layer1-2-candidate
+END lm-layer1-2-candidate passed= True wall= 77.91592364292592
+START lm-layer1-3-candidate
+END lm-layer1-3-candidate passed= True wall= 77.90569628030062
+START lm-layer1-4-base
+END lm-layer1-4-base passed= True wall= 76.86011934000999
+START synthetic-candidate
+END synthetic-candidate passed= True wall= 41.329576006159186
+{'passed': True, 'short': {'lm-layer1-prefix': {'samples_abba': [14.000514704, 14.021150466, 14.046602015, 14.0567873], 'base_mean_seconds': 14.028651002, 'candidate_mean_seconds': 14.0338762405, 'reduction_percent': -0.03724690634370198}, 'lm-layer1': {'samples_abba': [47.065730369, 47.726157777, 47.697110354, 47.169214618], 'base_mean_seconds': 47.1174724935, 'candidate_mean_seconds': 47.7116340655, 'reduction_percent': -1.261021741100321}}, 'full': {'skipped': True, 'reason': 'Repeated-weight prefix reduction did not exceed 0.5%.'}, 'finished_utc': '2026-09-24T17:52:23.070207+00:00'}

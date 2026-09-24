@@ -1,0 +1,20 @@
+{
+  "adopt": false,
+  "reason": "Cold three-step trained workload regressed 1.261%; 825 level-specific entries for 297 hits. Failed the predeclared >0.5% prefix improvement gate.",
+  "full_pair_run": false,
+  "prototype_source_preserved": "revision-3/compiled-sources.tar.gz",
+  "restored_tracked_files": [
+    "experiments/run_packed_probe.py",
+    "native/fideslib_stage0/CMakeLists.txt",
+    "native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+    "native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp",
+    "native/fideslib_stage0/src/packed_fideslib.cpp",
+    "tests/test_packed_probe_runner.py"
+  ],
+  "removed_untracked_prototype_files": [
+    "native/fideslib_stage0/include/compact_rns.hpp",
+    "native/fideslib_stage0/src/weight_plaintext_probe.cpp",
+    "native/fideslib_stage0/tests/test_compact_rns.cpp"
+  ],
+  "baseline_source_files_verified": 115
+}

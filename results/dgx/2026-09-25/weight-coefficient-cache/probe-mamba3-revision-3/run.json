@@ -1,0 +1,43 @@
+{
+  "name": "probe-mamba3-revision-3",
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/weight-preparation-20260925/revision-3/build/weight_plaintext_probe",
+    "/home/kataiwa/fhemamba/weight-preparation-20260925/probe-mamba3-revision-3/native.json",
+    "--program",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1-prefix/program.txt"
+  ],
+  "started_utc": "2026-09-24T17:43:19.220496+00:00",
+  "timeout_seconds": 600,
+  "binary_sha256": "7ba5bb78a6b688fd7102c9464da48a998e90d73fba6fca7a4008f4b4d7ef5acf",
+  "candidate_source_manifest_sha256": "bb5b97b2f012be2bfefa6772f7ad148e1ea6863f7ab83eff8037b8b639526352",
+  "revision": "revision-3",
+  "runlib_sha256": "e94133608124b1bf2d83f0ea5342419ea6fb481984749c14be9ae300bee90a08",
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "controller_sha256": "d95eab7009ba23c801d421dbfa5b14b1a51d27120483c91301e1b4b68210a8b0",
+  "architecture": "mamba3",
+  "pid": 3031252,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 10.03901835437864,
+  "ended_utc": "2026-09-24T17:43:29.268542+00:00",
+  "passed": true,
+  "native_sha256": "7c7331c1bb4726544537c0059453b1af745e873f977210a4038f69bd401d6ed7",
+  "checks": {
+    "native": true,
+    "exact": true,
+    "immutable": true,
+    "level_key": true,
+    "budget": true,
+    "cases": true,
+    "gpu_cases": true,
+    "fallback": true,
+    "hits": true
+  },
+  "eval_seconds": null
+}

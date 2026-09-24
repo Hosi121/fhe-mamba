@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-09-24T17:25:47.143432+00:00",
+  "base_commit": "eb6624775dddd0dc25c80f1022d7c5f09051edd0",
+  "mechanism": "Fixed-admission compact signed coefficient cache for immutable degree-one public-weight diagonals; roundtrip all RNS limbs before admission; CPU reconstruction then existing upload/GPU NTT. No dependency patch.",
+  "scope": "Shared preparation implementation; first integration and matched inference test in Mamba-3. Mamba-2 regression through shared encoder probe.",
+  "cache_budget_mib": 2048,
+  "correctness": "Exact CPU RNS and metadata, exact GPU readback, cache immutability, unsupported and byte-budget fallback, unchanged model gates/operations/IDs.",
+  "performance": "Exact probe then cold repeat-weight small workload ABBA, and no-reuse regression control. If prefix mean reduction > 0.5%, run one fresh frozen full baseline/candidate pair. All samples and failures retained.",
+  "review_seconds": 10800,
+  "boundary": "One cache mechanism through adoption decision; 3h native-process review interval within existing user authorization. No indefinite exploration."
+}

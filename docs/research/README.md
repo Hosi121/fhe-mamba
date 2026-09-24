@@ -8,6 +8,7 @@ Use the [evidence registry](../evidence.md) for current claim status and the
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-25 — Compact coefficient cache, rejected](2026-09-25-weight-coefficient-cache.md) | Exact CPU/GPU reconstruction passes, but level-dependent reuse gives 1.26% slower cold three-step inference; prototype archived, active code restored |
 | [2026-09-24 — Shared ciphertext ownership](2026-09-24-owned-arithmetic.md) | Mamba-3 16.27 → 15.82 min (2.79%, adopt); Mamba-2 32.66 → 32.38 min (0.83%, adopt); exact-RNS gates and unchanged model contracts |
 | [2026-09-25 — Preparation and lifetime design](2026-09-25-preparation-design.md) | Static cache admission curve: 2 GiB LRU gives zero identity hits versus 16,384 for a fixed subset; CPU/GPU ownership and refresh scheduling constraints |
 | [2026-09-25 — Encode range scan](2026-09-25-encoding-range.md) | Local CPU prototype: 167,772,160 exact coefficient comparisons, 2.31–3.92% full-encode reduction; not applied to DGX or model inference |

@@ -1,0 +1,9 @@
+{
+  "openfhe_commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+  "files_sha256": {
+    "ckkspackedencoding.cpp": "ce967bf68d80a63101984e8927298923c6c3c6754dc522e63355e7ec40655401",
+    "ckkspackedencoding.h": "983981653104dc21680653f3b4e1108b51d0e8a39e40a0d8337f7d6502d0fe6a",
+    "plaintext.h": "63cd8f18f335dbdc3487e7e04ccbfedb29cc2fd5ef0b256a841b1147e65f3c83"
+  },
+  "source": "Pinned DGX OpenFHE source files; no dependency modified"
+}

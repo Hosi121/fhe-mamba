@@ -1,0 +1,4 @@
+{
+  "stage": "build",
+  "reason": "New shared compact_rns header include directory was missing on fideslib_plaintext_encoder. Corrected CMake private stage0_layout dependency; no GPU run used this build."
+}

@@ -1,0 +1,58 @@
+{
+  "review_seconds": 10800,
+  "used_seconds": 561.5101472176611,
+  "runs": [
+    {
+      "name": "probe-mamba3",
+      "charged_seconds": 9.323281711898744
+    },
+    {
+      "name": "probe-mamba2",
+      "charged_seconds": 9.703618546016514
+    },
+    {
+      "name": "probe-mamba3-revision-3",
+      "charged_seconds": 10.03901835437864
+    },
+    {
+      "name": "probe-mamba2-revision-3",
+      "charged_seconds": 8.73847439698875
+    },
+    {
+      "name": "lm-layer1-prefix-1-base",
+      "charged_seconds": 42.795624307356775
+    },
+    {
+      "name": "lm-layer1-prefix-2-candidate",
+      "charged_seconds": 43.401816971600056
+    },
+    {
+      "name": "lm-layer1-prefix-3-candidate",
+      "charged_seconds": 43.242382157593966
+    },
+    {
+      "name": "lm-layer1-prefix-4-base",
+      "charged_seconds": 43.43346992507577
+    },
+    {
+      "name": "lm-layer1-1-base",
+      "charged_seconds": 76.82114557735622
+    },
+    {
+      "name": "lm-layer1-2-candidate",
+      "charged_seconds": 77.91592364292592
+    },
+    {
+      "name": "lm-layer1-3-candidate",
+      "charged_seconds": 77.90569628030062
+    },
+    {
+      "name": "lm-layer1-4-base",
+      "charged_seconds": 76.86011934000999
+    },
+    {
+      "name": "synthetic-candidate",
+      "charged_seconds": 41.329576006159186
+    }
+  ]
+}

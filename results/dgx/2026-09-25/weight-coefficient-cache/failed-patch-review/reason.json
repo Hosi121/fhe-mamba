@@ -1,0 +1,4 @@
+{
+  "stage": "derived patch review before publication",
+  "reason": "New-file unified diffs lacked the Git new-file mode marker. git apply treated /dev/null as a relative path. Added new file mode 100644; original source archives and raw measurements unchanged."
+}

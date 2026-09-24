@@ -1,0 +1,6 @@
+{
+  "changed_since_exact_probe": [
+    "native/fideslib_stage0/src/packed_fideslib.cpp"
+  ],
+  "reason": "Admit only weights with at least two live uses; preserve unused-cache single-step path. The final build repeats both exact GPU probes before timing."
+}
