@@ -1,0 +1,22 @@
+{
+  "limit_seconds": 7200.0,
+  "used_seconds": 3165.0309353340417,
+  "runs": [
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-layer1-radix8",
+      "charged_seconds": 131.41785372886807
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-layer1-legacy",
+      "charged_seconds": 161.5401721149683
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-full-radix8",
+      "charged_seconds": 2815.6645363559946
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-synthetic-radix8",
+      "charged_seconds": 56.408373134210706
+    }
+  ]
+}

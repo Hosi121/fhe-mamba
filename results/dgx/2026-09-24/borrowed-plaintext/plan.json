@@ -1,0 +1,28 @@
+{
+  "question": "Can both evaluators upload pinned NativeInteger arrays directly, preserving all RNS residues and model contracts?",
+  "review_seconds": 7200,
+  "wait_scope": "Wait for preceding model campaign to finish; never build or benchmark over its GPU measurements.",
+  "sequence": [
+    "both exact-RNS borrowed probes",
+    "M3 base/borrow/routing/all mirrored controls",
+    "M2 base/borrow ABBA, coefficient moves disabled",
+    "cached M3 combined regression",
+    "same-binary full M3 base/candidate if short mean improves",
+    "full M2 candidate if short mean improves"
+  ],
+  "invariants": [
+    "M3 exact and polynomial <=0.001",
+    "M2 polynomial <=0.05",
+    "unchanged input, parameters, counts and selected IDs",
+    "zero intermediate diagnostic decryptions",
+    "immutable CPU plaintext and synchronized borrowed lifetime",
+    "unsupported ABI/modulus/limb layout retains staged transfer",
+    "Routing preserves mask count and depth; executed model rotations must match shared static inventory."
+  ],
+  "scope": "Borrowing removes the explicit host staging vector; GPU transfer and any driver staging still occur.",
+  "triage": {
+    "linear_baby_tuning": "480 fewer static rotations; deferred in favor of routing stages.",
+    "routing_stages": "59900 to 50780 static model rotations, excluding refresh; no new keys or mask levels.",
+    "negate_api": "Pinned GPU EvalNegate changes scale/depth through multScalar; retain exact subtraction implementation."
+  }
+}

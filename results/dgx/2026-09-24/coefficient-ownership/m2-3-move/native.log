@@ -1,0 +1,65 @@
+[stage1_mamba2_decode_fideslib] bsgs layout mode=auto in_proj r=7 window=3840 diagonals=110 baby=10 out_proj r=20 window=1536 diagonals=77 baby=8 rss_gib=0.222435 peak_rss_gib=0.222435
+[stage1_mamba2_decode_fideslib] rotation key plan mode=balanced required=101 keys=103 base=32 est_gib=18.105469 planned_composite_apps_per_token=0.000000 rss_gib=0.222435 peak_rss_gib=0.222435
+[stage1_mamba2_decode_fideslib] no-bootstrap ledger per token output: 76 74; segment map: residual->18 proj->12 fifo->12 conv->7 dt->6 decay->3 state_pre->5 state_tail->4 y->18 newton->14 (max segment 18 + bootstrap output 18 vs depth 44) rss_gib=0.222496 peak_rss_gib=0.222496
+[stage1_mamba2_decode_fideslib] payload loaded d_model=768 proj_dim=3352 groups=6 layers=2/24 rotation_keys=101 rss_gib=0.222496 peak_rss_gib=0.222496
+[stage1_mamba2_decode_fideslib] context setup begin rss_gib=0.222496 peak_rss_gib=0.222496
+[stage1_mamba2_decode_fideslib] context setup done rss_gib=0.77462 peak_rss_gib=0.77462
+[stage1_mamba2_decode_fideslib] rotation keygen begin mode=balanced count=103 rss_gib=0.77462 peak_rss_gib=0.77462
+[stage1_mamba2_decode_fideslib] rotation keygen done rss_gib=21.9062 peak_rss_gib=21.9062
+[stage1_mamba2_decode_fideslib] bootstrap setup/keygen begin rss_gib=21.9062 peak_rss_gib=21.9062
+[stage1_mamba2_decode_fideslib] bootstrap setup/keygen done rss_gib=29.3463 peak_rss_gib=31.9104
+[stage1_mamba2_decode_fideslib] load context begin rss_gib=29.3463 peak_rss_gib=31.9104
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 150 ~ 3900MB
+Rotation keys loaded: 115 ~ 20700MB
+[stage1_mamba2_decode_fideslib] load context done rss_gib=30.7205 peak_rss_gib=31.9104
+[stage1_mamba2_decode_fideslib] encode self test passed threads=8 diagonals=32 rss_gib=29.4108 peak_rss_gib=31.9104
+[stage1_mamba2_decode_fideslib] pt cache encode begin mode=full registered=427 registered_gib=6.569824 selected=298 selected_gib=4.995117 threads=8 rss_gib=29.1334 peak_rss_gib=31.9104
+[stage1_mamba2_decode_fideslib] pt cache encode done cached=298/427 bytes_gib=4.995117 rss_gib=33.8335 peak_rss_gib=33.8335
+[stage1_mamba2_decode_fideslib] pt reuse check passed (EvalMult left the shared plaintext intact) rss_gib=33.8336 peak_rss_gib=33.8336
+[stage1_mamba2_decode_fideslib] token loop begin tokens=2 layers=2 rss_gib=33.8336 peak_rss_gib=33.8336
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.conv_silu level_before=37 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.dt level_before=38 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.y_scaled level_before=37 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] t0.L00 done output_level=29 bootstraps=5 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.residual level_before=29 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.proj level_before=29 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.dt level_before=35 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.y_scaled level_before=38 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=33.8337 peak_rss_gib=33.8337
+[stage1_mamba2_decode_fideslib] t0.L01 done output_level=33 bootstraps=8 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.output level_before=33 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] token 0 done output_level=21 bootstraps=14 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.conv_silu level_before=37 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.dt level_before=38 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.decay level_before=38 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.y_scaled level_before=37 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] t1.L00 done output_level=29 bootstraps=6 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.residual level_before=29 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.proj level_before=29 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.dt level_before=35 level_after=21 rss_gib=34.109 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L01.state_post0+t1.L01.state_post1 levels_before=37/37 level_after=20 rss_gib=34.1088 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L01.state_post2+t1.L01.state_post3 levels_before=37/37 level_after=20 rss_gib=34.1088 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L01.state_post4+t1.L01.state_post5 levels_before=37/37 level_after=20 rss_gib=34.1088 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.y_scaled level_before=37 level_after=21 rss_gib=34.1088 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=34.1088 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=34.1088 peak_rss_gib=34.3094
+[stage1_mamba2_decode_fideslib] t1.L01 done output_level=33 bootstraps=14 rss_gib=34.1088 peak_rss_gib=34.3714
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.output level_before=33 level_after=21 rss_gib=34.1088 peak_rss_gib=34.3714
+[stage1_mamba2_decode_fideslib] token 1 done output_level=21 bootstraps=21 rss_gib=34.1088 peak_rss_gib=34.3714
+[stage1_mamba2_decode_fideslib] token loop done rotations=1464 ct_pt=8056 ct_ct=1008 bootstraps=61 rss_gib=34.1088 peak_rss_gib=34.3714
+[stage1_mamba2_decode_fideslib] decrypt begin rss_gib=34.1088 peak_rss_gib=34.3714
+[stage1_mamba2_decode_fideslib] token 0 max_abs_error=0.000122 max_abs_error_vs_exact=0.004129 non_finite_slots=0 slot0=-0.405301 ref0=-0.405279 rss_gib=34.1086 peak_rss_gib=34.3714
+[stage1_mamba2_decode_fideslib] token 1 max_abs_error=0.000652 max_abs_error_vs_exact=0.009005 non_finite_slots=0 slot0=-0.450011 ref0=-0.450070 rss_gib=34.1086 peak_rss_gib=34.3714
+[stage1_mamba2_decode_fideslib] decrypt done rss_gib=34.1086 peak_rss_gib=34.3714

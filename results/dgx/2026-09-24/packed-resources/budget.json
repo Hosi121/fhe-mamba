@@ -1,0 +1,95 @@
+{
+  "review_seconds": 14400,
+  "used_seconds": 5306.805977098644,
+  "runs": [
+    {
+      "name": "probe-mamba2",
+      "charged_seconds": 29.462684456259012
+    },
+    {
+      "name": "probe-mamba3",
+      "charged_seconds": 30.065206638537347
+    },
+    {
+      "name": "prefix-1-base",
+      "charged_seconds": 45.829289093613625
+    },
+    {
+      "name": "prefix-2-naf",
+      "charged_seconds": 45.54694709647447
+    },
+    {
+      "name": "prefix-3-reuse",
+      "charged_seconds": 45.54055408388376
+    },
+    {
+      "name": "prefix-4-direct",
+      "charged_seconds": 45.28903561364859
+    },
+    {
+      "name": "prefix-5-compact",
+      "charged_seconds": 45.74983024969697
+    },
+    {
+      "name": "prefix-6-all",
+      "charged_seconds": 44.638135948218405
+    },
+    {
+      "name": "prefix-7-all",
+      "charged_seconds": 44.80512023717165
+    },
+    {
+      "name": "prefix-8-compact",
+      "charged_seconds": 45.80821839906275
+    },
+    {
+      "name": "prefix-9-direct",
+      "charged_seconds": 45.18686634302139
+    },
+    {
+      "name": "prefix-10-reuse",
+      "charged_seconds": 45.89141016919166
+    },
+    {
+      "name": "prefix-11-naf",
+      "charged_seconds": 45.33657558634877
+    },
+    {
+      "name": "prefix-12-base",
+      "charged_seconds": 45.670645779930055
+    },
+    {
+      "name": "m2-1-base",
+      "charged_seconds": 87.33906856365502
+    },
+    {
+      "name": "m2-2-direct",
+      "charged_seconds": 83.87591730058193
+    },
+    {
+      "name": "m2-3-direct",
+      "charged_seconds": 85.48450791742653
+    },
+    {
+      "name": "m2-4-base",
+      "charged_seconds": 87.44874048791826
+    },
+    {
+      "name": "cache-all",
+      "charged_seconds": 45.24363414384425
+    },
+    {
+      "name": "full-base",
+      "charged_seconds": 1155.9612448764965
+    },
+    {
+      "name": "full-all",
+      "charged_seconds": 1095.6751204393804
+    },
+    {
+      "name": "m2-full-direct",
+      "charged_seconds": 2060.9572236742824
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

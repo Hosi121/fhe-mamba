@@ -1,0 +1,30 @@
+{
+  "schema": "fhemamba-packed-run-v1",
+  "started_utc": "2026-09-24T02:17:33.929215+00:00",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-gpu-ntt-final",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1-prefix/program.txt",
+    "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-final-prefix-c2/native.json",
+    "0.001",
+    "0.001",
+    "--planned-refresh",
+    "--batch-refresh",
+    "--profile-evaluation",
+    "--inplace-ops",
+    "--fast-plaintext-upload",
+    "--gpu-plaintext-ntt"
+  ],
+  "binary_sha256": "0b50a6aafce942a6e2b3794bfa0e7c1ad8ccdb2d1836160007b7d17d25e8bdfb",
+  "manifest_sha256": "f836bff8529a8c0252a4e910253e6f4dc8dc2dde7786be3e70b71b5b1136ef1e",
+  "program_sha256": "327df6348ae284e613ea8a0493def98cb70499034807b7a92fec4d9da8fcc607",
+  "timeout_seconds": 150,
+  "architecture": "mamba3",
+  "tokens": 1,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 45.74182250071317,
+  "passed": true,
+  "native_sha256": "958d337325021081a54cd29855de1b02afd8620a02c0325a00a8df3f0a21e951",
+  "campaign_budget_seconds": 21600,
+  "campaign_used_seconds": 620.1837294800207
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "fhemamba-packed-refresh-probe-v1",
+  "architecture": "arithmetic-refresh-probe",
+  "tokens": 0,
+  "output_names": [
+    "identity_after_refresh"
+  ],
+  "program": {
+    "format": "fhemamba-packed-v1",
+    "slots": 1024,
+    "public_refresh_bound": 64,
+    "nodes": 46,
+    "operations": {
+      "input": 1,
+      "mulp": 45
+    },
+    "outputs": 1,
+    "encrypted_benchmark": false
+  },
+  "files_sha256": {
+    "program.txt": "89c8efb1cc7016edaaa20a7addd63e9a9e3b940324c51e0208f156f0152ac1e5",
+    "fixture.npz": "1116d921f03db276adebaad47294f81cdf0825c91f3c629cf4edea25259950a0"
+  },
+  "scope": "automatic refresh arithmetic; not a Mamba sequence result"
+}

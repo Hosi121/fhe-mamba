@@ -1,0 +1,142 @@
+........................................................................ [ 25%]
+........................................................................ [ 50%]
+................................................FF...................... [ 75%]
+......................................................................   [100%]
+=================================== FAILURES ===================================
+__________ test_refresh_options_reach_native_and_are_recorded[False] ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-hosi/pytest-0/test_refresh_options_reach_nat0')
+budgeted = False
+
+    @pytest.mark.parametrize("budgeted", [False, True])
+    def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
+        body = (
+            "import sys\n"
+            "assert '--planned-refresh' in sys.argv\n"
+            "assert '--batch-refresh' in sys.argv\n"
+            "assert '--trace-levels' in sys.argv\n"
+            "assert '--profile-evaluation' in sys.argv\n"
+            "assert '--inplace-ops' in sys.argv\n"
+            "assert '--cache-plaintexts' in sys.argv\n"
+            "assert '--fast-plaintext-upload' in sys.argv\n"
+            "assert '--gpu-plaintext-ntt' in sys.argv\n"
+            "assert '--direct-plaintext-upload' in sys.argv\n"
+            "assert '--move-plaintext-coefficients' in sys.argv\n"
+            "assert '--naf-rotations' in sys.argv\n"
+            "assert '--reuse-dead-inputs' in sys.argv\n"
+            "assert '--compact-weights' in sys.argv\n"
+        )
+        binary, payload = fixture_files(tmp_path, body)
+        budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
+        result = RUNNER.run(
+            binary,
+            payload,
+            tmp_path / "result",
+            planned_refresh=True,
+            batch_refresh=True,
+            trace_levels=True,
+            profile_evaluation=True,
+            inplace_ops=True,
+            cache_plaintexts=True,
+            fast_plaintext_upload=True,
+            gpu_plaintext_ntt=True,
+            direct_plaintext_upload=True,
+            move_plaintext_coefficients=True,
+            naf_rotations=True,
+            reuse_dead_inputs=True,
+            compact_weights=True,
+            **budget,
+        )
+        assert result["returncode"] == 0
+>       assert result["command"][-12:] == [
+            "--trace-levels",
+            "--planned-refresh",
+            "--batch-refresh",
+            "--profile-evaluation",
+            "--inplace-ops",
+            "--cache-plaintexts",
+            "--fast-plaintext-upload",
+            "--gpu-plaintext-ntt",
+            "--direct-plaintext-upload",
+            "--move-plaintext-coefficients",
+            "--naf-rotations",
+            "--reuse-dead-inputs",
+            "--compact-weights",
+        ]
+E       AssertionError: assert ['--planned-r...-upload', ...] == ['--trace-lev...intexts', ...]
+E         
+E         At index 0 diff: '--planned-refresh' != '--trace-levels'
+E         Right contains one more item: '--compact-weights'
+E         Use -v to get more diff
+
+tests/test_packed_probe_runner.py:216: AssertionError
+___________ test_refresh_options_reach_native_and_are_recorded[True] ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-hosi/pytest-0/test_refresh_options_reach_nat1')
+budgeted = True
+
+    @pytest.mark.parametrize("budgeted", [False, True])
+    def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
+        body = (
+            "import sys\n"
+            "assert '--planned-refresh' in sys.argv\n"
+            "assert '--batch-refresh' in sys.argv\n"
+            "assert '--trace-levels' in sys.argv\n"
+            "assert '--profile-evaluation' in sys.argv\n"
+            "assert '--inplace-ops' in sys.argv\n"
+            "assert '--cache-plaintexts' in sys.argv\n"
+            "assert '--fast-plaintext-upload' in sys.argv\n"
+            "assert '--gpu-plaintext-ntt' in sys.argv\n"
+            "assert '--direct-plaintext-upload' in sys.argv\n"
+            "assert '--move-plaintext-coefficients' in sys.argv\n"
+            "assert '--naf-rotations' in sys.argv\n"
+            "assert '--reuse-dead-inputs' in sys.argv\n"
+            "assert '--compact-weights' in sys.argv\n"
+        )
+        binary, payload = fixture_files(tmp_path, body)
+        budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
+        result = RUNNER.run(
+            binary,
+            payload,
+            tmp_path / "result",
+            planned_refresh=True,
+            batch_refresh=True,
+            trace_levels=True,
+            profile_evaluation=True,
+            inplace_ops=True,
+            cache_plaintexts=True,
+            fast_plaintext_upload=True,
+            gpu_plaintext_ntt=True,
+            direct_plaintext_upload=True,
+            move_plaintext_coefficients=True,
+            naf_rotations=True,
+            reuse_dead_inputs=True,
+            compact_weights=True,
+            **budget,
+        )
+        assert result["returncode"] == 0
+>       assert result["command"][-12:] == [
+            "--trace-levels",
+            "--planned-refresh",
+            "--batch-refresh",
+            "--profile-evaluation",
+            "--inplace-ops",
+            "--cache-plaintexts",
+            "--fast-plaintext-upload",
+            "--gpu-plaintext-ntt",
+            "--direct-plaintext-upload",
+            "--move-plaintext-coefficients",
+            "--naf-rotations",
+            "--reuse-dead-inputs",
+            "--compact-weights",
+        ]
+E       AssertionError: assert ['--planned-r...-upload', ...] == ['--trace-lev...intexts', ...]
+E         
+E         At index 0 diff: '--planned-refresh' != '--trace-levels'
+E         Right contains one more item: '--compact-weights'
+E         Use -v to get more diff
+
+tests/test_packed_probe_runner.py:216: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_packed_probe_runner.py::test_refresh_options_reach_native_and_are_recorded[False]
+FAILED tests/test_packed_probe_runner.py::test_refresh_options_reach_native_and_are_recorded[True]

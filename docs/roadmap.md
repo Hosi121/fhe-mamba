@@ -10,6 +10,29 @@ and feed back its encrypted embedding. Retain this end-to-end correctness gate
 while shortening its runtime. See the
 [five-evaluation result](research/2026-09-22-client-generation.md).
 
+
+The shared Mamba-3 executor now passes complete SISO 187M generation and a
+matched [depth/batching comparison](research/2026-09-24-mamba3-depth-batching.md):
+46.20 → 24.95 min, all four tokens unchanged, exact hidden error 0.000155
+under the fixed 0.001 gate. The 12-layer model, frozen polynomials and CKKS
+parameters are unchanged. The [microkernel profile](research/2026-09-24-mamba3-microkernels.md)
+finds substantial host encoding and GPU copy/NTT costs in a short prefix. SIMD
+mask copies and optional GPU scratch reuse are measured locally; preserve the
+full-generation gate when extending these gains to the whole session.
+An optional [64-entry mask cache](research/2026-09-24-mamba3-plaintext-cache.md)
+reduces the matched prefix by 1.4%, avoiding 63 of 888 preparations; most
+encoding cost remains; full-generation cache validation is not yet measured.
+With additional GPU time authorized, the
+[GPU encoding path](research/2026-09-24-mamba3-gpu-encoding.md) now passes a
+same-binary full comparison: **21.87 → 18.59 minutes (−15.0%)**, all four tokens
+unchanged, exact error `8.83e-5`. It preserves OpenFHE rounding/scale and moves
+the integer NTT to the GPU; host preparation falls 378.84 → 218.56 seconds.
+The earlier 7200-second ledger stays immutable. This separate campaign uses
+3226.63 seconds across 18 attempts, including its failed allocation probe.
+Remaining candidates are coefficient construction and staging copies, followed
+by preparation/compute overlap with explicit buffer-lifetime guarantees.
+Repeated prompts/keys, longer horizons and certified domains remain open.
+
 ## 1. Reproducible Spark baseline
 
 Build pinned CUDA 13 / SM121 dependencies in an isolated prefix. Use calibrated
@@ -61,6 +84,10 @@ the full-ring coefficient NTT with a private 64-point transform and expansion.
 It passes exact plaintext parity, repeated smoke and complete generation:
 **2,573.37 -> 2,310.80 s (10.2%)**, maximum polynomial error **0.016255**,
 with all generated IDs, operation counts and levels unchanged. It stays opt-in.
+The later [shared plaintext preparation](research/2026-09-24-shared-plaintext-preparation.md)
+also passes the same workload, measuring **2318.10→2142.11 s (−7.59%)** in its
+own matched comparison. Mamba-2 and Mamba-3 now share encoding dispatch,
+additive scale repair and upload; the Mamba-3 full regression passes.
 The [normalization lower bounds](research/2026-09-22-normalization-bounds.md)
 identify the next experiment: preserve the public domain and precision while
 seeking one fewer internal refresh. The existing stage-11 refreshes cost

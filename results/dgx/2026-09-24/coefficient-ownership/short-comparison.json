@@ -1,0 +1,55 @@
+{
+  "m3": {
+    "samples_in_abba_order": [
+      15.418610918,
+      15.12135597,
+      15.186625135,
+      15.444480885
+    ],
+    "base_mean_seconds": 15.431545901500002,
+    "move_mean_seconds": 15.1539905525,
+    "reduction_percent": 1.798623098240748,
+    "invariant_fields": [
+      "nodes",
+      "evaluated_nodes",
+      "bootstraps",
+      "ct_ct_mul",
+      "ct_pt_mul",
+      "logical_refreshes",
+      "refresh_batches",
+      "bootstrap_passes",
+      "ring_dimension",
+      "slots",
+      "depth",
+      "scale_bits",
+      "refresh_policy",
+      "batch_refresh",
+      "gpu_plaintext_ntt",
+      "plaintext_ntt_batch",
+      "public_weight_count",
+      "public_weight_bytes",
+      "rotations",
+      "refresh_rotations",
+      "lifetime_clones_eliminated",
+      "gpu_ntt_encodes"
+    ]
+  },
+  "m2": {
+    "samples_in_abba_order": [
+      55.407169468,
+      55.963695922,
+      55.28675059,
+      55.311590449
+    ],
+    "base_mean_seconds": 55.3593799585,
+    "move_mean_seconds": 55.625223256,
+    "reduction_percent": -0.48021364708075165,
+    "invariant_fields": [
+      "parameters",
+      "ckks_levels",
+      "operation_counts",
+      "operation_counts_by_token",
+      "phase_operation_counts"
+    ]
+  }
+}

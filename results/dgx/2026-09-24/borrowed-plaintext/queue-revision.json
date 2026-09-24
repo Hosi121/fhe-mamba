@@ -1,0 +1,5 @@
+{
+  "reason": "M2 coefficient-move ABBA did not improve; retain its existing encoder and isolate borrowing. No measured job interrupted.",
+  "prior_controller_sha256": "6677cf17af7fe3c7ab48823762b19fbabec7a2968ba111aac4ef54ef40dd5982",
+  "stopped_waiter_pid": 2682248
+}

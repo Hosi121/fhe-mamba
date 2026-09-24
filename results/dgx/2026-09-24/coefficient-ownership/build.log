@@ -1,0 +1,65 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using FIDESlib.
+-- Found CUDAToolkit: /usr/local/cuda/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build
+[ 12%] Building CXX object CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o
+[ 25%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+[ 37%] Linking CXX static library libstage1_mamba2_payload.a
+[ 37%] Built target stage1_mamba2_payload
+[ 50%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 62%] Linking CXX static library libstage1_mamba2_plan.a
+[ 62%] Built target stage1_mamba2_plan
+[ 75%] Linking CXX static library libfideslib_plaintext_encoder.a
+[ 75%] Built target fideslib_plaintext_encoder
+[ 87%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[100%] Linking CXX executable packed_fideslib
+[100%] Built target packed_fideslib
+[ 50%] Built target fideslib_plaintext_encoder
+[ 75%] Building CXX object CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o
+[100%] Linking CXX executable packed_plaintext_probe
+[100%] Built target packed_plaintext_probe
+[ 11%] Built target stage1_mamba2_payload
+[ 22%] Building CXX object CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o
+[ 22%] Building CXX object CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o
+[ 33%] Built target fideslib_plaintext_encoder
+[ 38%] Building CXX object CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o
+[ 44%] Building CXX object CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o
+[ 50%] Linking CXX static library libstage1_mamba2_process.a
+[ 50%] Built target stage1_mamba2_process
+[ 61%] Built target stage1_mamba2_plan
+[ 66%] Linking CXX static library libstage1_mamba2_depth.a
+[ 66%] Built target stage1_mamba2_depth
+[ 72%] Linking CXX static library libstage1_mamba2_config.a
+[ 72%] Built target stage1_mamba2_config
+[ 77%] Building CXX object CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o
+[ 83%] Linking CXX static library libstage1_mamba2_artifact.a
+[ 83%] Built target stage1_mamba2_artifact
+[ 88%] Linking CXX static library libfideslib_handoff.a
+[ 88%] Built target fideslib_handoff
+[ 94%] Building CXX object CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o
+/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp: In lambda function:
+/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp:2439:79: note: parameter passing for argument of type ‘std::pair<double, double>’ when C++17 is enabled changed to match C++14 in GCC 10.1
+ 2439 |       return std::pair<double, double>{2.0 / (hi - lo), -(lo + hi) / (hi - lo)};
+      |                                                                               ^
+[100%] Linking CXX executable stage1_mamba2_decode_fideslib
+[100%] Built target stage1_mamba2_decode_fideslib
+[ 33%] Built target stage1_mamba2_payload
+[ 66%] Built target stage1_mamba2_plan
+[ 83%] Building CXX object CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o
+[100%] Linking CXX executable packed_resource_inventory
+[100%] Built target packed_resource_inventory

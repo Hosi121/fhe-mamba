@@ -1,0 +1,30 @@
+{
+  "finished_utc": "2026-09-24T09:15:58.069106+00:00",
+  "removed": [
+    {
+      "path": "runs/borrowed-plaintext-20260924/syntax-deps",
+      "files": 2351,
+      "bytes": 34998557,
+      "reason": "Disposable local header copies or CPU build products; validation logs, layout source, immutable source archives and remote measured binaries retained.",
+      "header_sha256": {
+        "openfhe/core/config_core.h": "b8575b2673947f6d37f86dcf12e690ec89d5517d658217e99c30465eccff12e0",
+        "openfhe/core/math/hal/intnat/mubintvecnat.h": "3ac888c8165194a627822101d2a9f10ec8d3135e7e2eae8a91c92cb808793889",
+        "openfhe/core/math/hal/intnat/ubintnat.h": "22d49038f1b63a88a2da0fd13941b11bd2a255c1dd3e65304600992324b9080a"
+      }
+    },
+    {
+      "path": "runs/packed-resources-20260924/cpu-build",
+      "files": 356,
+      "bytes": 42053839,
+      "reason": "Disposable local header copies or CPU build products; validation logs, layout source, immutable source archives and remote measured binaries retained.",
+      "cmake_cache_sha256": "d3d6f4f58497d0856f6790ab74b8194371943098da35a2f919b0b656d1bd5a04"
+    },
+    {
+      "path": "runs/coefficient-ownership-20260924/cpu-build",
+      "files": 356,
+      "bytes": 14642269,
+      "reason": "Disposable local header copies or CPU build products; validation logs, layout source, immutable source archives and remote measured binaries retained.",
+      "cmake_cache_sha256": "6319c4cfba349e5efb8408606b52b3187d02f6f208aa379ebed2d452a343a35a"
+    }
+  ]
+}

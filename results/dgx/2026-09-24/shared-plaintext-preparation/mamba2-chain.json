@@ -1,0 +1,252 @@
+{
+  "format": "fhemamba-m2-chain-joint-v1",
+  "n_layers": 24,
+  "n_test_tokens": 2,
+  "test_token_ids": [
+    510,
+    5347
+  ],
+  "final_norm_eps": 1e-05,
+  "layer_dirs": [
+    "layer_00",
+    "layer_01",
+    "layer_02",
+    "layer_03",
+    "layer_04",
+    "layer_05",
+    "layer_06",
+    "layer_07",
+    "layer_08",
+    "layer_09",
+    "layer_10",
+    "layer_11",
+    "layer_12",
+    "layer_13",
+    "layer_14",
+    "layer_15",
+    "layer_16",
+    "layer_17",
+    "layer_18",
+    "layer_19",
+    "layer_20",
+    "layer_21",
+    "layer_22",
+    "layer_23"
+  ],
+  "tensors": {
+    "final_norm_w": [
+      768
+    ],
+    "chain_input_embeddings": [
+      2,
+      768
+    ],
+    "chain_expected_final": [
+      2,
+      768
+    ],
+    "chain_expected_poly_final": [
+      2,
+      768
+    ],
+    "client_embedding_w": [
+      50288,
+      768
+    ],
+    "autoregressive_poly_embeddings": [
+      5,
+      768
+    ],
+    "autoregressive_poly_expected_final": [
+      5,
+      768
+    ],
+    "autoregressive_exact_expected_final": [
+      5,
+      768
+    ]
+  },
+  "dtype": "float32-le",
+  "autoregressive": {
+    "protocol": "client-in-loop-greedy-v1",
+    "prompt_tokens": 2,
+    "generate_tokens": 4,
+    "server_evaluations": 5,
+    "prompt_ids": [
+      510,
+      5347
+    ],
+    "poly_evaluated_ids": [
+      510,
+      5347,
+      273,
+      253,
+      4687
+    ],
+    "poly_generated_ids": [
+      273,
+      253,
+      4687,
+      273
+    ],
+    "exact_evaluated_ids": [
+      510,
+      5347,
+      273,
+      253,
+      4687
+    ],
+    "exact_generated_ids": [
+      273,
+      253,
+      4687,
+      273
+    ],
+    "embedding_lm_head_tied": true,
+    "client_lm_head_bias": false,
+    "operator_domain_violations": {
+      "conv_silu": [
+        0,
+        215040
+      ],
+      "rms_invsqrt": [
+        0,
+        125
+      ],
+      "gate_silu": [
+        0,
+        184320
+      ],
+      "decay_exp": [
+        0,
+        0
+      ],
+      "dt_softplus": [
+        0,
+        0
+      ],
+      "gated_rms_invsqrt": [
+        0,
+        120
+      ],
+      "joint_selective_gates": [
+        0,
+        2880
+      ]
+    }
+  },
+  "gated_norm": {
+    "init_degree": 31,
+    "newton_iterations": 4
+  },
+  "notes": [
+    "per-layer dirs are self-contained m1 payloads (per-layer poly fits)",
+    "FHE pass criterion: decrypted outputs match chain_expected_poly_final",
+    "chain_expected_final remains the exact-model approximation-quality reference",
+    "Scheduled normalization, shared-factor gates and public-envelope SiLU fits; domain membership and CKKS error require separate validation.",
+    "autoregressive assets support client decrypt/lm_head/argmax/re-encrypt"
+  ],
+  "final_norm_poly": {
+    "kind": "scaled-goldschmidt-invsqrt-v1",
+    "lo": 9.999999747378752e-06,
+    "hi": 58265.8984375,
+    "seed": 0.00414278863582148,
+    "coefficients": [
+      [
+        2.515883608130088,
+        2.3592168633014747
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.515883608132604,
+        2.359216863308552
+      ],
+      [
+        2.422403779271026,
+        2.1058907321614933
+      ],
+      [
+        2.1827999098013406,
+        1.540770691301773
+      ],
+      [
+        1.8127055938190995,
+        0.8824255046580195
+      ],
+      [
+        1.553840779946484,
+        0.5557964552630631
+      ],
+      [
+        1.5014679523959946,
+        0.5014693894551212
+      ]
+    ],
+    "tolerance": 1e-07,
+    "final_recomputed_newton": true,
+    "oracle_workspace_dtype": "float64"
+  },
+  "normalization_bundle_sha256": "89801adcc149d3183bf758fb8d022f4949b9b048ae5c665ff90a6892632c1c15",
+  "reference_domain_violations": {
+    "dt_softplus": [
+      0,
+      0
+    ],
+    "conv_silu": [
+      0,
+      86016
+    ],
+    "gate_silu": [
+      0,
+      73728
+    ],
+    "decay_exp": [
+      0,
+      0
+    ],
+    "rms_invsqrt": [
+      0,
+      50
+    ],
+    "gated_rms_invsqrt": [
+      0,
+      48
+    ],
+    "joint_selective_gates": [
+      0,
+      1152
+    ]
+  },
+  "stabilized_gate_bundle_sha256": "c15a58e757b928881d11602f162ba095ac597c9de1cc23cb94a09d669cdaf743"
+}

@@ -1,0 +1,119 @@
+
+/lib/aarch64-linux-gnu/libc.so.6:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+00000000000a1cc0 <__xpg_strerror_r@@GLIBC_2.17+0x870>:
+   a1cc0:	d503201f 	nop
+   a1cc4:	f102005f 	cmp	x2, #0x80
+   a1cc8:	540003c8 	b.hi	a1d40 <__xpg_strerror_r@@GLIBC_2.17+0x8f0>  // b.pmore
+   a1ccc:	0420e3e6 	cntb	x6
+   a1cd0:	eb06045f 	cmp	x2, x6, lsl #1
+   a1cd4:	54000108 	b.hi	a1cf4 <__xpg_strerror_r@@GLIBC_2.17+0x8a4>  // b.pmore
+   a1cd8:	25221fe0 	whilelo	p0.b, xzr, x2
+   a1cdc:	25221cc1 	whilelo	p1.b, x6, x2
+   a1ce0:	a400a020 	ld1b	{z0.b}, p0/z, [x1]
+   a1ce4:	a401a421 	ld1b	{z1.b}, p1/z, [x1, #1, mul vl]
+   a1ce8:	e400e000 	st1b	{z0.b}, p0, [x0]
+   a1cec:	e401e401 	st1b	{z1.b}, p1, [x0, #1, mul vl]
+   a1cf0:	d65f03c0 	ret
+   a1cf4:	8b020024 	add	x4, x1, x2
+   a1cf8:	8b020005 	add	x5, x0, x2
+   a1cfc:	ad400420 	ldp	q0, q1, [x1]
+   a1d00:	ad7f0c82 	ldp	q2, q3, [x4, #-32]
+   a1d04:	f101005f 	cmp	x2, #0x40
+   a1d08:	54000088 	b.hi	a1d18 <__xpg_strerror_r@@GLIBC_2.17+0x8c8>  // b.pmore
+   a1d0c:	ad000400 	stp	q0, q1, [x0]
+   a1d10:	ad3f0ca2 	stp	q2, q3, [x5, #-32]
+   a1d14:	d65f03c0 	ret
+   a1d18:	ad411424 	ldp	q4, q5, [x1, #32]
+   a1d1c:	f101805f 	cmp	x2, #0x60
+   a1d20:	54000069 	b.ls	a1d2c <__xpg_strerror_r@@GLIBC_2.17+0x8dc>  // b.plast
+   a1d24:	ad7e1c86 	ldp	q6, q7, [x4, #-64]
+   a1d28:	ad3e1ca6 	stp	q6, q7, [x5, #-64]
+   a1d2c:	ad000400 	stp	q0, q1, [x0]
+   a1d30:	ad011404 	stp	q4, q5, [x0, #32]
+   a1d34:	ad3f0ca2 	stp	q2, q3, [x5, #-32]
+   a1d38:	d65f03c0 	ret
+   a1d3c:	d503201f 	nop
+   a1d40:	8b020024 	add	x4, x1, x2
+   a1d44:	8b020005 	add	x5, x0, x2
+   a1d48:	3dc00023 	ldr	q3, [x1]
+   a1d4c:	92400c26 	and	x6, x1, #0xf
+   a1d50:	927cec21 	and	x1, x1, #0xfffffffffffffff0
+   a1d54:	cb060003 	sub	x3, x0, x6
+   a1d58:	8b060042 	add	x2, x2, x6
+   a1d5c:	ad408420 	ldp	q0, q1, [x1, #16]
+   a1d60:	3d800003 	str	q3, [x0]
+   a1d64:	ad418c22 	ldp	q2, q3, [x1, #48]
+   a1d68:	f1024042 	subs	x2, x2, #0x90
+   a1d6c:	54000129 	b.ls	a1d90 <__xpg_strerror_r@@GLIBC_2.17+0x940>  // b.plast
+   a1d70:	ad008460 	stp	q0, q1, [x3, #16]
+   a1d74:	ad428420 	ldp	q0, q1, [x1, #80]
+   a1d78:	ad018c62 	stp	q2, q3, [x3, #48]
+   a1d7c:	ad438c22 	ldp	q2, q3, [x1, #112]
+   a1d80:	91010021 	add	x1, x1, #0x40
+   a1d84:	91010063 	add	x3, x3, #0x40
+   a1d88:	f1010042 	subs	x2, x2, #0x40
+   a1d8c:	54ffff28 	b.hi	a1d70 <__xpg_strerror_r@@GLIBC_2.17+0x920>  // b.pmore
+   a1d90:	ad7e1484 	ldp	q4, q5, [x4, #-64]
+   a1d94:	ad008460 	stp	q0, q1, [x3, #16]
+   a1d98:	ad7f0480 	ldp	q0, q1, [x4, #-32]
+   a1d9c:	ad018c62 	stp	q2, q3, [x3, #48]
+   a1da0:	ad3e14a4 	stp	q4, q5, [x5, #-64]
+   a1da4:	ad3f04a0 	stp	q0, q1, [x5, #-32]
+   a1da8:	d65f03c0 	ret
+   a1dac:	d503201f 	nop
+   a1db0:	d503201f 	nop
+   a1db4:	d503201f 	nop
+   a1db8:	d503201f 	nop
+   a1dbc:	d503201f 	nop
+   a1dc0:	d503201f 	nop
+   a1dc4:	f102005f 	cmp	x2, #0x80
+   a1dc8:	540001c8 	b.hi	a1e00 <__xpg_strerror_r@@GLIBC_2.17+0x9b0>  // b.pmore
+   a1dcc:	0420e3e6 	cntb	x6
+   a1dd0:	eb06045f 	cmp	x2, x6, lsl #1
+   a1dd4:	54fff908 	b.hi	a1cf4 <__xpg_strerror_r@@GLIBC_2.17+0x8a4>  // b.pmore
+   a1dd8:	25221fe0 	whilelo	p0.b, xzr, x2
+   a1ddc:	25221cc1 	whilelo	p1.b, x6, x2
+   a1de0:	a400a020 	ld1b	{z0.b}, p0/z, [x1]
+   a1de4:	a401a421 	ld1b	{z1.b}, p1/z, [x1, #1, mul vl]
+   a1de8:	e400e000 	st1b	{z0.b}, p0, [x0]
+   a1dec:	e401e401 	st1b	{z1.b}, p1, [x0, #1, mul vl]
+   a1df0:	d65f03c0 	ret
+   a1df4:	d503201f 	nop
+   a1df8:	d503201f 	nop
+   a1dfc:	d503201f 	nop
+   a1e00:	8b020024 	add	x4, x1, x2
+   a1e04:	8b020005 	add	x5, x0, x2
+   a1e08:	cb010006 	sub	x6, x0, x1
+   a1e0c:	b4000386 	cbz	x6, a1e7c <__xpg_strerror_r@@GLIBC_2.17+0xa2c>
+   a1e10:	eb0200df 	cmp	x6, x2
+   a1e14:	54fff962 	b.cs	a1d40 <__xpg_strerror_r@@GLIBC_2.17+0x8f0>  // b.hs, b.nlast
+   a1e18:	3cdf0083 	ldur	q3, [x4, #-16]
+   a1e1c:	92400c86 	and	x6, x4, #0xf
+   a1e20:	927cec84 	and	x4, x4, #0xfffffffffffffff0
+   a1e24:	cb060042 	sub	x2, x2, x6
+   a1e28:	ad7f0480 	ldp	q0, q1, [x4, #-32]
+   a1e2c:	3c9f00a3 	stur	q3, [x5, #-16]
+   a1e30:	ad7e0c82 	ldp	q2, q3, [x4, #-64]
+   a1e34:	cb0600a5 	sub	x5, x5, x6
+   a1e38:	f1020042 	subs	x2, x2, #0x80
+   a1e3c:	54000149 	b.ls	a1e64 <__xpg_strerror_r@@GLIBC_2.17+0xa14>  // b.plast
+   a1e40:	3c9f00a1 	stur	q1, [x5, #-16]
+   a1e44:	3c9e00a0 	stur	q0, [x5, #-32]
+   a1e48:	ad7d0480 	ldp	q0, q1, [x4, #-96]
+   a1e4c:	3c9d00a3 	stur	q3, [x5, #-48]
+   a1e50:	3c9c0ca2 	str	q2, [x5, #-64]!
+   a1e54:	ad7c0c82 	ldp	q2, q3, [x4, #-128]
+   a1e58:	d1010084 	sub	x4, x4, #0x40
+   a1e5c:	f1010042 	subs	x2, x2, #0x40
+   a1e60:	54ffff08 	b.hi	a1e40 <__xpg_strerror_r@@GLIBC_2.17+0x9f0>  // b.pmore
+   a1e64:	ad411424 	ldp	q4, q5, [x1, #32]
+   a1e68:	ad3f04a0 	stp	q0, q1, [x5, #-32]
+   a1e6c:	ad400420 	ldp	q0, q1, [x1]
+   a1e70:	ad3e0ca2 	stp	q2, q3, [x5, #-64]
+   a1e74:	ad011404 	stp	q4, q5, [x0, #32]
+   a1e78:	ad000400 	stp	q0, q1, [x0]
+   a1e7c:	d65f03c0 	ret

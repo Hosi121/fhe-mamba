@@ -1,0 +1,230 @@
+Start testing: Sep 24 05:09 JST
+----------------------------------------------------------
+1/15 Testing: packed_depth
+1/15 Test: packed_depth
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_packed_depth"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"packed_depth" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+depth planner shares refreshes and preserves depth limits
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"packed_depth" end time: Sep 24 05:09 JST
+"packed_depth" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/15 Testing: packed_routing
+2/15 Test: packed_routing
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_packed_routing"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"packed_routing" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+routing matches direct indexing
+<end of output>
+Test time =   2.81 sec
+----------------------------------------------------------
+Test Passed.
+"packed_routing" end time: Sep 24 05:09 JST
+"packed_routing" time elapsed: 00:00:02
+----------------------------------------------------------
+
+3/15 Testing: packed_program
+3/15 Test: packed_program
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_packed_program"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"packed_program" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"packed_program" end time: Sep 24 05:09 JST
+"packed_program" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/15 Testing: stage0_layout
+4/15 Test: stage0_layout
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage0_layout"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage0_layout" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"stage0_layout" end time: Sep 24 05:09 JST
+"stage0_layout" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/15 Testing: stage1_normalization
+5/15 Test: stage1_normalization
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_normalization"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_normalization" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_normalization" end time: Sep 24 05:09 JST
+"stage1_normalization" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/15 Testing: stage1_vector_rms
+6/15 Test: stage1_vector_rms
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_vector_rms"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_vector_rms" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_vector_rms" end time: Sep 24 05:09 JST
+"stage1_vector_rms" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/15 Testing: stage1_tail_payload
+7/15 Test: stage1_tail_payload
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_tail_payload"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_tail_payload" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_tail_payload" end time: Sep 24 05:09 JST
+"stage1_tail_payload" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/15 Testing: stage1_rank_gate_payload
+8/15 Test: stage1_rank_gate_payload
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_rank_gate_payload"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_rank_gate_payload" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_rank_gate_payload" end time: Sep 24 05:09 JST
+"stage1_rank_gate_payload" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/15 Testing: stage1_mamba2_config
+9/15 Test: stage1_mamba2_config
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_mamba2_config"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_mamba2_config" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_mamba2_config" end time: Sep 24 05:09 JST
+"stage1_mamba2_config" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/15 Testing: stage1_mamba2_depth
+10/15 Test: stage1_mamba2_depth
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_mamba2_depth"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_mamba2_depth" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_mamba2_depth" end time: Sep 24 05:09 JST
+"stage1_mamba2_depth" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/15 Testing: stage1_mamba2_artifact
+11/15 Test: stage1_mamba2_artifact
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_mamba2_artifact"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_mamba2_artifact" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_mamba2_artifact" end time: Sep 24 05:09 JST
+"stage1_mamba2_artifact" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/15 Testing: stage1_mamba2_payload
+12/15 Test: stage1_mamba2_payload
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_mamba2_payload"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_mamba2_payload" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_mamba2_payload" end time: Sep 24 05:09 JST
+"stage1_mamba2_payload" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/15 Testing: stage1_joint_gates
+13/15 Test: stage1_joint_gates
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_joint_gates"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_joint_gates" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.25 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_joint_gates" end time: Sep 24 05:09 JST
+"stage1_joint_gates" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/15 Testing: stage1_mamba2_plan
+14/15 Test: stage1_mamba2_plan
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_mamba2_plan"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_mamba2_plan" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_mamba2_plan" end time: Sep 24 05:09 JST
+"stage1_mamba2_plan" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/15 Testing: stage1_mamba2_process
+15/15 Test: stage1_mamba2_process
+Command: "/tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build/test_stage1_mamba2_process"
+Directory: /tmp/pytest-of-hosi/pytest-21/test_native_stage0_layout_cpp_0/build
+"stage1_mamba2_process" start time: Sep 24 05:09 JST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"stage1_mamba2_process" end time: Sep 24 05:09 JST
+"stage1_mamba2_process" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 24 05:09 JST

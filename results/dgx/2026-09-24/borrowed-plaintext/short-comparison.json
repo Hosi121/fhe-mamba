@@ -1,0 +1,47 @@
+{
+  "m3": {
+    "base": {
+      "samples": [
+        15.171943751,
+        15.263647006
+      ],
+      "mean_seconds": 15.2177953785,
+      "reduction_percent": 0.0
+    },
+    "borrow": {
+      "samples": [
+        14.912708201,
+        14.939089015
+      ],
+      "mean_seconds": 14.925898608,
+      "reduction_percent": 1.9181278446705696
+    },
+    "routing": {
+      "samples": [
+        14.936375828,
+        15.017700102
+      ],
+      "mean_seconds": 14.977037965,
+      "reduction_percent": 1.5820781362335001
+    },
+    "all": {
+      "samples": [
+        14.683156426,
+        14.729644989
+      ],
+      "mean_seconds": 14.7064007075,
+      "reduction_percent": 3.3605043193215
+    }
+  },
+  "m2": {
+    "samples_in_abba_order": [
+      55.747851779,
+      54.279719911,
+      54.729183301,
+      56.317706809
+    ],
+    "base_mean_seconds": 56.032779294,
+    "borrow_mean_seconds": 54.504451606,
+    "reduction_percent": 2.727560023358777
+  }
+}

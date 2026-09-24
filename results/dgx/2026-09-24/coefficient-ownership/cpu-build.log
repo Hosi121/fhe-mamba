@@ -1,0 +1,61 @@
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/hosi/cipher/runs/coefficient-ownership-20260924/cpu-build
+[  2%] Building CXX object CMakeFiles/test_packed_lifetime.dir/tests/test_packed_lifetime.cpp.o
+[  6%] Built target stage1_mamba2_config
+[ 10%] Built target stage1_mamba2_payload
+[ 14%] Built target stage1_mamba2_process
+[ 16%] Building CXX object CMakeFiles/test_packed_routing.dir/tests/test_packed_routing.cpp.o
+[ 18%] Building CXX object CMakeFiles/test_plaintext_cache.dir/tests/test_plaintext_cache.cpp.o
+[ 20%] Building CXX object CMakeFiles/test_packed_depth.dir/tests/test_packed_depth.cpp.o
+[ 22%] Linking CXX executable test_packed_lifetime
+[ 25%] Linking CXX executable test_plaintext_cache
+[ 25%] Built target test_packed_lifetime
+[ 25%] Built target test_plaintext_cache
+[ 27%] Building CXX object CMakeFiles/test_packed_program.dir/tests/test_packed_program.cpp.o
+[ 29%] Building CXX object CMakeFiles/test_stage0_layout.dir/tests/test_stage0_layout.cpp.o
+[ 31%] Linking CXX executable test_packed_routing
+[ 33%] Linking CXX executable test_packed_depth
+[ 33%] Built target test_packed_routing
+[ 35%] Building CXX object CMakeFiles/test_stage1_normalization.dir/tests/test_stage1_normalization.cpp.o
+[ 35%] Built target test_packed_depth
+[ 37%] Building CXX object CMakeFiles/test_stage1_vector_rms.dir/tests/test_stage1_vector_rms.cpp.o
+[ 39%] Linking CXX executable test_stage0_layout
+[ 41%] Linking CXX executable test_packed_program
+[ 41%] Built target test_stage0_layout
+[ 43%] Building CXX object CMakeFiles/test_stage1_tail_payload.dir/tests/test_stage1_tail_payload.cpp.o
+[ 43%] Built target test_packed_program
+[ 45%] Building CXX object CMakeFiles/test_stage1_rank_gate_payload.dir/tests/test_stage1_rank_gate_payload.cpp.o
+[ 47%] Linking CXX executable test_stage1_normalization
+[ 50%] Linking CXX executable test_stage1_vector_rms
+[ 50%] Built target test_stage1_normalization
+[ 52%] Building CXX object CMakeFiles/test_stage1_mamba2_config.dir/tests/test_stage1_mamba2_config.cpp.o
+[ 52%] Built target test_stage1_vector_rms
+[ 54%] Building CXX object CMakeFiles/test_stage1_mamba2_payload.dir/tests/test_stage1_mamba2_payload.cpp.o
+[ 56%] Linking CXX executable test_stage1_tail_payload
+[ 58%] Linking CXX executable test_stage1_mamba2_config
+[ 58%] Built target test_stage1_tail_payload
+[ 60%] Linking CXX executable test_stage1_rank_gate_payload
+[ 62%] Building CXX object CMakeFiles/test_stage1_mamba2_process.dir/tests/test_stage1_mamba2_process.cpp.o
+[ 62%] Built target test_stage1_mamba2_config
+[ 66%] Built target stage1_mamba2_depth
+[ 70%] Built target stage1_mamba2_artifact
+[ 75%] Built target stage1_mamba2_plan
+[ 77%] Building CXX object CMakeFiles/test_stage1_mamba2_depth.dir/tests/test_stage1_mamba2_depth.cpp.o
+[ 77%] Built target test_stage1_rank_gate_payload
+[ 79%] Building CXX object CMakeFiles/test_stage1_mamba2_artifact.dir/tests/test_stage1_mamba2_artifact.cpp.o
+[ 81%] Linking CXX executable test_stage1_mamba2_payload
+[ 83%] Linking CXX executable test_stage1_mamba2_process
+[ 83%] Built target test_stage1_mamba2_payload
+[ 85%] Building CXX object CMakeFiles/test_stage1_joint_gates.dir/tests/test_stage1_joint_gates.cpp.o
+[ 85%] Built target test_stage1_mamba2_process
+[ 87%] Building CXX object CMakeFiles/test_stage1_mamba2_plan.dir/tests/test_stage1_mamba2_plan.cpp.o
+[ 89%] Linking CXX executable test_stage1_mamba2_artifact
+[ 89%] Built target test_stage1_mamba2_artifact
+[ 93%] Built target packed_resource_inventory
+[ 95%] Linking CXX executable test_stage1_mamba2_depth
+[ 95%] Built target test_stage1_mamba2_depth
+[ 97%] Linking CXX executable test_stage1_joint_gates
+[ 97%] Built target test_stage1_joint_gates
+[100%] Linking CXX executable test_stage1_mamba2_plan
+[100%] Built target test_stage1_mamba2_plan

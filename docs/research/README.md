@@ -8,9 +8,20 @@ Use the [evidence registry](../evidence.md) for current claim status and the
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-24 — Cache integration](2026-09-24-packed-cache-integration.md) | Existing 64-entry cache with the same optimized binary; prefix ABBA 1.35% reduction, full qualification and adoption decision |
+| [2026-09-24 — Borrowed upload and routing](2026-09-24-borrowed-plaintext.md) | Mamba-3 matched full 17.36 → 16.74 minutes (3.53% reduction); 9,120 fewer model rotations; Mamba-2 ABBA 2.73% reduction and full parity |
+| [2026-09-24 — Static waste audit](2026-09-24-static-waste-audit.md) | Remaining internal ciphertext copies, repeated weight preparation and synchronization; source-bound counts, no new speedup claim |
+| [2026-09-24 — Coefficient ownership](2026-09-24-coefficient-ownership.md) | Mamba-3 same-binary prefix −1.80%, full parity in 17.31 minutes; Mamba-2 +0.48%, so its full follow-up is skipped |
+| [2026-09-24 — Packed resources and direct upload](2026-09-24-packed-resources.md) | Mamba-3 matched full generation 18.58 → 17.58 minutes (−5.39%); lossless matrix storage 673.3 → 168.3 MiB; Mamba-2 ABBA −5.56% and full parity |
+| [2026-09-24 — Shared plaintext preparation](2026-09-24-shared-plaintext-preparation.md) | Mamba-2 matched full generation: 38.64 → 35.70 minutes (−7.6%); Mamba-3 full regression passes |
+| [2026-09-24 — Mamba-3 GPU plaintext encoding](2026-09-24-mamba3-gpu-encoding.md) | Exact RNS parity and matched full generation: 21.87 → 18.59 minutes (−15.0%) |
+| [2026-09-24 — Mamba-3 plaintext cache](2026-09-24-mamba3-plaintext-cache.md) | Bounded encoded-mask reuse: matched prefix ABBA −1.4%, unchanged error gates |
+| [2026-09-24 — Mamba-3 microkernels](2026-09-24-mamba3-microkernels.md) | ARM SIMD mask copies, CUDA/host profile and matched GPU scratch reuse |
+| [2026-09-24 — Mamba-3 depth and batch refresh](2026-09-24-mamba3-depth-batching.md) | Matched full 187M generation: 46.20 → 24.95 minutes, unchanged accuracy gates |
+| [2026-09-24 — Mamba-3 generation and routing](2026-09-24-mamba3-trained-generation.md) | Complete 187M encrypted generation and matched slot-routing optimization |
 | [2026-09-22 — Client generation](2026-09-22-client-generation.md) | First complete stabilized prompt-to-text run |
 | [2026-09-22 — Periodic coefficients](2026-09-22-periodic-gate-coefficients.md) | Reusing repeated joint-gate coefficient patterns |
-| [2026-09-22 — Subring encoding](2026-09-22-subring-gate-encoding.md) | Latest measured 38.5-minute candidate and matched controls |
+| [2026-09-22 — Subring encoding](2026-09-22-subring-gate-encoding.md) | Historical 38.5-minute candidate and matched controls |
 | [2026-09-22 — Generation cost bounds](2026-09-22-generation-cost-bounds.md) | Runtime decomposition and conditional acceleration scenarios |
 | [2026-09-22 — Normalization bounds](2026-09-22-normalization-bounds.md) | Necessary polynomial degree and multiplication-depth bounds |
 
@@ -18,6 +29,8 @@ Use the [evidence registry](../evidence.md) for current claim status and the
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-24 — Mamba-3 SISO](2026-09-24-mamba3-siso.md) | Shared mixer formula, upstream parity, 4/8-step encrypted execution and refresh probe |
+| [2026-09-24 — Trained Mamba-3 preflight](2026-09-24-mamba3-trained-preflight.md) | Complete 187M CPU generation, exact state factorization and encrypted client-loop component |
 | [2026-09-21 — SSM cryptographic design](2026-09-21-ssm-cryptographic-design.md) | State algebra, domain failures, joint gates and normalization certificates |
 | [2026-09-21 — Native normalization](2026-09-21-normalization-native.md) | Isolated encrypted inverse-square-root schedules |
 | [2026-09-21 — Vector RMS](2026-09-21-vector-rms.md) | Vector-level RMSNorm and refresh experiments |

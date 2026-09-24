@@ -1,0 +1,54 @@
+{
+  "binary_sha256": "342532ac0f7c4504343b3b77c87a5451a9898f5c918902f6c2e26fafc156c37b",
+  "compiled_sources_sha256": {
+    "src/packed_fideslib.cpp": "978d289042120e5d94b031921cd656434b49ab8d75d9a9edefd0f254ba523808",
+    "include/packed_program.hpp": "63fd46d2196b0e633956c7c39e1ec115d75cf626cbed26bc5204a124ce41fcf5",
+    "src/stage1_mamba2_plan.cpp": "fc1d051d39a891021ef9e129d7856325e638112b91b706aac41a120bc64a10bc",
+    "src/stage1_mamba2_plan.hpp": "d62805532feea24478804a9c95b082b5921de1d34daf40ad6f3ac390c41d7bcd",
+    "src/stage1_mamba2_payload.cpp": "fb27e9b8e743776f629827c8ebede6b3c47c1da7e5c9f86001e94301c1933202",
+    "src/stage1_mamba2_payload.hpp": "5426f065c4674efac77199ac39e074b57fe98a10b23ce038169792e91fac857b",
+    "src/fideslib_plaintext_ops.hpp": "a64e6dca39f496a82ccec65faa35f4568252607bb15e29bb5b7386550bf59e67",
+    "CMakeLists.txt": "df7a3633c8e3a39ff7d521a89515066a451bf3dbfc798faf7510f307a4c1eb3a"
+  },
+  "base_commit": "70bf711cf4968bd2c818bc4637382acd8afe5d4c",
+  "source_state": "uncommitted working tree",
+  "full_encrypted_generation": "not run; awaiting GPU budget",
+  "complete_backbone_plaintext_and_polynomial_verified": true,
+  "source_sha256": {
+    "src/fhemamba/mamba3.py": "818e0526fe20f4e0878478cda742531fa9fe644a6bb798450153306c06dc7b71",
+    "src/fhemamba/mamba3_lm.py": "a28301cdf0b3ab72b60e27db40ceedab4bdad1b98a603628b56a408529452601",
+    "src/fhemamba/packed_program.py": "643f4f759153875490d701561550b00f49621b32d69cc8ff1c6c97050b4764aa",
+    "src/fhemamba/tensor_ops.py": "b6b5bc815318a47d80a833bac7770d2515e2ba58bf3abdfcc9b0ed7e066a7c45",
+    "src/fhemamba/ops.py": "6c81346d416f5cc01ad1280e634c0498144d5c9ab00ed1a5b7a2ca7a353b8ec9",
+    "experiments/export_mamba3_lm.py": "c4f70845abd3d074b0afe7d46175bf9a36a256d69f14bd8405809d96b2fc4b75",
+    "experiments/check_mamba3_lm_upstream.py": "4884b954af9b62892184b90ab18206fd3d3920f89350cba6f49904e4165cd5df",
+    "experiments/run_packed_probe.py": "ac34192358d5f98495f0df5970aa55eee69267ff14e5e8d27b218996949cff74",
+    "experiments/report_mamba3_generation.py": "bd55924c84203767d26326213e6d06c29b6b3f6a53c84e1d650b3fb98e557ba5",
+    "scripts/download_mamba3_checkpoint.py": "accf6b22c748952a37d47aa7a46f34b92a0991a0e80c3168e375935fb247b330",
+    "config/mamba3-reproduction.json": "9656b9590f65be9f26514245803aba7bc6cbdd274d30203c4ad4137766dc3480"
+  },
+  "checks": {
+    "pytest_passed": 270,
+    "native_cpu_tests_passed": 13,
+    "coverage_percent": 87.57,
+    "wheel_trained_generation": "passed"
+  },
+  "artifact_sha256": {
+    "failed/nonfinite-projection.json": "af7402c7ca67240ecb9cb77fbfaeffe590916691a6f5b5a5fca4d1b26750e4bb",
+    "failed/synthetic-replicated.log": "da8e33fa5afdff20c9b962cde155713aad0ccd70966f77a236bdbcb92e8ef972",
+    "full-export/fixture.npz": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57",
+    "full-export/manifest.json": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+    "layer1/fixture.npz": "3a42e18b0792173fc3df5630c3d4509f9cc411d46daaa2c10dde40d5186ebc2e",
+    "layer1/generation.json": "9534293bf795435a654dde234b98adb5b8f09711b99a3db5848c1408127ba414",
+    "layer1/manifest.json": "f3979518293ac0f29c4638c783b1157d3a02c7a2786d2a76ef0e484d36a8eec4",
+    "layer1/native.json": "669bd6448ea4760256e52ecdf7b7e3007e0277a8d6c31828f7e2144a651dda44",
+    "layer1/native.log": "187c12d7948376490a6d4c4848b65b2a58fd2e4a3e6cd971044963cc74c7c2b1",
+    "layer1/run.json": "f2e10dee11c700e497460f3f4ca4a51e971552355c6a72521d4509e9864baba2",
+    "projections/direct-final.json": "a15124fffaeda99c88b607df979edb7288573ce7d222123358f6a1ab29d72514",
+    "projections/direct-final.log": "5191161d799890866810cd9da1c78f524feb2da848befcf88bdd2ea878b91182",
+    "projections/program.txt.gz": "165462f791814c99a786a3690fc261c21c64c53dad4ead5272102bbd210e8353",
+    "projections/replicated-final.json": "026d1188e228f971ddb20f7862191bad76bd7cfc18a8b4ddbb237b5275539484",
+    "projections/replicated-final.log": "97bd4b1b8a0eb68bb8966ddad8300bce575a46b46b1cf182053477a4994e25bd",
+    "upstream-parity.json": "9e371c057e28b2e483fbe26e20e33256aee9505821d177d7c152f3aa5dfaa258"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "fhemamba-prefix-derivation-v1",
+  "source_program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "program_sha256": "75bc25aaea9284f16e3397848583312c40c52656d0a69b58a9160994b591f131",
+  "executed_program_nodes": 1414,
+  "outputs": 1,
+  "scope": "First encrypted evaluation of the complete 12-layer frozen program; no generated tokens.",
+  "recipe": "Copy source header with node count 1414 and output count 1; copy first 1414 node lines and first output line. Copy fixture.npz unchanged.",
+  "manifest_note": "Export metadata otherwise inherited from the full workload; native nodes/output counts describe the executed prefix."
+}

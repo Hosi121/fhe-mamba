@@ -1,0 +1,106 @@
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/hosi/cipher/build/stage0-layout-tests
+[  2%] Building CXX object CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o
+[  4%] Building CXX object CMakeFiles/test_plaintext_cache.dir/tests/test_plaintext_cache.cpp.o
+[  6%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+[  9%] Building CXX object CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o
+[ 11%] Linking CXX executable test_plaintext_cache
+[ 13%] Linking CXX static library libstage1_mamba2_process.a
+[ 15%] Linking CXX static library libstage1_mamba2_config.a
+[ 15%] Built target stage1_mamba2_process
+[ 18%] Building CXX object CMakeFiles/test_packed_depth.dir/tests/test_packed_depth.cpp.o
+[ 18%] Built target stage1_mamba2_config
+[ 20%] Building CXX object CMakeFiles/test_packed_routing.dir/tests/test_packed_routing.cpp.o
+[ 20%] Built target test_plaintext_cache
+[ 22%] Building CXX object CMakeFiles/test_packed_program.dir/tests/test_packed_program.cpp.o
+[ 25%] Linking CXX static library libstage1_mamba2_payload.a
+[ 25%] Built target stage1_mamba2_payload
+[ 27%] Building CXX object CMakeFiles/test_stage0_layout.dir/tests/test_stage0_layout.cpp.o
+[ 29%] Linking CXX executable test_packed_program
+[ 31%] Linking CXX executable test_packed_routing
+[ 31%] Built target test_packed_program
+[ 34%] Building CXX object CMakeFiles/test_stage1_normalization.dir/tests/test_stage1_normalization.cpp.o
+[ 36%] Linking CXX executable test_packed_depth
+[ 36%] Built target test_packed_routing
+[ 38%] Building CXX object CMakeFiles/test_stage1_vector_rms.dir/tests/test_stage1_vector_rms.cpp.o
+[ 38%] Built target test_packed_depth
+[ 40%] Building CXX object CMakeFiles/test_stage1_tail_payload.dir/tests/test_stage1_tail_payload.cpp.o
+[ 43%] Linking CXX executable test_stage0_layout
+[ 45%] Linking CXX executable test_stage1_normalization
+[ 45%] Built target test_stage0_layout
+[ 47%] Building CXX object CMakeFiles/test_stage1_rank_gate_payload.dir/tests/test_stage1_rank_gate_payload.cpp.o
+[ 47%] Built target test_stage1_normalization
+[ 50%] Building CXX object CMakeFiles/test_stage1_mamba2_config.dir/tests/test_stage1_mamba2_config.cpp.o
+[ 52%] Linking CXX executable test_stage1_vector_rms
+[ 52%] Built target test_stage1_vector_rms
+[ 54%] Building CXX object CMakeFiles/test_stage1_mamba2_payload.dir/tests/test_stage1_mamba2_payload.cpp.o
+[ 56%] Linking CXX executable test_stage1_tail_payload
+[ 56%] Built target test_stage1_tail_payload
+[ 59%] Building CXX object CMakeFiles/test_stage1_mamba2_process.dir/tests/test_stage1_mamba2_process.cpp.o
+[ 61%] Linking CXX executable test_stage1_mamba2_config
+[ 61%] Built target test_stage1_mamba2_config
+[ 63%] Building CXX object CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o
+[ 65%] Linking CXX executable test_stage1_rank_gate_payload
+[ 65%] Built target test_stage1_rank_gate_payload
+[ 68%] Building CXX object CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o
+[ 70%] Linking CXX executable test_stage1_mamba2_payload
+[ 72%] Linking CXX executable test_stage1_mamba2_process
+[ 72%] Built target test_stage1_mamba2_process
+[ 72%] Built target test_stage1_mamba2_payload
+[ 75%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 77%] Linking CXX static library libstage1_mamba2_artifact.a
+[ 77%] Built target stage1_mamba2_artifact
+[ 79%] Building CXX object CMakeFiles/test_stage1_mamba2_artifact.dir/tests/test_stage1_mamba2_artifact.cpp.o
+[ 81%] Linking CXX static library libstage1_mamba2_depth.a
+[ 81%] Built target stage1_mamba2_depth
+[ 84%] Building CXX object CMakeFiles/test_stage1_mamba2_depth.dir/tests/test_stage1_mamba2_depth.cpp.o
+[ 86%] Building CXX object CMakeFiles/test_stage1_joint_gates.dir/tests/test_stage1_joint_gates.cpp.o
+[ 88%] Linking CXX static library libstage1_mamba2_plan.a
+[ 88%] Built target stage1_mamba2_plan
+[ 90%] Building CXX object CMakeFiles/test_stage1_mamba2_plan.dir/tests/test_stage1_mamba2_plan.cpp.o
+[ 93%] Linking CXX executable test_stage1_mamba2_artifact
+[ 93%] Built target test_stage1_mamba2_artifact
+[ 95%] Linking CXX executable test_stage1_joint_gates
+[ 95%] Built target test_stage1_joint_gates
+[ 97%] Linking CXX executable test_stage1_mamba2_depth
+[ 97%] Built target test_stage1_mamba2_depth
+[100%] Linking CXX executable test_stage1_mamba2_plan
+[100%] Built target test_stage1_mamba2_plan
+Test project /home/hosi/cipher/build/stage0-layout-tests
+      Start  1: plaintext_cache
+ 1/16 Test  #1: plaintext_cache ..................   Passed    0.00 sec
+      Start  2: packed_depth
+ 2/16 Test  #2: packed_depth .....................   Passed    0.02 sec
+      Start  3: packed_routing
+ 3/16 Test  #3: packed_routing ...................   Passed    1.18 sec
+      Start  4: packed_program
+ 4/16 Test  #4: packed_program ...................   Passed    0.00 sec
+      Start  5: stage0_layout
+ 5/16 Test  #5: stage0_layout ....................   Passed    0.00 sec
+      Start  6: stage1_normalization
+ 6/16 Test  #6: stage1_normalization .............   Passed    0.00 sec
+      Start  7: stage1_vector_rms
+ 7/16 Test  #7: stage1_vector_rms ................   Passed    0.00 sec
+      Start  8: stage1_tail_payload
+ 8/16 Test  #8: stage1_tail_payload ..............   Passed    0.00 sec
+      Start  9: stage1_rank_gate_payload
+ 9/16 Test  #9: stage1_rank_gate_payload .........   Passed    0.00 sec
+      Start 10: stage1_mamba2_config
+10/16 Test #10: stage1_mamba2_config .............   Passed    0.00 sec
+      Start 11: stage1_mamba2_depth
+11/16 Test #11: stage1_mamba2_depth ..............   Passed    0.02 sec
+      Start 12: stage1_mamba2_artifact
+12/16 Test #12: stage1_mamba2_artifact ...........   Passed    0.00 sec
+      Start 13: stage1_mamba2_payload
+13/16 Test #13: stage1_mamba2_payload ............   Passed    0.00 sec
+      Start 14: stage1_joint_gates
+14/16 Test #14: stage1_joint_gates ...............   Passed    0.11 sec
+      Start 15: stage1_mamba2_plan
+15/16 Test #15: stage1_mamba2_plan ...............   Passed    0.01 sec
+      Start 16: stage1_mamba2_process
+16/16 Test #16: stage1_mamba2_process ............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 16
+
+Total Test time (real) =   1.36 sec

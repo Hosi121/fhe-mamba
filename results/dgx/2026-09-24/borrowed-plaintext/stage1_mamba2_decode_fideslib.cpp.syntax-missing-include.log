@@ -1,0 +1,6 @@
+In file included from native/fideslib_stage0/src/stage1_mamba2_depth.hpp:3,
+                 from native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp:49:
+native/fideslib_stage0/src/stage1_mamba2_payload.hpp:3:10: fatal error: stage1_normalization.hpp: No such file or directory
+    3 | #include "stage1_normalization.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.

@@ -1,0 +1,9 @@
+{
+  "schema": "fhemamba-prefix-derivation-v1",
+  "source_program_sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917",
+  "program_sha256": "327df6348ae284e613ea8a0493def98cb70499034807b7a92fec4d9da8fcc607",
+  "executed_program_nodes": 127,
+  "outputs": 1,
+  "scope": "first prompt evaluation of the trained one-layer component, no generated tokens",
+  "recipe": "From the frozen one-layer three-evaluation export, copy the header with node count 127 and output count 1, the first 127 node lines and the first output line. Retain fixture.npz unchanged. Use the stored prefix manifest, which binds the exact derived files."
+}

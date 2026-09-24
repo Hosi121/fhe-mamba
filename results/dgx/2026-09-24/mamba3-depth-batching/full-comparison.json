@@ -1,0 +1,26 @@
+{
+  "scope": "all 12 trained layers, five evaluations and four generated tokens; one run per variant",
+  "hardware": "DGX Spark NVIDIA GB10",
+  "same_program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "same_manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+  "baseline_binary_sha256": "17f506416b4a0d1934b202d826916eebdbe849c09a41b5f19295f4fb45cac029",
+  "candidate_binary_sha256": "5c1b755f120a152fca1791d92d1a2e228a62c54416c6f9736851df1c3fd6bef4",
+  "baseline_native_sha256": "f3c2a3fbdd89590a4e6371a8e0cd7902c05b26b9fcaede6bb7ebf4d284ee63ff",
+  "candidate_native_sha256": "2651888526b1ea120081006214824d84224f2dfc1b1926f38a5b1ddd0f5b4e19",
+  "baseline_eval_seconds": 2771.840432,
+  "candidate_eval_seconds": 1496.95038223,
+  "speedup": 1.8516581878090055,
+  "reduction_percent": 45.994352165868115,
+  "baseline_bootstraps": 2652,
+  "candidate_bootstraps": 726,
+  "baseline_error_exact": 0.000216662515689,
+  "candidate_error_exact": 0.000155460583006,
+  "tokens_equal": true,
+  "unchanged_context": {
+    "slots": 32768,
+    "ring_dimension": 65536,
+    "depth": 44,
+    "scale_bits": 59,
+    "security": "not-set"
+  }
+}

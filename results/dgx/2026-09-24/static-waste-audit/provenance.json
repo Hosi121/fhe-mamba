@@ -1,0 +1,37 @@
+{
+  "scope": "Static source analysis and existing logs; no new FHE execution or production edits.",
+  "repo_commit": "70bf711cf4968bd2c818bc4637382acd8afe5d4c",
+  "source_manifest_sha256": "b92f3ff75dbed84f5295d309539ad6dadecec12a0bb66b703eeeb92f03e857c9",
+  "verified_source_files": 111,
+  "input_program": "runs/mamba3-lm-full-20260924/program.txt",
+  "input_program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "analyzer_binary_sha256": "5b59e6d463ce94233a519f6d3fe786cfe4083d7f2fcbbf132c124a8feff7b2ac",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compile_command": "g++ -O2 -std=c++20 -ffunction-sections -fdata-sections -Wl,--gc-sections -Inative/fideslib_stage0/include -Inative/fideslib_stage0/src runs/static-waste-audit-20260924/analyze.cpp native/fideslib_stage0/src/stage1_mamba2_plan.cpp -o runs/static-waste-audit-20260924/analyze",
+  "backend_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "backend_diff_sha256": "e525c7951facbfad0a834a35d8893e8e09c639e109f09c33239334eae1657b6f",
+  "backend_diff_hash_normalization": "SHA256(git diff stdout decoded as text and strip(), UTF-8); checked against current remote source",
+  "dependency_sources": {
+    "api/CryptoContext.cpp": {
+      "sha256": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+      "binding": "individual campaign source hash"
+    },
+    "api/Plaintext.cpp": {
+      "sha256": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
+      "binding": "individual campaign source hash"
+    },
+    "api/Ciphertext.cpp": {
+      "sha256": "83f8d04147c6e5ec6c197c7f9cdf8cb66e643f2d61fdb4d0a23919f9b20626ce",
+      "binding": "pinned Git tree"
+    },
+    "src/CKKS/Ciphertext.cpp": {
+      "sha256": "a32ddf43c08daf2696b0520d0c8094bf866935579b57e596254e34ead598b951",
+      "binding": "pinned Git tree plus campaign backend diff"
+    },
+    "src/CKKS/Ciphertext.cuh": {
+      "sha256": "75ee0b57a5e10c450e4d1276b15fc3ec75da78a93d71c7f094a637443e1086c6",
+      "binding": "pinned Git tree"
+    }
+  },
+  "binding_note": "Core Ciphertext.cpp has no individual field in the original campaign manifest. The patched file is bound by the matching backend Git commit and normalized combined diff hash; an absent field is not a source mismatch."
+}

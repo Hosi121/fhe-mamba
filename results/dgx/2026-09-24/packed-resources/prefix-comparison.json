@@ -1,0 +1,266 @@
+{
+  "base": {
+    "eval_seconds": [
+      16.317205581,
+      16.356424259
+    ],
+    "wall_seconds": [
+      45.829289093613625,
+      45.670645779930055
+    ],
+    "max_exact_error": [
+      1.40742065827e-05,
+      1.22260850992e-05
+    ],
+    "max_polynomial_error": [
+      1.40786370685e-05,
+      1.2611417608e-05
+    ],
+    "rotations": [
+      1103,
+      1103
+    ],
+    "refresh_rotations": [
+      3,
+      3
+    ],
+    "lifetime_clones_eliminated": [
+      0,
+      0
+    ],
+    "public_weight_bytes": [
+      58834944,
+      58834944
+    ],
+    "peak_rss_gib": [
+      26.8223876953,
+      26.82239151
+    ],
+    "upload_seconds": [
+      1.183726903,
+      1.20880232
+    ],
+    "mean_seconds": 16.336814920000002,
+    "reduction_percent": 0.0
+  },
+  "naf": {
+    "eval_seconds": [
+      15.994313236,
+      16.002848583
+    ],
+    "wall_seconds": [
+      45.54694709647447,
+      45.33657558634877
+    ],
+    "max_exact_error": [
+      1.12309537108e-05,
+      1.69295365442e-05
+    ],
+    "max_polynomial_error": [
+      1.07319413291e-05,
+      1.77732953031e-05
+    ],
+    "rotations": [
+      909,
+      909
+    ],
+    "refresh_rotations": [
+      3,
+      3
+    ],
+    "lifetime_clones_eliminated": [
+      0,
+      0
+    ],
+    "public_weight_bytes": [
+      58834944,
+      58834944
+    ],
+    "peak_rss_gib": [
+      26.8226013184,
+      26.8224334717
+    ],
+    "upload_seconds": [
+      1.214423908,
+      1.213210673
+    ],
+    "mean_seconds": 15.9985809095,
+    "reduction_percent": 2.070379153808777
+  },
+  "reuse": {
+    "eval_seconds": [
+      16.337928959,
+      16.467033656
+    ],
+    "wall_seconds": [
+      45.54055408388376,
+      45.89141016919166
+    ],
+    "max_exact_error": [
+      1.16026545158e-05,
+      3.08464364904e-05
+    ],
+    "max_polynomial_error": [
+      1.21913209208e-05,
+      3.08375303514e-05
+    ],
+    "rotations": [
+      1103,
+      1103
+    ],
+    "refresh_rotations": [
+      3,
+      3
+    ],
+    "lifetime_clones_eliminated": [
+      52,
+      52
+    ],
+    "public_weight_bytes": [
+      58834944,
+      58834944
+    ],
+    "peak_rss_gib": [
+      26.8224601746,
+      26.8224639893
+    ],
+    "upload_seconds": [
+      1.201420419,
+      1.216229859
+    ],
+    "mean_seconds": 16.4024813075,
+    "reduction_percent": -0.4019534274065206
+  },
+  "direct": {
+    "eval_seconds": [
+      15.861013226,
+      15.948134889
+    ],
+    "wall_seconds": [
+      45.28903561364859,
+      45.18686634302139
+    ],
+    "max_exact_error": [
+      1.50212873878e-05,
+      1.31469148608e-05
+    ],
+    "max_polynomial_error": [
+      1.53354387664e-05,
+      1.1584453345e-05
+    ],
+    "rotations": [
+      1103,
+      1103
+    ],
+    "refresh_rotations": [
+      3,
+      3
+    ],
+    "lifetime_clones_eliminated": [
+      0,
+      0
+    ],
+    "public_weight_bytes": [
+      58834944,
+      58834944
+    ],
+    "peak_rss_gib": [
+      26.8226318359,
+      26.8218727112
+    ],
+    "upload_seconds": [
+      0.710079266,
+      0.707727519
+    ],
+    "mean_seconds": 15.9045740575,
+    "reduction_percent": 2.645808651298609
+  },
+  "compact": {
+    "eval_seconds": [
+      16.399111498,
+      16.498162743
+    ],
+    "wall_seconds": [
+      45.74983024969697,
+      45.80821839906275
+    ],
+    "max_exact_error": [
+      2.394110934e-05,
+      1.05890779596e-05
+    ],
+    "max_polynomial_error": [
+      2.39914047481e-05,
+      1.01038586842e-05
+    ],
+    "rotations": [
+      1103,
+      1103
+    ],
+    "refresh_rotations": [
+      3,
+      3
+    ],
+    "lifetime_clones_eliminated": [
+      0,
+      0
+    ],
+    "public_weight_bytes": [
+      14708736,
+      14708736
+    ],
+    "peak_rss_gib": [
+      26.7740287781,
+      26.7734985352
+    ],
+    "upload_seconds": [
+      1.225548453,
+      1.214598958
+    ],
+    "mean_seconds": 16.448637120500003,
+    "reduction_percent": -0.684479814747152
+  },
+  "all": {
+    "eval_seconds": [
+      15.498492779,
+      15.450606884
+    ],
+    "wall_seconds": [
+      44.638135948218405,
+      44.80512023717165
+    ],
+    "max_exact_error": [
+      1.39335640887e-05,
+      8.90108504806e-06
+    ],
+    "max_polynomial_error": [
+      1.41783952807e-05,
+      8.58192177183e-06
+    ],
+    "rotations": [
+      909,
+      909
+    ],
+    "refresh_rotations": [
+      3,
+      3
+    ],
+    "lifetime_clones_eliminated": [
+      52,
+      52
+    ],
+    "public_weight_bytes": [
+      14708736,
+      14708736
+    ],
+    "peak_rss_gib": [
+      26.7738304138,
+      26.7738418579
+    ],
+    "upload_seconds": [
+      0.712943066,
+      0.713405983
+    ],
+    "mean_seconds": 15.4745498315,
+    "reduction_percent": 5.278048950927349
+  }
+}

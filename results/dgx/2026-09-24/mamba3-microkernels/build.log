@@ -1,0 +1,7 @@
+[ 33%] Built target stage1_mamba2_payload
+[ 50%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 66%] Linking CXX static library libstage1_mamba2_plan.a
+[ 66%] Built target stage1_mamba2_plan
+[ 83%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[100%] Linking CXX executable packed_fideslib
+[100%] Built target packed_fideslib

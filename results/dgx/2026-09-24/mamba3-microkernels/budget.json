@@ -1,0 +1,102 @@
+{
+  "limit_seconds": 7200.0,
+  "used_seconds": 6926.773762212135,
+  "runs": [
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-layer1-radix8",
+      "charged_seconds": 131.41785372886807
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-layer1-legacy",
+      "charged_seconds": 161.5401721149683
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-full-radix8",
+      "charged_seconds": 2815.6645363559946
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-synthetic-radix8",
+      "charged_seconds": 56.408373134210706
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-prefix-trace",
+      "charged_seconds": 60.69665998034179
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-layer1-planned",
+      "charged_seconds": 113.70070966240019
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-layer1-single",
+      "charged_seconds": 103.61567582096905
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-planned",
+      "charged_seconds": 348.68054618965834
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-layer1-batch",
+      "charged_seconds": 104.69783264026046
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-batch",
+      "charged_seconds": 309.8227837430313
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-batch",
+      "charged_seconds": 1540.5132721038535
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-prefix-profile",
+      "charged_seconds": 54.152057791128755
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-prefix-a1",
+      "charged_seconds": 53.01304842438549
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-prefix-b1",
+      "charged_seconds": 52.18209433648735
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-prefix-b2",
+      "charged_seconds": 52.4560265513137
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-prefix-a2",
+      "charged_seconds": 51.99221410788596
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-full-prefix",
+      "charged_seconds": 306.45484859962016
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-layer1",
+      "charged_seconds": 106.54784508049488
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-synthetic",
+      "charged_seconds": 57.401080779731274
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-inplace-profile",
+      "charged_seconds": 57.00273829791695
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-generation-a1",
+      "charged_seconds": 98.38117594271898
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-generation-b1",
+      "charged_seconds": 96.26329027302563
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-generation-b2",
+      "charged_seconds": 96.44430653005838
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/micro-generation-a2",
+      "charged_seconds": 97.724620022811
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+[
+  "g++",
+  "-std=gnu++20",
+  "-fopenmp",
+  "-fsyntax-only",
+  "-Inative/fideslib_stage0/src",
+  "-Iruns/borrowed-plaintext-20260924/syntax-deps/openfhe",
+  "-Iruns/borrowed-plaintext-20260924/syntax-deps/openfhe/core",
+  "-Iruns/borrowed-plaintext-20260924/syntax-deps/openfhe/pke",
+  "-Iruns/borrowed-plaintext-20260924/syntax-deps/openfhe/binfhe",
+  "-Iruns/borrowed-plaintext-20260924/syntax-deps/openfhe/third-party/include",
+  "-isystem",
+  "runs/borrowed-plaintext-20260924/syntax-deps/cuda/cccl",
+  "-isystem",
+  "runs/borrowed-plaintext-20260924/syntax-deps/fideslib",
+  "-isystem",
+  "runs/borrowed-plaintext-20260924/syntax-deps/cuda",
+  "native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp"
+]

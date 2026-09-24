@@ -1,0 +1,512 @@
+{
+  "schema": "fhemamba-gpu-encoding-comparison-v1",
+  "prefix_v2": {
+    "order": [
+      "a1",
+      "b2",
+      "c3",
+      "c4",
+      "b5",
+      "a6"
+    ],
+    "identity": {
+      "binary_sha256": "bb19748e2919df500f9bb6e854e6d20879b9c06c94fc4daf09763c6a94af7eac",
+      "program_sha256": "327df6348ae284e613ea8a0493def98cb70499034807b7a92fec4d9da8fcc607",
+      "manifest_sha256": "f836bff8529a8c0252a4e910253e6f4dc8dc2dde7786be3e70b71b5b1136ef1e"
+    },
+    "common": {
+      "security": "not-set",
+      "slots": 32768,
+      "ring_dimension": 65536,
+      "depth": 44,
+      "scale_bits": 59,
+      "nodes": 127,
+      "evaluated_nodes": 119,
+      "bootstraps": 8,
+      "ct_ct_mul": 181,
+      "ct_pt_mul": 1440,
+      "rotations": 1103,
+      "linear_method": "replicated-bsgs",
+      "routing_method": "radix8-bsgs32",
+      "refresh_policy": "planned",
+      "bootstrap_passes": 2,
+      "batch_refresh": true,
+      "logical_refreshes": 5,
+      "planned_logical_refreshes": 4,
+      "refresh_batches": 1,
+      "largest_refresh_batch": 2,
+      "inplace_ops": true,
+      "scratch_clones_eliminated": 2311,
+      "profile_evaluation": true,
+      "cache_plaintexts": false,
+      "host_encodes": 888,
+      "evaluation_decryptions": 0,
+      "client_output_decrypt_count": 0,
+      "generated_token_ids": [],
+      "exact_tolerance": 0.001,
+      "polynomial_tolerance": 0.001
+    },
+    "groups": {
+      "a": {
+        "eval_seconds": [
+          19.622651698,
+          19.705301446
+        ],
+        "mean_seconds": 19.663976572,
+        "process_wall_seconds": [
+          48.709831323474646,
+          48.68851747084409
+        ],
+        "host_encoding_mean_seconds": 6.1899676815,
+        "upload_mean_seconds": 0,
+        "setup_seconds": [
+          26.323134001,
+          26.367422056
+        ],
+        "peak_rss_gib": [
+          26.8222541809,
+          26.8222503662
+        ],
+        "reduction_percent": 0.0,
+        "speedup": 1.0
+      },
+      "b": {
+        "eval_seconds": [
+          18.900025329,
+          18.860294062
+        ],
+        "mean_seconds": 18.8801596955,
+        "process_wall_seconds": [
+          47.75803482159972,
+          47.762468178756535
+        ],
+        "host_encoding_mean_seconds": 6.114110989,
+        "upload_mean_seconds": 1.092158492,
+        "setup_seconds": [
+          26.207815839,
+          26.292480391
+        ],
+        "peak_rss_gib": [
+          26.8223266602,
+          26.8220367432
+        ],
+        "reduction_percent": 3.986054771933023,
+        "speedup": 1.0415153732352602
+      },
+      "c": {
+        "eval_seconds": [
+          16.626492342,
+          16.624324318
+        ],
+        "mean_seconds": 16.62540833,
+        "process_wall_seconds": [
+          45.87667084764689,
+          45.620719029568136
+        ],
+        "host_encoding_mean_seconds": 3.5490054085000002,
+        "upload_mean_seconds": 1.404945997,
+        "setup_seconds": [
+          26.402484577,
+          26.334917381
+        ],
+        "peak_rss_gib": [
+          26.8220748901,
+          26.8220596313
+        ],
+        "reduction_percent": 15.452460649931254,
+        "speedup": 1.1827665331092654
+      }
+    },
+    "max_abs_error_vs_exact": 2.15634584528e-05,
+    "max_abs_error_vs_polynomial": 2.23844719036e-05
+  },
+  "prefix_final": {
+    "order": [
+      "a1",
+      "c2",
+      "c3",
+      "a4"
+    ],
+    "identity": {
+      "binary_sha256": "0b50a6aafce942a6e2b3794bfa0e7c1ad8ccdb2d1836160007b7d17d25e8bdfb",
+      "program_sha256": "327df6348ae284e613ea8a0493def98cb70499034807b7a92fec4d9da8fcc607",
+      "manifest_sha256": "f836bff8529a8c0252a4e910253e6f4dc8dc2dde7786be3e70b71b5b1136ef1e"
+    },
+    "common": {
+      "security": "not-set",
+      "slots": 32768,
+      "ring_dimension": 65536,
+      "depth": 44,
+      "scale_bits": 59,
+      "nodes": 127,
+      "evaluated_nodes": 119,
+      "bootstraps": 8,
+      "ct_ct_mul": 181,
+      "ct_pt_mul": 1440,
+      "rotations": 1103,
+      "linear_method": "replicated-bsgs",
+      "routing_method": "radix8-bsgs32",
+      "refresh_policy": "planned",
+      "bootstrap_passes": 2,
+      "batch_refresh": true,
+      "logical_refreshes": 5,
+      "planned_logical_refreshes": 4,
+      "refresh_batches": 1,
+      "largest_refresh_batch": 2,
+      "inplace_ops": true,
+      "scratch_clones_eliminated": 2311,
+      "profile_evaluation": true,
+      "cache_plaintexts": false,
+      "host_encodes": 888,
+      "evaluation_decryptions": 0,
+      "client_output_decrypt_count": 0,
+      "generated_token_ids": [],
+      "exact_tolerance": 0.001,
+      "polynomial_tolerance": 0.001
+    },
+    "groups": {
+      "a": {
+        "eval_seconds": [
+          19.71109085,
+          19.711557919
+        ],
+        "mean_seconds": 19.711324384500003,
+        "process_wall_seconds": [
+          48.88185130059719,
+          48.94782524369657
+        ],
+        "host_encoding_mean_seconds": 6.184849331000001,
+        "upload_mean_seconds": 0,
+        "setup_seconds": [
+          26.571330038,
+          26.640242
+        ],
+        "peak_rss_gib": [
+          26.8219261169,
+          26.821937561
+        ],
+        "reduction_percent": 0.0,
+        "speedup": 1.0
+      },
+      "c": {
+        "eval_seconds": [
+          16.402926612,
+          16.442527884
+        ],
+        "mean_seconds": 16.422727248,
+        "process_wall_seconds": [
+          45.74182250071317,
+          45.87087017390877
+        ],
+        "host_encoding_mean_seconds": 3.5010270235,
+        "upload_mean_seconds": 1.2052007960000002,
+        "setup_seconds": [
+          26.643323755,
+          26.628166163
+        ],
+        "peak_rss_gib": [
+          26.8220481873,
+          26.8219566345
+        ],
+        "reduction_percent": 16.683795935528256,
+        "speedup": 1.2002467121835987
+      }
+    },
+    "max_abs_error_vs_exact": 2.02141582941e-05,
+    "max_abs_error_vs_polynomial": 2.10351717449e-05
+  },
+  "full": {
+    "order": [
+      "a1",
+      "c2"
+    ],
+    "identity": {
+      "binary_sha256": "0b50a6aafce942a6e2b3794bfa0e7c1ad8ccdb2d1836160007b7d17d25e8bdfb",
+      "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+      "manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7"
+    },
+    "common": {
+      "security": "not-set",
+      "slots": 32768,
+      "ring_dimension": 65536,
+      "depth": 44,
+      "scale_bits": 59,
+      "nodes": 7910,
+      "evaluated_nodes": 7814,
+      "bootstraps": 726,
+      "ct_ct_mul": 12005,
+      "ct_pt_mul": 107738,
+      "rotations": 86063,
+      "linear_method": "replicated-bsgs",
+      "routing_method": "radix8-bsgs32",
+      "refresh_policy": "planned",
+      "bootstrap_passes": 2,
+      "batch_refresh": true,
+      "logical_refreshes": 1108,
+      "planned_logical_refreshes": 623,
+      "refresh_batches": 260,
+      "largest_refresh_batch": 8,
+      "inplace_ops": true,
+      "scratch_clones_eliminated": 174634,
+      "profile_evaluation": true,
+      "cache_plaintexts": false,
+      "host_encodes": 61696,
+      "evaluation_decryptions": 0,
+      "client_output_decrypt_count": 4,
+      "generated_token_ids": [
+        315,
+        279,
+        1614,
+        315
+      ],
+      "exact_tolerance": 0.001,
+      "polynomial_tolerance": 0.001
+    },
+    "groups": {
+      "a": {
+        "eval_seconds": [
+          1312.19848751
+        ],
+        "mean_seconds": 1312.19848751,
+        "process_wall_seconds": [
+          1352.7959508541971
+        ],
+        "host_encoding_mean_seconds": 378.837731831,
+        "upload_mean_seconds": 0,
+        "setup_seconds": [
+          26.605252568
+        ],
+        "peak_rss_gib": [
+          27.9648666382
+        ],
+        "reduction_percent": 0.0,
+        "speedup": 1.0
+      },
+      "c": {
+        "eval_seconds": [
+          1115.5139722
+        ],
+        "mean_seconds": 1115.5139722,
+        "process_wall_seconds": [
+          1155.9236730989069
+        ],
+        "host_encoding_mean_seconds": 218.560430586,
+        "upload_mean_seconds": 73.496719771,
+        "setup_seconds": [
+          26.617964764
+        ],
+        "peak_rss_gib": [
+          27.9649162292
+        ],
+        "reduction_percent": 14.988930194792738,
+        "speedup": 1.1763173928893977
+      }
+    },
+    "max_abs_error_vs_exact": 0.000118052882629,
+    "max_abs_error_vs_polynomial": 0.000116286216966
+  },
+  "micro_probe": {
+    "exact_rns_input_cases": 160,
+    "ntt_batches": [
+      1,
+      4,
+      16,
+      64
+    ],
+    "encrypted_max_abs_error": 2.52149303746925e-12,
+    "timing": [
+      {
+        "level": 21,
+        "mode": "standard",
+        "samples": 8,
+        "median_encode_ms": 8.1346075,
+        "median_upload_ms": 7.0653775,
+        "median_total_ms": 15.2333125
+      },
+      {
+        "level": 21,
+        "mode": "fast-upload",
+        "samples": 8,
+        "median_encode_ms": 8.1279595,
+        "median_upload_ms": 1.697714,
+        "median_total_ms": 9.825121
+      },
+      {
+        "level": 21,
+        "mode": "gpu-ntt-1",
+        "samples": 8,
+        "median_encode_ms": 4.9868369999999995,
+        "median_upload_ms": 2.1374525,
+        "median_total_ms": 7.1272015
+      },
+      {
+        "level": 21,
+        "mode": "gpu-ntt-4",
+        "samples": 8,
+        "median_encode_ms": 4.969277,
+        "median_upload_ms": 1.896763,
+        "median_total_ms": 6.8805285000000005
+      },
+      {
+        "level": 21,
+        "mode": "gpu-ntt-16",
+        "samples": 8,
+        "median_encode_ms": 5.0342535,
+        "median_upload_ms": 1.8397705000000002,
+        "median_total_ms": 6.862328
+      },
+      {
+        "level": 21,
+        "mode": "gpu-ntt-64",
+        "samples": 8,
+        "median_encode_ms": 4.968317,
+        "median_upload_ms": 1.8222665,
+        "median_total_ms": 6.797639
+      },
+      {
+        "level": 26,
+        "mode": "standard",
+        "samples": 8,
+        "median_encode_ms": 6.7409505,
+        "median_upload_ms": 2.1871,
+        "median_total_ms": 8.9280185
+      },
+      {
+        "level": 26,
+        "mode": "fast-upload",
+        "samples": 8,
+        "median_encode_ms": 6.819350999999999,
+        "median_upload_ms": 1.3170155000000001,
+        "median_total_ms": 8.1363665
+      },
+      {
+        "level": 26,
+        "mode": "gpu-ntt-1",
+        "samples": 8,
+        "median_encode_ms": 4.0940639999999995,
+        "median_upload_ms": 1.6595935,
+        "median_total_ms": 5.757761
+      },
+      {
+        "level": 26,
+        "mode": "gpu-ntt-4",
+        "samples": 8,
+        "median_encode_ms": 4.1117355,
+        "median_upload_ms": 1.478176,
+        "median_total_ms": 5.585096
+      },
+      {
+        "level": 26,
+        "mode": "gpu-ntt-16",
+        "samples": 8,
+        "median_encode_ms": 4.094175,
+        "median_upload_ms": 1.4236885,
+        "median_total_ms": 5.5146155
+      },
+      {
+        "level": 26,
+        "mode": "gpu-ntt-64",
+        "samples": 8,
+        "median_encode_ms": 4.109216,
+        "median_upload_ms": 1.4133285,
+        "median_total_ms": 5.5192795
+      },
+      {
+        "level": 34,
+        "mode": "standard",
+        "samples": 8,
+        "median_encode_ms": 4.469856999999999,
+        "median_upload_ms": 1.221015,
+        "median_total_ms": 5.69464
+      },
+      {
+        "level": 34,
+        "mode": "fast-upload",
+        "samples": 8,
+        "median_encode_ms": 4.4660969999999995,
+        "median_upload_ms": 0.783941,
+        "median_total_ms": 5.247006000000001
+      },
+      {
+        "level": 34,
+        "mode": "gpu-ntt-1",
+        "samples": 8,
+        "median_encode_ms": 2.76444,
+        "median_upload_ms": 0.9639409999999999,
+        "median_total_ms": 3.7283969999999997
+      },
+      {
+        "level": 34,
+        "mode": "gpu-ntt-4",
+        "samples": 8,
+        "median_encode_ms": 2.775464,
+        "median_upload_ms": 0.8602609999999999,
+        "median_total_ms": 3.632997
+      },
+      {
+        "level": 34,
+        "mode": "gpu-ntt-16",
+        "samples": 8,
+        "median_encode_ms": 2.767544,
+        "median_upload_ms": 0.8254045000000001,
+        "median_total_ms": 3.5952444999999997
+      },
+      {
+        "level": 34,
+        "mode": "gpu-ntt-64",
+        "samples": 8,
+        "median_encode_ms": 2.7661119999999997,
+        "median_upload_ms": 0.828133,
+        "median_total_ms": 3.5957565
+      }
+    ]
+  },
+  "regressions": {
+    "layer": {
+      "identity": {
+        "binary_sha256": "0b50a6aafce942a6e2b3794bfa0e7c1ad8ccdb2d1836160007b7d17d25e8bdfb",
+        "program_sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917",
+        "manifest_sha256": "f3979518293ac0f29c4638c783b1157d3a02c7a2786d2a76ef0e484d36a8eec4"
+      },
+      "eval_seconds": 55.624991574,
+      "max_abs_error_vs_exact": 2.03527453801e-05,
+      "max_abs_error_vs_polynomial": 1.38593920782e-05,
+      "generated_token_ids": [
+        6864,
+        6864
+      ],
+      "evaluation_decryptions": 0,
+      "plaintext_cache_hits": 0,
+      "gpu_ntt_encodes": 2857,
+      "plaintext_ntt_batch": 16
+    },
+    "synthetic": {
+      "identity": {
+        "binary_sha256": "0b50a6aafce942a6e2b3794bfa0e7c1ad8ccdb2d1836160007b7d17d25e8bdfb",
+        "program_sha256": "7e4ad8f9b91b3e885e3b1dae9d2cfd29a2fac92d94b68b4ac72cfe59fc372831",
+        "manifest_sha256": "461351e19053c34e36713abcafa206bbbe1549c4c561564a036ccc1e4ac6d872"
+      },
+      "eval_seconds": 28.024689274,
+      "max_abs_error_vs_exact": 7.72198950894e-08,
+      "max_abs_error_vs_polynomial": 5.16364728753e-12,
+      "generated_token_ids": [],
+      "evaluation_decryptions": 0,
+      "plaintext_cache_hits": 236,
+      "gpu_ntt_encodes": 724,
+      "plaintext_ntt_batch": 16
+    }
+  },
+  "limitations": [
+    "Full generation has one fresh-key run per mode on one frozen prompt; prefix has two per mode.",
+    "Host timers enabled in both model modes, with no attached profiler.",
+    "Full comparison uses identical CPU affinity and in-place scratch; cache is disabled.",
+    "Standard upload time is uninstrumented in model JSON, not zero work.",
+    "Evaluation excludes setup, final token selection and diagnostic reference checks; process wall includes them. Payload hash verification is charged only to the ledger.",
+    "Inline client and security=not-set; no longer-context or new-prompt guarantee."
+  ],
+  "campaign": {
+    "used_seconds": 3226.6348105072975,
+    "attempts": 18,
+    "review_window_seconds": 21600
+  }
+}

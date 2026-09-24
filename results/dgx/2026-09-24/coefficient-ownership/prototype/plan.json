@@ -1,0 +1,15 @@
+{
+  "question": "Can owning OpenFHE coefficient arrays be moved into real-parameter polynomials without a copy?",
+  "review_seconds": 7200,
+  "scope": [
+    "same-binary exact-RNS probe with 160 moved-coefficient cases",
+    "both Mamba parameter configurations",
+    "mirrored phase samples before native-model integration"
+  ],
+  "invariants": [
+    "unchanged coefficients, roots, moduli, slots and scale metadata",
+    "no caller/context mutation",
+    "1e-6 encrypted arithmetic gate"
+  ],
+  "decision": "Integrate in both evaluators only if exactness passes and the matched preparation mean/median improves; then verify unchanged model gates in bounded follow-up."
+}

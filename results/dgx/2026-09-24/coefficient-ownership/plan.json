@@ -1,0 +1,19 @@
+{
+  "question": "Does shared owning-coefficient preparation improve unchanged encrypted model evaluation?",
+  "review_seconds": 7200,
+  "sequence": [
+    "build immutable final source",
+    "both parameter exactness probes",
+    "M3 prefix ABBA",
+    "M2 two-layer ABBA",
+    "M3 cached state regression",
+    "one full candidate per architecture if its short mean improves"
+  ],
+  "invariants": [
+    "M3 exact and polynomial <=0.001",
+    "M2 polynomial <=0.05",
+    "same payload, arithmetic, levels, parameters and selected IDs",
+    "zero intermediate diagnostic decryptions"
+  ],
+  "scope": "Incremental latency claim uses same-binary ABBA; full candidate is completion/parity, not a paired full latency comparison."
+}

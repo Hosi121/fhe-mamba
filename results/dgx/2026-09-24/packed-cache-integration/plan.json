@@ -1,0 +1,16 @@
+{
+  "question": "Does the existing exact mask cache improve the selected optimized Mamba-3 path through full generation?",
+  "review_seconds": 3600,
+  "sequence": [
+    "wait for the transfer/routing campaign and reuse its unchanged executable",
+    "selected prefix without/with/with/without cache",
+    "full cached follow-up only if paired short mean improves"
+  ],
+  "invariants": [
+    "same binary and source archive",
+    "unchanged .001 exact/polynomial gates and four selected IDs",
+    "same parameters and encrypted operation counts",
+    "zero intermediate decryptions"
+  ],
+  "scope": "Bounded 64-entry existing cache; no new cache implementation or approximation."
+}

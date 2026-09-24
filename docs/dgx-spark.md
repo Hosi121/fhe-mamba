@@ -38,7 +38,7 @@ dependency and uses `~/fhemamba/spark/` for its own patched FIDESlib snapshot
 and kernel. No B300 container or Slurm allocation is needed. `BUILD_JOBS`
 defaults to 8. `FHEMAMBA_REMOTE_ROOT` overrides the default `~/fhemamba` root.
 
-The build verifies the source snapshot, runs the 12 C++ contract tests,
+The build verifies the source snapshot, runs the 13 C++ contract tests,
 and writes `spark/kernel/stage1_mamba2_decode_fideslib.build.json`. The runner
 checks hashes of the native sources/configuration, executable and OpenFHE
 shared libraries, and sets the matching library path. FIDESlib is linked
@@ -231,6 +231,15 @@ measured build. This keeps the 50.6-minute and 42.9-minute baseline roots intact
 The subring mode requires periodic coefficients; the launcher checks the
 reported native mode. The two dedicated campaign manifests are
 `dgx_spark_subring_gate_smoke.json` and `dgx_spark_subring_gate_generation.json`.
+
+The [shared plaintext path](research/2026-09-24-shared-plaintext-preparation.md)
+ports the packed executor's copy reduction and GPU NTT to Mamba-2. Its matched
+full comparison measures **2318.10→2142.11 s (38.64→35.70 minutes, −7.59%)**,
+with unchanged IDs, operation counts, levels and error gate. Add
+`--gpu-plaintext-ntt` to the prompt launcher with a fresh current build; it
+includes fast upload and preserves the subring optimization. The archived
+source and measured commands live in the linked study. Historical build roots
+remain evidence for their original modes.
 
 ### Kernel comparisons
 

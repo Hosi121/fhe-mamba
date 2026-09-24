@@ -1,0 +1,14 @@
+{
+  "micro-profile.nsys-rep": {
+    "sha256": "cf75e7b2de7c68e1e8080970333dea7e9572d2cb5d2eadf2398248e93b02365d",
+    "gzip_sha256": "3c06b343fc33e3d828a0a22506ae636ffd495942be5b87c146ecf05c63b4af76",
+    "raw_bytes": 13765507,
+    "compressed_bytes": 8113715
+  },
+  "micro-profile-inplace.nsys-rep": {
+    "sha256": "589351fac2a16cd3e07499c25df7d9f4c63229d94faa6eca2e97f0fa0b10ecf6",
+    "gzip_sha256": "71735a6fa97ec5665b5934b1602e4faeca46583f469aa7c0ac27d6eaf75a7223",
+    "raw_bytes": 12882192,
+    "compressed_bytes": 7570187
+  }
+}

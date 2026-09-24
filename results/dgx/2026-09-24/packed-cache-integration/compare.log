@@ -1,0 +1,78 @@
+{
+  "short": {
+    "samples_in_abba_order": [
+      14.665308077,
+      14.5191603,
+      14.464689982,
+      14.714656376
+    ],
+    "base_mean_seconds": 14.6899822265,
+    "cache_mean_seconds": 14.491925141,
+    "reduction_percent": 1.3482459164771199,
+    "selected_mode": "all"
+  },
+  "full": {
+    "base": {
+      "eval_seconds": 1004.62161828,
+      "host_encoding_seconds": 200.271788571,
+      "plaintext_upload_seconds": 26.59297511,
+      "bootstrap_seconds": 513.222393775,
+      "host_encodes": 61696,
+      "gpu_ntt_encodes": 61696,
+      "plaintext_cache_hits": 0,
+      "plaintext_cache_misses": 0,
+      "plaintext_cache_bypasses": 0,
+      "plaintext_cache_evictions": 0,
+      "plaintext_cache_entries": 0,
+      "max_abs_error_vs_exact": 0.000160619944545,
+      "max_abs_error_vs_polynomial": 0.000129253379571,
+      "peak_rss_gib": 27.3141365051
+    },
+    "cache": {
+      "eval_seconds": 976.106806178,
+      "host_encoding_seconds": 170.617746543,
+      "plaintext_upload_seconds": 23.098872866,
+      "bootstrap_seconds": 514.304661553,
+      "host_encodes": 50913,
+      "gpu_ntt_encodes": 50913,
+      "plaintext_cache_hits": 10783,
+      "plaintext_cache_misses": 26173,
+      "plaintext_cache_bypasses": 22745,
+      "plaintext_cache_evictions": 26109,
+      "plaintext_cache_entries": 64,
+      "max_abs_error_vs_exact": 0.00016661458628,
+      "max_abs_error_vs_polynomial": 0.000156554606759,
+      "peak_rss_gib": 27.3141365051
+    },
+    "reduction_percent": 2.838363378126363,
+    "adopt_cache": true
+  },
+  "budget": {
+    "review_seconds": 3600,
+    "used_seconds": 1194.0059375986457,
+    "runs": [
+      {
+        "name": "prefix-1-base",
+        "charged_seconds": 44.33672000467777
+      },
+      {
+        "name": "prefix-2-cache",
+        "charged_seconds": 44.042098256759346
+      },
+      {
+        "name": "prefix-3-cache",
+        "charged_seconds": 43.95036227349192
+      },
+      {
+        "name": "prefix-4-base",
+        "charged_seconds": 44.465367410331964
+      },
+      {
+        "name": "full-cache",
+        "charged_seconds": 1017.2113896533847
+      }
+    ],
+    "scope": "Internal review interval, not a newly inferred user spending limit."
+  },
+  "scope": "Same immutable binary and payload, fresh-process prefix ABBA. The full uncached run is the preceding campaign candidate; the cached full run follows the intervening Mamba-2 validation. One full run per mode, unchanged gates, counts and selected IDs."
+}

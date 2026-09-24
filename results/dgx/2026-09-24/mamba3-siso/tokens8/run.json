@@ -1,0 +1,22 @@
+{
+  "schema": "fhemamba-packed-run-v1",
+  "started_utc": "2026-09-23T16:21:13.204417+00:00",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/build/packed_fideslib",
+    "/home/kataiwa/fhemamba/mamba3-20260924/payload8/program.txt",
+    "/home/kataiwa/fhemamba/mamba3-20260924/run8/native.json",
+    "0.001",
+    "0.001"
+  ],
+  "binary_sha256": "a26ec33ee66b1fdfc69b394598221fd408cf00309f5025233a1041ed090e0ec3",
+  "manifest_sha256": "e77dbf0bb8cd6def0f773e11fa223df9f85f381d043750dc92fe923208a98538",
+  "program_sha256": "39bcf8a795e4a7e714c81e4b797f46ca99582eb79641ec617669022a25373e09",
+  "timeout_seconds": 600.0,
+  "architecture": "mamba3",
+  "tokens": 8,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 215.40254901256412,
+  "passed": true,
+  "native_sha256": "7b972ea472dd00c25d8b767f83a20f502108d1dfc347d0bbc9938f6a9058b1a8"
+}

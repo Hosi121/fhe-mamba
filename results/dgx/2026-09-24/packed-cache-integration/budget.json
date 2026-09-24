@@ -1,0 +1,27 @@
+{
+  "review_seconds": 3600,
+  "used_seconds": 1194.0059375986457,
+  "runs": [
+    {
+      "name": "prefix-1-base",
+      "charged_seconds": 44.33672000467777
+    },
+    {
+      "name": "prefix-2-cache",
+      "charged_seconds": 44.042098256759346
+    },
+    {
+      "name": "prefix-3-cache",
+      "charged_seconds": 43.95036227349192
+    },
+    {
+      "name": "prefix-4-base",
+      "charged_seconds": 44.465367410331964
+    },
+    {
+      "name": "full-cache",
+      "charged_seconds": 1017.2113896533847
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

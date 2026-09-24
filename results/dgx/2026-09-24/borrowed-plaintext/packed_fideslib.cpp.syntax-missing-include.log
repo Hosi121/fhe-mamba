@@ -1,0 +1,4 @@
+native/fideslib_stage0/src/packed_fideslib.cpp:3:10: fatal error: packed_program.hpp: No such file or directory
+    3 | #include "packed_program.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.

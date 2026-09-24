@@ -1,0 +1,92 @@
+{
+  "before": [
+    {
+      "ssm_storage_bytes": 4096,
+      "ssm_logical_bytes": 4096,
+      "conv_storage_bytes": 2304,
+      "conv_logical_bytes": 2304
+    },
+    {
+      "ssm_storage_bytes": 4096,
+      "ssm_logical_bytes": 4096,
+      "conv_storage_bytes": 2304,
+      "conv_logical_bytes": 2304
+    }
+  ],
+  "after": [
+    {
+      "ssm_storage_bytes": 4096,
+      "ssm_logical_bytes": 4096,
+      "conv_storage_bytes": 2304,
+      "conv_logical_bytes": 2304
+    },
+    {
+      "ssm_storage_bytes": 4096,
+      "ssm_logical_bytes": 4096,
+      "conv_storage_bytes": 2304,
+      "conv_logical_bytes": 2304
+    }
+  ],
+  "source_sha256": {
+    "before": "8bcbb172702c1e6b753cc98de0632f2d7df31049e244f04ffefc24c0b898a88e",
+    "after": "2d612d986035b3f5a83c0b08e85f95cdb0cb5e7245dd3e646d25c1f27b36768e"
+  },
+  "config": {
+    "transformers_version": "5.12.1",
+    "architectures": null,
+    "output_hidden_states": false,
+    "return_dict": true,
+    "dtype": null,
+    "chunk_size_feed_forward": 0,
+    "is_encoder_decoder": false,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "problem_type": null,
+    "num_heads": 4,
+    "head_dim": 16,
+    "vocab_size": 97,
+    "hidden_size": 32,
+    "state_size": 8,
+    "num_hidden_layers": 2,
+    "layer_norm_epsilon": 1e-05,
+    "pad_token_id": 1,
+    "bos_token_id": 0,
+    "eos_token_id": 2,
+    "expand": 2,
+    "conv_kernel": 4,
+    "n_groups": 2,
+    "use_bias": false,
+    "use_conv_bias": true,
+    "hidden_act": "silu",
+    "initializer_range": 0.1,
+    "residual_in_fp32": true,
+    "time_step_rank": 2,
+    "time_step_min": 0.001,
+    "time_step_max": 0.1,
+    "time_step_floor": 0.0001,
+    "time_step_limit": [
+      0.0,
+      Infinity
+    ],
+    "rescale_prenorm_residual": false,
+    "use_cache": true,
+    "rms_norm": true,
+    "chunk_size": 8,
+    "tie_word_embeddings": false,
+    "_name_or_path": "",
+    "model_type": "mamba2",
+    "output_attentions": false
+  },
+  "prefill_bit_identical": true,
+  "decode_bit_identical": true,
+  "inference_no_grad": true,
+  "passed": true,
+  "valid_measurement": false,
+  "reason": "Harness used model_forward architecture dispatch, which called the installed reference for both labels. Replaced with direct calls to each version of mixer2_forward."
+}

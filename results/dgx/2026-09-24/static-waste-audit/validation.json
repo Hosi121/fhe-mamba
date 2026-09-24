@@ -1,0 +1,8 @@
+{
+  "derivation_checks": 13,
+  "source_files_unchanged": 111,
+  "document_links": "passed",
+  "ruff_check": "passed after formatting the new derivation script",
+  "production_code_changed_for_this_audit": false,
+  "new_gpu_runs_for_this_audit": 0
+}

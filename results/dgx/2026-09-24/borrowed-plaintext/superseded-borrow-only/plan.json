@@ -1,0 +1,20 @@
+{
+  "question": "Can both evaluators upload pinned NativeInteger arrays directly, preserving all RNS residues and model contracts?",
+  "review_seconds": 7200,
+  "wait_scope": "Wait for preceding model campaign to finish; never build or benchmark over its GPU measurements.",
+  "sequence": [
+    "both exact-RNS probes, 320 borrowed input/format cases each",
+    "same-binary per-model ABBA with direct+move baseline and borrowed candidate",
+    "cached M3 carried-state regression",
+    "full candidate per architecture only if short mean improves"
+  ],
+  "invariants": [
+    "M3 exact and polynomial <=0.001",
+    "M2 polynomial <=0.05",
+    "unchanged input, parameters, counts and selected IDs",
+    "zero intermediate diagnostic decryptions",
+    "immutable CPU plaintext and synchronized borrowed lifetime",
+    "unsupported ABI/modulus/limb layout retains staged transfer"
+  ],
+  "scope": "Borrowing removes the explicit host staging vector; GPU transfer and any driver staging still occur."
+}

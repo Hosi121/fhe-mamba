@@ -19,6 +19,55 @@ This runs:
 All Python tests live in `tests/`: model/approximation unit tests, CLI and
 artifact validation, and repository/native integration contracts. Native C++
 contracts live in `native/fideslib_stage0/tests/` and run through pytest.
+The packed contracts include depth-planner invariants, dense routing oracles
+and bitwise coefficient copies across wraparound, short tails and special
+IEEE-754 values. Native microkernel performance is measured separately on
+[DGX Spark](research/2026-09-24-mamba3-microkernels.md); local CI does not
+establish CUDA speed or encrypted accuracy.
+
+The plaintext-cache contract checks deliberate hash collisions, coefficient
+bits (including signed zero), CKKS levels, LRU eviction and backend ownership.
+It also verifies that dense/non-finite vectors bypass the cache. Encrypted
+accuracy and timing still require a matched run on the target GPU.
+
+The hardware-only `packed_plaintext_probe` checks the plaintext-upload and GPU
+NTT bridge. Its 160 input cases cover 1/32/1024/32768 slots, levels 0/21/34/44,
+scale degrees 1/2 and five coefficient patterns. All RNS residues must equal
+OpenFHE's standard encoding exactly, including NTT batches of 1/4/16/64 limbs.
+It also checks encrypted multiplication at three working levels with a `1e-6`
+error limit. These checks require the pinned OpenFHE/FIDESlib build and a CUDA
+GPU. They supplement the unchanged `0.001` exact/polynomial model gates and
+actual token comparison; CPU CI cannot validate this path. The
+[encoding study](research/2026-09-24-mamba3-gpu-encoding.md) retains raw reports,
+the failed initial allocation probe and the corrected implementation.
+
+The shared preparation policy checks 162 cases for periodic coefficients and
+new/cached degree-2 addends. Run `packed_plaintext_probe OUTPUT.json --mamba2`
+for sparse-ternary keys with complex slots, or omit `--mamba2` for the Mamba-3
+uniform-ternary/real configuration. These probes verify both evaluators' common
+dispatch and keep the existing exact RNS and `1e-6` arithmetic gates.
+The direct-upload path is checked in both evaluation and coefficient formats,
+including all four NTT batch sizes. Earlier archived studies used 54 policy
+cases, before adding the direct-upload modes; the direct-only study used 90
+cases and the coefficient-ownership study used 126.
+
+Borrowed upload checks both plaintext formats for all 160 inputs (320
+input/format cases), all four coefficient NTT widths, unchanged CPU residues
+after upload and the moved-coefficient path. It must actually dispatch the
+borrowed loader on the pinned target. Mirrored preparation samples separate
+ownership transfer from borrowed upload. The shared policy also exercises
+their implicit flags and preserves the periodic CPU encoder.
+
+Native CPU contracts exhaust packed NAF offsets and finite BF16 bit patterns,
+compare compact and double BSGS masks, and protect retained/aliased operands
+from destructive reuse. Stateful CPU tests check the actual backing-storage
+bytes after prefill and verify continuation against full-sequence inference.
+Routing contracts compare destination masks with each original routing stage,
+including dirty padding, gather/scatter and all supported radices. Existing
+BSGS tests separately compare masked transforms with direct indexing.
+The [resource study](research/2026-09-24-packed-resources.md) retains both
+configuration probes, complete model regressions and the corrected storage
+harness alongside its invalid first result.
 
 For focused iteration:
 
@@ -56,7 +105,9 @@ RUN_PRECOMMIT=1 scripts/run_checks.sh
 ## Native C++ contract tests
 
 The FIDESlib-free C++ tests cover payload parsing, layout, planning, depth,
-process-role restrictions, and artifact emission:
+process-role restrictions, artifact emission and packed slot routing. Routing
+tests compare random and model-shaped gather/scatter maps with direct indexing,
+including inactive slots and all supported routing radices:
 
 ```bash
 cmake -S native/fideslib_stage0 -B build/stage0-layout-tests \

@@ -1,0 +1,50 @@
+{
+  "name": "probe-mamba2",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba2-plaintext-20260924/build/packed_plaintext_probe",
+    "/home/kataiwa/fhemamba/mamba2-plaintext-20260924/probe-mamba2/native.json",
+    "--mamba2"
+  ],
+  "started_utc": "2026-09-24T04:27:53.949784+00:00",
+  "timeout_seconds": 300,
+  "allowed_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "environment": {
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "source_manifest_sha256": "dd80095f39eed69ff4f6d159bced9ba994f93128f8a2f2c249ac79ca5aee4e61",
+  "binary_sha256": "7398c43e210f0052bd2e4129d6cb3320ef5f484237f2c199db1127b308a0961b",
+  "pid": 2504927,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 20.36774706840515,
+  "ended_utc": "2026-09-24T04:28:14.326843+00:00",
+  "passed": true,
+  "native_sha256": "560edcc4d1c96a24b5a2896e67834e4af91685327e7753a96a9cd7ccc892d6aa",
+  "checks": {
+    "native_passed": true,
+    "rns": true,
+    "shared_policy": true
+  },
+  "eval_seconds": null
+}

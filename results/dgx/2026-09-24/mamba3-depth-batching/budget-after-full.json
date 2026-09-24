@@ -1,0 +1,50 @@
+{
+  "limit_seconds": 7200.0,
+  "used_seconds": 5746.758415474556,
+  "runs": [
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-layer1-radix8",
+      "charged_seconds": 131.41785372886807
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-layer1-legacy",
+      "charged_seconds": 161.5401721149683
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-full-radix8",
+      "charged_seconds": 2815.6645363559946
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/optimization-synthetic-radix8",
+      "charged_seconds": 56.408373134210706
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-prefix-trace",
+      "charged_seconds": 60.69665998034179
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-layer1-planned",
+      "charged_seconds": 113.70070966240019
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-layer1-single",
+      "charged_seconds": 103.61567582096905
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-planned",
+      "charged_seconds": 348.68054618965834
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-layer1-batch",
+      "charged_seconds": 104.69783264026046
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-batch",
+      "charged_seconds": 309.8227837430313
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-batch",
+      "charged_seconds": 1540.5132721038535
+    }
+  ]
+}

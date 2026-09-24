@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt-final",
+    "/home/kataiwa/fhemamba/mamba3-20260924/gpu-ntt-probe-final/native.json"
+  ],
+  "started_utc": "2026-09-24T02:13:49.664965+00:00",
+  "binary_sha256": "55c97cf885e5901091dc177e04a401856c8106d4bc6a8fa0ab660d7e14e7bdae",
+  "allowed_cpus": [
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "omp_num_threads": "4",
+  "passed": true,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 41.82546588592231,
+  "native_sha256": "b3627360b3443066fcca2f78fbfef0309ebb36128f2bcebc1d0fd6b1f5489bdd",
+  "campaign_used_seconds": 392.1062383549288
+}

@@ -1,0 +1,15 @@
+{
+  "command_prefix": [
+    "env",
+    "LD_LIBRARY_PATH=/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "OMP_NUM_THREADS=4",
+    "taskset",
+    "-c",
+    "15-19",
+    "python3"
+  ],
+  "cpu_allowed_list_observed": "15-19",
+  "cores": "Cortex-X925",
+  "maximum_frequency_khz_per_core": 3900000,
+  "scope": "Both modes of the one-layer three-evaluation generation ABBA use this affinity. Earlier full/prefix measurements did not pin CPU affinity; do not attribute differences across these workloads to scratch reuse."
+}

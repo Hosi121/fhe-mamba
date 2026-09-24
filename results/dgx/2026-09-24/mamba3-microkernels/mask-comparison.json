@@ -1,0 +1,66 @@
+{
+  "hardware": "DGX Spark Cortex-X925 CPU 15, performance governor",
+  "compiler": "GCC 13.3.0 -O3 -std=c++20",
+  "bitwise_equal": true,
+  "allocation_included": true,
+  "warmups_per_block": 10,
+  "samples_per_block": 100,
+  "rows": [
+    {
+      "order": "abba",
+      "coefficients": 24,
+      "scalar_median_ns": 64.0,
+      "spans_median_ns": 48.0,
+      "speedup": 1.3333333333333333
+    },
+    {
+      "order": "abba",
+      "coefficients": 768,
+      "scalar_median_ns": 1136.0,
+      "spans_median_ns": 112.0,
+      "speedup": 10.142857142857142
+    },
+    {
+      "order": "abba",
+      "coefficients": 1024,
+      "scalar_median_ns": 1376.0,
+      "spans_median_ns": 144.0,
+      "speedup": 9.555555555555555
+    },
+    {
+      "order": "abba",
+      "coefficients": 32768,
+      "scalar_median_ns": 43168.0,
+      "spans_median_ns": 3488.0,
+      "speedup": 12.376146788990825
+    },
+    {
+      "order": "baab",
+      "coefficients": 24,
+      "scalar_median_ns": 64.0,
+      "spans_median_ns": 48.0,
+      "speedup": 1.3333333333333333
+    },
+    {
+      "order": "baab",
+      "coefficients": 768,
+      "scalar_median_ns": 1136.0,
+      "spans_median_ns": 112.0,
+      "speedup": 10.142857142857142
+    },
+    {
+      "order": "baab",
+      "coefficients": 1024,
+      "scalar_median_ns": 1376.0,
+      "spans_median_ns": 144.0,
+      "speedup": 9.555555555555555
+    },
+    {
+      "order": "baab",
+      "coefficients": 32768,
+      "scalar_median_ns": 42608.0,
+      "spans_median_ns": 3424.0,
+      "speedup": 12.44392523364486
+    }
+  ]
+}

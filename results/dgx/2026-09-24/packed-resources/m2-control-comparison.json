@@ -1,0 +1,23 @@
+{
+  "base": {
+    "samples": [
+      58.967491642,
+      59.095571969
+    ],
+    "eval_gpu_ntt_encodes": [
+      258,
+      258
+    ]
+  },
+  "direct": {
+    "samples": [
+      55.768854528,
+      55.726442226
+    ],
+    "eval_gpu_ntt_encodes": [
+      258,
+      258
+    ]
+  },
+  "reduction_percent": 5.562931077783806
+}

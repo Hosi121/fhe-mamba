@@ -1,0 +1,80 @@
+{
+  "scope": "Static opportunities, not measured savings; existing completed full runs supply counts and phase ceilings.",
+  "checks": {
+    "m3_raw_hash": true,
+    "m3_existing_run_passed": true,
+    "m2_raw_hash": true,
+    "m2_existing_run_passed": true,
+    "source_manifest": true,
+    "payload_identity": true,
+    "static_ct_ct_matches_recorded": true,
+    "static_cheb_calls_match_recorded": true,
+    "static_linears_match_recorded": true,
+    "static_routing_calls_match_recorded": true,
+    "static_routing_stages_match_recorded": true,
+    "m3_expected_mode": true,
+    "m3_existing_error_gates": true
+  },
+  "m3_accumulator_adds": {
+    "linear_inner": 19920,
+    "linear_outer": 2280,
+    "routing": 29220,
+    "cheb_leaves": 37077,
+    "cheb_recombines": 3459
+  },
+  "m3_outer_clone_candidates": 183912,
+  "m2_joint_multiply_result_copy_candidates_minimum": 8280,
+  "m3_explicit_sync_call_components": {
+    "rotation_steps": 57932,
+    "ct_pt_muls": 107738,
+    "ct_ct_muls": 12005,
+    "identified_accumulator_adds": 91956,
+    "evaluated_nodes": 7814,
+    "single_device_fast_uploads": 61696
+  },
+  "m3_explicit_sync_calls_minimum": 339141,
+  "m3_repeated_weight_diagonal_identities": 17952,
+  "weight_reuse_caveat": "Identity count ignores level/scale compatibility; it is an upper opportunity count, not proven cache hits.",
+  "illustrative_full_weight_rns_cache": {
+    "level": 21,
+    "residues": 24,
+    "single_copy_gib": 52.59375,
+    "scope": "One assumed encoding level, no metadata; CPU and GPU residency can duplicate this."
+  },
+  "m3_existing_profile": {
+    "eval_seconds": 1004.62161828,
+    "bootstrap_seconds": {
+      "seconds": 513.222393775,
+      "percent_of_eval": 51.086138744822314
+    },
+    "host_encoding_seconds": {
+      "seconds": 200.271788571,
+      "percent_of_eval": 19.935046680946684
+    },
+    "plaintext_upload_seconds": {
+      "seconds": 26.59297511,
+      "percent_of_eval": 2.64706379258785
+    },
+    "mask_preparation_seconds": {
+      "seconds": 1.231892547,
+      "percent_of_eval": 0.12262254012700897
+    },
+    "caveat": "Nested counters; do not add these percentages or treat them as removable overhead."
+  },
+  "m2_cache": {
+    "budget_gib": 5,
+    "bytes_cached_gib": 5,
+    "entries_cached": 356,
+    "replicated_cache_hits": 5,
+    "replicated_cache_misses": 22435
+  },
+  "m2_cache_caveat": "Budget estimates one RNS array per entry; uploaded entries can retain a CPU and GPU array. RSS savings are unmeasured.",
+  "deprioritized": {
+    "m2_composite_rotation_steps": 0,
+    "m3_cheb_zero_scalar_adds": 0,
+    "m3_ps_ct_ct_savings": 20,
+    "m3_ps_model_ct_ct_percent": 0.1665972511453561,
+    "m3_ps_scalar_savings": 245,
+    "ps_caveat": "Same symbolic multiply depth and current coefficient cutoff; numerical parity and runtime untested."
+  }
+}

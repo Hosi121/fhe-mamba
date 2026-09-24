@@ -1,0 +1,15 @@
+{
+  "review_seconds": 7200,
+  "used_seconds": 64.67115584015846,
+  "runs": [
+    {
+      "name": "probe-mamba2",
+      "charged_seconds": 31.731817944906652
+    },
+    {
+      "name": "probe-mamba3",
+      "charged_seconds": 32.93933789525181
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

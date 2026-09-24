@@ -1,0 +1,12 @@
+{
+  "samples_in_abba_order": [
+    14.665308077,
+    14.5191603,
+    14.464689982,
+    14.714656376
+  ],
+  "base_mean_seconds": 14.6899822265,
+  "cache_mean_seconds": 14.491925141,
+  "reduction_percent": 1.3482459164771199,
+  "selected_mode": "all"
+}

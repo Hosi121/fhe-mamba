@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+root=/home/kataiwa/fhemamba/mamba3-20260924
+exec /usr/local/bin/nsys profile --trace=cuda --sample=none --cpuctxsw=none \
+  --capture-range=cudaProfilerApi --capture-range-end=stop \
+  --output "$root/micro-profile-inplace" "$root/packed_fideslib-inplace" "$@"

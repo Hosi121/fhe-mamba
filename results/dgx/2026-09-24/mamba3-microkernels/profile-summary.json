@@ -1,0 +1,16 @@
+{
+  "scope": "instrumented 127-node prefix; sums of recorded kernel durations, not exclusive wall time",
+  "recorded_kernel_seconds": 9.468548768,
+  "copy_kernel_seconds": 1.98803344,
+  "ntt_intt_kernel_seconds": 3.23157824,
+  "rotation_keyswitch_kernel_seconds": 1.511962912,
+  "eval_seconds": 21.433361528,
+  "host_encoding_seconds": 7.053727245,
+  "host_encodes": 888,
+  "mask_preparation_seconds": 0.03123058,
+  "candidate_copy_kernel_seconds": 1.561017152,
+  "baseline_copy_kernel_calls": 20454,
+  "candidate_copy_kernel_calls": 15832,
+  "candidate_profile_eval_seconds": 22.920441099,
+  "candidate_profile_host_encoding_seconds": 8.70617925
+}

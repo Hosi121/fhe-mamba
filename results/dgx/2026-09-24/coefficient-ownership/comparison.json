@@ -1,0 +1,177 @@
+{
+  "probes": {
+    "mamba2": {
+      "max_abs_error": 1.73024671534424e-12,
+      "levels": {
+        "21": {
+          "copy": {
+            "median_encode_ms": 4.8428925,
+            "median_preparation_ms": 5.888367000000001
+          },
+          "move": {
+            "median_encode_ms": 4.544524,
+            "median_preparation_ms": 5.618175
+          },
+          "reduction_percent": 4.588572689168336
+        },
+        "26": {
+          "copy": {
+            "median_encode_ms": 4.00257,
+            "median_preparation_ms": 4.811636
+          },
+          "move": {
+            "median_encode_ms": 3.784714,
+            "median_preparation_ms": 4.6296685
+          },
+          "reduction_percent": 3.7818218169454187
+        },
+        "34": {
+          "copy": {
+            "median_encode_ms": 2.7479435,
+            "median_preparation_ms": 3.223961
+          },
+          "move": {
+            "median_encode_ms": 2.617471,
+            "median_preparation_ms": 3.112688
+          },
+          "reduction_percent": 3.451437532898205
+        }
+      }
+    },
+    "mamba3": {
+      "max_abs_error": 2.58076322336517e-12,
+      "levels": {
+        "21": {
+          "copy": {
+            "median_encode_ms": 4.9552130000000005,
+            "median_preparation_ms": 6.003568
+          },
+          "move": {
+            "median_encode_ms": 4.63766,
+            "median_preparation_ms": 5.733359
+          },
+          "reduction_percent": 4.5008068535244306
+        },
+        "26": {
+          "copy": {
+            "median_encode_ms": 4.101651,
+            "median_preparation_ms": 4.933093
+          },
+          "move": {
+            "median_encode_ms": 3.862922,
+            "median_preparation_ms": 4.726781
+          },
+          "reduction_percent": 4.182203741141722
+        },
+        "34": {
+          "copy": {
+            "median_encode_ms": 2.733167,
+            "median_preparation_ms": 3.228025
+          },
+          "move": {
+            "median_encode_ms": 2.603719,
+            "median_preparation_ms": 3.1174720000000002
+          },
+          "reduction_percent": 3.4247876023264956
+        }
+      }
+    }
+  },
+  "short": {
+    "m3": {
+      "samples_in_abba_order": [
+        15.418610918,
+        15.12135597,
+        15.186625135,
+        15.444480885
+      ],
+      "base_mean_seconds": 15.431545901500002,
+      "move_mean_seconds": 15.1539905525,
+      "reduction_percent": 1.798623098240748
+    },
+    "m2": {
+      "samples_in_abba_order": [
+        55.407169468,
+        55.963695922,
+        55.28675059,
+        55.311590449
+      ],
+      "base_mean_seconds": 55.3593799585,
+      "move_mean_seconds": 55.625223256,
+      "reduction_percent": -0.48021364708075165
+    }
+  },
+  "full": {
+    "m3": {
+      "eval_seconds": 1038.77734995,
+      "max_exact_error": 0.000171286110668,
+      "max_polynomial_error": 0.000169519445005,
+      "peak_rss_gib": 27.3139457703,
+      "moved_coefficient_encodes": 61696
+    },
+    "m2": {
+      "skipped": "No improvement in the mirrored short mean; retain preceding full candidate."
+    }
+  },
+  "cache": {
+    "hits": 236,
+    "max_exact_error": 7.72266096072e-08,
+    "max_polynomial_error": 4.08066636037e-12
+  },
+  "budget": {
+    "review_seconds": 7200,
+    "used_seconds": 1695.2053185822442,
+    "runs": [
+      {
+        "name": "probe-mamba2",
+        "charged_seconds": 33.34514267463237
+      },
+      {
+        "name": "probe-mamba3",
+        "charged_seconds": 33.89689949341118
+      },
+      {
+        "name": "m3-1-base",
+        "charged_seconds": 44.02512025553733
+      },
+      {
+        "name": "m3-2-move",
+        "charged_seconds": 43.67953708767891
+      },
+      {
+        "name": "m3-3-move",
+        "charged_seconds": 43.74519204720855
+      },
+      {
+        "name": "m3-4-base",
+        "charged_seconds": 44.14424676075578
+      },
+      {
+        "name": "m2-1-base",
+        "charged_seconds": 82.49918770883232
+      },
+      {
+        "name": "m2-2-move",
+        "charged_seconds": 82.36606748495251
+      },
+      {
+        "name": "m2-3-move",
+        "charged_seconds": 81.62811730802059
+      },
+      {
+        "name": "m2-4-base",
+        "charged_seconds": 82.52426723018289
+      },
+      {
+        "name": "cache-move",
+        "charged_seconds": 44.36484676320106
+      },
+      {
+        "name": "m3-full-move",
+        "charged_seconds": 1078.9866937678307
+      }
+    ],
+    "scope": "Internal review interval, not a newly inferred user spending limit."
+  },
+  "scope": "Same-binary short ABBA establishes incremental timings; single full candidates check completion/parity."
+}

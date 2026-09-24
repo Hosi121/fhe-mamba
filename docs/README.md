@@ -11,6 +11,7 @@ generation. Commands use the repository root as their working directory.
 | [Reproduction](reproducing.md) | A complete path from checkout to the measured workload |
 | [DGX Spark](dgx-spark.md) | Native dependencies, builds, machine requirements and campaigns |
 | [Python package](package.md) | Model, operator, layout and CLI modules |
+| [Mamba-3](mamba3.md) | Trained SISO model, common arithmetic backend and complete encrypted generation |
 | [Repository layout](repository.md) | File ownership, generated outputs and previous paths |
 | [Testing](testing.md) | Formatting, Python tests, coverage, C++ contracts and artifact checks |
 | [Research validation](validation.md) | Approximation quality, encrypted probes and GPU promotion gates |

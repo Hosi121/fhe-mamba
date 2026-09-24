@@ -1,0 +1,15 @@
+{
+  "scope": "one trained layer, three evaluations; one sample per variant",
+  "same_binary": "17f506416b4a0d1934b202d826916eebdbe849c09a41b5f19295f4fb45cac029",
+  "same_manifest": "f3979518293ac0f29c4638c783b1157d3a02c7a2786d2a76ef0e484d36a8eec4",
+  "same_program": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917",
+  "baseline_eval_seconds": 130.169496789,
+  "candidate_eval_seconds": 100.830729924,
+  "speedup": 1.290970489721871,
+  "reduction_percent": 22.538895508336388,
+  "baseline_bootstraps": 134,
+  "candidate_bootstraps": 62,
+  "baseline_error_exact": 3.3299324075e-05,
+  "candidate_error_exact": 2.03944276502e-05,
+  "tokens_equal": true
+}

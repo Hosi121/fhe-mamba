@@ -1,0 +1,1392 @@
+[stage1_mamba2_decode_fideslib] bsgs layout mode=auto in_proj r=7 window=3840 diagonals=110 baby=10 out_proj r=20 window=1536 diagonals=77 baby=8 rss_gib=1.78633 peak_rss_gib=1.78633
+[stage1_mamba2_decode_fideslib] rotation key plan mode=balanced required=101 keys=103 base=32 est_gib=18.105469 planned_composite_apps_per_token=0.000000 rss_gib=1.78633 peak_rss_gib=1.78633
+[stage1_mamba2_decode_fideslib] no-bootstrap ledger per token output: 76 74 74 74 74; segment map: residual->18 proj->12 fifo->12 conv->7 dt->6 decay->3 state_pre->5 state_tail->4 y->18 newton->14 (max segment 18 + bootstrap output 18 vs depth 44) rss_gib=1.78639 peak_rss_gib=1.78639
+[stage1_mamba2_decode_fideslib] payload loaded d_model=768 proj_dim=3352 groups=6 layers=24/24 rotation_keys=101 rss_gib=1.78639 peak_rss_gib=1.78639
+[stage1_mamba2_decode_fideslib] context setup begin rss_gib=1.78639 peak_rss_gib=1.78639
+[stage1_mamba2_decode_fideslib] context setup done rss_gib=2.31307 peak_rss_gib=2.31307
+[stage1_mamba2_decode_fideslib] rotation keygen begin mode=balanced count=103 rss_gib=2.31307 peak_rss_gib=2.31307
+[stage1_mamba2_decode_fideslib] rotation keygen done rss_gib=23.3861 peak_rss_gib=23.3861
+[stage1_mamba2_decode_fideslib] bootstrap setup/keygen begin rss_gib=23.3861 peak_rss_gib=23.3861
+[stage1_mamba2_decode_fideslib] bootstrap setup/keygen done rss_gib=30.8848 peak_rss_gib=33.4493
+[stage1_mamba2_decode_fideslib] load context begin rss_gib=30.8848 peak_rss_gib=33.4493
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 150 ~ 3900MB
+Rotation keys loaded: 115 ~ 20700MB
+[stage1_mamba2_decode_fideslib] load context done rss_gib=32.2439 peak_rss_gib=33.4493
+[stage1_mamba2_decode_fideslib] encode self test passed threads=8 diagonals=32 rss_gib=31.4087 peak_rss_gib=33.4493
+[stage1_mamba2_decode_fideslib] pt cache encode begin mode=full registered=5048 registered_gib=65.351562 selected=356 selected_gib=5.000000 threads=8 rss_gib=31.1314 peak_rss_gib=33.4493
+[stage1_mamba2_decode_fideslib] pt cache encode done cached=356/5048 bytes_gib=5.000000 rss_gib=35.8623 peak_rss_gib=35.8623
+[stage1_mamba2_decode_fideslib] pt reuse check passed (EvalMult left the shared plaintext intact) rss_gib=35.8551 peak_rss_gib=35.8775
+[stage1_mamba2_decode_fideslib] token loop begin tokens=5 layers=24 rss_gib=35.8551 peak_rss_gib=35.8775
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.conv_silu level_before=37 level_after=21 rss_gib=36.0172 peak_rss_gib=36.0764
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.dt level_before=38 level_after=21 rss_gib=36.0212 peak_rss_gib=36.0764
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.y_scaled level_before=37 level_after=21 rss_gib=36.0226 peak_rss_gib=36.0764
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.0226 peak_rss_gib=36.0764
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L00.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.0226 peak_rss_gib=36.0764
+[stage1_mamba2_decode_fideslib] t0.L00 done output_level=29 bootstraps=5 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.residual level_before=29 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.proj level_before=29 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.dt level_before=35 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.y_scaled level_before=38 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L01.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] t0.L01 done output_level=33 bootstraps=8 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.residual level_before=33 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.proj level_before=29 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.dt level_before=35 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.y_scaled level_before=38 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L02.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.0603 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] t0.L02 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.proj level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L03.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] t0.L03 done output_level=35 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.residual level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.proj level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.dt level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L04.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] t0.L04 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.proj level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L05.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] t0.L05 done output_level=33 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.residual level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.proj level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.dt level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L06.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7532
+[stage1_mamba2_decode_fideslib] t0.L06 done output_level=29 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.residual level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.proj level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L07.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] t0.L07 done output_level=33 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.residual level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.proj level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L08.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] t0.L08 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L09.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] t0.L09 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L10.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] t0.L10 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L11.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] t0.L11 done output_level=33 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.residual level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L12.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] t0.L12 done output_level=33 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.residual level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L13.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7669
+[stage1_mamba2_decode_fideslib] t0.L13 done output_level=29 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.residual level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L14.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.7674
+[stage1_mamba2_decode_fideslib] t0.L14 done output_level=27 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.residual level_before=27 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L15.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] t0.L15 done output_level=33 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.residual level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L16.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] t0.L16 done output_level=29 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.residual level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.proj level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L17.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] t0.L17 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.proj level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L18.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] t0.L18 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.proj level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L19.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] t0.L19 done output_level=29 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.residual level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.proj level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L20.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] t0.L20 done output_level=31 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.residual level_before=31 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.proj level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L21.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8435
+[stage1_mamba2_decode_fideslib] t0.L21 done output_level=27 bootstraps=8 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L22.residual level_before=27 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L22.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L22.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L22.proj level_before=33 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L22.dt level_before=34 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L22.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L22.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t0.L22 done output_level=37 bootstraps=7 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L23.residual level_before=37 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L23.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L23.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L23.proj level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L23.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L23.y_scaled level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.L23.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t0.L23 done output_level=35 bootstraps=7 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.final_norm_scaled.scheduled_norm_input level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.final.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t0.final.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] token 0 done output_level=35 bootstraps=190 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.conv_silu level_before=37 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.dt level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.decay level_before=38 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.y_scaled level_before=37 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L00.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L00 done output_level=29 bootstraps=6 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.residual level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.proj level_before=29 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.dt level_before=35 level_after=21 rss_gib=36.4871 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L01.state_post0+t1.L01.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L01.state_post2+t1.L01.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L01.state_post4+t1.L01.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.y_scaled level_before=37 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L01.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L01 done output_level=33 bootstraps=14 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.residual level_before=33 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.proj level_before=29 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.dt level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L02.state_post0+t1.L02.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L02.state_post2+t1.L02.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L02.state_post4+t1.L02.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.y_scaled level_before=37 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L02.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L02 done output_level=31 bootstraps=14 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.residual level_before=31 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.proj level_before=29 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.dt level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L03.state_post0+t1.L03.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L03.state_post2+t1.L03.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L03.state_post4+t1.L03.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.y_scaled level_before=37 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L03.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L03 done output_level=35 bootstraps=14 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.residual level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.proj level_before=29 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.dt level_before=36 level_after=21 rss_gib=36.4869 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L04.state_post0+t1.L04.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L04.state_post2+t1.L04.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L04.state_post4+t1.L04.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L04.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L04 done output_level=31 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.residual level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.proj level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.dt level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L05.state_post0+t1.L05.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L05.state_post2+t1.L05.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L05.state_post4+t1.L05.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L05.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L05 done output_level=33 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.residual level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.proj level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.dt level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L06.state_post0+t1.L06.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L06.state_post2+t1.L06.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L06.state_post4+t1.L06.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L06.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L06 done output_level=29 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.residual level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.proj level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.dt level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L07.state_post0+t1.L07.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L07.state_post2+t1.L07.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L07.state_post4+t1.L07.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L07.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L07 done output_level=33 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.residual level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.proj level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L08.state_post0+t1.L08.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L08.state_post2+t1.L08.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L08.state_post4+t1.L08.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L08.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L08 done output_level=31 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.residual level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L09.state_post0+t1.L09.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L09.state_post2+t1.L09.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L09.state_post4+t1.L09.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L09.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L09 done output_level=31 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.residual level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.dt level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L10.state_post0+t1.L10.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L10.state_post2+t1.L10.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L10.state_post4+t1.L10.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L10.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L10 done output_level=31 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.residual level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L11.state_post0+t1.L11.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L11.state_post2+t1.L11.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L11.state_post4+t1.L11.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L11.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L11 done output_level=33 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.residual level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L12.state_post0+t1.L12.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L12.state_post2+t1.L12.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L12.state_post4+t1.L12.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L12.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L12 done output_level=33 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.residual level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L13.state_post0+t1.L13.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L13.state_post2+t1.L13.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L13.state_post4+t1.L13.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L13.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L13 done output_level=29 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.residual level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L14.state_post0+t1.L14.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L14.state_post2+t1.L14.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L14.state_post4+t1.L14.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L14.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.8455
+[stage1_mamba2_decode_fideslib] t1.L14 done output_level=27 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.residual level_before=27 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L15.state_post0+t1.L15.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L15.state_post2+t1.L15.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L15.state_post4+t1.L15.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L15.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L15 done output_level=33 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.residual level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.dt level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L16.state_post0+t1.L16.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L16.state_post2+t1.L16.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L16.state_post4+t1.L16.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L16.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L16 done output_level=29 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.residual level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.proj level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L17.state_post0+t1.L17.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L17.state_post2+t1.L17.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L17.state_post4+t1.L17.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L17.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L17 done output_level=31 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.residual level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.proj level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L18.state_post0+t1.L18.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L18.state_post2+t1.L18.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L18.state_post4+t1.L18.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L18.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L18 done output_level=31 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.residual level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.proj level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.dt level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L19.state_post0+t1.L19.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L19.state_post2+t1.L19.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L19.state_post4+t1.L19.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L19.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L19 done output_level=29 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.residual level_before=29 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.proj level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.dt level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L20.state_post0+t1.L20.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L20.state_post2+t1.L20.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L20.state_post4+t1.L20.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L20.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L20 done output_level=31 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.residual level_before=31 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.proj level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L21.state_post0+t1.L21.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L21.state_post2+t1.L21.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L21.state_post4+t1.L21.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L21.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L21 done output_level=27 bootstraps=14 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L22.residual level_before=27 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L22.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L22.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L22.proj level_before=33 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L22.dt level_before=34 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L22.state_post0+t1.L22.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L22.state_post2+t1.L22.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L22.state_post4+t1.L22.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L22.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L22.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L22 done output_level=37 bootstraps=13 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L23.residual level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L23.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L23.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L23.proj level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L23.dt level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L23.state_post0+t1.L23.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L23.state_post2+t1.L23.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t1.L23.state_post4+t1.L23.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L23.y_scaled level_before=37 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.L23.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t1.L23 done output_level=35 bootstraps=13 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.final_norm_scaled.scheduled_norm_input level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.final.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t1.final.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] autoregressive client round trip after token 1 selected_id=273 poly_max_abs_error=0.002759 exact_max_abs_error=0.020107 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] token 1 done output_level=35 bootstraps=329 rss_gib=36.4867 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L00.conv_silu level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L00.dt level_before=38 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L00.decay level_before=38 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L00.state_post0+t2.L00.state_post1 levels_before=26/26 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L00.state_post2+t2.L00.state_post3 levels_before=26/26 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L00.state_post4+t2.L00.state_post5 levels_before=26/26 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L00.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L00.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L00.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L00 done output_level=29 bootstraps=12 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L01.state_post0+t2.L01.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L01.state_post2+t2.L01.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L01.state_post4+t2.L01.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L01.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L01 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L02.state_post0+t2.L02.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L02.state_post2+t2.L02.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L02.state_post4+t2.L02.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L02.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L02 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L03.state_post0+t2.L03.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L03.state_post2+t2.L03.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L03.state_post4+t2.L03.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L03.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L03 done output_level=35 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.residual level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.dt level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L04.state_post0+t2.L04.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L04.state_post2+t2.L04.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L04.state_post4+t2.L04.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L04.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L04 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L05.state_post0+t2.L05.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L05.state_post2+t2.L05.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L05.state_post4+t2.L05.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L05.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L05 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.dt level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L06.state_post0+t2.L06.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L06.state_post2+t2.L06.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L06.state_post4+t2.L06.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L06.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L06 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L07.state_post0+t2.L07.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L07.state_post2+t2.L07.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L07.state_post4+t2.L07.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L07.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L07 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L08.state_post0+t2.L08.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L08.state_post2+t2.L08.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L08.state_post4+t2.L08.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L08.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L08 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L09.state_post0+t2.L09.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L09.state_post2+t2.L09.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L09.state_post4+t2.L09.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L09.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L09 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L10.state_post0+t2.L10.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L10.state_post2+t2.L10.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L10.state_post4+t2.L10.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L10.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L10 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L11.state_post0+t2.L11.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L11.state_post2+t2.L11.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L11.state_post4+t2.L11.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L11.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L11 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L12.state_post0+t2.L12.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L12.state_post2+t2.L12.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L12.state_post4+t2.L12.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L12.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L12 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L13.state_post0+t2.L13.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L13.state_post2+t2.L13.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L13.state_post4+t2.L13.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L13.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L13 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L14.state_post0+t2.L14.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L14.state_post2+t2.L14.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L14.state_post4+t2.L14.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L14.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.9181
+[stage1_mamba2_decode_fideslib] t2.L14 done output_level=27 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.residual level_before=27 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L15.state_post0+t2.L15.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L15.state_post2+t2.L15.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L15.state_post4+t2.L15.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L15.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L15 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L16.state_post0+t2.L16.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L16.state_post2+t2.L16.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L16.state_post4+t2.L16.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L16.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L16 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L17.state_post0+t2.L17.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L17.state_post2+t2.L17.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L17.state_post4+t2.L17.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L17.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L17 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L18.state_post0+t2.L18.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L18.state_post2+t2.L18.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L18.state_post4+t2.L18.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L18.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L18 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L19.state_post0+t2.L19.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L19.state_post2+t2.L19.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L19.state_post4+t2.L19.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L19.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L19 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L20.state_post0+t2.L20.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L20.state_post2+t2.L20.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L20.state_post4+t2.L20.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L20.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L20 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L21.state_post0+t2.L21.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L21.state_post2+t2.L21.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L21.state_post4+t2.L21.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L21.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L21 done output_level=27 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L22.residual level_before=27 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L22.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L22.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L22.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L22.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L22.state_post0+t2.L22.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L22.state_post2+t2.L22.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L22.state_post4+t2.L22.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L22.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L22.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L22 done output_level=37 bootstraps=13 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L23.residual level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L23.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L23.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L23.proj level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L23.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L23.state_post0+t2.L23.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L23.state_post2+t2.L23.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t2.L23.state_post4+t2.L23.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L23.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.L23.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t2.L23 done output_level=35 bootstraps=13 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.final_norm_scaled.scheduled_norm_input level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.final.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t2.final.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] autoregressive client round trip after token 2 selected_id=253 poly_max_abs_error=0.005044 exact_max_abs_error=0.025877 rss_gib=36.4872 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] token 2 done output_level=35 bootstraps=335 rss_gib=36.4872 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L00.conv_silu level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L00.dt level_before=38 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L00.decay level_before=38 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L00.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L00.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L00.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L00 done output_level=29 bootstraps=6 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L01.state_post0+t3.L01.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L01.state_post2+t3.L01.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L01.state_post4+t3.L01.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L01.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L01 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L02.state_post0+t3.L02.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L02.state_post2+t3.L02.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L02.state_post4+t3.L02.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L02.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L02 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L03.state_post0+t3.L03.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L03.state_post2+t3.L03.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L03.state_post4+t3.L03.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L03.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L03 done output_level=35 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.residual level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.dt level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L04.state_post0+t3.L04.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L04.state_post2+t3.L04.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L04.state_post4+t3.L04.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L04.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L04 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L05.state_post0+t3.L05.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L05.state_post2+t3.L05.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L05.state_post4+t3.L05.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L05.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L05 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.dt level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L06.state_post0+t3.L06.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L06.state_post2+t3.L06.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L06.state_post4+t3.L06.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L06.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L06 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L07.state_post0+t3.L07.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L07.state_post2+t3.L07.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L07.state_post4+t3.L07.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L07.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L07 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L08.state_post0+t3.L08.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L08.state_post2+t3.L08.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L08.state_post4+t3.L08.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L08.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L08 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L09.state_post0+t3.L09.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L09.state_post2+t3.L09.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L09.state_post4+t3.L09.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L09.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L09 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L10.state_post0+t3.L10.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L10.state_post2+t3.L10.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L10.state_post4+t3.L10.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L10.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L10 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L11.state_post0+t3.L11.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L11.state_post2+t3.L11.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L11.state_post4+t3.L11.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L11.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L11 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L12.state_post0+t3.L12.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L12.state_post2+t3.L12.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L12.state_post4+t3.L12.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L12.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L12 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L13.state_post0+t3.L13.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L13.state_post2+t3.L13.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L13.state_post4+t3.L13.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L13.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L13 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L14.state_post0+t3.L14.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L14.state_post2+t3.L14.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L14.state_post4+t3.L14.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L14.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=36.973
+[stage1_mamba2_decode_fideslib] t3.L14 done output_level=27 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.residual level_before=27 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L15.state_post0+t3.L15.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L15.state_post2+t3.L15.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L15.state_post4+t3.L15.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L15.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L15 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L16.state_post0+t3.L16.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L16.state_post2+t3.L16.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L16.state_post4+t3.L16.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L16.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L16 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L17.state_post0+t3.L17.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L17.state_post2+t3.L17.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L17.state_post4+t3.L17.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L17.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L17 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L18.state_post0+t3.L18.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L18.state_post2+t3.L18.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L18.state_post4+t3.L18.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L18.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L18 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L19.state_post0+t3.L19.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L19.state_post2+t3.L19.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L19.state_post4+t3.L19.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L19.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L19 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L20.state_post0+t3.L20.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L20.state_post2+t3.L20.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L20.state_post4+t3.L20.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L20.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L20 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L21.state_post0+t3.L21.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L21.state_post2+t3.L21.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L21.state_post4+t3.L21.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L21.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L21 done output_level=27 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L22.residual level_before=27 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L22.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L22.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L22.proj level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L22.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L22.state_post0+t3.L22.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L22.state_post2+t3.L22.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L22.state_post4+t3.L22.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L22.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L22.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L22 done output_level=37 bootstraps=13 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L23.residual level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L23.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L23.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L23.proj level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L23.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L23.state_post0+t3.L23.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L23.state_post2+t3.L23.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t3.L23.state_post4+t3.L23.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L23.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.L23.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t3.L23 done output_level=35 bootstraps=13 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.final_norm_scaled.scheduled_norm_input level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.final.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t3.final.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] autoregressive client round trip after token 3 selected_id=4687 poly_max_abs_error=0.003548 exact_max_abs_error=0.010560 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] token 3 done output_level=35 bootstraps=329 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L00.conv_silu level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L00.dt level_before=38 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L00.decay level_before=38 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L00.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L00.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L00.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L00 done output_level=29 bootstraps=6 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L01.state_post0+t4.L01.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L01.state_post2+t4.L01.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L01.state_post4+t4.L01.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L01.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L01 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L02.state_post0+t4.L02.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L02.state_post2+t4.L02.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L02.state_post4+t4.L02.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L02.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L02 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L03.state_post0+t4.L03.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L03.state_post2+t4.L03.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L03.state_post4+t4.L03.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L03.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L03 done output_level=35 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.residual level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.dt level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L04.state_post0+t4.L04.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L04.state_post2+t4.L04.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L04.state_post4+t4.L04.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L04.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L04 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L05.state_post0+t4.L05.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L05.state_post2+t4.L05.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L05.state_post4+t4.L05.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L05.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L05 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.dt level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L06.state_post0+t4.L06.state_post1 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L06.state_post2+t4.L06.state_post3 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L06.state_post4+t4.L06.state_post5 levels_before=38/38 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L06.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L06 done output_level=29 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.residual level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L07.state_post0+t4.L07.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L07.state_post2+t4.L07.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L07.state_post4+t4.L07.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L07.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L07 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.proj level_before=29 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L08.state_post0+t4.L08.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L08.state_post2+t4.L08.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L08.state_post4+t4.L08.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L08.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L08 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L09.state_post0+t4.L09.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L09.state_post2+t4.L09.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L09.state_post4+t4.L09.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L09.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L09 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.dt level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L10.state_post0+t4.L10.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L10.state_post2+t4.L10.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L10.state_post4+t4.L10.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L10.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L10 done output_level=31 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.residual level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L11.state_post0+t4.L11.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L11.state_post2+t4.L11.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L11.state_post4+t4.L11.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L11.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L11 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L12.state_post0+t4.L12.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L12.state_post2+t4.L12.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L12.state_post4+t4.L12.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L12.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L12 done output_level=33 bootstraps=14 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.residual level_before=33 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.proj level_before=31 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.dt level_before=34 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L13.state_post0+t4.L13.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L13.state_post2+t4.L13.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L13.state_post4+t4.L13.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.y_scaled level_before=37 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L13.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4873 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L13 done output_level=29 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.residual level_before=29 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.proj level_before=31 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.dt level_before=34 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L14.state_post0+t4.L14.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L14.state_post2+t4.L14.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L14.state_post4+t4.L14.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L14.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.0179
+[stage1_mamba2_decode_fideslib] t4.L14 done output_level=27 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.residual level_before=27 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.proj level_before=31 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.dt level_before=34 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L15.state_post0+t4.L15.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L15.state_post2+t4.L15.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L15.state_post4+t4.L15.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L15.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L15 done output_level=33 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.residual level_before=33 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.proj level_before=31 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.dt level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L16.state_post0+t4.L16.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L16.state_post2+t4.L16.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L16.state_post4+t4.L16.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L16.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L16 done output_level=29 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.residual level_before=29 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.proj level_before=31 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.dt level_before=34 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L17.state_post0+t4.L17.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L17.state_post2+t4.L17.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L17.state_post4+t4.L17.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L17.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L17 done output_level=31 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.residual level_before=31 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.proj level_before=33 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.dt level_before=34 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L18.state_post0+t4.L18.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L18.state_post2+t4.L18.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L18.state_post4+t4.L18.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L18.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L18 done output_level=31 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.residual level_before=31 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.proj level_before=33 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.dt level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L19.state_post0+t4.L19.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L19.state_post2+t4.L19.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L19.state_post4+t4.L19.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L19.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L19 done output_level=29 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.residual level_before=29 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.proj level_before=33 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.dt level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L20.state_post0+t4.L20.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L20.state_post2+t4.L20.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L20.state_post4+t4.L20.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L20.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L20 done output_level=31 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.residual level_before=31 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.proj level_before=33 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.dt level_before=34 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L21.state_post0+t4.L21.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L21.state_post2+t4.L21.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L21.state_post4+t4.L21.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L21.gated.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L21 done output_level=27 bootstraps=14 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L22.residual level_before=27 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L22.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L22.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L22.proj level_before=33 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L22.dt level_before=34 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L22.state_post0+t4.L22.state_post1 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L22.state_post2+t4.L22.state_post3 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L22.state_post4+t4.L22.state_post5 levels_before=36/36 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L22.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L22.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L22 done output_level=37 bootstraps=13 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L23.residual level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L23.block.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L23.block.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L23.proj level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L23.dt level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L23.state_post0+t4.L23.state_post1 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L23.state_post2+t4.L23.state_post3 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] complex-paired state bootstrap t4.L23.state_post4+t4.L23.state_post5 levels_before=37/37 level_after=20 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L23.y_scaled level_before=37 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.L23.gated.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] t4.L23 done output_level=35 bootstraps=13 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.final_norm_scaled.scheduled_norm_input level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.final.scheduled_norm.5 level_before=35 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] auto bootstrap t4.final.scheduled_norm.11 level_before=36 level_after=21 rss_gib=36.4872 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] autoregressive client round trip after token 4 selected_id=273 poly_max_abs_error=0.002097 exact_max_abs_error=0.062586 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] token 4 done output_level=35 bootstraps=329 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] token loop done rotations=47667 ct_pt=275673 ct_ct=32701 bootstraps=2187 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] decrypt begin rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] token 0 max_abs_error=0.000419 max_abs_error_vs_exact=0.011654 non_finite_slots=0 slot0=-0.116992 ref0=-0.116994 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] token 1 max_abs_error=0.002759 max_abs_error_vs_exact=0.020107 non_finite_slots=0 slot0=-0.162197 ref0=-0.162101 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] token 2 max_abs_error=0.005044 max_abs_error_vs_exact=0.025877 non_finite_slots=0 slot0=-0.071685 ref0=-0.071637 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] token 3 max_abs_error=0.003548 max_abs_error_vs_exact=0.010560 non_finite_slots=0 slot0=-0.098352 ref0=-0.098316 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] token 4 max_abs_error=0.002097 max_abs_error_vs_exact=0.062586 non_finite_slots=0 slot0=0.010717 ref0=0.010691 rss_gib=36.4871 peak_rss_gib=37.063
+[stage1_mamba2_decode_fideslib] decrypt done rss_gib=36.4871 peak_rss_gib=37.063

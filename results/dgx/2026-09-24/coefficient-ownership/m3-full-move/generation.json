@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "complete_backbone": true,
+  "layers": 12,
+  "prompt": "The capital",
+  "generated_token_ids": [
+    315,
+    279,
+    1614,
+    315
+  ],
+  "generated_text": " of the state of",
+  "text": "The capital of the state of",
+  "eval_seconds": 1038.77734995,
+  "max_abs_error_vs_polynomial": 0.000169519445005,
+  "max_abs_error_vs_exact": 0.000171286110668,
+  "security": "not-set",
+  "client_protocol": "tied vocabulary head and greedy selection from actual decrypted final hidden; fresh encrypted embedding feedback"
+}

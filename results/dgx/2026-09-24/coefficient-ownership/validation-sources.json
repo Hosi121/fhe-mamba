@@ -1,0 +1,9 @@
+{
+  "scope": "Python runner assertion corrected after native build snapshot: derive suffix length from expected flags. Native compiled sources unchanged.",
+  "overlay": {
+    "tests/test_packed_probe_runner.py": {
+      "file": "validation/test_packed_probe_runner.py",
+      "sha256": "bae867da808662f3ad29c731ae6694581e795175fab1b5f9f7a62f3347d165f6"
+    }
+  }
+}

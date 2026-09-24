@@ -1,0 +1,13 @@
+{
+  "allowed_cpus": [
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "omp_num_threads": 4,
+  "modes": "c",
+  "profile": true,
+  "cache": false
+}

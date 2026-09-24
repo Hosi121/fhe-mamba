@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "upstream_commit": "e9594ce1c732d97440f0332fdc43170a2294dbfa",
+  "tolerance": 1e-07,
+  "precision_note": "upstream preprocessing casts A to float32; our oracle keeps float64",
+  "source_sha256": {
+    "mamba_ssm/modules/mamba3.py": "930c3dfa04dea8444b1c9ee8b6ac9cbbc7ef492dc5ae1f4c83051ef953eca33c",
+    "mamba_ssm/ops/triton/mamba3/mamba3_mimo_rotary_step.py": "e117b5da3d2ddfcfa66673a88dfd88a6d688100291d3b6a1b0b3c24c82ef79d6",
+    "mamba_ssm/ops/cute/mamba3/mamba3_step_fn.py": "5c82f3936308cfc90bb3bcdfd410c60fc80dfc3afe72c4338831341398cd7ca4"
+  },
+  "cases": [
+    {
+      "rope_fraction": 0.5,
+      "outproj_norm": false,
+      "output_max_abs_error": 1.1959838674968637e-10,
+      "state_max_abs_error": 4.134008690925839e-10
+    },
+    {
+      "rope_fraction": 0.5,
+      "outproj_norm": true,
+      "output_max_abs_error": 2.291759559902573e-10,
+      "state_max_abs_error": 4.134008690925839e-10
+    },
+    {
+      "rope_fraction": 1.0,
+      "outproj_norm": false,
+      "output_max_abs_error": 1.1015749423748389e-10,
+      "state_max_abs_error": 1.6471612962476456e-10
+    },
+    {
+      "rope_fraction": 1.0,
+      "outproj_norm": true,
+      "output_max_abs_error": 1.1636233643308458e-10,
+      "state_max_abs_error": 1.6471612962476456e-10
+    }
+  ],
+  "scope": "upstream CPU reference parity; no fused CUDA kernel validation"
+}

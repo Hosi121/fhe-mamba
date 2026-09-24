@@ -9,6 +9,7 @@ broader horizons and client/server separation remain explicit gates.
 
 | ID | Priority | State | Acceptance |
 |---|---|---|---|
+| PBI-M3-001 | P1 | Full generation and optimization composition checked | Trained SISO 187M on GB10: selected 12×5 completion **16.27 minutes**, all four IDs match, exact error 0.00016661 at unchanged 0.001 gates. [Upload/routing evidence](research/2026-09-24-borrowed-plaintext.md), [cache composition and adoption](research/2026-09-24-packed-cache-integration.md), [coefficient ownership control](research/2026-09-24-coefficient-ownership.md). Shared borrowed upload also passes Mamba-2 full generation; its coefficient moves remain off. Frozen sources, binaries, negative controls and finite campaign ledgers are preserved. Remaining: persistent state co-location, safe preparation overlap, repeated keys/prompts, longer horizons and certified domains. |
 | PBI-SPARK-001 | P0 | Implemented | Isolated CUDA 13 / SM121 build, source/binary/library provenance, calibrated payload, memory-aware preflight and reproducible launch command. See `docs/dgx-spark.md`. |
 | PBI-SPARK-002 | P0 | 24×1 gate passes | Four matched ABBA runs pass with tracked raw JSON: keys 137→103, mean peak RSS 41.85→36.17 GiB. No demonstrated evaluation latency gain; multi-token promotion remains PBI-M4-002. |
 | PBI-SPARK-003 | P0 | Fixed; 24×1 repeated gate passes | Correct same-level plaintext-addition scale degree. GPU micro-probe and four fresh-key, zero-debug 24-layer runs pass; keep negative artifacts. Extend payload/horizon coverage separately. |

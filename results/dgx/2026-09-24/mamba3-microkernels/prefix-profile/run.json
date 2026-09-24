@@ -1,0 +1,27 @@
+{
+  "schema": "fhemamba-packed-run-v1",
+  "started_utc": "2026-09-23T20:42:40.154419+00:00",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/microkernels/profile-packed",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1-prefix/program.txt",
+    "/home/kataiwa/fhemamba/mamba3-20260924/micro-prefix-profile/native.json",
+    "0.001",
+    "0.001",
+    "--planned-refresh",
+    "--batch-refresh",
+    "--profile-evaluation"
+  ],
+  "binary_sha256": "490015780a30114ecb8ed0f574b2aa2ad2e70e64366833bb5576fa2b34d8275e",
+  "manifest_sha256": "f836bff8529a8c0252a4e910253e6f4dc8dc2dde7786be3e70b71b5b1136ef1e",
+  "program_sha256": "327df6348ae284e613ea8a0493def98cb70499034807b7a92fec4d9da8fcc607",
+  "timeout_seconds": 300.0,
+  "architecture": "mamba3",
+  "tokens": 1,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 54.05282242782414,
+  "passed": true,
+  "native_sha256": "d296e51b90359ff4b45ab6b6f0d103565a38f520e72f2b75c9ec0030b439a641",
+  "campaign_budget_seconds": 7200.0,
+  "campaign_used_seconds": 5800.910473265685
+}

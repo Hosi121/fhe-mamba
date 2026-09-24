@@ -1,0 +1,14 @@
+{
+  "user_authorization": "GPU use expanded by user: any number of hours; continue optimization cycles",
+  "review_window_seconds": 21600,
+  "previous_ledger": "optimization-budget-20260924.json (7174.2396297976375/7200 seconds; immutable history)",
+  "new_ledger": "optimization-cycle2-budget-20260924.json",
+  "invariants": [
+    "same frozen model/payload and polynomials",
+    "same CKKS parameters",
+    "0.001 exact and polynomial error gates",
+    "same generated tokens in full generation",
+    "no evaluator decryptions"
+  ],
+  "round_stop": "validated E2E improvement or diminishing candidate returns; review window is a checkpoint, not a user-imposed total budget"
+}

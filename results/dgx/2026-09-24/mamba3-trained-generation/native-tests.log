@@ -1,0 +1,33 @@
+Test project /tmp/fhemamba-mamba3-routing-tests
+      Start  1: packed_routing
+ 1/14 Test  #1: packed_routing ...................   Passed    0.45 sec
+      Start  2: packed_program
+ 2/14 Test  #2: packed_program ...................   Passed    0.00 sec
+      Start  3: stage0_layout
+ 3/14 Test  #3: stage0_layout ....................   Passed    0.00 sec
+      Start  4: stage1_normalization
+ 4/14 Test  #4: stage1_normalization .............   Passed    0.01 sec
+      Start  5: stage1_vector_rms
+ 5/14 Test  #5: stage1_vector_rms ................   Passed    0.00 sec
+      Start  6: stage1_tail_payload
+ 6/14 Test  #6: stage1_tail_payload ..............   Passed    0.00 sec
+      Start  7: stage1_rank_gate_payload
+ 7/14 Test  #7: stage1_rank_gate_payload .........   Passed    0.00 sec
+      Start  8: stage1_mamba2_config
+ 8/14 Test  #8: stage1_mamba2_config .............   Passed    0.00 sec
+      Start  9: stage1_mamba2_depth
+ 9/14 Test  #9: stage1_mamba2_depth ..............   Passed    0.02 sec
+      Start 10: stage1_mamba2_artifact
+10/14 Test #10: stage1_mamba2_artifact ...........   Passed    0.01 sec
+      Start 11: stage1_mamba2_payload
+11/14 Test #11: stage1_mamba2_payload ............   Passed    0.00 sec
+      Start 12: stage1_joint_gates
+12/14 Test #12: stage1_joint_gates ...............   Passed    0.12 sec
+      Start 13: stage1_mamba2_plan
+13/14 Test #13: stage1_mamba2_plan ...............   Passed    0.01 sec
+      Start 14: stage1_mamba2_process
+14/14 Test #14: stage1_mamba2_process ............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 14
+
+Total Test time (real) =   0.64 sec

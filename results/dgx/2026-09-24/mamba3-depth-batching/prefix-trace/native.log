@@ -1,0 +1,275 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 248 ~ 6262MB
+Rotation keys loaded: 85 ~ 15300MB
+setup_seconds=26.4319
+level_input node=0 op=public bound=1 parents= refreshed=0
+level_output node=0 level=0 degree=1 bootstraps=0
+node=1/127 op=public seconds=0.171854 eta_seconds=21.6536 bootstraps=0
+level_input node=1 op=input bound=19.625 parents= refreshed=0
+level_output node=1 level=0 degree=1 bootstraps=0
+level_input node=2 op=mul bound=48.1426 parents=1:0:1,1:0:1, refreshed=0
+level_output node=2 level=0 degree=2 bootstraps=0
+level_input node=3 op=scatter bound=48.1426 parents=2:0:2, refreshed=0
+level_output node=3 level=0 degree=2 bootstraps=0
+level_input node=4 op=sum bound=451.069 parents=3:0:2, refreshed=0
+level_output node=4 level=1 degree=2 bootstraps=0
+level_input node=5 op=mulp bound=1 parents=4:1:2, refreshed=0
+level_output node=5 level=2 degree=2 bootstraps=0
+level_input node=6 op=addp bound=1 parents=5:2:2, refreshed=0
+level_output node=6 level=2 degree=2 bootstraps=0
+level_input node=7 op=cheb bound=29.5233 parents=6:2:2, refreshed=0
+level_output node=7 level=10 degree=2 bootstraps=0
+level_input node=8 op=repeat bound=29.5233 parents=7:10:2, refreshed=0
+level_output node=8 level=10 degree=2 bootstraps=0
+level_input node=9 op=mul bound=72.4243 parents=1:0:1,8:10:2, refreshed=0
+level_output node=9 level=11 degree=2 bootstraps=0
+level_input node=10 op=mulp bound=13.4931 parents=9:11:2, refreshed=0
+level_output node=10 level=12 degree=2 bootstraps=0
+node=11/127 op=mulp seconds=1.06902 eta_seconds=11.2733 bootstraps=0
+level_input node=11 op=linear bound=37.912 parents=10:12:2, refreshed=0
+level_output node=11 level=14 degree=2 bootstraps=0
+level_input node=12 op=gather bound=11.1642 parents=11:14:2, refreshed=0
+level_output node=12 level=15 degree=2 bootstraps=0
+level_input node=13 op=gather bound=25.6094 parents=11:14:2, refreshed=0
+level_output node=13 level=15 degree=2 bootstraps=0
+level_input node=14 op=gather bound=29.5638 parents=11:14:2, refreshed=0
+level_output node=14 level=15 degree=2 bootstraps=0
+level_input node=15 op=gather bound=23.612 parents=11:14:2, refreshed=0
+level_output node=15 level=15 degree=2 bootstraps=0
+level_input node=16 op=gather bound=5.42224 parents=11:14:2, refreshed=0
+level_output node=16 level=15 degree=2 bootstraps=0
+level_input node=17 op=gather bound=37.912 parents=11:14:2, refreshed=0
+level_output node=17 level=15 degree=2 bootstraps=0
+level_input node=18 op=gather bound=31.9044 parents=11:14:2, refreshed=0
+level_output node=18 level=15 degree=2 bootstraps=0
+level_input node=19 op=gather bound=9.04958 parents=11:14:2, refreshed=0
+level_output node=19 level=15 degree=2 bootstraps=0
+level_input node=20 op=addp bound=67.898 parents=16:15:2, refreshed=0
+level_output node=20 level=15 degree=2 bootstraps=0
+node=21/127 op=addp seconds=4.49311 eta_seconds=22.6795 bootstraps=0
+level_input node=21 op=cheb bound=10.8393 parents=20:15:2, refreshed=0
+level_output node=21 level=23 degree=2 bootstraps=0
+level_input node=22 op=cheb bound=45.912 parents=17:15:2, refreshed=0
+level_output node=22 level=27 degree=2 bootstraps=0
+level_input node=23 op=mul bound=17.4636 parents=22:27:2,21:23:2, refreshed=0
+level_output node=23 level=28 degree=2 bootstraps=0
+level_input node=24 op=cheb bound=7.994 parents=23:28:2, refreshed=0
+level_output node=24 level=35 degree=2 bootstraps=0
+level_input node=25 op=cheb bound=4.38405 parents=18:15:2, refreshed=0
+level_output node=25 level=23 degree=2 bootstraps=0
+level_input node=26 op=cheb bound=6.49143 parents=19:15:2, refreshed=0
+level_output node=26 level=24 degree=2 bootstraps=0
+level_input node=27 op=repeat bound=6.49143 parents=26:24:2, refreshed=0
+level_output node=27 level=24 degree=2 bootstraps=0
+level_input node=28 op=repeat bound=10.8393 parents=21:23:2, refreshed=0
+level_output node=28 level=24 degree=2 bootstraps=0
+level_input node=29 op=mul bound=8.79535 parents=27:24:2,28:24:2, refreshed=0
+level_output node=29 level=25 degree=2 bootstraps=0
+level_input node=30 op=mulp bound=27.6314 parents=29:25:2, refreshed=0
+level_output node=30 level=26 degree=2 bootstraps=0
+node=31/127 op=mulp seconds=7.59656 eta_seconds=23.5248 bootstraps=0
+level_input node=31 op=add bound=27.6314 parents=0:0:1,30:26:2, refreshed=0
+level_output node=31 level=26 degree=2 bootstraps=0
+level_input node=32 op=cheb bound=8 parents=31:26:2, refreshed=0
+level_output node=32 level=34 degree=2 bootstraps=0
+level_input node=33 op=cheb bound=8 parents=31:26:2, refreshed=0
+level_output node=33 level=34 degree=2 bootstraps=0
+level_input node=34 op=mul bound=109.252 parents=14:15:2,14:15:2, refreshed=0
+level_output node=34 level=16 degree=2 bootstraps=0
+level_input node=35 op=sum bound=811.21 parents=34:16:2, refreshed=0
+level_output node=35 level=17 degree=2 bootstraps=0
+level_input node=36 op=mulp bound=6.33758 parents=35:17:2, refreshed=0
+level_output node=36 level=18 degree=2 bootstraps=0
+level_input node=37 op=addp bound=6.33766 parents=36:18:2, refreshed=0
+level_output node=37 level=18 degree=2 bootstraps=0
+level_input node=38 op=cheb bound=8.98815 parents=37:18:2, refreshed=0
+level_output node=38 level=27 degree=2 bootstraps=0
+level_input node=39 op=repeat bound=8.98815 parents=38:27:2, refreshed=0
+level_output node=39 level=27 degree=2 bootstraps=0
+level_input node=40 op=mul bound=33.2155 parents=14:15:2,39:27:2, refreshed=0
+level_output node=40 level=28 degree=2 bootstraps=0
+node=41/127 op=mul seconds=8.2606 eta_seconds=17.3271 bootstraps=0
+level_input node=41 op=mulp bound=13.98 parents=40:28:2, refreshed=0
+level_output node=41 level=29 degree=2 bootstraps=0
+level_input node=42 op=mul bound=69.691 parents=15:15:2,15:15:2, refreshed=0
+level_output node=42 level=16 degree=2 bootstraps=0
+level_input node=43 op=sum bound=775.136 parents=42:16:2, refreshed=0
+level_output node=43 level=17 degree=2 bootstraps=0
+level_input node=44 op=mulp bound=6.05575 parents=43:17:2, refreshed=0
+level_output node=44 level=18 degree=2 bootstraps=0
+level_input node=45 op=addp bound=6.05583 parents=44:18:2, refreshed=0
+level_output node=45 level=18 degree=2 bootstraps=0
+level_input node=46 op=cheb bound=9.19493 parents=45:18:2, refreshed=0
+level_output node=46 level=28 degree=2 bootstraps=0
+level_input node=47 op=repeat bound=9.19493 parents=46:28:2, refreshed=0
+level_output node=47 level=28 degree=2 bootstraps=0
+level_input node=48 op=mul bound=27.1389 parents=15:15:2,47:28:2, refreshed=0
+level_output node=48 level=29 degree=2 bootstraps=0
+level_input node=49 op=mulp bound=12.0494 parents=48:29:2, refreshed=0
+level_output node=49 level=30 degree=2 bootstraps=0
+level_input node=50 op=repeat bound=13.98 parents=41:29:2, refreshed=0
+level_output node=50 level=29 degree=2 bootstraps=0
+node=51/127 op=repeat seconds=8.88441 eta_seconds=13.2395 bootstraps=0
+level_input node=51 op=addp bound=27.8342 parents=50:29:2, refreshed=0
+level_output node=51 level=29 degree=2 bootstraps=0
+level_input node=52 op=repeat bound=12.0494 parents=49:30:2, refreshed=0
+level_output node=52 level=30 degree=2 bootstraps=0
+level_input node=53 op=addp bound=30.4125 parents=52:30:2, refreshed=0
+level_output node=53 level=30 degree=2 bootstraps=0
+level_input node=54 op=gather bound=27.8342 parents=51:29:2, refreshed=0
+level_output node=54 level=33 degree=2 bootstraps=0
+level_input node=55 op=gather bound=23.6972 parents=51:29:2, refreshed=0
+level_output node=55 level=33 degree=2 bootstraps=0
+level_input node=56 op=mul bound=27.5579 parents=54:33:2,32:34:2, refreshed=0
+level_output node=56 level=35 degree=2 bootstraps=0
+level_input node=57 op=mul bound=14.1267 parents=55:33:2,33:34:2, refreshed=0
+level_output node=57 level=35 degree=2 bootstraps=0
+level_input node=58 op=mulp bound=14.1267 parents=57:35:2, refreshed=0
+level_output node=58 level=36 degree=2 bootstraps=0
+level_input node=59 op=add bound=27.1107 parents=56:35:2,58:36:2, refreshed=0
+level_output node=59 level=36 degree=2 bootstraps=0
+level_input node=60 op=mul bound=14.0776 parents=54:33:2,33:34:2, refreshed=0
+level_output node=60 level=35 degree=2 bootstraps=0
+node=61/127 op=mul seconds=9.66946 eta_seconds=10.462 bootstraps=0
+level_input node=61 op=mul bound=23.6758 parents=55:33:2,32:34:2, refreshed=0
+level_output node=61 level=35 degree=2 bootstraps=0
+level_input node=62 op=add bound=23.6229 parents=60:35:2,61:35:2, refreshed=0
+level_output node=62 level=35 degree=2 bootstraps=0
+level_input node=63 op=scatter bound=27.1107 parents=59:36:2, refreshed=0
+level_output node=63 level=26 degree=2 bootstraps=2
+level_input node=64 op=scatter bound=23.6229 parents=62:35:2, refreshed=0
+level_output node=64 level=25 degree=2 bootstraps=2
+level_input node=65 op=add bound=27.1107 parents=63:26:2,64:25:2, refreshed=0
+level_output node=65 level=26 degree=2 bootstraps=0
+level_input node=66 op=gather bound=19.3808 parents=51:29:2, refreshed=0
+level_output node=66 level=30 degree=2 bootstraps=0
+level_input node=67 op=scatter bound=27.1107 parents=65:26:2, refreshed=0
+level_output node=67 level=27 degree=2 bootstraps=0
+level_input node=68 op=scatter bound=19.3808 parents=66:30:2, refreshed=0
+level_output node=68 level=31 degree=2 bootstraps=0
+level_input node=69 op=add bound=27.1107 parents=67:27:2,68:31:2, refreshed=0
+level_output node=69 level=31 degree=2 bootstraps=0
+level_input node=70 op=gather bound=30.4125 parents=53:30:2, refreshed=0
+level_output node=70 level=34 degree=2 bootstraps=0
+node=71/127 op=gather seconds=14.743 eta_seconds=11.6283 bootstraps=4
+level_input node=71 op=gather bound=17.2931 parents=53:30:2, refreshed=0
+level_output node=71 level=34 degree=2 bootstraps=0
+level_input node=72 op=mul bound=30.4125 parents=70:34:2,32:34:2, refreshed=0
+level_output node=72 level=35 degree=2 bootstraps=0
+level_input node=73 op=mul bound=13.4012 parents=71:34:2,33:34:2, refreshed=0
+level_output node=73 level=35 degree=2 bootstraps=0
+level_input node=74 op=mulp bound=13.4012 parents=73:35:2, refreshed=0
+level_output node=74 level=36 degree=2 bootstraps=0
+level_input node=75 op=add bound=30.4058 parents=72:35:2,74:36:2, refreshed=0
+level_output node=75 level=36 degree=2 bootstraps=0
+level_input node=76 op=mul bound=10.6484 parents=70:34:2,33:34:2, refreshed=0
+level_output node=76 level=35 degree=2 bootstraps=0
+level_input node=77 op=mul bound=17.2931 parents=71:34:2,32:34:2, refreshed=0
+level_output node=77 level=35 degree=2 bootstraps=0
+level_input node=78 op=add bound=17.2934 parents=76:35:2,77:35:2, refreshed=0
+level_output node=78 level=35 degree=2 bootstraps=0
+level_input node=79 op=scatter bound=30.4058 parents=75:36:2, refreshed=0
+level_output node=79 level=26 degree=2 bootstraps=2
+level_input node=80 op=scatter bound=17.2934 parents=78:35:2, refreshed=0
+level_output node=80 level=25 degree=2 bootstraps=2
+node=81/127 op=scatter seconds=18.5547 eta_seconds=10.5372 bootstraps=8
+level_input node=81 op=add bound=30.4058 parents=79:26:2,80:25:2, refreshed=0
+level_output node=81 level=26 degree=2 bootstraps=0
+level_input node=82 op=gather bound=15.7525 parents=53:30:2, refreshed=0
+level_output node=82 level=31 degree=2 bootstraps=0
+level_input node=83 op=scatter bound=30.4058 parents=81:26:2, refreshed=0
+level_output node=83 level=27 degree=2 bootstraps=0
+level_input node=84 op=scatter bound=15.7525 parents=82:31:2, refreshed=0
+level_output node=84 level=32 degree=2 bootstraps=0
+level_input node=85 op=add bound=30.4058 parents=83:27:2,84:32:2, refreshed=0
+level_output node=85 level=32 degree=2 bootstraps=0
+level_input node=86 op=mulp bound=4.38405 parents=25:23:2, refreshed=0
+level_output node=86 level=24 degree=2 bootstraps=0
+level_input node=87 op=addp bound=7.85441 parents=86:24:2, refreshed=0
+level_output node=87 level=24 degree=2 bootstraps=0
+level_input node=88 op=mul bound=10.6421 parents=87:24:2,21:23:2, refreshed=0
+level_output node=88 level=25 degree=2 bootstraps=0
+level_input node=89 op=mul bound=1.64785 parents=88:25:2,24:35:2, refreshed=0
+level_output node=89 level=36 degree=2 bootstraps=0
+level_input node=90 op=mul bound=1 parents=25:23:2,21:23:2, refreshed=0
+level_output node=90 level=24 degree=2 bootstraps=0
+node=91/127 op=mul seconds=19.7251 eta_seconds=7.80332 bootstraps=8
+level_input node=91 op=mulp bound=116.843 parents=13:15:2, refreshed=0
+level_output node=91 level=16 degree=2 bootstraps=0
+level_input node=92 op=mul bound=29.656 parents=69:31:2,85:32:2, refreshed=0
+level_output node=92 level=33 degree=2 bootstraps=0
+level_input node=93 op=sum bound=115.168 parents=92:33:2, refreshed=0
+level_output node=93 level=34 degree=2 bootstraps=0
+level_input node=94 op=mul bound=4.71675 parents=93:34:2,90:24:2, refreshed=0
+level_output node=94 level=35 degree=2 bootstraps=0
+level_input node=95 op=repeat bound=4.71675 parents=94:35:2, refreshed=0
+level_output node=95 level=36 degree=2 bootstraps=0
+level_input node=96 op=mul bound=13.2271 parents=13:15:2,95:36:2, refreshed=0
+level_output node=96 level=37 degree=2 bootstraps=0
+level_input node=97 op=add bound=116.839 parents=91:16:2,96:23:2, refreshed=2
+level_output node=97 level=23 degree=2 bootstraps=2
+level_input node=98 op=cheb bound=8.94785 parents=12:15:2, refreshed=0
+level_output node=98 level=22 degree=2 bootstraps=0
+level_input node=99 op=mul bound=32.4245 parents=97:23:2,98:22:2, refreshed=0
+level_output node=99 level=24 degree=2 bootstraps=0
+level_input node=100 op=linear bound=90.9906 parents=99:24:2, refreshed=0
+level_output node=100 level=26 degree=2 bootstraps=0
+node=101/127 op=linear seconds=23.407 eta_seconds=6.02558 bootstraps=10
+level_input node=101 op=add bound=89.6313 parents=1:0:1,100:26:2, refreshed=0
+level_output node=101 level=26 degree=2 bootstraps=0
+level_input node=102 op=mul bound=1004.22 parents=101:26:2,101:26:2, refreshed=0
+level_output node=102 level=27 degree=2 bootstraps=0
+level_input node=103 op=scatter bound=1004.22 parents=102:27:2, refreshed=0
+level_output node=103 level=27 degree=2 bootstraps=0
+level_input node=104 op=sum bound=2173.26 parents=103:27:2, refreshed=0
+level_output node=104 level=28 degree=2 bootstraps=0
+level_input node=105 op=mulp bound=2.82977 parents=104:28:2, refreshed=0
+level_output node=105 level=29 degree=2 bootstraps=0
+level_input node=106 op=addp bound=2.82985 parents=105:29:2, refreshed=0
+level_output node=106 level=29 degree=2 bootstraps=0
+level_input node=107 op=cheb bound=13.451 parents=106:23:2, refreshed=2
+level_output node=107 level=32 degree=2 bootstraps=2
+level_input node=108 op=repeat bound=13.451 parents=107:32:2, refreshed=0
+level_output node=108 level=32 degree=2 bootstraps=0
+level_input node=109 op=mul bound=150.703 parents=101:26:2,108:32:2, refreshed=0
+level_output node=109 level=33 degree=2 bootstraps=0
+level_input node=110 op=mulp bound=6.58592 parents=109:33:2, refreshed=0
+level_output node=110 level=34 degree=2 bootstraps=0
+node=111/127 op=mulp seconds=25.0478 eta_seconds=3.6105 bootstraps=12
+level_input node=111 op=linear bound=19.3748 parents=110:34:2, refreshed=0
+level_output node=111 level=36 degree=2 bootstraps=0
+level_input node=112 op=gather bound=14.2986 parents=111:36:2, refreshed=0
+level_output node=112 level=37 degree=2 bootstraps=0
+level_input node=113 op=gather bound=19.3748 parents=111:36:2, refreshed=0
+level_output node=113 level=37 degree=2 bootstraps=0
+level_input node=114 op=cheb bound=17.7954 parents=113:23:2, refreshed=2
+level_output node=114 level=31 degree=2 bootstraps=2
+level_input node=115 op=mul bound=28.0865 parents=112:23:2,114:31:2, refreshed=2
+level_output node=115 level=32 degree=2 bootstraps=2
+level_input node=116 op=linear bound=150.732 parents=115:32:2, refreshed=0
+level_output node=116 level=34 degree=2 bootstraps=0
+level_input node=117 op=add bound=240.363 parents=101:26:2,116:34:2, refreshed=0
+level_output node=117 level=34 degree=2 bootstraps=0
+level_input node=118 op=mul bound=7221.79 parents=117:34:2,117:34:2, refreshed=0
+level_output node=118 level=35 degree=2 bootstraps=0
+level_input node=119 op=scatter bound=7221.79 parents=118:35:2, refreshed=0
+level_output node=119 level=35 degree=2 bootstraps=0
+level_input node=120 op=sum bound=14100 parents=119:35:2, refreshed=0
+level_output node=120 level=36 degree=2 bootstraps=0
+node=121/127 op=sum seconds=29.7997 eta_seconds=1.47767 bootstraps=16
+level_input node=121 op=mulp bound=18.3594 parents=120:36:2, refreshed=0
+level_output node=121 level=37 degree=2 bootstraps=0
+level_input node=122 op=addp bound=18.3595 parents=121:23:2, refreshed=2
+level_output node=122 level=23 degree=2 bootstraps=2
+level_input node=123 op=cheb bound=5.28086 parents=122:23:2, refreshed=0
+level_output node=123 level=31 degree=2 bootstraps=0
+level_input node=124 op=repeat bound=5.28086 parents=123:31:2, refreshed=0
+level_output node=124 level=31 degree=2 bootstraps=0
+level_input node=125 op=mul bound=158.666 parents=117:34:2,124:31:2, refreshed=0
+level_output node=125 level=35 degree=2 bootstraps=0
+level_input node=126 op=mulp bound=99.7857 parents=125:35:2, refreshed=0
+level_output node=126 level=36 degree=2 bootstraps=0
+node=127/127 op=mulp seconds=31.3414 eta_seconds=0 bootstraps=18
+passed=1 polynomial_error=2.39067e-06 exact_error=2.52882e-06 eval_seconds=31.3414

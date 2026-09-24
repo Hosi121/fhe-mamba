@@ -1,0 +1,87 @@
+{
+  "review_seconds": 21600,
+  "used_seconds": 6582.387001558207,
+  "runs": [
+    {
+      "name": "probe-mamba2",
+      "charged_seconds": 20.36774706840515
+    },
+    {
+      "name": "probe-mamba3",
+      "charged_seconds": 20.544890199787915
+    },
+    {
+      "name": "smoke-1-a",
+      "charged_seconds": 51.2492604078725
+    },
+    {
+      "name": "smoke-2-b",
+      "charged_seconds": 50.08799398690462
+    },
+    {
+      "name": "smoke-3-c",
+      "charged_seconds": 49.56112723518163
+    },
+    {
+      "name": "smoke-4-c",
+      "charged_seconds": 50.60697865206748
+    },
+    {
+      "name": "smoke-5-b",
+      "charged_seconds": 49.34376783762127
+    },
+    {
+      "name": "smoke-6-a",
+      "charged_seconds": 49.91905958298594
+    },
+    {
+      "name": "pressure-1-b",
+      "charged_seconds": 85.80484157800674
+    },
+    {
+      "name": "pressure-2-c",
+      "charged_seconds": 84.46482898760587
+    },
+    {
+      "name": "pressure-3-c",
+      "charged_seconds": 85.0544112874195
+    },
+    {
+      "name": "pressure-4-b",
+      "charged_seconds": 84.88907825760543
+    },
+    {
+      "name": "full-a",
+      "charged_seconds": 2346.6913177827373
+    },
+    {
+      "name": "full-c",
+      "charged_seconds": 2169.816076069139
+    },
+    {
+      "name": "mamba3-prefix-1",
+      "charged_seconds": 45.765771434642375
+    },
+    {
+      "name": "mamba3-prefix-2",
+      "charged_seconds": 45.27658922318369
+    },
+    {
+      "name": "mamba3-prefix-3",
+      "charged_seconds": 45.19434436131269
+    },
+    {
+      "name": "mamba3-prefix-4",
+      "charged_seconds": 45.34455023519695
+    },
+    {
+      "name": "mamba3-synthetic",
+      "charged_seconds": 46.35567070636898
+    },
+    {
+      "name": "mamba3-full",
+      "charged_seconds": 1156.048696664162
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

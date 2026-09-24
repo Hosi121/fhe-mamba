@@ -119,7 +119,8 @@ OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
   --prompt 'The capital' --generate-tokens 4 \
   --ssh-host "$FHEMAMBA_SSH_HOST" \
   --remote-root "$FHEMAMBA_REMOTE_ROOT" \
-  --joint-periodic-coefficients --joint-subring-encoding
+  --joint-periodic-coefficients --joint-subring-encoding \
+  --gpu-plaintext-ntt --direct-plaintext-upload --borrow-plaintext-upload
 ```
 
 The launcher requires `ssh` and `rsync`. It copies a new payload, invokes
@@ -132,9 +133,15 @@ The reference continuation is `The capital of the Republic of`, with IDs
 `[273, 253, 4687, 273]`. Acceptance also requires all five outputs to decrypt,
 error at most `0.05` against the polynomial reference, and zero intermediate
 diagnostic decryptions. New keys can change numerical error and timing.
-The recorded 38.5 minutes covers native evaluation; setup, Python reference
-preparation and transfer are additional. See the
-[measurement scope](research/2026-09-22-subring-gate-encoding.md#complete-generation-result).
+The recorded 32.94 minutes covers native evaluation with shared GPU
+plaintext preparation and borrowed upload. Setup, Python reference preparation
+and transfer are additional. The borrowed-upload ABBA measures
+56.03→54.50 seconds;
+its full run verifies completion and parity. Coefficient moves remain off for
+Mamba-2 after their non-improving control. GPU NTT includes fast upload and
+retains periodic subring encoding on the CPU. Borrowing falls back when the
+pinned word layout is unavailable. See the
+[upload/routing study](research/2026-09-24-borrowed-plaintext.md).
 
 Inspect the result:
 

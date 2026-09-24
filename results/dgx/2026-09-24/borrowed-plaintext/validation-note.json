@@ -1,0 +1,3 @@
+{
+  "note": "Ruff excludes immutable measured controllers under results/dgx; application, experiment and test code remain checked. The initial whole-repo format failure is preserved."
+}

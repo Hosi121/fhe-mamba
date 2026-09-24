@@ -1,0 +1,22 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 248 ~ 6262MB
+Rotation keys loaded: 85 ~ 15300MB
+setup_seconds=26.5203
+planned_logical_refreshes=4
+node=1/127 op=public seconds=0.18487 eta_seconds=23.2936 bootstraps=0
+node=11/127 op=mulp seconds=0.915579 eta_seconds=9.6552 bootstraps=0
+node=21/127 op=addp seconds=2.79357 eta_seconds=14.1009 bootstraps=0
+node=31/127 op=mulp seconds=3.8026 eta_seconds=11.7758 bootstraps=0
+node=41/127 op=mul seconds=4.38903 eta_seconds=9.20625 bootstraps=0
+node=51/127 op=repeat seconds=4.94711 eta_seconds=7.37217 bootstraps=0
+node=61/127 op=mul seconds=5.50024 eta_seconds=5.95108 bootstraps=0
+node=71/127 op=gather seconds=6.49049 eta_seconds=5.11926 bootstraps=0
+node=81/127 op=scatter seconds=7.01355 eta_seconds=3.98301 bootstraps=0
+node=91/127 op=mul seconds=7.44729 eta_seconds=2.94618 bootstraps=0
+node=101/127 op=linear seconds=9.96913 eta_seconds=2.56631 bootstraps=2
+node=111/127 op=mulp seconds=11.4423 eta_seconds=1.64933 bootstraps=4
+node=121/127 op=sum seconds=13.9569 eta_seconds=0.692079 bootstraps=6
+node=127/127 op=mulp seconds=15.4981 eta_seconds=0 bootstraps=8
+passed=1 polynomial_error=1.41784e-05 exact_error=1.39336e-05 eval_seconds=15.4985

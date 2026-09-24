@@ -1,0 +1,30 @@
+{
+  "schema": "fhemamba-packed-run-v1",
+  "started_utc": "2026-09-23T20:14:35.563051+00:00",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-deepopt-final",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-full/program.txt",
+    "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-batch/native.json",
+    "0.001",
+    "0.001",
+    "--client-head",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-full/client_head.f32",
+    "--planned-refresh",
+    "--batch-refresh"
+  ],
+  "binary_sha256": "5c1b755f120a152fca1791d92d1a2e228a62c54416c6f9736851df1c3fd6bef4",
+  "manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+  "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "timeout_seconds": 2400.0,
+  "architecture": "mamba3",
+  "tokens": 5,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 1539.151258269325,
+  "passed": true,
+  "native_sha256": "2651888526b1ea120081006214824d84224f2dfc1b1926f38a5b1ddd0f5b4e19",
+  "complete_backbone": true,
+  "expected_text": "The capital of the state of",
+  "campaign_budget_seconds": 7200.0,
+  "campaign_used_seconds": 5746.758415474556
+}

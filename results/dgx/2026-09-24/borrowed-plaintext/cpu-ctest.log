@@ -1,0 +1,39 @@
+Test project /home/hosi/cipher/runs/coefficient-ownership-20260924/cpu-build
+      Start  1: packed_lifetime
+ 1/17 Test  #1: packed_lifetime ..................   Passed    0.00 sec
+      Start  2: plaintext_cache
+ 2/17 Test  #2: plaintext_cache ..................   Passed    0.00 sec
+      Start  3: packed_depth
+ 3/17 Test  #3: packed_depth .....................   Passed    0.02 sec
+      Start  4: packed_routing
+ 4/17 Test  #4: packed_routing ...................   Passed    4.76 sec
+      Start  5: packed_program
+ 5/17 Test  #5: packed_program ...................   Passed    0.00 sec
+      Start  6: stage0_layout
+ 6/17 Test  #6: stage0_layout ....................   Passed    0.00 sec
+      Start  7: stage1_normalization
+ 7/17 Test  #7: stage1_normalization .............   Passed    0.01 sec
+      Start  8: stage1_vector_rms
+ 8/17 Test  #8: stage1_vector_rms ................   Passed    0.00 sec
+      Start  9: stage1_tail_payload
+ 9/17 Test  #9: stage1_tail_payload ..............   Passed    0.00 sec
+      Start 10: stage1_rank_gate_payload
+10/17 Test #10: stage1_rank_gate_payload .........   Passed    0.00 sec
+      Start 11: stage1_mamba2_config
+11/17 Test #11: stage1_mamba2_config .............   Passed    0.00 sec
+      Start 12: stage1_mamba2_depth
+12/17 Test #12: stage1_mamba2_depth ..............   Passed    0.02 sec
+      Start 13: stage1_mamba2_artifact
+13/17 Test #13: stage1_mamba2_artifact ...........   Passed    0.02 sec
+      Start 14: stage1_mamba2_payload
+14/17 Test #14: stage1_mamba2_payload ............   Passed    0.00 sec
+      Start 15: stage1_joint_gates
+15/17 Test #15: stage1_joint_gates ...............   Passed    0.11 sec
+      Start 16: stage1_mamba2_plan
+16/17 Test #16: stage1_mamba2_plan ...............   Passed    0.01 sec
+      Start 17: stage1_mamba2_process
+17/17 Test #17: stage1_mamba2_process ............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 17
+
+Total Test time (real) =   4.97 sec

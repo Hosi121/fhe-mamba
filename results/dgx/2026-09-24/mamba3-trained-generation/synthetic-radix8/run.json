@@ -1,0 +1,24 @@
+{
+  "schema": "fhemamba-packed-run-v1",
+  "started_utc": "2026-09-23T19:13:44.462669+00:00",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-radix8",
+    "/home/kataiwa/fhemamba/mamba3-20260924/payload/program.txt",
+    "/home/kataiwa/fhemamba/mamba3-20260924/optimization-synthetic-radix8/native.json",
+    "0.001",
+    "0.001"
+  ],
+  "binary_sha256": "17f506416b4a0d1934b202d826916eebdbe849c09a41b5f19295f4fb45cac029",
+  "manifest_sha256": "461351e19053c34e36713abcafa206bbbe1549c4c561564a036ccc1e4ac6d872",
+  "program_sha256": "7e4ad8f9b91b3e885e3b1dae9d2cfd29a2fac92d94b68b4ac72cfe59fc372831",
+  "timeout_seconds": 600.0,
+  "architecture": "mamba3",
+  "tokens": 4,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 56.39694622531533,
+  "passed": true,
+  "native_sha256": "a8de29f0d7d90a0fcf42e21f1d51b3abeabb4d883ee06017b4d38eb1d6fb429d",
+  "campaign_budget_seconds": 7200.0,
+  "campaign_used_seconds": 3165.0309353340417
+}

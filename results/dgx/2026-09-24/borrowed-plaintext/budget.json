@@ -1,0 +1,79 @@
+{
+  "review_seconds": 7200,
+  "used_seconds": 4967.946827197447,
+  "runs": [
+    {
+      "name": "probe-mamba2",
+      "charged_seconds": 47.98075353447348
+    },
+    {
+      "name": "probe-mamba3",
+      "charged_seconds": 48.666502172127366
+    },
+    {
+      "name": "m3-1-base",
+      "charged_seconds": 44.686549979262054
+    },
+    {
+      "name": "m3-2-borrow",
+      "charged_seconds": 44.22705945465714
+    },
+    {
+      "name": "m3-3-routing",
+      "charged_seconds": 44.319239237345755
+    },
+    {
+      "name": "m3-4-all",
+      "charged_seconds": 44.08790256921202
+    },
+    {
+      "name": "m3-5-all",
+      "charged_seconds": 44.13425364997238
+    },
+    {
+      "name": "m3-6-routing",
+      "charged_seconds": 44.29352679103613
+    },
+    {
+      "name": "m3-7-borrow",
+      "charged_seconds": 44.48665372654796
+    },
+    {
+      "name": "m3-8-base",
+      "charged_seconds": 44.54615478683263
+    },
+    {
+      "name": "m2-1-base",
+      "charged_seconds": 85.03613139875233
+    },
+    {
+      "name": "m2-2-borrow",
+      "charged_seconds": 83.73031906504184
+    },
+    {
+      "name": "m2-3-borrow",
+      "charged_seconds": 84.56299553625286
+    },
+    {
+      "name": "m2-4-base",
+      "charged_seconds": 85.97147077787668
+    },
+    {
+      "name": "cache-all",
+      "charged_seconds": 43.626264155842364
+    },
+    {
+      "name": "m3-full-base",
+      "charged_seconds": 1081.6881488729268
+    },
+    {
+      "name": "m3-full-candidate",
+      "charged_seconds": 1046.0910528507084
+    },
+    {
+      "name": "m2-full-borrow",
+      "charged_seconds": 2005.8118486385792
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

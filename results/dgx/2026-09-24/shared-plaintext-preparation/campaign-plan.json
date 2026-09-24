@@ -1,0 +1,41 @@
+{
+  "objective": "Share plaintext preparation between Mamba-2 and Mamba-3 and validate the Mamba-2 acceleration on frozen complete generation.",
+  "authorization": "User requested the port, explicitly requested common implementation, and already authorized hours of GPU work.",
+  "completion_boundary": "Exact arithmetic probes, interleaved Mamba-2 short comparison, same-binary full Mamba-2 baseline/candidate, and Mamba-3 regression with unchanged error gates; document measured result.",
+  "conditions": {
+    "Mamba-2": {
+      "input_payload_sha256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
+      "layers": 24,
+      "evaluations": 5,
+      "generated_tokens": 4,
+      "tolerance_vs_polynomial": 0.05,
+      "CUDA_LAUNCH_BLOCKING": "1",
+      "thread_environment": "No OMP/MKL/OpenBLAS override; encode_threads=8; all 20 CPUs allowed."
+    },
+    "Mamba-3": {
+      "layers": 12,
+      "evaluations": 5,
+      "tolerance_vs_exact_and_polynomial": 0.001,
+      "CPUs": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "OMP_NUM_THREADS": 4
+    }
+  },
+  "review_seconds": 21600,
+  "review_note": "Internal review interval, not a newly inferred user GPU-spend ceiling.",
+  "modes": {
+    "a": "previous CPU encoders and stock upload",
+    "b": "same encoders plus fewer upload copies",
+    "c": "fast upload plus GPU NTT for uncached full-slot real coefficients; periodic subring retained"
+  },
+  "selection": "Choose the faster valid candidate after repeated short A/B/C/C/B/A runs. Full claims require full baseline and candidate.",
+  "model_changes": false,
+  "approximation_changes": false,
+  "backend_dependency_changes": false,
+  "additional_cache_pressure_control": "The one-layer workload has zero GPU NTT encodes because all ordinary masks are cached. Add two-layer/two-evaluation B/C/C/B before candidate selection; require nonzero GPU NTT dispatch."
+}

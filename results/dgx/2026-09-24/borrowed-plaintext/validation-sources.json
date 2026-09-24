@@ -1,0 +1,8 @@
+{
+  "scope": "Validation configuration after the native snapshot; excludes immutable GPU evidence from automatic formatting. Native sources remain exactly as compiled.",
+  "files": {
+    "validation/pyproject.toml": "193be7681f8456ec6d44bb1eb9a749b49372af4ae4dc146572e1f6123be2f271"
+  },
+  "frozen_source_mismatches": [],
+  "checks": "scripts/run_checks.sh: format, lint, 286 Python tests including native contract invocation; separate 17 C++ tests passed."
+}

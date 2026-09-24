@@ -1,0 +1,2 @@
+memcpy /lib/aarch64-linux-gnu/libc.so.6 0xa1cc0
+memmove /lib/aarch64-linux-gnu/libc.so.6 0xa1dc0

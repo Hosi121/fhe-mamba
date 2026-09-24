@@ -1,0 +1,156 @@
+{
+  "version": "0.5.0",
+  "stage": "fhemamba-client-generation",
+  "repo_commit": "70bf711cf4968bd2c818bc4637382acd8afe5d4c-dirty.dd80095f39eed69f",
+  "binary_sha256": "cd0da8f2c57463a2bb4a4d311e4fb1f84233701282e8d9be77f4e645859bc787",
+  "input_payload_sha256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
+  "backend": "fideslib-gpu",
+  "config": {
+    "input_mode": "fhemamba-m1-payload"
+  },
+  "encrypted": true,
+  "status": "passed",
+  "passed": true,
+  "parameters": {
+    "source_payload_sha256": "b40d33b30e018ef91e894aa9e2bd26adb6be6d5e1ae49873e356d78795d5c745",
+    "prompt": "The capital",
+    "prompt_ids": [
+      510,
+      5347
+    ],
+    "prompt_tokens": 2,
+    "generate_tokens": 4,
+    "server_evaluations": 5,
+    "n_layers": 24,
+    "frozen_operators_and_bounds_unchanged": true,
+    "input_payload_sha256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
+    "security": "not-set",
+    "selection": "greedy",
+    "joint_periodic_coefficients": true,
+    "joint_subring_encoding": true,
+    "fast_plaintext_upload": true,
+    "gpu_plaintext_ntt": true
+  },
+  "checks": {
+    "native_passed": true,
+    "encrypted_full_chain": true,
+    "complete_generation": true,
+    "matches_polynomial_tokens": true,
+    "all_outputs_decrypt": true,
+    "all_errors_within_0_05": true,
+    "no_intermediate_diagnostic_decrypts": true,
+    "client_output_decrypts": true
+  },
+  "text": {
+    "prompt": "The capital",
+    "generated": " of the Republic of",
+    "full": "The capital of the Republic of",
+    "polynomial_reference": " of the Republic of",
+    "exact_reference": " of the Republic of"
+  },
+  "measurements": {
+    "generated_ids": [
+      273,
+      253,
+      4687,
+      273
+    ],
+    "per_token_max_abs_error": [
+      0.000419424484235,
+      0.00275929048879,
+      0.00504368600004,
+      0.00354784425741,
+      0.00209709758854
+    ],
+    "per_token_max_abs_error_vs_exact": [
+      0.0116538942988,
+      0.0201068159419,
+      0.0258769398605,
+      0.0105603401144,
+      0.0625860790966
+    ],
+    "matches_exact_tokens": true,
+    "peak_rss_gib": 37.0629653931,
+    "operator_domain_violations": {
+      "conv_silu": [
+        0,
+        215040
+      ],
+      "rms_invsqrt": [
+        0,
+        125
+      ],
+      "gate_silu": [
+        0,
+        184320
+      ],
+      "decay_exp": [
+        0,
+        0
+      ],
+      "dt_softplus": [
+        0,
+        0
+      ],
+      "gated_rms_invsqrt": [
+        0,
+        120
+      ],
+      "joint_selective_gates": [
+        0,
+        2880
+      ]
+    }
+  },
+  "operation_counts": {
+    "rotations": 47667,
+    "rotations_direct": 47667,
+    "rotations_composite_steps": 0,
+    "ct_pt_mul": 275673,
+    "ct_ct_mul": 32701,
+    "adds": 322524,
+    "unity_level_align_muls": 16752,
+    "direct_level_align_drops": 81030,
+    "fused_projection_calls": 120,
+    "fused_projection_fallbacks": 0,
+    "projection_late_level_drops": 240,
+    "bootstraps": 2187
+  },
+  "timing": {
+    "setup_seconds": 22.27769498,
+    "pt_cache_encode_seconds": 0.826407257,
+    "rotate_keygen_seconds": 4.730708007,
+    "bootstrap_precompute_seconds": 3.38232345,
+    "bootstrap_eval_seconds": 1082.82913408,
+    "debug_client_reencrypt_seconds": 0,
+    "autoregressive_client_seconds": 0.236133842,
+    "load_context_seconds": 12.974114326,
+    "eval_seconds": 2142.10686764,
+    "token_step_seconds": [
+      396.500254947,
+      435.318595749,
+      437.440713226,
+      435.931580578,
+      436.915590021
+    ],
+    "initial_state_step_seconds": 396.500254947,
+    "carried_state_step_count": 4,
+    "carried_state_step_mean_seconds": 436.401619894,
+    "decrypt_seconds": 0.036258742
+  },
+  "measurement_scope": {
+    "full_model_correctness_claimed": false,
+    "encrypted_recurrent_state_and_fifo": true,
+    "client_selects_from_full_vocabulary": true,
+    "zero_intermediate_decrypts": true,
+    "client_server_process_separated": false,
+    "fully_encrypted_token_selection": false,
+    "claim": "Single-process interactive generation with client output decryption, full-vocabulary greedy selection and encrypted embedding feedback. This does not establish server key separation or 128-bit full-chain security."
+  },
+  "raw_native_sha256": "76505fa7a1dbf941d61928270c3ff35c3f79a746d7045a86d897ca39294ba842",
+  "tokenizer_files_sha256": {
+    "tokenizer_config.json": "4592630aed015b2622d77c0903954cef70870dba56925dc053942125df34b0ad",
+    "special_tokens_map.json": "aff38493227d813e29fcf8406e8e90062f1f031aa47d589325e9c31d89ac7cc3",
+    "tokenizer.json": "e9f8495abe17234420c02d6406a3fecb4241446c4554962654e38e7236db5d54"
+  }
+}

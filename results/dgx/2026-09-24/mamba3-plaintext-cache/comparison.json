@@ -1,0 +1,82 @@
+{
+  "schema": "fhemamba-plaintext-cache-comparison-v1",
+  "scope": "127-node trained one-layer prefix, first evaluation; no generation",
+  "order": [
+    "a1",
+    "b1",
+    "b2",
+    "a2"
+  ],
+  "identity": {
+    "binary_sha256": "a0ae813fa79c66564e902cde97b4e235eee3fac51d779e9d5bdce321726be5af",
+    "program_sha256": "327df6348ae284e613ea8a0493def98cb70499034807b7a92fec4d9da8fcc607",
+    "manifest_sha256": "f836bff8529a8c0252a4e910253e6f4dc8dc2dde7786be3e70b71b5b1136ef1e"
+  },
+  "common": {
+    "security": "not-set",
+    "slots": 32768,
+    "ring_dimension": 65536,
+    "depth": 44,
+    "scale_bits": 59,
+    "nodes": 127,
+    "evaluated_nodes": 119,
+    "bootstraps": 8,
+    "ct_ct_mul": 181,
+    "ct_pt_mul": 1440,
+    "rotations": 1103,
+    "linear_method": "replicated-bsgs",
+    "routing_method": "radix8-bsgs32",
+    "refresh_policy": "planned",
+    "bootstrap_passes": 2,
+    "batch_refresh": true,
+    "logical_refreshes": 5,
+    "planned_logical_refreshes": 4,
+    "refresh_batches": 1,
+    "largest_refresh_batch": 2,
+    "inplace_ops": true,
+    "scratch_clones_eliminated": 2311,
+    "profile_evaluation": true,
+    "evaluation_decryptions": 0,
+    "client_output_decrypt_count": 0,
+    "generated_token_ids": [],
+    "exact_tolerance": 0.001,
+    "polynomial_tolerance": 0.001
+  },
+  "baseline_eval_seconds": [
+    19.540851065,
+    19.646572519
+  ],
+  "candidate_eval_seconds": [
+    19.308695265,
+    19.324161684
+  ],
+  "baseline_mean_seconds": 19.593711792,
+  "candidate_mean_seconds": 19.3164284745,
+  "reduction_percent": 1.415164826570603,
+  "speedup": 1.0143547922363623,
+  "baseline_host_encoding_mean_seconds": 6.1544827115,
+  "candidate_host_encoding_mean_seconds": 5.829551007,
+  "baseline_host_encodes": [
+    888,
+    888
+  ],
+  "candidate_host_encodes": [
+    825,
+    825
+  ],
+  "candidate_cache_hits": [
+    63,
+    63
+  ],
+  "baseline_peak_rss_gib": [
+    26.8219299316,
+    26.8222236633
+  ],
+  "candidate_peak_rss_gib": [
+    26.8221092224,
+    26.8220977783
+  ],
+  "max_abs_error_vs_exact": 2.43786319243e-05,
+  "max_abs_error_vs_polynomial": 2.32984599782e-05,
+  "note": "Both modes enable host timers, without an attached Nsight profiler; two samples each."
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "fhemamba-packed-run-v1",
+  "started_utc": "2026-09-23T19:58:45.498094+00:00",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/build/packed_fideslib",
+    "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-payload/program.txt",
+    "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-planned/native.json",
+    "0.001",
+    "0.001",
+    "--trace-levels",
+    "--planned-refresh"
+  ],
+  "binary_sha256": "0df8e9c298278bdf14cfbfcb6fd3e97514b4812672faf2cd7bb7abca6a01a21f",
+  "manifest_sha256": "071909d36476e071c714a15def194e115ad4bb7f42855ec3d0a8657ed7761985",
+  "program_sha256": "75bc25aaea9284f16e3397848583312c40c52656d0a69b58a9160994b591f131",
+  "timeout_seconds": 600.0,
+  "architecture": "mamba3",
+  "tokens": 1,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 347.5227201245725,
+  "passed": true,
+  "native_sha256": "cb925e0c52d1a890ba01b0179122e7e70ee05de0b8849c351c14c17fb8ac10a0",
+  "campaign_budget_seconds": 7200.0,
+  "campaign_used_seconds": 3791.724526987411
+}

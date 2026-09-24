@@ -1,0 +1,256 @@
+{
+  "probes": {
+    "mamba2": {
+      "max_abs_error": 1.62539505995038e-12,
+      "levels": {
+        "21": {
+          "copy": {
+            "median_encode_ms": 4.574773,
+            "median_preparation_ms": 5.667358
+          },
+          "borrow": {
+            "median_encode_ms": 4.565500500000001,
+            "median_preparation_ms": 5.2354295
+          },
+          "reduction_percent": 7.621337843841869
+        },
+        "26": {
+          "copy": {
+            "median_encode_ms": 3.799628,
+            "median_preparation_ms": 4.663596999999999
+          },
+          "borrow": {
+            "median_encode_ms": 3.8037080000000003,
+            "median_preparation_ms": 4.3417645
+          },
+          "reduction_percent": 6.90095006065059
+        },
+        "34": {
+          "copy": {
+            "median_encode_ms": 2.590947,
+            "median_preparation_ms": 3.088459
+          },
+          "borrow": {
+            "median_encode_ms": 2.5966505,
+            "median_preparation_ms": 2.9078669999999995
+          },
+          "reduction_percent": 5.847317383847428
+        }
+      }
+    },
+    "mamba3": {
+      "max_abs_error": 2.35742981985308e-12,
+      "levels": {
+        "21": {
+          "copy": {
+            "median_encode_ms": 4.5952455,
+            "median_preparation_ms": 5.6981825
+          },
+          "borrow": {
+            "median_encode_ms": 4.601781,
+            "median_preparation_ms": 5.273134000000001
+          },
+          "reduction_percent": 7.459369720081776
+        },
+        "26": {
+          "copy": {
+            "median_encode_ms": 3.8216925,
+            "median_preparation_ms": 4.6815175
+          },
+          "borrow": {
+            "median_encode_ms": 3.849925,
+            "median_preparation_ms": 4.3920770000000005
+          },
+          "reduction_percent": 6.182621340195771
+        },
+        "34": {
+          "copy": {
+            "median_encode_ms": 2.589179,
+            "median_preparation_ms": 3.095988
+          },
+          "borrow": {
+            "median_encode_ms": 2.5900030000000003,
+            "median_preparation_ms": 2.9238834999999996
+          },
+          "reduction_percent": 5.558952424880214
+        }
+      }
+    }
+  },
+  "short": {
+    "m3": {
+      "base": {
+        "samples": [
+          15.171943751,
+          15.263647006
+        ],
+        "mean_seconds": 15.2177953785,
+        "reduction_percent": 0.0
+      },
+      "borrow": {
+        "samples": [
+          14.912708201,
+          14.939089015
+        ],
+        "mean_seconds": 14.925898608,
+        "reduction_percent": 1.9181278446705696
+      },
+      "routing": {
+        "samples": [
+          14.936375828,
+          15.017700102
+        ],
+        "mean_seconds": 14.977037965,
+        "reduction_percent": 1.5820781362335001
+      },
+      "all": {
+        "samples": [
+          14.683156426,
+          14.729644989
+        ],
+        "mean_seconds": 14.7064007075,
+        "reduction_percent": 3.3605043193215
+      }
+    },
+    "m2": {
+      "samples_in_abba_order": [
+        55.747851779,
+        54.279719911,
+        54.729183301,
+        56.317706809
+      ],
+      "base_mean_seconds": 56.032779294,
+      "borrow_mean_seconds": 54.504451606,
+      "reduction_percent": 2.727560023358777
+    }
+  },
+  "full": {
+    "m3": {
+      "base": {
+        "eval_seconds": 1041.3475167,
+        "host_encoding_seconds": 201.611671692,
+        "plaintext_upload_seconds": 43.038393377,
+        "bootstrap_seconds": 515.189935592,
+        "rotations": 67052,
+        "refresh_rotations": 7152,
+        "routing_stage_rotations_saved": 0,
+        "optimized_routing_stages": 0,
+        "gpu_ntt_encodes": 61696,
+        "borrowed_plaintext_uploads": 0,
+        "max_abs_error_vs_exact": 6.72106138062e-05,
+        "max_abs_error_vs_polynomial": 6.41835070709e-05,
+        "peak_rss_gib": 27.3140602112,
+        "wall_seconds": 1081.6881488729268
+      },
+      "candidate": {
+        "eval_seconds": 1004.62161828,
+        "host_encoding_seconds": 200.271788571,
+        "plaintext_upload_seconds": 26.59297511,
+        "bootstrap_seconds": 513.222393775,
+        "rotations": 57932,
+        "refresh_rotations": 7152,
+        "routing_stage_rotations_saved": 9120,
+        "optimized_routing_stages": 1680,
+        "gpu_ntt_encodes": 61696,
+        "borrowed_plaintext_uploads": 61696,
+        "max_abs_error_vs_exact": 0.000160619944545,
+        "max_abs_error_vs_polynomial": 0.000129253379571,
+        "peak_rss_gib": 27.3141365051,
+        "wall_seconds": 1046.0910528507084
+      },
+      "selected_mode": "all",
+      "reduction_percent": 3.5267667931242808
+    },
+    "m2": {
+      "eval_seconds": 1976.1446393,
+      "max_polynomial_error": 0.0104841591561,
+      "peak_rss_gib": 37.0615196228,
+      "borrowed_uploads": 145588
+    }
+  },
+  "cache": {
+    "hits": 236,
+    "max_exact_error": 7.72271326888e-08,
+    "max_polynomial_error": 5.08587616466e-12
+  },
+  "budget": {
+    "review_seconds": 7200,
+    "used_seconds": 4967.946827197447,
+    "runs": [
+      {
+        "name": "probe-mamba2",
+        "charged_seconds": 47.98075353447348
+      },
+      {
+        "name": "probe-mamba3",
+        "charged_seconds": 48.666502172127366
+      },
+      {
+        "name": "m3-1-base",
+        "charged_seconds": 44.686549979262054
+      },
+      {
+        "name": "m3-2-borrow",
+        "charged_seconds": 44.22705945465714
+      },
+      {
+        "name": "m3-3-routing",
+        "charged_seconds": 44.319239237345755
+      },
+      {
+        "name": "m3-4-all",
+        "charged_seconds": 44.08790256921202
+      },
+      {
+        "name": "m3-5-all",
+        "charged_seconds": 44.13425364997238
+      },
+      {
+        "name": "m3-6-routing",
+        "charged_seconds": 44.29352679103613
+      },
+      {
+        "name": "m3-7-borrow",
+        "charged_seconds": 44.48665372654796
+      },
+      {
+        "name": "m3-8-base",
+        "charged_seconds": 44.54615478683263
+      },
+      {
+        "name": "m2-1-base",
+        "charged_seconds": 85.03613139875233
+      },
+      {
+        "name": "m2-2-borrow",
+        "charged_seconds": 83.73031906504184
+      },
+      {
+        "name": "m2-3-borrow",
+        "charged_seconds": 84.56299553625286
+      },
+      {
+        "name": "m2-4-base",
+        "charged_seconds": 85.97147077787668
+      },
+      {
+        "name": "cache-all",
+        "charged_seconds": 43.626264155842364
+      },
+      {
+        "name": "m3-full-base",
+        "charged_seconds": 1081.6881488729268
+      },
+      {
+        "name": "m3-full-candidate",
+        "charged_seconds": 1046.0910528507084
+      },
+      {
+        "name": "m2-full-borrow",
+        "charged_seconds": 2005.8118486385792
+      }
+    ],
+    "scope": "Internal review interval, not a newly inferred user spending limit."
+  },
+  "scope": "Separate and combined mirrored M3 controls, matched full M3 base/candidate. M2 keeps coefficient moves disabled; its incremental timing claim uses ABBA and the single full run checks parity."
+}

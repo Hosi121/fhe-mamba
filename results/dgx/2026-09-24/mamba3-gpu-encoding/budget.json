@@ -1,0 +1,78 @@
+{
+  "limit_seconds": 21600,
+  "used_seconds": 3226.6348105072975,
+  "runs": [
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-ntt-probe",
+      "charged_seconds": 1.7959930086508393
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-ntt-probe-v2",
+      "charged_seconds": 21.301352112554014
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-prefix-a1",
+      "charged_seconds": 48.818047964945436
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-prefix-b2",
+      "charged_seconds": 47.86341474670917
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-prefix-c3",
+      "charged_seconds": 45.98214821424335
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-prefix-c4",
+      "charged_seconds": 45.72623852547258
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-prefix-b5",
+      "charged_seconds": 47.86792121361941
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-prefix-a6",
+      "charged_seconds": 48.79459060449153
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-ntt-probe-v3",
+      "charged_seconds": 42.131066078320146
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-ntt-probe-final",
+      "charged_seconds": 41.82546588592231
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-layer-c1",
+      "charged_seconds": 85.40578383859247
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-synthetic-c1",
+      "charged_seconds": 47.835167311131954
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-final-prefix-a1",
+      "charged_seconds": 48.98846210539341
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-final-prefix-c2",
+      "charged_seconds": 45.84807786997408
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-final-prefix-c3",
+      "charged_seconds": 45.97739982418716
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-final-prefix-a4",
+      "charged_seconds": 49.05429756175727
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-full-a1",
+      "charged_seconds": 1354.144511403516
+    },
+    {
+      "output": "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-full-c2",
+      "charged_seconds": 1157.2748722378165
+    }
+  ]
+}

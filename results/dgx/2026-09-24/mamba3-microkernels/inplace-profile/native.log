@@ -1,0 +1,29 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 248 ~ 6262MB
+Rotation keys loaded: 85 ~ 15300MB
+setup_seconds=27.3718
+planned_logical_refreshes=4
+node=1/127 op=public seconds=0.184446 eta_seconds=23.2402 bootstraps=0
+node=11/127 op=mulp seconds=1.09717 eta_seconds=11.5701 bootstraps=0
+node=21/127 op=addp seconds=4.58581 eta_seconds=23.1474 bootstraps=0
+node=31/127 op=mulp seconds=6.07222 eta_seconds=18.8043 bootstraps=0
+node=41/127 op=mul seconds=6.84661 eta_seconds=14.3612 bootstraps=0
+node=51/127 op=repeat seconds=7.52562 eta_seconds=11.2147 bootstraps=0
+node=61/127 op=mul seconds=8.53676 eta_seconds=9.23649 bootstraps=0
+node=71/127 op=gather seconds=10.4548 eta_seconds=8.24604 bootstraps=0
+node=81/127 op=scatter seconds=11.4394 eta_seconds=6.49643 bootstraps=0
+node=91/127 op=mul seconds=12.2945 eta_seconds=4.86375 bootstraps=0
+node=101/127 op=linear seconds=15.9437 eta_seconds=4.10431 bootstraps=2
+node=111/127 op=mulp seconds=17.486 eta_seconds=2.52051 bootstraps=4
+node=121/127 op=sum seconds=21.2697 eta_seconds=1.0547 bootstraps=6
+node=127/127 op=mulp seconds=22.9199 eta_seconds=0 bootstraps=8
+Capture range started in the application.
+Capture range ended in the application.
+Generating '/tmp/nsys-report-e2b1.qdstrm'
+[1/1] [0%                          ] micro-profile-inplace.nsys-repProcessing events...
+[1/1] [0%                          ] micro-profile-inplace.nsys-rep[1/1] [14%                         ] micro-profile-inplace.nsys-rep[1/1] [12%                         ] micro-profile-inplace.nsys-rep[1/1] [10%                         ] micro-profile-inplace.nsys-rep[1/1] [9%                          ] micro-profile-inplace.nsys-rep[1/1] [8%                          ] micro-profile-inplace.nsys-rep[1/1] [=16%                        ] micro-profile-inplace.nsys-rep[1/1] [14%                         ] micro-profile-inplace.nsys-rep[1/1] [13%                         ] micro-profile-inplace.nsys-rep[1/1] [12%                         ] micro-profile-inplace.nsys-rep[1/1] [11%                         ] micro-profile-inplace.nsys-rep[1/1] [10%                         ] micro-profile-inplace.nsys-rep[1/1] [9%                          ] micro-profile-inplace.nsys-rep[1/1] [8%                          ] micro-profile-inplace.nsys-rep[1/1] [7%                          ] micro-profile-inplace.nsys-rep[1/1] [6%                          ] micro-profile-inplace.nsys-rep[1/1] [5%                          ] micro-profile-inplace.nsys-rep[1/1] [6%                          ] micro-profile-inplace.nsys-rep[1/1] [8%                          ] micro-profile-inplace.nsys-rep[1/1] [9%                          ] micro-profile-inplace.nsys-rep[1/1] [11%                         ] micro-profile-inplace.nsys-rep[1/1] [13%                         ] micro-profile-inplace.nsys-rep[1/1] [=15%                        ] micro-profile-inplace.nsys-rep[1/1] [=17%                        ] micro-profile-inplace.nsys-rep[1/1] [==19%                       ] micro-profile-inplace.nsys-rep[1/1] [==21%                       ] micro-profile-inplace.nsys-rep[1/1] [===23%                      ] micro-profile-inplace.nsys-rep[1/1] [====25%                     ] micro-profile-inplace.nsys-rep[1/1] [====27%                     ] micro-profile-inplace.nsys-rep[1/1] [=====29%                    ] micro-profile-inplace.nsys-rep[1/1] [=====31%                    ] micro-profile-inplace.nsys-rep[1/1] [======33%                   ] micro-profile-inplace.nsys-rep[1/1] [======35%                   ] micro-profile-inplace.nsys-rep[1/1] [=======37%                  ] micro-profile-inplace.nsys-rep[1/1] [=======39%                  ] micro-profile-inplace.nsys-rep[1/1] [========41%                 ] micro-profile-inplace.nsys-rep[1/1] [=========43%                ] micro-profile-inplace.nsys-rep[1/1] [=========45%                ] micro-profile-inplace.nsys-rep[1/1] [==========47%               ] micro-profile-inplace.nsys-rep[1/1] [==========49%               ] micro-profile-inplace.nsys-rep[1/1] [===========51%              ] micro-profile-inplace.nsys-rep[1/1] [===========53%              ] micro-profile-inplace.nsys-rep[1/1] [============55%             ] micro-profile-inplace.nsys-rep[1/1] [============57%             ] micro-profile-inplace.nsys-rep[1/1] [=============59%            ] micro-profile-inplace.nsys-rep[1/1] [==============61%           ] micro-profile-inplace.nsys-rep[1/1] [==============62%           ] micro-profile-inplace.nsys-rep[1/1] [==============64%           ] micro-profile-inplace.nsys-rep[1/1] [===============66%          ] micro-profile-inplace.nsys-rep[1/1] [================68%         ] micro-profile-inplace.nsys-rep[1/1] [================70%         ] micro-profile-inplace.nsys-rep[1/1] [=================72%        ] micro-profile-inplace.nsys-rep[1/1] [=================74%        ] micro-profile-inplace.nsys-rep[1/1] [==================76%       ] micro-profile-inplace.nsys-rep[1/1] [==================78%       ] micro-profile-inplace.nsys-rep[1/1] [========================100%] micro-profile-inplace.nsys-rep[1/1] [========================100%] micro-profile-inplace.nsys-rep
+passed=1 polynomial_error=1.08058e-05 exact_error=1.06975e-05 eval_seconds=22.9204
+Generated:
+	/home/kataiwa/fhemamba/mamba3-20260924/micro-profile-inplace.nsys-rep

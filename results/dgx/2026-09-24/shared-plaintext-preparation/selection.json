@@ -1,0 +1,8 @@
+{
+  "mean_seconds": {
+    "b": 58.7916561865,
+    "c": 57.7104213515
+  },
+  "candidate": "c",
+  "rule": "Faster valid mean under B/C/C/B with nonzero GPU NTT dispatch."
+}

@@ -1,0 +1,30 @@
+[  4%] Built target stage1_mamba2_process
+[  8%] Built target stage1_mamba2_payload
+[ 12%] Built target stage1_mamba2_config
+[ 16%] Built target test_packed_lifetime
+[ 20%] Built target test_plaintext_cache
+[ 27%] Built target test_packed_program
+[ 27%] Building CXX object CMakeFiles/test_packed_routing.dir/tests/test_packed_routing.cpp.o
+[ 29%] Building CXX object CMakeFiles/test_packed_depth.dir/tests/test_packed_depth.cpp.o
+[ 33%] Built target test_stage0_layout
+[ 37%] Built target test_stage1_normalization
+[ 41%] Built target test_stage1_vector_rms
+[ 45%] Built target test_stage1_tail_payload
+[ 50%] Built target test_stage1_rank_gate_payload
+[ 54%] Built target test_stage1_mamba2_config
+[ 58%] Built target test_stage1_mamba2_payload
+[ 62%] Built target test_stage1_mamba2_process
+[ 66%] Built target stage1_mamba2_depth
+[ 70%] Built target stage1_mamba2_artifact
+[ 75%] Built target stage1_mamba2_plan
+[ 79%] Built target test_stage1_mamba2_depth
+[ 83%] Built target test_stage1_mamba2_artifact
+[ 87%] Built target test_stage1_joint_gates
+[ 91%] Built target test_stage1_mamba2_plan
+[ 93%] Building CXX object CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o
+[ 95%] Linking CXX executable test_packed_routing
+[ 95%] Built target test_packed_routing
+[ 97%] Linking CXX executable test_packed_depth
+[ 97%] Built target test_packed_depth
+[100%] Linking CXX executable packed_resource_inventory
+[100%] Built target packed_resource_inventory

@@ -1,0 +1,16 @@
+Would reformat: results/dgx/2026-09-24/packed-resources/check_cpu_state.py
+Would reformat: results/dgx/2026-09-24/packed-resources/compare.py
+Would reformat: results/dgx/2026-09-24/packed-resources/finish_reports.py
+Would reformat: results/dgx/2026-09-24/packed-resources/postprocess_hook.py
+Would reformat: results/dgx/2026-09-24/packed-resources/progress.py
+Would reformat: results/dgx/2026-09-24/packed-resources/run_campaign.py
+Would reformat: results/dgx/2026-09-24/packed-resources/runlib.py
+Would reformat: results/dgx/2026-09-24/packed-resources/target_provenance.py
+Would reformat: results/dgx/2026-09-24/packed-resources/watch_completion.py
+Would reformat: results/dgx/2026-09-24/shared-plaintext-preparation/compare.py
+Would reformat: results/dgx/2026-09-24/shared-plaintext-preparation/finish_reports.py
+Would reformat: results/dgx/2026-09-24/shared-plaintext-preparation/run_remaining.py
+Would reformat: results/dgx/2026-09-24/shared-plaintext-preparation/run_study.py
+Would reformat: results/dgx/2026-09-24/shared-plaintext-preparation/target_provenance.py
+Would reformat: results/dgx/2026-09-24/shared-plaintext-preparation/watch_completion.py
+15 files would be reformatted, 128 files already formatted

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "complete_backbone": false,
+  "layers": 1,
+  "prompt": "The capital",
+  "generated_token_ids": [
+    6864,
+    6864
+  ],
+  "generated_text": " capital capital",
+  "text": "The capital capital capital",
+  "eval_seconds": 129.667466476,
+  "max_abs_error_vs_polynomial": 3.74192967776e-05,
+  "max_abs_error_vs_exact": 3.51790579654e-05,
+  "security": "not-set",
+  "client_protocol": "tied vocabulary head and greedy selection from actual decrypted final hidden; fresh encrypted embedding feedback"
+}

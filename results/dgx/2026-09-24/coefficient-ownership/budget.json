@@ -1,0 +1,55 @@
+{
+  "review_seconds": 7200,
+  "used_seconds": 1695.2053185822442,
+  "runs": [
+    {
+      "name": "probe-mamba2",
+      "charged_seconds": 33.34514267463237
+    },
+    {
+      "name": "probe-mamba3",
+      "charged_seconds": 33.89689949341118
+    },
+    {
+      "name": "m3-1-base",
+      "charged_seconds": 44.02512025553733
+    },
+    {
+      "name": "m3-2-move",
+      "charged_seconds": 43.67953708767891
+    },
+    {
+      "name": "m3-3-move",
+      "charged_seconds": 43.74519204720855
+    },
+    {
+      "name": "m3-4-base",
+      "charged_seconds": 44.14424676075578
+    },
+    {
+      "name": "m2-1-base",
+      "charged_seconds": 82.49918770883232
+    },
+    {
+      "name": "m2-2-move",
+      "charged_seconds": 82.36606748495251
+    },
+    {
+      "name": "m2-3-move",
+      "charged_seconds": 81.62811730802059
+    },
+    {
+      "name": "m2-4-base",
+      "charged_seconds": 82.52426723018289
+    },
+    {
+      "name": "cache-move",
+      "charged_seconds": 44.36484676320106
+    },
+    {
+      "name": "m3-full-move",
+      "charged_seconds": 1078.9866937678307
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

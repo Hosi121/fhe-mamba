@@ -1,0 +1,12 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt(+0x174bbc)[0xb9db06e14bbc]
+/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt(+0x14fce0)[0xb9db06defce0]
+/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt(+0x1224ac)[0xb9db06dc24ac]
+/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt(+0x77b70)[0xb9db06d17b70]
+/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt(+0x1204a0)[0xb9db06dc04a0]
+/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt(+0x3decc)[0xb9db06cddecc]
+/lib/aarch64-linux-gnu/libc.so.6(+0x284c4)[0xfe2303ed84c4]
+/lib/aarch64-linux-gnu/libc.so.6(__libc_start_main+0x98)[0xfe2303ed8598]
+/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt(+0x74ef0)[0xb9db06d14ef0]
+Cuda failure /home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CudaUtils.cu:457: 'an illegal memory access was encountered'

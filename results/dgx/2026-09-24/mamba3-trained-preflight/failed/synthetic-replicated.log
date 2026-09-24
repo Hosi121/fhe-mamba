@@ -1,0 +1,51 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 1024 slots.
+Plaintexts loaded: 120 ~ 3030MB
+Rotation keys loaded: 50 ~ 9000MB
+setup_seconds=15.9217
+node=1/428 op=public seconds=0.159345 eta_seconds=68.0401 bootstraps=0
+node=11/428 op=gather seconds=1.179 eta_seconds=44.6949 bootstraps=0
+node=21/428 op=cheb seconds=4.20697 eta_seconds=81.5351 bootstraps=0
+node=31/428 op=mulp seconds=4.57153 eta_seconds=58.5451 bootstraps=0
+node=41/428 op=cheb seconds=5.42714 eta_seconds=51.2269 bootstraps=0
+node=51/428 op=mul seconds=5.83966 eta_seconds=43.1677 bootstraps=0
+node=61/428 op=gather seconds=6.13731 eta_seconds=36.9245 bootstraps=0
+node=71/428 op=mul seconds=6.51322 eta_seconds=32.7496 bootstraps=0
+node=81/428 op=mulp seconds=6.86369 eta_seconds=29.4037 bootstraps=0
+node=91/428 op=mul seconds=10.261 eta_seconds=37.9995 bootstraps=0
+node=101/428 op=mul seconds=13.729 eta_seconds=44.4492 bootstraps=0
+node=111/428 op=input seconds=15.4594 eta_seconds=44.1499 bootstraps=0
+node=121/428 op=addp seconds=16.017 eta_seconds=40.6381 bootstraps=0
+node=131/428 op=mulp seconds=18.9186 eta_seconds=42.8918 bootstraps=0
+node=141/428 op=mul seconds=19.6674 eta_seconds=40.0323 bootstraps=0
+node=151/428 op=repeat seconds=20.1137 eta_seconds=36.8973 bootstraps=0
+node=161/428 op=mul seconds=20.4761 eta_seconds=33.9573 bootstraps=0
+node=171/428 op=gather seconds=20.9443 eta_seconds=31.4777 bootstraps=0
+node=181/428 op=scatter seconds=21.3716 eta_seconds=29.1646 bootstraps=0
+node=191/428 op=mul seconds=21.5096 eta_seconds=26.6899 bootstraps=0
+node=201/428 op=add seconds=24.9107 eta_seconds=28.133 bootstraps=0
+node=211/428 op=sum seconds=29.4479 eta_seconds=30.2853 bootstraps=0
+node=221/428 op=gather seconds=30.2447 eta_seconds=28.3287 bootstraps=0
+node=231/428 op=cheb seconds=32.8942 eta_seconds=28.0526 bootstraps=0
+node=241/428 op=mul seconds=33.5087 eta_seconds=26.0005 bootstraps=0
+node=251/428 op=mulp seconds=34.1372 eta_seconds=24.0728 bootstraps=0
+node=261/428 op=gather seconds=34.6889 eta_seconds=22.1956 bootstraps=0
+node=271/428 op=scatter seconds=35.1077 eta_seconds=20.3392 bootstraps=0
+node=281/428 op=mulp seconds=35.5028 eta_seconds=18.5726 bootstraps=0
+node=291/428 op=scatter seconds=35.8451 eta_seconds=16.8755 bootstraps=0
+node=301/428 op=repeat seconds=39.1381 eta_seconds=16.5134 bootstraps=0
+node=311/428 op=repeat seconds=42.56 eta_seconds=16.0113 bootstraps=0
+node=321/428 op=mul seconds=44.0213 eta_seconds=14.6738 bootstraps=0
+node=331/428 op=gather seconds=44.735 eta_seconds=13.1096 bootstraps=0
+node=341/428 op=repeat seconds=47.6672 eta_seconds=12.1614 bootstraps=0
+node=351/428 op=cheb seconds=48.3957 eta_seconds=10.6167 bootstraps=0
+node=361/428 op=mul seconds=48.8577 eta_seconds=9.06776 bootstraps=0
+node=371/428 op=mulp seconds=49.2423 eta_seconds=7.56553 bootstraps=0
+node=381/428 op=scatter seconds=49.5745 eta_seconds=6.11549 bootstraps=0
+node=391/428 op=add seconds=49.9067 eta_seconds=4.72263 bootstraps=0
+node=401/428 op=mul seconds=50.2814 eta_seconds=3.38553 bootstraps=0
+node=411/428 op=repeat seconds=53.6797 eta_seconds=2.22033 bootstraps=0
+node=421/428 op=repeat seconds=57.0917 eta_seconds=0.949267 bootstraps=0
+node=428/428 op=linear seconds=58.2644 eta_seconds=0 bootstraps=0
+/home/kataiwa/fhe-deps/FIDESlib/deps/openfhe-src/src/pke/lib/encoding/ckkspackedencoding.cpp:l.453:Decode(): The decryption failed because the approximation error is too high. Check the parameters. 

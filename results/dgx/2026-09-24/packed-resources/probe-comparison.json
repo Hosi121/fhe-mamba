@@ -1,0 +1,198 @@
+{
+  "mamba2": {
+    "21:standard": {
+      "n": 8,
+      "median_preparation_ms": 10.998886500000001
+    },
+    "21:fast-upload": {
+      "n": 8,
+      "median_preparation_ms": 9.8109425
+    },
+    "21:gpu-ntt-1": {
+      "n": 8,
+      "median_preparation_ms": 7.413087
+    },
+    "21:gpu-ntt-4": {
+      "n": 8,
+      "median_preparation_ms": 7.191407
+    },
+    "21:gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 7.130615
+    },
+    "21:gpu-ntt-64": {
+      "n": 8,
+      "median_preparation_ms": 7.110335
+    },
+    "21:direct-upload": {
+      "n": 8,
+      "median_preparation_ms": 9.030527
+    },
+    "21:direct-gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 6.337543
+    },
+    "26:standard": {
+      "n": 8,
+      "median_preparation_ms": 7.705711
+    },
+    "26:fast-upload": {
+      "n": 8,
+      "median_preparation_ms": 6.969431
+    },
+    "26:gpu-ntt-1": {
+      "n": 8,
+      "median_preparation_ms": 5.9345915
+    },
+    "26:gpu-ntt-4": {
+      "n": 8,
+      "median_preparation_ms": 5.704751
+    },
+    "26:gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 5.6718235
+    },
+    "26:gpu-ntt-64": {
+      "n": 8,
+      "median_preparation_ms": 5.5036075
+    },
+    "26:direct-upload": {
+      "n": 8,
+      "median_preparation_ms": 6.708798999999999
+    },
+    "26:direct-gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 5.2039599999999995
+    },
+    "34:standard": {
+      "n": 8,
+      "median_preparation_ms": 5.7964475
+    },
+    "34:fast-upload": {
+      "n": 8,
+      "median_preparation_ms": 5.099447
+    },
+    "34:gpu-ntt-1": {
+      "n": 8,
+      "median_preparation_ms": 3.8002949999999998
+    },
+    "34:gpu-ntt-4": {
+      "n": 8,
+      "median_preparation_ms": 3.689543
+    },
+    "34:gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 3.6701675
+    },
+    "34:gpu-ntt-64": {
+      "n": 8,
+      "median_preparation_ms": 3.6610475
+    },
+    "34:direct-upload": {
+      "n": 8,
+      "median_preparation_ms": 4.8305675
+    },
+    "34:direct-gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 3.326672
+    }
+  },
+  "mamba3": {
+    "21:standard": {
+      "n": 8,
+      "median_preparation_ms": 11.240727
+    },
+    "21:fast-upload": {
+      "n": 8,
+      "median_preparation_ms": 9.859856
+    },
+    "21:gpu-ntt-1": {
+      "n": 8,
+      "median_preparation_ms": 7.4534475
+    },
+    "21:gpu-ntt-4": {
+      "n": 8,
+      "median_preparation_ms": 7.02228
+    },
+    "21:gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 7.167759
+    },
+    "21:gpu-ntt-64": {
+      "n": 8,
+      "median_preparation_ms": 7.177464
+    },
+    "21:direct-upload": {
+      "n": 8,
+      "median_preparation_ms": 9.028936
+    },
+    "21:direct-gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 6.402184
+    },
+    "26:standard": {
+      "n": 8,
+      "median_preparation_ms": 8.382615999999999
+    },
+    "26:fast-upload": {
+      "n": 8,
+      "median_preparation_ms": 7.540112000000001
+    },
+    "26:gpu-ntt-1": {
+      "n": 8,
+      "median_preparation_ms": 6.06348
+    },
+    "26:gpu-ntt-4": {
+      "n": 8,
+      "median_preparation_ms": 5.8814
+    },
+    "26:gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 5.823608
+    },
+    "26:gpu-ntt-64": {
+      "n": 8,
+      "median_preparation_ms": 5.812904
+    },
+    "26:direct-upload": {
+      "n": 8,
+      "median_preparation_ms": 6.656072
+    },
+    "26:direct-gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 4.9677679999999995
+    },
+    "34:standard": {
+      "n": 8,
+      "median_preparation_ms": 5.829576
+    },
+    "34:fast-upload": {
+      "n": 8,
+      "median_preparation_ms": 5.220264500000001
+    },
+    "34:gpu-ntt-1": {
+      "n": 8,
+      "median_preparation_ms": 3.723752
+    },
+    "34:gpu-ntt-4": {
+      "n": 8,
+      "median_preparation_ms": 3.642496
+    },
+    "34:gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 3.600016
+    },
+    "34:gpu-ntt-64": {
+      "n": 8,
+      "median_preparation_ms": 3.579992
+    },
+    "34:direct-upload": {
+      "n": 8,
+      "median_preparation_ms": 5.281152
+    },
+    "34:direct-gpu-ntt-16": {
+      "n": 8,
+      "median_preparation_ms": 3.266744
+    }
+  }
+}

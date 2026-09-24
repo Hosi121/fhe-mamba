@@ -1,0 +1,31 @@
+{
+  "schema": "fhemamba-packed-run-v1",
+  "started_utc": "2026-09-23T19:53:45.231370+00:00",
+  "command": [
+    "/home/kataiwa/fhemamba/mamba3-20260924/build/packed_fideslib",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1/program.txt",
+    "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-layer1-single/native.json",
+    "0.001",
+    "0.001",
+    "--client-head",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1/client_head.f32",
+    "--planned-refresh",
+    "--bootstrap-passes",
+    "1"
+  ],
+  "binary_sha256": "9420bed5d12d3c6fda42f220791640358529e853d93c88e2c1c844cc4a42a4fc",
+  "manifest_sha256": "f3979518293ac0f29c4638c783b1157d3a02c7a2786d2a76ef0e484d36a8eec4",
+  "program_sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917",
+  "timeout_seconds": 240.0,
+  "architecture": "mamba3",
+  "tokens": 3,
+  "timed_out": false,
+  "returncode": 1,
+  "wall_seconds": 103.32271717302501,
+  "passed": false,
+  "native_sha256": "6bc38dbb157c031a825384d4bfcdf753395cc43c761b02bce64f46e06ee40911",
+  "complete_backbone": false,
+  "expected_text": "The capital capital capital",
+  "campaign_budget_seconds": 7200.0,
+  "campaign_used_seconds": 3443.0439807977527
+}

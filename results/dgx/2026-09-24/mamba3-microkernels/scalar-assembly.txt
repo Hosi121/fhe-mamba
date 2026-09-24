@@ -1,0 +1,87 @@
+
+bench_mask:     file format elf64-littleaarch64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .text:
+
+0000000000001ae0 <mask_scalar>:
+    1ae0:	a9ba7bfd 	stp	x29, x30, [sp, #-96]!
+    1ae4:	910003fd 	mov	x29, sp
+    1ae8:	a90363f7 	stp	x23, x24, [sp, #48]
+    1aec:	aa0003f7 	mov	x23, x0
+    1af0:	2a0103f8 	mov	w24, w1
+    1af4:	a90153f3 	stp	x19, x20, [sp, #16]
+    1af8:	92fe0000 	mov	x0, #0xfffffffffffffff     	// #1152921504606846975
+    1afc:	a94052e1 	ldp	x1, x20, [x23]
+    1b00:	a9025bf5 	stp	x21, x22, [sp, #32]
+    1b04:	a9046bf9 	stp	x25, x26, [sp, #64]
+    1b08:	cb010294 	sub	x20, x20, x1
+    1b0c:	9343fe94 	asr	x20, x20, #3
+    1b10:	eb34c01f 	cmp	x0, w20, sxtw
+    1b14:	54000723 	b.cc	1bf8 <mask_scalar+0x118>  // b.lo, b.ul, b.last
+    1b18:	a9007d1f 	stp	xzr, xzr, [x8]
+    1b1c:	aa0803f5 	mov	x21, x8
+    1b20:	93407e99 	sxtw	x25, w20
+    1b24:	f900091f 	str	xzr, [x8, #16]
+    1b28:	b4000559 	cbz	x25, 1bd0 <mask_scalar+0xf0>
+    1b2c:	d37df33a 	lsl	x26, x25, #3
+    1b30:	f9002bfb 	str	x27, [sp, #80]
+    1b34:	aa1a03e0 	mov	x0, x26
+    1b38:	97fffd7a 	bl	1120 <_Znwm@plt>
+    1b3c:	aa0003f6 	mov	x22, x0
+    1b40:	8b1a001b 	add	x27, x0, x26
+    1b44:	f90002b6 	str	x22, [x21]
+    1b48:	2a1403f3 	mov	w19, w20
+    1b4c:	f800841f 	str	xzr, [x0], #8
+    1b50:	f9000abb 	str	x27, [x21, #16]
+    1b54:	f100073f 	cmp	x25, #0x1
+    1b58:	540004c0 	b.eq	1bf0 <mask_scalar+0x110>  // b.none
+    1b5c:	eb1b001f 	cmp	x0, x27
+    1b60:	54000080 	b.eq	1b70 <mask_scalar+0x90>  // b.none
+    1b64:	d1002342 	sub	x2, x26, #0x8
+    1b68:	52800001 	mov	w1, #0x0                   	// #0
+    1b6c:	97fffd55 	bl	10c0 <memset@plt>
+    1b70:	f90006bb 	str	x27, [x21, #8]
+    1b74:	1ad40f01 	sdiv	w1, w24, w20
+    1b78:	d2800002 	mov	x2, #0x0                   	// #0
+    1b7c:	f94002e4 	ldr	x4, [x23]
+    1b80:	1b14e021 	msub	w1, w1, w20, w24
+    1b84:	0b140021 	add	w1, w1, w20
+    1b88:	1ad40c20 	sdiv	w0, w1, w20
+    1b8c:	1b148400 	msub	w0, w0, w20, w1
+    1b90:	0b020003 	add	w3, w0, w2
+    1b94:	fc627880 	ldr	d0, [x4, x2, lsl #3]
+    1b98:	91000442 	add	x2, x2, #0x1
+    1b9c:	1ad30c61 	sdiv	w1, w3, w19
+    1ba0:	1b138c21 	msub	w1, w1, w19, w3
+    1ba4:	fc21dac0 	str	d0, [x22, w1, sxtw #3]
+    1ba8:	6b02027f 	cmp	w19, w2
+    1bac:	54ffff2c 	b.gt	1b90 <mask_scalar+0xb0>
+    1bb0:	a94153f3 	ldp	x19, x20, [sp, #16]
+    1bb4:	aa1503e0 	mov	x0, x21
+    1bb8:	a9425bf5 	ldp	x21, x22, [sp, #32]
+    1bbc:	a94363f7 	ldp	x23, x24, [sp, #48]
+    1bc0:	a9446bf9 	ldp	x25, x26, [sp, #64]
+    1bc4:	f9402bfb 	ldr	x27, [sp, #80]
+    1bc8:	a8c67bfd 	ldp	x29, x30, [sp], #96
+    1bcc:	d65f03c0 	ret
+    1bd0:	f900091f 	str	xzr, [x8, #16]
+    1bd4:	aa1503e0 	mov	x0, x21
+    1bd8:	a94153f3 	ldp	x19, x20, [sp, #16]
+    1bdc:	a9425bf5 	ldp	x21, x22, [sp, #32]
+    1be0:	a94363f7 	ldp	x23, x24, [sp, #48]
+    1be4:	a9446bf9 	ldp	x25, x26, [sp, #64]
+    1be8:	a8c67bfd 	ldp	x29, x30, [sp], #96
+    1bec:	d65f03c0 	ret
+    1bf0:	f90006a0 	str	x0, [x21, #8]
+    1bf4:	17ffffe0 	b	1b74 <mask_scalar+0x94>
+    1bf8:	90000000 	adrp	x0, 1000 <__abi_tag+0xd88>
+    1bfc:	913ba000 	add	x0, x0, #0xee8
+    1c00:	f9002bfb 	str	x27, [sp, #80]
+    1c04:	97fffd2b 	bl	10b0 <_ZSt20__throw_length_errorPKc@plt>
+
+Disassembly of section .fini:

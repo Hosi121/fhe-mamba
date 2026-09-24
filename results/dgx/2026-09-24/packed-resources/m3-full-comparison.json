@@ -1,0 +1,70 @@
+{
+  "base": {
+    "eval_seconds": [
+      1114.9271676
+    ],
+    "wall_seconds": [
+      1155.9612448764965
+    ],
+    "max_exact_error": [
+      8.69684742657e-05
+    ],
+    "max_polynomial_error": [
+      6.57020401396e-05
+    ],
+    "rotations": [
+      86063
+    ],
+    "refresh_rotations": [
+      7323
+    ],
+    "lifetime_clones_eliminated": [
+      0
+    ],
+    "public_weight_bytes": [
+      706019328
+    ],
+    "peak_rss_gib": [
+      27.9648284912
+    ],
+    "upload_seconds": [
+      73.414490186
+    ],
+    "mean_seconds": 1114.9271676,
+    "reduction_percent": 0.0
+  },
+  "all": {
+    "eval_seconds": [
+      1054.8568314
+    ],
+    "wall_seconds": [
+      1095.6751204393804
+    ],
+    "max_exact_error": [
+      0.000126600833906
+    ],
+    "max_polynomial_error": [
+      0.000124834168243
+    ],
+    "rotations": [
+      67052
+    ],
+    "refresh_rotations": [
+      7152
+    ],
+    "lifetime_clones_eliminated": [
+      3898
+    ],
+    "public_weight_bytes": [
+      176504832
+    ],
+    "peak_rss_gib": [
+      27.3143157959
+    ],
+    "upload_seconds": [
+      42.865344572
+    ],
+    "mean_seconds": 1054.8568314,
+    "reduction_percent": 5.387826034350562
+  }
+}

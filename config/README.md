@@ -2,6 +2,8 @@
 
 - `reproduction.json` pins the public model revision, its six required file
   hashes, and the two approximation bundles below.
+- `mamba3-reproduction.json` pins the official Mamba-3 SISO 187M checkpoint,
+  compatible public Llama-3.1 tokenizer and upstream reference source revision.
 - `mamba2-130m-normalization-20260921.json` contains 49 public normalization
   recipes and their input/error contract.
 - `mamba2-130m-gates-20260921.npz` is the byte-identical frozen joint-gate

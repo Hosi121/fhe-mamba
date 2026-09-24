@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "hidden_max_abs_error": 7.758908937560705e-08,
+  "state_max_abs_error": 1.7677493202583605e-07,
+  "actual_tokens": [
+    315,
+    279,
+    1614,
+    315
+  ],
+  "upstream_tokens": [
+    315,
+    279,
+    1614,
+    315
+  ],
+  "layers": 12,
+  "evaluations": 5,
+  "upstream_commit": "e9594ce1c732d97440f0332fdc43170a2294dbfa",
+  "source_sha256": {
+    "mamba_ssm/modules/mamba3.py": "930c3dfa04dea8444b1c9ee8b6ac9cbbc7ef492dc5ae1f4c83051ef953eca33c",
+    "mamba_ssm/ops/triton/mamba3/mamba3_mimo_rotary_step.py": "e117b5da3d2ddfcfa66673a88dfd88a6d688100291d3b6a1b0b3c24c82ef79d6",
+    "mamba_ssm/ops/cute/mamba3/mamba3_step_fn.py": "5c82f3936308cfc90bb3bcdfd410c60fc80dfc3afe72c4338831341398cd7ca4",
+    "mamba_ssm/modules/block.py": "b62e755195c277a027c5d9cc8d576a8ae4a1d1317143b91370b2f8ce683b4cc1",
+    "mamba_ssm/modules/mlp.py": "d3aa360ae67608d2582975f25ec9adc57613e442f2edefcd88e91363e6de5021"
+  },
+  "scope": "original upstream CPU preprocessing, rotary, recurrence, residual block and MLP; no fused CUDA comparison",
+  "precision": "FP64 oracle with upstream FP32 A preprocessing; residual FP32 rounding disabled for both oracles"
+}

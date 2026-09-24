@@ -1,0 +1,91 @@
+{
+  "matched_conditions": true,
+  "groups": {
+    "a": {
+      "eval_seconds": [
+        2318.1002473
+      ],
+      "mean_seconds": 2318.1002473,
+      "process_wall_seconds": [
+        2346.6913177827373
+      ],
+      "setup_seconds": [
+        23.180904582
+      ],
+      "max_abs_error": [
+        0.0138623747597
+      ],
+      "peak_rss_gib": [
+        37.0935440063
+      ],
+      "joint_gate_seconds": [
+        652.51318846
+      ],
+      "bootstrap_seconds": [
+        1083.54856243
+      ],
+      "plaintext_encoding": [
+        {
+          "fast_upload": false,
+          "gpu_ntt": false,
+          "ntt_batch": 16,
+          "fast_uploads": 0,
+          "gpu_ntt_encodes": 0,
+          "upload_seconds": 0,
+          "eval_fast_uploads": 0,
+          "eval_gpu_ntt_encodes": 0,
+          "eval_upload_seconds": 0
+        }
+      ],
+      "reduction_percent": 0.0,
+      "speedup": 1.0
+    },
+    "c": {
+      "eval_seconds": [
+        2142.10686764
+      ],
+      "mean_seconds": 2142.10686764,
+      "process_wall_seconds": [
+        2169.816076069139
+      ],
+      "setup_seconds": [
+        22.27769498
+      ],
+      "max_abs_error": [
+        0.00504368600004
+      ],
+      "peak_rss_gib": [
+        37.0629653931
+      ],
+      "joint_gate_seconds": [
+        530.811602964
+      ],
+      "bootstrap_seconds": [
+        1082.82913408
+      ],
+      "plaintext_encoding": [
+        {
+          "fast_upload": true,
+          "gpu_ntt": true,
+          "ntt_batch": 16,
+          "fast_uploads": 145589,
+          "gpu_ntt_encodes": 23542,
+          "upload_seconds": 214.856891491,
+          "eval_fast_uploads": 145588,
+          "eval_gpu_ntt_encodes": 23542,
+          "eval_upload_seconds": 214.848651704
+        }
+      ],
+      "reduction_percent": 7.592138427360407,
+      "speedup": 1.0821590100469147
+    }
+  },
+  "physical_bootstraps": 2187,
+  "subring_encodes": 121975,
+  "generated_ids": [
+    273,
+    253,
+    4687,
+    273
+  ]
+}

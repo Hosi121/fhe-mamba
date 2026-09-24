@@ -1,0 +1,11 @@
+{
+  "question": "Do shared NAF rotations, safe last-use reuse, direct limb upload and exact public-weight storage reduce the cost of unchanged Mamba inference?",
+  "prior_study": "mamba2-plaintext-20260924 must finish before build or GPU work",
+  "scope": ["shared NAF routine", "DAG binary last-use ownership", "shared direct plaintext limb upload", "lossless BF16 matrix storage", "CPU state storage ownership", "static packing inventory"],
+  "invariants": ["unchanged model and payload hashes", "M3 exact and polynomial error <= 0.001", "M2 polynomial error <= 0.05", "actual greedy token equality", "no diagnostic intermediate decryptions", "same parameters, refresh policy and hardware"],
+  "sequence": ["CPU contracts and static full-program inventory", "fresh separate GPU build after prior completion", "both plaintext exact-RNS probes", "M3 prefix individual modes and combined mode in mirrored order", "M2 direct-upload control in ABBA order", "same-binary M3 full baseline and combined candidate", "full M2 direct-upload candidate if short comparison improves"],
+  "review_seconds": 14400,
+  "review_note": "Internal bounded review interval under the user's existing hours-of-GPU authorization; not a new inferred spending limit.",
+  "timeouts_seconds": {"build": 900, "probe": 300, "prefix": 300, "m3_full": 2400, "m2_full": 4200},
+  "persistent_state_copacking": "Inventory only in this cycle: quantify slot opportunity; access masks, rotations and level compatibility require a separate schedule and measured break-even."
+}
