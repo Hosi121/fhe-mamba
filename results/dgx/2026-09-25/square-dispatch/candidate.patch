@@ -1,0 +1,337 @@
+diff --git a/native/fideslib_stage0/include/owned_arithmetic.hpp b/native/fideslib_stage0/include/owned_arithmetic.hpp
+index 6b73231..147b60d 100644
+--- a/native/fideslib_stage0/include/owned_arithmetic.hpp
++++ b/native/fideslib_stage0/include/owned_arithmetic.hpp
+@@ -10,6 +10,20 @@ struct OwnedArithmeticStats {
+   long long calls = 0, reused_inputs = 0, cloned_inputs = 0;
+ };
+ 
++// A unary operation needs one private buffer. Preserve its identity instead of
++// manufacturing two independent copies of a known square's operand.
++template <class Handle, class Clone, class Evaluate, class Complete>
++auto evaluate_owned_unary(Handle value, Clone&& clone, Evaluate&& evaluate,
++                          Complete&& complete, OwnedArithmeticStats& stats) -> Handle {
++  if (!value) throw std::invalid_argument("owned arithmetic needs an operand");
++  if (value.use_count() == 1) ++stats.reused_inputs;
++  else { value = clone(value); ++stats.cloned_inputs; }
++  evaluate(value);
++  complete();
++  ++stats.calls;
++  return value;
++}
++
+ // Consume scratch handles, detaching any aliases before level alignment can
+ // mutate either operand. Completion must precede release of the right operand:
+ // an asynchronous evaluator may still be reading its storage.
+diff --git a/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp b/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp
+index c3814a6..e59e692 100644
+--- a/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp
++++ b/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp
+@@ -7,6 +7,17 @@ namespace fhemamba {
+ 
+ enum class CiphertextBinaryOp { Add, Subtract, Multiply };
+ 
++template <class Complete>
++auto owned_ciphertext_square(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
++                             fideslib::Ciphertext<fideslib::DCRTPoly> value,
++                             Complete&& complete, OwnedArithmeticStats& stats)
++    -> fideslib::Ciphertext<fideslib::DCRTPoly> {
++  return evaluate_owned_unary(std::move(value),
++      [](const auto& input) { return input->Clone(); },
++      [&](auto& input) { context->EvalSquareInPlace(input); },
++      std::forward<Complete>(complete), stats);
++}
++
+ // Keep ownership and the backend operation shared; each architecture supplies
+ // its existing level-alignment and synchronization policy.
+ template <class Align, class Complete>
+diff --git a/native/fideslib_stage0/src/owned_arithmetic_probe.cpp b/native/fideslib_stage0/src/owned_arithmetic_probe.cpp
+index b248f66..bf31035 100644
+--- a/native/fideslib_stage0/src/owned_arithmetic_probe.cpp
++++ b/native/fideslib_stage0/src/owned_arithmetic_probe.cpp
+@@ -112,11 +112,51 @@ int main(int argc, char** argv) {
+         }
+     if (cases != 96 || stats.calls != 96 || stats.reused_inputs != 96 || stats.cloned_inputs != 96)
+       throw std::runtime_error("unexpected ownership dispatch count");
++    fhemamba::OwnedArithmeticStats square_stats;
++    int square_cases = 0;
++    for (const auto level : {0u, 21u, 34u, 39u})
++      for (int degree_case = 0; degree_case < 3; ++degree_case)
++        for (int alias = 0; alias < 3; ++alias) {
++          auto a = original_a->Clone();
++          a->SetLevel(level);
++          if (degree_case == 1) cc->EvalMultInPlace(a, 0.375);
++          if (degree_case == 2) a = cc->EvalMult(a, a);
++          sync_gpu();
++          const auto before = snapshot(a);
++          auto left = a->Clone(), right = a->Clone();
++          align(left, right);
++          auto expected = cc->EvalMult(left, right);
++          // Cover both the allocating Mamba-2 and in-place Mamba-3 baselines.
++          auto mutable_left = a->Clone(), mutable_right = a->Clone();
++          cc->EvalMultMutableInPlace(mutable_left, mutable_right);
++          auto direct = cc->EvalMult(a, a);
++          sync_gpu();
++          auto value = alias == 0 ? a : a->Clone();
++          Ct live_alias = alias == 2 ? value : Ct{};
++          auto actual = fhemamba::owned_ciphertext_square(cc, std::move(value), sync_gpu, square_stats);
++          const auto reference = snapshot(expected);
++          if (!same_rns(reference, snapshot(actual)) ||
++              !same_rns(reference, snapshot(mutable_left)) ||
++              !same_rns(reference, snapshot(direct)) ||
++              expected->GetLevel() != actual->GetLevel() ||
++              expected->GetNoiseScaleDeg() != actual->GetNoiseScaleDeg())
++            throw std::runtime_error("square result or metadata mismatch in case " + std::to_string(square_cases));
++          if (!same_rns(before, snapshot(a)) || (live_alias && !same_rns(before, snapshot(live_alias))))
++            throw std::runtime_error("square live input changed in case " + std::to_string(square_cases));
++          ++square_cases;
++        }
++    if (square_cases != 36 || square_stats.calls != 36 ||
++        square_stats.reused_inputs != 12 || square_stats.cloned_inputs != 24)
++      throw std::runtime_error("unexpected square dispatch count");
+     std::ofstream out(argv[1]);
+     out << "{\"passed\":true,\"cases\":" << cases
+         << ",\"exact_rns_results\":true,\"live_inputs_unchanged\":true"
+         << ",\"repeated_decrypt_bit_equal\":" << (repeated_decrypt_bit_equal ? "true" : "false")
+         << ",\"reused_inputs\":" << stats.reused_inputs << ",\"cloned_inputs\":" << stats.cloned_inputs
++        << ",\"square_cases\":" << square_cases
++        << ",\"square_exact_rns_results\":true,\"square_live_inputs_unchanged\":true"
++        << ",\"square_reused_inputs\":" << square_stats.reused_inputs
++        << ",\"square_cloned_inputs\":" << square_stats.cloned_inputs
+         << ",\"mamba2\":" << (mamba2 ? "true" : "false")
+         << ",\"ring_dimension\":65536,\"depth\":44,\"scale_bits\":59,\"security\":\"not-set\"}\n";
+     std::cout << "passed cases=" << cases << std::endl;
+diff --git a/native/fideslib_stage0/src/packed_fideslib.cpp b/native/fideslib_stage0/src/packed_fideslib.cpp
+index a7cda98..0b7216c 100644
+--- a/native/fideslib_stage0/src/packed_fideslib.cpp
++++ b/native/fideslib_stage0/src/packed_fideslib.cpp
+@@ -57,6 +57,7 @@ struct PackedEvaluator {
+   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
+   long long scratch_clones_eliminated = 0;
+   fhemamba::OwnedArithmeticStats owned_arithmetic;
++  fhemamba::OwnedArithmeticStats square_arithmetic;
+   long long lifetime_clones_eliminated = 0, refresh_rotations = 0;
+   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
+   long long host_encodes = 0;
+@@ -95,12 +96,17 @@ struct PackedEvaluator {
+     auto out = cc->EvalAdd(x, y); sync_gpu(); return out;
+   }
+   auto mul(const Ct& a, const Ct& b) -> Ct {
++    if (a == b) return square(a);
+     auto [x, y] = aligned(a, b); ++ct_ct;
+     if (inplace_ops) {
+       cc->EvalMultMutableInPlace(x, y); sync_gpu(); ++scratch_clones_eliminated; return x;
+     }
+     auto out = cc->EvalMult(x, y); sync_gpu(); return out;
+   }
++  auto square(Ct value) -> Ct {
++    ++ct_ct;
++    return fhemamba::owned_ciphertext_square(cc, std::move(value), sync_gpu, square_arithmetic);
++  }
+   auto add_temporaries(Ct a, Ct b) -> Ct {
+     if (!inplace_ops) return add(a, b);
+     ++adds; ++scratch_clones_eliminated;
+@@ -530,10 +536,12 @@ struct PackedEvaluator {
+           return fhemamba::consume_or_clone(values[parent], last[parent] == i,
+               [](const Ct& v) { return v->Clone(); }, lifetime_clones_eliminated);
+         };
+-        // Mutable multiplication may align both operands. A square/double
+-        // still needs two distinct buffers; clone before moving its sole input.
+-        Ct right = a == b ? values[b]->Clone() : take(b);
+-        out = binary_owned(take(a), std::move(right), op == "mul");
++        if (op == "mul" && a == b) out = square(take(a));
++        else {
++          // Binary level alignment may mutate both buffers, including doubles.
++          Ct right = a == b ? values[b]->Clone() : take(b);
++          out = binary_owned(take(a), std::move(right), op == "mul");
++        }
+       }
+       else if (op == "add") out = add(x, values[n.parents[1]]);
+       else if (op == "mul") out = mul(x, values[n.parents[1]]);
+@@ -837,6 +845,9 @@ auto main(int argc, char** argv) -> int {
+            << ",\"owned_arithmetic_calls\":" << evaluator.owned_arithmetic.calls
+            << ",\"owned_arithmetic_reused_inputs\":" << evaluator.owned_arithmetic.reused_inputs
+            << ",\"owned_arithmetic_cloned_inputs\":" << evaluator.owned_arithmetic.cloned_inputs
++           << ",\"square_arithmetic_calls\":" << evaluator.square_arithmetic.calls
++           << ",\"square_arithmetic_reused_inputs\":" << evaluator.square_arithmetic.reused_inputs
++           << ",\"square_arithmetic_cloned_inputs\":" << evaluator.square_arithmetic.cloned_inputs
+            << ",\"host_encoding_seconds\":" << evaluator.host_encoding_seconds
+            << ",\"host_encodes\":" << evaluator.host_encodes
+            << ",\"mask_preparation_seconds\":" << evaluator.mask_preparation_seconds
+diff --git a/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp b/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
+index 4add993..2967657 100644
+--- a/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
++++ b/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
+@@ -1695,6 +1695,14 @@ auto main(int argc, char* argv[]) -> int {
+       ++ct_pt_muls;
+       return output;
+     };
++    fhemamba::OwnedArithmeticStats square_arithmetic;
++    auto square = [&](Ciphertext<DCRTPoly> value) {
++      ++ct_ct_muls;
++      return fhemamba::owned_ciphertext_square(cc, std::move(value), [] {
++        if (cudaDeviceSynchronize() != 0)
++          throw std::runtime_error("square arithmetic CUDA synchronization failed");
++      }, square_arithmetic);
++    };
+     // Mutating aligned add: both handles may be level-boosted in place.
+     auto add_aligned = [&](Ciphertext<DCRTPoly> lhs, Ciphertext<DCRTPoly> rhs) {
+       align_levels(
+@@ -1727,6 +1735,11 @@ auto main(int argc, char* argv[]) -> int {
+               throw std::runtime_error("owned arithmetic CUDA synchronization failed");
+           }, owned_arithmetic);
+     };
++    auto private_multiply = [&](const Ciphertext<DCRTPoly>& a, const Ciphertext<DCRTPoly>& b) {
++      // Recognize a square before protective clones erase the alias identity.
++      if (a == b) return square(a);
++      return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
++    };
+     auto add_scalar = [&](const Ciphertext<DCRTPoly>& ciphertext, double scalar) {
+       ++adds;
+       return cc->EvalAdd(ciphertext, scalar);
+@@ -1871,9 +1884,9 @@ auto main(int argc, char* argv[]) -> int {
+         Ciphertext<DCRTPoly> value;
+         if (i % 2 == 0) {
+           auto half = get_t(i / 2);
+-          auto square = mul_aligned(half->Clone(), half->Clone());
++          auto squared = square(half);
+           ++adds;
+-          auto doubled = cc->EvalAdd(square, square);
++          auto doubled = cc->EvalAdd(squared, squared);
+           value = add_aligned(doubled, scaled_clone(ones_ct, -1.0));
+         } else {
+           auto high = get_t((i + 1) / 2);
+@@ -2377,8 +2390,7 @@ auto main(int argc, char* argv[]) -> int {
+                              int iterations, const std::string& tag, int& counter) {
+       for (int iteration = 0; iteration < iterations; ++iteration) {
+         maybe_bootstrap(y, 2, tag + ".iter" + std::to_string(iteration), counter);
+-        ++ct_ct_muls;
+-        auto y_squared = cc->EvalMult(y, y);
++        auto y_squared = square(y);
+         auto vy = mul_aligned(v_neg_half->Clone(), y->Clone());
+         auto product = mul_aligned(vy, y_squared);
+         auto y_scaled = scaled_clone(y, 1.5);
+@@ -2398,9 +2410,7 @@ auto main(int argc, char* argv[]) -> int {
+       void stage(const NormCt&) {}
+     } norm_ops{
+         scaled_clone, add_scalar,
+-        [&](const NormCt& a, const NormCt& b) {
+-          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
+-        },
++        private_multiply,
+         [&](const NormCt& a, const NormCt& b) {
+           return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
+         }};
+@@ -3677,8 +3687,7 @@ auto main(int argc, char* argv[]) -> int {
+       // and norm weights are folded into the in_proj plaintexts, so proj =
+       // BSGS(h) * inv (inv is a uniform broadcast and commutes with matmul).
+       auto inv_block = time_phase("block_norm", [&]() {
+-        ++ct_ct_muls;
+-        auto squared = cc->EvalMult(hidden_ct, hidden_ct);
++        auto squared = square(hidden_ct);
+         auto variance = norm_variance_sum(squared);
+         if (plan.rms_schedule) {
+           variance = add_scalar(scaled_clone(variance, 1.0 / d_model), plan.eps_block);
+@@ -3795,9 +3804,7 @@ auto main(int argc, char* argv[]) -> int {
+             std::function<NormCt(const NormCt&, const std::vector<double>&)> coefficient_product;
+             std::function<NormCt(const std::vector<double>&)> constant;
+           } ops{
+-              [&](const NormCt& a, const NormCt& b) {
+-                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
+-              },
++              private_multiply,
+               [&](const NormCt& a, const NormCt& b) {
+                 return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
+               },
+@@ -3824,8 +3831,7 @@ auto main(int argc, char* argv[]) -> int {
+         auto u = add_const_vector(mul_mask(proj_ct, plan.cache_prefix + "dt_mask", plan.dt_mask),
+                                   plan.cache_prefix + "dt_const", plan.dt_const);
+         auto root = eval_chebyshev(u, plan.dt_coeffs);
+-        ++ct_ct_muls;
+-        return cc->EvalMult(root, root);  // cheb-squared: softplus >= 0
++        return square(std::move(root));  // cheb-squared: softplus >= 0
+       });
+       }
+       // Joint write bypasses the legacy decay polynomial but still needs the
+@@ -3845,8 +3851,7 @@ auto main(int argc, char* argv[]) -> int {
+             maybe_bootstrap(value, remaining_squarings + plan.req_decay,
+                             tag + "decay_sq" + std::to_string(squaring),
+                             layer_bootstraps);
+-            ++ct_ct_muls;
+-            value = cc->EvalMult(value, value);
++            value = square(std::move(value));
+           }
+           return value;
+         });
+@@ -4150,8 +4155,7 @@ auto main(int argc, char* argv[]) -> int {
+       // variance payloads, sqrt(w)) are folded into out_proj; the uniform
+       // inverse is applied after the BSGS matmul.
+       auto inv_gated = time_phase("gated_norm", [&]() {
+-        ++ct_ct_muls;
+-        auto squared = cc->EvalMult(y_ct, y_ct);
++        auto squared = square(y_ct);
+         auto variance = norm_variance_sum(squared);
+         const double y_normalization_squared = y_normalization * y_normalization;
+         if (plan.gated_schedule) {
+@@ -4172,8 +4176,7 @@ auto main(int argc, char* argv[]) -> int {
+           maybe_bootstrap(u, gated_requirement,
+                           tag + "gated_poly_input", layer_bootstraps);
+           auto quarter_root = eval_chebyshev(u, plan.gated_coeffs);
+-          ++ct_ct_muls;
+-          auto guess = cc->EvalMult(quarter_root, quarter_root);
++          auto guess = square(std::move(quarter_root));
+           guess = scaled_clone(guess, plan.gated_damping_mean);
+           // Refine against the mean variance, not its d_inner-wide sum.
+           // Reconstructing the sum from a bootstrapped affine coordinate
+@@ -4504,8 +4507,7 @@ auto main(int argc, char* argv[]) -> int {
+         hidden_ct = time_phase("final_norm", [&]() {
+           auto numerator = final_schedule
+               ? mul_mask(hidden_ct, "final.norm_w", final_w_vec) : hidden_ct;
+-          ++ct_ct_muls;
+-          auto squared = cc->EvalMult(hidden_ct, hidden_ct);
++          auto squared = square(hidden_ct);
+           auto variance = norm_variance_sum(squared);
+           if (final_schedule) {
+             variance = add_scalar(scaled_clone(variance, final_norm_scale * final_norm_scale / d_model),
+@@ -5126,6 +5128,9 @@ auto main(int argc, char* argv[]) -> int {
+     out << "\"owned_arithmetic\":{\"calls\":" << owned_arithmetic.calls
+         << ",\"reused_inputs\":" << owned_arithmetic.reused_inputs
+         << ",\"cloned_inputs\":" << owned_arithmetic.cloned_inputs << "},";
++    out << "\"square_arithmetic\":{\"calls\":" << square_arithmetic.calls
++        << ",\"reused_inputs\":" << square_arithmetic.reused_inputs
++        << ",\"cloned_inputs\":" << square_arithmetic.cloned_inputs << "},";
+     out << "\"plaintext_coefficient_floor\":" << kPlaintextCoefficientFloor << ",";
+     out << "\"pt_cache\":{";
+     out << "\"mode\":\"" << json_escape(pt_cache_mode) << "\",";
+diff --git a/native/fideslib_stage0/tests/test_owned_arithmetic.cpp b/native/fideslib_stage0/tests/test_owned_arithmetic.cpp
+index 61a1d84..db361a4 100644
+--- a/native/fideslib_stage0/tests/test_owned_arithmetic.cpp
++++ b/native/fideslib_stage0/tests/test_owned_arithmetic.cpp
+@@ -50,4 +50,27 @@ int main() {
+   bool rejected = false;
+   try { subtract({}, a); } catch (const std::invalid_argument&) { rejected = true; }
+   assert(rejected && stats.calls == 4 && completions == 4);
++
++  fhemamba::OwnedArithmeticStats square_stats;
++  int square_completions = 0;
++  std::weak_ptr<Value> square_pending;
++  auto square = [&](Handle value) {
++    return fhemamba::evaluate_owned_unary(std::move(value),
++        [](const Handle& x) { return std::make_shared<Value>(*x); },
++        [&](Handle& x) { x->number *= x->number; ++x->level; square_pending = x; },
++        [&] { assert(!square_pending.expired()); ++square_completions; }, square_stats);
++  };
++  a = std::make_shared<Value>(Value{3, 2});
++  original = a.get();
++  result = square(std::move(a));
++  assert(!a && result.get() == original && result->number == 9 && result->level == 3);
++  a = std::make_shared<Value>(Value{-5, 4});
++  b = a;
++  result = square(std::move(a));
++  assert(!a && b->number == -5 && b->level == 4);
++  assert(result.get() != b.get() && result->number == 25 && result->level == 5);
++  assert(square_stats.calls == 2 && square_stats.reused_inputs == 1 && square_stats.cloned_inputs == 1);
++  rejected = false;
++  try { square({}); } catch (const std::invalid_argument&) { rejected = true; }
++  assert(rejected && square_stats.calls == 2 && square_completions == 2);
+ }

@@ -47,7 +47,7 @@ and [Spark build instructions](docs/dgx-spark.md#build).
 ## Measured results and scope
 
 Both trained models complete **five encrypted evaluations and four generated
-tokens** on **DGX Spark GB10**. The latest shared ownership helper reuses
+tokens** on **DGX Spark GB10**. The measured shared ownership change reuses
 private ciphertext buffers in both models while preserving arithmetic order,
 operation counts, selected tokens and the existing error gates.
 
@@ -75,6 +75,14 @@ The change passes **286 tests**, including **18 C++ contracts**, plus
 **192 GPU cases with exactly matching ciphertext coefficients and metadata**.
 See the [ownership study](docs/research/2026-09-24-owned-arithmetic.md) for
 commands, raw measurements, failed controls and source/binary identities.
+
+A later [shared square dispatch](docs/research/2026-09-25-square-dispatch.md)
+passes **72 additional exact-RNS cases**. In four interleaved prefix runs per
+model, mean evaluation time falls **47.09 → 46.69 s (0.84%)** for Mamba-3
+and **53.98 → 53.50 s (0.88%)** for Mamba-2, with unchanged error gates and
+operation counts. These small prefix results have no significance claim;
+the square change has **not yet been measured at full depth**. The full-model
+table above therefore retains the earlier measurements.
 
 Earlier milestones remain reproducible:
 

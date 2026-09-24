@@ -57,6 +57,7 @@ struct PackedEvaluator {
   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
   long long scratch_clones_eliminated = 0;
   fhemamba::OwnedArithmeticStats owned_arithmetic;
+  fhemamba::OwnedArithmeticStats square_arithmetic;
   long long lifetime_clones_eliminated = 0, refresh_rotations = 0;
   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
   long long host_encodes = 0;
@@ -95,11 +96,16 @@ struct PackedEvaluator {
     auto out = cc->EvalAdd(x, y); sync_gpu(); return out;
   }
   auto mul(const Ct& a, const Ct& b) -> Ct {
+    if (a == b) return square(a);
     auto [x, y] = aligned(a, b); ++ct_ct;
     if (inplace_ops) {
       cc->EvalMultMutableInPlace(x, y); sync_gpu(); ++scratch_clones_eliminated; return x;
     }
     auto out = cc->EvalMult(x, y); sync_gpu(); return out;
+  }
+  auto square(Ct value) -> Ct {
+    ++ct_ct;
+    return fhemamba::owned_ciphertext_square(cc, std::move(value), sync_gpu, square_arithmetic);
   }
   auto add_temporaries(Ct a, Ct b) -> Ct {
     if (!inplace_ops) return add(a, b);
@@ -530,10 +536,12 @@ struct PackedEvaluator {
           return fhemamba::consume_or_clone(values[parent], last[parent] == i,
               [](const Ct& v) { return v->Clone(); }, lifetime_clones_eliminated);
         };
-        // Mutable multiplication may align both operands. A square/double
-        // still needs two distinct buffers; clone before moving its sole input.
-        Ct right = a == b ? values[b]->Clone() : take(b);
-        out = binary_owned(take(a), std::move(right), op == "mul");
+        if (op == "mul" && a == b) out = square(take(a));
+        else {
+          // Binary level alignment may mutate both buffers, including doubles.
+          Ct right = a == b ? values[b]->Clone() : take(b);
+          out = binary_owned(take(a), std::move(right), op == "mul");
+        }
       }
       else if (op == "add") out = add(x, values[n.parents[1]]);
       else if (op == "mul") out = mul(x, values[n.parents[1]]);
@@ -837,6 +845,9 @@ auto main(int argc, char** argv) -> int {
            << ",\"owned_arithmetic_calls\":" << evaluator.owned_arithmetic.calls
            << ",\"owned_arithmetic_reused_inputs\":" << evaluator.owned_arithmetic.reused_inputs
            << ",\"owned_arithmetic_cloned_inputs\":" << evaluator.owned_arithmetic.cloned_inputs
+           << ",\"square_arithmetic_calls\":" << evaluator.square_arithmetic.calls
+           << ",\"square_arithmetic_reused_inputs\":" << evaluator.square_arithmetic.reused_inputs
+           << ",\"square_arithmetic_cloned_inputs\":" << evaluator.square_arithmetic.cloned_inputs
            << ",\"host_encoding_seconds\":" << evaluator.host_encoding_seconds
            << ",\"host_encodes\":" << evaluator.host_encodes
            << ",\"mask_preparation_seconds\":" << evaluator.mask_preparation_seconds

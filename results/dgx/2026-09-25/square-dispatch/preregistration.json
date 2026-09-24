@@ -1,0 +1,14 @@
+{
+  "hypothesis": "Preserving square identity removes redundant clones and enables the existing exact binomialSquare kernel for both model adapters.",
+  "scope": "72 square cases plus 192 existing arithmetic cases in two contexts, then 8 fresh serial model prefix processes.",
+  "order_per_architecture": ["baseline", "candidate", "candidate", "baseline"],
+  "mamba3": {"layers": 1, "evaluations": 3, "error_gates": [0.001, 0.001]},
+  "mamba2": {"layers": 2, "evaluations": 2, "error_gate": 0.05},
+  "fixed": ["hardware", "compiler", "dependencies", "payload", "CKKS parameters", "refresh schedule", "operation counts", "thread policy"],
+  "abort": ["exact RNS or metadata mismatch", "live input mutation", "error gate failure", "operation count or level changes", "timeout"],
+  "primary_metric": "Native evaluation seconds, mean of two processes per variant; setup and request wall time retained separately.",
+  "prefix_threshold_percent": 0.5,
+  "full_model_run": false,
+  "review_interval_seconds": 7200,
+  "limitations": "Small trial; no statistical significance or full-model speedup claim. No automatic retry or expanding experiment search."
+}

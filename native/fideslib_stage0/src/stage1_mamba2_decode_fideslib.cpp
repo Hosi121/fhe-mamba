@@ -1695,6 +1695,14 @@ auto main(int argc, char* argv[]) -> int {
       ++ct_pt_muls;
       return output;
     };
+    fhemamba::OwnedArithmeticStats square_arithmetic;
+    auto square = [&](Ciphertext<DCRTPoly> value) {
+      ++ct_ct_muls;
+      return fhemamba::owned_ciphertext_square(cc, std::move(value), [] {
+        if (cudaDeviceSynchronize() != 0)
+          throw std::runtime_error("square arithmetic CUDA synchronization failed");
+      }, square_arithmetic);
+    };
     // Mutating aligned add: both handles may be level-boosted in place.
     auto add_aligned = [&](Ciphertext<DCRTPoly> lhs, Ciphertext<DCRTPoly> rhs) {
       align_levels(
@@ -1726,6 +1734,11 @@ auto main(int argc, char* argv[]) -> int {
             if (cudaDeviceSynchronize() != 0)
               throw std::runtime_error("owned arithmetic CUDA synchronization failed");
           }, owned_arithmetic);
+    };
+    auto private_multiply = [&](const Ciphertext<DCRTPoly>& a, const Ciphertext<DCRTPoly>& b) {
+      // Recognize a square before protective clones erase the alias identity.
+      if (a == b) return square(a);
+      return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
     };
     auto add_scalar = [&](const Ciphertext<DCRTPoly>& ciphertext, double scalar) {
       ++adds;
@@ -1871,9 +1884,9 @@ auto main(int argc, char* argv[]) -> int {
         Ciphertext<DCRTPoly> value;
         if (i % 2 == 0) {
           auto half = get_t(i / 2);
-          auto square = mul_aligned(half->Clone(), half->Clone());
+          auto squared = square(half);
           ++adds;
-          auto doubled = cc->EvalAdd(square, square);
+          auto doubled = cc->EvalAdd(squared, squared);
           value = add_aligned(doubled, scaled_clone(ones_ct, -1.0));
         } else {
           auto high = get_t((i + 1) / 2);
@@ -2377,8 +2390,7 @@ auto main(int argc, char* argv[]) -> int {
                              int iterations, const std::string& tag, int& counter) {
       for (int iteration = 0; iteration < iterations; ++iteration) {
         maybe_bootstrap(y, 2, tag + ".iter" + std::to_string(iteration), counter);
-        ++ct_ct_muls;
-        auto y_squared = cc->EvalMult(y, y);
+        auto y_squared = square(y);
         auto vy = mul_aligned(v_neg_half->Clone(), y->Clone());
         auto product = mul_aligned(vy, y_squared);
         auto y_scaled = scaled_clone(y, 1.5);
@@ -2398,9 +2410,7 @@ auto main(int argc, char* argv[]) -> int {
       void stage(const NormCt&) {}
     } norm_ops{
         scaled_clone, add_scalar,
-        [&](const NormCt& a, const NormCt& b) {
-          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
-        },
+        private_multiply,
         [&](const NormCt& a, const NormCt& b) {
           return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
         }};
@@ -3677,8 +3687,7 @@ auto main(int argc, char* argv[]) -> int {
       // and norm weights are folded into the in_proj plaintexts, so proj =
       // BSGS(h) * inv (inv is a uniform broadcast and commutes with matmul).
       auto inv_block = time_phase("block_norm", [&]() {
-        ++ct_ct_muls;
-        auto squared = cc->EvalMult(hidden_ct, hidden_ct);
+        auto squared = square(hidden_ct);
         auto variance = norm_variance_sum(squared);
         if (plan.rms_schedule) {
           variance = add_scalar(scaled_clone(variance, 1.0 / d_model), plan.eps_block);
@@ -3795,9 +3804,7 @@ auto main(int argc, char* argv[]) -> int {
             std::function<NormCt(const NormCt&, const std::vector<double>&)> coefficient_product;
             std::function<NormCt(const std::vector<double>&)> constant;
           } ops{
-              [&](const NormCt& a, const NormCt& b) {
-                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
-              },
+              private_multiply,
               [&](const NormCt& a, const NormCt& b) {
                 return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
               },
@@ -3824,8 +3831,7 @@ auto main(int argc, char* argv[]) -> int {
         auto u = add_const_vector(mul_mask(proj_ct, plan.cache_prefix + "dt_mask", plan.dt_mask),
                                   plan.cache_prefix + "dt_const", plan.dt_const);
         auto root = eval_chebyshev(u, plan.dt_coeffs);
-        ++ct_ct_muls;
-        return cc->EvalMult(root, root);  // cheb-squared: softplus >= 0
+        return square(std::move(root));  // cheb-squared: softplus >= 0
       });
       }
       // Joint write bypasses the legacy decay polynomial but still needs the
@@ -3845,8 +3851,7 @@ auto main(int argc, char* argv[]) -> int {
             maybe_bootstrap(value, remaining_squarings + plan.req_decay,
                             tag + "decay_sq" + std::to_string(squaring),
                             layer_bootstraps);
-            ++ct_ct_muls;
-            value = cc->EvalMult(value, value);
+            value = square(std::move(value));
           }
           return value;
         });
@@ -4150,8 +4155,7 @@ auto main(int argc, char* argv[]) -> int {
       // variance payloads, sqrt(w)) are folded into out_proj; the uniform
       // inverse is applied after the BSGS matmul.
       auto inv_gated = time_phase("gated_norm", [&]() {
-        ++ct_ct_muls;
-        auto squared = cc->EvalMult(y_ct, y_ct);
+        auto squared = square(y_ct);
         auto variance = norm_variance_sum(squared);
         const double y_normalization_squared = y_normalization * y_normalization;
         if (plan.gated_schedule) {
@@ -4172,8 +4176,7 @@ auto main(int argc, char* argv[]) -> int {
           maybe_bootstrap(u, gated_requirement,
                           tag + "gated_poly_input", layer_bootstraps);
           auto quarter_root = eval_chebyshev(u, plan.gated_coeffs);
-          ++ct_ct_muls;
-          auto guess = cc->EvalMult(quarter_root, quarter_root);
+          auto guess = square(std::move(quarter_root));
           guess = scaled_clone(guess, plan.gated_damping_mean);
           // Refine against the mean variance, not its d_inner-wide sum.
           // Reconstructing the sum from a bootstrapped affine coordinate
@@ -4504,8 +4507,7 @@ auto main(int argc, char* argv[]) -> int {
         hidden_ct = time_phase("final_norm", [&]() {
           auto numerator = final_schedule
               ? mul_mask(hidden_ct, "final.norm_w", final_w_vec) : hidden_ct;
-          ++ct_ct_muls;
-          auto squared = cc->EvalMult(hidden_ct, hidden_ct);
+          auto squared = square(hidden_ct);
           auto variance = norm_variance_sum(squared);
           if (final_schedule) {
             variance = add_scalar(scaled_clone(variance, final_norm_scale * final_norm_scale / d_model),
@@ -5126,6 +5128,9 @@ auto main(int argc, char* argv[]) -> int {
     out << "\"owned_arithmetic\":{\"calls\":" << owned_arithmetic.calls
         << ",\"reused_inputs\":" << owned_arithmetic.reused_inputs
         << ",\"cloned_inputs\":" << owned_arithmetic.cloned_inputs << "},";
+    out << "\"square_arithmetic\":{\"calls\":" << square_arithmetic.calls
+        << ",\"reused_inputs\":" << square_arithmetic.reused_inputs
+        << ",\"cloned_inputs\":" << square_arithmetic.cloned_inputs << "},";
     out << "\"plaintext_coefficient_floor\":" << kPlaintextCoefficientFloor << ",";
     out << "\"pt_cache\":{";
     out << "\"mode\":\"" << json_escape(pt_cache_mode) << "\",";

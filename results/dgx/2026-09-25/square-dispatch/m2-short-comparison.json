@@ -1,0 +1,17 @@
+{
+  "samples_abba": [
+    54.076628747,
+    53.28248608,
+    53.719669041,
+    53.879869377
+  ],
+  "base_mean_seconds": 53.978249062,
+  "candidate_mean_seconds": 53.5010775605,
+  "reduction_percent": 0.8840070024352165,
+  "pair_reduction_percent": [
+    1.468550620482345,
+    0.2973287386408896
+  ],
+  "clears_prefix_threshold": true,
+  "scope": "Two fresh processes per variant; prefix evidence only, no full-model speedup claim."
+}

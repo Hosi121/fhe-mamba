@@ -112,11 +112,51 @@ int main(int argc, char** argv) {
         }
     if (cases != 96 || stats.calls != 96 || stats.reused_inputs != 96 || stats.cloned_inputs != 96)
       throw std::runtime_error("unexpected ownership dispatch count");
+    fhemamba::OwnedArithmeticStats square_stats;
+    int square_cases = 0;
+    for (const auto level : {0u, 21u, 34u, 39u})
+      for (int degree_case = 0; degree_case < 3; ++degree_case)
+        for (int alias = 0; alias < 3; ++alias) {
+          auto a = original_a->Clone();
+          a->SetLevel(level);
+          if (degree_case == 1) cc->EvalMultInPlace(a, 0.375);
+          if (degree_case == 2) a = cc->EvalMult(a, a);
+          sync_gpu();
+          const auto before = snapshot(a);
+          auto left = a->Clone(), right = a->Clone();
+          align(left, right);
+          auto expected = cc->EvalMult(left, right);
+          // Cover both the allocating Mamba-2 and in-place Mamba-3 baselines.
+          auto mutable_left = a->Clone(), mutable_right = a->Clone();
+          cc->EvalMultMutableInPlace(mutable_left, mutable_right);
+          auto direct = cc->EvalMult(a, a);
+          sync_gpu();
+          auto value = alias == 0 ? a : a->Clone();
+          Ct live_alias = alias == 2 ? value : Ct{};
+          auto actual = fhemamba::owned_ciphertext_square(cc, std::move(value), sync_gpu, square_stats);
+          const auto reference = snapshot(expected);
+          if (!same_rns(reference, snapshot(actual)) ||
+              !same_rns(reference, snapshot(mutable_left)) ||
+              !same_rns(reference, snapshot(direct)) ||
+              expected->GetLevel() != actual->GetLevel() ||
+              expected->GetNoiseScaleDeg() != actual->GetNoiseScaleDeg())
+            throw std::runtime_error("square result or metadata mismatch in case " + std::to_string(square_cases));
+          if (!same_rns(before, snapshot(a)) || (live_alias && !same_rns(before, snapshot(live_alias))))
+            throw std::runtime_error("square live input changed in case " + std::to_string(square_cases));
+          ++square_cases;
+        }
+    if (square_cases != 36 || square_stats.calls != 36 ||
+        square_stats.reused_inputs != 12 || square_stats.cloned_inputs != 24)
+      throw std::runtime_error("unexpected square dispatch count");
     std::ofstream out(argv[1]);
     out << "{\"passed\":true,\"cases\":" << cases
         << ",\"exact_rns_results\":true,\"live_inputs_unchanged\":true"
         << ",\"repeated_decrypt_bit_equal\":" << (repeated_decrypt_bit_equal ? "true" : "false")
         << ",\"reused_inputs\":" << stats.reused_inputs << ",\"cloned_inputs\":" << stats.cloned_inputs
+        << ",\"square_cases\":" << square_cases
+        << ",\"square_exact_rns_results\":true,\"square_live_inputs_unchanged\":true"
+        << ",\"square_reused_inputs\":" << square_stats.reused_inputs
+        << ",\"square_cloned_inputs\":" << square_stats.cloned_inputs
         << ",\"mamba2\":" << (mamba2 ? "true" : "false")
         << ",\"ring_dimension\":65536,\"depth\":44,\"scale_bits\":59,\"security\":\"not-set\"}\n";
     std::cout << "passed cases=" << cases << std::endl;

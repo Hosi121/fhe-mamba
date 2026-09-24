@@ -50,4 +50,27 @@ int main() {
   bool rejected = false;
   try { subtract({}, a); } catch (const std::invalid_argument&) { rejected = true; }
   assert(rejected && stats.calls == 4 && completions == 4);
+
+  fhemamba::OwnedArithmeticStats square_stats;
+  int square_completions = 0;
+  std::weak_ptr<Value> square_pending;
+  auto square = [&](Handle value) {
+    return fhemamba::evaluate_owned_unary(std::move(value),
+        [](const Handle& x) { return std::make_shared<Value>(*x); },
+        [&](Handle& x) { x->number *= x->number; ++x->level; square_pending = x; },
+        [&] { assert(!square_pending.expired()); ++square_completions; }, square_stats);
+  };
+  a = std::make_shared<Value>(Value{3, 2});
+  original = a.get();
+  result = square(std::move(a));
+  assert(!a && result.get() == original && result->number == 9 && result->level == 3);
+  a = std::make_shared<Value>(Value{-5, 4});
+  b = a;
+  result = square(std::move(a));
+  assert(!a && b->number == -5 && b->level == 4);
+  assert(result.get() != b.get() && result->number == 25 && result->level == 5);
+  assert(square_stats.calls == 2 && square_stats.reused_inputs == 1 && square_stats.cloned_inputs == 1);
+  rejected = false;
+  try { square({}); } catch (const std::invalid_argument&) { rejected = true; }
+  assert(rejected && square_stats.calls == 2 && square_completions == 2);
 }

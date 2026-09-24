@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "short": {
+    "m3": {
+      "samples_abba": [
+        47.057378841,
+        46.521366317,
+        46.864410125,
+        47.123694148
+      ],
+      "base_mean_seconds": 47.0905364945,
+      "candidate_mean_seconds": 46.692888221000004,
+      "reduction_percent": 0.8444335170113004,
+      "pair_reduction_percent": [
+        1.1390615822676975,
+        0.5502200701533955
+      ],
+      "clears_prefix_threshold": true,
+      "scope": "Two fresh processes per variant; prefix evidence only, no full-model speedup claim."
+    },
+    "m2": {
+      "samples_abba": [
+        54.076628747,
+        53.28248608,
+        53.719669041,
+        53.879869377
+      ],
+      "base_mean_seconds": 53.978249062,
+      "candidate_mean_seconds": 53.5010775605,
+      "reduction_percent": 0.8840070024352165,
+      "pair_reduction_percent": [
+        1.468550620482345,
+        0.2973287386408896
+      ],
+      "clears_prefix_threshold": true,
+      "scope": "Two fresh processes per variant; prefix evidence only, no full-model speedup claim."
+    }
+  },
+  "full": {
+    "skipped": true,
+    "reason": "Outside this bounded trial."
+  },
+  "finished_utc": "2026-09-24T23:18:21.156505+00:00"
+}

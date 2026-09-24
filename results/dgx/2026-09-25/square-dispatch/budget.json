@@ -1,0 +1,47 @@
+{
+  "review_seconds": 7200,
+  "used_seconds": 650.4280034620315,
+  "runs": [
+    {
+      "name": "probe-rns-mamba3",
+      "charged_seconds": 6.259177456609905
+    },
+    {
+      "name": "probe-rns-mamba2",
+      "charged_seconds": 6.123283422552049
+    },
+    {
+      "name": "m3-1-base",
+      "charged_seconds": 76.85759196709841
+    },
+    {
+      "name": "m3-2-candidate",
+      "charged_seconds": 76.21747172065079
+    },
+    {
+      "name": "m3-3-candidate",
+      "charged_seconds": 76.58504549600184
+    },
+    {
+      "name": "m3-4-base",
+      "charged_seconds": 76.91371168196201
+    },
+    {
+      "name": "m2-1-base",
+      "charged_seconds": 83.24492967128754
+    },
+    {
+      "name": "m2-2-candidate",
+      "charged_seconds": 82.40991745889187
+    },
+    {
+      "name": "m2-3-candidate",
+      "charged_seconds": 82.71788726747036
+    },
+    {
+      "name": "m2-4-base",
+      "charged_seconds": 83.0989873195067
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

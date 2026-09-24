@@ -1,0 +1,26 @@
+{
+  "source_archive_verified": true,
+  "all_expanded_sources_verified": true,
+  "removed": [
+    "build/compile_commands.json",
+    "build/cmake_install.cmake",
+    "build/CMakeFiles",
+    "build/Makefile",
+    "build/libfideslib_plaintext_encoder.a",
+    "build/libstage1_mamba2_plan.a",
+    "build/libfideslib_handoff.a",
+    "build/CMakeCache.txt",
+    "build/libstage1_mamba2_artifact.a",
+    "build/libstage1_mamba2_depth.a",
+    "build/libstage1_mamba2_process.a",
+    "build/libstage1_mamba2_config.a",
+    "build/libstage1_mamba2_payload.a",
+    "source/"
+  ],
+  "retained_binaries": {
+    "packed_fideslib": "84d292e64290a64604e5152b9e5a697832bbfa88bbee2268331f819a2b5e7009",
+    "stage1_mamba2_decode_fideslib": "45ced07f8bf64b26549446cce436f163925fc6c3afc35cacc78eb03d7c53b193",
+    "owned_arithmetic_probe": "9e1c886b1cf2d6c5dc4efa96da94f7c8723851bc60755693eb06e8e67a75ae47"
+  },
+  "reason": "Retain measured executables for later full-depth qualification; source archives and build metadata retain reconstruction inputs."
+}
