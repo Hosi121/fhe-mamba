@@ -1,0 +1,9 @@
+{
+  "command": [
+    "runs/math-kernel-audit-20260925/analyze",
+    "runs/mamba3-lm-full-20260924/program.txt"
+  ],
+  "returncode": 0,
+  "seconds": 10.569398200997966,
+  "stderr": ""
+}

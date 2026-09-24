@@ -1,0 +1,67 @@
+{
+  "scope": "Static counts and conditional scenarios, not measured speedup or an executable packing plan",
+  "baseline_eval_seconds": 949.257736612,
+  "matched_profile_counts": true,
+  "squares": {
+    "calls": 4386,
+    "all_ctct": 12005,
+    "fraction": 0.3653477717617659
+  },
+  "shared_same_input_basis": {
+    "groups": 60,
+    "ctct_saved": 465
+  },
+  "rotation_prefix": {
+    "baseline": 50780,
+    "candidate": 50180,
+    "saved": 600
+  },
+  "rotation_modup_with_prefix_and_sibling_hoisting": {
+    "baseline": 50780,
+    "candidate": 46700,
+    "saved": 4080
+  },
+  "nonlinear_frontier_packing": {
+    "nodes": 761,
+    "groups": 408,
+    "multi_groups": 171,
+    "maximum_group_nodes": 10,
+    "maximum_group_slots": 3188,
+    "separate_polynomial_ctct": 9991,
+    "joint_polynomial_ctct": 5980,
+    "polynomial_ctct_saved": 4011,
+    "excludes": [
+      "level/scale compatibility",
+      "packing/unpacking cost",
+      "plaintext-vector preparation",
+      "changed refresh placement",
+      "error and live-state validation"
+    ]
+  },
+  "category_seconds": {
+    "refresh": 515.04254127,
+    "routing_nodes_outside_refresh": 188.09640551799998,
+    "linear_nodes_outside_refresh": 131.22438685400002,
+    "polynomial_nodes_outside_refresh": 100.55823609199996
+  },
+  "one_category_twice_as_fast_others_fixed": {
+    "refresh": {
+      "eval_seconds": 691.7364659770001,
+      "time_reduction_fraction": 0.2712869863501143
+    },
+    "routing_nodes_outside_refresh": {
+      "eval_seconds": 855.209533853,
+      "time_reduction_fraction": 0.09907551883081601
+    },
+    "linear_nodes_outside_refresh": {
+      "eval_seconds": 883.6455431850001,
+      "time_reduction_fraction": 0.06911947187407372
+    },
+    "polynomial_nodes_outside_refresh": {
+      "eval_seconds": 898.978618566,
+      "time_reduction_fraction": 0.0529667719385163
+    }
+  },
+  "nonrefresh_eliminated_refresh_fixed_max_speedup": 1.8430666606127435,
+  "host_encoding_nested_seconds_do_not_add": 169.527330653
+}

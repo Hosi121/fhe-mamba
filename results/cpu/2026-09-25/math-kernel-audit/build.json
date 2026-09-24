@@ -1,0 +1,15 @@
+{
+  "command": [
+    "g++",
+    "-O2",
+    "-std=c++20",
+    "-Inative/fideslib_stage0/include",
+    "-Inative/fideslib_stage0/src",
+    "results/cpu/2026-09-25/math-kernel-audit/analyze.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+    "-o",
+    "runs/math-kernel-audit-20260925/analyze"
+  ],
+  "returncode": 0,
+  "seconds": 3.0241608819997055
+}

@@ -1,0 +1,32 @@
+{
+  "git_commit": "88870f92968b5e2789a9114a87506d00f87e3a2a",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "files": {
+    "native/fideslib_stage0/include/stage1_tail_payload.hpp": "f2285a721f34140cd58ca7f1984831f68b5e4bdbd45733594f2794aacf59e362",
+    "native/fideslib_stage0/include/packed_lifetime.hpp": "1ad7f86c48483b876a020e3ee0c0249132d6d2a26d13b125a8804431f1f967e6",
+    "native/fideslib_stage0/include/stage1_vector_rms.hpp": "e1b245ab518f224c1a3c97d3f40425a701a13100407e783ce52564e0fb707df1",
+    "native/fideslib_stage0/include/packed_depth.hpp": "546de4d1bf4b162b069752ecfaaa82019363d47215b94483bc1b270a93542deb",
+    "native/fideslib_stage0/include/stage1_rank_gate_eval.hpp": "bc99e11334c286aada5a21b24de327ccc1941731f246c6795cc3469d33fcda7d",
+    "native/fideslib_stage0/include/plaintext_mask.hpp": "14d8492acd56c15a40941e92df24fd783ef53e42f99690cfba750f2a7328fe16",
+    "native/fideslib_stage0/include/stage1_normalization.hpp": "4c4251239a231ab70127528833b3993c0d6099b4b1ad4874db68c377a23ce458",
+    "native/fideslib_stage0/include/public_weights.hpp": "b2920a4f866c78da0beb4bd4584e066232b712bbe0cbd2169932d8a220edf0b6",
+    "native/fideslib_stage0/include/stage0_layout.hpp": "38b4cb42fbe5f54bd9f479d54d96929f8819d70d00543bb2980b13f2945cc14e",
+    "native/fideslib_stage0/include/rotation_steps.hpp": "d2868d7d23c8b1844b57a41064661af0ccfa5ec1d4e442957a8d6a553c15a106",
+    "native/fideslib_stage0/include/plaintext_cache.hpp": "5e0b675a7b2e16d76104638fcdf9ca34b540ecd5b6c40a580ff7571530fc99aa",
+    "native/fideslib_stage0/include/owned_arithmetic.hpp": "fe5cf1e069dbbc52ffcbb39be9258733f6d74d0ddb7314742d535b58bbf5c5ce",
+    "native/fideslib_stage0/include/stage1_tail_eval.hpp": "4225bd47357dd134558244dab7e1e14727b27d942dbeb2f36cb7eee9afb7139e",
+    "native/fideslib_stage0/include/packed_program.hpp": "876e38041605e8a56fbd44a1e8f94052609ff7ba34479e8182baf0fffede8ab6",
+    "native/fideslib_stage0/include/stage1_rank_gate_payload.hpp": "917258a99785e0b38e3dd0d04a758adc4d83cbb269cd3a4d0cc22ecf8b001a87",
+    "native/fideslib_stage0/include/packed_routing.hpp": "64367e7a0a7fd1938831d511aee5d8571db9659cb734c22c88e00d9a5236562b",
+    "native/fideslib_stage0/include/stage1_joint_gates.hpp": "7f2c8f7f82726513678c1efb4ee4e9b58818c1ec31b33849424b87236e078f65",
+    "native/fideslib_stage0/src/packed_fideslib.cpp": "0899ad397df428b1ddcc32050f16df07889e01b339e9cdf8988666c90670b3b0",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp": "ac19557a2cea47319b4ab5cdc0fec229420a5588894ac5faa6462798e9f354c2",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.hpp": "bdb2bd0de8fdac049218bacb9c01cb333a9abc36740e891cb9217974db40ad03",
+    "src/fhemamba/mamba3.py": "818e0526fe20f4e0878478cda742531fa9fe644a6bb798450153306c06dc7b71",
+    "src/fhemamba/packed_program.py": "643f4f759153875490d701561550b00f49621b32d69cc8ff1c6c97050b4764aa",
+    "results/dgx/2026-09-24/owned-arithmetic/m3-full-candidate/native.json": "94cf3d29107686ef21ddef5123d8817adf0b1170933119d095737ad4035cb441",
+    "results/dgx/2026-09-24/owned-arithmetic/m2-full-candidate/native.json": "eeb3e64cca21397f97cce497ec79082677c0b6fdfb1d6a45a9b71c7c72fe95ad",
+    "runs/mamba3-lm-full-20260924/program.txt": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199"
+  },
+  "analyzer_binary_sha256": "65c88e6b7927077a596aa3123c06f7caf8538f32e53f419454bd6b3facd56f39"
+}

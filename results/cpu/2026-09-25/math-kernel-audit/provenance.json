@@ -1,0 +1,19 @@
+{
+  "study": "static-math-kernel-audit",
+  "base_commit": "88870f92968b5e2789a9114a87506d00f87e3a2a",
+  "files": {
+    "README.md": "2a26159a8e47829e1e66e1e998dc7e532c91dcca835cfb78f04c12d819e15c7f",
+    "analyze.cpp": "8ef76bcda03cac3cfbce40506579be4e8eb43445ad1758ff124644ded000ce5f",
+    "backend-sources.json": "a32ffa75dd5c8724370e88f5ee6961fd33aa10e6afaa1f3c26aa27d620b08b90",
+    "build.json": "27cfc14c2ecd2090dac6090d3bcd957f7ddd0e9356f27c1e5f0eec5fa4a485e1",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "derive.py": "ade6dc23bc3df041df2cfff40a7ebb51b1e4155dc65d3867132678e711455c00",
+    "frontier-groups.json": "51ef31a21c9e63b58b9885b3b5a07746b92b8a4a324eb73d6a0a8289fbef907b",
+    "inventory.json": "c7a50d76bf510e1543ecd7f0a26db040f2ce00415eb6a5e3c64d56b4549f3e11",
+    "run.json": "d0e383e109069ce6bb5ba0cc3e71615220ff5ea49a17bc10caf193a0e8662686",
+    "source-identities.json": "bd1d8e351f35ab84d60447866830e0d5b2dc95c13cf2eb85128df7fbc5d45aaa",
+    "summary.json": "5437664b0952002d5ff851562dff44b4e658f84627a74f59c0fb1bcf0fe4fdad",
+    "validation.json": "19603284f8b03e1415d4366bfbe410058f2bd31d4ffcb715e1c7dec27e22a22d"
+  },
+  "research_note_sha256": "7980cc02f311e2757b6bf26d0077514b1cd0459deb254e56235d352f4b20ddba"
+}

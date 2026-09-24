@@ -8,6 +8,7 @@ Use the [evidence registry](../evidence.md) for current claim status and the
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-25 — Arithmetic and kernel opportunities](2026-09-25-math-kernel-audit.md) | Static inventory: 4,386 hidden squares, 465 shared-basis products, and an optimistic 9,991 → 5,980 polynomial-core product count from SIMD grouping; no new speed measurement |
 | [2026-09-25 — Compact coefficient cache, rejected](2026-09-25-weight-coefficient-cache.md) | Exact CPU/GPU reconstruction passes, but level-dependent reuse gives 1.26% slower cold three-step inference; prototype archived, active code restored |
 | [2026-09-24 — Shared ciphertext ownership](2026-09-24-owned-arithmetic.md) | Mamba-3 16.27 → 15.82 min (2.79%, adopt); Mamba-2 32.66 → 32.38 min (0.83%, adopt); exact-RNS gates and unchanged model contracts |
 | [2026-09-25 — Preparation and lifetime design](2026-09-25-preparation-design.md) | Static cache admission curve: 2 GiB LRU gives zero identity hits versus 16,384 for a fixed subset; CPU/GPU ownership and refresh scheduling constraints |

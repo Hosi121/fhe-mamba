@@ -1,0 +1,20 @@
+{
+  "root": "/home/kataiwa/fhemamba/spark/source-2a70798e869944af",
+  "git_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "git_diff_raw_sha256": "e797fabf171824d8f5f9478bf251ef25d4f37cd70e52f1b75ed2368edaa46e4f",
+  "files": {
+    "api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+    "src/CKKS/Ciphertext.cpp": "a32ddf43c08daf2696b0520d0c8094bf866935579b57e596254e34ead598b951",
+    "src/CKKS/LimbPartition.cu": "063336a48c4f9db6866d328fd9917b8d804cb5410975490b48a8107a6c633ce0",
+    "src/CKKS/ElemenwiseBatchKernels.cu": "4fce0bfe089be18523d267690935ad66bd8728964d134a3b3b4fb97b6baf52fd",
+    "src/CKKS/LinearTransform.cu": "b2da6f0bea0b5783d66939b8d1aa25dd8e4ce9de7d7edaa169c8920aa804a374",
+    "src/CKKS/CoeffsToSlots.cu": "d704fad300ecf799c957bb68b27cfd3e757114374df8888cb9977f197b14d594",
+    "src/CKKS/Conv.cu": "2495fb7df54cc4f54409d49bb2e6710ad59dcc683183a526fc5525bafcf32b18",
+    "src/NTT.cu": "1d7674f5773c88ea3515871519206b5571dd9b112be91145f336063921801484",
+    "src/NTThelper.cuh": "5febd53138c15c6873997d576e84fddf4d25911e1e690a03ea9f977179ccb6d9",
+    "src/NTTfusions.cuh": "0be96ee7baf799acf3f813ea093bd60c58b27be15fd2fdb120a0621e166392b5",
+    "src/ModMult.cuh": "679300b179a24f32f5cd2fcab3a4bfc45c667aa6f55a9790cf493ff73417e0a9"
+  },
+  "observed_utc": "2026-09-24T18:57:57.813459+00:00",
+  "previous_backend_observations": "results/cpu/2026-09-25/preparation-design/backend-observations.json"
+}

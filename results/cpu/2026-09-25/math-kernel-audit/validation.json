@@ -1,0 +1,12 @@
+{
+  "scope": "Static inventory and documentation validation; no encrypted timing or RNS experiment",
+  "derivation_reproduced_identically": true,
+  "profile_rotation_and_ctct_counts_match": true,
+  "same_input_pairs_shape_and_adjacency_checked": true,
+  "new_evidence_json_parsed": true,
+  "local_markdown_links_checked": 37,
+  "diff_whitespace_check": "passed",
+  "python_ruff_check_and_format": "passed",
+  "temporary_analyzer_removed_after_hash_check": true,
+  "inference_sources_unchanged": true
+}
