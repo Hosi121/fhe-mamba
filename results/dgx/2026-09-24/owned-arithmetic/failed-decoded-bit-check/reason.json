@@ -1,0 +1,5 @@
+{
+  "failure": "Decoded bit equality is invalid for OpenFHE CKKS because Decode adds fresh Gaussian noise.",
+  "source": "/home/kataiwa/fhe-deps/FIDESlib/deps/openfhe-src/src/pke/lib/encoding/ckkspackedencoding.cpp:408-470",
+  "replacement": "Compare every GPU RNS coefficient and metadata exactly; preserve the application numerical gates and the original failed probe."
+}

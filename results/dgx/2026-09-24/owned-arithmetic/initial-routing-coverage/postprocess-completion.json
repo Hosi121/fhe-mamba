@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "error": "Traceback (most recent call last):\n  File \"/home/hosi/cipher/runs/owned-arithmetic-20260924/postprocess_hook.py\", line 16, in <module>\n    assert json.loads((root/'completion.local.json').read_text())['passed']\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^\nAssertionError\n",
+  "finished_utc": "2026-09-24T15:05:16.616837+00:00"
+}

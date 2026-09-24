@@ -1,0 +1,57 @@
+{
+  "name": "probe-rns-mamba2",
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build/owned_arithmetic_probe",
+    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/probe-rns-mamba2/native.json",
+    "--mamba2"
+  ],
+  "started_utc": "2026-09-24T14:22:00.186193+00:00",
+  "timeout_seconds": 300,
+  "allowed_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "environment": {
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "OMP_NUM_THREADS": "4"
+  },
+  "source_manifest_sha256": "02475ce8eb0ba17df2f0594211c50948f890c258251ab74fe642c8d6236003a9",
+  "controller_sha256": "df1b467aeba049617e6922caf2a1d9aedc666e971dc6982b1357e0d9885200a9",
+  "launcher_sha256": "03c25292ac695f452ad6af0e4987ac91bd36c6bcbad8f880e17ef9b4c722424a",
+  "binary_sha256": "29cd019cb6b3e3d786acfdfe332868aeadfab5a00255c59bbfe09bc3273504be",
+  "pid": 2895453,
+  "timed_out": false,
+  "returncode": 0,
+  "wall_seconds": 5.00826604757458,
+  "ended_utc": "2026-09-24T14:22:05.203558+00:00",
+  "passed": true,
+  "native_sha256": "f4846f902688f9989e3f42e46c10ad1bc3cdb18272765b67982c4f786d17294d",
+  "checks": {
+    "native": true,
+    "cases": true,
+    "exact_rns": true,
+    "live_outs": true
+  },
+  "eval_seconds": null
+}

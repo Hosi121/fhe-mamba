@@ -1,0 +1,137 @@
+{
+  "previous_target_sha256": "c6833343a0c26d9e419a89c65cc65c0e583d0205fa158853bf8cd8ddfcf491c2",
+  "source_manifest_sha256": "304fd7ae707e7a762642440fcc2aa80ba69f4adaa363b668299b0b86549a2477",
+  "binary_sha256": "78c9735c4dbe3b0dcaa8cd1b1eae64bda8ec3940b38aa206cf20387c5d7db707",
+  "changed_sources": [
+    "native/fideslib_stage0/src/packed_fideslib.cpp"
+  ],
+  "compile_commands": [
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "output": "CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "output": "CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "output": "CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "output": "CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "output": "CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "output": "CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "output": "CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "output": "CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "output": "CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "output": "CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "output": "CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "output": "CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+      "output": "CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "output": "CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "output": "CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "output": "CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "output": "CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "output": "CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "output": "CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "output": "CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o -c /home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/source-final/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "output": "CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o"
+    }
+  ],
+  "scope": "Only packed_fideslib is rebuilt. Mamba-2 and the exact-RNS helper probe remain their initial immutable binaries and sources."
+}

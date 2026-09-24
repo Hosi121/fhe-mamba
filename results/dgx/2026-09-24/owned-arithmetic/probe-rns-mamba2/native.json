@@ -1,0 +1,1 @@
+{"passed":true,"cases":96,"exact_rns_results":true,"live_inputs_unchanged":true,"repeated_decrypt_bit_equal":true,"reused_inputs":96,"cloned_inputs":96,"mamba2":true,"ring_dimension":65536,"depth":44,"scale_bits":59,"security":"not-set"}

@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "error": "Traceback (most recent call last):\n  File \"/home/hosi/cipher/runs/owned-arithmetic-20260924/finalize.py\", line 26, in <module>\n    assert read(ROOT / 'postprocess-completion.json')['passed']\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^\nAssertionError\n",
+  "finished_utc": "2026-09-24T15:05:20.974186+00:00"
+}

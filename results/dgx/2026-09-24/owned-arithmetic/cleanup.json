@@ -1,0 +1,36 @@
+{
+  "removed": [
+    {
+      "path": "source/",
+      "replacement": "compiled-sources.tar.gz",
+      "files_verified": 115
+    },
+    {
+      "path": "source-final/",
+      "replacement": "compiled-final-sources.tar.gz",
+      "files_verified": 115
+    },
+    {
+      "path": "test_owned_arithmetic",
+      "sha256": "7640e20ebe18b4f85d10ea0189972424dcc6d878b25a3e42b6f937289a1b6bf8",
+      "reason": "Local standalone validation finished; source and output preserved"
+    },
+    {
+      "path": "encoding_inventory",
+      "sha256": "bc8d596bfbe3d0085764d518e2dc987aafc844ca6ea41249dbb16dca2ebde4cb",
+      "reason": "Local standalone validation finished; source and output preserved"
+    },
+    {
+      "path": "encoding_log_probe",
+      "sha256": "84d828e5bf3e0e895ae8b921caf4abcd6c0cdc47664416d55f88d003186029ae",
+      "reason": "Local standalone validation finished; source and output preserved"
+    },
+    {
+      "path": "routing_coverage_inventory",
+      "sha256": "3b2e4b4eaa8ca93a1edad97cf31e5d1219e896d167d08e94f4449bdf2b417682",
+      "reason": "Local standalone validation finished; source and output preserved"
+    }
+  ],
+  "worktrees_created": 0,
+  "retained": "DGX baseline/candidate builds, measured source archives, raw logs and failed controls"
+}

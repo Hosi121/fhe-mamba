@@ -1,0 +1,84 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using FIDESlib.
+-- Found CUDAToolkit: /usr/local/cuda/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/owned-arithmetic-20260924/build
+[ 12%] Building CXX object CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o
+[ 25%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+[ 37%] Linking CXX static library libstage1_mamba2_payload.a
+[ 37%] Built target stage1_mamba2_payload
+[ 50%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 62%] Linking CXX static library libstage1_mamba2_plan.a
+[ 62%] Built target stage1_mamba2_plan
+[ 75%] Linking CXX static library libfideslib_plaintext_encoder.a
+[ 75%] Built target fideslib_plaintext_encoder
+[ 87%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[100%] Linking CXX executable packed_fideslib
+[100%] Built target packed_fideslib
+[ 50%] Building CXX object CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp: In lambda function:
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:42:52: error: binding reference of type ‘fideslib::Ciphertext<unsigned int>&’ {aka ‘std::shared_ptr<fideslib::CiphertextImpl<unsigned int> >&’} to ‘const Ct’ {aka ‘const std::shared_ptr<fideslib::CiphertextImpl<unsigned int> >’} discards qualifiers
+   42 |       Plaintext plain; cc->Decrypt(keys.secretKey, value, &plain);
+      |                                                    ^~~~~
+In file included from /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/Ciphertext.hpp:8,
+                 from /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/fideslib.hpp:5,
+                 from /home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp:3,
+                 from /home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:2:
+/home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/CryptoContext.hpp:106:85: note:   initializing argument 2 of ‘fideslib::DecryptResult fideslib::CryptoContextImpl<unsigned int>::Decrypt(fideslib::PrivateKey<unsigned int>&, fideslib::Ciphertext<unsigned int>&, fideslib::Plaintext*)’
+  106 |         DecryptResult Decrypt(const PrivateKey<DCRTPoly>& sk, Ciphertext<DCRTPoly>& ct, Plaintext* pt);
+      |                                                               ~~~~~~~~~~~~~~~~~~~~~~^~
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp: In function ‘int main(int, char**)’:
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:59:78: error: cannot bind non-const lvalue reference of type ‘fideslib::Plaintext&’ {aka ‘std::shared_ptr<fideslib::PlaintextImpl>&’} to an rvalue of type ‘fideslib::Plaintext’ {aka ‘std::shared_ptr<fideslib::PlaintextImpl>’}
+   59 |     auto original_a = cc->Encrypt(keys.publicKey, cc->MakeCKKSPackedPlaintext(a_values));
+      |                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+/home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/CryptoContext.hpp:102:80: note:   initializing argument 2 of ‘fideslib::Ciphertext<unsigned int> fideslib::CryptoContextImpl<unsigned int>::Encrypt(fideslib::PublicKey<unsigned int>&, fideslib::Plaintext&)’
+  102 |         Ciphertext<DCRTPoly> Encrypt(const PublicKey<DCRTPoly>& pk, Plaintext& pt);
+      |                                                                     ~~~~~~~~~~~^~
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:60:78: error: cannot bind non-const lvalue reference of type ‘fideslib::Plaintext&’ {aka ‘std::shared_ptr<fideslib::PlaintextImpl>&’} to an rvalue of type ‘fideslib::Plaintext’ {aka ‘std::shared_ptr<fideslib::PlaintextImpl>’}
+   60 |     auto original_b = cc->Encrypt(keys.publicKey, cc->MakeCKKSPackedPlaintext(b_values));
+      |                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+/home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/CryptoContext.hpp:102:80: note:   initializing argument 2 of ‘fideslib::Ciphertext<unsigned int> fideslib::CryptoContextImpl<unsigned int>::Encrypt(fideslib::PublicKey<unsigned int>&, fideslib::Plaintext&)’
+  102 |         Ciphertext<DCRTPoly> Encrypt(const PublicKey<DCRTPoly>& pk, Plaintext& pt);
+      |                                                                     ~~~~~~~~~~~^~
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:68:28: error: ‘b’ was not declared in this scope; did you mean ‘lb’?
+   68 |           a->SetLevel(la); b->SetLevel(lb);
+      |                            ^
+      |                            lb
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:75:23: error: ‘right’ was not declared in this scope; did you mean ‘std::right’?
+   75 |           align(left, right);
+      |                       ^~~~~
+      |                       std::right
+In file included from /usr/include/c++/13/ios:44,
+                 from /usr/include/c++/13/ostream:40,
+                 from /usr/include/c++/13/bits/unique_ptr.h:42,
+                 from /usr/include/c++/13/memory:78,
+                 from /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/Definitions.hpp:5,
+                 from /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/CCParams.hpp:9,
+                 from /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/fideslib.hpp:4:
+/usr/include/c++/13/bits/ios_base.h:1050:3: note: ‘std::right’ declared here
+ 1050 |   right(ios_base& __base)
+      |   ^~~~~
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:87:62: error: ‘before_b’ was not declared in this scope
+   87 |           if (!same_bits(before_a, decrypt(a)) || !same_bits(before_b, decrypt(b)) ||
+      |                                                              ^~~~~~~~
+/home/kataiwa/fhemamba/owned-arithmetic-20260924/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp:88:60: error: ‘level_b’ was not declared in this scope
+   88 |               a->GetLevel() != level_a || b->GetLevel() != level_b)
+      |                                                            ^~~~~~~
+gmake[3]: *** [CMakeFiles/owned_arithmetic_probe.dir/build.make:76: CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o] Error 1
+gmake[2]: *** [CMakeFiles/Makefile2:438: CMakeFiles/owned_arithmetic_probe.dir/all] Error 2
+gmake[1]: *** [CMakeFiles/Makefile2:445: CMakeFiles/owned_arithmetic_probe.dir/rule] Error 2
+gmake: *** [Makefile:280: owned_arithmetic_probe] Error 2

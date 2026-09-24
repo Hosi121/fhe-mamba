@@ -1,0 +1,86 @@
+{
+  "exact_rns_cases": 192,
+  "source_changes": [
+    "native/fideslib_stage0/CMakeLists.txt",
+    "native/fideslib_stage0/include/owned_arithmetic.hpp",
+    "native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp",
+    "native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+    "native/fideslib_stage0/src/packed_fideslib.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+    "native/fideslib_stage0/tests/test_owned_arithmetic.cpp"
+  ],
+  "short": {
+    "m3": {
+      "samples_in_abba_order": [
+        14.382653695,
+        14.031546423,
+        14.073826927,
+        14.521491265
+      ],
+      "base_mean_seconds": 14.45207248,
+      "candidate_mean_seconds": 14.052686675,
+      "reduction_percent": 2.763519249939439,
+      "qualifies_full_pair": true
+    },
+    "m2": {
+      "samples_in_abba_order": [
+        54.141711526,
+        53.752612834,
+        54.010516574,
+        54.233495795
+      ],
+      "base_mean_seconds": 54.1876036605,
+      "candidate_mean_seconds": 53.881564704,
+      "reduction_percent": 0.5647766939786081,
+      "qualifies_full_pair": true
+    }
+  },
+  "full": {
+    "m3": {
+      "base_seconds": 976.483172958,
+      "candidate_seconds": 949.257736612,
+      "reduction_percent": 2.7881111625843613,
+      "adopt": true
+    },
+    "m2": {
+      "base_seconds": 1959.30269679,
+      "candidate_seconds": 1942.98709714,
+      "reduction_percent": 0.8327248095320039,
+      "adopt": true
+    }
+  },
+  "m2_confirmation": {
+    "passed": true,
+    "samples_in_baab_order": [
+      53.568722199,
+      54.15096133,
+      54.366535799,
+      54.06051165
+    ],
+    "base_mean_seconds": 54.258748564499996,
+    "candidate_mean_seconds": 53.8146169245,
+    "reduction_percent": 0.8185438325619243,
+    "combined_base_samples": [
+      54.141711526,
+      54.233495795,
+      54.15096133,
+      54.366535799
+    ],
+    "combined_candidate_samples": [
+      53.752612834,
+      54.010516574,
+      53.568722199,
+      54.06051165
+    ],
+    "combined_base_mean_seconds": 54.2231761125,
+    "combined_candidate_mean_seconds": 53.84809081425,
+    "combined_reduction_percent": 0.6917435036851938,
+    "supports_adoption": true,
+    "scope": "Reversed short controls after the full pairs, added before full results because the initial 0.56% Mamba-2 prefix difference was small. Every sample preserved; no significance claim.",
+    "finished_utc": "2026-09-24T17:05:28.420624+00:00"
+  },
+  "adoption": {
+    "m3": true,
+    "m2": true
+  }
+}

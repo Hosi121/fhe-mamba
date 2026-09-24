@@ -1,0 +1,204 @@
+diff --git a/native/fideslib_stage0/CMakeLists.txt b/native/fideslib_stage0/CMakeLists.txt
+index ac035eb..86a23e8 100644
+--- a/native/fideslib_stage0/CMakeLists.txt
++++ b/native/fideslib_stage0/CMakeLists.txt
+@@ -105,6 +105,8 @@ if(FHE_STAGE0_BUILD_KERNEL)
+   target_link_libraries(packed_fideslib PRIVATE fideslib::fideslib CUDA::cudart stage0_layout stage1_mamba2_plan fideslib_plaintext_encoder)
+   add_executable(packed_plaintext_probe src/packed_plaintext_probe.cpp)
+   target_link_libraries(packed_plaintext_probe PRIVATE fideslib_plaintext_encoder)
++  add_executable(owned_arithmetic_probe src/owned_arithmetic_probe.cpp)
++  target_link_libraries(owned_arithmetic_probe PRIVATE fideslib::fideslib CUDA::cudart stage0_layout)
+ 
+   add_executable(
+     stage1_mamba2_decode_fideslib
+@@ -168,6 +170,9 @@ endif()
+ 
+ if(FHE_STAGE0_BUILD_TESTS)
+   enable_testing()
++  add_executable(test_owned_arithmetic tests/test_owned_arithmetic.cpp)
++  target_link_libraries(test_owned_arithmetic PRIVATE stage0_layout)
++  add_test(NAME owned_arithmetic COMMAND test_owned_arithmetic)
+   add_executable(test_packed_lifetime tests/test_packed_lifetime.cpp)
+   target_link_libraries(test_packed_lifetime PRIVATE stage0_layout)
+   add_test(NAME packed_lifetime COMMAND test_packed_lifetime)
+diff --git a/native/fideslib_stage0/src/packed_fideslib.cpp b/native/fideslib_stage0/src/packed_fideslib.cpp
+index ff495e7..e82b4ad 100644
+--- a/native/fideslib_stage0/src/packed_fideslib.cpp
++++ b/native/fideslib_stage0/src/packed_fideslib.cpp
+@@ -4,6 +4,7 @@
+ #include "packed_routing.hpp"
+ #include "packed_depth.hpp"
+ #include "packed_lifetime.hpp"
++#include "fideslib_owned_arithmetic.hpp"
+ #include "plaintext_cache.hpp"
+ #include "fideslib_plaintext_ops.hpp"
+ #include "fideslib_plaintext_encoder.hpp"
+@@ -55,6 +56,7 @@ struct PackedEvaluator {
+   bool bsgs_routing_stages = false;
+   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
+   long long scratch_clones_eliminated = 0;
++  fhemamba::OwnedArithmeticStats owned_arithmetic;
+   long long lifetime_clones_eliminated = 0, refresh_rotations = 0;
+   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
+   long long host_encodes = 0;
+@@ -99,6 +101,13 @@ struct PackedEvaluator {
+     }
+     auto out = cc->EvalMult(x, y); sync_gpu(); return out;
+   }
++  auto add_temporaries(Ct a, Ct b) -> Ct {
++    if (!inplace_ops) return add(a, b);
++    ++adds; ++scratch_clones_eliminated;
++    return fhemamba::owned_ciphertext_binary(cc, std::move(a), std::move(b),
++        fhemamba::CiphertextBinaryOp::Add,
++        [&](Ct& x, Ct& y) { align_owned(x, y); }, sync_gpu, owned_arithmetic);
++  }
+   auto scalar_add(const Ct& a, double b) -> Ct { ++adds; return cc->EvalAdd(a, b); }
+   auto plain(const Ct& a, std::vector<double> values, bool multiply) -> Ct {
+     values.resize(slots);
+@@ -222,10 +231,10 @@ struct PackedEvaluator {
+             auto mask = fhemamba::packed_diagonal_pre_mask(masks.at(plan.offsets[first + j]), giant);
+             if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
+             auto term = plain(babies[j], std::move(mask), true);
+-            inner = inner ? add(inner, term) : term;
++            inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
+           }
+           auto term = rotate(inner, giant);
+-          out = out ? add(out, term) : term;
++          out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+         }
+         sync_gpu();
+         return out;
+@@ -233,7 +242,7 @@ struct PackedEvaluator {
+     }
+     for (const auto& [offset, mask] : masks) {
+       auto term = plain(rotate(x, offset), mask, true);
+-      out = out ? add(out, term) : term;
++      out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+     }
+     return out ? out : scale(x, 0.0);
+   }
+@@ -355,10 +364,10 @@ struct PackedEvaluator {
+                                                first + j, shape, slots, 0.0);
+           if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
+           auto term = plain(babies[j], std::move(mask), true);
+-          inner = inner ? add(inner, term) : term;
++          inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
+         }
+         auto term = rotate(inner, first * shape.replicas);
+-        out = out ? add(out, term) : term;
++        out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+       }
+       out = rotation_sum(out, shape.replicas, shape.window + 1, true, rot, sum);
+       if (!mask_output) { sync_gpu(); return out; }
+@@ -419,7 +428,8 @@ struct PackedEvaluator {
+         Ct out;
+         for (int i = 1; i <= degree; ++i) {
+           if (std::abs(c[i]) < 1e-14) continue;
+-          auto term = scale(basis(i), c[i]); out = out ? add(out, term) : term;
++          auto term = scale(basis(i), c[i]);
++          out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+         }
+         if (!out) out = scale(u, 0.0);
+         return scalar_add(out, c[0]);
+@@ -429,7 +439,7 @@ struct PackedEvaluator {
+       std::vector<double> upper(c.begin() + k, c.end()), lower(c.begin(), c.begin() + k);
+       for (int i = 1; i < static_cast<int>(upper.size()); ++i) upper[i] *= 2;
+       for (int i = k + 1; i <= degree; ++i) lower[2 * k - i] -= c[i];
+-      return add(evaluate(lower), mul(basis(k), evaluate(upper)));
++      return add_temporaries(evaluate(lower), mul(basis(k), evaluate(upper)));
+     };
+     if (planned_refresh) {
+       for (auto& value : mask) value *= at_zero;
+@@ -824,6 +834,9 @@ auto main(int argc, char** argv) -> int {
+            << ",\"plaintext_cache_bypasses\":" << evaluator.plaintext_cache.bypasses
+            << ",\"plaintext_cache_evictions\":" << evaluator.plaintext_cache.evictions
+            << ",\"scratch_clones_eliminated\":" << evaluator.scratch_clones_eliminated
++           << ",\"owned_arithmetic_calls\":" << evaluator.owned_arithmetic.calls
++           << ",\"owned_arithmetic_reused_inputs\":" << evaluator.owned_arithmetic.reused_inputs
++           << ",\"owned_arithmetic_cloned_inputs\":" << evaluator.owned_arithmetic.cloned_inputs
+            << ",\"host_encoding_seconds\":" << evaluator.host_encoding_seconds
+            << ",\"host_encodes\":" << evaluator.host_encodes
+            << ",\"mask_preparation_seconds\":" << evaluator.mask_preparation_seconds
+diff --git a/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp b/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
+index 086f0ab..4add993 100644
+--- a/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
++++ b/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
+@@ -45,6 +45,7 @@
+ #include "stage1_mamba2_config.hpp"
+ #include "fideslib_handoff.hpp"
+ #include "fideslib_plaintext_encoder.hpp"
++#include "fideslib_owned_arithmetic.hpp"
+ #include "stage1_mamba2_artifact.hpp"
+ #include "stage1_mamba2_depth.hpp"
+ #include "stage1_mamba2_payload.hpp"
+@@ -1713,6 +1714,19 @@ auto main(int argc, char* argv[]) -> int {
+       ++adds;
+       return cc->EvalSub(lhs, rhs);
+     };
++    fhemamba::OwnedArithmeticStats owned_arithmetic;
++    auto private_binary = [&](Ciphertext<DCRTPoly> lhs, Ciphertext<DCRTPoly> rhs,
++                              fhemamba::CiphertextBinaryOp operation) {
++      if (operation == fhemamba::CiphertextBinaryOp::Multiply) ++ct_ct_muls;
++      else ++adds;
++      return fhemamba::owned_ciphertext_binary(cc, std::move(lhs), std::move(rhs), operation,
++          [&](auto& a, auto& b) {
++            align_levels(cc, a, b, args.level_align_mode, unity_multiplies, direct_level_drops);
++          }, [] {
++            if (cudaDeviceSynchronize() != 0)
++              throw std::runtime_error("owned arithmetic CUDA synchronization failed");
++          }, owned_arithmetic);
++    };
+     auto add_scalar = [&](const Ciphertext<DCRTPoly>& ciphertext, double scalar) {
+       ++adds;
+       return cc->EvalAdd(ciphertext, scalar);
+@@ -2384,8 +2398,12 @@ auto main(int argc, char* argv[]) -> int {
+       void stage(const NormCt&) {}
+     } norm_ops{
+         scaled_clone, add_scalar,
+-        [&](const NormCt& a, const NormCt& b) { return mul_aligned(a->Clone(), b->Clone()); },
+-        [&](const NormCt& a, const NormCt& b) { return add_aligned(a->Clone(), b->Clone()); }};
++        [&](const NormCt& a, const NormCt& b) {
++          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
++        },
++        [&](const NormCt& a, const NormCt& b) {
++          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
++        }};
+     auto scheduled_inverse = [&](const NormCt& variance,
+                                  const fhemamba::stage1::NormalizationSchedule& recipe,
+                                  const std::string& tag, int& counter) {
+@@ -3777,14 +3795,21 @@ auto main(int argc, char* argv[]) -> int {
+             std::function<NormCt(const NormCt&, const std::vector<double>&)> coefficient_product;
+             std::function<NormCt(const std::vector<double>&)> constant;
+           } ops{
+-              [&](const NormCt& a, const NormCt& b) { return mul_aligned(a->Clone(), b->Clone()); },
+-              [&](const NormCt& a, const NormCt& b) { return add_aligned(a->Clone(), b->Clone()); },
+-              [&](const NormCt& a, const NormCt& b) { return sub_aligned(a->Clone(), b->Clone(), args.level_align_mode); },
++              [&](const NormCt& a, const NormCt& b) {
++                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
++              },
++              [&](const NormCt& a, const NormCt& b) {
++                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
++              },
++              [&](const NormCt& a, const NormCt& b) {
++                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Subtract);
++              },
+               [&](const NormCt& value, double scalar) {
+                 if (!args.joint_periodic_coefficients) return add_scalar(value, scalar);
+                 // M*T0=M, M*T1=u and M*T(2k)=2*(M*Tk)^2-M.
+                 // This preserves inactive lanes without a final mask/level.
+-                return add_aligned(value->Clone(), scaled_clone(joint_ones_ct, scalar));
++                return private_binary(value->Clone(), scaled_clone(joint_ones_ct, scalar),
++                                      fhemamba::CiphertextBinaryOp::Add);
+               },
+               scaled_clone, coefficient_product,
+               [&](const std::vector<double>& row) { return coefficient_product(joint_ones_ct, row); }};
+@@ -5098,6 +5123,9 @@ auto main(int argc, char* argv[]) -> int {
+         << ",\"eval_fast_uploads\":" << plaintexts.fast_uploads - setup_fast_uploads
+         << ",\"eval_gpu_ntt_encodes\":" << plaintexts.gpu_ntt_encodes - setup_gpu_ntt_encodes
+         << ",\"eval_upload_seconds\":" << plaintexts.upload_seconds - setup_upload_seconds << "},";
++    out << "\"owned_arithmetic\":{\"calls\":" << owned_arithmetic.calls
++        << ",\"reused_inputs\":" << owned_arithmetic.reused_inputs
++        << ",\"cloned_inputs\":" << owned_arithmetic.cloned_inputs << "},";
+     out << "\"plaintext_coefficient_floor\":" << kPlaintextCoefficientFloor << ",";
+     out << "\"pt_cache\":{";
+     out << "\"mode\":\"" << json_escape(pt_cache_mode) << "\",";

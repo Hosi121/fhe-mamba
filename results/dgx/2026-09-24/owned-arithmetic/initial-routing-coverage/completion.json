@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "error": "Traceback (most recent call last):\n  File \"/home/kataiwa/fhemamba/owned-arithmetic-20260924/run_campaign.py\", line 126, in <module>\n    measure(arch + '-full-candidate', True, full=True)\n  File \"/home/kataiwa/fhemamba/owned-arithmetic-20260924/run_campaign.py\", line 57, in m3\n    run(name, command, env, 1800 if full else 300, check,\n  File \"/home/kataiwa/fhemamba/owned-arithmetic-20260924/runlib.py\", line 109, in run\n    raise RuntimeError('job failed: ' + name)\nRuntimeError: job failed: m3-full-candidate\n",
+  "finished_utc": "2026-09-24T15:04:48.769832+00:00"
+}

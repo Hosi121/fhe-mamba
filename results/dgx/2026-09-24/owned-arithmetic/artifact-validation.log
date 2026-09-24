@@ -1,0 +1,30 @@
+{
+  "artifact_count": 2,
+  "results": [
+    {
+      "error_count": 0,
+      "explicit_non_success_probe": false,
+      "issues": [],
+      "path": "/home/hosi/cipher/runs/owned-arithmetic-20260924/m2-full-base/generation.json",
+      "stage": "fhemamba-client-generation",
+      "success_claimed": true,
+      "success_predicate_passed": true,
+      "valid": true,
+      "warning_count": 0
+    },
+    {
+      "error_count": 0,
+      "explicit_non_success_probe": false,
+      "issues": [],
+      "path": "/home/hosi/cipher/runs/owned-arithmetic-20260924/m2-full-candidate/generation.json",
+      "stage": "fhemamba-client-generation",
+      "success_claimed": true,
+      "success_predicate_passed": true,
+      "valid": true,
+      "warning_count": 0
+    }
+  ],
+  "stage": "artifact-validation",
+  "valid": true,
+  "version": "0.5.0"
+}

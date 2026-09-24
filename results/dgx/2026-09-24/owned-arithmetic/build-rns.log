@@ -1,0 +1,26 @@
+-- Using FIDESlib.
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/owned-arithmetic-20260924/build
+[ 25%] Built target stage1_mamba2_payload
+[ 50%] Built target fideslib_plaintext_encoder
+[ 75%] Built target stage1_mamba2_plan
+[100%] Built target packed_fideslib
+[ 50%] Built target fideslib_plaintext_encoder
+[ 75%] Building CXX object CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o
+[100%] Linking CXX executable owned_arithmetic_probe
+[100%] Built target owned_arithmetic_probe
+[ 11%] Built target stage1_mamba2_process
+[ 22%] Built target stage1_mamba2_config
+[ 33%] Built target stage1_mamba2_payload
+[ 44%] Built target fideslib_plaintext_encoder
+[ 55%] Built target stage1_mamba2_artifact
+[ 77%] Built target stage1_mamba2_plan
+[ 72%] Built target stage1_mamba2_depth
+[ 88%] Built target fideslib_handoff
+[100%] Built target stage1_mamba2_decode_fideslib

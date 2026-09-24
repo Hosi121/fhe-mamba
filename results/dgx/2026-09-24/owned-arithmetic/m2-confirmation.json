@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "samples_in_baab_order": [
+    53.568722199,
+    54.15096133,
+    54.366535799,
+    54.06051165
+  ],
+  "base_mean_seconds": 54.258748564499996,
+  "candidate_mean_seconds": 53.8146169245,
+  "reduction_percent": 0.8185438325619243,
+  "combined_base_samples": [
+    54.141711526,
+    54.233495795,
+    54.15096133,
+    54.366535799
+  ],
+  "combined_candidate_samples": [
+    53.752612834,
+    54.010516574,
+    53.568722199,
+    54.06051165
+  ],
+  "combined_base_mean_seconds": 54.2231761125,
+  "combined_candidate_mean_seconds": 53.84809081425,
+  "combined_reduction_percent": 0.6917435036851938,
+  "supports_adoption": true,
+  "scope": "Reversed short controls after the full pairs, added before full results because the initial 0.56% Mamba-2 prefix difference was small. Every sample preserved; no significance claim.",
+  "finished_utc": "2026-09-24T17:05:28.420624+00:00"
+}

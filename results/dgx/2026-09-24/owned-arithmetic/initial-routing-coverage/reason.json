@@ -1,0 +1,22 @@
+{
+  "model_numerical_and_token_gates_passed": true,
+  "failed_gate": "static_add_inventory",
+  "expected_calls": 91956,
+  "observed_calls": 91716,
+  "cause": "The initial implementation missed 240 accumulator additions in radix-routing stages where BSGS is not beneficial. They still called the protecting add helper.",
+  "action": "Consume those private temporary operands through the same validated helper. Rebuild only Mamba-3, repeat its state/prefix/full checks, then continue unchanged Mamba-2.",
+  "raw_measurements": "Moved without changing bytes; original source archive and binaries remain at campaign root. All native process time remains charged.",
+  "moved_paths": [
+    "m3-4-base",
+    "m3-full-base",
+    "m3-short-comparison.json",
+    "m3-2-candidate",
+    "m3-synthetic-candidate",
+    "m3-full-candidate",
+    "m3-1-base",
+    "m3-3-candidate",
+    "completion.json",
+    "short-comparison.json",
+    "controller-rns.log"
+  ]
+}

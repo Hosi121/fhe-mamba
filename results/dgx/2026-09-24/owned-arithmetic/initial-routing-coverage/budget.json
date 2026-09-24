@@ -1,0 +1,63 @@
+{
+  "review_seconds": 10800,
+  "used_seconds": 2573.6977547509596,
+  "runs": [
+    {
+      "name": "probe-mamba3",
+      "charged_seconds": 3.394107239320874
+    },
+    {
+      "name": "probe-rns-mamba3",
+      "charged_seconds": 5.048373719677329
+    },
+    {
+      "name": "probe-rns-mamba2",
+      "charged_seconds": 5.00826604757458
+    },
+    {
+      "name": "m3-synthetic-candidate",
+      "charged_seconds": 40.87494520749897
+    },
+    {
+      "name": "m3-1-base",
+      "charged_seconds": 43.932972114533186
+    },
+    {
+      "name": "m3-2-candidate",
+      "charged_seconds": 43.73069519456476
+    },
+    {
+      "name": "m3-3-candidate",
+      "charged_seconds": 43.48431613482535
+    },
+    {
+      "name": "m3-4-base",
+      "charged_seconds": 43.827163355425
+    },
+    {
+      "name": "m2-1-base",
+      "charged_seconds": 83.19130486343056
+    },
+    {
+      "name": "m2-2-candidate",
+      "charged_seconds": 82.95621302444488
+    },
+    {
+      "name": "m2-3-candidate",
+      "charged_seconds": 84.34494328312576
+    },
+    {
+      "name": "m2-4-base",
+      "charged_seconds": 84.7141062868759
+    },
+    {
+      "name": "m3-full-base",
+      "charged_seconds": 1020.4507526941597
+    },
+    {
+      "name": "m3-full-candidate",
+      "charged_seconds": 988.7395955855027
+    }
+  ],
+  "scope": "Three-hour internal review interval for two ownership candidates. User previously authorized hours of DGX optimization. End after their exactness, ABBA and qualified full-pair adoption decisions."
+}

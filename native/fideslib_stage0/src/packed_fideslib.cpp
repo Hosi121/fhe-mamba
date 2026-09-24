@@ -4,6 +4,7 @@
 #include "packed_routing.hpp"
 #include "packed_depth.hpp"
 #include "packed_lifetime.hpp"
+#include "fideslib_owned_arithmetic.hpp"
 #include "plaintext_cache.hpp"
 #include "fideslib_plaintext_ops.hpp"
 #include "fideslib_plaintext_encoder.hpp"
@@ -55,6 +56,7 @@ struct PackedEvaluator {
   bool bsgs_routing_stages = false;
   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
   long long scratch_clones_eliminated = 0;
+  fhemamba::OwnedArithmeticStats owned_arithmetic;
   long long lifetime_clones_eliminated = 0, refresh_rotations = 0;
   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
   long long host_encodes = 0;
@@ -98,6 +100,13 @@ struct PackedEvaluator {
       cc->EvalMultMutableInPlace(x, y); sync_gpu(); ++scratch_clones_eliminated; return x;
     }
     auto out = cc->EvalMult(x, y); sync_gpu(); return out;
+  }
+  auto add_temporaries(Ct a, Ct b) -> Ct {
+    if (!inplace_ops) return add(a, b);
+    ++adds; ++scratch_clones_eliminated;
+    return fhemamba::owned_ciphertext_binary(cc, std::move(a), std::move(b),
+        fhemamba::CiphertextBinaryOp::Add,
+        [&](Ct& x, Ct& y) { align_owned(x, y); }, sync_gpu, owned_arithmetic);
   }
   auto scalar_add(const Ct& a, double b) -> Ct { ++adds; return cc->EvalAdd(a, b); }
   auto plain(const Ct& a, std::vector<double> values, bool multiply) -> Ct {
@@ -222,10 +231,10 @@ struct PackedEvaluator {
             auto mask = fhemamba::packed_diagonal_pre_mask(masks.at(plan.offsets[first + j]), giant);
             if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
             auto term = plain(babies[j], std::move(mask), true);
-            inner = inner ? add(inner, term) : term;
+            inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
           }
           auto term = rotate(inner, giant);
-          out = out ? add(out, term) : term;
+          out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
         }
         sync_gpu();
         return out;
@@ -233,7 +242,7 @@ struct PackedEvaluator {
     }
     for (const auto& [offset, mask] : masks) {
       auto term = plain(rotate(x, offset), mask, true);
-      out = out ? add(out, term) : term;
+      out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
     }
     return out ? out : scale(x, 0.0);
   }
@@ -273,7 +282,7 @@ struct PackedEvaluator {
             std::vector<double> mask(slots);
             for (int position : positions) mask[position] = 1;
             auto term = rotate(plain(out, std::move(mask), true), offset);
-            next = next ? add(next, term) : term;
+            next = next ? add_temporaries(std::move(next), std::move(term)) : std::move(term);
           }
           out = next;
         }
@@ -355,10 +364,10 @@ struct PackedEvaluator {
                                                first + j, shape, slots, 0.0);
           if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
           auto term = plain(babies[j], std::move(mask), true);
-          inner = inner ? add(inner, term) : term;
+          inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
         }
         auto term = rotate(inner, first * shape.replicas);
-        out = out ? add(out, term) : term;
+        out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
       }
       out = rotation_sum(out, shape.replicas, shape.window + 1, true, rot, sum);
       if (!mask_output) { sync_gpu(); return out; }
@@ -419,7 +428,8 @@ struct PackedEvaluator {
         Ct out;
         for (int i = 1; i <= degree; ++i) {
           if (std::abs(c[i]) < 1e-14) continue;
-          auto term = scale(basis(i), c[i]); out = out ? add(out, term) : term;
+          auto term = scale(basis(i), c[i]);
+          out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
         }
         if (!out) out = scale(u, 0.0);
         return scalar_add(out, c[0]);
@@ -429,7 +439,7 @@ struct PackedEvaluator {
       std::vector<double> upper(c.begin() + k, c.end()), lower(c.begin(), c.begin() + k);
       for (int i = 1; i < static_cast<int>(upper.size()); ++i) upper[i] *= 2;
       for (int i = k + 1; i <= degree; ++i) lower[2 * k - i] -= c[i];
-      return add(evaluate(lower), mul(basis(k), evaluate(upper)));
+      return add_temporaries(evaluate(lower), mul(basis(k), evaluate(upper)));
     };
     if (planned_refresh) {
       for (auto& value : mask) value *= at_zero;
@@ -824,6 +834,9 @@ auto main(int argc, char** argv) -> int {
            << ",\"plaintext_cache_bypasses\":" << evaluator.plaintext_cache.bypasses
            << ",\"plaintext_cache_evictions\":" << evaluator.plaintext_cache.evictions
            << ",\"scratch_clones_eliminated\":" << evaluator.scratch_clones_eliminated
+           << ",\"owned_arithmetic_calls\":" << evaluator.owned_arithmetic.calls
+           << ",\"owned_arithmetic_reused_inputs\":" << evaluator.owned_arithmetic.reused_inputs
+           << ",\"owned_arithmetic_cloned_inputs\":" << evaluator.owned_arithmetic.cloned_inputs
            << ",\"host_encoding_seconds\":" << evaluator.host_encoding_seconds
            << ",\"host_encodes\":" << evaluator.host_encodes
            << ",\"mask_preparation_seconds\":" << evaluator.mask_preparation_seconds

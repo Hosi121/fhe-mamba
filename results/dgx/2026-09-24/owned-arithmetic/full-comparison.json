@@ -1,0 +1,14 @@
+{
+  "m3": {
+    "base_seconds": 976.483172958,
+    "candidate_seconds": 949.257736612,
+    "reduction_percent": 2.7881111625843613,
+    "adopt": true
+  },
+  "m2": {
+    "base_seconds": 1959.30269679,
+    "candidate_seconds": 1942.98709714,
+    "reduction_percent": 0.8327248095320039,
+    "adopt": true
+  }
+}

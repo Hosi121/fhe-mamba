@@ -1,0 +1,476 @@
+diff --git a/native/fideslib_stage0/CMakeLists.txt b/native/fideslib_stage0/CMakeLists.txt
+index ac035eb..864097e 100644
+--- a/native/fideslib_stage0/CMakeLists.txt
++++ b/native/fideslib_stage0/CMakeLists.txt
+@@ -105,6 +105,8 @@ if(FHE_STAGE0_BUILD_KERNEL)
+   target_link_libraries(packed_fideslib PRIVATE fideslib::fideslib CUDA::cudart stage0_layout stage1_mamba2_plan fideslib_plaintext_encoder)
+   add_executable(packed_plaintext_probe src/packed_plaintext_probe.cpp)
+   target_link_libraries(packed_plaintext_probe PRIVATE fideslib_plaintext_encoder)
++  add_executable(owned_arithmetic_probe src/owned_arithmetic_probe.cpp)
++  target_link_libraries(owned_arithmetic_probe PRIVATE fideslib_plaintext_encoder stage0_layout)
+ 
+   add_executable(
+     stage1_mamba2_decode_fideslib
+@@ -168,6 +170,9 @@ endif()
+ 
+ if(FHE_STAGE0_BUILD_TESTS)
+   enable_testing()
++  add_executable(test_owned_arithmetic tests/test_owned_arithmetic.cpp)
++  target_link_libraries(test_owned_arithmetic PRIVATE stage0_layout)
++  add_test(NAME owned_arithmetic COMMAND test_owned_arithmetic)
+   add_executable(test_packed_lifetime tests/test_packed_lifetime.cpp)
+   target_link_libraries(test_packed_lifetime PRIVATE stage0_layout)
+   add_test(NAME packed_lifetime COMMAND test_packed_lifetime)
+diff --git a/native/fideslib_stage0/src/packed_fideslib.cpp b/native/fideslib_stage0/src/packed_fideslib.cpp
+index ff495e7..a7cda98 100644
+--- a/native/fideslib_stage0/src/packed_fideslib.cpp
++++ b/native/fideslib_stage0/src/packed_fideslib.cpp
+@@ -4,6 +4,7 @@
+ #include "packed_routing.hpp"
+ #include "packed_depth.hpp"
+ #include "packed_lifetime.hpp"
++#include "fideslib_owned_arithmetic.hpp"
+ #include "plaintext_cache.hpp"
+ #include "fideslib_plaintext_ops.hpp"
+ #include "fideslib_plaintext_encoder.hpp"
+@@ -55,6 +56,7 @@ struct PackedEvaluator {
+   bool bsgs_routing_stages = false;
+   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
+   long long scratch_clones_eliminated = 0;
++  fhemamba::OwnedArithmeticStats owned_arithmetic;
+   long long lifetime_clones_eliminated = 0, refresh_rotations = 0;
+   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
+   long long host_encodes = 0;
+@@ -99,6 +101,13 @@ struct PackedEvaluator {
+     }
+     auto out = cc->EvalMult(x, y); sync_gpu(); return out;
+   }
++  auto add_temporaries(Ct a, Ct b) -> Ct {
++    if (!inplace_ops) return add(a, b);
++    ++adds; ++scratch_clones_eliminated;
++    return fhemamba::owned_ciphertext_binary(cc, std::move(a), std::move(b),
++        fhemamba::CiphertextBinaryOp::Add,
++        [&](Ct& x, Ct& y) { align_owned(x, y); }, sync_gpu, owned_arithmetic);
++  }
+   auto scalar_add(const Ct& a, double b) -> Ct { ++adds; return cc->EvalAdd(a, b); }
+   auto plain(const Ct& a, std::vector<double> values, bool multiply) -> Ct {
+     values.resize(slots);
+@@ -222,10 +231,10 @@ struct PackedEvaluator {
+             auto mask = fhemamba::packed_diagonal_pre_mask(masks.at(plan.offsets[first + j]), giant);
+             if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
+             auto term = plain(babies[j], std::move(mask), true);
+-            inner = inner ? add(inner, term) : term;
++            inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
+           }
+           auto term = rotate(inner, giant);
+-          out = out ? add(out, term) : term;
++          out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+         }
+         sync_gpu();
+         return out;
+@@ -233,7 +242,7 @@ struct PackedEvaluator {
+     }
+     for (const auto& [offset, mask] : masks) {
+       auto term = plain(rotate(x, offset), mask, true);
+-      out = out ? add(out, term) : term;
++      out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+     }
+     return out ? out : scale(x, 0.0);
+   }
+@@ -273,7 +282,7 @@ struct PackedEvaluator {
+             std::vector<double> mask(slots);
+             for (int position : positions) mask[position] = 1;
+             auto term = rotate(plain(out, std::move(mask), true), offset);
+-            next = next ? add(next, term) : term;
++            next = next ? add_temporaries(std::move(next), std::move(term)) : std::move(term);
+           }
+           out = next;
+         }
+@@ -355,10 +364,10 @@ struct PackedEvaluator {
+                                                first + j, shape, slots, 0.0);
+           if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
+           auto term = plain(babies[j], std::move(mask), true);
+-          inner = inner ? add(inner, term) : term;
++          inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
+         }
+         auto term = rotate(inner, first * shape.replicas);
+-        out = out ? add(out, term) : term;
++        out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+       }
+       out = rotation_sum(out, shape.replicas, shape.window + 1, true, rot, sum);
+       if (!mask_output) { sync_gpu(); return out; }
+@@ -419,7 +428,8 @@ struct PackedEvaluator {
+         Ct out;
+         for (int i = 1; i <= degree; ++i) {
+           if (std::abs(c[i]) < 1e-14) continue;
+-          auto term = scale(basis(i), c[i]); out = out ? add(out, term) : term;
++          auto term = scale(basis(i), c[i]);
++          out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+         }
+         if (!out) out = scale(u, 0.0);
+         return scalar_add(out, c[0]);
+@@ -429,7 +439,7 @@ struct PackedEvaluator {
+       std::vector<double> upper(c.begin() + k, c.end()), lower(c.begin(), c.begin() + k);
+       for (int i = 1; i < static_cast<int>(upper.size()); ++i) upper[i] *= 2;
+       for (int i = k + 1; i <= degree; ++i) lower[2 * k - i] -= c[i];
+-      return add(evaluate(lower), mul(basis(k), evaluate(upper)));
++      return add_temporaries(evaluate(lower), mul(basis(k), evaluate(upper)));
+     };
+     if (planned_refresh) {
+       for (auto& value : mask) value *= at_zero;
+@@ -824,6 +834,9 @@ auto main(int argc, char** argv) -> int {
+            << ",\"plaintext_cache_bypasses\":" << evaluator.plaintext_cache.bypasses
+            << ",\"plaintext_cache_evictions\":" << evaluator.plaintext_cache.evictions
+            << ",\"scratch_clones_eliminated\":" << evaluator.scratch_clones_eliminated
++           << ",\"owned_arithmetic_calls\":" << evaluator.owned_arithmetic.calls
++           << ",\"owned_arithmetic_reused_inputs\":" << evaluator.owned_arithmetic.reused_inputs
++           << ",\"owned_arithmetic_cloned_inputs\":" << evaluator.owned_arithmetic.cloned_inputs
+            << ",\"host_encoding_seconds\":" << evaluator.host_encoding_seconds
+            << ",\"host_encodes\":" << evaluator.host_encodes
+            << ",\"mask_preparation_seconds\":" << evaluator.mask_preparation_seconds
+diff --git a/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp b/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
+index 086f0ab..4add993 100644
+--- a/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
++++ b/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp
+@@ -45,6 +45,7 @@
+ #include "stage1_mamba2_config.hpp"
+ #include "fideslib_handoff.hpp"
+ #include "fideslib_plaintext_encoder.hpp"
++#include "fideslib_owned_arithmetic.hpp"
+ #include "stage1_mamba2_artifact.hpp"
+ #include "stage1_mamba2_depth.hpp"
+ #include "stage1_mamba2_payload.hpp"
+@@ -1713,6 +1714,19 @@ auto main(int argc, char* argv[]) -> int {
+       ++adds;
+       return cc->EvalSub(lhs, rhs);
+     };
++    fhemamba::OwnedArithmeticStats owned_arithmetic;
++    auto private_binary = [&](Ciphertext<DCRTPoly> lhs, Ciphertext<DCRTPoly> rhs,
++                              fhemamba::CiphertextBinaryOp operation) {
++      if (operation == fhemamba::CiphertextBinaryOp::Multiply) ++ct_ct_muls;
++      else ++adds;
++      return fhemamba::owned_ciphertext_binary(cc, std::move(lhs), std::move(rhs), operation,
++          [&](auto& a, auto& b) {
++            align_levels(cc, a, b, args.level_align_mode, unity_multiplies, direct_level_drops);
++          }, [] {
++            if (cudaDeviceSynchronize() != 0)
++              throw std::runtime_error("owned arithmetic CUDA synchronization failed");
++          }, owned_arithmetic);
++    };
+     auto add_scalar = [&](const Ciphertext<DCRTPoly>& ciphertext, double scalar) {
+       ++adds;
+       return cc->EvalAdd(ciphertext, scalar);
+@@ -2384,8 +2398,12 @@ auto main(int argc, char* argv[]) -> int {
+       void stage(const NormCt&) {}
+     } norm_ops{
+         scaled_clone, add_scalar,
+-        [&](const NormCt& a, const NormCt& b) { return mul_aligned(a->Clone(), b->Clone()); },
+-        [&](const NormCt& a, const NormCt& b) { return add_aligned(a->Clone(), b->Clone()); }};
++        [&](const NormCt& a, const NormCt& b) {
++          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
++        },
++        [&](const NormCt& a, const NormCt& b) {
++          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
++        }};
+     auto scheduled_inverse = [&](const NormCt& variance,
+                                  const fhemamba::stage1::NormalizationSchedule& recipe,
+                                  const std::string& tag, int& counter) {
+@@ -3777,14 +3795,21 @@ auto main(int argc, char* argv[]) -> int {
+             std::function<NormCt(const NormCt&, const std::vector<double>&)> coefficient_product;
+             std::function<NormCt(const std::vector<double>&)> constant;
+           } ops{
+-              [&](const NormCt& a, const NormCt& b) { return mul_aligned(a->Clone(), b->Clone()); },
+-              [&](const NormCt& a, const NormCt& b) { return add_aligned(a->Clone(), b->Clone()); },
+-              [&](const NormCt& a, const NormCt& b) { return sub_aligned(a->Clone(), b->Clone(), args.level_align_mode); },
++              [&](const NormCt& a, const NormCt& b) {
++                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
++              },
++              [&](const NormCt& a, const NormCt& b) {
++                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
++              },
++              [&](const NormCt& a, const NormCt& b) {
++                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Subtract);
++              },
+               [&](const NormCt& value, double scalar) {
+                 if (!args.joint_periodic_coefficients) return add_scalar(value, scalar);
+                 // M*T0=M, M*T1=u and M*T(2k)=2*(M*Tk)^2-M.
+                 // This preserves inactive lanes without a final mask/level.
+-                return add_aligned(value->Clone(), scaled_clone(joint_ones_ct, scalar));
++                return private_binary(value->Clone(), scaled_clone(joint_ones_ct, scalar),
++                                      fhemamba::CiphertextBinaryOp::Add);
+               },
+               scaled_clone, coefficient_product,
+               [&](const std::vector<double>& row) { return coefficient_product(joint_ones_ct, row); }};
+@@ -5098,6 +5123,9 @@ auto main(int argc, char* argv[]) -> int {
+         << ",\"eval_fast_uploads\":" << plaintexts.fast_uploads - setup_fast_uploads
+         << ",\"eval_gpu_ntt_encodes\":" << plaintexts.gpu_ntt_encodes - setup_gpu_ntt_encodes
+         << ",\"eval_upload_seconds\":" << plaintexts.upload_seconds - setup_upload_seconds << "},";
++    out << "\"owned_arithmetic\":{\"calls\":" << owned_arithmetic.calls
++        << ",\"reused_inputs\":" << owned_arithmetic.reused_inputs
++        << ",\"cloned_inputs\":" << owned_arithmetic.cloned_inputs << "},";
+     out << "\"plaintext_coefficient_floor\":" << kPlaintextCoefficientFloor << ",";
+     out << "\"pt_cache\":{";
+     out << "\"mode\":\"" << json_escape(pt_cache_mode) << "\",";
+diff --git a/native/fideslib_stage0/include/owned_arithmetic.hpp b/native/fideslib_stage0/include/owned_arithmetic.hpp
+new file mode 100644
+index 0000000..6b73231
+--- /dev/null
++++ b/native/fideslib_stage0/include/owned_arithmetic.hpp
+@@ -0,0 +1,32 @@
++#pragma once
++
++#include <initializer_list>
++#include <stdexcept>
++#include <utility>
++
++namespace fhemamba {
++
++struct OwnedArithmeticStats {
++  long long calls = 0, reused_inputs = 0, cloned_inputs = 0;
++};
++
++// Consume scratch handles, detaching any aliases before level alignment can
++// mutate either operand. Completion must precede release of the right operand:
++// an asynchronous evaluator may still be reading its storage.
++template <class Handle, class Clone, class Align, class Evaluate, class Complete>
++auto evaluate_owned_binary(Handle left, Handle right, Clone&& clone, Align&& align,
++                           Evaluate&& evaluate, Complete&& complete,
++                           OwnedArithmeticStats& stats) -> Handle {
++  if (!left || !right) throw std::invalid_argument("owned arithmetic needs two operands");
++  for (auto* value : {&left, &right}) {
++    if (value->use_count() == 1) ++stats.reused_inputs;
++    else { *value = clone(*value); ++stats.cloned_inputs; }
++  }
++  align(left, right);
++  evaluate(left, right);
++  complete();
++  ++stats.calls;
++  return left;
++}
++
++}  // namespace fhemamba
+diff --git a/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp b/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp
+new file mode 100644
+index 0000000..c3814a6
+--- /dev/null
++++ b/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp
+@@ -0,0 +1,30 @@
++#pragma once
++
++#include <fideslib.hpp>
++#include "owned_arithmetic.hpp"
++
++namespace fhemamba {
++
++enum class CiphertextBinaryOp { Add, Subtract, Multiply };
++
++// Keep ownership and the backend operation shared; each architecture supplies
++// its existing level-alignment and synchronization policy.
++template <class Align, class Complete>
++auto owned_ciphertext_binary(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
++                             fideslib::Ciphertext<fideslib::DCRTPoly> left,
++                             fideslib::Ciphertext<fideslib::DCRTPoly> right,
++                             CiphertextBinaryOp operation, Align&& align, Complete&& complete,
++                             OwnedArithmeticStats& stats)
++    -> fideslib::Ciphertext<fideslib::DCRTPoly> {
++  return evaluate_owned_binary(std::move(left), std::move(right),
++      [](const auto& value) { return value->Clone(); }, std::forward<Align>(align),
++      [&](auto& a, auto& b) {
++        switch (operation) {
++          case CiphertextBinaryOp::Add: context->EvalAddInPlace(a, b); break;
++          case CiphertextBinaryOp::Subtract: context->EvalSubInPlace(a, b); break;
++          case CiphertextBinaryOp::Multiply: context->EvalMultMutableInPlace(a, b); break;
++        }
++      }, std::forward<Complete>(complete), stats);
++}
++
++}  // namespace fhemamba
+diff --git a/native/fideslib_stage0/src/owned_arithmetic_probe.cpp b/native/fideslib_stage0/src/owned_arithmetic_probe.cpp
+new file mode 100644
+index 0000000..b248f66
+--- /dev/null
++++ b/native/fideslib_stage0/src/owned_arithmetic_probe.cpp
+@@ -0,0 +1,124 @@
++// Same-input encrypted arithmetic and live-out gates for scratch ownership.
++#include "fideslib_owned_arithmetic.hpp"
++#include <CKKS/Ciphertext.cuh>
++#include <CKKS/openfhe-interface/RawCiphertext.cuh>
++#include <cuda_runtime_api.h>
++#include <algorithm>
++#include <cmath>
++#include <complex>
++#include <cstring>
++#include <fstream>
++#include <iostream>
++#include <vector>
++
++using namespace fideslib;
++using Ct = Ciphertext<DCRTPoly>;
++using Op = fhemamba::CiphertextBinaryOp;
++static void sync_gpu() {
++  if (cudaDeviceSynchronize()) throw std::runtime_error("CUDA synchronization failed");
++}
++static bool same_bits(const std::vector<std::complex<double>>& a,
++                      const std::vector<std::complex<double>>& b) {
++  return a.size() == b.size() && std::memcmp(a.data(), b.data(), a.size() * sizeof(a[0])) == 0;
++}
++static bool same_rns(const FIDESlib::CKKS::RawCipherText& a,
++                     const FIDESlib::CKKS::RawCipherText& b) {
++  return a.sub_0 == b.sub_0 && a.sub_1 == b.sub_1 && a.moduli == b.moduli &&
++         a.numRes == b.numRes && a.N == b.N && a.format == b.format &&
++         a.Noise == b.Noise && a.NoiseLevel == b.NoiseLevel && a.slots == b.slots;
++}
++
++int main(int argc, char** argv) {
++  try {
++    if (argc < 2 || argc > 3 || (argc == 3 && std::string(argv[2]) != "--mamba2"))
++      throw std::invalid_argument("usage: owned_arithmetic_probe OUTPUT [--mamba2]");
++    const bool mamba2 = argc == 3;
++    CCParams<CryptoContextCKKSRNS> p;
++    p.SetSecurityLevel(HEStd_NotSet);
++    p.SetSecretKeyDist(mamba2 ? SPARSE_TERNARY : UNIFORM_TERNARY);
++    p.SetCKKSDataType(mamba2 ? COMPLEX : REAL);
++    p.SetRingDim(65536); p.SetBatchSize(32768);
++    p.SetMultiplicativeDepth(44); p.SetScalingModSize(59); p.SetFirstModSize(60);
++    p.SetScalingTechnique(FLEXIBLEAUTO); p.SetKeySwitchTechnique(HYBRID);
++    p.SetNumLargeDigits(3); p.SetDevices({0});
++    p.SetPlaintextAutoload(false); p.SetCiphertextAutoload(true);
++    auto cc = GenCryptoContext(p);
++    for (auto feature : {PKE, KEYSWITCH, LEVELEDSHE}) cc->Enable(feature);
++    auto keys = cc->KeyGen(); cc->EvalMultKeyGen(keys.secretKey);
++    cc->LoadContext(keys.publicKey); sync_gpu();
++    auto decrypt = [&](Ct value) {
++      Plaintext plain; cc->Decrypt(keys.secretKey, value, &plain);
++      plain->SetLength(32768);
++      auto values = plain->GetCKKSPackedValue();
++      for (const auto& x : values)
++        if (!std::isfinite(x.real()) || !std::isfinite(x.imag()))
++          throw std::runtime_error("non-finite output");
++      return values;
++    };
++    auto align = [](Ct& a, Ct& b) {
++      const auto level = std::max(a->GetLevel(), b->GetLevel());
++      a->SetLevel(level); b->SetLevel(level);
++    };
++    auto snapshot = [&](const Ct& value) {
++      sync_gpu();
++      FIDESlib::CKKS::RawCipherText raw{};
++      auto gpu = std::static_pointer_cast<FIDESlib::CKKS::Ciphertext>(cc->GetDeviceCiphertext(value->gpu));
++      gpu->store(raw); sync_gpu();
++      return raw;
++    };
++    std::vector<std::complex<double>> a_values(32768), b_values(32768);
++    for (int i = 0; i < 32768; ++i) {
++      a_values[i] = {std::sin(i * 0.7 + 0.1) / 8, mamba2 ? std::cos(i * 0.3) / 16 : 0};
++      b_values[i] = {std::cos(i * 0.2 + 0.4) / 4, mamba2 ? std::sin(i * 0.1) / 32 : 0};
++    }
++    auto plain_a = cc->MakeCKKSPackedPlaintext(a_values);
++    auto plain_b = cc->MakeCKKSPackedPlaintext(b_values);
++    auto original_a = cc->Encrypt(keys.publicKey, plain_a);
++    auto original_b = cc->Encrypt(keys.publicKey, plain_b);
++    sync_gpu();
++    fhemamba::OwnedArithmeticStats stats;
++    int cases = 0;
++    bool repeated_decrypt_bit_equal = true;
++    for (const auto [la, lb] : {std::pair{0u, 0u}, {21u, 21u}, {21u, 24u}, {34u, 32u}})
++      for (bool scaled : {false, true}) for (auto op : {Op::Add, Op::Subtract, Op::Multiply})
++        for (int alias = 0; alias < 4; ++alias) {
++          auto a = original_a->Clone(), b = original_b->Clone();
++          a->SetLevel(la); b->SetLevel(lb);
++          if (scaled) cc->EvalMultInPlace(a, 1.0);
++          sync_gpu();
++          if (alias >= 2) b = a;
++          const auto before_a = snapshot(a), before_b = snapshot(b);
++          const auto level_a = a->GetLevel(), level_b = b->GetLevel();
++          auto left = a->Clone(), right = b->Clone();
++          align(left, right);
++          auto expected = op == Op::Add ? cc->EvalAdd(left, right) :
++                          op == Op::Subtract ? cc->EvalSub(left, right) : cc->EvalMult(left, right);
++          sync_gpu();
++          auto input_a = alias == 0 || alias == 3 ? a->Clone() : a;
++          auto input_b = alias == 3 ? input_a : alias == 2 ? a : b->Clone();
++          auto actual = fhemamba::owned_ciphertext_binary(cc, std::move(input_a), std::move(input_b),
++              op, align, sync_gpu, stats);
++          if (!same_rns(snapshot(expected), snapshot(actual)) ||
++              expected->GetLevel() != actual->GetLevel() ||
++              expected->GetNoiseScaleDeg() != actual->GetNoiseScaleDeg())
++            throw std::runtime_error("result or metadata mismatch in case " + std::to_string(cases));
++          if (!same_rns(before_a, snapshot(a)) || !same_rns(before_b, snapshot(b)) ||
++              a->GetLevel() != level_a || b->GetLevel() != level_b)
++            throw std::runtime_error("live input changed in case " + std::to_string(cases));
++          // OpenFHE's CKKS Decode adds random Gaussian noise. Record this
++          // diagnostic, but gate exact ciphertext coefficients instead.
++          if (cases == 0) repeated_decrypt_bit_equal = same_bits(decrypt(expected), decrypt(expected));
++          ++cases;
++        }
++    if (cases != 96 || stats.calls != 96 || stats.reused_inputs != 96 || stats.cloned_inputs != 96)
++      throw std::runtime_error("unexpected ownership dispatch count");
++    std::ofstream out(argv[1]);
++    out << "{\"passed\":true,\"cases\":" << cases
++        << ",\"exact_rns_results\":true,\"live_inputs_unchanged\":true"
++        << ",\"repeated_decrypt_bit_equal\":" << (repeated_decrypt_bit_equal ? "true" : "false")
++        << ",\"reused_inputs\":" << stats.reused_inputs << ",\"cloned_inputs\":" << stats.cloned_inputs
++        << ",\"mamba2\":" << (mamba2 ? "true" : "false")
++        << ",\"ring_dimension\":65536,\"depth\":44,\"scale_bits\":59,\"security\":\"not-set\"}\n";
++    std::cout << "passed cases=" << cases << std::endl;
++  } catch (const std::exception& error) { std::cerr << error.what() << std::endl; return 2; }
++}
+diff --git a/native/fideslib_stage0/tests/test_owned_arithmetic.cpp b/native/fideslib_stage0/tests/test_owned_arithmetic.cpp
+new file mode 100644
+index 0000000..61a1d84
+--- /dev/null
++++ b/native/fideslib_stage0/tests/test_owned_arithmetic.cpp
+@@ -0,0 +1,53 @@
++#include "owned_arithmetic.hpp"
++#include <algorithm>
++#include <cassert>
++#include <memory>
++
++struct Value { int number, level; };
++using Handle = std::shared_ptr<Value>;
++
++int main() {
++  fhemamba::OwnedArithmeticStats stats;
++  int completions = 0;
++  std::weak_ptr<Value> pending_read;
++  auto subtract = [&](Handle left, Handle right) {
++    return fhemamba::evaluate_owned_binary(std::move(left), std::move(right),
++        [](const Handle& x) { return std::make_shared<Value>(*x); },
++        [](Handle& a, Handle& b) { a->level = b->level = std::max(a->level, b->level); },
++        [&](Handle& a, Handle& b) {
++          assert(a.get() != b.get()); // Mutable operations need distinct buffers.
++          a->number -= b->number;
++          pending_read = b;
++        },
++        [&] { assert(!pending_read.expired()); ++completions; }, stats);
++  };
++  auto a = std::make_shared<Value>(Value{7, 2});
++  auto b = std::make_shared<Value>(Value{3, 5});
++  auto original = a.get();
++  auto result = subtract(std::move(a), std::move(b));
++  assert(!a && !b && result.get() == original);
++  assert(result->number == 4 && result->level == 5 && pending_read.expired());
++  assert(stats.reused_inputs == 2 && stats.cloned_inputs == 0);
++
++  // Both original live-outs survive a mutating alignment and subtraction.
++  a = std::make_shared<Value>(Value{9, 1});
++  b = std::make_shared<Value>(Value{2, 6});
++  result = subtract(a, b);
++  assert(a->number == 9 && a->level == 1 && b->number == 2 && b->level == 6);
++  assert(result->number == 7 && result->level == 6);
++  assert(stats.reused_inputs == 2 && stats.cloned_inputs == 2);
++
++  // Two dying handles can alias even when no caller retains their value.
++  b = a;
++  result = subtract(std::move(a), std::move(b));
++  assert(result->number == 0 && stats.reused_inputs == 3 && stats.cloned_inputs == 3);
++
++  // A square/double with another live alias must detach both operands.
++  a = std::make_shared<Value>(Value{11, 4});
++  result = subtract(a, a);
++  assert(a->number == 11 && a->level == 4 && result->number == 0);
++  assert(stats.calls == 4 && completions == 4 && stats.cloned_inputs == 5);
++  bool rejected = false;
++  try { subtract({}, a); } catch (const std::invalid_argument&) { rejected = true; }
++  assert(rejected && stats.calls == 4 && completions == 4);
++}

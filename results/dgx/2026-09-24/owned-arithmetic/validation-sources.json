@@ -1,0 +1,7 @@
+{
+  "scope": "Validation-only lint exclusion for immutable CPU evidence; compiled native/application sources remain unchanged.",
+  "files_sha256": {
+    "pyproject.toml": "c6645b4ea5b083fe05e9152d993445e64eb0573db7813f03e7459e05990810df"
+  },
+  "compiled_final_manifest_sha256": "304fd7ae707e7a762642440fcc2aa80ba69f4adaa363b668299b0b86549a2477"
+}

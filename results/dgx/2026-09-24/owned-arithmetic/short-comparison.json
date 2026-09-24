@@ -1,0 +1,26 @@
+{
+  "m3": {
+    "samples_in_abba_order": [
+      14.382653695,
+      14.031546423,
+      14.073826927,
+      14.521491265
+    ],
+    "base_mean_seconds": 14.45207248,
+    "candidate_mean_seconds": 14.052686675,
+    "reduction_percent": 2.763519249939439,
+    "qualifies_full_pair": true
+  },
+  "m2": {
+    "samples_in_abba_order": [
+      54.141711526,
+      53.752612834,
+      54.010516574,
+      54.233495795
+    ],
+    "base_mean_seconds": 54.1876036605,
+    "candidate_mean_seconds": 53.881564704,
+    "reduction_percent": 0.5647766939786081,
+    "qualifies_full_pair": true
+  }
+}

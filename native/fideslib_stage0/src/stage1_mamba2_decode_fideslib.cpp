@@ -45,6 +45,7 @@
 #include "stage1_mamba2_config.hpp"
 #include "fideslib_handoff.hpp"
 #include "fideslib_plaintext_encoder.hpp"
+#include "fideslib_owned_arithmetic.hpp"
 #include "stage1_mamba2_artifact.hpp"
 #include "stage1_mamba2_depth.hpp"
 #include "stage1_mamba2_payload.hpp"
@@ -1713,6 +1714,19 @@ auto main(int argc, char* argv[]) -> int {
       ++adds;
       return cc->EvalSub(lhs, rhs);
     };
+    fhemamba::OwnedArithmeticStats owned_arithmetic;
+    auto private_binary = [&](Ciphertext<DCRTPoly> lhs, Ciphertext<DCRTPoly> rhs,
+                              fhemamba::CiphertextBinaryOp operation) {
+      if (operation == fhemamba::CiphertextBinaryOp::Multiply) ++ct_ct_muls;
+      else ++adds;
+      return fhemamba::owned_ciphertext_binary(cc, std::move(lhs), std::move(rhs), operation,
+          [&](auto& a, auto& b) {
+            align_levels(cc, a, b, args.level_align_mode, unity_multiplies, direct_level_drops);
+          }, [] {
+            if (cudaDeviceSynchronize() != 0)
+              throw std::runtime_error("owned arithmetic CUDA synchronization failed");
+          }, owned_arithmetic);
+    };
     auto add_scalar = [&](const Ciphertext<DCRTPoly>& ciphertext, double scalar) {
       ++adds;
       return cc->EvalAdd(ciphertext, scalar);
@@ -2384,8 +2398,12 @@ auto main(int argc, char* argv[]) -> int {
       void stage(const NormCt&) {}
     } norm_ops{
         scaled_clone, add_scalar,
-        [&](const NormCt& a, const NormCt& b) { return mul_aligned(a->Clone(), b->Clone()); },
-        [&](const NormCt& a, const NormCt& b) { return add_aligned(a->Clone(), b->Clone()); }};
+        [&](const NormCt& a, const NormCt& b) {
+          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
+        },
+        [&](const NormCt& a, const NormCt& b) {
+          return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
+        }};
     auto scheduled_inverse = [&](const NormCt& variance,
                                  const fhemamba::stage1::NormalizationSchedule& recipe,
                                  const std::string& tag, int& counter) {
@@ -3777,14 +3795,21 @@ auto main(int argc, char* argv[]) -> int {
             std::function<NormCt(const NormCt&, const std::vector<double>&)> coefficient_product;
             std::function<NormCt(const std::vector<double>&)> constant;
           } ops{
-              [&](const NormCt& a, const NormCt& b) { return mul_aligned(a->Clone(), b->Clone()); },
-              [&](const NormCt& a, const NormCt& b) { return add_aligned(a->Clone(), b->Clone()); },
-              [&](const NormCt& a, const NormCt& b) { return sub_aligned(a->Clone(), b->Clone(), args.level_align_mode); },
+              [&](const NormCt& a, const NormCt& b) {
+                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Multiply);
+              },
+              [&](const NormCt& a, const NormCt& b) {
+                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Add);
+              },
+              [&](const NormCt& a, const NormCt& b) {
+                return private_binary(a->Clone(), b->Clone(), fhemamba::CiphertextBinaryOp::Subtract);
+              },
               [&](const NormCt& value, double scalar) {
                 if (!args.joint_periodic_coefficients) return add_scalar(value, scalar);
                 // M*T0=M, M*T1=u and M*T(2k)=2*(M*Tk)^2-M.
                 // This preserves inactive lanes without a final mask/level.
-                return add_aligned(value->Clone(), scaled_clone(joint_ones_ct, scalar));
+                return private_binary(value->Clone(), scaled_clone(joint_ones_ct, scalar),
+                                      fhemamba::CiphertextBinaryOp::Add);
               },
               scaled_clone, coefficient_product,
               [&](const std::vector<double>& row) { return coefficient_product(joint_ones_ct, row); }};
@@ -5098,6 +5123,9 @@ auto main(int argc, char* argv[]) -> int {
         << ",\"eval_fast_uploads\":" << plaintexts.fast_uploads - setup_fast_uploads
         << ",\"eval_gpu_ntt_encodes\":" << plaintexts.gpu_ntt_encodes - setup_gpu_ntt_encodes
         << ",\"eval_upload_seconds\":" << plaintexts.upload_seconds - setup_upload_seconds << "},";
+    out << "\"owned_arithmetic\":{\"calls\":" << owned_arithmetic.calls
+        << ",\"reused_inputs\":" << owned_arithmetic.reused_inputs
+        << ",\"cloned_inputs\":" << owned_arithmetic.cloned_inputs << "},";
     out << "\"plaintext_coefficient_floor\":" << kPlaintextCoefficientFloor << ",";
     out << "\"pt_cache\":{";
     out << "\"mode\":\"" << json_escape(pt_cache_mode) << "\",";

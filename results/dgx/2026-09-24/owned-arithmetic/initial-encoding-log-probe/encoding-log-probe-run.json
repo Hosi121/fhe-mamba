@@ -1,0 +1,30 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "runs/owned-arithmetic-20260924/encoding_log_probe"
+  ],
+  "compile": [
+    "g++",
+    "-O3",
+    "-std=c++20",
+    "-ffp-contract=off",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "encoding_log_probe.cpp",
+    "-o",
+    "encoding_log_probe"
+  ],
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "machine": "x86_64",
+  "cpu_model": "Intel(R) Core(TM) Ultra 7 255H",
+  "source_sha256": "77e7c0bdfb7bb7f13c025c95a1037992fd54d736987da02c5f4fcd3094f23feb",
+  "binary_sha256": "149bc173c65ac8ff39c4a47f9c502f2d7fdef749fe4e75116687421f9c1cd5ea",
+  "original_mean_seconds": 0.00047574166129032264,
+  "reduced_mean_seconds": 0.00013640337903225806,
+  "extracted_stage_speed_ratio": 3.4877556895259496,
+  "finished_utc": "2026-09-24T14:53:24.183349+00:00",
+  "scope": "Extracted CPU range scan on finite scaled inputs only. Neither full encoding nor encrypted/model performance; no production change."
+}

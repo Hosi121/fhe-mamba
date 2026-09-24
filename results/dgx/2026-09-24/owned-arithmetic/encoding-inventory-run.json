@@ -1,0 +1,32 @@
+{
+  "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "returncode": 0,
+  "local_analysis_wall_seconds": 13.394885043002432,
+  "finished_utc": "2026-09-24T14:49:10.471766+00:00",
+  "scope": "Local static mask inventory; neither DGX measurement nor encoder implementation.",
+  "encoding_inventory.cpp_sha256": "225fcba4fde0606ce2e40c22c89c44d4b74280c02a8c7eb5fdd21cfded6a151d",
+  "encoding_inventory_sha256": "bc8d596bfbe3d0085764d518e2dc987aafc844ca6ea41249dbb16dca2ebde4cb",
+  "compile": [
+    "g++",
+    "-O3",
+    "-std=c++20",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "native/fideslib_stage0/include",
+    "-I",
+    "native/fideslib_stage0/src",
+    "encoding_inventory.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+    "-o",
+    "encoding_inventory"
+  ],
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "helper_sources_sha256": {
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp": "ac19557a2cea47319b4ab5cdc0fec229420a5588894ac5faa6462798e9f354c2",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.hpp": "bdb2bd0de8fdac049218bacb9c01cb333a9abc36740e891cb9217974db40ad03",
+    "native/fideslib_stage0/include/packed_program.hpp": "876e38041605e8a56fbd44a1e8f94052609ff7ba34479e8182baf0fffede8ab6",
+    "native/fideslib_stage0/include/public_weights.hpp": "b2920a4f866c78da0beb4bd4584e066232b712bbe0cbd2169932d8a220edf0b6"
+  }
+}

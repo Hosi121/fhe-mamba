@@ -1,0 +1,3 @@
+{
+  "reason": "Preserve the first extracted scan sample before guarding the empty-vector memcmp; timed nonempty kernels are unchanged."
+}

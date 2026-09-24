@@ -1,0 +1,49 @@
+{
+  "name": "probe-mamba3",
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build/owned_arithmetic_probe",
+    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/probe-mamba3/native.json"
+  ],
+  "started_utc": "2026-09-24T14:16:48.309466+00:00",
+  "timeout_seconds": 300,
+  "allowed_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "environment": {
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "OMP_NUM_THREADS": "4"
+  },
+  "source_manifest_sha256": "f1fc7be29fb0915a6caf886e6d064574a3a4f97376b9716e4cd7c0a3ccdfad75",
+  "controller_sha256": "df1b467aeba049617e6922caf2a1d9aedc666e971dc6982b1357e0d9885200a9",
+  "launcher_sha256": "03c25292ac695f452ad6af0e4987ac91bd36c6bcbad8f880e17ef9b4c722424a",
+  "binary_sha256": "4d239e3ae20c12e31ce98bc79ae97769ae4fa69857a3c2348029fe308ee8b62b",
+  "pid": 2890076,
+  "timed_out": false,
+  "returncode": 2,
+  "wall_seconds": 3.394107239320874,
+  "ended_utc": "2026-09-24T14:16:51.715405+00:00",
+  "passed": false,
+  "validation_error": "[Errno 2] No such file or directory: '/home/kataiwa/fhemamba/owned-arithmetic-20260924/probe-mamba3/native.json'"
+}

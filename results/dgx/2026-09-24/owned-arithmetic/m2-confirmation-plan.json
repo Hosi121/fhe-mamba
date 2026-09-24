@@ -1,0 +1,28 @@
+{
+  "declared_utc": "2026-09-24T14:46:07.282590+00:00",
+  "reason": "Initial Mamba-2 ABBA mean reduction is only 0.5648%; check order/drift before adoption.",
+  "order": [
+    "candidate",
+    "base",
+    "base",
+    "candidate"
+  ],
+  "when": "After both qualified full pairs; no simultaneous GPU jobs or builds.",
+  "count": 4,
+  "per_run_timeout_seconds": 300,
+  "existing_review_seconds": 10800,
+  "acceptance": "Unchanged full/model correctness. Mamba-2 must improve in the reversed short block, aggregate short mean and full pair.",
+  "known_initial_short": {
+    "samples_in_abba_order": [
+      54.141711526,
+      53.752612834,
+      54.010516574,
+      54.233495795
+    ],
+    "base_mean_seconds": 54.1876036605,
+    "candidate_mean_seconds": 53.881564704,
+    "reduction_percent": 0.5647766939786081,
+    "qualifies_full_pair": true
+  },
+  "full_pair_results_known": false
+}

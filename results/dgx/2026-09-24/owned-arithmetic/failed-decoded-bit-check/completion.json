@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "error": "Traceback (most recent call last):\n  File \"/home/kataiwa/fhemamba/owned-arithmetic-20260924/run_campaign.py\", line 114, in <module>\n    run('probe-' + arch, command, env, 300,\n  File \"/home/kataiwa/fhemamba/owned-arithmetic-20260924/runlib.py\", line 109, in run\n    raise RuntimeError('job failed: ' + name)\nRuntimeError: job failed: probe-mamba3\n",
+  "finished_utc": "2026-09-24T14:16:51.718204+00:00"
+}

@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "checked_after_campaign": true,
+  "finished_utc": "2026-09-24T17:05:31.481592+00:00",
+  "mamba2_payload_sha256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
+  "mamba2_payload_file_count": 489,
+  "candidate_sources": 115,
+  "candidate_binaries": {
+    "packed_fideslib": "8b68081fa16dba194bfa27ef1c80b248a5a34d91af8eaa91dba9aa082160c494",
+    "stage1_mamba2_decode_fideslib": "a7ed8d63259bbcc138c557ed2e0d775825410a5a9f89a9e2c8abe01e20cae20d",
+    "owned_arithmetic_probe": "29cd019cb6b3e3d786acfdfe332868aeadfab5a00255c59bbfe09bc3273504be"
+  },
+  "final_candidate_sources": 115,
+  "final_mamba3_binary": "78c9735c4dbe3b0dcaa8cd1b1eae64bda8ec3940b38aa206cf20387c5d7db707",
+  "dependencies_verified": {
+    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/packed_fideslib": "8edf1593688c7aad0c4ede625608600df26ae810bda32731a6a3ab397b989a39",
+    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/packed_plaintext_probe": "c2fb15d9c31a3aafe12051fe58258b4a06838c23ab603c3dd909a5b7fc8f32ec",
+    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/stage1_mamba2_decode_fideslib": "3a1cf98dcb65cd8b19ca63033b96d268bf915370334f6be02b911b1f5c198e65",
+    "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/config_core.h": "b8575b2673947f6d37f86dcf12e690ec89d5517d658217e99c30465eccff12e0",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/math/hal/intnat/ubintnat.h": "22d49038f1b63a88a2da0fd13941b11bd2a255c1dd3e65304600992324b9080a",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/math/hal/intnat/mubintvecnat.h": "3ac888c8165194a627822101d2a9f10ec8d3135e7e2eae8a91c92cb808793889",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Plaintext.cu": "08feb9adb7a3809db59dd867f39cf79de96df546451d1953724292077659bf31",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/RNSPoly.cpp": "83c7234b5e45fe89447b0d524efb455c2e6ecb9680c538bc999d9dca52b07941",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/LimbPartition.cu": "063336a48c4f9db6866d328fd9917b8d804cb5410975490b48a8107a6c633ce0",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Limb.cu": "9e0eccc93e31a92a05db9919d62734b59ae152b70ffe2f30e39277984b2156e3",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/openfhe-interface/RawCiphertext.cu": "1ff5d81255930803de56184b628a902972e8dc67ccf794be1359355d59bde63a"
+  },
+  "governor": "performance",
+  "openfhe_decode_source": {
+    "path": "/home/kataiwa/fhe-deps/FIDESlib/deps/openfhe-src/src/pke/lib/encoding/ckkspackedencoding.cpp",
+    "sha256": "ce967bf68d80a63101984e8927298923c6c3c6754dc522e63355e7ec40655401",
+    "observation": "REAL CKKS Decode injects Gaussian samples at lines 480 and 482; exact comparison uses ciphertext RNS coefficients instead of repeated decoded bits."
+  }
+}

@@ -105,6 +105,8 @@ if(FHE_STAGE0_BUILD_KERNEL)
   target_link_libraries(packed_fideslib PRIVATE fideslib::fideslib CUDA::cudart stage0_layout stage1_mamba2_plan fideslib_plaintext_encoder)
   add_executable(packed_plaintext_probe src/packed_plaintext_probe.cpp)
   target_link_libraries(packed_plaintext_probe PRIVATE fideslib_plaintext_encoder)
+  add_executable(owned_arithmetic_probe src/owned_arithmetic_probe.cpp)
+  target_link_libraries(owned_arithmetic_probe PRIVATE fideslib_plaintext_encoder stage0_layout)
 
   add_executable(
     stage1_mamba2_decode_fideslib
@@ -168,6 +170,9 @@ endif()
 
 if(FHE_STAGE0_BUILD_TESTS)
   enable_testing()
+  add_executable(test_owned_arithmetic tests/test_owned_arithmetic.cpp)
+  target_link_libraries(test_owned_arithmetic PRIVATE stage0_layout)
+  add_test(NAME owned_arithmetic COMMAND test_owned_arithmetic)
   add_executable(test_packed_lifetime tests/test_packed_lifetime.cpp)
   target_link_libraries(test_packed_lifetime PRIVATE stage0_layout)
   add_test(NAME packed_lifetime COMMAND test_packed_lifetime)
