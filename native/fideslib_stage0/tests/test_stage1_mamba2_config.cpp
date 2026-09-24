@@ -47,6 +47,24 @@ auto main() -> int {
   require(parse({"stage1", "--input", "payload", "--joint-periodic-coefficients", "true"}).joint_periodic_coefficients,
           "periodic joint coefficient flag was not parsed");
   require(!defaults.joint_subring_encoding, "subring encoding must remain opt-in");
+  require(!defaults.fast_plaintext_upload && !defaults.gpu_plaintext_ntt,
+          "plaintext acceleration must remain opt-in");
+  const auto plaintext = parse({"stage1", "--input", "payload",
+                               "--fast-plaintext-upload", "true", "--gpu-plaintext-ntt", "1"});
+  require(plaintext.fast_plaintext_upload && plaintext.gpu_plaintext_ntt,
+          "plaintext preparation options were not parsed");
+  const auto direct = parse({"stage1", "--input", "payload", "--direct-plaintext-upload", "1"});
+  require(direct.direct_plaintext_upload, "direct plaintext upload was not parsed");
+  require(!defaults.move_plaintext_coefficients, "coefficient moves must remain opt-in");
+  const auto moving = parse({"stage1", "--input", "payload",
+                             "--move-plaintext-coefficients", "1", "--gpu-plaintext-ntt", "0"});
+  require(moving.move_plaintext_coefficients && moving.gpu_plaintext_ntt,
+          "coefficient moves must imply GPU NTT regardless of argument order");
+  require(!defaults.borrow_plaintext_upload, "borrowed upload must remain opt-in");
+  const auto borrowing = parse({"stage1", "--input", "payload",
+                                "--borrow-plaintext-upload", "1", "--direct-plaintext-upload", "0"});
+  require(borrowing.borrow_plaintext_upload && borrowing.direct_plaintext_upload && !borrowing.gpu_plaintext_ntt,
+          "borrowed upload must imply direct upload without changing the encoding policy");
   require(parse({"stage1", "--input", "payload", "--joint-periodic-coefficients", "true",
                  "--joint-subring-encoding", "true"}).joint_subring_encoding,
           "subring encoding flag was not parsed");

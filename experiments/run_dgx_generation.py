@@ -43,6 +43,11 @@ def main():
         help="encode public joint-gate coefficients with a compact period and masked basis",
     )
     parser.add_argument("--ssh-host", default="dgx")
+    parser.add_argument("--fast-plaintext-upload", action="store_true")
+    parser.add_argument("--direct-plaintext-upload", action="store_true")
+    parser.add_argument("--gpu-plaintext-ntt", action="store_true")
+    parser.add_argument("--move-plaintext-coefficients", action="store_true")
+    parser.add_argument("--borrow-plaintext-upload", action="store_true")
     parser.add_argument(
         "--joint-subring-encoding",
         action="store_true",
@@ -52,6 +57,9 @@ def main():
     parser.add_argument("--remote-root", required=True, type=Path)
     parser.add_argument("--remote-git-dir", type=Path)
     args = parser.parse_args()
+    args.gpu_plaintext_ntt |= args.move_plaintext_coefficients
+    args.direct_plaintext_upload |= args.borrow_plaintext_upload
+    args.fast_plaintext_upload |= args.gpu_plaintext_ntt or args.direct_plaintext_upload
     if args.joint_subring_encoding and not args.joint_periodic_coefficients:
         parser.error("joint-subring-encoding requires joint-periodic-coefficients")
     if args.generate_tokens < 1 or args.threads < 1:
@@ -92,6 +100,11 @@ def main():
     request["input_payload_sha256"] = payload_sha256(payload)
     request["joint_periodic_coefficients"] = args.joint_periodic_coefficients
     request["joint_subring_encoding"] = args.joint_subring_encoding
+    request["fast_plaintext_upload"] = args.fast_plaintext_upload
+    request["direct_plaintext_upload"] = args.direct_plaintext_upload
+    request["gpu_plaintext_ntt"] = args.gpu_plaintext_ntt
+    request["move_plaintext_coefficients"] = args.move_plaintext_coefficients
+    request["borrow_plaintext_upload"] = args.borrow_plaintext_upload
     write_json(args.output_dir / "request.json", request)
     manifest = json.loads(
         (ROOT / "experiments/manifests/dgx_spark_stabilized_generation.json").read_text()
@@ -103,6 +116,11 @@ def main():
             "LAYERS": str(request["n_layers"]),
             "JOINT_PERIODIC_COEFFICIENTS": "1" if args.joint_periodic_coefficients else "0",
             "JOINT_SUBRING_ENCODING": "1" if args.joint_subring_encoding else "0",
+            "FAST_PLAINTEXT_UPLOAD": "1" if args.fast_plaintext_upload else "0",
+            "DIRECT_PLAINTEXT_UPLOAD": "1" if args.direct_plaintext_upload else "0",
+            "GPU_PLAINTEXT_NTT": "1" if args.gpu_plaintext_ntt else "0",
+            "MOVE_PLAINTEXT_COEFFICIENTS": "1" if args.move_plaintext_coefficients else "0",
+            "BORROW_PLAINTEXT_UPLOAD": "1" if args.borrow_plaintext_upload else "0",
         }
     )
     manifest["acceptance"].update({"tokens": evaluations, "layers": request["n_layers"]})
@@ -192,6 +210,22 @@ def main():
     report["checks"]["subring_encoding_mode"] = (
         native["parameters"]["joint_gate_schedule"].get("subring_encoding", False)
         is args.joint_subring_encoding
+    )
+    encoding = native["measurements"].get("plaintext_encoding", {})
+    report["checks"]["fast_plaintext_upload_mode"] = (
+        encoding.get("fast_upload", False) is args.fast_plaintext_upload
+    )
+    report["checks"]["gpu_plaintext_ntt_mode"] = (
+        encoding.get("gpu_ntt", False) is args.gpu_plaintext_ntt
+    )
+    report["checks"]["direct_plaintext_upload_mode"] = (
+        encoding.get("direct_upload", False) is args.direct_plaintext_upload
+    )
+    report["checks"]["move_plaintext_coefficients_mode"] = (
+        encoding.get("move_coefficients", False) is args.move_plaintext_coefficients
+    )
+    report["checks"]["borrow_plaintext_upload_mode"] = (
+        encoding.get("borrow_upload", False) is args.borrow_plaintext_upload
     )
     campaign = json.loads((local_results / "campaign.json").read_text())
     report["checks"]["campaign_passed"] = (

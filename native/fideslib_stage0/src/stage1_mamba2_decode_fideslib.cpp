@@ -44,8 +44,7 @@
 
 #include "stage1_mamba2_config.hpp"
 #include "fideslib_handoff.hpp"
-#include "fideslib_plaintext_ops.hpp"
-#include "fideslib_periodic_encoder.hpp"
+#include "fideslib_plaintext_encoder.hpp"
 #include "stage1_mamba2_artifact.hpp"
 #include "stage1_mamba2_depth.hpp"
 #include "stage1_mamba2_payload.hpp"
@@ -461,7 +460,8 @@ auto slot_bsgs_linear_block0_from_babies(
     long long* cache_hits,
     long long* cache_misses,
     int encode_threads,
-    int stride) -> Ciphertext<DCRTPoly> {
+    int stride,
+    const std::function<void(Plaintext&)>& load_plaintext) -> Ciphertext<DCRTPoly> {
   Ciphertext<DCRTPoly> accumulator;
   bool has_accumulator = false;
   const auto giants = slot_bsgs_giant_with_zero(input_dim, output_dim, baby_step);
@@ -575,6 +575,7 @@ auto slot_bsgs_linear_block0_from_babies(
           ++*cache_misses;
         }
       }
+      load_plaintext(plain);
       auto term = cc->EvalMult(baby_ct.at(baby), plain);
       ++ct_pt_muls;
       if (!has_inner) {
@@ -1404,8 +1405,13 @@ auto main(int argc, char* argv[]) -> int {
       }
     };
 
-    std::unique_ptr<fhemamba::stage1::PeriodicPlaintextEncoder> joint_periodic_encoder;
-    long long joint_subring_encode_calls = 0;
+    fhemamba::PlaintextPreparation plaintexts(
+        cc, batch_size, {.fast_upload = args.fast_plaintext_upload,
+                        .gpu_ntt = args.gpu_plaintext_ntt, .profile = true,
+                        .direct_upload = args.direct_plaintext_upload,
+                        .move_coefficients = args.move_plaintext_coefficients,
+                        .borrow_upload = args.borrow_plaintext_upload});
+    auto load_plaintext = [&](Plaintext& plain) { plaintexts.load(plain); };
     auto make_plain = [&](const std::vector<double>& values) {
       auto plain = cc->MakeCKKSPackedPlaintext(values);
       plain->SetLength(static_cast<size_t>(batch_size));
@@ -1413,18 +1419,7 @@ auto main(int argc, char* argv[]) -> int {
     };
     auto make_plain_at_level = [&](const std::vector<double>& values,
                                    uint32_t level, uint32_t packing_slots = 0) {
-      if (packing_slots && joint_periodic_encoder) {
-        if (packing_slots != joint_periodic_encoder->slots())
-          throw std::invalid_argument("unexpected joint coefficient packing period");
-        ++joint_subring_encode_calls;
-        return joint_periodic_encoder->encode(values, level);
-      }
-      if (level == 0 && packing_slots == 0) {
-        return make_plain(values);
-      }
-      return cc->MakeCKKSPackedPlaintext(
-          values, 1, level, nullptr,
-          packing_slots ? packing_slots : static_cast<uint32_t>(batch_size));
+      return plaintexts.encode(values, level, 1, packing_slots);
     };
     std::map<std::pair<uint32_t, double>, Plaintext> imaginary_constant_cache;
     auto imaginary_constant_plain = [&](double value, uint32_t level) {
@@ -1437,6 +1432,7 @@ auto main(int argc, char* argv[]) -> int {
           static_cast<std::size_t>(batch_size), {0.0, value});
       auto plain = cc->MakeCKKSPackedPlaintext(
           values, 1, level, nullptr, static_cast<uint32_t>(batch_size));
+      load_plaintext(plain);
       auto [entry, inserted] =
           imaginary_constant_cache.emplace(key, std::move(plain));
       (void)inserted;
@@ -1725,9 +1721,8 @@ auto main(int argc, char* argv[]) -> int {
                                 const std::string& key, const std::vector<double>& values) {
       auto plain = cached_plain(
           key, values, static_cast<uint32_t>(ciphertext->GetLevel()));
-      plain = fhemamba::stage1::additive_plaintext(
-          cc, ciphertext, plain, values, static_cast<uint32_t>(batch_size),
-          pt_add_scale_reencodes);
+      plain = plaintexts.align_addend(ciphertext, plain, values, pt_add_scale_reencodes);
+      load_plaintext(plain);
       ++adds;
       return cc->EvalAdd(ciphertext, plain);
     };
@@ -1739,6 +1734,7 @@ auto main(int argc, char* argv[]) -> int {
       // mutable Plaintexts for the same reason).
       auto plain = cached_plain(
           key, mask, static_cast<uint32_t>(ciphertext->GetLevel()), packing_slots);
+      load_plaintext(plain);
       return cc->EvalMult(ciphertext, plain);
     };
     // Rotation choke point: EVERY EvalRotate goes through here. "rotations"
@@ -2431,8 +2427,7 @@ auto main(int argc, char* argv[]) -> int {
       joint_ones_ct = encrypt_values(fhemamba::stage1::joint_coefficient_slots(
           head_ones, batch_size, stream_stride, dt0, args.streams));
       if (args.joint_subring_encoding)
-        joint_periodic_encoder =
-            std::make_unique<fhemamba::stage1::PeriodicPlaintextEncoder>(cc, joint_coefficient_period);
+        plaintexts.enable_periodic_encoding(joint_coefficient_period);
     }
     if (args.debug_recurrence_layer >= 0) {
       for (auto* values : {&debug_recurrence.incoming, &debug_recurrence.previous,
@@ -3193,6 +3188,7 @@ auto main(int argc, char* argv[]) -> int {
           for (int reduction = 0; reduction < 3; ++reduction) {
             cc->EvalMultInPlace(probe_ct, 1.0);
           }
+          load_plaintext(probe_plain);
           auto product = cc->EvalMult(probe_ct, probe_plain);
           (void)product;
           auto decoded_after = [&]() {
@@ -3458,6 +3454,7 @@ auto main(int argc, char* argv[]) -> int {
             ++replicated_cache_level_bypasses;
           }
         }
+        if (plain) load_plaintext(plain);
         return plain;
       };
       if (shape.baby_step <= 1) {
@@ -3694,7 +3691,7 @@ auto main(int argc, char* argv[]) -> int {
           linear = slot_bsgs_linear_block0_from_babies(
               cc, rotate, babies, plan.in_w_folded, d_model, proj_dim, kBabyStepIn,
               batch_size, ct_pt_muls, adds, plan.in_proj_table, &pt_cache_hits,
-              &pt_cache_misses, effective_encode_threads, stream_stride);
+              &pt_cache_misses, effective_encode_threads, stream_stride, load_plaintext);
         }
         return mul_aligned(linear, inv_block);
       });
@@ -4194,7 +4191,7 @@ auto main(int argc, char* argv[]) -> int {
           linear = slot_bsgs_linear_block0_from_babies(
               cc, rotate, babies, plan.out_w_folded, d_inner, d_model, kBabyStepOut,
               batch_size, ct_pt_muls, adds, plan.out_proj_table, &pt_cache_hits,
-              &pt_cache_misses, effective_encode_threads, stream_stride);
+              &pt_cache_misses, effective_encode_threads, stream_stride, load_plaintext);
         }
         return mul_aligned(linear, inv_gated);
       });
@@ -4210,6 +4207,12 @@ auto main(int argc, char* argv[]) -> int {
     // Token loop: per-layer state + conv FIFO stay ciphertext, residual is a
     // ciphertext handoff between layers, no intermediate decrypts.
     // -----------------------------------------------------------------------
+    const auto setup_fast_uploads = plaintexts.fast_uploads;
+    const auto setup_direct_uploads = plaintexts.direct_uploads;
+    const auto setup_gpu_ntt_encodes = plaintexts.gpu_ntt_encodes;
+    const auto setup_moved_encodes = plaintexts.moved_coefficient_encodes;
+    const auto setup_borrowed_uploads = plaintexts.borrowed_uploads;
+    const auto setup_upload_seconds = plaintexts.upload_seconds;
     const auto eval_start = now();
     log_phase("token loop begin tokens=" + std::to_string(args.tokens) +
               " layers=" + std::to_string(layers_loaded));
@@ -4946,7 +4949,7 @@ auto main(int argc, char* argv[]) -> int {
     out << ",\"coefficient_encoding\":\"power-of-two-ps-block-scaling\","
         << "\"periodic_coefficients\":" << (args.joint_periodic_coefficients ? "true" : "false")
         << ",\"subring_encoding\":" << (args.joint_subring_encoding ? "true" : "false")
-        << ",\"subring_encode_calls\":" << joint_subring_encode_calls
+        << ",\"subring_encode_calls\":" << plaintexts.subring_encodes
         << ",\"coefficient_packing_slots\":" << joint_coefficient_period
         << ",\"masked_basis\":" << (args.joint_periodic_coefficients ? "true" : "false") << "},";
     out << "\"carried_bounds_source\":\""
@@ -5076,6 +5079,25 @@ auto main(int argc, char* argv[]) -> int {
       write_int_vector_json(out, required_plain);
     }
     out << ",";
+    out << "\"plaintext_encoding\":{\"fast_upload\":"
+        << ((args.fast_plaintext_upload || args.gpu_plaintext_ntt || args.direct_plaintext_upload) ? "true" : "false")
+        << ",\"direct_upload\":" << (args.direct_plaintext_upload ? "true" : "false")
+        << ",\"direct_uploads\":" << plaintexts.direct_uploads
+        << ",\"eval_direct_uploads\":" << plaintexts.direct_uploads - setup_direct_uploads
+        << ",\"gpu_ntt\":" << (args.gpu_plaintext_ntt ? "true" : "false")
+        << ",\"move_coefficients\":" << (args.move_plaintext_coefficients ? "true" : "false")
+        << ",\"moved_coefficient_encodes\":" << plaintexts.moved_coefficient_encodes
+        << ",\"eval_moved_coefficient_encodes\":" << plaintexts.moved_coefficient_encodes - setup_moved_encodes
+        << ",\"borrow_upload\":" << (args.borrow_plaintext_upload ? "true" : "false")
+        << ",\"borrowed_uploads\":" << plaintexts.borrowed_uploads
+        << ",\"eval_borrowed_uploads\":" << plaintexts.borrowed_uploads - setup_borrowed_uploads
+        << ",\"ntt_batch\":" << fhemamba::kPlaintextNttBatch
+        << ",\"fast_uploads\":" << plaintexts.fast_uploads
+        << ",\"gpu_ntt_encodes\":" << plaintexts.gpu_ntt_encodes
+        << ",\"upload_seconds\":" << plaintexts.upload_seconds
+        << ",\"eval_fast_uploads\":" << plaintexts.fast_uploads - setup_fast_uploads
+        << ",\"eval_gpu_ntt_encodes\":" << plaintexts.gpu_ntt_encodes - setup_gpu_ntt_encodes
+        << ",\"eval_upload_seconds\":" << plaintexts.upload_seconds - setup_upload_seconds << "},";
     out << "\"plaintext_coefficient_floor\":" << kPlaintextCoefficientFloor << ",";
     out << "\"pt_cache\":{";
     out << "\"mode\":\"" << json_escape(pt_cache_mode) << "\",";

@@ -127,6 +127,15 @@ struct Config {
   // their Chebyshev basis supported on the original head lanes.
   bool joint_periodic_coefficients = false;
   bool joint_subring_encoding = false;
+  // Shared Mamba-2/Mamba-3 plaintext bridge. GPU NTT implies fast upload;
+  // periodic coefficients retain their more economical subring CPU NTT.
+  bool fast_plaintext_upload = false;
+  bool direct_plaintext_upload = false;
+  bool gpu_plaintext_ntt = false;
+  // Move freshly encoded RNS arrays when restoring real NTT parameters.
+  // Implies GPU plaintext NTT; periodic encodes retain their small CPU path.
+  bool move_plaintext_coefficients = false;
+  bool borrow_plaintext_upload = false;
   // Use FIDESlib's fused LinearTransform for the true-BSGS core. This hoists
   // baby rotations and fuses diagonal products/sums on the GPU. It requires
   // direct keys for every baby and giant rotation; otherwise evaluation

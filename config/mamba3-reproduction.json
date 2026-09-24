@@ -1,0 +1,22 @@
+{
+  "checkpoint": {
+    "repo_id": "state-spaces/mamba3-siso-187m",
+    "revision": "6792c27c00f3bb41506db1066dcd1c51bb0f4b02",
+    "files_sha256": {
+      "config.json": "642a36b583d7625f456623555c4974758ab132687bdeee97a362e44e5efff545",
+      "pytorch_model.bin": "b462d55e9f8ab9746be641d4de550b51bf65e55ab662e66835588b5a458c95ec",
+      "README.md": "327168ddad6fd3c6469206ee8e6312d7fc5b6c65d51805e37267204cdf1b4908"
+    }
+  },
+  "tokenizer": {
+    "repo_id": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
+    "revision": "031d4042f36adc1a52cca51b331d25cbe3cf1022",
+    "files_sha256": {
+      "special_tokens_map.json": "6f38c73729248f6c127296386e3cdde96e254636cc58b4169d3fd32328d9a8ec",
+      "tokenizer.json": "79e3e522635f3171300913bb421464a87de6222182a0570b9b2ccba2a964b2b4",
+      "tokenizer_config.json": "7d9e72de122ffa940711710f4e31d70b680d4015409c744856086bed53c43779"
+    },
+    "note": "Public Llama-3.1 tokenizer from NVIDIA; no chat template, add_special_tokens=False. Official Meta repository requires gated access."
+  },
+  "upstream_commit": "e9594ce1c732d97440f0332fdc43170a2294dbfa"
+}

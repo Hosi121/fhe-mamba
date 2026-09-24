@@ -340,6 +340,13 @@ auto main() -> int {
   require(second_pre_mask != replicated_bsgs_mask(bsgs_weights, 4, 16, 2,
                                                    small_bsgs_shape, 128),
           "nonzero-giant BSGS mask was not shifted");
+  auto packed_source = bsgs_weights;
+  std::vector<uint16_t> packed_weights;
+  require(fhemamba::compact_exact_bf16(packed_source, packed_weights), "exact weights did not compact");
+  for (int k = 0; k < small_bsgs_shape.per_replica; ++k)
+    require(replicated_bsgs_pre_mask(packed_weights, 4, 16, k, small_bsgs_shape, 128) ==
+            replicated_bsgs_pre_mask(bsgs_weights, 4, 16, k, small_bsgs_shape, 128),
+            "compact weight storage changed a BSGS mask");
 
   require_invalid([] { resolve_replicated_shape(4, 0, 32, 0); });
   require_invalid([] { python_mod(1, 0); });

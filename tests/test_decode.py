@@ -77,6 +77,23 @@ def test_stateful_prefill_then_decode_matches_full_forward(factory) -> None:
 
 
 @pytest.mark.parametrize("factory", [_tiny_mamba1, _tiny_mamba2])
+@pytest.mark.parametrize("length", [1, 64, 129])
+def test_prefill_state_owns_only_its_logical_storage(factory, length) -> None:
+    model = factory()
+    torch.manual_seed(31)
+    ids = torch.randint(0, 97, (1, length + 1))
+    states = init_states(model)
+    with torch.no_grad():
+        model_forward(model, ids[:, :length], scan="chunked", states=states)
+        for state in states:
+            for value in (state.conv, state.ssm):
+                assert value.untyped_storage().nbytes() == value.numel() * value.element_size()
+        decoded = model_forward(model, ids[:, length:], states=states)["logits"]
+        full = model_forward(model, ids)["logits"][:, -1:]
+    assert torch.allclose(decoded, full, atol=1e-4)
+
+
+@pytest.mark.parametrize("factory", [_tiny_mamba1, _tiny_mamba2])
 def test_greedy_generation_matches_hf_generate(factory) -> None:
     model = factory()
     torch.manual_seed(37)

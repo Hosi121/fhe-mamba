@@ -1,6 +1,8 @@
 #pragma once
 
 #include "stage1_mamba2_payload.hpp"
+#include "rotation_steps.hpp"
+#include "public_weights.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -100,13 +102,15 @@ auto resolve_replicated_shape(int output_dim, int input_dim, int batch,
 auto resolve_interleaved_replicated_shape(int output_dim, int input_dim,
                                           int batch, int force_r)
     -> ReplicatedShape;
-auto replicated_bsgs_mask(const std::vector<double>& weights, int output_dim,
+auto replicated_bsgs_mask(PublicWeightView weights, int output_dim,
                           int input_dim, int k,
-                          const ReplicatedShape& shape, int batch_size)
+                          const ReplicatedShape& shape, int batch_size,
+                          double coefficient_floor = kPlaintextCoefficientFloor)
     -> std::vector<double>;
-auto replicated_bsgs_pre_mask(const std::vector<double>& weights,
+auto replicated_bsgs_pre_mask(PublicWeightView weights,
                               int output_dim, int input_dim, int k,
-                              const ReplicatedShape& shape, int batch_size)
+                              const ReplicatedShape& shape, int batch_size,
+                              double coefficient_floor = kPlaintextCoefficientFloor)
     -> std::vector<double>;
 auto python_mod(int value, int modulus) -> int;
 auto slot_bsgs_giant_with_zero(int input_dim, int output_dim, int baby_step)
@@ -138,7 +142,7 @@ auto required_rotations(const M1Payload& payload, const PackingDims& dims,
                         bool replicated_state_blocks = false,
                         bool shared_head_expansion = false)
     -> std::vector<int32_t>;
-auto naf_steps(int value) -> std::vector<int>;
+using fhemamba::naf_steps;
 void verify_naf(const std::vector<int32_t>& indices);
 auto rotation_frequencies(const M1Payload& payload, const PackingDims& dims,
                           int layers, int streams, int stream_stride,

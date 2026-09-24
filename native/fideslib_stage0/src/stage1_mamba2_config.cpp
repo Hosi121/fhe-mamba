@@ -163,6 +163,16 @@ auto parse_args(int argc, char* argv[]) -> Config {
       config.joint_periodic_coefficients = parse_bool_arg(arg, value);
     } else if (arg == "--joint-subring-encoding") {
       config.joint_subring_encoding = parse_bool_arg(arg, value);
+    } else if (arg == "--fast-plaintext-upload") {
+      config.fast_plaintext_upload = parse_bool_arg(arg, value);
+    } else if (arg == "--direct-plaintext-upload") {
+      config.direct_plaintext_upload = parse_bool_arg(arg, value);
+    } else if (arg == "--gpu-plaintext-ntt") {
+      config.gpu_plaintext_ntt = parse_bool_arg(arg, value);
+    } else if (arg == "--move-plaintext-coefficients") {
+      config.move_plaintext_coefficients = parse_bool_arg(arg, value);
+    } else if (arg == "--borrow-plaintext-upload") {
+      config.borrow_plaintext_upload = parse_bool_arg(arg, value);
     } else if (arg == "--fused-replicated-linear-transform") {
       config.fused_replicated_linear_transform = parse_bool_arg(arg, value);
     } else if (arg == "--fused-replicated-linear-transform-scope") {
@@ -446,6 +456,8 @@ auto parse_args(int argc, char* argv[]) -> Config {
                     }))) {
     throw std::invalid_argument("binary-sha256 must be unknown or 64 hexadecimal characters");
   }
+  config.gpu_plaintext_ntt |= config.move_plaintext_coefficients;
+  config.direct_plaintext_upload |= config.borrow_plaintext_upload;
   return config;
 }
 

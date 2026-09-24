@@ -1,6 +1,7 @@
-"""Lowerable reference forward for HF Mamba-1, parameterized by Ops.
+"""Lowerable Mamba-1/2 reference and architecture-aware model forward.
 
-This is the single implementation of the model math. It reads weights directly
+Mamba-3's shared mixer formula lives in mamba3.py and uses the same dispatch
+and state-allocation boundary. The Mamba-1/2 implementation reads weights directly
 off a ``transformers`` ``MambaForCausalLM`` — there is deliberately no
 weight-copying or adaptation layer. With ``Exact`` ops and ``scan="loop"`` it
 reproduces ``MambaMixer.slow_forward`` (transformers 5.2) exactly, including
@@ -19,13 +20,13 @@ Two scan schedules compute the same recurrence:
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-
 import torch
 from torch import Tensor
 from torch.nn import functional as F  # noqa: N812
 
+from fhemamba.architectures import LayerState, init_mixer_state, mixer_forward_dispatch
 from fhemamba.ops import Exact, Site
+from fhemamba.tensor_ops import TensorOps, rms_normalize, ssm_readout
 
 __all__ = [
     "LayerState",
@@ -38,47 +39,9 @@ __all__ = [
 ]
 
 
-@dataclass
-class LayerState:
-    """Recurrent per-layer state for stateful prefill/decode.
-
-    conv holds the last (kernel-1) conv-input columns — under FHE this is the
-    FIFO of ciphertexts the decode kernel keeps; ssm is the recurrent state.
-    """
-
-    conv: Tensor
-    ssm: Tensor
-
-
-def init_states(model, batch_size: int = 1) -> list[LayerState]:
+def init_states(model, batch_size: int = 1) -> list:
     """Zero states for every layer (equivalent to an empty prefix)."""
-    states = []
-    for block in model.backbone.layers:
-        mixer = block.mixer
-        kernel = mixer.conv_kernel_size
-        channels = mixer.conv1d.weight.shape[0]
-        device = mixer.conv1d.weight.device
-        dtype = mixer.conv1d.weight.dtype
-        conv = torch.zeros(batch_size, channels, kernel - 1, device=device, dtype=dtype)
-        if type(mixer).__name__ == "Mamba2Mixer":
-            ssm = torch.zeros(
-                batch_size,
-                mixer.num_heads,
-                mixer.head_dim,
-                mixer.ssm_state_size,
-                device=device,
-                dtype=dtype,
-            )
-        else:
-            ssm = torch.zeros(
-                batch_size,
-                mixer.intermediate_size,
-                mixer.ssm_state_size,
-                device=device,
-                dtype=dtype,
-            )
-        states.append(LayerState(conv=conv, ssm=ssm))
-    return states
+    return [init_mixer_state(block.mixer, batch_size) for block in model.backbone.layers]
 
 
 def _stateful_conv(mixer, conv_in: Tensor, state: LayerState | None) -> Tensor:
@@ -94,13 +57,13 @@ def _stateful_conv(mixer, conv_in: Tensor, state: LayerState | None) -> Tensor:
         mixer.conv1d.bias,
         groups=mixer.conv1d.weight.shape[0],
     )
-    state.conv = full[..., -(mixer.conv_kernel_size - 1) :]
+    history = mixer.conv_kernel_size - 1
+    state.conv = full[..., seq_len : seq_len + history].clone()
     return out
 
 
 def rms_norm_forward(norm, x: Tensor, ops, site: Site) -> Tensor:
-    variance = x.pow(2).mean(-1, keepdim=True)
-    return norm.weight * (x * ops.inv_sqrt(variance + norm.variance_epsilon, site))
+    return rms_normalize(x, norm.weight, norm.variance_epsilon, TensorOps(ops), site)
 
 
 def _affine_scan(a: Tensor, b: Tensor) -> tuple[Tensor, Tensor]:
@@ -206,7 +169,7 @@ def mixer_forward(
         )
         scan_output = torch.einsum("bdtn,btn->bdt", states, c_sel)
         if state is not None:
-            state.ssm = states[:, :, -1]
+            state.ssm = states[:, :, -1].clone()
     else:
         msg = f"unknown scan schedule: {scan}"
         raise ValueError(msg)
@@ -285,7 +248,7 @@ def mixer2_forward(
             decayed = decay[:, t, :, None, None] * ssm_state
             decayed = ops.checkpoint(decayed, (layer_idx, "state_decayed"))
             ssm_state = decayed + update
-            outputs.append(torch.einsum("bhpn,bhn->bhp", ssm_state, c_heads[:, t]))
+            outputs.append(ssm_readout(ssm_state, c_heads[:, t], TensorOps(ops)))
         y = torch.stack(outputs, dim=1)  # (batch, T, heads, head_dim)
         if state is not None:
             state.ssm = ssm_state
@@ -313,7 +276,7 @@ def mixer2_forward(
             carry = states[:, :, :, -1]
         y = torch.cat(pieces, dim=1)
         if state is not None:
-            state.ssm = carry
+            state.ssm = carry.clone()
     else:
         msg = f"unknown scan schedule: {scan}"
         raise ValueError(msg)
@@ -332,9 +295,7 @@ def mixer2_forward(
 
 
 def _mixer_dispatch(mixer):
-    if type(mixer).__name__ == "Mamba2Mixer":
-        return mixer2_forward
-    return mixer_forward
+    return mixer_forward_dispatch(mixer)
 
 
 @torch.no_grad()

@@ -56,6 +56,9 @@ def test_dgx_mamba2_common_defaults_to_promoted_structural_path() -> None:
     assert args["--state-refresh-interval"] == "1"
     assert args["--pt-cache-gib"] == "5"
     assert args["--pt-cache-weight-level"] == "20"
+    assert args["--direct-plaintext-upload"] == "0"
+    assert args["--move-plaintext-coefficients"] == "0"
+    assert args["--borrow-plaintext-upload"] == "0"
 
 
 def test_dgx_mamba2_common_preserves_environment_overrides() -> None:
@@ -66,6 +69,9 @@ def test_dgx_mamba2_common_preserves_environment_overrides() -> None:
         DEBUG_NORMALIZED_STATE_BOOTSTRAP_RANGE="1",
         FUSED_REPLICATED_LINEAR_TRANSFORM="1",
         FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE="out-proj",
+        DIRECT_PLAINTEXT_UPLOAD="1",
+        MOVE_PLAINTEXT_COEFFICIENTS="1",
+        BORROW_PLAINTEXT_UPLOAD="1",
     )
 
     assert args["--pt-cache-gib"] == "9"
@@ -74,3 +80,6 @@ def test_dgx_mamba2_common_preserves_environment_overrides() -> None:
     assert args["--debug-normalized-state-bootstrap-range"] == "1"
     assert args["--fused-replicated-linear-transform"] == "1"
     assert args["--fused-replicated-linear-transform-scope"] == "out-proj"
+    assert args["--direct-plaintext-upload"] == "1"
+    assert args["--move-plaintext-coefficients"] == "1"
+    assert args["--borrow-plaintext-upload"] == "1"

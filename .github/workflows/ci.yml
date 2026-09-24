@@ -53,6 +53,7 @@ jobs:
       - name: Exercise the CPU example and published evidence
         run: |
           .venv/bin/python examples/cpu_smoke.py
+          .venv/bin/python examples/mamba3_cpu_smoke.py
           .venv/bin/fhemamba validate-artifacts --require-commit \
             results/dgx/2026-09-22/subring-gates/generation.json \
             results/dgx/2026-09-22/subring-gates/m2_chain_subring-client-generation_l24_t5.json
@@ -63,3 +64,4 @@ jobs:
           cd "$(mktemp -d)"
           "$GITHUB_WORKSPACE/.venv/bin/fhemamba" --version
           "$GITHUB_WORKSPACE/.venv/bin/python" -I "$GITHUB_WORKSPACE/examples/cpu_smoke.py"
+          "$GITHUB_WORKSPACE/.venv/bin/python" -I "$GITHUB_WORKSPACE/examples/mamba3_cpu_smoke.py"

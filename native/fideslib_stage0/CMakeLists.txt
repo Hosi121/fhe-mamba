@@ -50,6 +50,9 @@ add_library(stage1_mamba2_plan STATIC src/stage1_mamba2_plan.cpp)
 target_include_directories(stage1_mamba2_plan PUBLIC src)
 target_link_libraries(stage1_mamba2_plan PUBLIC stage1_mamba2_payload)
 
+add_executable(packed_resource_inventory src/packed_resource_inventory.cpp)
+target_link_libraries(packed_resource_inventory PRIVATE stage1_mamba2_plan)
+
 add_library(stage1_mamba2_process STATIC src/stage1_mamba2_process.cpp)
 target_include_directories(stage1_mamba2_process PUBLIC src)
 
@@ -93,11 +96,21 @@ if(FHE_STAGE0_BUILD_KERNEL)
   add_executable(stage1_bootstrap_probe src/stage1_bootstrap_probe.cpp)
   target_link_libraries(stage1_bootstrap_probe PRIVATE fideslib::fideslib)
 
+  add_executable(packed_fideslib src/packed_fideslib.cpp)
+  add_library(fideslib_plaintext_encoder STATIC src/fideslib_plaintext_encoder.cpp)
+  target_link_libraries(fideslib_plaintext_encoder PUBLIC fideslib::fideslib CUDA::cudart)
+  target_include_directories(fideslib_plaintext_encoder PUBLIC src
+    ${OpenFHE_INCLUDE} ${OpenFHE_INCLUDE}/core ${OpenFHE_INCLUDE}/pke
+    ${OpenFHE_INCLUDE}/binfhe ${OpenFHE_INCLUDE}/third-party/include)
+  target_link_libraries(packed_fideslib PRIVATE fideslib::fideslib CUDA::cudart stage0_layout stage1_mamba2_plan fideslib_plaintext_encoder)
+  add_executable(packed_plaintext_probe src/packed_plaintext_probe.cpp)
+  target_link_libraries(packed_plaintext_probe PRIVATE fideslib_plaintext_encoder)
+
   add_executable(
     stage1_mamba2_decode_fideslib
     src/stage1_mamba2_decode_fideslib.cpp)
   target_link_libraries(
-    stage1_mamba2_decode_fideslib PRIVATE fideslib::fideslib CUDA::cudart fideslib_handoff stage1_mamba2_artifact stage1_mamba2_config stage1_mamba2_depth stage1_mamba2_payload stage1_mamba2_plan stage1_mamba2_process stage1_rank_gate_payload stage1_tail_payload)
+    stage1_mamba2_decode_fideslib PRIVATE fideslib::fideslib CUDA::cudart fideslib_handoff fideslib_plaintext_encoder stage1_mamba2_artifact stage1_mamba2_config stage1_mamba2_depth stage1_mamba2_payload stage1_mamba2_plan stage1_mamba2_process stage1_rank_gate_payload stage1_tail_payload)
   target_include_directories(
     stage1_mamba2_decode_fideslib PRIVATE
     ${OpenFHE_INCLUDE}
@@ -155,6 +168,21 @@ endif()
 
 if(FHE_STAGE0_BUILD_TESTS)
   enable_testing()
+  add_executable(test_packed_lifetime tests/test_packed_lifetime.cpp)
+  target_link_libraries(test_packed_lifetime PRIVATE stage0_layout)
+  add_test(NAME packed_lifetime COMMAND test_packed_lifetime)
+  add_executable(test_plaintext_cache tests/test_plaintext_cache.cpp)
+  target_link_libraries(test_plaintext_cache PRIVATE stage0_layout)
+  add_test(NAME plaintext_cache COMMAND test_plaintext_cache)
+  add_executable(test_packed_depth tests/test_packed_depth.cpp)
+  target_link_libraries(test_packed_depth PRIVATE stage0_layout)
+  add_test(NAME packed_depth COMMAND test_packed_depth)
+  add_executable(test_packed_routing tests/test_packed_routing.cpp)
+  target_link_libraries(test_packed_routing PRIVATE stage0_layout)
+  add_test(NAME packed_routing COMMAND test_packed_routing)
+  add_executable(test_packed_program tests/test_packed_program.cpp)
+  target_link_libraries(test_packed_program PRIVATE stage0_layout)
+  add_test(NAME packed_program COMMAND test_packed_program)
   add_executable(test_stage0_layout tests/test_stage0_layout.cpp)
   target_link_libraries(test_stage0_layout PRIVATE stage0_layout)
   add_test(NAME stage0_layout COMMAND test_stage0_layout)

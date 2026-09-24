@@ -1,4 +1,5 @@
 #include "stage1_mamba2_plan.hpp"
+#include "plaintext_mask.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -92,8 +93,8 @@ auto resolve_interleaved_replicated_shape(int output_dim, int input_dim,
 }
 
 // Combined per-k mask (one encoded plaintext serves all replicas).
-auto replicated_bsgs_mask(const std::vector<double>& weights, int output_dim, int input_dim,
-                          int k, const ReplicatedShape& shape, int batch_size)
+auto replicated_bsgs_mask(PublicWeightView weights, int output_dim, int input_dim,
+                          int k, const ReplicatedShape& shape, int batch_size, double coefficient_floor)
     -> std::vector<double> {
   if (output_dim <= 0 || input_dim <= 0 || k < 0 || batch_size <= 0 ||
       weights.size() != static_cast<std::size_t>(output_dim) * input_dim ||
@@ -112,18 +113,18 @@ auto replicated_bsgs_mask(const std::vector<double>& weights, int output_dim, in
       const double value =
           weights[static_cast<std::size_t>(i) * input_dim + ((i + d) % input_dim)];
       mask[static_cast<std::size_t>(j * shape.window + i + j)] =
-          std::abs(value) < kPlaintextCoefficientFloor ? 0.0 : value;
+          std::abs(value) < coefficient_floor ? 0.0 : value;
     }
   }
   return mask;
 }
 
-auto replicated_bsgs_pre_mask(const std::vector<double>& weights, int output_dim,
+auto replicated_bsgs_pre_mask(PublicWeightView weights, int output_dim,
                               int input_dim, int k,
-                              const ReplicatedShape& shape, int batch_size)
+                              const ReplicatedShape& shape, int batch_size, double coefficient_floor)
     -> std::vector<double> {
   auto mask = replicated_bsgs_mask(weights, output_dim, input_dim, k, shape,
-                                   batch_size);
+                                   batch_size, coefficient_floor);
   if (shape.baby_step <= 1) {
     return mask;
   }
@@ -131,12 +132,7 @@ auto replicated_bsgs_pre_mask(const std::vector<double>& weights, int output_dim
   if (giant == 0) {
     return mask;
   }
-  std::vector<double> shifted(mask.size(), 0.0);
-  for (int slot = 0; slot < batch_size; ++slot) {
-    shifted[static_cast<std::size_t>((slot + giant) % batch_size)] =
-        mask[static_cast<std::size_t>(slot)];
-  }
-  return shifted;
+  return fhemamba::rotate_plaintext_mask(mask, giant);
 }
 
 // Rotation indices for one replicated matmul: input self-extension, window
@@ -489,25 +485,6 @@ auto required_rotations(const M1Payload& payload, const PackingDims& dims,
 // key switch in the proven kernels (no rescale, never level-aligned), so a
 // k-step composition consumes zero levels and the ledger is unchanged.
 // ---------------------------------------------------------------------------
-
-auto naf_steps(int value) -> std::vector<int> {
-  std::vector<int> steps;
-  if (value == 0) {
-    return steps;
-  }
-  long long v = value;
-  int k = 0;
-  while (v != 0) {
-    if ((v & 1) != 0) {
-      const long long digit = 2 - (v & 3);  // +-1, zeroing the low two bits
-      steps.push_back(static_cast<int>(digit << k));
-      v -= digit;
-    }
-    v >>= 1;
-    ++k;
-  }
-  return steps;
-}
 
 // Startup unit test over the exact index set the kernel will use.
 void verify_naf(const std::vector<int32_t>& indices) {

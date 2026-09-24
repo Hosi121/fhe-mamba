@@ -52,6 +52,10 @@ class Exact:
     def checkpoint(self, x: Tensor, site: Site) -> Tensor:
         return x
 
+    def unary(self, x: Tensor, site: Site, function) -> Tensor:
+        """Architecture-specific nonlinearities use the same substitution boundary."""
+        return function(x)
+
     def silu(self, x: Tensor, site: Site) -> Tensor:
         return F.silu(x)
 
@@ -116,6 +120,10 @@ class RangeRecorder(Exact):
 
     def _record(self, x: Tensor, site: Site) -> None:
         _record_device_range(self._ranges, x, site)
+
+    def unary(self, x: Tensor, site: Site, function) -> Tensor:
+        self._record(x, site)
+        return function(x)
 
     def checkpoint(self, x: Tensor, site: Site) -> Tensor:
         self._record(x, site)
@@ -634,6 +642,9 @@ class PolyOps(Exact):
 
     def silu(self, x: Tensor, site: Site) -> Tensor:
         return self._apply(x, site, F.silu)
+
+    def unary(self, x: Tensor, site: Site, function) -> Tensor:
+        return self._apply(x, site, function)
 
     def softplus(self, x: Tensor, site: Site) -> Tensor:
         return self._apply(x, site, F.softplus)
