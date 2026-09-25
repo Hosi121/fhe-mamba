@@ -1,0 +1,59 @@
+[  2%] Building CXX object CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o
+[  4%] Building CXX object CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o
+[  7%] Building CXX object CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o
+[ 11%] Built target stage1_mamba2_payload
+[ 14%] Building CXX object CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o
+[ 16%] Linking CXX static library libstage1_mamba2_process.a
+[ 16%] Built target stage1_mamba2_process
+[ 21%] Built target fideslib_plaintext_encoder
+[ 23%] Building CXX object CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o
+[ 26%] Linking CXX static library libstage1_mamba2_config.a
+[ 26%] Built target stage1_mamba2_config
+[ 28%] Building CXX object CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o
+[ 30%] Linking CXX executable stage1_bootstrap_probe
+[ 33%] Linking CXX executable stage1_plaintext_add_probe
+[ 35%] Linking CXX executable fideslib_ctpt_probe
+[ 35%] Built target stage1_bootstrap_probe
+[ 38%] Building CXX object CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o
+[ 38%] Built target fideslib_ctpt_probe
+[ 38%] Built target stage1_plaintext_add_probe
+[ 40%] Building CXX object CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o
+[ 42%] Building CXX object CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o
+[ 45%] Linking CXX executable stage1_coefficient_encoding_probe
+[ 47%] Linking CXX executable stage1_normalization_probe
+[ 47%] Built target stage1_coefficient_encoding_probe
+[ 50%] Building CXX object CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o
+[ 50%] Built target stage1_normalization_probe
+[ 52%] Building CXX object CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o
+[ 54%] Linking CXX static library libstage1_mamba2_depth.a
+[ 54%] Built target stage1_mamba2_depth
+[ 57%] Building CXX object CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o
+[ 59%] Linking CXX executable stage1_subring_encoding_probe
+[ 61%] Linking CXX static library libstage1_mamba2_artifact.a
+[ 61%] Built target stage1_mamba2_artifact
+[ 66%] Built target stage1_mamba2_plan
+[ 69%] Building CXX object CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o
+[ 71%] Linking CXX executable stage1_vector_rms_probe
+[ 71%] Built target stage1_subring_encoding_probe
+[ 73%] Building CXX object CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o
+[ 73%] Built target stage1_vector_rms_probe
+[ 76%] Building CXX object CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o
+[ 78%] Linking CXX executable packed_resource_inventory
+[ 78%] Built target packed_resource_inventory
+[ 83%] Built target packed_fideslib
+[ 85%] Linking CXX executable packed_plaintext_probe
+[ 88%] Linking CXX executable owned_arithmetic_probe
+[ 90%] Linking CXX static library libfideslib_handoff.a
+[ 90%] Built target fideslib_handoff
+[ 92%] Building CXX object CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o
+[ 95%] Building CXX object CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o
+[ 95%] Built target packed_plaintext_probe
+[ 95%] Built target owned_arithmetic_probe
+/home/kataiwa/fhemamba/s2c-first-20260925/final-source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp: In lambda function:
+/home/kataiwa/fhemamba/s2c-first-20260925/final-source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp:2470:79: note: parameter passing for argument of type ‘std::pair<double, double>’ when C++17 is enabled changed to match C++14 in GCC 10.1
+ 2470 |       return std::pair<double, double>{2.0 / (hi - lo), -(lo + hi) / (hi - lo)};
+      |                                                                               ^
+[ 97%] Linking CXX executable fideslib_client_server_probe
+[ 97%] Built target fideslib_client_server_probe
+[100%] Linking CXX executable stage1_mamba2_decode_fideslib
+[100%] Built target stage1_mamba2_decode_fideslib

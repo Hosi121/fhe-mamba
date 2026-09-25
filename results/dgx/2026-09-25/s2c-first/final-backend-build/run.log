@@ -1,0 +1,74 @@
+[  6%] Built target gpu-test
+[  8%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Bootstrap.cu.o
+[ 10%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/CoeffsToSlots.cu.o
+[ 13%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/RawCiphertext.cu.o
+[ 15%] Building CXX object CMakeFiles/fideslib.dir/api/CryptoContext.cpp.o
+[ 17%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Context.cu.o
+[ 19%] Building CXX object CMakeFiles/fideslib.dir/api/Ciphertext.cpp.o
+[ 21%] Building CXX object CMakeFiles/fideslib.dir/api/GenCryptoContext.cpp.o
+[ 23%] Building CXX object CMakeFiles/fideslib.dir/api/Plaintext.cpp.o
+[ 26%] Building CXX object CMakeFiles/fideslib.dir/api/Serialize.cpp.o
+[ 28%] Linking CUDA device code CMakeFiles/fideslib.dir/cmake_device_link.o
+[ 30%] Linking CXX static library fideslib.a
+[ 93%] Built target fideslib
+[ 95%] Linking CUDA device code CMakeFiles/dummy.dir/cmake_device_link.o
+nvlink warning : Ignoring -dlto option because no LTO objects found
+[ 97%] Linking CXX executable dummy
+[100%] Built target dummy
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/kataiwa/fhemamba/s2c-first-20260925/install/lib/fideslib.a
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CCParams.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/Ciphertext.hpp
+-- Installing: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CryptoContext.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/Definitions.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/GenCryptoContext.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/KeyPair.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/Plaintext.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/PrivateKey.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/PublicKey.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/Serialize.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/fideslib.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/share/fideslib/cmake/fideslibTargets.cmake
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/share/fideslib/cmake/fideslibTargets-release.cmake
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/share/fideslib/cmake/fideslibConfig.cmake
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/share/fideslib/cmake/fideslibConfigVersion.cmake
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/VectorGPU.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/Rotation.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/AddSub.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/ConstantsGPU.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/PolyApprox.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CudaUtils.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/LimbUtils.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/Math.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/NTThelper.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Conv.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/LimbPartition.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/AccumulateBroadcast.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/forwardDefs.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/ApproxModEval.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/openfhe-interface
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/openfhe-interface/RawCiphertext.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/openfhe-interface/ParameterSwitch.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/KeySwitchingKey.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/LinearTransform.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Context.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Limb.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Plaintext.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Ciphertext.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/ElemenwiseBatchKernels.cuh
+-- Installing: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/BootstrapPrecomputation.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/RNSPoly.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/CoeffsToSlots.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Rescale.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Parameters.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CKKS/Bootstrap.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/NTTfusions.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/PeerUtils.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/ModMult.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/NTT.cuh
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/LogUtil.hpp
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/ntt_types.inc
+-- Up-to-date: /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/parallel_for.hpp

@@ -1,0 +1,61 @@
+{
+  "completed_at_unix": 1790322043.5423424,
+  "root": "/home/kataiwa/fhemamba/s2c-first-20260925",
+  "before_bytes": 448373613,
+  "after_bytes": 33193548,
+  "removed_directories": [
+    "source",
+    "build",
+    "install",
+    "executor-source",
+    "executor-build",
+    "final-source",
+    "final-backend",
+    "legacy-build",
+    "probe"
+  ],
+  "removed_build_intermediates": [
+    "final-native-build/CMakeCache.txt",
+    "final-native-build/CMakeFiles",
+    "final-native-build/Makefile",
+    "final-native-build/cmake_install.cmake",
+    "final-native-build/compile_commands.json",
+    "final-native-build/fideslib_client_server_probe",
+    "final-native-build/fideslib_ctpt_probe",
+    "final-native-build/libfideslib_handoff.a",
+    "final-native-build/libfideslib_plaintext_encoder.a",
+    "final-native-build/libstage1_mamba2_artifact.a",
+    "final-native-build/libstage1_mamba2_config.a",
+    "final-native-build/libstage1_mamba2_depth.a",
+    "final-native-build/libstage1_mamba2_payload.a",
+    "final-native-build/libstage1_mamba2_plan.a",
+    "final-native-build/libstage1_mamba2_process.a",
+    "final-native-build/owned_arithmetic_probe",
+    "final-native-build/packed_plaintext_probe",
+    "final-native-build/packed_resource_inventory",
+    "final-native-build/stage1_bootstrap_probe",
+    "final-native-build/stage1_coefficient_encoding_probe",
+    "final-native-build/stage1_mamba2_decode_fideslib",
+    "final-native-build/stage1_normalization_probe",
+    "final-native-build/stage1_plaintext_add_probe",
+    "final-native-build/stage1_subring_encoding_probe",
+    "final-native-build/stage1_vector_rms_probe",
+    "probe-build/CMakeCache.txt",
+    "probe-build/CMakeFiles",
+    "probe-build/Makefile",
+    "probe-build/cmake_install.cmake"
+  ],
+  "retained_binaries_sha256": {
+    "final-native-build/packed_fideslib": "4504ee7ba95d7e5420def9dab07da8760c362b4471644735a9c993fcd0b9fec9",
+    "probe-build/refresh_probe": "d457c50db321dc9d39e57e25b13aa69d9c020d9afa3102c3e557f4857501ed7d"
+  },
+  "retained": "Selected full-run executable, prototype probe executable, archived source overlays and raw records",
+  "canonical_dependencies": "Untouched; verification is recorded separately",
+  "local_scratch": {
+    "removed": "/home/hosi/cipher/runs/s2c-first-20260925",
+    "files": 538,
+    "bytes": 6683374,
+    "source_archives_and_results_verified_first": true
+  },
+  "worktrees": "None created; canonical checkout retained"
+}

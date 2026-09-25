@@ -1,0 +1,15 @@
+{
+  "command": [
+    "cmake",
+    "-S",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/probe",
+    "-B",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/probe-build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+    "-Dfideslib_DIR=/home/kataiwa/fhemamba/s2c-first-20260925/install/share/fideslib/cmake"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790318762.427951,
+  "wall_seconds": 0.06385993957519531
+}

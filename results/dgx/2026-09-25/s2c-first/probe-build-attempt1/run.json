@@ -1,0 +1,12 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/probe-build",
+    "-j",
+    "4"
+  ],
+  "exit_code": 2,
+  "started_at_unix": 1790318713.2696295,
+  "wall_seconds": 0.5684170722961426
+}

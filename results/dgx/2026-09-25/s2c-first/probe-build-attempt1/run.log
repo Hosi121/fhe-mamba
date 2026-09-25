@@ -1,0 +1,14 @@
+[ 50%] Building CXX object CMakeFiles/refresh_probe.dir/refresh_probe.cpp.o
+/home/kataiwa/fhemamba/s2c-first-20260925/probe/refresh_probe.cpp: In lambda function:
+/home/kataiwa/fhemamba/s2c-first-20260925/probe/refresh_probe.cpp:80:35: error: binding reference of type ‘fideslib::Ciphertext<unsigned int>&’ {aka ‘std::shared_ptr<fideslib::CiphertextImpl<unsigned int> >&’} to ‘const Ct’ {aka ‘const std::shared_ptr<fideslib::CiphertextImpl<unsigned int> >’} discards qualifiers
+   80 |       cc->Decrypt(keys.secretKey, value, &decoded);
+      |                                   ^~~~~
+In file included from /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/Ciphertext.hpp:8,
+                 from /home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/fideslib.hpp:5,
+                 from /home/kataiwa/fhemamba/s2c-first-20260925/probe/refresh_probe.cpp:2:
+/home/kataiwa/fhemamba/s2c-first-20260925/install/include/fideslib/CryptoContext.hpp:106:85: note:   initializing argument 2 of ‘fideslib::DecryptResult fideslib::CryptoContextImpl<unsigned int>::Decrypt(fideslib::PrivateKey<unsigned int>&, fideslib::Ciphertext<unsigned int>&, fideslib::Plaintext*)’
+  106 |         DecryptResult Decrypt(const PrivateKey<DCRTPoly>& sk, Ciphertext<DCRTPoly>& ct, Plaintext* pt);
+      |                                                               ~~~~~~~~~~~~~~~~~~~~~~^~
+gmake[2]: *** [CMakeFiles/refresh_probe.dir/build.make:76: CMakeFiles/refresh_probe.dir/refresh_probe.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/refresh_probe.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2

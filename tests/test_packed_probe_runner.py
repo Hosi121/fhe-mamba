@@ -163,6 +163,8 @@ def test_budget_requires_both_path_and_limit(kwargs):
         {"bootstrap_passes": 0},
         {"frontier_refresh": True},
         {"frontier_refresh": True, "planned_refresh": True},
+        {"s2c_first": True},
+        {"s2c_first": True, "planned_refresh": True},
         {"batch_refresh": True},
         {"planned_refresh": True, "batch_refresh": True, "bootstrap_passes": 1},
         {"planned_refresh": True, "legacy_routing": True},
@@ -218,6 +220,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         reuse_dead_inputs=True,
         compact_weights=True,
         frontier_refresh=True,
+        s2c_first=True,
         **budget,
     )
     assert result["returncode"] == 0
@@ -238,6 +241,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "--reuse-dead-inputs",
         "--compact-weights",
         "--frontier-refresh",
+        "--s2c-first",
     ]
     assert result["command"][-len(expected_flags) :] == expected_flags
     assert result["passed"] is False  # No native result; flags cannot bypass the gate.

@@ -15,8 +15,8 @@ struct PackedDepthPlan {
   std::vector<bool> defer_linear_mask;
   std::vector<bool> live;
   int refreshes = 0;
-  static constexpr int ceiling = 39;
-  static constexpr int refreshed = 22;
+  int ceiling = 39;
+  int refreshed = 22;
 };
 
 inline int packed_routing_depth(const std::vector<double>& indices, bool scatter) {
@@ -97,8 +97,12 @@ inline int simulate_packed_depth(const PackedProgram& program, const PackedDepth
   return refreshes;
 }
 
-inline auto plan_packed_depth(const PackedProgram& program) -> PackedDepthPlan {
+inline auto plan_packed_depth(const PackedProgram& program, int ceiling = 39, int refreshed = 22) -> PackedDepthPlan {
+  if (refreshed < 0 || ceiling <= refreshed)
+    throw std::invalid_argument("invalid packed refresh level policy");
   PackedDepthPlan plan;
+  plan.ceiling = ceiling;
+  plan.refreshed = refreshed;
   const int count = program.nodes.size();
   plan.refresh_after.resize(count);
   plan.defer_linear_mask.resize(count);

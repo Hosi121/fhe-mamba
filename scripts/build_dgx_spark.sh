@@ -22,6 +22,7 @@ cuda_release="$(nvcc --version | sed -n 's/.*release \([0-9]*\.[0-9]*\).*/\1/p')
 patch_names=(
   bootstrap-stage-sync b300-ciphertext-lifetime-sync b300-keyswitch-stage-sync
   linear-transform-api conjugate-api ckks-data-type-api cuda13-graph-api cuda13-cccl-include
+  s2c-first-bootstrap
 )
 patches=()
 for name in "${patch_names[@]}"; do

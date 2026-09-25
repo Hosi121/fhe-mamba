@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/home/kataiwa/fhemamba/s2c-first-20260925/legacy-build/packed_fideslib",
+    "/dev/null",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/legacy-rejection/unused.json",
+    ".001",
+    ".001",
+    "--s2c-first",
+    "--planned-refresh",
+    "--batch-refresh"
+  ],
+  "exit_code": 2,
+  "wall_seconds": 0.4689607620239258,
+  "expected_exit_code": 2
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "cmake",
+    "-S",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/final-source/native/fideslib_stage0",
+    "-B",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/legacy-build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+    "-DCMAKE_PREFIX_PATH=/home/kataiwa/fhemamba/spark/install-2a70798e869944af;/home/kataiwa/fhe-deps/openfhe-fides",
+    "-Dfideslib_DIR=/home/kataiwa/fhemamba/spark/install-2a70798e869944af/share/fideslib/cmake"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.31598353385925293,
+  "expected_exit_code": 0
+}

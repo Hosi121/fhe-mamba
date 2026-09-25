@@ -1,0 +1,1 @@
+{"mode":"s2c","input_level":39,"correction_factor_requested":0,"setup_seconds":24.418197248999999,"samples":[

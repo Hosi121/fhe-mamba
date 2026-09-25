@@ -1,0 +1,20 @@
+{
+  "decision": "retain opt-in experimental path; existing circuit remains default",
+  "candidate": "full-real SlotsToCoeffs-first bootstrap with two-pass correction",
+  "full_reduction_percent": 1.5894587094935742,
+  "peak_rss_reduction_gib": 1.1074676513000021,
+  "reasons": [
+    "All five evaluation outputs pass both unchanged 0.001 gates; all four token IDs match.",
+    "Full native evaluation is 12.075 seconds shorter; prefix controls show the same small positive direction.",
+    "Peak process RSS is 1.107 GiB lower.",
+    "The isolated primitive improves by about 39%, but 102.925 seconds of additional ordinary work offsets 115.000 seconds saved in refresh. This is not a large whole-model improvement."
+  ],
+  "limits": [
+    "One full sample per mode, one fixed prompt/checkpoint; no long-context or arbitrary-prompt qualification.",
+    "Uniform ternary, full-real packing, FLEXIBLEAUTO, transform budgets [4,4]; GPU mode only.",
+    "S2C-first context serialization is rejected; legacy Mamba-2 is not switched.",
+    "No single-pass qualification or new cryptographic security claim."
+  ],
+  "full_candidate_sha256": "aafbbf5523434ed1f4a9404733cf6d69e9cd4ac32fe020f7c557575a1d3b6a2c",
+  "full_baseline_sha256": "9d30be548d7d49f69f553daa249099c32f756903c44e9396e1490d958d1b0bc6"
+}

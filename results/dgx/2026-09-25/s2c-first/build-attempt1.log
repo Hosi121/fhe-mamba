@@ -1,0 +1,106 @@
+-- FIDESlib install path at: /home/kataiwa/fhemamba/s2c-first-20260925/install
+-- OpenFHE install path at: /home/kataiwa/fhe-deps/openfhe-fides
+-- The CXX compiler identification is GNU 13.3.0
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+CMake Warning at cmake/ClangFormat.cmake:41 (message):
+  clang-format not found! The 'format' target will not be available.
+Call Stack (most recent call first):
+  CMakeLists.txt:92 (include)
+
+
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- CUDA found: 13.0.88
+-- CUDA include path: /usr/local/cuda-13.0/targets/sbsa-linux/include
+-- NCCL not found: building without NCCL support
+-- FOUND PACKAGE OpenFHE
+-- OpenFHE Version: 1.4.2
+-- OpenFHE installed as shared libraries: ON
+-- OpenFHE include files location: /home/kataiwa/fhe-deps/openfhe-fides/include/openfhe
+-- OpenFHE lib files location: /home/kataiwa/fhe-deps/openfhe-fides/lib
+-- OpenFHE Native Backend size: 64
+-- IPO / LTO enabled
+-- Configuring done (2.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/s2c-first-20260925/build
+[  2%] Building CUDA object CMakeFiles/gpu-test.dir/other/GPUTest.cpp.o
+[  4%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/RNSPoly.cpp.o
+[  6%] Building CXX object CMakeFiles/fideslib.dir/src/parallel_for.cpp.o
+[ 10%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/RNSPolyBatch.cpp.o
+[ 10%] Building CUDA object CMakeFiles/fideslib.dir/src/AddSub.cu.o
+[ 13%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/Ciphertext.cpp.o
+[ 15%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/AccumulateBroadcast.cu.o
+[ 17%] Linking CUDA device code CMakeFiles/gpu-test.dir/cmake_device_link.o
+[ 19%] Linking CUDA executable gpu-test
+[ 19%] Built target gpu-test
+[ 21%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/ApproxModEval.cu.o
+[ 23%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Bootstrap.cu.o
+[ 26%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/CoeffsToSlots.cu.o
+[ 28%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Context.cu.o
+[ 30%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Conv.cu.o
+[ 32%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/ElemenwiseBatchKernels.cu.o
+[ 34%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/KeySwitchingKey.cu.o
+[ 36%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Limb.cu.o
+[ 39%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartition.cu.o
+[ 41%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionBatch.cu.o
+[ 43%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionMGPU.cu.o
+[ 45%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LinearTransform.cu.o
+[ 47%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Parameters.cu.o
+[ 50%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Plaintext.cu.o
+[ 52%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Rescale.cu.o
+[ 54%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/ParameterSwitch.cu.o
+[ 56%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/RawCiphertext.cu.o
+[ 58%] Building CUDA object CMakeFiles/fideslib.dir/src/ConstantsGPU.cu.o
+[ 60%] Building CUDA object CMakeFiles/fideslib.dir/src/CudaUtils.cu.o
+[ 63%] Building CUDA object CMakeFiles/fideslib.dir/src/Math.cu.o
+[ 65%] Building CUDA object CMakeFiles/fideslib.dir/src/ModMult.cu.o
+[ 67%] Building CUDA object CMakeFiles/fideslib.dir/src/NTT.cu.o
+[ 69%] Building CUDA object CMakeFiles/fideslib.dir/src/PeerUtils.cu.o
+[ 71%] Building CUDA object CMakeFiles/fideslib.dir/src/PolyApprox.cu.o
+[ 73%] Building CUDA object CMakeFiles/fideslib.dir/src/Rotation.cu.o
+[ 76%] Building CUDA object CMakeFiles/fideslib.dir/src/VectorGPU.cu.o
+[ 78%] Building CXX object CMakeFiles/fideslib.dir/api/CCParams.cpp.o
+[ 80%] Building CXX object CMakeFiles/fideslib.dir/api/Ciphertext.cpp.o
+[ 82%] Building CXX object CMakeFiles/fideslib.dir/api/CryptoContext.cpp.o
+[ 84%] Building CXX object CMakeFiles/fideslib.dir/api/GenCryptoContext.cpp.o
+[ 86%] Building CXX object CMakeFiles/fideslib.dir/api/Plaintext.cpp.o
+/home/kataiwa/fhemamba/s2c-first-20260925/source/api/CryptoContext.cpp: In member function ‘void fideslib::CryptoContextImpl<unsigned int>::LoadContext(fideslib::PublicKey<unsigned int>&)’:
+/home/kataiwa/fhemamba/s2c-first-20260925/source/api/CryptoContext.cpp:232:41: error: invalid use of incomplete type ‘class FIDESlib::CKKS::BootstrapPrecomputation’
+  232 |                 c->GetBootPrecomputation(slot).slotsToCoeffsFirst =
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+In file included from /home/kataiwa/fhemamba/s2c-first-20260925/source/src/CKKS/Limb.cuh:10,
+                 from /home/kataiwa/fhemamba/s2c-first-20260925/source/src/CKKS/LimbPartition.cuh:8,
+                 from /home/kataiwa/fhemamba/s2c-first-20260925/source/src/CKKS/RNSPoly.cuh:8,
+                 from /home/kataiwa/fhemamba/s2c-first-20260925/source/src/CKKS/Ciphertext.cuh:8,
+                 from /home/kataiwa/fhemamba/s2c-first-20260925/source/src/CKKS/AccumulateBroadcast.cuh:7,
+                 from /home/kataiwa/fhemamba/s2c-first-20260925/source/api/CryptoContext.cpp:2:
+/home/kataiwa/fhemamba/s2c-first-20260925/source/src/CKKS/forwardDefs.cuh:22:7: note: forward declaration of ‘class FIDESlib::CKKS::BootstrapPrecomputation’
+   22 | class BootstrapPrecomputation;
+      |       ^~~~~~~~~~~~~~~~~~~~~~~
+/home/kataiwa/fhemamba/s2c-first-20260925/source/api/CryptoContext.cpp: In member function ‘void fideslib::CryptoContextImpl<unsigned int>::EvalBootstrapKeyGen(fideslib::PrivateKey<unsigned int>&, uint32_t)’:
+/home/kataiwa/fhemamba/s2c-first-20260925/source/api/CryptoContext.cpp:378:57: error: aggregate ‘FIDESlib::CKKS::BootstrapPrecomputation precom’ has incomplete type and cannot be defined
+  378 |                 FIDESlib::CKKS::BootstrapPrecomputation precom;
+      |                                                         ^~~~~~
+/home/kataiwa/fhemamba/s2c-first-20260925/source/api/CryptoContext.cpp:381:51: error: cannot convert ‘<brace-enclosed initializer list>’ to ‘const std::vector<int>&’
+  381 |                 if (offset) this->EvalRotateKeyGen(secretKey, {offset, -offset});
+      |                             ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/kataiwa/fhemamba/s2c-first-20260925/source/api/CryptoContext.cpp:304:112: note:   initializing argument 2 of ‘void fideslib::CryptoContextImpl<unsigned int>::EvalRotateKeyGen(fideslib::PrivateKey<unsigned int>&, const std::vector<int>&)’
+  304 | void CryptoContextImpl<DCRTPoly>::EvalRotateKeyGen(const PrivateKey<DCRTPoly>& sk, const std::vector<int32_t>& steps) {
+      |                                                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+[ 89%] Building CXX object CMakeFiles/fideslib.dir/api/Serialize.cpp.o
+gmake[2]: *** [CMakeFiles/fideslib.dir/build.make:580: CMakeFiles/fideslib.dir/api/CryptoContext.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/fideslib.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2

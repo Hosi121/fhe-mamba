@@ -63,6 +63,26 @@ int main() {
   masks.outputs.push_back({1, std::vector<double>(4), std::vector<double>(4)});
   require(!plan_packed_depth(masks).defer_linear_mask[1], "observable projection must be masked");
 
+  // S2C-first spends four levels before raising the modulus, and returns four
+  // extra levels. The first refresh moves earlier; the interval stays equal.
+  PackedProgram chain{32768, 1, {{"input", 1, {}, {0.5}, 1}}, {}};
+  for (int i = 1; i <= 37; ++i)
+    chain.nodes.push_back({"mulp", 1, {i - 1}, {1}, 1});
+  chain.outputs.push_back({37, {0.5}, {0.5}});
+  auto ordinary = plan_packed_depth(chain);
+  auto s2c = plan_packed_depth(chain, 35, 18);
+  require(ordinary.refreshes == 0 && s2c.refreshes == 1,
+          "S2C input transform's reserved levels were ignored");
+  require(ordinary.ceiling - ordinary.refreshed == s2c.ceiling - s2c.refreshed,
+          "usable depth changed after refresh");
+  levels.resize(chain.nodes.size());
+  simulate_packed_depth(chain, s2c, &levels);
+  require(levels.back() == 19, "S2C refreshed level was ignored");
+  bool rejected = false;
+  try { (void)plan_packed_depth(chain, 18, 18); }
+  catch (const std::invalid_argument&) { rejected = true; }
+  require(rejected, "invalid refresh policy was accepted");
+
   // The estimator must account for each actual mask stage, including
   // reductions whose temporary padding is dirty and still needs selection.
   for (int stride : {1, 2, 64, 128}) {

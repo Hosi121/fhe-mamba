@@ -1,0 +1,14 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/legacy-build",
+    "--target",
+    "packed_fideslib",
+    "-j",
+    "4"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 8.893909454345703,
+  "expected_exit_code": 0
+}

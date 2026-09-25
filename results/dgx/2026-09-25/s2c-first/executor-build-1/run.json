@@ -1,0 +1,15 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/executor-build",
+    "--target",
+    "packed_fideslib",
+    "-j",
+    "4"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790319017.8255315,
+  "wall_seconds": 9.467995643615723,
+  "expected_exit_code": 0
+}

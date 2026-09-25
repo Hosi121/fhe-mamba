@@ -1,0 +1,16 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/probe-build/refresh_probe",
+    "baseline",
+    "36",
+    "3",
+    "0",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/initial-baseline/native.json"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790318764.9674048,
+  "wall_seconds": 31.332246780395508
+}

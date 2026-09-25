@@ -1,0 +1,12 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/final-native-build",
+    "-j",
+    "4"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 41.35322403907776,
+  "expected_exit_code": 0
+}

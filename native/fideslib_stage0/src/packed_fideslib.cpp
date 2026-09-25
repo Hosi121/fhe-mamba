@@ -48,6 +48,7 @@ struct PackedEvaluator {
   bool planned_refresh = false;
   bool batch_refresh = false;
   int bootstrap_passes = 2;
+  int refresh_ceiling = 39, refreshed_level = 22;
   long long logical_refreshes = 0, refresh_batches = 0, largest_refresh_batch = 1;
   long long evaluated_nodes = 0;
   int planned_logical_refreshes = 0;
@@ -271,7 +272,7 @@ struct PackedEvaluator {
       if (monotone && offsets.size() > 32) {
         Ct out = x;
         for (const auto& stage : fhemamba::monotone_routing(indices, scatter)) {
-          if (out->GetLevel() + (planned_refresh ? 1 : 3) > 39) out = refresh(out, current_bound);
+          if (out->GetLevel() + (planned_refresh ? 1 : 3) > refresh_ceiling) out = refresh(out, current_bound);
           if (bsgs_routing_stages) {
             std::vector<int> offsets;
             int direct_cost = 0;
@@ -339,7 +340,7 @@ struct PackedEvaluator {
           }
         }
         if (!any) continue;
-        if (out->GetLevel() + 3 > 39) out = refresh(out, current_bound);
+        if (out->GetLevel() + 3 > refresh_ceiling) out = refresh(out, current_bound);
         auto moving = plain(out, std::move(moving_mask), true);
         auto [a, b] = aligned(out, moving);
         ++adds;
@@ -462,7 +463,7 @@ struct PackedEvaluator {
     if (planned_refresh) {
       if (legacy_routing || !replicated_linear)
         throw std::invalid_argument("planned refresh requires replicated linear and radix8 routing");
-      depth_plan = fhemamba::plan_packed_depth(program);
+      depth_plan = fhemamba::plan_packed_depth(program, refresh_ceiling, refreshed_level);
       if (frontier_refresh) {
         // Advance independent branches to a common refresh frontier. Actual
         // ciphertext levels below remain authoritative for refresh decisions.
@@ -499,7 +500,7 @@ struct PackedEvaluator {
         }
         if (next < 0 || program.nodes[next].operation == "feedback") continue;
         const int level = values[j]->GetLevel();
-        if (level <= depth_plan.refreshed || (level < 33 && level + depth_plan.cost[next] <= 39)) continue;
+        if (level <= depth_plan.refreshed || (level < refresh_ceiling - 6 && level + depth_plan.cost[next] <= refresh_ceiling)) continue;
         group.push_back(j); occupied += program.nodes[j].size;
       }
       if (group.size() > 1) {
@@ -524,7 +525,7 @@ struct PackedEvaluator {
           const auto& candidate = program.nodes[ready];
           bool fits = true;
           if (candidate.operation != "feedback") for (int parent : candidate.parents)
-            fits = fits && values[parent]->GetLevel() + depth_plan.cost[ready] <= 39;
+            fits = fits && values[parent]->GetLevel() + depth_plan.cost[ready] <= refresh_ceiling;
           if (fits) {
             if (ready != i) ++frontier_deferrals;
             i = ready; break;
@@ -545,7 +546,7 @@ struct PackedEvaluator {
       }
       if (planned_refresh) need = depth_plan.cost[i];
       for (int parent : n.parents) {
-        if ((!planned_refresh || op != "feedback") && values[parent]->GetLevel() + need > 39) {
+        if ((!planned_refresh || op != "feedback") && values[parent]->GetLevel() + need > refresh_ceiling) {
           refresh_value(parent, i);
         }
       }
@@ -685,7 +686,7 @@ struct GenerationClient {
 
 auto main(int argc, char** argv) -> int {
   try {
-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--client-head FILE]");
+    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--client-head FILE]");
     bool replicated_linear = true;
     bool legacy_routing = false;
     bool trace_levels = false;
@@ -702,6 +703,7 @@ auto main(int argc, char** argv) -> int {
     bool borrow_plaintext_upload = false;
     bool bsgs_routing_stages = false;
     bool frontier_refresh = false;
+    bool s2c_first = false;
     int bootstrap_passes = 2;
     std::string client_path;
     for (int i = 5; i < argc; ++i) {
@@ -724,6 +726,7 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--borrow-plaintext-upload") borrow_plaintext_upload = true;
       else if (option == "--bsgs-routing-stages") bsgs_routing_stages = true;
       else if (option == "--frontier-refresh") frontier_refresh = true;
+      else if (option == "--s2c-first") s2c_first = true;
       else if (option == "--bootstrap-passes" && i + 1 < argc) {
         bootstrap_passes = std::stoi(argv[++i]);
         if (bootstrap_passes != 1 && bootstrap_passes != 2)
@@ -741,6 +744,10 @@ auto main(int argc, char** argv) -> int {
       throw std::invalid_argument("BSGS routing stages require planned refresh and radix8 routing");
     if (batch_refresh && (!planned_refresh || bootstrap_passes != 2))
       throw std::invalid_argument("batch refresh requires planned refresh and two bootstrap passes");
+    if (s2c_first && !batch_refresh) throw std::invalid_argument("S2C-first requires planned two-pass batch refresh");
+#ifndef FIDESLIB_S2C_FIRST_BOOTSTRAP
+    if (s2c_first) throw std::invalid_argument("S2C-first requires the optional FIDESlib bootstrap patch");
+#endif
     if (frontier_refresh && !batch_refresh)
       throw std::invalid_argument("frontier refresh requires batch refresh");
     if (planned_refresh && (legacy_routing || !replicated_linear))
@@ -775,7 +782,11 @@ auto main(int argc, char** argv) -> int {
     std::vector<int> rotations;
     for (int i = 1; i < program.slots; i *= 2) { rotations.push_back(i); rotations.push_back(-i); }
     cc->EvalRotateKeyGen(keys.secretKey, rotations);
+#ifdef FIDESLIB_S2C_FIRST_BOOTSTRAP
+    cc->EvalBootstrapSetup({4, 4}, {0, 0}, program.slots, 0, s2c_first);
+#else
     cc->EvalBootstrapSetup({4, 4}, {0, 0}, program.slots, 0);
+#endif
     cc->EvalBootstrapKeyGen(keys.secretKey, program.slots);
     cc->LoadContext(keys.publicKey); sync_gpu();
     PackedEvaluator evaluator{cc, keys.publicKey, program.slots, program.bound};
@@ -790,6 +801,10 @@ auto main(int argc, char** argv) -> int {
     evaluator.reuse_dead_inputs = reuse_dead_inputs;
     evaluator.bsgs_routing_stages = bsgs_routing_stages;
     evaluator.frontier_refresh = frontier_refresh;
+    // Moving four StC levels before ModRaise also returns four extra levels.
+    // Keep the usable interval and the two-pass wrapper's safety margin equal.
+    evaluator.refresh_ceiling = s2c_first ? 35 : 39;
+    evaluator.refreshed_level = s2c_first ? 18 : 22;
     evaluator.cache_plaintexts = cache_plaintexts;
     evaluator.plaintexts = std::make_unique<fhemamba::PlaintextPreparation>(
         cc, program.slots, fhemamba::PlaintextPreparationOptions{
@@ -839,6 +854,9 @@ auto main(int argc, char** argv) -> int {
            << ",\"slots\":" << program.slots << ",\"ring_dimension\":65536,\"depth\":44,\"scale_bits\":59"
            << ",\"nodes\":" << program.nodes.size() << ",\"setup_seconds\":" << setup_seconds
            << ",\"frontier_refresh\":" << (frontier_refresh ? "true" : "false")
+           << ",\"s2c_first\":" << (s2c_first ? "true" : "false")
+           << ",\"refresh_ceiling\":" << evaluator.refresh_ceiling
+           << ",\"refreshed_level\":" << evaluator.refreshed_level
            << ",\"frontier_deferrals\":" << evaluator.frontier_deferrals
            << ",\"maximum_ready_nodes\":" << evaluator.maximum_ready_nodes
            << ",\"evaluated_nodes\":" << evaluator.evaluated_nodes

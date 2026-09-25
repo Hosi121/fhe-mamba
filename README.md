@@ -47,30 +47,37 @@ and [Spark build instructions](docs/dgx-spark.md#build).
 ## Measured results and scope
 
 Both trained models complete **five encrypted evaluations and four generated
-tokens** on **DGX Spark GB10**. The latest Mamba-3 change advances independent
-ready operations before grouped refresh, reducing expensive bootstrap calls.
+tokens** on **DGX Spark GB10**. The latest Mamba-3 experiment moves
+SlotsToCoeffs before modulus raising and uses one real modular-reduction
+branch, while retaining two-pass error correction.
 
 | Model | Layers | Study baseline → candidate | Reduction | Generated text |
 | --- | ---: | ---: | ---: | --- |
 | Mamba-2-130M | 24 | 1959.30 → **1942.99 s** (32.38 min) | **0.83%** | `The capital of the Republic of` |
-| Mamba-3 SISO 187M | 12 | 941.95 → **761.00 s** (12.68 min) | **19.21%** | `The capital of the state of` |
+| Mamba-3 SISO 187M | 12 | 759.70 → **747.63 s** (12.46 min) | **1.59%** | `The capital of the state of` |
 
-Mamba-3's [ready-node refresh study](docs/research/2026-09-25-packed-frontiers.md)
-tests three mechanisms and selects the simpler scheduler. Bootstrap calls fall
-**726 → 476 (34.44%)**, with unchanged polynomials, CKKS parameters, generated
-IDs and both `0.001` error gates. Maximum exact/polynomial errors are
-**0.0000809575 / 0.0000607799**. The **20% full-model target is not met**.
-Polynomial batching and persistent slot windows are retained as reproducible
-experiments; their best combination is slower at **792.40 s**. Enable the
-selected schedule with `--planned-refresh --batch-refresh --frontier-refresh`.
+The [S2C-first study](docs/research/2026-09-25-s2c-first.md) retains this circuit
+as an **opt-in experimental path**. Refresh saves 115.00 s, while ordinary
+work grows by 102.92 s: the isolated primitive's approximately 39% reduction
+becomes a modest full-model gain. Peak process RSS falls from 27.31 to 26.21 GiB.
+Weights, model polynomials, CKKS parameters, token IDs and both `0.001` gates
+are unchanged; maximum exact/polynomial errors are **4.68984e-5 / 5.61686e-7**.
+After rebuilding on Spark, add `--s2c-first` alongside
+`--planned-refresh --batch-refresh --frontier-refresh`. The existing circuit
+remains available by omitting the new flag.
+
+The preceding [ready-node refresh study](docs/research/2026-09-25-packed-frontiers.md)
+reduced 941.95 to 761.00 s (19.21%). Its three-candidate campaign did not meet
+its 20% target; rejected polynomial/layout prototypes remain archived. The
+new circuit is a separate follow-up, not a revision of that campaign's result.
 
 These are native evaluation times, including plaintext encoding and GPU upload
 during evaluation. Setup/key generation, input parsing, final client
 selection/validation and external transport are excluded. Compare variants
 within each study: the model sizes, weights and numerical contracts differ,
 so this table does not rank architectures. The final Mamba-3 pair uses one
-fresh process per mode; an earlier full trial also measured a 19.09% reduction.
-Fresh-key error differences do not establish accuracy improvements. Local release checks pass **288 tests**,
+fresh process per mode; alternating prefix controls also show a small gain.
+Fresh-key error differences do not establish general accuracy improvements. Local release checks pass **290 tests**,
 including **19 native C++ contracts**.
 
 The Mamba-2 row retains the earlier

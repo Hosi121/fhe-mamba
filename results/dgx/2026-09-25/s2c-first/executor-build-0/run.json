@@ -1,0 +1,17 @@
+{
+  "command": [
+    "cmake",
+    "-S",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/executor-source/native/fideslib_stage0",
+    "-B",
+    "/home/kataiwa/fhemamba/s2c-first-20260925/executor-build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+    "-DCMAKE_PREFIX_PATH=/home/kataiwa/fhemamba/s2c-first-20260925/install;/home/kataiwa/fhe-deps/openfhe-fides",
+    "-Dfideslib_DIR=/home/kataiwa/fhemamba/s2c-first-20260925/install/share/fideslib/cmake"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790319017.509282,
+  "wall_seconds": 0.31587696075439453,
+  "expected_exit_code": 0
+}

@@ -8,6 +8,7 @@ Use the [evidence registry](../evidence.md) for current claim status and the
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-25 — S2C-first refresh](2026-09-25-s2c-first.md) | One GPU circuit implemented; full Mamba-3 759.70 → 747.63 s (1.59%); refresh saves 115.00 s but ordinary work grows 102.92 s; opt-in, same accuracy/token gates |
 | [2026-09-25 — First-principles review](2026-09-25-first-principles.md) | 70.32% of polynomial products process at most 32 values; bootstrap ordering, 32-bit RNS and dual-ring candidates; exact-coefficient algebra checks and rejection criteria; no new GPU speed claim |
 | [2026-09-25 — Ready-node refresh scheduling](2026-09-25-packed-frontiers.md) | Three mechanisms tested; full Mamba-3 941.95 → 761.00 s (19.21%); scheduler adopted, polynomial/layout prototypes archived; 20% target unmet |
 | [2026-09-25 — Shared square dispatch](2026-09-25-square-dispatch.md) | 72 new exact-RNS cases; separate-binary ABBA prefixes improve 0.84% for Mamba-3 and 0.88% for Mamba-2; isolated prefix evidence; included in the later refresh-study baseline |

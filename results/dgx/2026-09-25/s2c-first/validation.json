@@ -1,0 +1,20 @@
+{
+  "phase": "completed local and DGX qualification",
+  "pytest": {
+    "passed": true,
+    "python_tests": 290,
+    "includes_native_cpp_contracts": 19
+  },
+  "ruff_check": "passed",
+  "ruff_format_check": "118 files passed",
+  "backend_patch_apply_check": "passed against the matched patched baseline",
+  "gpu_adoption": "opt-in experimental",
+  "backend_patch_reconstruction": "All final backend files reconstructed byte-for-byte",
+  "backend_patch_sha256": "9bf562eaf352da12706d70cfc65352704c9ef071335e04366739711ba2f44dbe",
+  "all_native_targets_build": "passed",
+  "legacy_api_build_and_early_rejection": "passed",
+  "full_error_and_token_gates": "passed",
+  "archives_and_summary": "verified",
+  "baseline_dependencies_unchanged": 17,
+  "relative_markdown_links_checked": 226
+}

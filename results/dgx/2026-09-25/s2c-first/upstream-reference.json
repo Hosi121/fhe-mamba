@@ -1,0 +1,5 @@
+{
+  "url": "https://raw.githubusercontent.com/openfheorg/openfhe-development/v1.5.0/src/pke/lib/scheme/ckksrns/ckksrns-fhe.cpp",
+  "sha256": "fcac1f16e4c85c7cf76cf519dca6a7b4118e3ef55927ca01a4bdf2cc6f69ac55",
+  "scope": "Reference ordering and low-level precomputation; installed OpenFHE is unchanged"
+}

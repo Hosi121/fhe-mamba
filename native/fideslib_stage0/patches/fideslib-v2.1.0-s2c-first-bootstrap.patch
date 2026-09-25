@@ -1,0 +1,218 @@
+diff --git a/api/CryptoContext.cpp b/api/CryptoContext.cpp
+index 728aae2..f71e534 100644
+--- a/api/CryptoContext.cpp
++++ b/api/CryptoContext.cpp
+@@ -1,4 +1,5 @@
+ #include "CryptoContext.hpp"
++#include "CKKS/BootstrapPrecomputation.cuh"
+ #include "CKKS/AccumulateBroadcast.cuh"
+ #include "CKKS/ApproxModEval.cuh"
+ #include "CKKS/Bootstrap.cuh"
+@@ -227,7 +228,10 @@ void CryptoContextImpl<DCRTPoly>::LoadContext(const PublicKey<DCRTPoly>& publicK
+ 	}
+ 	// Bootstrapping keys.
+ 	for (const auto& slot : this->slots_bootstrap) {
++
+ 		FIDESlib::CKKS::AddBootstrapPrecomputation(pkImpl, slot, c);
++		c->GetBootPrecomputation(slot).slotsToCoeffsFirst =
++		    std::find(s2c_first_slots.begin(), s2c_first_slots.end(), slot) != s2c_first_slots.end();
+ 	}
+ 
+ 	this->gpu	 = std::make_any<FIDESlib::CKKS::Context>(std::move(c));
+@@ -312,7 +316,7 @@ void CryptoContextImpl<DCRTPoly>::EvalRotateKeyGen(const PrivateKey<DCRTPoly>& s
+ 
+ // ---- Bootstrapping ----
+ 
+-void CryptoContextImpl<DCRTPoly>::EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor) {
++void CryptoContextImpl<DCRTPoly>::EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor, bool slotsToCoeffsFirst) {
+ 
+ 	// Only before loading one must compute the bootstrapping auxiliary data.
+ 	if (this->loaded) {
+@@ -338,11 +342,27 @@ void CryptoContextImpl<DCRTPoly>::EvalBootstrapSetup(const std::vector<uint32_t>
+ 	int32_t modall = static_cast<int>(lbcrypto::GetMultiplicativeDepthByCoeffVector(coeffchebyshev, false)) + doubleAngleIts;
+ 
+ 	if (this->devices.empty()) {
++		if (slotsToCoeffsFirst) OPENFHE_THROW("S2C-first prototype requires GPU");
+ 		context->EvalBootstrapSetup(levelBudget, std::move(dim1), slots, correctionFactor, true);
+ 		return;
+ 	}
+ 
++
++	if (slotsToCoeffsFirst) {
++		const auto cp = std::dynamic_pointer_cast<lbcrypto::CryptoParametersCKKSRNS>(context->GetCryptoParameters());
++		if (this->keyDist != fideslib::UNIFORM_TERNARY ||
++		    context->GetCKKSDataType() != lbcrypto::REAL || slots != context->GetRingDimension() / 2 ||
++		    cp->GetScalingTechnique() != lbcrypto::FLEXIBLEAUTO || levelBudget != std::vector<uint32_t>{4, 4})
++			OPENFHE_THROW("Experimental S2C-first requires uniform ternary, full real packing, FLEXIBLEAUTO and budget [4,4]");
++		const int l0 = cp->GetElementParams()->GetParams().size();
++		// The pinned OpenFHE fork uses this override only to choose lDec.
++		// lDec = L0 - (modall + encBudget + decBudget) = 2, as in v1.5 StC-first.
++		modall = l0 - levelBudget[0] - levelBudget[1] - 2;
++		if (modall < 0) OPENFHE_THROW("Insufficient modulus chain for S2C-first");
++	}
+ 	context->EvalBootstrapSetup(levelBudget, std::move(dim1), slots, correctionFactor, true, modall);
++	std::erase(this->s2c_first_slots, slots);
++	if (slotsToCoeffsFirst) this->s2c_first_slots.push_back(slots);
+ }
+ 
+ void CryptoContextImpl<DCRTPoly>::EvalBootstrapKeyGen(const PrivateKey<DCRTPoly>& secretKey, uint32_t slots) {
+@@ -355,7 +375,14 @@ void CryptoContextImpl<DCRTPoly>::EvalBootstrapKeyGen(const PrivateKey<DCRTPoly>
+ 
+ 	this->slots_bootstrap.push_back(slots);
+ 
++
+ 	FIDESlib::CKKS::GenBootstrapKeys(skImpl, slots, this->keyDist == fideslib::SPARSE_ENCAPSULATED);
++	if (std::find(s2c_first_slots.begin(), s2c_first_slots.end(), slots) != s2c_first_slots.end()) {
++		FIDESlib::CKKS::BootstrapPrecomputation precom;
++		FIDESlib::CKKS::GetBootstrapIndexes(skImpl->GetCryptoContext(), slots, &precom);
++		const auto offset = precom.ctsOutputRotation;
++		if (offset) this->EvalRotateKeyGen(secretKey, {offset, -offset});
++	}
+ }
+ 
+ // ---- Serialization ----
+@@ -1901,4 +1928,4 @@ std::vector<int> CryptoContextImpl<DCRTPoly>::GetConvolutionTransformRotationInd
+ 	return FIDESlib::CKKS::GetConvolutionTransformRotationIndices(rowSize, bStep, stride, gStep);
+ }
+ 
+-} // namespace fideslib
+\ No newline at end of file
++} // namespace fideslib
+diff --git a/api/CryptoContext.hpp b/api/CryptoContext.hpp
+index 818b7c7..0d0fc11 100644
+--- a/api/CryptoContext.hpp
++++ b/api/CryptoContext.hpp
+@@ -1,6 +1,9 @@
+ #ifndef API_CRYPTOCONTEXT_HPP
+ #define API_CRYPTOCONTEXT_HPP
+ 
++// Experimental full-real GPU bootstrap; see EvalBootstrapSetup's fifth argument.
++#define FIDESLIB_S2C_FIRST_BOOTSTRAP 1
++
+ #include <any>
+ #include <complex>
+ #include <cstdint>
+@@ -77,7 +80,7 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 	// ---- Bootstrapping ----
+ 
+ 	/// @brief Generate bootstrap precomputation data.
+-	void EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor);
++	void EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor, bool slotsToCoeffsFirst = false);
+ 	/// @brief Generate the evaluation bootstrap keys.
+ 	void EvalBootstrapKeyGen(const PrivateKey<DCRTPoly>& secretKey, uint32_t slots);
+ 
+@@ -225,6 +228,7 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 	std::vector<int32_t> rotation_indexes;
+ 	/// @brief Bootstrap slots available.
+ 	std::vector<uint32_t> slots_bootstrap;
++	std::vector<uint32_t> s2c_first_slots;
+ 	/// @brief Secret key distribution.
+ 	SecretKeyDist keyDist = UNIFORM_TERNARY;
+ 
+@@ -255,4 +259,4 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 
+ } // namespace fideslib
+ 
+-#endif // API_CRYPTOCONTEXT_HPP
+\ No newline at end of file
++#endif // API_CRYPTOCONTEXT_HPP
+diff --git a/api/Serialize.cpp b/api/Serialize.cpp
+index 68c047e..0bc9c4c 100644
+--- a/api/Serialize.cpp
++++ b/api/Serialize.cpp
+@@ -12,6 +12,10 @@
+ namespace fideslib::Serial {
+ 
+ bool SerializeToFile(const std::string& filename, const fideslib::CryptoContext<fideslib::DCRTPoly>& obj, const SerType& sertype) {
++	// The pinned OpenFHE serializer does not preserve this GPU-only circuit mode.
++	// Reject before creating a file instead of silently restoring the other circuit.
++	if (!obj->s2c_first_slots.empty())
++		OPENFHE_THROW("Experimental S2C-first context serialization is not supported");
+ 	auto& context = std::any_cast<const lbcrypto::CryptoContext<lbcrypto::DCRTPoly>&>(obj->cpu);
+ 
+ 	bool res = false;
+@@ -259,4 +263,4 @@ bool DeserializeFromFile(const std::string& filename, fideslib::PrivateKey<fides
+ 	return res;
+ }
+ 
+-} // namespace fideslib::Serial
+\ No newline at end of file
++} // namespace fideslib::Serial
+diff --git a/src/CKKS/Bootstrap.cu b/src/CKKS/Bootstrap.cu
+index b82dc17..f8439db 100644
+--- a/src/CKKS/Bootstrap.cu
++++ b/src/CKKS/Bootstrap.cu
+@@ -210,7 +210,24 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 	uint64_t scalar = std::llround(post);
+ 
+ 	//////////////////////////////////////////////////////////////////////
++
+ 	bool sparse_encaps = cc.GetBootPrecomputation(slots).sparse_encaps;
++	const auto& bp = cc.GetBootPrecomputation(slots);
++	if (bp.slotsToCoeffsFirst) {
++		if (prescaled || slots != cc.N / 2 || isLT)
++			throw std::invalid_argument("Unsupported S2C-first bootstrap input");
++		// FIDES levels count remaining primes minus one (opposite to OpenFHE).
++		// Four StC stages plus one level for AdjustCiphertext require level >= 5.
++		while (ctxt.NoiseLevel > 1) ctxt.rescale();
++		if (ctxt.getLevel() < 5)
++			throw std::invalid_argument("S2C-first requires five remaining levels");
++		ctxt.dropToLevel(5);
++		// The stock affine transforms defer the CtS output rotation until StC.
++		// Restore each transform's boundary when their order is reversed.
++		if (bp.ctsOutputRotation) ctxt.rotate(-bp.ctsOutputRotation);
++		EvalCoeffsToSlots(ctxt, slots, true);
++		cudaDeviceSynchronize();
++	}
+ 
+ 	{
+ 		ModRaise(ctxt, slots, correction, prescaled, sparse_encaps);
+@@ -268,7 +285,7 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 	cudaDeviceSynchronize();
+ 	//  std::cout << "ModRed" << std::endl;
+ 
+-	if (cc.N / 2 == slots) {
++	if (cc.N / 2 == slots && !bp.slotsToCoeffsFirst) {
+ 		aux.conjugate(ctxt);
+ 		Ciphertext ctxtEncI(cc_);
+ 		ctxtEncI.sub(ctxt, aux);
+@@ -292,6 +309,14 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 		ctxt.rescale();
+ 	}
+ 
++	if (bp.slotsToCoeffsFirst) {
++		if (bp.ctsOutputRotation) ctxt.rotate(bp.ctsOutputRotation);
++		multIntScalar(ctxt, uint64_t{1} << correction);
++		cudaDeviceSynchronize();
++		ctxt.slots = old_slots;
++		return;
++	}
++
+ 	//  std::cout << "LT" << std::endl;
+ 
+ 	if (isLT) {
+diff --git a/src/CKKS/BootstrapPrecomputation.cuh b/src/CKKS/BootstrapPrecomputation.cuh
+index 2d47a16..20f9da9 100644
+--- a/src/CKKS/BootstrapPrecomputation.cuh
++++ b/src/CKKS/BootstrapPrecomputation.cuh
+@@ -33,6 +33,8 @@ class BootstrapPrecomputation {
+ 	std::vector<LTstep> StC;
+ 	std::vector<LTstep> CtS;
+ 	int accumulate_bStep = 4;
++	int ctsOutputRotation = 0;
++	bool slotsToCoeffsFirst = false;
+ 	uint32_t correctionFactor;
+ 	bool sparse_encaps{ false };
+ 	std::weak_ptr<ContextData> sparse_context;
+diff --git a/src/CKKS/openfhe-interface/RawCiphertext.cu b/src/CKKS/openfhe-interface/RawCiphertext.cu
+index 714ab3a..3f0358a 100644
+--- a/src/CKKS/openfhe-interface/RawCiphertext.cu
++++ b/src/CKKS/openfhe-interface/RawCiphertext.cu
+@@ -936,6 +936,7 @@ std::vector<int> FIDESlib::CKKS::GetBootstrapIndexes(lbcrypto::CryptoContext<lbc
+ 			}
+ 		}
+ 
++		result.ctsOutputRotation = ReduceRotation(acc_offset, slots);
+ 		if constexpr (AFFINE_LT && MAKE_STC_LT_FRIENDLY) {
+ 			for (uint32_t s = 0; s < result.StC.size(); s++) {
+ 				int offset = result.StC.at(s).rotOut[0];

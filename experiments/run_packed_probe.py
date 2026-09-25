@@ -52,6 +52,7 @@ def _run(
     reuse_dead_inputs=False,
     compact_weights=False,
     frontier_refresh=False,
+    s2c_first=False,
 ):
     binary, payload, output = binary.resolve(), payload.resolve(), output.resolve()
     if not math.isfinite(timeout) or timeout <= 0 or not math.isfinite(tolerance) or tolerance <= 0:
@@ -62,6 +63,8 @@ def _run(
         raise ValueError("planned refresh requires radix8 routing")
     if batch_refresh and (not planned_refresh or bootstrap_passes != 2):
         raise ValueError("batch refresh requires planned refresh and two bootstrap passes")
+    if s2c_first and not batch_refresh:
+        raise ValueError("S2C-first requires planned two-pass batch refresh")
     if frontier_refresh and not batch_refresh:
         raise ValueError("frontier refresh requires batch refresh")
     manifest = json.loads((payload / "manifest.json").read_text())
@@ -113,6 +116,7 @@ def _run(
         (reuse_dead_inputs, "--reuse-dead-inputs"),
         (compact_weights, "--compact-weights"),
         (frontier_refresh, "--frontier-refresh"),
+        (s2c_first, "--s2c-first"),
     ):
         if enabled:
             command.append(flag)
@@ -196,6 +200,7 @@ def run(
     reuse_dead_inputs=False,
     compact_weights=False,
     frontier_refresh=False,
+    s2c_first=False,
     budget_file=None,
     budget_seconds=None,
 ):
@@ -227,6 +232,7 @@ def run(
             reuse_dead_inputs=reuse_dead_inputs,
             compact_weights=compact_weights,
             frontier_refresh=frontier_refresh,
+            s2c_first=s2c_first,
         )
     import fcntl
 
@@ -279,6 +285,7 @@ def run(
                 reuse_dead_inputs=reuse_dead_inputs,
                 compact_weights=compact_weights,
                 frontier_refresh=frontier_refresh,
+                s2c_first=s2c_first,
             )
         finally:
             charged = time.monotonic() - started
@@ -320,6 +327,7 @@ def main():
     parser.add_argument("--reuse-dead-inputs", action="store_true")
     parser.add_argument("--compact-weights", action="store_true")
     parser.add_argument("--frontier-refresh", action="store_true")
+    parser.add_argument("--s2c-first", action="store_true")
     parser.add_argument("--budget-file", type=Path)
     parser.add_argument("--budget-seconds", type=float)
     args = parser.parse_args()
@@ -347,6 +355,7 @@ def main():
         reuse_dead_inputs=args.reuse_dead_inputs,
         compact_weights=args.compact_weights,
         frontier_refresh=args.frontier_refresh,
+        s2c_first=args.s2c_first,
         budget_file=args.budget_file,
         budget_seconds=args.budget_seconds,
     )

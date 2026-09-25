@@ -38,11 +38,18 @@ dependency and uses `~/fhemamba/spark/` for its own patched FIDESlib snapshot
 and kernel. No B300 container or Slurm allocation is needed. `BUILD_JOBS`
 defaults to 8. `FHEMAMBA_REMOTE_ROOT` overrides the default `~/fhemamba` root.
 
-The build verifies the source snapshot, runs the 13 C++ contract tests,
+The build verifies the source snapshot, runs the 19 C++ contract tests,
 and writes `spark/kernel/stage1_mamba2_decode_fideslib.build.json`. The runner
 checks hashes of the native sources/configuration, executable and OpenFHE
 shared libraries, and sets the matching library path. FIDESlib is linked
 statically by its current build. Rebuild after native source changes.
+
+The build includes the experimental S2C-first bootstrap patch. The packed
+Mamba-3 runner selects it with `--s2c-first`, together with
+`--planned-refresh --batch-refresh --frontier-refresh`; omitting the flag
+keeps the existing circuit. The [qualification study](research/2026-09-25-s2c-first.md)
+records the supported real-packing configuration and modest full-model gain.
+The legacy Mamba-2 executor keeps its current bootstrap circuit.
 
 ## Payload
 
