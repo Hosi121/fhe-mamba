@@ -1,0 +1,22 @@
+{
+  "scope": "Research-only verification; no new encrypted performance or full test suite run",
+  "passed": true,
+  "analyzer_execution": "passed after final analyzer changes",
+  "ruff_check": "passed",
+  "whitespace_check": "passed including untracked files",
+  "relative_markdown_links_checked": 41,
+  "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "files_sha256": {
+    "docs/research/2026-09-25-first-principles.md": "fd4dead174ac8c0cc9f7e1f3560f3a98bf47d94b26a2431dfea4da329bcf4046",
+    "docs/research/README.md": "455151b1152b9a68e863cd7715de7aa2284450b79130cf5acb727e6b120c7ecf",
+    "results/cpu/2026-09-25/first-principles/analyze.py": "1c72f278fd4eaf85964eabf775b37190bd8a5db7c6da61dbcfa75b13c011a6bc",
+    "results/cpu/2026-09-25/first-principles/sources.json": "650c63bb50053053ef997490af9390c02bbed69a42430fda0df4580600a1fbb5",
+    "results/cpu/2026-09-25/first-principles/summary.json": "f8896031f4576e37b240abc2644feb0012429b4b5685d46b1a33d4e5417b369d",
+    "results/cpu/2026-09-25/first-principles/README.md": "78894a717f1dad0b6c95cdd13cba312c264fca13723c714cfc6d4ba783ad7a00"
+  },
+  "runtime": {
+    "python": "3.12.3"
+  },
+  "production_code_changed": false,
+  "new_gpu_jobs": 0
+}

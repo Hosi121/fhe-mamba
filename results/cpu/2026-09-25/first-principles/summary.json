@@ -1,0 +1,7682 @@
+{
+  "scope": "Static attribution, algebra checks and conditional scenarios; no new GPU speed result",
+  "base_commit": "f2452997f603c6dfd4556a73f8023ae621469253",
+  "inputs": {
+    "results/dgx/2026-09-25/packed-frontiers/payload-manifests/lm-full/manifest.json": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+    "results/dgx/2026-09-25/packed-frontiers/final-candidate-full/native.json": "da3dea44bc2a2afeb34540d28b1249b703e1102b0af9bba5889bbee612024223",
+    "results/cpu/2026-09-25/math-kernel-audit/inventory.json": "c7a50d76bf510e1543ecd7f0a26db040f2ce00415eb6a5e3c64d56b4549f3e11"
+  },
+  "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "graph": {
+    "nodes": 7910,
+    "live_nodes": 7814,
+    "slots": 32768,
+    "maximum_logical_node_size": 3432,
+    "warning": "Logical sizes exclude replicated BSGS scratch and packed refresh groups",
+    "live_size_histogram": {
+      "1": 980,
+      "24": 1272,
+      "32": 120,
+      "128": 600,
+      "768": 2257,
+      "1024": 125,
+      "1536": 1560,
+      "3072": 840,
+      "3432": 60
+    }
+  },
+  "polynomials": {
+    "by_kind": {
+      "inv_sqrt": {
+        "nodes": 245,
+        "ctct_core_calls": 2720,
+        "logical_values": 245
+      },
+      "softplus": {
+        "nodes": 60,
+        "ctct_core_calls": 500,
+        "logical_values": 1440
+      },
+      "sigmoid": {
+        "nodes": 60,
+        "ctct_core_calls": 685,
+        "logical_values": 1440
+      },
+      "tanh": {
+        "nodes": 60,
+        "ctct_core_calls": 785,
+        "logical_values": 1920
+      },
+      "cos": {
+        "nodes": 60,
+        "ctct_core_calls": 665,
+        "logical_values": 46080
+      },
+      "sin": {
+        "nodes": 60,
+        "ctct_core_calls": 665,
+        "logical_values": 46080
+      },
+      "silu": {
+        "nodes": 120,
+        "ctct_core_calls": 1635,
+        "logical_values": 184320
+      },
+      "negative_a": {
+        "nodes": 48,
+        "ctct_core_calls": 2036,
+        "logical_values": 1152
+      },
+      "exp": {
+        "nodes": 48,
+        "ctct_core_calls": 300,
+        "logical_values": 1152
+      }
+    },
+    "by_size": {
+      "1": {
+        "nodes": 245,
+        "ctct_core_calls": 2720,
+        "logical_values": 245
+      },
+      "24": {
+        "nodes": 216,
+        "ctct_core_calls": 3521,
+        "logical_values": 5184
+      },
+      "32": {
+        "nodes": 60,
+        "ctct_core_calls": 785,
+        "logical_values": 1920
+      },
+      "768": {
+        "nodes": 120,
+        "ctct_core_calls": 1330,
+        "logical_values": 92160
+      },
+      "1536": {
+        "nodes": 120,
+        "ctct_core_calls": 1635,
+        "logical_values": 184320
+      }
+    },
+    "total_core_ctct_calls": 9991,
+    "dag_ctct_calls": 2014,
+    "small_nodes": 521,
+    "small_core_ctct_calls": 7026,
+    "small_core_fraction": 0.7032329096186568,
+    "scalar_rms_repeat_candidates": [
+      {
+        "polynomial": 18,
+        "repeat": 19,
+        "target_size": 768
+      },
+      {
+        "polynomial": 49,
+        "repeat": 50,
+        "target_size": 128
+      },
+      {
+        "polynomial": 57,
+        "repeat": 58,
+        "target_size": 128
+      },
+      {
+        "polynomial": 118,
+        "repeat": 119,
+        "target_size": 768
+      },
+      {
+        "polynomial": 134,
+        "repeat": 135,
+        "target_size": 768
+      },
+      {
+        "polynomial": 165,
+        "repeat": 166,
+        "target_size": 128
+      },
+      {
+        "polynomial": 173,
+        "repeat": 174,
+        "target_size": 128
+      },
+      {
+        "polynomial": 234,
+        "repeat": 235,
+        "target_size": 768
+      },
+      {
+        "polynomial": 250,
+        "repeat": 251,
+        "target_size": 768
+      },
+      {
+        "polynomial": 281,
+        "repeat": 282,
+        "target_size": 128
+      },
+      {
+        "polynomial": 289,
+        "repeat": 290,
+        "target_size": 128
+      },
+      {
+        "polynomial": 350,
+        "repeat": 351,
+        "target_size": 768
+      },
+      {
+        "polynomial": 366,
+        "repeat": 367,
+        "target_size": 768
+      },
+      {
+        "polynomial": 397,
+        "repeat": 398,
+        "target_size": 128
+      },
+      {
+        "polynomial": 405,
+        "repeat": 406,
+        "target_size": 128
+      },
+      {
+        "polynomial": 466,
+        "repeat": 467,
+        "target_size": 768
+      },
+      {
+        "polynomial": 482,
+        "repeat": 483,
+        "target_size": 768
+      },
+      {
+        "polynomial": 513,
+        "repeat": 514,
+        "target_size": 128
+      },
+      {
+        "polynomial": 521,
+        "repeat": 522,
+        "target_size": 128
+      },
+      {
+        "polynomial": 582,
+        "repeat": 583,
+        "target_size": 768
+      },
+      {
+        "polynomial": 598,
+        "repeat": 599,
+        "target_size": 768
+      },
+      {
+        "polynomial": 629,
+        "repeat": 630,
+        "target_size": 128
+      },
+      {
+        "polynomial": 637,
+        "repeat": 638,
+        "target_size": 128
+      },
+      {
+        "polynomial": 698,
+        "repeat": 699,
+        "target_size": 768
+      },
+      {
+        "polynomial": 714,
+        "repeat": 715,
+        "target_size": 768
+      },
+      {
+        "polynomial": 745,
+        "repeat": 746,
+        "target_size": 128
+      },
+      {
+        "polynomial": 753,
+        "repeat": 754,
+        "target_size": 128
+      },
+      {
+        "polynomial": 814,
+        "repeat": 815,
+        "target_size": 768
+      },
+      {
+        "polynomial": 830,
+        "repeat": 831,
+        "target_size": 768
+      },
+      {
+        "polynomial": 861,
+        "repeat": 862,
+        "target_size": 128
+      },
+      {
+        "polynomial": 869,
+        "repeat": 870,
+        "target_size": 128
+      },
+      {
+        "polynomial": 930,
+        "repeat": 931,
+        "target_size": 768
+      },
+      {
+        "polynomial": 946,
+        "repeat": 947,
+        "target_size": 768
+      },
+      {
+        "polynomial": 977,
+        "repeat": 978,
+        "target_size": 128
+      },
+      {
+        "polynomial": 985,
+        "repeat": 986,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1046,
+        "repeat": 1047,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1062,
+        "repeat": 1063,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1093,
+        "repeat": 1094,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1101,
+        "repeat": 1102,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1162,
+        "repeat": 1163,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1178,
+        "repeat": 1179,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1209,
+        "repeat": 1210,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1217,
+        "repeat": 1218,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1278,
+        "repeat": 1279,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1294,
+        "repeat": 1295,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1325,
+        "repeat": 1326,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1333,
+        "repeat": 1334,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1394,
+        "repeat": 1395,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1410,
+        "repeat": 1411,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1420,
+        "repeat": 1421,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1451,
+        "repeat": 1452,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1459,
+        "repeat": 1460,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1528,
+        "repeat": 1529,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1544,
+        "repeat": 1545,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1575,
+        "repeat": 1576,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1583,
+        "repeat": 1584,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1652,
+        "repeat": 1653,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1668,
+        "repeat": 1669,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1699,
+        "repeat": 1700,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1707,
+        "repeat": 1708,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1776,
+        "repeat": 1777,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1792,
+        "repeat": 1793,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1823,
+        "repeat": 1824,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1831,
+        "repeat": 1832,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1900,
+        "repeat": 1901,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1916,
+        "repeat": 1917,
+        "target_size": 768
+      },
+      {
+        "polynomial": 1947,
+        "repeat": 1948,
+        "target_size": 128
+      },
+      {
+        "polynomial": 1955,
+        "repeat": 1956,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2024,
+        "repeat": 2025,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2040,
+        "repeat": 2041,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2071,
+        "repeat": 2072,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2079,
+        "repeat": 2080,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2148,
+        "repeat": 2149,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2164,
+        "repeat": 2165,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2195,
+        "repeat": 2196,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2203,
+        "repeat": 2204,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2272,
+        "repeat": 2273,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2288,
+        "repeat": 2289,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2319,
+        "repeat": 2320,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2327,
+        "repeat": 2328,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2396,
+        "repeat": 2397,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2412,
+        "repeat": 2413,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2443,
+        "repeat": 2444,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2451,
+        "repeat": 2452,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2520,
+        "repeat": 2521,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2536,
+        "repeat": 2537,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2567,
+        "repeat": 2568,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2575,
+        "repeat": 2576,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2644,
+        "repeat": 2645,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2660,
+        "repeat": 2661,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2691,
+        "repeat": 2692,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2699,
+        "repeat": 2700,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2768,
+        "repeat": 2769,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2784,
+        "repeat": 2785,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2815,
+        "repeat": 2816,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2823,
+        "repeat": 2824,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2892,
+        "repeat": 2893,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2908,
+        "repeat": 2909,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2918,
+        "repeat": 2919,
+        "target_size": 768
+      },
+      {
+        "polynomial": 2949,
+        "repeat": 2950,
+        "target_size": 128
+      },
+      {
+        "polynomial": 2957,
+        "repeat": 2958,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3033,
+        "repeat": 3034,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3049,
+        "repeat": 3050,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3080,
+        "repeat": 3081,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3088,
+        "repeat": 3089,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3164,
+        "repeat": 3165,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3180,
+        "repeat": 3181,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3211,
+        "repeat": 3212,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3219,
+        "repeat": 3220,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3295,
+        "repeat": 3296,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3311,
+        "repeat": 3312,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3342,
+        "repeat": 3343,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3350,
+        "repeat": 3351,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3426,
+        "repeat": 3427,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3442,
+        "repeat": 3443,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3473,
+        "repeat": 3474,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3481,
+        "repeat": 3482,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3557,
+        "repeat": 3558,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3573,
+        "repeat": 3574,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3604,
+        "repeat": 3605,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3612,
+        "repeat": 3613,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3688,
+        "repeat": 3689,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3704,
+        "repeat": 3705,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3735,
+        "repeat": 3736,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3743,
+        "repeat": 3744,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3819,
+        "repeat": 3820,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3835,
+        "repeat": 3836,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3866,
+        "repeat": 3867,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3874,
+        "repeat": 3875,
+        "target_size": 128
+      },
+      {
+        "polynomial": 3950,
+        "repeat": 3951,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3966,
+        "repeat": 3967,
+        "target_size": 768
+      },
+      {
+        "polynomial": 3997,
+        "repeat": 3998,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4005,
+        "repeat": 4006,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4081,
+        "repeat": 4082,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4097,
+        "repeat": 4098,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4128,
+        "repeat": 4129,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4136,
+        "repeat": 4137,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4212,
+        "repeat": 4213,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4228,
+        "repeat": 4229,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4259,
+        "repeat": 4260,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4267,
+        "repeat": 4268,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4343,
+        "repeat": 4344,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4359,
+        "repeat": 4360,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4390,
+        "repeat": 4391,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4398,
+        "repeat": 4399,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4474,
+        "repeat": 4475,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4490,
+        "repeat": 4491,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4500,
+        "repeat": 4501,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4531,
+        "repeat": 4532,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4539,
+        "repeat": 4540,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4622,
+        "repeat": 4623,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4638,
+        "repeat": 4639,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4669,
+        "repeat": 4670,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4677,
+        "repeat": 4678,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4760,
+        "repeat": 4761,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4776,
+        "repeat": 4777,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4807,
+        "repeat": 4808,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4815,
+        "repeat": 4816,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4898,
+        "repeat": 4899,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4914,
+        "repeat": 4915,
+        "target_size": 768
+      },
+      {
+        "polynomial": 4945,
+        "repeat": 4946,
+        "target_size": 128
+      },
+      {
+        "polynomial": 4953,
+        "repeat": 4954,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5036,
+        "repeat": 5037,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5052,
+        "repeat": 5053,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5083,
+        "repeat": 5084,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5091,
+        "repeat": 5092,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5174,
+        "repeat": 5175,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5190,
+        "repeat": 5191,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5221,
+        "repeat": 5222,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5229,
+        "repeat": 5230,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5312,
+        "repeat": 5313,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5328,
+        "repeat": 5329,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5359,
+        "repeat": 5360,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5367,
+        "repeat": 5368,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5450,
+        "repeat": 5451,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5466,
+        "repeat": 5467,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5497,
+        "repeat": 5498,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5505,
+        "repeat": 5506,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5588,
+        "repeat": 5589,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5604,
+        "repeat": 5605,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5635,
+        "repeat": 5636,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5643,
+        "repeat": 5644,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5726,
+        "repeat": 5727,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5742,
+        "repeat": 5743,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5773,
+        "repeat": 5774,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5781,
+        "repeat": 5782,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5864,
+        "repeat": 5865,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5880,
+        "repeat": 5881,
+        "target_size": 768
+      },
+      {
+        "polynomial": 5911,
+        "repeat": 5912,
+        "target_size": 128
+      },
+      {
+        "polynomial": 5919,
+        "repeat": 5920,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6002,
+        "repeat": 6003,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6018,
+        "repeat": 6019,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6049,
+        "repeat": 6050,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6057,
+        "repeat": 6058,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6140,
+        "repeat": 6141,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6156,
+        "repeat": 6157,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6166,
+        "repeat": 6167,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6197,
+        "repeat": 6198,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6205,
+        "repeat": 6206,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6295,
+        "repeat": 6296,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6311,
+        "repeat": 6312,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6342,
+        "repeat": 6343,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6350,
+        "repeat": 6351,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6440,
+        "repeat": 6441,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6456,
+        "repeat": 6457,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6487,
+        "repeat": 6488,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6495,
+        "repeat": 6496,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6585,
+        "repeat": 6586,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6601,
+        "repeat": 6602,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6632,
+        "repeat": 6633,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6640,
+        "repeat": 6641,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6730,
+        "repeat": 6731,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6746,
+        "repeat": 6747,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6777,
+        "repeat": 6778,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6785,
+        "repeat": 6786,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6875,
+        "repeat": 6876,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6891,
+        "repeat": 6892,
+        "target_size": 768
+      },
+      {
+        "polynomial": 6922,
+        "repeat": 6923,
+        "target_size": 128
+      },
+      {
+        "polynomial": 6930,
+        "repeat": 6931,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7020,
+        "repeat": 7021,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7036,
+        "repeat": 7037,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7067,
+        "repeat": 7068,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7075,
+        "repeat": 7076,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7165,
+        "repeat": 7166,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7181,
+        "repeat": 7182,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7212,
+        "repeat": 7213,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7220,
+        "repeat": 7221,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7310,
+        "repeat": 7311,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7326,
+        "repeat": 7327,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7357,
+        "repeat": 7358,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7365,
+        "repeat": 7366,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7455,
+        "repeat": 7456,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7471,
+        "repeat": 7472,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7502,
+        "repeat": 7503,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7510,
+        "repeat": 7511,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7600,
+        "repeat": 7601,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7616,
+        "repeat": 7617,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7647,
+        "repeat": 7648,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7655,
+        "repeat": 7656,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7745,
+        "repeat": 7746,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7761,
+        "repeat": 7762,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7792,
+        "repeat": 7793,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7800,
+        "repeat": 7801,
+        "target_size": 128
+      },
+      {
+        "polynomial": 7890,
+        "repeat": 7891,
+        "target_size": 768
+      },
+      {
+        "polynomial": 7906,
+        "repeat": 7907,
+        "target_size": 768
+      }
+    ],
+    "sites": [
+      {
+        "id": 18,
+        "site": "0:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 32,
+        "site": "0:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 36,
+        "site": "0:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 37,
+        "site": "0:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 43,
+        "site": "0:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 44,
+        "site": "0:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 49,
+        "site": "0:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 57,
+        "site": "0:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 109,
+        "site": "0:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 118,
+        "site": "0:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 125,
+        "site": "0:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 134,
+        "site": "1:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 148,
+        "site": "1:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 152,
+        "site": "1:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 153,
+        "site": "1:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 159,
+        "site": "1:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 160,
+        "site": "1:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 165,
+        "site": "1:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 173,
+        "site": "1:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 225,
+        "site": "1:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 234,
+        "site": "1:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 241,
+        "site": "1:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 250,
+        "site": "2:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 264,
+        "site": "2:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 268,
+        "site": "2:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 269,
+        "site": "2:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 275,
+        "site": "2:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 276,
+        "site": "2:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 281,
+        "site": "2:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 289,
+        "site": "2:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 341,
+        "site": "2:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 350,
+        "site": "2:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 357,
+        "site": "2:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 366,
+        "site": "3:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 380,
+        "site": "3:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 384,
+        "site": "3:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 385,
+        "site": "3:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 391,
+        "site": "3:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 392,
+        "site": "3:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 397,
+        "site": "3:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 405,
+        "site": "3:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 457,
+        "site": "3:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 466,
+        "site": "3:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 473,
+        "site": "3:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 482,
+        "site": "4:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 496,
+        "site": "4:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 500,
+        "site": "4:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 501,
+        "site": "4:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 507,
+        "site": "4:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 508,
+        "site": "4:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 513,
+        "site": "4:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 521,
+        "site": "4:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 573,
+        "site": "4:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 582,
+        "site": "4:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 589,
+        "site": "4:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 598,
+        "site": "5:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 612,
+        "site": "5:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 616,
+        "site": "5:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 617,
+        "site": "5:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 623,
+        "site": "5:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 624,
+        "site": "5:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 629,
+        "site": "5:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 637,
+        "site": "5:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 689,
+        "site": "5:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 698,
+        "site": "5:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 705,
+        "site": "5:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 714,
+        "site": "6:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 728,
+        "site": "6:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 732,
+        "site": "6:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 733,
+        "site": "6:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 739,
+        "site": "6:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 740,
+        "site": "6:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 745,
+        "site": "6:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 753,
+        "site": "6:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 805,
+        "site": "6:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 814,
+        "site": "6:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 821,
+        "site": "6:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 830,
+        "site": "7:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 844,
+        "site": "7:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 848,
+        "site": "7:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 849,
+        "site": "7:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 855,
+        "site": "7:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 856,
+        "site": "7:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 861,
+        "site": "7:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 869,
+        "site": "7:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 921,
+        "site": "7:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 930,
+        "site": "7:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 937,
+        "site": "7:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 946,
+        "site": "8:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 960,
+        "site": "8:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 964,
+        "site": "8:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 965,
+        "site": "8:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 971,
+        "site": "8:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 972,
+        "site": "8:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 977,
+        "site": "8:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 985,
+        "site": "8:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1037,
+        "site": "8:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1046,
+        "site": "8:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1053,
+        "site": "8:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1062,
+        "site": "9:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1076,
+        "site": "9:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1080,
+        "site": "9:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1081,
+        "site": "9:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1087,
+        "site": "9:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1088,
+        "site": "9:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1093,
+        "site": "9:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1101,
+        "site": "9:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1153,
+        "site": "9:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1162,
+        "site": "9:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1169,
+        "site": "9:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1178,
+        "site": "10:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1192,
+        "site": "10:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1196,
+        "site": "10:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1197,
+        "site": "10:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1203,
+        "site": "10:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1204,
+        "site": "10:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1209,
+        "site": "10:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1217,
+        "site": "10:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1269,
+        "site": "10:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1278,
+        "site": "10:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1285,
+        "site": "10:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1294,
+        "site": "11:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1308,
+        "site": "11:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1312,
+        "site": "11:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1313,
+        "site": "11:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1319,
+        "site": "11:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1320,
+        "site": "11:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1325,
+        "site": "11:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1333,
+        "site": "11:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1385,
+        "site": "11:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1394,
+        "site": "11:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1401,
+        "site": "11:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 127,
+        "ctct_core_calls": 24
+      },
+      {
+        "id": 1410,
+        "site": "-1:final_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1420,
+        "site": "0:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1434,
+        "site": "0:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1435,
+        "site": "0:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 1437,
+        "site": "0:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1438,
+        "site": "0:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1439,
+        "site": "0:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1445,
+        "site": "0:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1446,
+        "site": "0:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1451,
+        "site": "0:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1459,
+        "site": "0:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1519,
+        "site": "0:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1528,
+        "site": "0:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1535,
+        "site": "0:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1544,
+        "site": "1:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1558,
+        "site": "1:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1559,
+        "site": "1:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 1561,
+        "site": "1:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1562,
+        "site": "1:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1563,
+        "site": "1:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1569,
+        "site": "1:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1570,
+        "site": "1:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1575,
+        "site": "1:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1583,
+        "site": "1:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1643,
+        "site": "1:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1652,
+        "site": "1:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1659,
+        "site": "1:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1668,
+        "site": "2:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1682,
+        "site": "2:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1683,
+        "site": "2:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 1685,
+        "site": "2:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1686,
+        "site": "2:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1687,
+        "site": "2:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1693,
+        "site": "2:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1694,
+        "site": "2:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1699,
+        "site": "2:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1707,
+        "site": "2:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1767,
+        "site": "2:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1776,
+        "site": "2:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1783,
+        "site": "2:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1792,
+        "site": "3:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1806,
+        "site": "3:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1807,
+        "site": "3:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 1809,
+        "site": "3:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 1810,
+        "site": "3:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1811,
+        "site": "3:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1817,
+        "site": "3:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1818,
+        "site": "3:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1823,
+        "site": "3:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1831,
+        "site": "3:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1891,
+        "site": "3:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1900,
+        "site": "3:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1907,
+        "site": "3:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1916,
+        "site": "4:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1930,
+        "site": "4:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1931,
+        "site": "4:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 1933,
+        "site": "4:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 1934,
+        "site": "4:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1935,
+        "site": "4:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1941,
+        "site": "4:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1942,
+        "site": "4:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 1947,
+        "site": "4:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 1955,
+        "site": "4:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2015,
+        "site": "4:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2024,
+        "site": "4:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2031,
+        "site": "4:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2040,
+        "site": "5:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2054,
+        "site": "5:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2055,
+        "site": "5:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 2057,
+        "site": "5:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 2058,
+        "site": "5:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2059,
+        "site": "5:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2065,
+        "site": "5:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2066,
+        "site": "5:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2071,
+        "site": "5:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2079,
+        "site": "5:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2139,
+        "site": "5:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2148,
+        "site": "5:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2155,
+        "site": "5:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2164,
+        "site": "6:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2178,
+        "site": "6:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2179,
+        "site": "6:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 2181,
+        "site": "6:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2182,
+        "site": "6:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2183,
+        "site": "6:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2189,
+        "site": "6:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2190,
+        "site": "6:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2195,
+        "site": "6:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2203,
+        "site": "6:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2263,
+        "site": "6:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2272,
+        "site": "6:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2279,
+        "site": "6:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2288,
+        "site": "7:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2302,
+        "site": "7:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2303,
+        "site": "7:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 2305,
+        "site": "7:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 2306,
+        "site": "7:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2307,
+        "site": "7:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2313,
+        "site": "7:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2314,
+        "site": "7:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2319,
+        "site": "7:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2327,
+        "site": "7:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2387,
+        "site": "7:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2396,
+        "site": "7:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2403,
+        "site": "7:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2412,
+        "site": "8:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2426,
+        "site": "8:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2427,
+        "site": "8:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 2429,
+        "site": "8:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2430,
+        "site": "8:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2431,
+        "site": "8:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2437,
+        "site": "8:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2438,
+        "site": "8:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2443,
+        "site": "8:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2451,
+        "site": "8:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2511,
+        "site": "8:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2520,
+        "site": "8:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2527,
+        "site": "8:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2536,
+        "site": "9:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2550,
+        "site": "9:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2551,
+        "site": "9:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 1023,
+        "ctct_core_calls": 66
+      },
+      {
+        "id": 2553,
+        "site": "9:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2554,
+        "site": "9:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2555,
+        "site": "9:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2561,
+        "site": "9:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2562,
+        "site": "9:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2567,
+        "site": "9:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2575,
+        "site": "9:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2635,
+        "site": "9:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2644,
+        "site": "9:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2651,
+        "site": "9:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2660,
+        "site": "10:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2674,
+        "site": "10:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2675,
+        "site": "10:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 2677,
+        "site": "10:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2678,
+        "site": "10:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2679,
+        "site": "10:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2685,
+        "site": "10:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2686,
+        "site": "10:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2691,
+        "site": "10:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2699,
+        "site": "10:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2759,
+        "site": "10:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2768,
+        "site": "10:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2775,
+        "site": "10:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2784,
+        "site": "11:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2798,
+        "site": "11:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2799,
+        "site": "11:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 2801,
+        "site": "11:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2802,
+        "site": "11:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2803,
+        "site": "11:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2809,
+        "site": "11:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2810,
+        "site": "11:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2815,
+        "site": "11:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2823,
+        "site": "11:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2883,
+        "site": "11:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2892,
+        "site": "11:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2899,
+        "site": "11:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 127,
+        "ctct_core_calls": 24
+      },
+      {
+        "id": 2908,
+        "site": "-1:final_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2918,
+        "site": "0:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2932,
+        "site": "0:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2933,
+        "site": "0:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 2935,
+        "site": "0:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 2936,
+        "site": "0:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 2937,
+        "site": "0:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2943,
+        "site": "0:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2944,
+        "site": "0:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2949,
+        "site": "0:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 2957,
+        "site": "0:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3024,
+        "site": "0:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3033,
+        "site": "0:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3040,
+        "site": "0:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3049,
+        "site": "1:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3063,
+        "site": "1:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3064,
+        "site": "1:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 3066,
+        "site": "1:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3067,
+        "site": "1:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3068,
+        "site": "1:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3074,
+        "site": "1:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3075,
+        "site": "1:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3080,
+        "site": "1:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3088,
+        "site": "1:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3155,
+        "site": "1:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3164,
+        "site": "1:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3171,
+        "site": "1:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3180,
+        "site": "2:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3194,
+        "site": "2:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3195,
+        "site": "2:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 3197,
+        "site": "2:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3198,
+        "site": "2:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3199,
+        "site": "2:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3205,
+        "site": "2:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3206,
+        "site": "2:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3211,
+        "site": "2:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3219,
+        "site": "2:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3286,
+        "site": "2:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3295,
+        "site": "2:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3302,
+        "site": "2:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3311,
+        "site": "3:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3325,
+        "site": "3:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3326,
+        "site": "3:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 3328,
+        "site": "3:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 3329,
+        "site": "3:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3330,
+        "site": "3:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3336,
+        "site": "3:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3337,
+        "site": "3:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3342,
+        "site": "3:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3350,
+        "site": "3:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3417,
+        "site": "3:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3426,
+        "site": "3:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3433,
+        "site": "3:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3442,
+        "site": "4:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3456,
+        "site": "4:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3457,
+        "site": "4:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 3459,
+        "site": "4:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3460,
+        "site": "4:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3461,
+        "site": "4:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3467,
+        "site": "4:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3468,
+        "site": "4:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3473,
+        "site": "4:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3481,
+        "site": "4:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3548,
+        "site": "4:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3557,
+        "site": "4:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3564,
+        "site": "4:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3573,
+        "site": "5:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3587,
+        "site": "5:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3588,
+        "site": "5:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 3590,
+        "site": "5:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 3591,
+        "site": "5:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3592,
+        "site": "5:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3598,
+        "site": "5:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3599,
+        "site": "5:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3604,
+        "site": "5:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3612,
+        "site": "5:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3679,
+        "site": "5:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3688,
+        "site": "5:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3695,
+        "site": "5:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3704,
+        "site": "6:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3718,
+        "site": "6:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3719,
+        "site": "6:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 3721,
+        "site": "6:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3722,
+        "site": "6:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3723,
+        "site": "6:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3729,
+        "site": "6:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3730,
+        "site": "6:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3735,
+        "site": "6:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3743,
+        "site": "6:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3810,
+        "site": "6:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3819,
+        "site": "6:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3826,
+        "site": "6:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3835,
+        "site": "7:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3849,
+        "site": "7:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3850,
+        "site": "7:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 3852,
+        "site": "7:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 3853,
+        "site": "7:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3854,
+        "site": "7:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3860,
+        "site": "7:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3861,
+        "site": "7:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3866,
+        "site": "7:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3874,
+        "site": "7:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3941,
+        "site": "7:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3950,
+        "site": "7:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3957,
+        "site": "7:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 3966,
+        "site": "8:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3980,
+        "site": "8:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3981,
+        "site": "8:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 3983,
+        "site": "8:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 3984,
+        "site": "8:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3985,
+        "site": "8:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3991,
+        "site": "8:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3992,
+        "site": "8:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 3997,
+        "site": "8:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4005,
+        "site": "8:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4072,
+        "site": "8:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4081,
+        "site": "8:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4088,
+        "site": "8:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4097,
+        "site": "9:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4111,
+        "site": "9:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4112,
+        "site": "9:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 1023,
+        "ctct_core_calls": 66
+      },
+      {
+        "id": 4114,
+        "site": "9:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4115,
+        "site": "9:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4116,
+        "site": "9:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4122,
+        "site": "9:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4123,
+        "site": "9:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4128,
+        "site": "9:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4136,
+        "site": "9:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4203,
+        "site": "9:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4212,
+        "site": "9:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4219,
+        "site": "9:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4228,
+        "site": "10:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4242,
+        "site": "10:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4243,
+        "site": "10:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 4245,
+        "site": "10:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4246,
+        "site": "10:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4247,
+        "site": "10:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4253,
+        "site": "10:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4254,
+        "site": "10:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4259,
+        "site": "10:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4267,
+        "site": "10:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4334,
+        "site": "10:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4343,
+        "site": "10:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4350,
+        "site": "10:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4359,
+        "site": "11:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4373,
+        "site": "11:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4374,
+        "site": "11:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 4376,
+        "site": "11:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4377,
+        "site": "11:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4378,
+        "site": "11:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4384,
+        "site": "11:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4385,
+        "site": "11:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4390,
+        "site": "11:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4398,
+        "site": "11:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4465,
+        "site": "11:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4474,
+        "site": "11:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4481,
+        "site": "11:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 127,
+        "ctct_core_calls": 24
+      },
+      {
+        "id": 4490,
+        "site": "-1:final_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4500,
+        "site": "0:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4514,
+        "site": "0:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4515,
+        "site": "0:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 4517,
+        "site": "0:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4518,
+        "site": "0:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4519,
+        "site": "0:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4525,
+        "site": "0:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4526,
+        "site": "0:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4531,
+        "site": "0:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4539,
+        "site": "0:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4613,
+        "site": "0:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4622,
+        "site": "0:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4629,
+        "site": "0:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4638,
+        "site": "1:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4652,
+        "site": "1:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4653,
+        "site": "1:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 4655,
+        "site": "1:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4656,
+        "site": "1:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4657,
+        "site": "1:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4663,
+        "site": "1:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4664,
+        "site": "1:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4669,
+        "site": "1:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4677,
+        "site": "1:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4751,
+        "site": "1:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4760,
+        "site": "1:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4767,
+        "site": "1:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 4776,
+        "site": "2:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4790,
+        "site": "2:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4791,
+        "site": "2:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 4793,
+        "site": "2:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4794,
+        "site": "2:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4795,
+        "site": "2:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4801,
+        "site": "2:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4802,
+        "site": "2:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4807,
+        "site": "2:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4815,
+        "site": "2:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4889,
+        "site": "2:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4898,
+        "site": "2:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4905,
+        "site": "2:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4914,
+        "site": "3:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4928,
+        "site": "3:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 4929,
+        "site": "3:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 4931,
+        "site": "3:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 4932,
+        "site": "3:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4933,
+        "site": "3:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4939,
+        "site": "3:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4940,
+        "site": "3:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4945,
+        "site": "3:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 4953,
+        "site": "3:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5027,
+        "site": "3:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5036,
+        "site": "3:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5043,
+        "site": "3:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5052,
+        "site": "4:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5066,
+        "site": "4:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5067,
+        "site": "4:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 5069,
+        "site": "4:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5070,
+        "site": "4:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5071,
+        "site": "4:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5077,
+        "site": "4:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5078,
+        "site": "4:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5083,
+        "site": "4:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5091,
+        "site": "4:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5165,
+        "site": "4:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5174,
+        "site": "4:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5181,
+        "site": "4:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5190,
+        "site": "5:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5204,
+        "site": "5:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5205,
+        "site": "5:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 5207,
+        "site": "5:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 5208,
+        "site": "5:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5209,
+        "site": "5:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5215,
+        "site": "5:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5216,
+        "site": "5:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5221,
+        "site": "5:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5229,
+        "site": "5:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5303,
+        "site": "5:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5312,
+        "site": "5:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5319,
+        "site": "5:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5328,
+        "site": "6:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5342,
+        "site": "6:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5343,
+        "site": "6:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 5345,
+        "site": "6:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5346,
+        "site": "6:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5347,
+        "site": "6:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5353,
+        "site": "6:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5354,
+        "site": "6:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5359,
+        "site": "6:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5367,
+        "site": "6:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5441,
+        "site": "6:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5450,
+        "site": "6:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5457,
+        "site": "6:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5466,
+        "site": "7:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5480,
+        "site": "7:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5481,
+        "site": "7:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 5483,
+        "site": "7:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 5484,
+        "site": "7:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5485,
+        "site": "7:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5491,
+        "site": "7:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5492,
+        "site": "7:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5497,
+        "site": "7:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5505,
+        "site": "7:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5579,
+        "site": "7:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5588,
+        "site": "7:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5595,
+        "site": "7:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5604,
+        "site": "8:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5618,
+        "site": "8:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5619,
+        "site": "8:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 5621,
+        "site": "8:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5622,
+        "site": "8:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5623,
+        "site": "8:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5629,
+        "site": "8:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5630,
+        "site": "8:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5635,
+        "site": "8:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5643,
+        "site": "8:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5717,
+        "site": "8:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5726,
+        "site": "8:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5733,
+        "site": "8:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5742,
+        "site": "9:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5756,
+        "site": "9:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5757,
+        "site": "9:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 1023,
+        "ctct_core_calls": 66
+      },
+      {
+        "id": 5759,
+        "site": "9:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5760,
+        "site": "9:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5761,
+        "site": "9:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5767,
+        "site": "9:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5768,
+        "site": "9:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5773,
+        "site": "9:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5781,
+        "site": "9:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5855,
+        "site": "9:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5864,
+        "site": "9:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5871,
+        "site": "9:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5880,
+        "site": "10:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5894,
+        "site": "10:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5895,
+        "site": "10:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 5897,
+        "site": "10:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5898,
+        "site": "10:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5899,
+        "site": "10:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 5905,
+        "site": "10:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5906,
+        "site": "10:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5911,
+        "site": "10:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 5919,
+        "site": "10:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 5993,
+        "site": "10:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6002,
+        "site": "10:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6009,
+        "site": "10:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6018,
+        "site": "11:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6032,
+        "site": "11:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6033,
+        "site": "11:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 6035,
+        "site": "11:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6036,
+        "site": "11:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6037,
+        "site": "11:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6043,
+        "site": "11:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6044,
+        "site": "11:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6049,
+        "site": "11:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6057,
+        "site": "11:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6131,
+        "site": "11:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6140,
+        "site": "11:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6147,
+        "site": "11:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 127,
+        "ctct_core_calls": 24
+      },
+      {
+        "id": 6156,
+        "site": "-1:final_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6166,
+        "site": "0:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6180,
+        "site": "0:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6181,
+        "site": "0:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 6183,
+        "site": "0:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6184,
+        "site": "0:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6185,
+        "site": "0:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6191,
+        "site": "0:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6192,
+        "site": "0:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6197,
+        "site": "0:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6205,
+        "site": "0:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6286,
+        "site": "0:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6295,
+        "site": "0:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6302,
+        "site": "0:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6311,
+        "site": "1:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6325,
+        "site": "1:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6326,
+        "site": "1:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 6328,
+        "site": "1:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6329,
+        "site": "1:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6330,
+        "site": "1:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6336,
+        "site": "1:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6337,
+        "site": "1:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6342,
+        "site": "1:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6350,
+        "site": "1:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6431,
+        "site": "1:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6440,
+        "site": "1:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6447,
+        "site": "1:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6456,
+        "site": "2:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6470,
+        "site": "2:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6471,
+        "site": "2:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 6473,
+        "site": "2:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6474,
+        "site": "2:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6475,
+        "site": "2:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6481,
+        "site": "2:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6482,
+        "site": "2:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6487,
+        "site": "2:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6495,
+        "site": "2:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6576,
+        "site": "2:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6585,
+        "site": "2:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6592,
+        "site": "2:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6601,
+        "site": "3:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6615,
+        "site": "3:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6616,
+        "site": "3:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 6618,
+        "site": "3:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 6619,
+        "site": "3:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6620,
+        "site": "3:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6626,
+        "site": "3:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6627,
+        "site": "3:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6632,
+        "site": "3:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6640,
+        "site": "3:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6721,
+        "site": "3:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6730,
+        "site": "3:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6737,
+        "site": "3:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6746,
+        "site": "4:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6760,
+        "site": "4:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6761,
+        "site": "4:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 6763,
+        "site": "4:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6764,
+        "site": "4:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6765,
+        "site": "4:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6771,
+        "site": "4:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6772,
+        "site": "4:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6777,
+        "site": "4:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6785,
+        "site": "4:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6866,
+        "site": "4:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6875,
+        "site": "4:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6882,
+        "site": "4:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 6891,
+        "site": "5:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6905,
+        "site": "5:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 6906,
+        "site": "5:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 6908,
+        "site": "5:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 6909,
+        "site": "5:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6910,
+        "site": "5:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6916,
+        "site": "5:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6917,
+        "site": "5:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6922,
+        "site": "5:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 6930,
+        "site": "5:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7011,
+        "site": "5:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7020,
+        "site": "5:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7027,
+        "site": "5:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7036,
+        "site": "6:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7050,
+        "site": "6:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7051,
+        "site": "6:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 7053,
+        "site": "6:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7054,
+        "site": "6:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7055,
+        "site": "6:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7061,
+        "site": "6:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7062,
+        "site": "6:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7067,
+        "site": "6:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7075,
+        "site": "6:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7156,
+        "site": "6:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7165,
+        "site": "6:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7172,
+        "site": "6:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7181,
+        "site": "7:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7195,
+        "site": "7:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7196,
+        "site": "7:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 7198,
+        "site": "7:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 7,
+        "ctct_core_calls": 4
+      },
+      {
+        "id": 7199,
+        "site": "7:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7200,
+        "site": "7:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7206,
+        "site": "7:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7207,
+        "site": "7:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7212,
+        "site": "7:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7220,
+        "site": "7:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7301,
+        "site": "7:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7310,
+        "site": "7:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7317,
+        "site": "7:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7326,
+        "site": "8:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7340,
+        "site": "8:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7341,
+        "site": "8:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 511,
+        "ctct_core_calls": 49
+      },
+      {
+        "id": 7343,
+        "site": "8:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7344,
+        "site": "8:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7345,
+        "site": "8:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7351,
+        "site": "8:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7352,
+        "site": "8:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7357,
+        "site": "8:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7365,
+        "site": "8:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7446,
+        "site": "8:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7455,
+        "site": "8:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7462,
+        "site": "8:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7471,
+        "site": "9:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7485,
+        "site": "9:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7486,
+        "site": "9:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 1023,
+        "ctct_core_calls": 66
+      },
+      {
+        "id": 7488,
+        "site": "9:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7489,
+        "site": "9:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7490,
+        "site": "9:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7496,
+        "site": "9:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7497,
+        "site": "9:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7502,
+        "site": "9:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7510,
+        "site": "9:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7591,
+        "site": "9:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7600,
+        "site": "9:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7607,
+        "site": "9:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7616,
+        "site": "10:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7630,
+        "site": "10:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7631,
+        "site": "10:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 7633,
+        "site": "10:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7634,
+        "site": "10:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7635,
+        "site": "10:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7641,
+        "site": "10:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7642,
+        "site": "10:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7647,
+        "site": "10:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7655,
+        "site": "10:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7736,
+        "site": "10:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7745,
+        "site": "10:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7752,
+        "site": "10:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 63,
+        "ctct_core_calls": 16
+      },
+      {
+        "id": 7761,
+        "site": "11:block_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7775,
+        "site": "11:dt_softplus",
+        "kind": "softplus",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7776,
+        "site": "11:m3_negative_a",
+        "kind": "negative_a",
+        "size": 24,
+        "degree": 255,
+        "ctct_core_calls": 33
+      },
+      {
+        "id": 7778,
+        "site": "11:decay_exp",
+        "kind": "exp",
+        "size": 24,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7779,
+        "site": "11:m3_mixing",
+        "kind": "sigmoid",
+        "size": 24,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7780,
+        "site": "11:m3_angle_tanh",
+        "kind": "tanh",
+        "size": 32,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7786,
+        "site": "11:m3_cos",
+        "kind": "cos",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7787,
+        "site": "11:m3_sin",
+        "kind": "sin",
+        "size": 768,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7792,
+        "site": "11:m3_b_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7800,
+        "site": "11:m3_c_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 15,
+        "ctct_core_calls": 7
+      },
+      {
+        "id": 7881,
+        "site": "11:gate_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7890,
+        "site": "11:mlp_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      },
+      {
+        "id": 7897,
+        "site": "11:mlp_silu",
+        "kind": "silu",
+        "size": 1536,
+        "degree": 127,
+        "ctct_core_calls": 24
+      },
+      {
+        "id": 7906,
+        "site": "-1:final_rms",
+        "kind": "inv_sqrt",
+        "size": 1,
+        "degree": 31,
+        "ctct_core_calls": 11
+      }
+    ]
+  },
+  "profile": {
+    "eval_seconds": 761.001983786,
+    "category_seconds": {
+      "routing": 161.491932903,
+      "linear": 123.939218059,
+      "polynomial": 99.02948886599998,
+      "refresh_including_wrapper": 363.586452278,
+      "remaining_including_timer_gaps": 12.954891679999946
+    },
+    "host_encoding_nested_seconds_do_not_add": 151.814104462,
+    "physical_two_pass_refresh_events": 238
+  },
+  "conditional_scenarios_not_forecasts": {
+    "routing": {
+      "seconds_if_category_halved_and_others_fixed": 680.2560173345,
+      "total_reduction_fraction": 0.10610480415542048
+    },
+    "linear": {
+      "seconds_if_category_halved_and_others_fixed": 699.0323747565,
+      "total_reduction_fraction": 0.08143159985102794
+    },
+    "polynomial": {
+      "seconds_if_category_halved_and_others_fixed": 711.487239353,
+      "total_reduction_fraction": 0.06506519757893817
+    },
+    "refresh_including_wrapper": {
+      "seconds_if_category_halved_and_others_fixed": 579.208757647,
+      "total_reduction_fraction": 0.23888666522861754
+    },
+    "all_nonrefresh": {
+      "seconds_if_category_halved_and_others_fixed": 562.294218032,
+      "total_reduction_fraction": 0.26111333477138243
+    }
+  },
+  "dual_ring_break_even": {
+    "assumption": "All nonrefresh time halves, old per-event refresh cost, no conversion cost",
+    "maximum_refresh_count_multiplier_for_any_gain": 1.5465213692892688,
+    "seconds_if_refresh_count_increases_50_percent": 744.087444171
+  },
+  "ideal_rns_storage_not_traffic_model": [
+    {
+      "limbs64": 20,
+      "bytes64_two_components": 20971520,
+      "limbs32_min_for_same_bits": 40,
+      "bytes32_two_components": 20971520
+    },
+    {
+      "limbs64": 40,
+      "bytes64_two_components": 41943040,
+      "limbs32_min_for_same_bits": 79,
+      "bytes32_two_components": 41418752
+    }
+  ],
+  "algebra": {
+    "scope": "Float64 identity checks; sampled defects are not interval/error certificates",
+    "grid_points_per_site": 65537,
+    "seed": 20260925,
+    "same_angle_gram_identity_max_error": 3.552713678800501e-15,
+    "frozen_polynomial_complex_multiply_max_error": 8.881784197001252e-16,
+    "rotary_sites": [
+      {
+        "layer": 0,
+        "sampled_unitarity_defect": 4.440892098500626e-15
+      },
+      {
+        "layer": 1,
+        "sampled_unitarity_defect": 1.3533780762742254e-09
+      },
+      {
+        "layer": 2,
+        "sampled_unitarity_defect": 2.6986302081866143e-11
+      },
+      {
+        "layer": 3,
+        "sampled_unitarity_defect": 1.1242118347354335e-12
+      },
+      {
+        "layer": 4,
+        "sampled_unitarity_defect": 1.6653345369377348e-15
+      },
+      {
+        "layer": 5,
+        "sampled_unitarity_defect": 1.0972334152370422e-11
+      },
+      {
+        "layer": 6,
+        "sampled_unitarity_defect": 4.8223869342223225e-11
+      },
+      {
+        "layer": 7,
+        "sampled_unitarity_defect": 1.8784972577456927e-08
+      },
+      {
+        "layer": 8,
+        "sampled_unitarity_defect": 6.70454802786935e-11
+      },
+      {
+        "layer": 9,
+        "sampled_unitarity_defect": 2.4424906541753444e-15
+      },
+      {
+        "layer": 10,
+        "sampled_unitarity_defect": 2.7297378668578176e-07
+      },
+      {
+        "layer": 11,
+        "sampled_unitarity_defect": 3.859270891748423e-07
+      }
+    ],
+    "negative_a_sites": [
+      {
+        "layer": 0,
+        "degree": 511,
+        "domain": [
+          -5.820935891846244,
+          12.45967855403855
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.146607447402548,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 1,
+        "degree": 255,
+        "domain": [
+          -3.7695577753056395,
+          5.256559968347622
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.20966304364264018,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 2,
+        "degree": 511,
+        "domain": [
+          -10.458064763547066,
+          8.89436518936067
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.08727477289021979,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 3,
+        "degree": 255,
+        "domain": [
+          -3.624988150318173,
+          4.864141383862232
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.21621677018376914,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 4,
+        "degree": 511,
+        "domain": [
+          -6.100307324718791,
+          13.282963891051917
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.14083897418336117,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 5,
+        "degree": 255,
+        "domain": [
+          -3.894169950036967,
+          5.008079897890055
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.2043247394775179,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 6,
+        "degree": 255,
+        "domain": [
+          -3.535417310682438,
+          4.29349475751273
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.22048687728131713,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 7,
+        "degree": 511,
+        "domain": [
+          -5.853367296273965,
+          7.224090615085639
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.14591367378539297,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 8,
+        "degree": 511,
+        "domain": [
+          -4.54649441732734,
+          8.385633232970694
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.18029406049269311,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 9,
+        "degree": 1023,
+        "domain": [
+          -11.471378167458036,
+          17.253704437525514
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.08018360012603352,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 10,
+        "degree": 255,
+        "domain": [
+          -2.0351175151259677,
+          3.6885656749592703
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.32947653427465284,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      },
+      {
+        "layer": 11,
+        "degree": 255,
+        "domain": [
+          -1.536485787224966,
+          5.656734130439331
+        ],
+        "floor": 0.0001,
+        "analytic_minimum_unfloored": 0.394246246139643,
+        "floor_inactive_on_whole_domain": true,
+        "piecewise_identity_max_error": 0.0
+      }
+    ]
+  }
+}

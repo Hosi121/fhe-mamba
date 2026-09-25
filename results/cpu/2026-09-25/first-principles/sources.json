@@ -1,0 +1,106 @@
+{
+  "review_date": "2026-09-25",
+  "repository_base": "f2452997f603c6dfd4556a73f8023ae621469253",
+  "backend": {
+    "host": "dgx",
+    "directory": "/home/kataiwa/fhemamba/spark/source-2a70798e869944af",
+    "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+    "files_sha256": {
+      "src/CKKS/Bootstrap.cu": "86f815a9af430ad3dd7e88c04902302f638ccf56e744dd9c2fd0e0e8af760536",
+      "src/CKKS/ApproxModEval.cu": "193dc6e3df0b406af85ac67b0569a253a027c5957cdd22e6c0e87e2da5525e52",
+      "api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a"
+    },
+    "observations": [
+      "GPU Bootstrap uses ModRaise-first ordering.",
+      "Full packing dispatches to two-component approxModReduction.",
+      "approxModReduction has COMPLEX=true and evaluates the two Chebyshev series separately.",
+      "No BTSlotsEncoding or SlotsToCoeffs-first mode found in the inspected api and src/CKKS trees."
+    ]
+  },
+  "primary_sources": [
+    {
+      "title": "OpenFHE CKKS bootstrapping documentation",
+      "version": "v1.5.0",
+      "url": "https://github.com/openfheorg/openfhe-development/blob/v1.5.0/src/pke/examples/CKKS_BOOTSTRAPPING.md"
+    },
+    {
+      "title": "Faster Bootstrapping for CKKS with Less Modulus Consumption",
+      "version": "ePrint 2025/1403, revised 2026-03-05, PKC 2026",
+      "url": "https://eprint.iacr.org/2025/1403"
+    },
+    {
+      "title": "LCR+AKS author explanation and results",
+      "version": "2026-06-29",
+      "url": "https://ckks.org/blog/2026/less-mod-ckks/"
+    },
+    {
+      "title": "Cheddar",
+      "version": "arXiv 2407.13055v2",
+      "url": "https://arxiv.org/html/2407.13055v2"
+    },
+    {
+      "title": "Cheddar implementation",
+      "version": "main tree 8df8b26ce5411a68b68f0e7c2fb7e9a2f05f3e94, inspected 2026-09-25",
+      "url": "https://github.com/scale-snu/cheddar-fhe"
+    },
+    {
+      "title": "Lattigo residual/bootstrap parameter example",
+      "version": "v6.2.0",
+      "url": "https://github.com/tuneinsight/lattigo/blob/v6.2.0/examples/singleparty/ckks_bootstrapping/basics/main.go"
+    },
+    {
+      "title": "Lattigo smaller-ring batch bootstrap support",
+      "version": "main tree 5dbffbdea05394de2ca3a432ed5318aa832e3f40, inspected 2026-09-25",
+      "url": "https://github.com/tuneinsight/lattigo"
+    },
+    {
+      "title": "Faster CoeffToSlot and SlotToCoeff for Sparsely Packed Ciphertexts",
+      "version": "ePrint 2026/1023, revised 2026-09-07",
+      "url": "https://eprint.iacr.org/2026/1023"
+    },
+    {
+      "title": "Low-Latency Bootstrapping for CKKS using Roots of Unity",
+      "version": "arXiv 2607.27401v1, Tables 2-3",
+      "url": "https://arxiv.org/html/2607.27401v1"
+    },
+    {
+      "title": "Ciphertext Packing System",
+      "version": "HEIR maintained design, inspected 2026-09-25",
+      "url": "https://heir.dev/docs/design/layout/"
+    },
+    {
+      "title": "RBOOT",
+      "version": "USENIX Security 2026",
+      "url": "https://www.usenix.org/conference/usenixsecurity26/presentation/yang-zhaomin"
+    },
+    {
+      "title": "FESC",
+      "version": "arXiv 2608.17442v2",
+      "url": "https://arxiv.org/html/2608.17442v2"
+    },
+    {
+      "title": "TensorFHE",
+      "version": "arXiv 2212.14191",
+      "url": "https://arxiv.org/abs/2212.14191"
+    },
+    {
+      "title": "FHECore",
+      "version": "arXiv 2602.22229v2; simulated modified GPU",
+      "url": "https://arxiv.org/abs/2602.22229v2"
+    },
+    {
+      "title": "Lattigo smaller-ring evaluator and circuit ordering",
+      "version": "v6.2.0",
+      "url": "https://github.com/tuneinsight/lattigo/blob/v6.2.0/circuits/ckks/bootstrapping/evaluator.go"
+    }
+  ],
+  "model_config": {
+    "sha256": "642a36b583d7625f456623555c4974758ab132687bdeee97a362e44e5efff545",
+    "heads": 24,
+    "head_width": 64,
+    "state_width": 128,
+    "factor_scalar_crossover_steps": 42.44559585492228,
+    "first_integer_step_exceeding_dense_state_scalars": 43,
+    "scope": "Logical scalars only, ignoring angle/lag caches and encrypted representation costs"
+  }
+}
