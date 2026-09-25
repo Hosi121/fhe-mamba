@@ -197,6 +197,10 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "assert '--reuse-dead-inputs' in sys.argv\n"
         "assert '--compact-weights' in sys.argv\n"
         "assert '--frontier-refresh' in sys.argv\n"
+        "assert '--s2c-first' in sys.argv\n"
+        "assert '--gpu-plaintext-rns' in sys.argv\n"
+        "assert '--hoist-rotations' in sys.argv\n"
+        "assert '--share-chebyshev' in sys.argv\n"
     )
     binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
@@ -222,6 +226,8 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         frontier_refresh=True,
         s2c_first=True,
         gpu_plaintext_rns=True,
+        hoist_rotations=True,
+        share_chebyshev=True,
         **budget,
     )
     assert result["returncode"] == 0
@@ -244,6 +250,8 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "--frontier-refresh",
         "--s2c-first",
         "--gpu-plaintext-rns",
+        "--hoist-rotations",
+        "--share-chebyshev",
     ]
     assert result["command"][-len(expected_flags) :] == expected_flags
     assert result["passed"] is False  # No native result; flags cannot bypass the gate.

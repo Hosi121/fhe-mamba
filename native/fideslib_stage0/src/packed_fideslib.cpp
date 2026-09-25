@@ -5,6 +5,8 @@
 #include "packed_depth.hpp"
 #include "packed_lifetime.hpp"
 #include "packed_schedule.hpp"
+#include "fideslib_rotation_batch.hpp"
+#include "chebyshev_basis_cache.hpp"
 #include "fideslib_owned_arithmetic.hpp"
 #include "plaintext_cache.hpp"
 #include "fideslib_plaintext_ops.hpp"
@@ -57,6 +59,10 @@ struct PackedEvaluator {
   bool naf_rotations = false, reuse_dead_inputs = false;
   bool bsgs_routing_stages = false;
   bool frontier_refresh = false;
+  bool hoist_rotations = false, share_chebyshev = false;
+  fhemamba::RotationBatchStats rotation_batch_stats;
+  long long shared_basis_hits = 0, shared_basis_invalidations = 0;
+  std::map<int, fhemamba::ChebyshevBasisState<Ct>> shared_bases;
   long long frontier_deferrals = 0;
   std::size_t maximum_ready_nodes = 0;
   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
@@ -157,6 +163,18 @@ struct PackedEvaluator {
     }
     return out;
   }
+  auto rotate_many(const Ct& input, const std::vector<int>& offsets) -> std::vector<Ct> {
+    if (!hoist_rotations) {
+      std::vector<Ct> out;
+      for (int offset : offsets) out.push_back(rotate(input, offset));
+      return out;
+    }
+    const auto before = rotation_batch_stats.edges;
+    auto out = fhemamba::hoisted_rotation_batch(cc, input, offsets, slots,
+        naf_rotations, sync_gpu, rotation_batch_stats);
+    rotations += rotation_batch_stats.edges - before;
+    return out;
+  }
   auto bootstrap_components(Ct input) -> std::pair<Ct, Ct> {
     while (input->GetNoiseScaleDeg() > 1) cc->RescaleInPlace(input);
     sync_gpu(); auto first = cc->EvalBootstrap(input); sync_gpu(); ++bootstraps;
@@ -232,8 +250,8 @@ struct PackedEvaluator {
       const auto plan = fhemamba::plan_packed_diagonals(std::move(offsets), slots, naf_rotations);
       if (plan.baby_step) {
         const int step = plan.offsets[1] - plan.offsets[0];
-        std::vector<Ct> babies;
-        for (int j = 0; j < plan.baby_step; ++j) babies.push_back(rotate(x, plan.offsets[j]));
+        std::vector<int> baby_offsets(plan.offsets.begin(), plan.offsets.begin() + plan.baby_step);
+        auto babies = rotate_many(x, baby_offsets);
         for (int first = 0; first < static_cast<int>(plan.offsets.size()); first += plan.baby_step) {
           const int giant = first * step;
           Ct inner;
@@ -363,9 +381,9 @@ struct PackedEvaluator {
       auto extended = rotation_sum(x, shape.reps, -columns, true, rot, sum);
       auto replicated = rotation_sum(extended, shape.replicas + shape.guard_windows,
                                      -shape.window, true, rot, sum);
-      std::vector<Ct> babies;
-      for (int i = 0; i < shape.baby_step; ++i)
-        babies.push_back(rotate(replicated, i * shape.replicas));
+      std::vector<int> baby_offsets;
+      for (int i = 0; i < shape.baby_step; ++i) baby_offsets.push_back(i * shape.replicas);
+      auto babies = rotate_many(replicated, baby_offsets);
       Ct out;
       for (int first = 0; first < shape.per_replica; first += shape.baby_step) {
         Ct inner;
@@ -399,14 +417,22 @@ struct PackedEvaluator {
     }
     return transform(x, masks);
   }
-  auto chebyshev(const Ct& x, const fhemamba::PackedNode& node) -> Ct {
+  auto chebyshev(const Ct& x, const fhemamba::PackedNode& node, int shared_group = -1) -> Ct {
     const auto lo = node.data[0], hi = node.data[1];
     std::vector<double> affine(slots), bias(slots), mask(slots);
     for (int i = 0; i < node.size; ++i) {
       affine[i] = 2 / (hi - lo); bias[i] = -(lo + hi) / (hi - lo); mask[i] = 1;
     }
     // Zero padded normalized arguments keep every inactive slot in [-1,1].
-    auto u = plain(plain(x, affine, true), bias, false);
+    fhemamba::ChebyshevBasisState<Ct> local_basis;
+    auto& state = shared_group < 0 ? local_basis : shared_bases[shared_group];
+    if (!state.matches(x)) {
+      if (state.normalized) ++shared_basis_invalidations;
+      state.reset(x);
+      state.normalized = plain(plain(x, affine, true), bias, false);
+      state.basis.emplace(1, state.normalized);
+    } else ++shared_basis_hits;
+    const auto& u = state.normalized;
     std::vector<double> coefficients(node.data.begin() + 2, node.data.end());
     double at_zero = 0;
     if (planned_refresh) {
@@ -419,7 +445,7 @@ struct PackedEvaluator {
     int levels = 0;
     while ((1 << levels) < static_cast<int>(coefficients.size())) ++levels;
     const int baby = 1 << ((std::max(1, levels) + 1) / 2);
-    std::map<int, Ct> cache{{1, u}};
+    auto& cache = state.basis;
     std::function<Ct(int)> basis = [&](int i) -> Ct {
       if (cache.count(i)) return cache[i];
       Ct out;
@@ -473,6 +499,8 @@ struct PackedEvaluator {
       planned_logical_refreshes = depth_plan.refreshes;
       std::cout << "planned_logical_refreshes=" << depth_plan.refreshes << std::endl;
     }
+    auto sharing = fhemamba::plan_chebyshev_sharing(program, depth_plan.live);
+    shared_bases.clear();
     std::vector<Ct> values(program.nodes.size());
     std::vector<bool> dirty(program.nodes.size());
     auto clean = [&](int index) {
@@ -592,7 +620,11 @@ struct PackedEvaluator {
         dirty[i] = planned_refresh && depth_plan.defer_linear_mask[i];
         out = linear(x, weight, program.nodes[n.parents[0]].size, !dirty[i]);
       }
-      else if (op == "cheb") out = chebyshev(x, n);
+      else if (op == "cheb") {
+        const int group = share_chebyshev ? sharing.group[i] : -1;
+        out = chebyshev(x, n, group);
+        if (group >= 0 && !--sharing.remaining[group]) shared_bases.erase(group);
+      }
       else if (op == "repeat") {
         const int outer = n.data[0], inner = n.data[1], repeat = n.data[2];
         std::vector<double> destinations(outer * inner);
@@ -686,7 +718,7 @@ struct GenerationClient {
 
 auto main(int argc, char** argv) -> int {
   try {
-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--client-head FILE]");
+    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--hoist-rotations] [--share-chebyshev] [--client-head FILE]");
     bool replicated_linear = true;
     bool legacy_routing = false;
     bool trace_levels = false;
@@ -705,6 +737,7 @@ auto main(int argc, char** argv) -> int {
     bool frontier_refresh = false;
     bool s2c_first = false;
     bool gpu_plaintext_rns = false;
+    bool hoist_rotations = false, share_chebyshev = false;
     int bootstrap_passes = 2;
     std::string client_path;
     for (int i = 5; i < argc; ++i) {
@@ -729,6 +762,8 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--frontier-refresh") frontier_refresh = true;
       else if (option == "--s2c-first") s2c_first = true;
       else if (option == "--gpu-plaintext-rns") gpu_plaintext_rns = true;
+      else if (option == "--hoist-rotations") hoist_rotations = true;
+      else if (option == "--share-chebyshev") share_chebyshev = true;
       else if (option == "--bootstrap-passes" && i + 1 < argc) {
         bootstrap_passes = std::stoi(argv[++i]);
         if (bootstrap_passes != 1 && bootstrap_passes != 2)
@@ -818,6 +853,8 @@ auto main(int argc, char** argv) -> int {
             .move_coefficients = move_plaintext_coefficients, .borrow_upload = borrow_plaintext_upload,
             .gpu_rns = gpu_plaintext_rns});
     evaluator.bootstrap_passes = bootstrap_passes;
+    evaluator.hoist_rotations = hoist_rotations;
+    evaluator.share_chebyshev = share_chebyshev;
     const double setup_seconds = elapsed(setup);
     std::cout << "setup_seconds=" << setup_seconds << std::endl;
     auto decrypt_client = [&](const Ct& value, int size) {
@@ -861,6 +898,13 @@ auto main(int argc, char** argv) -> int {
            << ",\"nodes\":" << program.nodes.size() << ",\"setup_seconds\":" << setup_seconds
            << ",\"frontier_refresh\":" << (frontier_refresh ? "true" : "false")
            << ",\"s2c_first\":" << (s2c_first ? "true" : "false")
+           << ",\"hoist_rotations\":" << (hoist_rotations ? "true" : "false")
+           << ",\"share_chebyshev\":" << (share_chebyshev ? "true" : "false")
+           << ",\"rotation_batch_edges\":" << evaluator.rotation_batch_stats.edges
+           << ",\"rotation_batch_preparations\":" << evaluator.rotation_batch_stats.preparations
+           << ",\"rotation_sibling_batches\":" << evaluator.rotation_batch_stats.sibling_batches
+           << ",\"shared_basis_hits\":" << evaluator.shared_basis_hits
+           << ",\"shared_basis_invalidations\":" << evaluator.shared_basis_invalidations
            << ",\"gpu_plaintext_rns\":" << (gpu_plaintext_rns ? "true" : "false")
            << ",\"compact_rns_encodes\":" << evaluator.plaintexts->compact_rns_encodes
            << ",\"compact_rns_uploads\":" << evaluator.plaintexts->compact_rns_uploads

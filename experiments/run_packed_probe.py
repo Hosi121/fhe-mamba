@@ -54,6 +54,8 @@ def _run(
     frontier_refresh=False,
     s2c_first=False,
     gpu_plaintext_rns=False,
+    hoist_rotations=False,
+    share_chebyshev=False,
 ):
     binary, payload, output = binary.resolve(), payload.resolve(), output.resolve()
     if not math.isfinite(timeout) or timeout <= 0 or not math.isfinite(tolerance) or tolerance <= 0:
@@ -119,6 +121,8 @@ def _run(
         (frontier_refresh, "--frontier-refresh"),
         (s2c_first, "--s2c-first"),
         (gpu_plaintext_rns, "--gpu-plaintext-rns"),
+        (hoist_rotations, "--hoist-rotations"),
+        (share_chebyshev, "--share-chebyshev"),
     ):
         if enabled:
             command.append(flag)
@@ -204,6 +208,8 @@ def run(
     frontier_refresh=False,
     s2c_first=False,
     gpu_plaintext_rns=False,
+    hoist_rotations=False,
+    share_chebyshev=False,
     budget_file=None,
     budget_seconds=None,
 ):
@@ -237,6 +243,8 @@ def run(
             frontier_refresh=frontier_refresh,
             s2c_first=s2c_first,
             gpu_plaintext_rns=gpu_plaintext_rns,
+            hoist_rotations=hoist_rotations,
+            share_chebyshev=share_chebyshev,
         )
     import fcntl
 
@@ -291,6 +299,8 @@ def run(
                 frontier_refresh=frontier_refresh,
                 s2c_first=s2c_first,
                 gpu_plaintext_rns=gpu_plaintext_rns,
+                hoist_rotations=hoist_rotations,
+                share_chebyshev=share_chebyshev,
             )
         finally:
             charged = time.monotonic() - started
@@ -334,6 +344,8 @@ def main():
     parser.add_argument("--frontier-refresh", action="store_true")
     parser.add_argument("--s2c-first", action="store_true")
     parser.add_argument("--gpu-plaintext-rns", action="store_true")
+    parser.add_argument("--hoist-rotations", action="store_true")
+    parser.add_argument("--share-chebyshev", action="store_true")
     parser.add_argument("--budget-file", type=Path)
     parser.add_argument("--budget-seconds", type=float)
     args = parser.parse_args()
@@ -363,6 +375,8 @@ def main():
         frontier_refresh=args.frontier_refresh,
         s2c_first=args.s2c_first,
         gpu_plaintext_rns=args.gpu_plaintext_rns,
+        hoist_rotations=args.hoist_rotations,
+        share_chebyshev=args.share_chebyshev,
         budget_file=args.budget_file,
         budget_seconds=args.budget_seconds,
     )
