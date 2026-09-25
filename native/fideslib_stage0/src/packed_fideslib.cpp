@@ -4,6 +4,7 @@
 #include "packed_routing.hpp"
 #include "packed_depth.hpp"
 #include "packed_lifetime.hpp"
+#include "packed_schedule.hpp"
 #include "fideslib_owned_arithmetic.hpp"
 #include "plaintext_cache.hpp"
 #include "fideslib_plaintext_ops.hpp"
@@ -54,6 +55,9 @@ struct PackedEvaluator {
   bool inplace_ops = false;
   bool naf_rotations = false, reuse_dead_inputs = false;
   bool bsgs_routing_stages = false;
+  bool frontier_refresh = false;
+  long long frontier_deferrals = 0;
+  std::size_t maximum_ready_nodes = 0;
   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
   long long scratch_clones_eliminated = 0;
   fhemamba::OwnedArithmeticStats owned_arithmetic;
@@ -459,6 +463,12 @@ struct PackedEvaluator {
       if (legacy_routing || !replicated_linear)
         throw std::invalid_argument("planned refresh requires replicated linear and radix8 routing");
       depth_plan = fhemamba::plan_packed_depth(program);
+      if (frontier_refresh) {
+        // Advance independent branches to a common refresh frontier. Actual
+        // ciphertext levels below remain authoritative for refresh decisions.
+        std::fill(depth_plan.refresh_after.begin(), depth_plan.refresh_after.end(), false);
+        depth_plan.refreshes = fhemamba::simulate_packed_depth(program, depth_plan);
+      }
       planned_logical_refreshes = depth_plan.refreshes;
       std::cout << "planned_logical_refreshes=" << depth_plan.refreshes << std::endl;
     }
@@ -474,15 +484,22 @@ struct PackedEvaluator {
     const auto uses = fhemamba::plan_packed_uses(program, depth_plan.live);
     const auto& last = uses.last;
     const auto& consumers = uses.consumers;
+    std::unique_ptr<fhemamba::PackedReadySchedule> schedule;
+    if (frontier_refresh) schedule = std::make_unique<fhemamba::PackedReadySchedule>(program, depth_plan.live);
     auto refresh_value = [&](int requested, int next_operation) {
       std::vector<int> group{requested};
       int occupied = program.nodes[requested].size;
       if (batch_refresh) for (int j = 0; j < static_cast<int>(values.size()) && group.size() < 16; ++j) {
         if (j == requested || !values[j] || occupied + program.nodes[j].size > slots) continue;
-        const auto use = std::lower_bound(consumers[j].begin(), consumers[j].end(), next_operation);
-        if (use == consumers[j].end() || program.nodes[*use].operation == "feedback") continue;
+        int next = -1;
+        if (schedule) next = schedule->next_consumer(j);
+        else {
+          const auto use = std::lower_bound(consumers[j].begin(), consumers[j].end(), next_operation);
+          if (use != consumers[j].end()) next = *use;
+        }
+        if (next < 0 || program.nodes[next].operation == "feedback") continue;
         const int level = values[j]->GetLevel();
-        if (level <= depth_plan.refreshed || (level < 33 && level + depth_plan.cost[*use] <= 39)) continue;
+        if (level <= depth_plan.refreshed || (level < 33 && level + depth_plan.cost[next] <= 39)) continue;
         group.push_back(j); occupied += program.nodes[j].size;
       }
       if (group.size() > 1) {
@@ -493,9 +510,27 @@ struct PackedEvaluator {
         values[requested] = refresh(values[requested], program.nodes[requested].bound);
       }
     };
+    const int live_nodes = planned_refresh
+        ? std::count(depth_plan.live.begin(), depth_plan.live.end(), true)
+        : program.nodes.size();
     const auto start = Clock::now();
-    for (int i = 0; i < static_cast<int>(program.nodes.size()); ++i) {
-      if (planned_refresh && !depth_plan.live[i]) continue;
+    int sequential = 0, completed = 0;
+    while (schedule ? !schedule->empty() : sequential < static_cast<int>(program.nodes.size())) {
+      int i = sequential++;
+      if (schedule) {
+        maximum_ready_nodes = std::max(maximum_ready_nodes, schedule->ready().size());
+        i = *schedule->ready().begin();
+        for (int ready : schedule->ready()) {
+          const auto& candidate = program.nodes[ready];
+          bool fits = true;
+          if (candidate.operation != "feedback") for (int parent : candidate.parents)
+            fits = fits && values[parent]->GetLevel() + depth_plan.cost[ready] <= 39;
+          if (fits) {
+            if (ready != i) ++frontier_deferrals;
+            i = ready; break;
+          }
+        }
+      } else if (planned_refresh && !depth_plan.live[i]) continue;
       const auto& n = program.nodes[i];
       const auto operation_start = Clock::now();
       const auto prior_bootstrap_seconds = bootstrap_seconds;
@@ -533,7 +568,7 @@ struct PackedEvaluator {
       else if (consume_binary) {
         const int a = n.parents[0], b = n.parents[1];
         auto take = [&](int parent) {
-          return fhemamba::consume_or_clone(values[parent], last[parent] == i,
+          return fhemamba::consume_or_clone(values[parent], schedule ? schedule->final_use(parent, i) : last[parent] == i,
               [](const Ct& v) { return v->Clone(); }, lifetime_clones_eliminated);
         };
         if (op == "mul" && a == b) out = square(take(a));
@@ -583,18 +618,21 @@ struct PackedEvaluator {
       sync_gpu();
       if (trace_levels) std::cout << "level_output node=" << i << " level=" << out->GetLevel()
           << " degree=" << out->GetNoiseScaleDeg() << " bootstraps=" << bootstraps - prior_bootstraps << std::endl;
-      for (int parent : n.parents) if (last[parent] == i) values[parent].reset();
+      if (schedule) schedule->complete(i);
+      for (int parent : n.parents)
+        if (schedule ? schedule->releasable(parent) : last[parent] == i) values[parent].reset();
+      ++completed;
       auto& stats = operation_stats[op];
       ++stats.nodes;
       ++evaluated_nodes;
       stats.seconds += elapsed(operation_start);
       stats.bootstrap_seconds += bootstrap_seconds - prior_bootstrap_seconds;
       stats.bootstraps += bootstraps - prior_bootstraps;
-      if (i % 10 == 0 || i + 1 == static_cast<int>(program.nodes.size())) {
+      if (completed % 10 == 0 || completed == live_nodes) {
         const auto seconds = elapsed(start);
-        std::cout << "node=" << i + 1 << '/' << program.nodes.size() << " op=" << op
+        std::cout << "node=" << completed << '/' << live_nodes << " op=" << op
                   << " seconds=" << seconds << " eta_seconds="
-                  << seconds * (program.nodes.size() - i - 1) / (i + 1)
+                  << seconds * (live_nodes - completed) / completed
                   << " bootstraps=" << bootstraps << std::endl;
       }
     }
@@ -647,7 +685,7 @@ struct GenerationClient {
 
 auto main(int argc, char** argv) -> int {
   try {
-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--client-head FILE]");
+    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--client-head FILE]");
     bool replicated_linear = true;
     bool legacy_routing = false;
     bool trace_levels = false;
@@ -663,6 +701,7 @@ auto main(int argc, char** argv) -> int {
     bool move_plaintext_coefficients = false;
     bool borrow_plaintext_upload = false;
     bool bsgs_routing_stages = false;
+    bool frontier_refresh = false;
     int bootstrap_passes = 2;
     std::string client_path;
     for (int i = 5; i < argc; ++i) {
@@ -684,6 +723,7 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--move-plaintext-coefficients") move_plaintext_coefficients = true;
       else if (option == "--borrow-plaintext-upload") borrow_plaintext_upload = true;
       else if (option == "--bsgs-routing-stages") bsgs_routing_stages = true;
+      else if (option == "--frontier-refresh") frontier_refresh = true;
       else if (option == "--bootstrap-passes" && i + 1 < argc) {
         bootstrap_passes = std::stoi(argv[++i]);
         if (bootstrap_passes != 1 && bootstrap_passes != 2)
@@ -701,6 +741,8 @@ auto main(int argc, char** argv) -> int {
       throw std::invalid_argument("BSGS routing stages require planned refresh and radix8 routing");
     if (batch_refresh && (!planned_refresh || bootstrap_passes != 2))
       throw std::invalid_argument("batch refresh requires planned refresh and two bootstrap passes");
+    if (frontier_refresh && !batch_refresh)
+      throw std::invalid_argument("frontier refresh requires batch refresh");
     if (planned_refresh && (legacy_routing || !replicated_linear))
       throw std::invalid_argument("planned refresh requires replicated linear and radix8 routing");
     if (!std::isfinite(poly_tol) || !std::isfinite(exact_tol) || poly_tol <= 0 || exact_tol <= 0)
@@ -747,6 +789,7 @@ auto main(int argc, char** argv) -> int {
     evaluator.naf_rotations = naf_rotations;
     evaluator.reuse_dead_inputs = reuse_dead_inputs;
     evaluator.bsgs_routing_stages = bsgs_routing_stages;
+    evaluator.frontier_refresh = frontier_refresh;
     evaluator.cache_plaintexts = cache_plaintexts;
     evaluator.plaintexts = std::make_unique<fhemamba::PlaintextPreparation>(
         cc, program.slots, fhemamba::PlaintextPreparationOptions{
@@ -795,6 +838,9 @@ auto main(int argc, char** argv) -> int {
            << "\"passed\":" << (passed ? "true" : "false")
            << ",\"slots\":" << program.slots << ",\"ring_dimension\":65536,\"depth\":44,\"scale_bits\":59"
            << ",\"nodes\":" << program.nodes.size() << ",\"setup_seconds\":" << setup_seconds
+           << ",\"frontier_refresh\":" << (frontier_refresh ? "true" : "false")
+           << ",\"frontier_deferrals\":" << evaluator.frontier_deferrals
+           << ",\"maximum_ready_nodes\":" << evaluator.maximum_ready_nodes
            << ",\"evaluated_nodes\":" << evaluator.evaluated_nodes
            << ",\"eval_seconds\":" << eval_seconds << ",\"bootstrap_seconds\":" << evaluator.bootstrap_seconds
            << ",\"bootstraps\":" << evaluator.bootstraps << ",\"ct_ct_mul\":" << evaluator.ct_ct

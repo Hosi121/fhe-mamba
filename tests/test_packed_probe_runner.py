@@ -161,6 +161,8 @@ def test_budget_requires_both_path_and_limit(kwargs):
     "options",
     [
         {"bootstrap_passes": 0},
+        {"frontier_refresh": True},
+        {"frontier_refresh": True, "planned_refresh": True},
         {"batch_refresh": True},
         {"planned_refresh": True, "batch_refresh": True, "bootstrap_passes": 1},
         {"planned_refresh": True, "legacy_routing": True},
@@ -192,6 +194,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "assert '--naf-rotations' in sys.argv\n"
         "assert '--reuse-dead-inputs' in sys.argv\n"
         "assert '--compact-weights' in sys.argv\n"
+        "assert '--frontier-refresh' in sys.argv\n"
     )
     binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
@@ -214,6 +217,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         naf_rotations=True,
         reuse_dead_inputs=True,
         compact_weights=True,
+        frontier_refresh=True,
         **budget,
     )
     assert result["returncode"] == 0
@@ -233,6 +237,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "--naf-rotations",
         "--reuse-dead-inputs",
         "--compact-weights",
+        "--frontier-refresh",
     ]
     assert result["command"][-len(expected_flags) :] == expected_flags
     assert result["passed"] is False  # No native result; flags cannot bypass the gate.
