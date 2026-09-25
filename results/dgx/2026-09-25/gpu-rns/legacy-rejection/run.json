@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/legacy-build/packed_fideslib",
+    "/dev/null",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/must-not-exist.json",
+    ".001",
+    ".001",
+    "--gpu-plaintext-rns"
+  ],
+  "exit_code": 2,
+  "started_at_unix": 1790326048.141502,
+  "wall_seconds": 0.4672236442565918,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  }
+}

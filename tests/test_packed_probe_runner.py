@@ -221,6 +221,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         compact_weights=True,
         frontier_refresh=True,
         s2c_first=True,
+        gpu_plaintext_rns=True,
         **budget,
     )
     assert result["returncode"] == 0
@@ -242,6 +243,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "--compact-weights",
         "--frontier-refresh",
         "--s2c-first",
+        "--gpu-plaintext-rns",
     ]
     assert result["command"][-len(expected_flags) :] == expected_flags
     assert result["passed"] is False  # No native result; flags cannot bypass the gate.

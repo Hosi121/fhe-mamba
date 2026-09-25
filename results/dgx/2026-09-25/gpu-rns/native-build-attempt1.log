@@ -1,0 +1,74 @@
+[  2%] Building CXX object CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o
+[  4%] Building CXX object CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o
+[  8%] Building CXX object CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o
+[  8%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+[ 10%] Linking CXX static library libstage1_mamba2_process.a
+[ 10%] Built target stage1_mamba2_process
+[ 13%] Building CXX object CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o
+[ 15%] Linking CXX static library libstage1_mamba2_config.a
+[ 15%] Built target stage1_mamba2_config
+[ 17%] Building CUDA object CMakeFiles/fideslib_plaintext_rns.dir/src/fideslib_plaintext_rns.cu.o
+[ 19%] Linking CXX static library libstage1_mamba2_payload.a
+[ 19%] Built target stage1_mamba2_payload
+[ 21%] Building CXX object CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o
+[ 23%] Linking CXX executable stage1_bootstrap_probe
+[ 26%] Linking CUDA static library libfideslib_plaintext_rns.a
+[ 26%] Built target fideslib_plaintext_rns
+[ 28%] Building CXX object CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o
+[ 30%] Linking CXX executable stage1_plaintext_add_probe
+[ 32%] Linking CXX executable fideslib_ctpt_probe
+[ 32%] Built target stage1_bootstrap_probe
+[ 34%] Building CXX object CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o
+[ 36%] Linking CXX executable stage1_coefficient_encoding_probe
+[ 36%] Built target stage1_plaintext_add_probe
+[ 39%] Building CXX object CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o
+[ 39%] Built target fideslib_ctpt_probe
+[ 41%] Building CXX object CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o
+[ 43%] Linking CXX executable stage1_normalization_probe
+[ 43%] Built target stage1_coefficient_encoding_probe
+[ 45%] Building CXX object CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o
+[ 45%] Built target stage1_normalization_probe
+[ 47%] Building CXX object CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o
+[ 50%] Linking CXX executable stage1_vector_rms_probe
+[ 52%] Linking CXX executable stage1_subring_encoding_probe
+[ 54%] Linking CXX static library libstage1_mamba2_depth.a
+[ 54%] Built target stage1_mamba2_depth
+[ 56%] Building CXX object CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o
+[ 58%] Linking CXX static library libstage1_mamba2_artifact.a
+[ 58%] Built target stage1_mamba2_artifact
+[ 60%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 60%] Built target stage1_vector_rms_probe
+[ 63%] Building CXX object CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o
+[ 63%] Built target stage1_subring_encoding_probe
+[ 65%] Linking CXX static library libstage1_mamba2_plan.a
+[ 65%] Built target stage1_mamba2_plan
+[ 67%] Building CXX object CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o
+[ 69%] Linking CXX executable packed_resource_inventory
+[ 69%] Built target packed_resource_inventory
+[ 71%] Linking CXX static library libfideslib_handoff.a
+[ 71%] Built target fideslib_handoff
+[ 73%] Building CXX object CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o
+[ 76%] Linking CXX static library libfideslib_plaintext_encoder.a
+[ 76%] Built target fideslib_plaintext_encoder
+[ 78%] Building CXX object CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o
+[ 80%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[ 82%] Building CXX object CMakeFiles/packed_rns_probe.dir/src/packed_rns_probe.cpp.o
+/home/kataiwa/fhemamba/gpu-rns-20260925/native-source/native/fideslib_stage0/src/packed_fideslib.cpp:25:16: error: conflicting declaration of C function ‘int cudaDeviceSynchronize()’
+   25 | extern "C" int cudaDeviceSynchronize(void);
+      |                ^~~~~~~~~~~~~~~~~~~~~
+In file included from /home/kataiwa/fhemamba/gpu-rns-20260925/native-source/native/fideslib_stage0/src/fideslib_plaintext_rns.hpp:3,
+                 from /home/kataiwa/fhemamba/gpu-rns-20260925/native-source/native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp:10,
+                 from /home/kataiwa/fhemamba/gpu-rns-20260925/native-source/native/fideslib_stage0/src/packed_fideslib.cpp:11:
+/usr/local/cuda-13.0/targets/sbsa-linux/include/cuda_runtime_api.h:352:58: note: previous declaration ‘cudaError_t cudaDeviceSynchronize()’
+  352 | extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceSynchronize(void);
+      |                                                          ^~~~~~~~~~~~~~~~~~~~~
+gmake[2]: *** [CMakeFiles/packed_fideslib.dir/build.make:76: CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:365: CMakeFiles/packed_fideslib.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[ 84%] Linking CXX executable packed_plaintext_probe
+[ 86%] Linking CXX executable packed_rns_probe
+[ 86%] Built target packed_plaintext_probe
+[ 86%] Built target packed_rns_probe
+[ 89%] Linking CXX executable fideslib_client_server_probe
+[ 89%] Built target fideslib_client_server_probe
+gmake: *** [Makefile:91: all] Error 2

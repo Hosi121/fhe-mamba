@@ -1,0 +1,7 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+exact_slots=1 cases=40
+exact_slots=32 cases=80
+exact_slots=1024 cases=120
+exact_slots=32768 cases=160
+exact_cases=160 max_error=1.34979e-12

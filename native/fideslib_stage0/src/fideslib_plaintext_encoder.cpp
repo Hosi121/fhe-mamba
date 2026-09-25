@@ -1,5 +1,9 @@
 #include "fideslib_plaintext_encoder.hpp"
 #include "fideslib_plaintext_ops.hpp"
+#include "plaintext_rns.hpp"
+#ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
+#include "fideslib_plaintext_rns.hpp"
+#endif
 #include <CKKS/Context.cuh>
 #include <CKKS/Plaintext.cuh>
 #include <math/dftransform.h>
@@ -104,10 +108,10 @@ bool load_native_borrowed(FIDESlib::CKKS::Plaintext& gpu, const lbcrypto::Plaint
 }
 
 CoefficientPlaintextEncoder::CoefficientPlaintextEncoder(Context context, uint32_t slots,
-                                                       bool move_coefficients)
+                                                       bool move_coefficients, bool compact_rns)
     : context_(std::move(context)),
       cpu_(std::any_cast<lbcrypto::CryptoContext<lbcrypto::DCRTPoly>>(context_->cpu)),
-      slots_(slots), move_coefficients_(move_coefficients) {
+      slots_(slots), move_coefficients_(move_coefficients), compact_rns_(compact_rns) {
   const auto n = cpu_->GetRingDimension();
   if (!std::has_single_bit(slots_) || slots_ > n / 2)
     throw std::invalid_argument("plaintext slots must divide N/2");
@@ -117,6 +121,18 @@ CoefficientPlaintextEncoder::CoefficientPlaintextEncoder(Context context, uint32
     moduli.push_back(tower->GetModulus());
     roots.emplace_back(1);
   }
+  compact_coefficient_params_ = std::make_shared<Params>(2 * n,
+      std::vector<lbcrypto::NativeInteger>{moduli.front()}, std::vector<lbcrypto::NativeInteger>{1});
+  compact_params_ = std::make_shared<Params>(*original);
+  while (compact_params_->GetParams().size() > 1) compact_params_->PopLastParam();
+  const auto cp = std::dynamic_pointer_cast<lbcrypto::CryptoParametersCKKSRNS>(cpu_->GetCryptoParameters());
+  compact_rns_ = compact_rns_ && slots_ == n / 2 && context_->loaded && context_->devices.size() == 1 &&
+      cp->GetScalingTechnique() == lbcrypto::FLEXIBLEAUTO;
+#if NATIVEINT != 64 || BLOCK_VECTOR_ALLOCATION == 1
+  compact_rns_ = false;
+#endif
+  for (const auto& tower : original->GetParams())
+    compact_rns_ = compact_rns_ && tower->GetModulus().GetMSB() <= 60;
   for (std::size_t level = 0; level < original->GetParams().size(); ++level) {
     auto full = std::make_shared<Params>(*original);
     for (std::size_t drop = 0; drop < level; ++drop) full->PopLastParam();
@@ -133,6 +149,10 @@ auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
     uint32_t level, std::size_t degree) const -> fideslib::Plaintext {
   if (values.size() > slots_ || level >= full_params_.size() || degree == 0)
     throw std::invalid_argument("plaintext values, level or degree out of range");
+  const auto cp = std::dynamic_pointer_cast<lbcrypto::CryptoParametersCKKSRNS>(cpu_->GetCryptoParameters());
+  const bool compact = compact_rns_ && degree == 1 && full_params_[level]->GetParams().size() > 1 &&
+      compact_plaintext_fits(values, slots_, cp->GetScalingFactorReal(level),
+                            compact_params_->GetParams()[0]->GetModulus().ConvertToInt());
   lbcrypto::Plaintext plaintext;
   {
 #ifdef _OPENMP
@@ -143,10 +163,10 @@ auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
     } serial;
 #endif
     plaintext = cpu_->MakeCKKSPackedPlaintext(values, degree, level,
-                                            coefficient_params_[level], slots_);
+        compact ? compact_coefficient_params_ : coefficient_params_[level], slots_);
   }
   auto& temporary = plaintext->GetElement<lbcrypto::DCRTPoly>();
-  lbcrypto::DCRTPoly coefficients(full_params_[level], ::Format::COEFFICIENT, false);
+  lbcrypto::DCRTPoly coefficients(compact ? compact_params_ : full_params_[level], ::Format::COEFFICIENT, false);
   auto& output = coefficients.GetAllElements();
   auto& input = temporary.GetAllElements();
   for (std::size_t i = 0; i < output.size(); ++i) {
@@ -169,7 +189,8 @@ auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
 }
 
 auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
-                    fideslib::Plaintext& plaintext, int ntt_batch, PlaintextUploadMode mode)
+                    fideslib::Plaintext& plaintext, int ntt_batch, PlaintextUploadMode mode,
+                    PlaintextRnsWorkspace* workspace)
     -> PlaintextUploadMode {
   if (ntt_batch <= 0) throw std::invalid_argument("NTT batch must be positive");
   if (plaintext->loaded) return PlaintextUploadMode::AlreadyLoaded;
@@ -182,7 +203,50 @@ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
   auto gpu = std::make_shared<FIDESlib::CKKS::Plaintext>(gpu_context);
   auto actual = PlaintextUploadMode::Staged;
   FIDESlib::CKKS::RawPlainText raw{};
-  if (mode == PlaintextUploadMode::Borrowed && load_native_borrowed(*gpu, cpu)) {
+  const auto expected_towers = gpu->cc.L + 1 - static_cast<int>(cpu->GetLevel());
+  const bool compact = static_cast<int>(limbs.size()) != expected_towers;
+  if (compact && mode != PlaintextUploadMode::CompactRns)
+    throw std::invalid_argument("compact plaintext requires the GPU RNS loader");
+  if (mode == PlaintextUploadMode::CompactRns && compact) {
+#ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
+    using Native = lbcrypto::NativeInteger;
+    if constexpr (!std::is_standard_layout_v<Native> || sizeof(Native) != sizeof(uint64_t) ||
+                  !std::is_same_v<typename Native::Integer, uint64_t> ||
+                  std::endian::native != std::endian::little)
+      throw std::invalid_argument("unsupported compact plaintext word layout");
+    if (context->devices.size() != 1 || limbs.size() != 1 || expected_towers <= 1 ||
+        expected_towers > gpu->cc.L + 1 || cpu->GetNoiseScaleDeg() != 1 ||
+        poly.GetFormat() != ::Format::COEFFICIENT || poly.GetRingDimension() != gpu->cc.N ||
+        cpu->GetSlots() != gpu->cc.N / 2 || limbs[0].GetValues().GetLength() != gpu->cc.N ||
+        limbs[0].GetModulus().ConvertToInt() != gpu->cc.prime[0].p)
+      throw std::invalid_argument("invalid compact plaintext layout");
+    FIDESlib::CKKS::SetCurrentContext(gpu->cc_);
+    gpu->c0.grow(expected_towers - 1, false);
+    PlaintextRnsWorkspace temporary_workspace;
+    if (!workspace) workspace = &temporary_workspace;
+    const auto* source = workspace->upload(std::addressof(limbs[0].GetValues()[0]),
+                                          gpu->cc.N * sizeof(uint64_t), context->devices[0]);
+    for (int i = 0; i < expected_towers; ++i) {
+      const auto position = gpu->cc.limbGPUid[i];
+      auto& partition = gpu->c0.GPU.at(position.x);
+      if (partition.device != context->devices[0])
+        throw std::invalid_argument("compact plaintext requires one device");
+      std::visit([&](auto& limb) {
+        if constexpr (std::is_same_v<std::remove_pointer_t<decltype(limb.v.data)>, uint64_t>)
+          expand_plaintext_rns(source, limb.v.data, gpu->cc.N, gpu->cc.prime[0].p,
+                               gpu->cc.prime[i].p, limb.stream.ptr());
+        else throw std::invalid_argument("compact plaintext requires 64-bit limbs");
+      }, partition.limb.at(position.y));
+    }
+    // A temporary workspace must not die before any limb finishes reading it.
+    synchronize();
+    gpu->NoiseFactor = cpu->GetScalingFactor(); gpu->NoiseLevel = 1; gpu->slots = cpu->GetSlots();
+    actual = PlaintextUploadMode::CompactRns;
+#else
+    throw std::invalid_argument("GPU RNS expansion is not built");
+#endif
+  } else if ((mode == PlaintextUploadMode::Borrowed || mode == PlaintextUploadMode::CompactRns) &&
+             load_native_borrowed(*gpu, cpu)) {
     actual = PlaintextUploadMode::Borrowed;
   } else {
     raw.originalPlainText = cpu;
@@ -198,7 +262,8 @@ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
     }
     // Constant plaintext buffers omit NTT scratch. Allocate ordinary limbs
     // (including aux pointers) before loadConstant so the transform can use them.
-    const bool direct = (mode == PlaintextUploadMode::Direct || mode == PlaintextUploadMode::Borrowed) &&
+    const bool direct = (mode == PlaintextUploadMode::Direct || mode == PlaintextUploadMode::Borrowed ||
+                         mode == PlaintextUploadMode::CompactRns) &&
                         load_raw_direct(*gpu, raw);
     if (direct) actual = PlaintextUploadMode::Direct;
     if (!direct) {
@@ -231,7 +296,10 @@ auto readback_plaintext(const fideslib::Plaintext& plaintext) -> lbcrypto::DCRTP
   FIDESlib::CKKS::RawPlainText raw{};
   gpu->store(raw); synchronize();
   const auto& cpu = std::any_cast<const lbcrypto::Plaintext&>(plaintext->cpu);
-  lbcrypto::DCRTPoly out(cpu->GetElement<lbcrypto::DCRTPoly>().GetParams(), ::Format::EVALUATION, false);
+  auto params = std::make_shared<lbcrypto::DCRTPoly::Params>(
+      *std::any_cast<const lbcrypto::CryptoContext<lbcrypto::DCRTPoly>&>(cc->cpu)->GetElementParams());
+  for (uint32_t i = 0; i < cpu->GetLevel(); ++i) params->PopLastParam();
+  lbcrypto::DCRTPoly out(params, ::Format::EVALUATION, false);
   auto& limbs = out.GetAllElements();
   if (raw.sub_0.size() != limbs.size()) throw std::runtime_error("GPU plaintext limb count differs");
   for (std::size_t i = 0; i < limbs.size(); ++i) {
@@ -246,13 +314,22 @@ PlaintextPreparation::PlaintextPreparation(Context context, uint32_t slots,
     PlaintextPreparationOptions options)
     : context_(std::move(context)), slots_(slots),
       fast_upload_(options.fast_upload || options.gpu_ntt || options.direct_upload ||
-                   options.move_coefficients || options.borrow_upload), profile_(options.profile),
-      move_coefficients_(options.move_coefficients),
-      upload_mode_(options.borrow_upload ? PlaintextUploadMode::Borrowed :
+                   options.move_coefficients || options.borrow_upload || options.gpu_rns), profile_(options.profile),
+      move_coefficients_(options.move_coefficients), gpu_rns_(options.gpu_rns),
+      upload_mode_(options.gpu_rns ? PlaintextUploadMode::CompactRns : options.borrow_upload ? PlaintextUploadMode::Borrowed :
                    options.direct_upload ? PlaintextUploadMode::Direct : PlaintextUploadMode::Staged) {
-  if (options.gpu_ntt || options.move_coefficients)
-    coefficient_ = std::make_unique<CoefficientPlaintextEncoder>(context_, slots_, options.move_coefficients);
+  if (options.gpu_rns) {
+#ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
+    rns_workspace_ = std::make_unique<PlaintextRnsWorkspace>();
+#else
+    throw std::invalid_argument("GPU RNS expansion is not built");
+#endif
+  }
+  if (options.gpu_ntt || options.move_coefficients || options.gpu_rns)
+    coefficient_ = std::make_unique<CoefficientPlaintextEncoder>(context_, slots_, options.move_coefficients, options.gpu_rns);
 }
+
+PlaintextPreparation::~PlaintextPreparation() = default;
 
 void PlaintextPreparation::enable_periodic_encoding(uint32_t slots) {
   periodic_ = std::make_unique<stage1::PeriodicPlaintextEncoder>(context_, slots);
@@ -269,7 +346,17 @@ auto PlaintextPreparation::encode(const std::vector<double>& values, uint32_t le
   if (coefficient_ && (!packing_slots || packing_slots == slots_)) {
     ++gpu_ntt_encodes;
     if (move_coefficients_) ++moved_coefficient_encodes;
-    return coefficient_->encode(values, level, degree);
+    auto result = coefficient_->encode(values, level, degree);
+    if (gpu_rns_) {
+      const auto& cpu = std::any_cast<const lbcrypto::Plaintext&>(result->cpu);
+      const auto original = std::any_cast<const lbcrypto::CryptoContext<lbcrypto::DCRTPoly>&>(context_->cpu)->GetElementParams();
+      const auto towers = original->GetParams().size() - level;
+      if (cpu->GetElement<lbcrypto::DCRTPoly>().GetNumOfElements() < towers) {
+        ++compact_rns_encodes;
+        compact_rns_saved_host_bytes += (towers - 1) * original->GetRingDimension() * sizeof(uint64_t);
+      } else ++compact_rns_fallbacks;
+    }
+    return result;
   }
   return context_->MakeCKKSPackedPlaintext(
       values, degree, level, nullptr, packing_slots ? packing_slots : slots_);
@@ -293,7 +380,12 @@ auto PlaintextPreparation::encode_addend(const Ciphertext& ciphertext,
 void PlaintextPreparation::load(fideslib::Plaintext& plaintext) {
   if (!fast_upload_ || plaintext->loaded) return;
   const auto start = profile_ ? std::chrono::steady_clock::now() : std::chrono::steady_clock::time_point{};
-  const auto mode = load_plaintext(context_, plaintext, kPlaintextNttBatch, upload_mode_);
+  PlaintextRnsWorkspace* workspace = nullptr;
+#ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
+  workspace = rns_workspace_.get();
+#endif
+  const auto mode = load_plaintext(context_, plaintext, kPlaintextNttBatch, upload_mode_, workspace);
+  if (mode == PlaintextUploadMode::CompactRns) ++compact_rns_uploads;
   if (mode == PlaintextUploadMode::Direct || mode == PlaintextUploadMode::Borrowed) ++direct_uploads;
   if (mode == PlaintextUploadMode::Borrowed) ++borrowed_uploads;
   ++fast_uploads;

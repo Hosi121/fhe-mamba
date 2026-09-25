@@ -1,0 +1,41 @@
+[  4%] Built target stage1_mamba2_process
+[  8%] Built target stage1_mamba2_config
+[ 13%] Built target stage1_mamba2_payload
+[ 17%] Built target fideslib_handoff
+[ 21%] Built target stage1_bootstrap_probe
+[ 26%] Built target fideslib_ctpt_probe
+[ 28%] Building CUDA object CMakeFiles/fideslib_plaintext_rns.dir/src/fideslib_plaintext_rns.cu.o
+[ 32%] Built target stage1_plaintext_add_probe
+[ 36%] Built target stage1_subring_encoding_probe
+[ 41%] Built target stage1_coefficient_encoding_probe
+[ 45%] Built target stage1_normalization_probe
+[ 50%] Built target stage1_vector_rms_probe
+[ 54%] Built target stage1_mamba2_depth
+[ 58%] Built target stage1_mamba2_artifact
+[ 63%] Built target stage1_mamba2_plan
+[ 67%] Built target fideslib_client_server_probe
+[ 71%] Built target packed_resource_inventory
+[ 73%] Linking CUDA static library libfideslib_plaintext_rns.a
+[ 73%] Built target fideslib_plaintext_rns
+[ 76%] Building CXX object CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o
+[ 78%] Linking CXX static library libfideslib_plaintext_encoder.a
+[ 78%] Built target fideslib_plaintext_encoder
+[ 80%] Building CXX object CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o
+[ 82%] Building CXX object CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o
+[ 84%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[ 86%] Building CXX object CMakeFiles/packed_rns_probe.dir/src/packed_rns_probe.cpp.o
+[ 89%] Linking CXX executable owned_arithmetic_probe
+[ 91%] Linking CXX executable packed_plaintext_probe
+[ 93%] Linking CXX executable packed_rns_probe
+[ 95%] Linking CXX executable packed_fideslib
+[ 95%] Built target owned_arithmetic_probe
+[ 97%] Building CXX object CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o
+[ 97%] Built target packed_plaintext_probe
+[ 97%] Built target packed_fideslib
+[ 97%] Built target packed_rns_probe
+/home/kataiwa/fhemamba/gpu-rns-20260925/native-source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp: In lambda function:
+/home/kataiwa/fhemamba/gpu-rns-20260925/native-source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp:2470:79: note: parameter passing for argument of type ‘std::pair<double, double>’ when C++17 is enabled changed to match C++14 in GCC 10.1
+ 2470 |       return std::pair<double, double>{2.0 / (hi - lo), -(lo + hi) / (hi - lo)};
+      |                                                                               ^
+[100%] Linking CXX executable stage1_mamba2_decode_fideslib
+[100%] Built target stage1_mamba2_decode_fideslib

@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "removed_paths_logical_bytes": {
+    "source": 39741068,
+    "build": 91176906,
+    "install": 42723409,
+    "native-source": 852791,
+    "legacy-build": 18769656,
+    "native-build/compile_commands.json": 20615,
+    "native-build/stage1_plaintext_add_probe": 16101616,
+    "native-build/cmake_install.cmake": 1705,
+    "native-build/CMakeFiles": 21222456,
+    "native-build/fideslib_ctpt_probe": 16168824,
+    "native-build/Makefile": 45535,
+    "native-build/stage1_mamba2_decode_fideslib": 17400800,
+    "native-build/libfideslib_plaintext_rns.a": 20080,
+    "native-build/packed_resource_inventory": 146936,
+    "native-build/stage1_coefficient_encoding_probe": 16168128,
+    "native-build/libfideslib_plaintext_encoder.a": 481066,
+    "native-build/stage1_vector_rms_probe": 16172728,
+    "native-build/libstage1_mamba2_plan.a": 80472,
+    "native-build/libfideslib_handoff.a": 2628166,
+    "native-build/CMakeCache.txt": 31533,
+    "native-build/fideslib_client_server_probe": 16658952,
+    "native-build/libstage1_mamba2_artifact.a": 49110,
+    "native-build/owned_arithmetic_probe": 16169336,
+    "native-build/stage1_bootstrap_probe": 16171920,
+    "native-build/libstage1_mamba2_depth.a": 50842,
+    "native-build/libstage1_mamba2_process.a": 29086,
+    "native-build/stage1_subring_encoding_probe": 16189064,
+    "native-build/stage1_normalization_probe": 16169864,
+    "native-build/libstage1_mamba2_config.a": 76846,
+    "native-build/libstage1_mamba2_payload.a": 156930
+  },
+  "before_logical_bytes": 431114486,
+  "after_logical_bytes": 49438046,
+  "retained_executable_sha256": {
+    "packed_fideslib": "bd7ab3c1fca7465a7186bf098c876ae16c199f7b7f19d3ae888731ce2b67e994",
+    "packed_rns_probe": "77c1aac53e7a65763a9ea422df1680f38ff39469502b24e555ccd866d710730c",
+    "packed_plaintext_probe": "5d26a3b933b22b48b343618e5bfd18cee6a7b729b938feb2b87cedebf4ca6df2"
+  },
+  "retained_executable_ldd": {
+    "packed_fideslib": "\tlinux-vdso.so.1 (0x0000ff3142a6c000)\n\tlibcudart.so.13 => /usr/local/cuda-13.0/lib64/libcudart.so.13 (0x0000ff3141b40000)\n\tlibcuda.so.1 => /lib/aarch64-linux-gnu/libcuda.so.1 (0x0000ff313bea0000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000ff313bc10000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000ff313bb60000)\n\tlibgomp.so.1 => /lib/aarch64-linux-gnu/libgomp.so.1 (0x0000ff313bae0000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000ff313baa0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ff313b8e0000)\n\t/lib/ld-linux-aarch64.so.1 (0x0000ff3142a30000)\n\tlibdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x0000ff313b8b0000)\n\tlibpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000ff313b880000)\n\tlibrt.so.1 => /lib/aarch64-linux-gnu/librt.so.1 (0x0000ff313b850000)\n",
+    "packed_rns_probe": "\tlinux-vdso.so.1 (0x0000e0d67535c000)\n\tlibcuda.so.1 => /lib/aarch64-linux-gnu/libcuda.so.1 (0x0000e0d66e870000)\n\tlibcudart.so.13 => /usr/local/cuda-13.0/lib64/libcudart.so.13 (0x0000e0d66e7b0000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000e0d66e520000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000e0d66e470000)\n\tlibgomp.so.1 => /lib/aarch64-linux-gnu/libgomp.so.1 (0x0000e0d66e3f0000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000e0d66e3b0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000e0d66e1f0000)\n\t/lib/ld-linux-aarch64.so.1 (0x0000e0d675320000)\n\tlibdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x0000e0d66e1c0000)\n\tlibrt.so.1 => /lib/aarch64-linux-gnu/librt.so.1 (0x0000e0d66e190000)\n\tlibpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000e0d66e160000)\n",
+    "packed_plaintext_probe": "\tlinux-vdso.so.1 (0x0000f3a58956c000)\n\tlibcuda.so.1 => /lib/aarch64-linux-gnu/libcuda.so.1 (0x0000f3a582a90000)\n\tlibcudart.so.13 => /usr/local/cuda-13.0/lib64/libcudart.so.13 (0x0000f3a5829d0000)\n\tlibstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000f3a582740000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000f3a582690000)\n\tlibgomp.so.1 => /lib/aarch64-linux-gnu/libgomp.so.1 (0x0000f3a582610000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000f3a5825d0000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000f3a582410000)\n\t/lib/ld-linux-aarch64.so.1 (0x0000f3a589530000)\n\tlibdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x0000f3a5823e0000)\n\tlibrt.so.1 => /lib/aarch64-linux-gnu/librt.so.1 (0x0000f3a5823b0000)\n\tlibpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000f3a582380000)\n"
+  },
+  "canonical_dependency_files_unchanged": 17,
+  "note": "Raw results, source archive, manifests and measured executables retained; no canonical dependency or payload removed.",
+  "local_scratch_removed": {
+    "path": "runs/gpu-rns-20260925",
+    "files": 293,
+    "logical_bytes": 19321835,
+    "raw_evidence_verified_identical": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "baseline_binary_sha256": "4504ee7ba95d7e5420def9dab07da8760c362b4471644735a9c993fcd0b9fec9",
+  "candidate_binary_sha256": "bd7ab3c1fca7465a7186bf098c876ae16c199f7b7f19d3ae888731ce2b67e994",
+  "probe_binary_sha256": "77c1aac53e7a65763a9ea422df1680f38ff39469502b24e555ccd866d710730c",
+  "backend_library_sha256": "d113ff681c4e8c382b92435d06d6299f8cbac6227a22ada217dc310ee212e935",
+  "native_source_manifest_sha256": "552c200ef7c32c3e13ef87ba958b71ad8f454a3589c2cb70e6b1c43fde0ce979",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "gpu": "name, driver_version\nNVIDIA GB10, 580.159.03\n"
+}

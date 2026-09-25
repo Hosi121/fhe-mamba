@@ -53,6 +53,7 @@ def _run(
     compact_weights=False,
     frontier_refresh=False,
     s2c_first=False,
+    gpu_plaintext_rns=False,
 ):
     binary, payload, output = binary.resolve(), payload.resolve(), output.resolve()
     if not math.isfinite(timeout) or timeout <= 0 or not math.isfinite(tolerance) or tolerance <= 0:
@@ -117,6 +118,7 @@ def _run(
         (compact_weights, "--compact-weights"),
         (frontier_refresh, "--frontier-refresh"),
         (s2c_first, "--s2c-first"),
+        (gpu_plaintext_rns, "--gpu-plaintext-rns"),
     ):
         if enabled:
             command.append(flag)
@@ -201,6 +203,7 @@ def run(
     compact_weights=False,
     frontier_refresh=False,
     s2c_first=False,
+    gpu_plaintext_rns=False,
     budget_file=None,
     budget_seconds=None,
 ):
@@ -233,6 +236,7 @@ def run(
             compact_weights=compact_weights,
             frontier_refresh=frontier_refresh,
             s2c_first=s2c_first,
+            gpu_plaintext_rns=gpu_plaintext_rns,
         )
     import fcntl
 
@@ -286,6 +290,7 @@ def run(
                 compact_weights=compact_weights,
                 frontier_refresh=frontier_refresh,
                 s2c_first=s2c_first,
+                gpu_plaintext_rns=gpu_plaintext_rns,
             )
         finally:
             charged = time.monotonic() - started
@@ -328,6 +333,7 @@ def main():
     parser.add_argument("--compact-weights", action="store_true")
     parser.add_argument("--frontier-refresh", action="store_true")
     parser.add_argument("--s2c-first", action="store_true")
+    parser.add_argument("--gpu-plaintext-rns", action="store_true")
     parser.add_argument("--budget-file", type=Path)
     parser.add_argument("--budget-seconds", type=float)
     args = parser.parse_args()
@@ -356,6 +362,7 @@ def main():
         compact_weights=args.compact_weights,
         frontier_refresh=args.frontier_refresh,
         s2c_first=args.s2c_first,
+        gpu_plaintext_rns=args.gpu_plaintext_rns,
         budget_file=args.budget_file,
         budget_seconds=args.budget_seconds,
     )

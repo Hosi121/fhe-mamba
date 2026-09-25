@@ -1,0 +1,18 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/legacy-build",
+    "--target",
+    "packed_fideslib",
+    "-j",
+    "4"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790326039.1727176,
+  "wall_seconds": 8.968218088150024,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  }
+}

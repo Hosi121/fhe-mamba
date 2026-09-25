@@ -8,6 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(FHE_STAGE0_BUILD_KERNEL "Build the FIDESlib Stage 0 kernel" ON)
 option(FHE_STAGE0_BUILD_TESTS "Build FIDESlib-free Stage 0 layout tests" OFF)
+option(FHE_STAGE0_GPU_RNS "Build exact GPU expansion of compact plaintext coefficients" OFF)
 
 file(
   READ
@@ -98,8 +99,18 @@ if(FHE_STAGE0_BUILD_KERNEL)
 
   add_executable(packed_fideslib src/packed_fideslib.cpp)
   add_library(fideslib_plaintext_encoder STATIC src/fideslib_plaintext_encoder.cpp)
+  if(FHE_STAGE0_GPU_RNS)
+    enable_language(CUDA)
+    add_library(fideslib_plaintext_rns STATIC src/fideslib_plaintext_rns.cu)
+    set_target_properties(fideslib_plaintext_rns PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON)
+    target_link_libraries(fideslib_plaintext_rns PUBLIC CUDA::cudart)
+    target_compile_definitions(fideslib_plaintext_encoder PUBLIC FHEMAMBA_GPU_PLAINTEXT_RNS=1)
+    target_link_libraries(fideslib_plaintext_encoder PUBLIC fideslib_plaintext_rns)
+    add_executable(packed_rns_probe src/packed_rns_probe.cpp)
+    target_link_libraries(packed_rns_probe PRIVATE fideslib_plaintext_encoder)
+  endif()
   target_link_libraries(fideslib_plaintext_encoder PUBLIC fideslib::fideslib CUDA::cudart)
-  target_include_directories(fideslib_plaintext_encoder PUBLIC src
+  target_include_directories(fideslib_plaintext_encoder PUBLIC src include
     ${OpenFHE_INCLUDE} ${OpenFHE_INCLUDE}/core ${OpenFHE_INCLUDE}/pke
     ${OpenFHE_INCLUDE}/binfhe ${OpenFHE_INCLUDE}/third-party/include)
   target_link_libraries(packed_fideslib PRIVATE fideslib::fideslib CUDA::cudart stage0_layout stage1_mamba2_plan fideslib_plaintext_encoder)
@@ -170,6 +181,9 @@ endif()
 
 if(FHE_STAGE0_BUILD_TESTS)
   enable_testing()
+  add_executable(test_plaintext_rns tests/test_plaintext_rns.cpp)
+  target_link_libraries(test_plaintext_rns PRIVATE stage0_layout)
+  add_test(NAME plaintext_rns COMMAND test_plaintext_rns)
   add_executable(test_packed_schedule tests/test_packed_schedule.cpp)
   target_link_libraries(test_packed_schedule PRIVATE stage0_layout)
   add_test(NAME packed_schedule COMMAND test_packed_schedule)

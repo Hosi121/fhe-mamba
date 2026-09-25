@@ -686,7 +686,7 @@ struct GenerationClient {
 
 auto main(int argc, char** argv) -> int {
   try {
-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--client-head FILE]");
+    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--client-head FILE]");
     bool replicated_linear = true;
     bool legacy_routing = false;
     bool trace_levels = false;
@@ -704,6 +704,7 @@ auto main(int argc, char** argv) -> int {
     bool bsgs_routing_stages = false;
     bool frontier_refresh = false;
     bool s2c_first = false;
+    bool gpu_plaintext_rns = false;
     int bootstrap_passes = 2;
     std::string client_path;
     for (int i = 5; i < argc; ++i) {
@@ -727,6 +728,7 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--bsgs-routing-stages") bsgs_routing_stages = true;
       else if (option == "--frontier-refresh") frontier_refresh = true;
       else if (option == "--s2c-first") s2c_first = true;
+      else if (option == "--gpu-plaintext-rns") gpu_plaintext_rns = true;
       else if (option == "--bootstrap-passes" && i + 1 < argc) {
         bootstrap_passes = std::stoi(argv[++i]);
         if (bootstrap_passes != 1 && bootstrap_passes != 2)
@@ -747,6 +749,9 @@ auto main(int argc, char** argv) -> int {
     if (s2c_first && !batch_refresh) throw std::invalid_argument("S2C-first requires planned two-pass batch refresh");
 #ifndef FIDESLIB_S2C_FIRST_BOOTSTRAP
     if (s2c_first) throw std::invalid_argument("S2C-first requires the optional FIDESlib bootstrap patch");
+#endif
+#ifndef FHEMAMBA_GPU_PLAINTEXT_RNS
+    if (gpu_plaintext_rns) throw std::invalid_argument("GPU plaintext RNS requires -DFHE_STAGE0_GPU_RNS=ON");
 #endif
     if (frontier_refresh && !batch_refresh)
       throw std::invalid_argument("frontier refresh requires batch refresh");
@@ -810,7 +815,8 @@ auto main(int argc, char** argv) -> int {
         cc, program.slots, fhemamba::PlaintextPreparationOptions{
             .fast_upload = fast_plaintext_upload, .gpu_ntt = gpu_plaintext_ntt,
             .profile = profile_evaluation, .direct_upload = direct_plaintext_upload,
-            .move_coefficients = move_plaintext_coefficients, .borrow_upload = borrow_plaintext_upload});
+            .move_coefficients = move_plaintext_coefficients, .borrow_upload = borrow_plaintext_upload,
+            .gpu_rns = gpu_plaintext_rns});
     evaluator.bootstrap_passes = bootstrap_passes;
     const double setup_seconds = elapsed(setup);
     std::cout << "setup_seconds=" << setup_seconds << std::endl;
@@ -855,6 +861,11 @@ auto main(int argc, char** argv) -> int {
            << ",\"nodes\":" << program.nodes.size() << ",\"setup_seconds\":" << setup_seconds
            << ",\"frontier_refresh\":" << (frontier_refresh ? "true" : "false")
            << ",\"s2c_first\":" << (s2c_first ? "true" : "false")
+           << ",\"gpu_plaintext_rns\":" << (gpu_plaintext_rns ? "true" : "false")
+           << ",\"compact_rns_encodes\":" << evaluator.plaintexts->compact_rns_encodes
+           << ",\"compact_rns_uploads\":" << evaluator.plaintexts->compact_rns_uploads
+           << ",\"compact_rns_fallbacks\":" << evaluator.plaintexts->compact_rns_fallbacks
+           << ",\"compact_rns_saved_host_bytes\":" << evaluator.plaintexts->compact_rns_saved_host_bytes
            << ",\"refresh_ceiling\":" << evaluator.refresh_ceiling
            << ",\"refreshed_level\":" << evaluator.refreshed_level
            << ",\"frontier_deferrals\":" << evaluator.frontier_deferrals

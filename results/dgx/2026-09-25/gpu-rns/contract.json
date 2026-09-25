@@ -1,0 +1,52 @@
+{
+  "scope": "one candidate: bounded single-tower plaintext encoding with exact GPU RNS expansion",
+  "repo_base": "434796306563562efd504f84daf4da1eb400572b",
+  "baseline_backend_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "openfhe_commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+  "hardware": "DGX Spark GB10",
+  "ring_dimension": 65536,
+  "slots": 32768,
+  "depth": 44,
+  "scaling_mod_size": 59,
+  "first_mod_size": 60,
+  "secret_key_distribution": "UNIFORM_TERNARY",
+  "large_digits": 3,
+  "scaling_technique": "FLEXIBLEAUTO",
+  "security": "not-set",
+  "bootstrap_level_budget": [
+    4,
+    4
+  ],
+  "bootstrap_passes": 2,
+  "residual_multiplier": 4096,
+  "precision_gates": {
+    "exact_max_abs_error": 0.001,
+    "frozen_polynomial_max_abs_error": 0.001
+  },
+  "full_workload": {
+    "model": "Mamba-3 SISO 187M",
+    "layers": 12,
+    "evaluations": 5,
+    "tokens": [
+      315,
+      279,
+      1614,
+      315
+    ]
+  },
+  "comparison_policy": "small encrypted probe and matched ABBA prefixes before matched full encrypted inference; record rejected boundary; same frozen weights, polynomial coefficients and payload; no intermediate evaluator decryption",
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "cpu_affinity": "15-19"
+  },
+  "stopping_rule": "one implementation; exact small encrypted qualification, then full comparison and adoption decision",
+  "baseline_binary": "/home/kataiwa/fhemamba/s2c-first-20260925/final-native-build/packed_fideslib",
+  "baseline_binary_sha256": "4504ee7ba95d7e5420def9dab07da8760c362b4471644735a9c993fcd0b9fec9",
+  "invariants": [
+    "Keep S2C-first and two-pass residual correction",
+    "Keep ciphertext levels and scheduling policy, all model coefficients and weights",
+    "Keep both 0.001 output gates and all generated token IDs"
+  ],
+  "hypothesis": "Avoid host expansion of identical rounded coefficients into every RNS tower; expand one bounded coefficient residue vector on GPU",
+  "expected_limit": "Prior host encoding 183.138 seconds is 24.50% of total 747.629 seconds. FFT, transfers and GPU expansion remain, so this is not an expected speedup."
+}

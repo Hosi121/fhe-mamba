@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "prefix_means_seconds": {
+    "baseline": 38.3565705785,
+    "candidate": 30.889807163999997
+  },
+  "exact_rns_cases": 720,
+  "encrypted_cases": 27,
+  "same_schedule": true
+}

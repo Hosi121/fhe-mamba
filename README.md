@@ -47,24 +47,30 @@ and [Spark build instructions](docs/dgx-spark.md#build).
 ## Measured results and scope
 
 Both trained models complete **five encrypted evaluations and four generated
-tokens** on **DGX Spark GB10**. The latest Mamba-3 experiment moves
-SlotsToCoeffs before modulus raising and uses one real modular-reduction
-branch, while retaining two-pass error correction.
+tokens** on **DGX Spark GB10**. The latest Mamba-3 experiment expands bounded
+public plaintext coefficients into RNS residues on the GPU, reducing CPU
+preparation while retaining S2C-first refresh and two-pass error correction.
 
 | Model | Layers | Study baseline → candidate | Reduction | Generated text |
 | --- | ---: | ---: | ---: | --- |
 | Mamba-2-130M | 24 | 1959.30 → **1942.99 s** (32.38 min) | **0.83%** | `The capital of the Republic of` |
-| Mamba-3 SISO 187M | 12 | 759.70 → **747.63 s** (12.46 min) | **1.59%** | `The capital of the state of` |
+| Mamba-3 SISO 187M | 12 | 750.41 → **618.95 s** (10.32 min) | **17.52%** | `The capital of the state of` |
 
-The [S2C-first study](docs/research/2026-09-25-s2c-first.md) retains this circuit
-as an **opt-in experimental path**. Refresh saves 115.00 s, while ordinary
-work grows by 102.92 s: the isolated primitive's approximately 39% reduction
-becomes a modest full-model gain. Peak process RSS falls from 27.31 to 26.21 GiB.
+The [GPU RNS study](docs/research/2026-09-25-gpu-rns.md) adopts this preparation
+path as **opt-in**. Ordinary evaluation falls **501.05 → 381.02 s (23.96%)**;
+host encoding within it falls **183.55 → 65.24 s**. The refresh circuit and
+484 bootstrap calls are unchanged. Peak process RSS remains 26.21 GiB.
 Weights, model polynomials, CKKS parameters, token IDs and both `0.001` gates
-are unchanged; maximum exact/polynomial errors are **4.68984e-5 / 5.61686e-7**.
-After rebuilding on Spark, add `--s2c-first` alongside
-`--planned-refresh --batch-refresh --frontier-refresh`. The existing circuit
-remains available by omitting the new flag.
+are unchanged; maximum exact/polynomial errors are **4.70075e-5 / 5.00072e-7**.
+After rebuilding on Spark, add `--gpu-plaintext-rns --s2c-first` alongside
+`--planned-refresh --batch-refresh --frontier-refresh` to the packed runner.
+The [study](docs/research/2026-09-25-gpu-rns.md#reproduction-and-validation)
+records build requirements, fallback conditions and the full command artifacts.
+
+The preceding [S2C-first study](docs/research/2026-09-25-s2c-first.md) reduced
+759.70 to 747.63 s (1.59%). It saved 115.00 s in refresh while ordinary work
+grew 102.92 s; GPU RNS addresses a large part of that ordinary preparation cost.
+The current comparison reruns its released executable as the 750.41 s baseline.
 
 The preceding [ready-node refresh study](docs/research/2026-09-25-packed-frontiers.md)
 reduced 941.95 to 761.00 s (19.21%). Its three-candidate campaign did not meet
@@ -76,16 +82,18 @@ during evaluation. Setup/key generation, input parsing, final client
 selection/validation and external transport are excluded. Compare variants
 within each study: the model sizes, weights and numerical contracts differ,
 so this table does not rank architectures. The final Mamba-3 pair uses one
-fresh process per mode; alternating prefix controls also show a small gain.
-Fresh-key error differences do not establish general accuracy improvements. Local release checks pass **290 tests**,
-including **19 native C++ contracts**.
+fresh process per mode; alternating prefix controls show a 19.47% reduction.
+Fresh-key error differences do not establish general accuracy improvements.
+Local release checks pass **290 tests**, including **20 native C++ contracts**;
+720 new exact-RNS cases and both existing plaintext configuration probes pass.
 
 The Mamba-2 row retains the earlier
 [shared ownership study](docs/research/2026-09-24-owned-arithmetic.md):
 151,315 backend result copies removed, maximum error `0.003651` below `0.05`,
 one fresh full pair and eight interleaved prefix samples. The small time
-difference has no statistical significance claim. This scheduler change applies
-to the common packed executor; the specialized Mamba-2 evaluator is unchanged.
+difference has no statistical significance claim. GPU RNS uses shared plaintext
+machinery, qualified for both model configurations; the specialized Mamba-2
+executor and its full-depth measurement are unchanged in this study.
 
 The [shared square dispatch](docs/research/2026-09-25-square-dispatch.md)
 passes 72 additional exact-RNS cases and has separate prefix controls for both

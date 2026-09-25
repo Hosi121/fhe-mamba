@@ -1,0 +1,144 @@
+-- FIDESlib install path at: /home/kataiwa/fhemamba/gpu-rns-20260925/install
+-- OpenFHE install path at: /home/kataiwa/fhe-deps/openfhe-fides
+-- The CXX compiler identification is GNU 13.3.0
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+CMake Warning at cmake/ClangFormat.cmake:41 (message):
+  clang-format not found! The 'format' target will not be available.
+Call Stack (most recent call first):
+  CMakeLists.txt:92 (include)
+
+
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- CUDA found: 13.0.88
+-- CUDA include path: /usr/local/cuda-13.0/targets/sbsa-linux/include
+-- NCCL not found: building without NCCL support
+-- FOUND PACKAGE OpenFHE
+-- OpenFHE Version: 1.4.2
+-- OpenFHE installed as shared libraries: ON
+-- OpenFHE include files location: /home/kataiwa/fhe-deps/openfhe-fides/include/openfhe
+-- OpenFHE lib files location: /home/kataiwa/fhe-deps/openfhe-fides/lib
+-- OpenFHE Native Backend size: 64
+-- IPO / LTO enabled
+-- Configuring done (1.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/gpu-rns-20260925/build
+[  2%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/Ciphertext.cpp.o
+[  4%] Building CXX object CMakeFiles/fideslib.dir/src/parallel_for.cpp.o
+[  6%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/RNSPoly.cpp.o
+[  8%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/RNSPolyBatch.cpp.o
+[ 13%] Building CUDA object CMakeFiles/gpu-test.dir/other/GPUTest.cpp.o
+[ 13%] Building CUDA object CMakeFiles/fideslib.dir/src/AddSub.cu.o
+[ 15%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/AccumulateBroadcast.cu.o
+[ 17%] Linking CUDA device code CMakeFiles/gpu-test.dir/cmake_device_link.o
+[ 19%] Linking CUDA executable gpu-test
+[ 19%] Built target gpu-test
+[ 21%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/ApproxModEval.cu.o
+[ 23%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Bootstrap.cu.o
+[ 26%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/CoeffsToSlots.cu.o
+[ 28%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Context.cu.o
+[ 30%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Conv.cu.o
+[ 32%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/ElemenwiseBatchKernels.cu.o
+[ 34%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/KeySwitchingKey.cu.o
+[ 36%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Limb.cu.o
+[ 39%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartition.cu.o
+[ 41%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionBatch.cu.o
+[ 43%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionMGPU.cu.o
+[ 45%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LinearTransform.cu.o
+[ 47%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Parameters.cu.o
+[ 50%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Plaintext.cu.o
+[ 52%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Rescale.cu.o
+[ 54%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/ParameterSwitch.cu.o
+[ 56%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/RawCiphertext.cu.o
+[ 58%] Building CUDA object CMakeFiles/fideslib.dir/src/ConstantsGPU.cu.o
+[ 60%] Building CUDA object CMakeFiles/fideslib.dir/src/CudaUtils.cu.o
+[ 63%] Building CUDA object CMakeFiles/fideslib.dir/src/Math.cu.o
+[ 65%] Building CUDA object CMakeFiles/fideslib.dir/src/ModMult.cu.o
+[ 67%] Building CUDA object CMakeFiles/fideslib.dir/src/NTT.cu.o
+[ 69%] Building CUDA object CMakeFiles/fideslib.dir/src/PeerUtils.cu.o
+[ 71%] Building CUDA object CMakeFiles/fideslib.dir/src/PolyApprox.cu.o
+[ 73%] Building CUDA object CMakeFiles/fideslib.dir/src/Rotation.cu.o
+[ 76%] Building CUDA object CMakeFiles/fideslib.dir/src/VectorGPU.cu.o
+[ 78%] Building CXX object CMakeFiles/fideslib.dir/api/CCParams.cpp.o
+[ 80%] Building CXX object CMakeFiles/fideslib.dir/api/Ciphertext.cpp.o
+[ 82%] Building CXX object CMakeFiles/fideslib.dir/api/CryptoContext.cpp.o
+[ 84%] Building CXX object CMakeFiles/fideslib.dir/api/GenCryptoContext.cpp.o
+[ 86%] Building CXX object CMakeFiles/fideslib.dir/api/Plaintext.cpp.o
+[ 89%] Building CXX object CMakeFiles/fideslib.dir/api/Serialize.cpp.o
+[ 91%] Linking CUDA device code CMakeFiles/fideslib.dir/cmake_device_link.o
+[ 93%] Linking CXX static library fideslib.a
+[ 93%] Built target fideslib
+[ 95%] Building CXX object CMakeFiles/dummy.dir/other/Dummy.cpp.o
+[ 97%] Linking CUDA device code CMakeFiles/dummy.dir/cmake_device_link.o
+nvlink warning : Ignoring -dlto option because no LTO objects found
+[100%] Linking CXX executable dummy
+[100%] Built target dummy
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/lib/fideslib.a
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CCParams.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/Ciphertext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CryptoContext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/Definitions.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/GenCryptoContext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/KeyPair.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/Plaintext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/PrivateKey.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/PublicKey.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/Serialize.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/fideslib.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/share/fideslib/cmake/fideslibTargets.cmake
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/share/fideslib/cmake/fideslibTargets-release.cmake
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/share/fideslib/cmake/fideslibConfig.cmake
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/share/fideslib/cmake/fideslibConfigVersion.cmake
+-- Up-to-date: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/VectorGPU.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/Rotation.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/AddSub.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/ConstantsGPU.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/PolyApprox.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CudaUtils.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/LimbUtils.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/Math.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/NTThelper.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Conv.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/LimbPartition.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/AccumulateBroadcast.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/forwardDefs.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/ApproxModEval.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/openfhe-interface
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/openfhe-interface/RawCiphertext.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/openfhe-interface/ParameterSwitch.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/KeySwitchingKey.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/LinearTransform.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Context.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Limb.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Plaintext.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Ciphertext.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/ElemenwiseBatchKernels.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/BootstrapPrecomputation.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/RNSPoly.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/CoeffsToSlots.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Rescale.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Parameters.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/CKKS/Bootstrap.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/NTTfusions.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/PeerUtils.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/ModMult.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/NTT.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/LogUtil.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/ntt_types.inc
+-- Installing: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/parallel_for.hpp

@@ -1,0 +1,1 @@
+GPU plaintext RNS requires -DFHE_STAGE0_GPU_RNS=ON

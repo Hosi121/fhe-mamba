@@ -1,0 +1,25 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using FIDESlib.
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/gpu-rns-20260925/install/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/gpu-rns-20260925/install/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Configuring done (1.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/gpu-rns-20260925/native-build

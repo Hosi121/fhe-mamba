@@ -34,6 +34,7 @@ This validates a recorded artifact; it does not rerun encrypted inference.
 
 | Location | Contents |
 | --- | --- |
+| [`dgx/2026-09-25/gpu-rns/`](dgx/2026-09-25/gpu-rns/) | Exact GPU plaintext RNS expansion: 720 exact cases, encrypted arithmetic, ABBA prefixes and qualified full pair; 17.52% full Mamba-3 reduction with S2C-first retained |
 | [`dgx/2026-09-25/packed-frontiers/`](dgx/2026-09-25/packed-frontiers/) | Three mechanisms, interleaved prefixes, full-depth selection and final-source qualification; rejected prototypes and Mamba-2 regression retained |
 | [`dgx/2026-09-25/square-dispatch/`](dgx/2026-09-25/square-dispatch/) | Shared square dispatch: exact RNS cases and separate-binary prefix controls for both models |
 | [`dgx/2026-09-25/weight-coefficient-cache/`](dgx/2026-09-25/weight-coefficient-cache/) | Rejected compact coefficient cache: 120 final exact GPU/RNS cases, two ABBA workloads, source archives and failed attempts; 1.26% slower three-step probe |

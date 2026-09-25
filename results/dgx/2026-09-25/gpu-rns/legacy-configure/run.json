@@ -1,0 +1,20 @@
+{
+  "command": [
+    "cmake",
+    "-S",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/native-source/native/fideslib_stage0",
+    "-B",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/legacy-build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+    "-DCMAKE_PREFIX_PATH=/home/kataiwa/fhemamba/spark/install-2a70798e869944af;/home/kataiwa/fhe-deps/openfhe-fides",
+    "-Dfideslib_DIR=/home/kataiwa/fhemamba/spark/install-2a70798e869944af/share/fideslib/cmake"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790326038.8580654,
+  "wall_seconds": 0.31424689292907715,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  }
+}

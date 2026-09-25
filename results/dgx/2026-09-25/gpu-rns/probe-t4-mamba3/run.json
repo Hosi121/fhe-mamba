@@ -1,0 +1,17 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/native-build/packed_rns_probe",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/probe-t4-mamba3/native.json"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790326048.6093652,
+  "wall_seconds": 5.82496452331543,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "binary_sha256": "77c1aac53e7a65763a9ea422df1680f38ff39469502b24e555ccd866d710730c"
+}

@@ -1,0 +1,31 @@
+{
+  "candidate": "bounded single-tower public plaintext encoding and exact GPU RNS expansion",
+  "decision": "adopt-opt-in",
+  "flag": "--gpu-plaintext-rns",
+  "stopping_rule_completed": true,
+  "reason": "All exact-RNS, encrypted arithmetic, shared regressions and model gates pass; ABBA prefixes and the full pair improve while retaining S2C-first and its schedule.",
+  "full_evaluation_reduction_percent": 17.51833100575675,
+  "full_ordinary_reduction_percent": 23.955616256576484,
+  "prefix_reduction_percent": 19.46671274799876,
+  "native_eval_seconds": {
+    "baseline": 750.41347199,
+    "candidate": 618.953556055
+  },
+  "ordinary_seconds": {
+    "baseline": 501.0505525819999,
+    "candidate": 381.020804954
+  },
+  "refresh_seconds": {
+    "baseline": 249.362919408,
+    "candidate": 237.932751101
+  },
+  "same_schedule": true,
+  "source_archive_sha256": "0d3f31eadd14fcf05659167bca44063d259821aa20b1cfe0f9fd788a470bd8d6",
+  "limits": [
+    "One full process per variant on one fixed trained Mamba-3 prompt/checkpoint; no statistical-significance claim.",
+    "Refresh circuit is unchanged; the observed refresh timing reduction is not causally attributed to this preparation change.",
+    "Mamba-2/complex configuration passes shared primitives and existing regressions, without a new Mamba-2 full-run speed measurement.",
+    "Compact preparation is restricted by the exact-lift bound and supported layout; other inputs retain the existing encoding.",
+    "Existing security=not-set qualification is unchanged."
+  ]
+}

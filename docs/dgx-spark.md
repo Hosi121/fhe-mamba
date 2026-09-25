@@ -38,7 +38,7 @@ dependency and uses `~/fhemamba/spark/` for its own patched FIDESlib snapshot
 and kernel. No B300 container or Slurm allocation is needed. `BUILD_JOBS`
 defaults to 8. `FHEMAMBA_REMOTE_ROOT` overrides the default `~/fhemamba` root.
 
-The build verifies the source snapshot, runs the 19 C++ contract tests,
+The build verifies the source snapshot, runs the 20 C++ contract tests,
 and writes `spark/kernel/stage1_mamba2_decode_fideslib.build.json`. The runner
 checks hashes of the native sources/configuration, executable and OpenFHE
 shared libraries, and sets the matching library path. FIDESlib is linked
@@ -50,6 +50,15 @@ Mamba-3 runner selects it with `--s2c-first`, together with
 keeps the existing circuit. The [qualification study](research/2026-09-25-s2c-first.md)
 records the supported real-packing configuration and modest full-model gain.
 The legacy Mamba-2 executor keeps its current bootstrap circuit.
+
+The Spark build also enables `FHE_STAGE0_GPU_RNS` and builds
+`packed_rns_probe`. Add `--gpu-plaintext-rns` to the packed runner to upload
+one bounded coefficient vector and expand its RNS towers on the GPU. The
+[qualification study](research/2026-09-25-gpu-rns.md) records exact-RNS checks
+and a 17.52% full Mamba-3 reduction with S2C-first retained. Unsupported
+plaintext shapes and ranges use the existing encoder. The option is off at
+runtime unless requested; custom CMake builds require
+`-DFHE_STAGE0_GPU_RNS=ON` and an appropriate `CMAKE_CUDA_ARCHITECTURES` value.
 
 ## Payload
 

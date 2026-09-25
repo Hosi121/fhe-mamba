@@ -1,0 +1,12 @@
+[ 12%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+[ 25%] Building CXX object CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o
+[ 37%] Linking CXX static library libstage1_mamba2_payload.a
+[ 37%] Built target stage1_mamba2_payload
+[ 50%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 62%] Linking CXX static library libstage1_mamba2_plan.a
+[ 62%] Built target stage1_mamba2_plan
+[ 75%] Linking CXX static library libfideslib_plaintext_encoder.a
+[ 75%] Built target fideslib_plaintext_encoder
+[ 87%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[100%] Linking CXX executable packed_fideslib
+[100%] Built target packed_fideslib

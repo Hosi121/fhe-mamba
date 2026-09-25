@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "identical_files": 91,
+  "reference": "../s2c-first/final-source-manifest.json:final-backend",
+  "verified_before_controller_start": true,
+  "note": "The rebuild uses a different directory and has a different static-library hash. The backend sources and documented build options match; byte identity of library archives is not claimed."
+}

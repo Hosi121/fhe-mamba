@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "identical_native_files": 85,
+  "note": "Delivered native implementation matches the frozen measured source overlay; evidence scripts and documents are separate."
+}

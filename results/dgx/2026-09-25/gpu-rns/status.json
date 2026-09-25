@@ -1,0 +1,10 @@
+{
+  "state": "completed",
+  "started_at_unix": 1790326038.7723644,
+  "stage": "full-candidate",
+  "baseline_eval_seconds": 750.41347199,
+  "candidate_eval_seconds": 618.953556055,
+  "reduction_fraction": 0.1751833100575675,
+  "same_schedule": true,
+  "finished_at_unix": 1790327781.3580577
+}

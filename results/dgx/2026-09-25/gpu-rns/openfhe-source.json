@@ -1,0 +1,14 @@
+{
+  "commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+  "files_sha256": {
+    "src/pke/lib/encoding/ckkspackedencoding.cpp": "ce967bf68d80a63101984e8927298923c6c3c6754dc522e63355e7ec40655401",
+    "src/pke/include/cryptocontext.h": "aa5b4639f3aefa197be87754bee35e9ff7b979d5e0062e2342909ab016ee4e1c",
+    "src/core/include/utils/utilities.h": "c4a4996bd1b491229a0637345c56a2c6c633cd31dd98b5e3a60713c19ecd1b9d"
+  },
+  "notes": [
+    "Encoding remains the pinned OpenFHE FFT/rounding implementation, using one q0 tower only for bounded degree-one values.",
+    "The existing approximate-scale path and higher degrees use the unchanged full encoding."
+  ],
+  "large_scaling_factor_max_bits_in_word": 61,
+  "constant_header": "src/pke/include/constants-defs.h"
+}

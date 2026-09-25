@@ -1,0 +1,17 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/native-build/packed_plaintext_probe",
+    "/home/kataiwa/fhemamba/gpu-rns-20260925/existing-plaintext-mamba3/native.json"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790327800.84623,
+  "wall_seconds": 49.172767639160156,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "binary_sha256": "5d26a3b933b22b48b343618e5bfd18cee6a7b729b938feb2b87cedebf4ca6df2"
+}
