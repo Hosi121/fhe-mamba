@@ -1,0 +1,33 @@
+{
+  "scope": "Static level models, not latency measurements or correctness substitutes",
+  "input_program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "compile": [
+    "g++",
+    "-O2",
+    "-std=c++20",
+    "-I",
+    "native/fideslib_stage0/include"
+  ],
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "files_sha256": {
+    "simulate_frontier.cpp": "6cd72d217757aa2fdf0cbf939939c481b3e208cf3f7a0995dd38a94565a90ce5",
+    "frontier-model-prefix.json": "6495a670affa7e25462a723f656be4b8cc89537be1a8bbe118c530fe8dc6238b",
+    "frontier-model-full.json": "1b97967564a84367077b0e43aa85dcad40164f41d8a2b8f7cbc6b8c7d7240f83",
+    "simulate_deferred_hoists.cpp": "509231325e664d99b2dad948af0b96bac6d216f6717dfeef7b99114ca27f4262",
+    "hoist-model-prefix.json": "f6e609415b940fa175da8b5e4770dda54ed38fd630eb5c4861fae4707888ac58",
+    "hoist-model-full.json": "d4664c632a327ec665ca58edc66f7626fb79d8f1c485e0de3fb55d9b36f83b2a",
+    "simulate_thresholds.cpp": "e0a1b789c56d1471d306705894f789234c8ef79b2dd477b87d758e7603d27530",
+    "threshold-model-full.json": "47ca2b0a8a58908305d3613b4da54ae912db8db39d3a31e42b0a72626c093973",
+    "simulate_priorities.cpp": "ed3a6717a054984a443a55437543ec083196323d648294b7fdbd74dcd0f73e91",
+    "priority-model-full.json": "13f960c285db4049a8d9fd5f05a81dee044e075879fa0c37d0eb6bb0952b3cd8",
+    "simulate_polynomial_depth.cpp": "1572cd633e1618fb1b9316e58ef71acbe282a2f6c7e058c21306488b11d18317",
+    "polynomial-depth-model-full.json": "16cc06f7079636ffeb26367ec6ad2b90c3b1a89cc7e30bae550666f2e4f2d18c"
+  },
+  "header_revision": "frontier-r1/compiled-sources.json",
+  "decisions": {
+    "delayed_static_hoists": "No GPU extension: modeled physical refresh count increases (251 to 259 without batching; 288 to 304 with batching).",
+    "threshold_and_capacity_sweep": "No GPU extension: lowest modeled physical count is 246 versus 251 at the current threshold, while logical refresh work grows. This does not support a large further saving.",
+    "ready_priorities": "No GPU extension: ordering ready nodes by produced depth or operation cost leaves the modeled physical refresh count at 251 in all five variants.",
+    "coefficient_aware_polynomial_depth": "No GPU extension: simulating the existing vector evaluator reduces the depth bound for 108 batches, but increases modeled physical refreshes from 288 to 295 under this scheduler. A smaller local depth does not guarantee better global refresh batching."
+  }
+}

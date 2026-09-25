@@ -1,0 +1,187 @@
+{
+  "review_seconds": 10800,
+  "used_seconds": 7785.772464189678,
+  "runs": [
+    {
+      "name": "full-baseline",
+      "charged_seconds": 982.3131728069857
+    },
+    {
+      "name": "batch-r1-synthetic",
+      "charged_seconds": 33.75780547503382
+    },
+    {
+      "name": "batch-r1-prefix-1",
+      "charged_seconds": 76.39855575375259
+    },
+    {
+      "name": "batch-r1-prefix-2",
+      "charged_seconds": 78.56262809131294
+    },
+    {
+      "name": "batch-r1-prefix-3",
+      "charged_seconds": 78.69052840676159
+    },
+    {
+      "name": "batch-r1-prefix-4",
+      "charged_seconds": 76.5515772998333
+    },
+    {
+      "name": "layout-r1-synthetic",
+      "charged_seconds": 40.976053168065846
+    },
+    {
+      "name": "layout-r1-layout-fixture",
+      "charged_seconds": 38.25832846481353
+    },
+    {
+      "name": "layout-r1-combined-fixture",
+      "charged_seconds": 34.27140647917986
+    },
+    {
+      "name": "layout-r1-prefix-1",
+      "charged_seconds": 76.62073681037873
+    },
+    {
+      "name": "layout-r1-prefix-2",
+      "charged_seconds": 77.06290514580905
+    },
+    {
+      "name": "layout-r1-prefix-3",
+      "charged_seconds": 76.86586248129606
+    },
+    {
+      "name": "layout-r1-prefix-4",
+      "charged_seconds": 76.95650087390095
+    },
+    {
+      "name": "layout-r1-prefix-5",
+      "charged_seconds": 76.95461673568934
+    },
+    {
+      "name": "layout-r1-prefix-6",
+      "charged_seconds": 76.56951475236565
+    },
+    {
+      "name": "frontier-r1-synthetic",
+      "charged_seconds": 40.923673855140805
+    },
+    {
+      "name": "frontier-r1-layout-fixture",
+      "charged_seconds": 35.33239753264934
+    },
+    {
+      "name": "frontier-r1-combined-fixture",
+      "charged_seconds": 33.897111017256975
+    },
+    {
+      "name": "frontier-r1-prefix-1",
+      "charged_seconds": 76.70569861680269
+    },
+    {
+      "name": "frontier-r1-prefix-2",
+      "charged_seconds": 68.98945136647671
+    },
+    {
+      "name": "frontier-r1-prefix-3",
+      "charged_seconds": 68.70961828064173
+    },
+    {
+      "name": "frontier-r1-prefix-4",
+      "charged_seconds": 68.99157836288214
+    },
+    {
+      "name": "frontier-r1-prefix-5",
+      "charged_seconds": 68.94150239881128
+    },
+    {
+      "name": "frontier-r1-prefix-6",
+      "charged_seconds": 76.8037404185161
+    },
+    {
+      "name": "frontier-r1-full",
+      "charged_seconds": 857.1479546837509
+    },
+    {
+      "name": "layout-r2-synthetic",
+      "charged_seconds": 40.96831204742193
+    },
+    {
+      "name": "layout-r2-layout-fixture",
+      "charged_seconds": 39.119445499032736
+    },
+    {
+      "name": "layout-r2-combined-fixture",
+      "charged_seconds": 33.51352986693382
+    },
+    {
+      "name": "layout-r2-prefix-1",
+      "charged_seconds": 76.19840339198709
+    },
+    {
+      "name": "layout-r2-prefix-2",
+      "charged_seconds": 76.29821737110615
+    },
+    {
+      "name": "layout-r2-prefix-3",
+      "charged_seconds": 69.19182136841118
+    },
+    {
+      "name": "layout-r2-prefix-4",
+      "charged_seconds": 68.02892068307847
+    },
+    {
+      "name": "layout-r2-prefix-5",
+      "charged_seconds": 68.22355625685304
+    },
+    {
+      "name": "layout-r2-prefix-6",
+      "charged_seconds": 68.89001709036529
+    },
+    {
+      "name": "layout-r2-prefix-7",
+      "charged_seconds": 75.8401359282434
+    },
+    {
+      "name": "layout-r2-prefix-8",
+      "charged_seconds": 76.14464609511197
+    },
+    {
+      "name": "layout-r2-full",
+      "charged_seconds": 832.9434893568978
+    },
+    {
+      "name": "m2-regression-1",
+      "charged_seconds": 82.88897116295993
+    },
+    {
+      "name": "m2-regression-2",
+      "charged_seconds": 83.33672344963998
+    },
+    {
+      "name": "m2-regression-3",
+      "charged_seconds": 82.75971726793796
+    },
+    {
+      "name": "m2-regression-4",
+      "charged_seconds": 84.1940993051976
+    },
+    {
+      "name": "frontier-only-full",
+      "charged_seconds": 803.181081565097
+    },
+    {
+      "name": "final-synthetic",
+      "charged_seconds": 40.81066431943327
+    },
+    {
+      "name": "final-candidate-full",
+      "charged_seconds": 802.2963271737099
+    },
+    {
+      "name": "final-baseline-full",
+      "charged_seconds": 983.6914657121524
+    }
+  ],
+  "scope": "Internal review interval, not a newly inferred user spending limit."
+}

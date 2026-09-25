@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "scope": "Only this campaign. Shared inputs, dependencies and baseline executables are untouched.",
+  "revisions": [
+    {
+      "revision": "batch-r1",
+      "verified_files": 118,
+      "removed": [
+        "source/",
+        "build/"
+      ],
+      "kept": []
+    },
+    {
+      "revision": "layout-r1",
+      "verified_files": 118,
+      "removed": [
+        "source/",
+        "build/"
+      ],
+      "kept": []
+    },
+    {
+      "revision": "frontier-r1",
+      "verified_files": 119,
+      "removed": [
+        "source/",
+        "build/"
+      ],
+      "kept": []
+    },
+    {
+      "revision": "layout-r2",
+      "verified_files": 119,
+      "removed": [
+        "source/",
+        "build/"
+      ],
+      "kept": []
+    },
+    {
+      "revision": "final-r1",
+      "verified_files": 117,
+      "removed": [
+        "source/",
+        "build intermediates (selected executables retained)"
+      ],
+      "kept": [
+        "final-r1/build/packed_fideslib",
+        "final-r1/build/stage1_mamba2_decode_fideslib"
+      ]
+    }
+  ]
+}

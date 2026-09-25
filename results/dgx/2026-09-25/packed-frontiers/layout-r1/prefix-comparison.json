@@ -1,0 +1,31 @@
+{
+  "samples_alccla": [
+    46.8203498,
+    47.210920803,
+    47.173248874,
+    47.223413304,
+    47.204871186,
+    46.865542135
+  ],
+  "comparisons": [
+    {
+      "mechanism": "layout",
+      "baseline_mean_seconds": 46.8429459675,
+      "candidate_mean_seconds": 47.2078959945,
+      "reduction_percent": -0.7790928163510458,
+      "features": [
+        "--defer-layout"
+      ]
+    },
+    {
+      "mechanism": "combined",
+      "baseline_mean_seconds": 46.8429459675,
+      "candidate_mean_seconds": 47.198331089,
+      "reduction_percent": -0.758673721645442,
+      "features": [
+        "--batch-polynomials",
+        "--defer-layout"
+      ]
+    }
+  ]
+}

@@ -47,42 +47,43 @@ and [Spark build instructions](docs/dgx-spark.md#build).
 ## Measured results and scope
 
 Both trained models complete **five encrypted evaluations and four generated
-tokens** on **DGX Spark GB10**. The measured shared ownership change reuses
-private ciphertext buffers in both models while preserving arithmetic order,
-operation counts, selected tokens and the existing error gates.
+tokens** on **DGX Spark GB10**. The latest Mamba-3 change advances independent
+ready operations before grouped refresh, reducing expensive bootstrap calls.
 
-| Model | Layers | Fresh baseline → candidate | Reduction | Generated text |
+| Model | Layers | Study baseline → candidate | Reduction | Generated text |
 | --- | ---: | ---: | ---: | --- |
 | Mamba-2-130M | 24 | 1959.30 → **1942.99 s** (32.38 min) | **0.83%** | `The capital of the Republic of` |
-| Mamba-3 SISO 187M | 12 | 976.48 → **949.26 s** (15.82 min) | **2.79%** | `The capital of the state of` |
+| Mamba-3 SISO 187M | 12 | 941.95 → **761.00 s** (12.68 min) | **19.21%** | `The capital of the state of` |
+
+Mamba-3's [ready-node refresh study](docs/research/2026-09-25-packed-frontiers.md)
+tests three mechanisms and selects the simpler scheduler. Bootstrap calls fall
+**726 → 476 (34.44%)**, with unchanged polynomials, CKKS parameters, generated
+IDs and both `0.001` error gates. Maximum exact/polynomial errors are
+**0.0000809575 / 0.0000607799**. The **20% full-model target is not met**.
+Polynomial batching and persistent slot windows are retained as reproducible
+experiments; their best combination is slower at **792.40 s**. Enable the
+selected schedule with `--planned-refresh --batch-refresh --frontier-refresh`.
 
 These are native evaluation times, including plaintext encoding and GPU upload
-performed during evaluation. Context/key setup, payload export, input loading
-and external transport are outside that timer. Each full mode has one fresh
-process/key sample. Separate interleaved prefix controls show a **2.76%**
-reduction for Mamba-3 and **0.69%** for Mamba-2 across its eight samples,
-including reversed controls. The small Mamba-2 difference does not establish
-statistical significance. Model sizes, weights and numerical contracts differ;
-this table does not rank architectures.
+during evaluation. Setup/key generation, input parsing, final client
+selection/validation and external transport are excluded. Compare variants
+within each study: the model sizes, weights and numerical contracts differ,
+so this table does not rank architectures. The final Mamba-3 pair uses one
+fresh process per mode; an earlier full trial also measured a 19.09% reduction.
+Fresh-key error differences do not establish accuracy improvements. Local release checks pass **288 tests**,
+including **19 native C++ contracts**.
 
-Mamba-2 removes **151,315 backend result copies** and has maximum
-CKKS-to-polynomial error **0.003651**, below its unchanged `0.05` gate.
-Mamba-3 reuses **183,912 temporary input buffers**; maximum errors are
-**0.0001395992** versus exact FP64 and **0.0001251919** versus the frozen
-polynomial circuit, both below `0.001`. These comparisons use fresh keys;
-variation in error between runs is not evidence of an accuracy improvement.
-The change passes **286 tests**, including **18 C++ contracts**, plus
-**192 GPU cases with exactly matching ciphertext coefficients and metadata**.
-See the [ownership study](docs/research/2026-09-24-owned-arithmetic.md) for
-commands, raw measurements, failed controls and source/binary identities.
+The Mamba-2 row retains the earlier
+[shared ownership study](docs/research/2026-09-24-owned-arithmetic.md):
+151,315 backend result copies removed, maximum error `0.003651` below `0.05`,
+one fresh full pair and eight interleaved prefix samples. The small time
+difference has no statistical significance claim. This scheduler change applies
+to the common packed executor; the specialized Mamba-2 evaluator is unchanged.
 
-A later [shared square dispatch](docs/research/2026-09-25-square-dispatch.md)
-passes **72 additional exact-RNS cases**. In four interleaved prefix runs per
-model, mean evaluation time falls **47.09 → 46.69 s (0.84%)** for Mamba-3
-and **53.98 → 53.50 s (0.88%)** for Mamba-2, with unchanged error gates and
-operation counts. These small prefix results have no significance claim;
-the square change has **not yet been measured at full depth**. The full-model
-table above therefore retains the earlier measurements.
+The [shared square dispatch](docs/research/2026-09-25-square-dispatch.md)
+passes 72 additional exact-RNS cases and has separate prefix controls for both
+models. It is included in the new Mamba-3 baseline; this study does not isolate
+its full-depth contribution.
 
 Earlier milestones remain reproducible:
 

@@ -1,0 +1,51 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 248 ~ 6262MB
+Rotation keys loaded: 85 ~ 15300MB
+setup_seconds=26.3071
+planned_logical_refreshes=25
+node=10/406 op=scatter seconds=0.636677 eta_seconds=25.2124 bootstraps=0
+node=20/406 op=linear seconds=2.94984 eta_seconds=56.9319 bootstraps=0
+node=30/406 op=mul seconds=3.08541 eta_seconds=38.6705 bootstraps=0
+node=40/406 op=gather seconds=4.98752 eta_seconds=45.6358 bootstraps=0
+node=50/406 op=addp seconds=5.11955 eta_seconds=36.4512 bootstraps=0
+node=60/406 op=add seconds=6.14304 eta_seconds=35.4249 bootstraps=0
+node=70/406 op=gather seconds=6.50345 eta_seconds=31.2166 bootstraps=0
+node=80/406 op=sum seconds=6.66536 eta_seconds=27.1613 bootstraps=0
+node=90/406 op=addp seconds=7.82219 eta_seconds=27.4646 bootstraps=0
+node=100/406 op=mul seconds=8.13922 eta_seconds=24.906 bootstraps=0
+node=110/406 op=mul seconds=8.65839 eta_seconds=23.2989 bootstraps=0
+node=120/406 op=gather seconds=9.11168 eta_seconds=21.7162 bootstraps=0
+node=130/406 op=gather seconds=9.44144 eta_seconds=20.0449 bootstraps=0
+node=140/406 op=cheb seconds=10.7494 eta_seconds=20.4239 bootstraps=0
+node=150/406 op=mul seconds=10.8938 eta_seconds=18.592 bootstraps=0
+node=160/406 op=mul seconds=11.2151 eta_seconds=17.2432 bootstraps=0
+node=170/406 op=add seconds=13.3851 eta_seconds=18.5817 bootstraps=2
+node=180/406 op=mul seconds=13.9048 eta_seconds=17.4583 bootstraps=2
+node=190/406 op=mul seconds=14.664 eta_seconds=16.6707 bootstraps=2
+node=200/406 op=add seconds=15.4106 eta_seconds=15.8729 bootstraps=2
+node=210/406 op=mul seconds=17.3337 eta_seconds=16.1781 bootstraps=4
+node=220/406 op=cheb_batch seconds=17.8436 eta_seconds=15.0859 bootstraps=4
+node=230/406 op=mul seconds=18.3011 eta_seconds=14.0043 bootstraps=4
+node=240/406 op=add seconds=20.771 eta_seconds=14.3666 bootstraps=6
+node=250/406 op=scatter seconds=21.2355 eta_seconds=13.251 bootstraps=6
+node=260/406 op=repeat seconds=22.9881 eta_seconds=12.9087 bootstraps=8
+client_token=6864 logit_margin=5.73045
+node=270/406 op=repeat seconds=23.7028 eta_seconds=11.9392 bootstraps=8
+node=280/406 op=gather seconds=25.2294 eta_seconds=11.3532 bootstraps=8
+node=290/406 op=sum seconds=27.0254 eta_seconds=10.8102 bootstraps=8
+node=300/406 op=add seconds=28.017 eta_seconds=9.89933 bootstraps=8
+node=310/406 op=addp seconds=28.3379 eta_seconds=8.7756 bootstraps=8
+node=320/406 op=gather seconds=29.1288 eta_seconds=7.82836 bootstraps=8
+node=330/406 op=gather seconds=29.5847 eta_seconds=6.81344 bootstraps=8
+node=340/406 op=scatter seconds=30.0125 eta_seconds=5.82596 bootstraps=8
+node=350/406 op=cheb seconds=30.179 eta_seconds=4.82864 bootstraps=8
+node=360/406 op=add seconds=32.2095 eta_seconds=4.11566 bootstraps=10
+node=370/406 op=repeat seconds=32.5933 eta_seconds=3.17124 bootstraps=10
+node=380/406 op=linear_ref seconds=33.1892 eta_seconds=2.27084 bootstraps=10
+node=390/406 op=mulp seconds=34.7338 eta_seconds=1.42498 bootstraps=12
+node=400/406 op=sum seconds=37.1214 eta_seconds=0.556821 bootstraps=14
+node=406/406 op=mulp seconds=38.6047 eta_seconds=0 bootstraps=16
+client_token=6864 logit_margin=5.21141
+passed=1 polynomial_error=1.79017e-05 exact_error=2.35061e-05 eval_seconds=38.6074

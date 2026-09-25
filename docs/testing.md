@@ -123,6 +123,11 @@ degree 768, both sparse and asymmetric coefficients, unchanged polynomial
 values, and baseline ceilings for depth and scalar products. The encrypted
 A/B campaign must check actual counts and output error independently.
 
+The ready-schedule contract covers out-of-order independent work, duplicate
+input edges, pinned outputs, dead nodes and two client-feedback barriers.
+Runner tests reject frontier refresh without grouped refresh and verify flag
+propagation through both budgeted and unbudgeted execution.
+
 These tests do not execute CKKS on a GPU. They are intended to catch contract
 breakage before a GPU experiment, including DGX Spark.
 

@@ -1,0 +1,12 @@
+{
+  "baseline_seconds": 941.693952903,
+  "combined_seconds": 816.409649212,
+  "reduction_percent": 13.304142317658595,
+  "goal_met": false,
+  "ctct_reduction_percent": 33.41107871720117,
+  "bootstrap_time_reduction_percent": 13.696663805044707,
+  "poly_nonbootstrap_seconds": {
+    "baseline": 97.12162223000001,
+    "combined": 101.61711729499999
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "prefix": [
+    {
+      "mechanism": "layout",
+      "baseline_mean_seconds": 46.8429459675,
+      "candidate_mean_seconds": 47.2078959945,
+      "reduction_percent": -0.7790928163510458,
+      "features": [
+        "--defer-layout"
+      ]
+    },
+    {
+      "mechanism": "combined",
+      "baseline_mean_seconds": 46.8429459675,
+      "candidate_mean_seconds": 47.198331089,
+      "reduction_percent": -0.758673721645442,
+      "features": [
+        "--batch-polynomials",
+        "--defer-layout"
+      ]
+    }
+  ],
+  "finished_utc": "2026-09-25T00:20:41.352977+00:00"
+}

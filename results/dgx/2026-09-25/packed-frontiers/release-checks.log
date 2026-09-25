@@ -1,0 +1,55 @@
+118 files already formatted
+All checks passed!
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [ 25%]
+........................................................................ [ 50%]
+........................................................................ [ 75%]
+........................................................................ [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.12-final-0 _______________
+
+Name                                     Stmts   Miss Branch BrPart  Cover   Missing
+------------------------------------------------------------------------------------
+src/fhemamba/_env.py                         5      0      2      1    86%   19->exit
+src/fhemamba/artifacts.py                  159     26     62     11    81%   23, 49, 82-89, 140, 155-156, 169-176, 190, 198, 206, 225, 233, 273-275, 298-304, 312, 353
+src/fhemamba/bootstrap_telemetry.py         97      7     32      8    88%   26, 28, 30, 40, 44, 62, 73, 132->171
+src/fhemamba/bsgs_layout.py                150     12     52     13    88%   50, 51->53, 54, 101, 105, 107, 118-119, 132, 138, 158, 186, 217, 329->331
+src/fhemamba/cli.py                         27     27      2      0     0%   3-55
+src/fhemamba/generate.py                    17      2      4      1    86%   25-26
+src/fhemamba/generation.py                  79     10     42      9    83%   20, 26, 28, 46, 60-61, 66, 79, 81, 87
+src/fhemamba/lowering.py                   152      1     10      1    99%   76
+src/fhemamba/m1_payload.py                 515     50    170     39    86%   86-87, 92-93, 95-96, 98-99, 102-103, 112->114, 222, 225, 293, 296, 328->346, 330, 350, 392, 396, 402-407, 442, 451, 468, 473-475, 477, 479, 500, 513, 536, 562, 568->570, 571, 586, 622->624, 659, 662, 678->680, 710, 746-747, 877, 928, 949-950, 1006, 1010, 1012
+src/fhemamba/mamba3.py                     156     11     44     11    89%   54, 56, 58, 95, 111, 161, 164, 166, 207, 211, 214
+src/fhemamba/mamba3_lm.py                   94      6     24      6    90%   35, 37, 46, 77, 88, 108
+src/fhemamba/noise_flow.py                 131      8     52      9    91%   36, 38, 40, 158, 174, 183->194, 185, 284, 349
+src/fhemamba/normalization.py              151      5     50      5    95%   63, 266, 272, 282, 294
+src/fhemamba/ops.py                        388     88     88     10    74%   89-90, 163-165, 169-174, 195, 201-202, 223, 257, 281, 326, 330, 340-341, 381, 403-406, 410, 414, 434-438, 442, 446, 488-505, 519-520, 542-543, 560, 599-616, 637-638, 647, 676-677, 681, 684-685, 691-697, 701-707
+src/fhemamba/packed_program.py             226     11     64     11    92%   77, 144, 146, 157, 159, 162, 188, 210, 240, 283, 289
+src/fhemamba/payload_surrogate.py           63      6     22      6    86%   31, 65, 81, 91, 109, 112
+src/fhemamba/phase_algebra.py               11      1      2      1    85%   23
+src/fhemamba/polynomial_certificate.py     163     10     76     10    92%   27, 72, 74, 76, 136, 219, 241, 245, 247, 279
+src/fhemamba/ppl.py                         27     27      6      0     0%   3-43
+src/fhemamba/prefill_budget.py              88      3     18      3    94%   46, 48, 53
+src/fhemamba/reference.py                  165      4     42      2    97%   174-175, 281-282
+src/fhemamba/rotation_keys.py              101      1     40      2    98%   100, 167->162
+src/fhemamba/selective_gates.py             68      1     26      2    97%   70->68, 115
+src/fhemamba/state_layout.py               131     12     46     12    86%   39, 54, 62, 66, 76, 101, 103, 132, 159, 161, 164, 166
+------------------------------------------------------------------------------------
+TOTAL                                     3378    329   1040    173    88%
+
+8 files skipped due to complete coverage.
+Required test coverage of 70.0% reached. Total coverage: 87.60%
+============================= slowest 10 durations =============================
+19.14s call     tests/test_native_layout_cpp.py::test_native_stage0_layout_cpp_unit_tests
+2.62s call     tests/test_decode.py::test_stateful_prefill_then_decode_matches_full_forward[_tiny_mamba1]
+2.52s call     tests/test_bsgs_layout.py::test_binary_replication_dense_parity[3352-768]
+1.95s call     tests/test_bsgs_layout.py::test_interleaved_windows_are_slot_exact_on_real_projection_shapes
+1.85s call     tests/test_decode.py::test_token_by_token_decode_matches_full_forward[_tiny_mamba1]
+1.32s call     tests/test_bsgs_layout.py::test_binary_replication_dense_parity[768-1536]
+1.08s call     tests/test_bsgs_layout.py::test_replicated_matmul_exact_across_shapes
+0.98s call     tests/test_bsgs_layout.py::test_true_bsgs_matches_dense_on_real_projection_shapes
+0.31s call     tests/test_mamba3_lm.py::test_extended_packing_handles_model_width_and_feedback_without_replay
+0.25s call     tests/test_scheduled_payload.py::test_scheduled_payload_uses_dedicated_final_norm[True]
+288 passed in 33.04s

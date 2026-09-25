@@ -1,0 +1,41 @@
+{
+  "schema": "packed-layout-regression-v1",
+  "format": "fhemamba-packed-v2",
+  "slots": 32768,
+  "public_refresh_bound": 64,
+  "nodes": 66,
+  "operations": {
+    "input": 2,
+    "gather": 8,
+    "add": 2,
+    "mul": 2,
+    "mulp": 40,
+    "addp": 1,
+    "sum": 1,
+    "linear": 1,
+    "repeat": 1,
+    "scatter": 2,
+    "cheb": 6
+  },
+  "outputs": 24,
+  "encrypted_benchmark": false,
+  "files_sha256": {
+    "program.txt": "507cbef0ec06ad65a90c7779b5caa03869e96594df6634996f94a3be02aa33a5"
+  },
+  "coverage": [
+    "shared live alias",
+    "nested windows",
+    "offset mismatch",
+    "dirty multiplication",
+    "negation",
+    "public terms",
+    "linear",
+    "repeat",
+    "scatter",
+    "sum",
+    "noncontiguous gather",
+    "polynomial batch",
+    "refresh",
+    "pinned output"
+  ]
+}

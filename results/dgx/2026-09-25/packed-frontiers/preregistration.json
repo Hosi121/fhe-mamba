@@ -1,0 +1,13 @@
+{
+  "base_commit": "18496e4e6a4e42c367fc356e99a7c4ab8e935eb0",
+  "goal": "At least 20 percent shorter full Mamba-3 evaluation under unchanged 0.001 gates",
+  "candidate_limit": 3,
+  "candidates": [
+    "joint nonlinear evaluation",
+    "persistent or symbolic slot layout",
+    "ready-node refresh scheduling"
+  ],
+  "stop": "Goal qualified or all three candidates evaluated and decisions recorded",
+  "scope": "Same five evaluations and generated IDs, unchanged model/polynomial coefficients and CKKS security parameters. Mamba-2 regression for shared changes. Count/layout/refresh changes are the intended optimization, not parity gates.",
+  "protocol": "CPU structural/algebra checks, synthetic encrypted gates, ABBA prefixes, then full comparison for promising candidates. Serial GPU work. Freeze each source/binary revision and preserve failures. Full-time baseline is freshly measured; no inference from prefix alone."
+}

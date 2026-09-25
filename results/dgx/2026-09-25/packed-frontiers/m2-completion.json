@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "samples_abba": [
+    53.851107837,
+    53.695045513,
+    53.794817614,
+    53.721220992
+  ],
+  "baseline_mean_seconds": 53.7861644145,
+  "candidate_mean_seconds": 53.7449315635,
+  "scope": "Mamba-2 two layers/two evaluations; shared code regression, no full-model speedup claim",
+  "finished_utc": "2026-09-25T01:16:54.162987+00:00"
+}

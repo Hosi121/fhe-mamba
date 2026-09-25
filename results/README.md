@@ -34,6 +34,8 @@ This validates a recorded artifact; it does not rerun encrypted inference.
 
 | Location | Contents |
 | --- | --- |
+| [`dgx/2026-09-25/packed-frontiers/`](dgx/2026-09-25/packed-frontiers/) | Three mechanisms, interleaved prefixes, full-depth selection and final-source qualification; rejected prototypes and Mamba-2 regression retained |
+| [`dgx/2026-09-25/square-dispatch/`](dgx/2026-09-25/square-dispatch/) | Shared square dispatch: exact RNS cases and separate-binary prefix controls for both models |
 | [`dgx/2026-09-25/weight-coefficient-cache/`](dgx/2026-09-25/weight-coefficient-cache/) | Rejected compact coefficient cache: 120 final exact GPU/RNS cases, two ABBA workloads, source archives and failed attempts; 1.26% slower three-step probe |
 | [`dgx/2026-09-24/owned-arithmetic/`](dgx/2026-09-24/owned-arithmetic/) | Shared scratch ownership: 192 exact-RNS cases, both prefix ABBA controls and qualified fresh full pairs; failed probe revisions retained |
 | [`cpu/2026-09-25/preparation-design/`](cpu/2026-09-25/preparation-design/) | Static public-weight access trace, LRU/fixed-subset calculations, existing profile analysis and source-bound integration constraints; no new speed test |

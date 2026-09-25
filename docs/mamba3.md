@@ -8,15 +8,15 @@ generation path remains available through its existing optimized native kernel.
 The trained **Mamba-3 SISO 187M** loader, all 12 blocks and client generation
 loop pass full CPU/reference parity and complete encrypted generation: five
 evaluations and four actual client-selected tokens.
-The latest shared-ownership implementation completes in **15.82
-minutes**. A fresh full baseline/candidate pair measures
-**16.27 → 15.82 minutes
-(2.79% reduction)**; the separate prefix ABBA measures
-2.76%. It reuses 183,912 temporary input buffers
-and preserves all four generated IDs, operation counts and both 0.001 gates.
-Maximum exact/polynomial errors are `0.0001395992` /
-`0.0001251919`. Each full mode was measured once.
-See the [ownership study](research/2026-09-24-owned-arithmetic.md).
+The ready-node refresh implementation completes in **12.68 minutes**.
+The final-source comparison measures **941.95 → 761.00 seconds (19.21% reduction)**,
+with bootstrap calls falling from 726 to 476. All four generated IDs and both
+`0.001` gates are preserved; maximum exact/polynomial errors are
+`0.0000809575` / `0.0000607799`. The 20% target remains unmet. The three-way
+polynomial/layout/scheduling combination takes 792.40 seconds and is not
+retained in the active executor. See the
+[refresh scheduling study](research/2026-09-25-packed-frontiers.md) for all
+samples, rejected candidates and final-source qualification.
 
 The preceding upload/routing comparison saves 9,120 model rotations
 (59,900 → 50,780); the selected configuration also retains the 64-entry cache.
@@ -74,6 +74,13 @@ bounds, applies the existing two-pass correction and unpacks them. These flags
 require replicated linear transforms, radix-8 routing and two bootstrap passes.
 One-pass refresh is an experimental native option and fails the trained
 one-layer accuracy gate; it is not a supported acceleration setting.
+
+`--frontier-refresh` advances ready nodes that fit their actual CKKS levels
+before refreshing a blocked branch. It requires `--planned-refresh --batch-refresh`
+and preserves the two-pass refresh. Runtime use counts protect pinned outputs
+and duplicate input edges under the changed order; feedback epochs remain
+barriers. Omitting this option retains the sequential schedule. The native
+report includes `frontier_deferrals` and `maximum_ready_nodes`.
 
 `--profile-evaluation` adds host encoding and mask preparation timers and CUDA
 profiler start/stop markers around evaluation. Use an Nsight Systems wrapper
@@ -214,7 +221,7 @@ shown below, then run with an explicit wall-time cap (seconds):
 ```bash
 OMP_NUM_THREADS=4 python3 experiments/run_packed_probe.py \
   --binary /path/to/packed_fideslib --payload /path/to/mamba3-lm \
-  --output /path/to/mamba3-lm-run --planned-refresh --batch-refresh \
+  --output /path/to/mamba3-lm-run --planned-refresh --batch-refresh --frontier-refresh \
   --inplace-ops --gpu-plaintext-ntt \
   --naf-rotations --reuse-dead-inputs --direct-plaintext-upload --compact-weights \
   --move-plaintext-coefficients --borrow-plaintext-upload --bsgs-routing-stages --cache-plaintexts \

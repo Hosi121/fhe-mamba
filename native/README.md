@@ -28,6 +28,17 @@ trained generation; `--inplace-ops` controls scratch reuse and
 scopes are in the [depth study](../docs/research/2026-09-24-mamba3-depth-batching.md)
 and [microkernel study](../docs/research/2026-09-24-mamba3-microkernels.md).
 
+`--frontier-refresh` advances independent ready operations before refreshing
+blocked branches, so more values can share the existing grouped refresh. It
+requires `--planned-refresh --batch-refresh`. Dependency and feedback barriers
+are preserved; runtime edge-use counts protect final-use ownership and pinned
+outputs. The result records `frontier_deferrals` and `maximum_ready_nodes`,
+and progress uses completed live-node counts. Omitting the option retains the
+sequential schedule. See the
+[three-candidate study](../docs/research/2026-09-25-packed-frontiers.md).
+Polynomial-batching and deferred-layout prototypes are archived there; their
+experimental flags are not part of the current executable.
+
 `--cache-plaintexts` enables a 64-entry LRU for encoded multiplication masks
 and their GPU handles. It requires exact coefficient bits and CKKS levels,
 bypasses dense diagonals/additive constants, and keeps existing synchronization.

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "removed": [
+    "inventory",
+    "simulate_frontier",
+    "simulate_deferred_hoists",
+    "simulate_thresholds",
+    "simulate_priorities",
+    "simulate_polynomial_depth",
+    "cpu-build/"
+  ],
+  "scope": "Only campaign-generated CPU build products, after archive verification. No worktree was created."
+}

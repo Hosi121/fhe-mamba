@@ -1,0 +1,181 @@
+{
+  "baseline_binaries_sha256": {
+    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build-final/packed_fideslib": "78c9735c4dbe3b0dcaa8cd1b1eae64bda8ec3940b38aa206cf20387c5d7db707",
+    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build/stage1_mamba2_decode_fideslib": "a7ed8d63259bbcc138c557ed2e0d775825410a5a9f89a9e2c8abe01e20cae20d"
+  },
+  "candidate_binaries_sha256": {
+    "packed_fideslib": "84d292e64290a64604e5152b9e5a697832bbfa88bbee2268331f819a2b5e7009",
+    "stage1_mamba2_decode_fideslib": "45ced07f8bf64b26549446cce436f163925fc6c3afc35cacc78eb03d7c53b193",
+    "owned_arithmetic_probe": "9e1c886b1cf2d6c5dc4efa96da94f7c8723851bc60755693eb06e8e67a75ae47"
+  },
+  "dependencies_sha256": {
+    "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68",
+    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/config_core.h": "b8575b2673947f6d37f86dcf12e690ec89d5517d658217e99c30465eccff12e0",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/math/hal/intnat/ubintnat.h": "22d49038f1b63a88a2da0fd13941b11bd2a255c1dd3e65304600992324b9080a",
+    "/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core/math/hal/intnat/mubintvecnat.h": "3ac888c8165194a627822101d2a9f10ec8d3135e7e2eae8a91c92cb808793889",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Plaintext.cu": "08feb9adb7a3809db59dd867f39cf79de96df546451d1953724292077659bf31",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/RNSPoly.cpp": "83c7234b5e45fe89447b0d524efb455c2e6ecb9680c538bc999d9dca52b07941",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/LimbPartition.cu": "063336a48c4f9db6866d328fd9917b8d804cb5410975490b48a8107a6c633ce0",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Limb.cu": "9e0eccc93e31a92a05db9919d62734b59ae152b70ffe2f30e39277984b2156e3",
+    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/openfhe-interface/RawCiphertext.cu": "1ff5d81255930803de56184b628a902972e8dc67ccf794be1359355d59bde63a"
+  },
+  "source_manifests_sha256": {
+    "baseline-sources.json": "cb84ef32c2fd5fadc3770e2b0c5d4b3f03183768d96c62a6755bb2f1401314b2",
+    "compiled-sources.json": "11a0ea2cb9393050d6a1f988894ff36edef7c4eb29b94f404c18058b921b194c"
+  },
+  "source_archives_sha256": {
+    "baseline-sources.tar.gz": "2dbac01d3d3b3eba9f138f0256b47021dccf469b7976ae9e8f0cee31e5668678",
+    "compiled-sources.tar.gz": "0e3be62993fb5e780612444943526f602199b86535f4bb8354e7652d4d5ff6a7"
+  },
+  "hardware": "NVIDIA GB10, 580.159.03",
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "cuda": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:57:39_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+  "backend_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "backend_diff_sha256": "e525c7951facbfad0a834a35d8893e8e09c639e109f09c33239334eae1657b6f",
+  "compile_commands": [
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "output": "CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "output": "CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "output": "CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "output": "CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "output": "CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "output": "CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "output": "CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "output": "CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "output": "CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "output": "CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "output": "CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "output": "CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+      "output": "CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "output": "CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "output": "CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "output": "CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "output": "CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "output": "CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "output": "CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "output": "CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o"
+    },
+    {
+      "directory": "/home/kataiwa/fhemamba/square-dispatch-20260925/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o -c /home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "file": "/home/kataiwa/fhemamba/square-dispatch-20260925/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "output": "CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o"
+    }
+  ],
+  "changed_sources": [
+    "native/fideslib_stage0/include/owned_arithmetic.hpp",
+    "native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp",
+    "native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+    "native/fideslib_stage0/src/packed_fideslib.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+    "native/fideslib_stage0/tests/test_owned_arithmetic.cpp"
+  ],
+  "gpu_before": "Fri Sep 25 08:07:29 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.159.03             Driver Version: 580.159.03     CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GB10                    On  |   0000000F:01:00.0  On |                  N/A |\n| N/A   43C    P8              5W /  N/A  | Not Supported          |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|  No running processes found                                                             |\n+-----------------------------------------------------------------------------------------+",
+  "scope": "Separate immutable baseline/candidate binaries; exact RNS probes then short ABBA model controls."
+}

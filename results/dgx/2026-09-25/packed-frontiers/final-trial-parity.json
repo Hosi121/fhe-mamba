@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "matched_fields": {
+    "evaluated_nodes": 7814,
+    "ct_ct_mul": 12005,
+    "ct_pt_mul": 106457,
+    "rotations": 62990,
+    "logical_refreshes": 1331,
+    "bootstraps": 476,
+    "frontier_deferrals": 2915,
+    "maximum_ready_nodes": 17
+  }
+}

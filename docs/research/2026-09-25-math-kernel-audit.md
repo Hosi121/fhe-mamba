@@ -7,6 +7,11 @@ are proposals supported by a new static inventory, **not measured speedups**.
 No inference implementation, cryptographic parameter, approximation polynomial,
 error gate, or DGX executable changed for this study.
 
+The later [refresh scheduling study](2026-09-25-packed-frontiers.md) implements
+and measures polynomial grouping, persistent windows and ready-node scheduling.
+It selects scheduling alone; the optimistic product count below is not a
+polynomial latency gain.
+
 The analysis uses main `88870f9`, the frozen 12-layer/five-evaluation Mamba-3
 program, and the adopted 949.257737-second DGX Spark result. Its counts reproduce
 the measured 50,780 rotations outside refresh and 12,005 ciphertext products.

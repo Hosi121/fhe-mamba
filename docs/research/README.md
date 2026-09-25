@@ -8,7 +8,8 @@ Use the [evidence registry](../evidence.md) for current claim status and the
 
 | Study | Focus |
 | --- | --- |
-| [2026-09-25 — Shared square dispatch](2026-09-25-square-dispatch.md) | 72 new exact-RNS cases; separate-binary ABBA prefixes improve 0.84% for Mamba-3 and 0.88% for Mamba-2; full-depth qualification pending |
+| [2026-09-25 — Ready-node refresh scheduling](2026-09-25-packed-frontiers.md) | Three mechanisms tested; full Mamba-3 941.95 → 761.00 s (19.21%); scheduler adopted, polynomial/layout prototypes archived; 20% target unmet |
+| [2026-09-25 — Shared square dispatch](2026-09-25-square-dispatch.md) | 72 new exact-RNS cases; separate-binary ABBA prefixes improve 0.84% for Mamba-3 and 0.88% for Mamba-2; isolated prefix evidence; included in the later refresh-study baseline |
 | [2026-09-25 — Arithmetic and kernel opportunities](2026-09-25-math-kernel-audit.md) | Static inventory: 4,386 hidden squares, 465 shared-basis products, and an optimistic 9,991 → 5,980 polynomial-core product count from SIMD grouping; no new speed measurement |
 | [2026-09-25 — Compact coefficient cache, rejected](2026-09-25-weight-coefficient-cache.md) | Exact CPU/GPU reconstruction passes, but level-dependent reuse gives 1.26% slower cold three-step inference; prototype archived, active code restored |
 | [2026-09-24 — Shared ciphertext ownership](2026-09-24-owned-arithmetic.md) | Mamba-3 16.27 → 15.82 min (2.79%, adopt); Mamba-2 32.66 → 32.38 min (0.83%, adopt); exact-RNS gates and unchanged model contracts |

@@ -1,0 +1,15 @@
+{
+  "samples_abba": [
+    46.812372716,
+    48.834910956,
+    48.763363011,
+    46.697563186
+  ],
+  "baseline_mean_seconds": 46.754967951,
+  "candidate_mean_seconds": 48.799136983500006,
+  "reduction_percent": -4.372089474304275,
+  "features": [
+    "--batch-polynomials"
+  ],
+  "full_qualifies": false
+}

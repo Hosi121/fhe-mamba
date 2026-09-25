@@ -1,0 +1,28 @@
+[  3%] Built target stage1_mamba2_config
+[  7%] Built target stage1_mamba2_payload
+[ 11%] Built target stage1_mamba2_process
+[ 13%] Building CXX object CMakeFiles/test_packed_optimization.dir/tests/test_packed_optimization.cpp.o
+[ 19%] Built target test_owned_arithmetic
+[ 21%] Built target test_packed_lifetime
+[ 25%] Built target test_plaintext_cache
+[ 32%] Built target test_packed_depth
+[ 32%] Built target test_packed_routing
+[ 36%] Built target test_packed_program
+[ 40%] Built target test_stage0_layout
+[ 48%] Built target test_stage1_normalization
+[ 48%] Built target test_stage1_vector_rms
+[ 51%] Built target test_stage1_tail_payload
+[ 55%] Built target test_stage1_rank_gate_payload
+[ 59%] Built target test_stage1_mamba2_config
+[ 65%] Built target test_stage1_mamba2_process
+[ 71%] Built target stage1_mamba2_depth
+[ 71%] Built target test_stage1_mamba2_payload
+[ 75%] Built target stage1_mamba2_plan
+[ 78%] Built target test_stage1_mamba2_depth
+[ 82%] Built target stage1_mamba2_artifact
+[ 86%] Built target test_stage1_joint_gates
+[ 90%] Built target packed_resource_inventory
+[ 94%] Built target test_stage1_mamba2_plan
+[ 98%] Built target test_stage1_mamba2_artifact
+[100%] Linking CXX executable test_packed_optimization
+[100%] Built target test_packed_optimization

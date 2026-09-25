@@ -1,0 +1,1 @@
+{"original":{"nodes":7910,"scalar_polynomials":761,"gathers":948,"contiguous_gathers":588,"planned_logical_refreshes":623},"batched":{"nodes":7985,"scalar_polynomials":237,"gathers":1472,"contiguous_gathers":1112,"planned_logical_refreshes":610},"batches":171,"members":524,"maximum_batch":10}

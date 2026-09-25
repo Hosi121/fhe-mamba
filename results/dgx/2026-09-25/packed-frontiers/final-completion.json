@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "revision": "final-r1",
+  "implementation_commit": "1eda1e2fe8364ea5273dd4b6a08d46710048271f",
+  "features": [
+    "--frontier-refresh"
+  ],
+  "baseline_seconds": 941.951139744,
+  "candidate_seconds": 761.001983786,
+  "reduction_percent": 19.210036309014676,
+  "target_met": false,
+  "baseline_sha256": "ed16512aaae40718c2d9d3c1dd96edd36a611ce119ee8f80c2dc9a104bcb3b65",
+  "candidate_sha256": "da3dea44bc2a2afeb34540d28b1249b703e1102b0af9bba5889bbee612024223",
+  "finished_utc": "2026-09-25T02:06:42.280184+00:00"
+}

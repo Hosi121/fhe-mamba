@@ -1,0 +1,1 @@
+{"batches_with_depth_reduction":108,"total_saved_depth":108,"simulations":[{"frontier":true,"precise_polynomial_depth":false,"logical_refreshes":1620,"physical_refreshes":288,"max_batch":16,"max_ready":18,"deferrals":2655},{"frontier":true,"precise_polynomial_depth":true,"logical_refreshes":1559,"physical_refreshes":295,"max_batch":16,"max_ready":18,"deferrals":2715}]

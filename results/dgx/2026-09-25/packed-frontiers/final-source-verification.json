@@ -1,0 +1,34 @@
+{
+  "implementation_commit": "1eda1e2fe8364ea5273dd4b6a08d46710048271f",
+  "files_verified_against_commit": 117,
+  "changed_or_added_files": [
+    "experiments/run_packed_probe.py",
+    "native/fideslib_stage0/CMakeLists.txt",
+    "native/fideslib_stage0/include/packed_schedule.hpp",
+    "native/fideslib_stage0/src/packed_fideslib.cpp",
+    "native/fideslib_stage0/tests/test_packed_schedule.cpp",
+    "tests/test_packed_probe_runner.py"
+  ],
+  "unchanged_mamba2_sources": [
+    "native/fideslib_stage0/include/stage1_joint_gates.hpp",
+    "native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_artifact.hpp",
+    "native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_config.hpp",
+    "native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_depth.hpp",
+    "native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_payload.hpp",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.hpp",
+    "native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_process.hpp",
+    "native/fideslib_stage0/tests/test_stage1_mamba2_artifact.cpp",
+    "native/fideslib_stage0/tests/test_stage1_mamba2_config.cpp",
+    "native/fideslib_stage0/tests/test_stage1_mamba2_depth.cpp",
+    "native/fideslib_stage0/tests/test_stage1_mamba2_payload.cpp",
+    "native/fideslib_stage0/tests/test_stage1_mamba2_plan.cpp",
+    "native/fideslib_stage0/tests/test_stage1_mamba2_process.cpp"
+  ]
+}

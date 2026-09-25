@@ -1,0 +1,44 @@
+{
+  "samples_alfc_cfla": [
+    46.873074381,
+    46.917526661,
+    39.531397843,
+    38.607359306,
+    38.565853995,
+    39.577081874,
+    46.776506277,
+    46.89762543
+  ],
+  "comparisons": [
+    {
+      "mechanism": "shared layout",
+      "baseline_mean_seconds": 46.8853499055,
+      "candidate_mean_seconds": 46.847016468999996,
+      "reduction_percent": 0.08175994543555554,
+      "features": [
+        "--defer-layout"
+      ]
+    },
+    {
+      "mechanism": "shared layout plus frontier",
+      "baseline_mean_seconds": 46.8853499055,
+      "candidate_mean_seconds": 39.5542398585,
+      "reduction_percent": 15.6362489813476,
+      "features": [
+        "--defer-layout",
+        "--frontier-refresh"
+      ]
+    },
+    {
+      "mechanism": "all",
+      "baseline_mean_seconds": 46.8853499055,
+      "candidate_mean_seconds": 38.5866066505,
+      "reduction_percent": 17.700077469244814,
+      "features": [
+        "--batch-polynomials",
+        "--defer-layout",
+        "--frontier-refresh"
+      ]
+    }
+  ]
+}

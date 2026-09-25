@@ -1,0 +1,78 @@
+[  1%] Building CXX object CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o
+[  5%] Building CXX object CMakeFiles/test_packed_optimization.dir/tests/test_packed_optimization.cpp.o
+[  5%] Building CXX object CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o
+[  7%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+[  9%] Linking CXX static library libstage1_mamba2_process.a
+[ 11%] Linking CXX static library libstage1_mamba2_config.a
+[ 11%] Built target stage1_mamba2_process
+[ 13%] Building CXX object CMakeFiles/test_owned_arithmetic.dir/tests/test_owned_arithmetic.cpp.o
+[ 13%] Built target stage1_mamba2_config
+[ 15%] Building CXX object CMakeFiles/test_packed_lifetime.dir/tests/test_packed_lifetime.cpp.o
+[ 17%] Linking CXX executable test_owned_arithmetic
+[ 19%] Linking CXX executable test_packed_lifetime
+[ 19%] Built target test_owned_arithmetic
+[ 21%] Building CXX object CMakeFiles/test_plaintext_cache.dir/tests/test_plaintext_cache.cpp.o
+[ 23%] Linking CXX static library libstage1_mamba2_payload.a
+[ 23%] Built target stage1_mamba2_payload
+[ 23%] Built target test_packed_lifetime
+[ 25%] Building CXX object CMakeFiles/test_packed_depth.dir/tests/test_packed_depth.cpp.o
+[ 26%] Building CXX object CMakeFiles/test_packed_routing.dir/tests/test_packed_routing.cpp.o
+[ 28%] Linking CXX executable test_packed_optimization
+[ 28%] Built target test_packed_optimization
+[ 30%] Building CXX object CMakeFiles/test_packed_program.dir/tests/test_packed_program.cpp.o
+[ 32%] Linking CXX executable test_plaintext_cache
+[ 32%] Built target test_plaintext_cache
+[ 34%] Building CXX object CMakeFiles/test_stage0_layout.dir/tests/test_stage0_layout.cpp.o
+[ 36%] Linking CXX executable test_packed_routing
+[ 38%] Linking CXX executable test_packed_program
+[ 38%] Built target test_packed_routing
+[ 40%] Linking CXX executable test_packed_depth
+[ 42%] Building CXX object CMakeFiles/test_stage1_normalization.dir/tests/test_stage1_normalization.cpp.o
+[ 42%] Built target test_packed_program
+[ 44%] Building CXX object CMakeFiles/test_stage1_vector_rms.dir/tests/test_stage1_vector_rms.cpp.o
+[ 44%] Built target test_packed_depth
+[ 46%] Building CXX object CMakeFiles/test_stage1_tail_payload.dir/tests/test_stage1_tail_payload.cpp.o
+[ 48%] Linking CXX executable test_stage0_layout
+[ 48%] Built target test_stage0_layout
+[ 50%] Building CXX object CMakeFiles/test_stage1_rank_gate_payload.dir/tests/test_stage1_rank_gate_payload.cpp.o
+[ 51%] Linking CXX executable test_stage1_normalization
+[ 53%] Linking CXX executable test_stage1_vector_rms
+[ 53%] Built target test_stage1_normalization
+[ 55%] Building CXX object CMakeFiles/test_stage1_mamba2_config.dir/tests/test_stage1_mamba2_config.cpp.o
+[ 55%] Built target test_stage1_vector_rms
+[ 57%] Building CXX object CMakeFiles/test_stage1_mamba2_payload.dir/tests/test_stage1_mamba2_payload.cpp.o
+[ 59%] Linking CXX executable test_stage1_tail_payload
+[ 59%] Built target test_stage1_tail_payload
+[ 61%] Building CXX object CMakeFiles/test_stage1_mamba2_process.dir/tests/test_stage1_mamba2_process.cpp.o
+[ 63%] Linking CXX executable test_stage1_rank_gate_payload
+[ 65%] Linking CXX executable test_stage1_mamba2_config
+[ 65%] Built target test_stage1_rank_gate_payload
+[ 67%] Building CXX object CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o
+[ 67%] Built target test_stage1_mamba2_config
+[ 69%] Building CXX object CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o
+[ 71%] Linking CXX executable test_stage1_mamba2_process
+[ 73%] Linking CXX executable test_stage1_mamba2_payload
+[ 73%] Built target test_stage1_mamba2_process
+[ 75%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 75%] Built target test_stage1_mamba2_payload
+[ 76%] Linking CXX static library libstage1_mamba2_artifact.a
+[ 76%] Built target stage1_mamba2_artifact
+[ 78%] Building CXX object CMakeFiles/test_stage1_mamba2_artifact.dir/tests/test_stage1_mamba2_artifact.cpp.o
+[ 80%] Linking CXX static library libstage1_mamba2_depth.a
+[ 80%] Built target stage1_mamba2_depth
+[ 82%] Building CXX object CMakeFiles/test_stage1_joint_gates.dir/tests/test_stage1_joint_gates.cpp.o
+[ 84%] Building CXX object CMakeFiles/test_stage1_mamba2_depth.dir/tests/test_stage1_mamba2_depth.cpp.o
+[ 86%] Linking CXX static library libstage1_mamba2_plan.a
+[ 86%] Built target stage1_mamba2_plan
+[ 88%] Building CXX object CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o
+[ 90%] Linking CXX executable test_stage1_mamba2_artifact
+[ 90%] Built target test_stage1_mamba2_artifact
+[ 92%] Building CXX object CMakeFiles/test_stage1_mamba2_plan.dir/tests/test_stage1_mamba2_plan.cpp.o
+[ 94%] Linking CXX executable test_stage1_joint_gates
+[ 96%] Linking CXX executable test_stage1_mamba2_depth
+[ 96%] Built target test_stage1_joint_gates
+[ 96%] Built target test_stage1_mamba2_depth
+[ 98%] Linking CXX executable packed_resource_inventory
+[100%] Linking CXX executable test_stage1_mamba2_plan
+[100%] Built target packed_resource_inventory
+[100%] Built target test_stage1_mamba2_plan
