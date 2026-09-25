@@ -1,5 +1,11 @@
 # First-principles review after the 761-second Mamba-3 run
 
+Follow-up: the [four structural trials](2026-09-25-structural-four.md) implement
+and test rotation sharing, basis sharing, nominal 59-bit 32-bit arithmetic and
+an encrypted dual-ring CPU route. Two shared-intermediate options qualify for
+a modest full-model gain; the other two concrete paths are rejected. The
+historical hypotheses below are not measured speedup claims.
+
 Research scope: inspect the current circuit and primary sources, derive costs,
 and identify discriminating experiments. No new GPU timing, backend port,
 checkpoint change, or deployment is part of this study. The preceding

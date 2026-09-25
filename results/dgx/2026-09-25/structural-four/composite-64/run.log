@@ -1,0 +1,17 @@
+WARN: UserInterface is for testing purposes only. Do not use in production.
+CtS preparation phase 0
+CtS preparation phase 1
+CtS preparation phase 2
+CtS preparation phase 3
+StC preparation phase 0
+StC preparation phase 1
+StC preparation phase 2
+WARN: Rotation key for rotation index 1 already prepared
+WARN: Rotation key for rotation index 2 already prepared
+WARN: Rotation key for rotation index 3 already prepared
+WARN: Rotation key for rotation index 4 already prepared
+WARN: Rotation key for rotation index 8 already prepared
+iteration=-1 ordinary=0.630349 refresh=0.601009 error=3.66992e-10
+iteration=0 ordinary=0.629325 refresh=0.601143 error=3.72658e-10
+iteration=1 ordinary=0.629357 refresh=0.60152 error=3.89651e-10
+iteration=2 ordinary=0.628614 refresh=0.596537 error=3.46017e-10

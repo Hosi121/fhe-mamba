@@ -1,0 +1,16 @@
+{
+  "command": [
+    "cmake",
+    "-S",
+    "/home/kataiwa/fhemamba/structural-four-20260925/repo/native/fideslib_stage0",
+    "-B",
+    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790332016.0640213,
+  "wall_seconds": 0.06397175788879395,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  }
+}

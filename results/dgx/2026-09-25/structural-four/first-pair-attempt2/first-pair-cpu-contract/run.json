@@ -1,0 +1,17 @@
+{
+  "command": [
+    "ctest",
+    "--test-dir",
+    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel",
+    "-R",
+    "shared_plans",
+    "--output-on-failure"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790332021.2710314,
+  "wall_seconds": 0.015816688537597656,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  }
+}

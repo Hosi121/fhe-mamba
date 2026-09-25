@@ -1,0 +1,30 @@
+Function "exit" not defined.
+Breakpoint 1 (exit) pending.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+[New Thread 0xfffff13bc8c0 (LWP 3490460)]
+[New Thread 0xfffff08288c0 (LWP 3490465)]
+WARN: UserInterface is for testing purposes only. Do not use in production.
+CtS preparation phase 0
+CtS preparation phase 1
+CtS preparation phase 2
+CtS preparation phase 3
+StC preparation phase 0
+StC preparation phase 1
+StC preparation phase 2
+WARN: Rotation key for rotation index 1 already prepared
+WARN: Rotation key for rotation index 2 already prepared
+WARN: Rotation key for rotation index 3 already prepared
+WARN: Rotation key for rotation index 4 already prepared
+WARN: Rotation key for rotation index 8 already prepared
+ERROR: QSize mismatch
+
+Thread 1 "composite_probe" hit Breakpoint 1, __GI_exit (status=1) at ./stdlib/exit.c:138
+warning: 138	./stdlib/exit.c: No such file or directory
+#0  __GI_exit (status=1) at ./stdlib/exit.c:138
+#1  0x0000fffff7862f34 in cheddar::AssertTrue(bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [clone .part.0] () from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/libcheddar.so
+#2  0x0000fffff7888454 in cheddar::ElementWiseHandler<unsigned int>::AssertNPMatch(std::vector<cheddar::DvView<unsigned int>, std::allocator<cheddar::DvView<unsigned int> > >&, cheddar::NPInfo const&) const () from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/libcheddar.so
+#3  0x0000fffff788bfa4 in cheddar::ElementWiseHandler<unsigned int>::Permute(std::vector<cheddar::DvView<unsigned int>, std::allocator<cheddar::DvView<unsigned int> > >&, cheddar::NPInfo const&, int, std::vector<cheddar::DvConstView<unsigned int>, std::allocator<cheddar::DvConstView<unsigned int> > > const&) const () from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/libcheddar.so
+#4  0x0000fffff7903550 in cheddar::UserInterface<unsigned int>::PrepareRotationKey(int, int) () from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/libcheddar.so
+#5  0x0000aaaaaaacbe6c in int run<unsigned int>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) ()
+#6  0x0000aaaaaaabf328 in main ()

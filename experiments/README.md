@@ -44,6 +44,13 @@ The packed runner additionally forwards `--direct-plaintext-upload`,
 the budgeted execution path. Commands and binary/payload hashes are recorded
 for each run; these switches do not relax validation.
 
+`--hoist-rotations` shares rotation prefixes and sibling key-switch preparation
+in the packed BSGS paths. `--share-chebyshev` reuses bases for polynomial nodes
+with the same encrypted input and normalization interval. Both are opt-in and
+are forwarded through ordinary and budgeted execution. Their counters and
+qualification are described in the
+[four-candidate study](../docs/research/2026-09-25-structural-four.md).
+
 ## Supporting files
 
 - [`manifests/`](manifests/README.md): versioned campaign parameters and acceptance gates.

@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "eligible": [
+    "hoist-rotations",
+    "share-chebyshev"
+  ],
+  "decisions": {
+    "hoist-rotations": "Exact RNS/metadata checks and alternating model prefixes pass; integrate for full comparison.",
+    "share-chebyshev": "Frozen-polynomial and forced-refresh invalidation checks pass; integrate for full comparison.",
+    "32-bit-rns": "The nominal 59-bit composite-rescale profile fails numerical gates; the same-circuit 64-bit control and upstream 40-bit 32-bit control pass. Reject this profile; do not infer that all 32-bit RNS is impossible or compare failed-output times as speedups.",
+    "small-ring": "CPU encrypted ring-switch/refresh/resume passes eight numerical cases; the roughly 55-second boundary outweighs its ordinary-arithmetic saving and cannot retain current GPU refresh speed. Reject this CPU path; a GPU ring switcher is not implemented or benchmarked."
+  },
+  "scope": "One implementation mechanism per candidate. Full comparison includes only the two qualified shared-intermediate paths; model and gates unchanged."
+}

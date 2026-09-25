@@ -1,0 +1,33 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel/packed_fideslib",
+    "/home/kataiwa/fhemamba/structural-four-20260925/basis-refresh-probe.txt",
+    "/home/kataiwa/fhemamba/structural-four-20260925/basis-refresh-share/native.json",
+    ".001",
+    ".001",
+    "--planned-refresh",
+    "--batch-refresh",
+    "--inplace-ops",
+    "--gpu-plaintext-ntt",
+    "--profile-evaluation",
+    "--naf-rotations",
+    "--reuse-dead-inputs",
+    "--direct-plaintext-upload",
+    "--compact-weights",
+    "--move-plaintext-coefficients",
+    "--borrow-plaintext-upload",
+    "--bsgs-routing-stages",
+    "--cache-plaintexts",
+    "--frontier-refresh",
+    "--s2c-first",
+    "--gpu-plaintext-rns",
+    "--share-chebyshev"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790334310.460173,
+  "wall_seconds": 30.34398913383484,
+  "binary_sha256": "ddf475897316f0a70cf2354595b5a4aa4426f5c1eea8e24f69068046020f5449"
+}

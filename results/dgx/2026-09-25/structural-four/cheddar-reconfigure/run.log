@@ -1,0 +1,13 @@
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found suitable version "13.0.88", minimum required is "11.8") 
+-- RMM: RMM_LOGGING_LEVEL = 'INFO'
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- CPM: adding package spdlog@1.8.5 (v1.8.5)
+-- Build spdlog: 1.8.5
+-- Build type: Release
+-- Generating install
+-- CPM: using local package Thrust@1.17.2.0
+-- RMM source dir: /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src
+-- CKKS_GPU_SOURCES: src/core/Container.cpp;src/core/Context.cpp;src/core/DeviceVector.cpp;src/core/Encode.cpp;src/core/EvkMap.cpp;src/core/EvkRequest.cpp;src/core/MemoryPool.cpp;src/core/MultiLevelCiphertext.cpp;src/core/NPInfo.cpp;src/core/ElementWise.cu;src/core/ModSwitch.cu;src/core/NTT.cu;src/core/Parameter.cu;src/UserInterface.cu;src/core/BigInt_gmp.cpp;src/extension/BootContext.cpp;src/extension/BootParameter.cpp;src/extension/EvalMod.cpp;src/extension/EvalPoly.cpp;src/extension/EvalSpecialFFT.cpp;src/extension/Hoist.cu;src/extension/LinearTransform.cpp;src/extension/StripedMatrix.cpp
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build

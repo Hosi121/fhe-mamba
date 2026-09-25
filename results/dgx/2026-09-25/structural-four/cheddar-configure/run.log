@@ -1,0 +1,43 @@
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found suitable version "13.0.88", minimum required is "11.8") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- RMM: RMM_LOGGING_LEVEL = 'INFO'
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- CPM: adding package spdlog@1.8.5 (v1.8.5)
+-- Build spdlog: 1.8.5
+-- Build type: Release
+-- Generating install
+-- Found Git: /usr/bin/git (found version "2.43.0") 
+-- CPM: adding package Thrust@1.17.2 (1.17.2)
+CMake Deprecation Warning at /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/CMakeLists.txt:9 (cmake_policy):
+  The OLD behavior for policy CMP0104 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+
+
+-- Found Thrust: /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/cmake/thrust-config.cmake (found version "1.17.2.0") 
+-- rapids-cmake [Thrust]: applied diff transform_iter_with_reduce_by_key.diff to fix issue: 'Support transform iterator with reduce by key [https://github.com/NVIDIA/thrust/pull/1805]'
+-- rapids-cmake [Thrust]: applied diff install_rules.diff to fix issue: 'Thrust 1.X installs incorrect files [https://github.com/NVIDIA/thrust/issues/1790]'
+-- Found CUB: /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub/cub/cmake/cub-config.cmake (found suitable version "1.17.2.0", minimum required is "1.17.2.0") 
+-- RMM source dir: /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src
+-- CKKS_GPU_SOURCES: src/core/Container.cpp;src/core/Context.cpp;src/core/DeviceVector.cpp;src/core/Encode.cpp;src/core/EvkMap.cpp;src/core/EvkRequest.cpp;src/core/MemoryPool.cpp;src/core/MultiLevelCiphertext.cpp;src/core/NPInfo.cpp;src/core/ElementWise.cu;src/core/ModSwitch.cu;src/core/NTT.cu;src/core/Parameter.cu;src/UserInterface.cu;src/core/BigInt_gmp.cpp;src/extension/BootContext.cpp;src/extension/BootParameter.cpp;src/extension/EvalMod.cpp;src/extension/EvalPoly.cpp;src/extension/EvalSpecialFFT.cpp;src/extension/Hoist.cu;src/extension/LinearTransform.cpp;src/extension/StripedMatrix.cpp
+-- Configuring done (14.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build

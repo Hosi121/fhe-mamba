@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "composite_parameters_sha256": "ec313dfa19dac675d089b430fd3ac11db1f518352035098b6d6367c32032dcf0",
+  "method": "Regenerate deterministic NTT primes in a temporary directory and compare all bytes."
+}

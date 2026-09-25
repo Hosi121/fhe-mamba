@@ -1,0 +1,12 @@
+{
+  "command": [
+    "ctest",
+    "--test-dir",
+    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel",
+    "--output-on-failure"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790334278.2029352,
+  "wall_seconds": 2.332587957382202,
+  "binary_sha256": null
+}

@@ -34,6 +34,7 @@ This validates a recorded artifact; it does not rerun encrypted inference.
 
 | Location | Contents |
 | --- | --- |
+| [`dgx/2026-09-25/structural-four/`](dgx/2026-09-25/structural-four/) | Four mechanisms, rotation/basis qualification, four full ABBA processes (0.86% reduction), and rejected 32-bit/CPU ring-switch prototypes with controls |
 | [`dgx/2026-09-25/gpu-rns/`](dgx/2026-09-25/gpu-rns/) | Exact GPU plaintext RNS expansion: 720 exact cases, encrypted arithmetic, ABBA prefixes and qualified full pair; 17.52% full Mamba-3 reduction with S2C-first retained |
 | [`dgx/2026-09-25/packed-frontiers/`](dgx/2026-09-25/packed-frontiers/) | Three mechanisms, interleaved prefixes, full-depth selection and final-source qualification; rejected prototypes and Mamba-2 regression retained |
 | [`dgx/2026-09-25/square-dispatch/`](dgx/2026-09-25/square-dispatch/) | Shared square dispatch: exact RNS cases and separate-binary prefix controls for both models |

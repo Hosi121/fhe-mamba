@@ -1,0 +1,16 @@
+{
+  "pins.json": "d865b084a630744b57517b8d9207d99502e3cec9dc8b7c9e44afd2c98e0ff8d9",
+  "generate_composite_params.py": "9d125e96c48a23d9e539b5688330e15443582358568bae0631e1979af0d49f07",
+  "small-ring/go.mod": "3eace6a861e31acf71c08190b54a335f9fae5d5bd9e24101ae0a9e6be5cc1ad7",
+  "small-ring/main.go": "5211fbeecaac6e73308b1d1992ad0d919b27e3950d960b44ef9206b01bdd23b0",
+  "small-ring/go.sum": "ba0b56d4f4d13fd01648402ad271b0c27a6722830ca2f652fcd94e4cfdcb508d",
+  "cheddar/composite_params.hpp": "ec313dfa19dac675d089b430fd3ac11db1f518352035098b6d6367c32032dcf0",
+  "cheddar/composite_probe.cpp": "1737c510d9e3113bbeede1a59d41f4de4f795820b964769581aecf026d21b0d9",
+  "cheddar/LICENSE": "24503fcec1fdc23da47499d63b3dcf04d3c5a0310955908fd5a567c42ef8d45f",
+  "cheddar/stock32_params.hpp": "0120e9e60a3e70882629d484c58c9edae0addc6c3bd6fb0a145729d33ae5ee15",
+  "cheddar/build.patch": "1d3531bbbaaa71a2b3b941456fcb9fae8b1121c8ea1decbf62528ae9c42dba98",
+  "cheddar/failed-default-key-level.cpp": "2321e46c106ed8236c6a43a10d0439a91905e00d8ce57a22e1f6f7e9d82ed516",
+  "small-ring-attempt1/go.mod": "3eace6a861e31acf71c08190b54a335f9fae5d5bd9e24101ae0a9e6be5cc1ad7",
+  "small-ring-attempt1/main.go": "054f064c90227f9cc657f217022f6bd4d91b986469da6d9feae2b66916923b57",
+  "small-ring-attempt1/go.sum": "ba0b56d4f4d13fd01648402ad271b0c27a6722830ca2f652fcd94e4cfdcb508d"
+}

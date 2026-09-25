@@ -1,0 +1,14 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+    "--target",
+    "composite_probe",
+    "-j",
+    "6"
+  ],
+  "started_at_unix": 1790334344.5673866,
+  "exit_code": 0,
+  "wall_seconds": 4.5501508712768555
+}

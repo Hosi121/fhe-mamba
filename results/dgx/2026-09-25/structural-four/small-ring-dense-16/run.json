@@ -1,0 +1,16 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/structural-four-20260925/small-ring-dense-probe",
+    "--logn",
+    "16",
+    "--output",
+    "/home/kataiwa/fhemamba/structural-four-20260925/small-ring-dense-16/native.json"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790333940.9317477,
+  "wall_seconds": 331.0311450958252,
+  "binary_sha256": "80488eba84989346299630ff380398c0786325486c7fdaf67ad4720af75f648b"
+}

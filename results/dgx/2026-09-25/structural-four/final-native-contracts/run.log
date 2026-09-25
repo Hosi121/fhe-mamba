@@ -1,0 +1,48 @@
+Internal ctest changing into directory: /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel
+Test project /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel
+      Start  1: shared_plans
+ 1/21 Test  #1: shared_plans .....................   Passed    0.00 sec
+      Start  2: plaintext_rns
+ 2/21 Test  #2: plaintext_rns ....................   Passed    0.00 sec
+      Start  3: packed_schedule
+ 3/21 Test  #3: packed_schedule ..................   Passed    0.00 sec
+      Start  4: owned_arithmetic
+ 4/21 Test  #4: owned_arithmetic .................   Passed    0.00 sec
+      Start  5: packed_lifetime
+ 5/21 Test  #5: packed_lifetime ..................   Passed    0.00 sec
+      Start  6: plaintext_cache
+ 6/21 Test  #6: plaintext_cache ..................   Passed    0.00 sec
+      Start  7: packed_depth
+ 7/21 Test  #7: packed_depth .....................   Passed    0.00 sec
+      Start  8: packed_routing
+ 8/21 Test  #8: packed_routing ...................   Passed    2.21 sec
+      Start  9: packed_program
+ 9/21 Test  #9: packed_program ...................   Passed    0.00 sec
+      Start 10: stage0_layout
+10/21 Test #10: stage0_layout ....................   Passed    0.00 sec
+      Start 11: stage1_normalization
+11/21 Test #11: stage1_normalization .............   Passed    0.00 sec
+      Start 12: stage1_vector_rms
+12/21 Test #12: stage1_vector_rms ................   Passed    0.00 sec
+      Start 13: stage1_tail_payload
+13/21 Test #13: stage1_tail_payload ..............   Passed    0.00 sec
+      Start 14: stage1_rank_gate_payload
+14/21 Test #14: stage1_rank_gate_payload .........   Passed    0.00 sec
+      Start 15: stage1_mamba2_config
+15/21 Test #15: stage1_mamba2_config .............   Passed    0.00 sec
+      Start 16: stage1_mamba2_depth
+16/21 Test #16: stage1_mamba2_depth ..............   Passed    0.01 sec
+      Start 17: stage1_mamba2_artifact
+17/21 Test #17: stage1_mamba2_artifact ...........   Passed    0.00 sec
+      Start 18: stage1_mamba2_payload
+18/21 Test #18: stage1_mamba2_payload ............   Passed    0.00 sec
+      Start 19: stage1_joint_gates
+19/21 Test #19: stage1_joint_gates ...............   Passed    0.03 sec
+      Start 20: stage1_mamba2_plan
+20/21 Test #20: stage1_mamba2_plan ...............   Passed    0.00 sec
+      Start 21: stage1_mamba2_process
+21/21 Test #21: stage1_mamba2_process ............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 21
+
+Total Test time (real) =   2.30 sec

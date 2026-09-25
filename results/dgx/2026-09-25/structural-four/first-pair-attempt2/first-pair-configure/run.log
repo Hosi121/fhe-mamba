@@ -1,0 +1,9 @@
+-- Using FIDESlib.
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/install-8f75cf9c2329fd3b/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/install-8f75cf9c2329fd3b/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel

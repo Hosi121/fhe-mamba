@@ -1,0 +1,17 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel/rotation_batch_probe",
+    "/home/kataiwa/fhemamba/structural-four-20260925/rotation-probe-mamba3/native.json"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790332021.2873871,
+  "wall_seconds": 21.51748490333557,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "binary_sha256": "8edad345f8e6442f4a35bbd7fa6b7b32d44360dda324879de2823337342df747"
+}

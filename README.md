@@ -47,45 +47,63 @@ and [Spark build instructions](docs/dgx-spark.md#build).
 ## Measured results and scope
 
 Both trained models complete **five encrypted evaluations and four generated
-tokens** on **DGX Spark GB10**. The latest Mamba-3 experiment expands bounded
-public plaintext coefficients into RNS residues on the GPU, reducing CPU
-preparation while retaining S2C-first refresh and two-pass error correction.
+tokens** on **DGX Spark GB10**. The latest Mamba-3 trial shares rotation
+preparation and same-input Chebyshev bases while retaining GPU plaintext RNS
+preparation, S2C-first refresh and two-pass error correction.
 
 | Model | Layers | Study baseline → candidate | Reduction | Generated text |
 | --- | ---: | ---: | ---: | --- |
 | Mamba-2-130M | 24 | 1959.30 → **1942.99 s** (32.38 min) | **0.83%** | `The capital of the Republic of` |
-| Mamba-3 SISO 187M | 12 | 750.41 → **618.95 s** (10.32 min) | **17.52%** | `The capital of the state of` |
+| Mamba-3 SISO 187M | 12 | 619.41 → **614.11 s** (10.24 min) | **0.86%** | `The capital of the state of` |
 
-The [GPU RNS study](docs/research/2026-09-25-gpu-rns.md) adopts this preparation
-path as **opt-in**. Ordinary evaluation falls **501.05 → 381.02 s (23.96%)**;
-host encoding within it falls **183.55 → 65.24 s**. The refresh circuit and
-484 bootstrap calls are unchanged. Peak process RSS remains 26.21 GiB.
-Weights, model polynomials, CKKS parameters, token IDs and both `0.001` gates
-are unchanged; maximum exact/polynomial errors are **4.70075e-5 / 5.00072e-7**.
-After rebuilding on Spark, add `--gpu-plaintext-rns --s2c-first` alongside
-`--planned-refresh --batch-refresh --frontier-refresh` to the packed runner.
-The [study](docs/research/2026-09-25-gpu-rns.md#reproduction-and-validation)
-records build requirements, fallback conditions and the full command artifacts.
+The [four-candidate study](docs/research/2026-09-25-structural-four.md) adopts
+`--hoist-rotations --share-chebyshev` as **opt-in**. Four full processes in
+baseline/candidate/candidate/baseline order average the values above. Ordinary
+evaluation falls **380.94 → 375.77 s (1.36%)**; refresh stays about **238.4 s**
+with **484 bootstraps**. Ciphertext products fall **12,005 → 11,540** and
+rotations **62,969 → 62,369**. Peak process RSS stays about **26.21 GiB**.
 
-The preceding [S2C-first study](docs/research/2026-09-25-s2c-first.md) reduced
-759.70 to 747.63 s (1.59%). It saved 115.00 s in refresh while ordinary work
-grew 102.92 s; GPU RNS addresses a large part of that ordinary preparation cost.
-The current comparison reruns its released executable as the 750.41 s baseline.
+Weights, model polynomials, CKKS parameters, all four generated IDs and both
+`0.001` error gates are unchanged. The candidate's maximum exact/polynomial
+errors are **4.65294e-5 / 9.65161e-7**. Its mean is **153.5 s per generated
+token**, or **163.7 s including process setup and validation**, amortized over
+this five-evaluation/four-generated-token request. This is a modest additional
+gain, not a large speedup or steady-state token-latency result.
 
-The preceding [ready-node refresh study](docs/research/2026-09-25-packed-frontiers.md)
-reduced 941.95 to 761.00 s (19.21%). Its three-candidate campaign did not meet
-its 20% target; rejected polynomial/layout prototypes remain archived. The
-new circuit is a separate follow-up, not a revision of that campaign's result.
+All four candidate mechanisms have implementations and small-circuit trials.
+The nominal 59-bit **32-bit RNS profile fails numerical validation**; its
+64-bit control and separate lower-precision 32-bit control pass. The **smaller
+ring CPU route passes accuracy but its refresh boundary costs about 55 s**,
+outweighing ordinary-arithmetic savings. Both are rejected for integration;
+[a GPU ring switcher remains unimplemented](docs/research/2026-09-25-structural-four.md#smaller-ordinary-ring).
+Their source, controls and limitations are archived with the study.
 
-These are native evaluation times, including plaintext encoding and GPU upload
-during evaluation. Setup/key generation, input parsing, final client
-selection/validation and external transport are excluded. Compare variants
-within each study: the model sizes, weights and numerical contracts differ,
-so this table does not rank architectures. The final Mamba-3 pair uses one
-fresh process per mode; alternating prefix controls show a 19.47% reduction.
-Fresh-key error differences do not establish general accuracy improvements.
-Local release checks pass **290 tests**, including **20 native C++ contracts**;
-720 new exact-RNS cases and both existing plaintext configuration probes pass.
+After rebuilding on Spark, add `--hoist-rotations --share-chebyshev` alongside
+`--gpu-plaintext-rns --s2c-first --planned-refresh --batch-refresh --frontier-refresh`
+to the packed runner. The [recorded controller](results/dgx/2026-09-25/structural-four/full_controller.py)
+contains the complete flags and exact process commands; the
+[study](docs/research/2026-09-25-structural-four.md#reproduction-and-provenance)
+links the build instructions and portable alternative-backend recipes.
+
+The preceding [GPU RNS study](docs/research/2026-09-25-gpu-rns.md) reduced
+750.41 → 618.95 s (17.52%), with ordinary evaluation down 23.96%. The preceding
+[S2C-first study](docs/research/2026-09-25-s2c-first.md) reduced 759.70 → 747.63 s
+(1.59%); its refresh saving was largely offset by ordinary preparation work.
+The [ready-node refresh study](docs/research/2026-09-25-packed-frontiers.md)
+reduced 941.95 → 761.00 s (19.21%), short of that earlier campaign's 20% target.
+Each study retains its own controls; the new comparison reruns the released
+GPU-RNS executable rather than treating an older sample as its control.
+
+These are native evaluation times, including encoding, GPU upload and client
+feedback inside the evaluation loop. Setup/key generation, input parsing,
+post-evaluation validation and external transport are excluded. Compare
+variants within each study: model sizes, weights and numerical contracts
+differ, so this table does not rank architectures. Two full samples per mode
+on one fixed prompt do not establish statistical significance or arbitrary-prompt
+performance. Fresh-key error differences do not establish accuracy improvements.
+Local release checks pass **290 tests**, including **21 native C++ contracts**;
+the new rotation helper passes **552 complete RNS/metadata cases** across both
+model configurations. The previous GPU-RNS qualification remains recorded.
 
 The Mamba-2 row retains the earlier
 [shared ownership study](docs/research/2026-09-24-owned-arithmetic.md):

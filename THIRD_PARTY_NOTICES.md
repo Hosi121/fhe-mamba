@@ -12,10 +12,16 @@ FIDESlib/OpenFHE installations and datasets are downloaded separately.
 | Compatible Llama-3.1 tokenizer | [NVIDIA Llama-3.1 Nemotron](https://huggingface.co/nvidia/Llama-3.1-Nemotron-70B-Instruct-HF) | Upstream Llama-3.1 terms; tokenizer files downloaded separately |
 | FIDESlib GPU backend | [CAPS-UMU/FIDESlib](https://github.com/CAPS-UMU/FIDESlib), Universidad de Murcia | [MIT](https://github.com/CAPS-UMU/FIDESlib/blob/cd171f20f510eeca04c71d7b0034ef073829f761/LICENSE.txt) |
 | OpenFHE | [openfheorg/openfhe-development](https://github.com/openfheorg/openfhe-development) | [BSD-2-Clause](https://github.com/openfheorg/openfhe-development/blob/v1.4.2/LICENSE) |
+| Cheddar experimental GPU adapter | [scale-snu/cheddar-fhe](https://github.com/scale-snu/cheddar-fhe), Scalable Computer Architecture Laboratory, Seoul National University | [MIT notice retained with the probe](results/dgx/2026-09-25/structural-four/alternative-backends/cheddar/LICENSE) |
+| Lattigo experimental ring-switch probe | [tuneinsight/lattigo v6.2.0](https://github.com/tuneinsight/lattigo/tree/v6.2.0), Tune Insight | [Apache-2.0](https://github.com/tuneinsight/lattigo/blob/v6.2.0/LICENSE); dependency downloaded separately |
 | PyTorch, NumPy, Transformers | Installed through the Python dependency lockfile | Respective upstream licenses; not relicensed by this repository |
 
 The native patch files modify the pinned FIDESlib/OpenFHE sources. Preserve
 upstream notices when distributing those sources or compiled dependencies.
+The four-candidate study's alternative backends are separate research probes,
+not Python package dependencies. Its archive includes the Cheddar build patch
+and parameter arrays; the full Cheddar, RMM and Lattigo implementations are
+downloaded separately at the recorded revisions.
 The checkpoint revision and file hashes used by the reproduction guide are
 in [config/reproduction.json](config/reproduction.json).
 

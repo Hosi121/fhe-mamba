@@ -1,0 +1,51 @@
+[  2%] Built target stage1_mamba2_payload
+[  4%] Built target fideslib_handoff
+[  6%] Built target stage1_mamba2_config
+[  8%] Built target stage1_mamba2_process
+[ 11%] Built target fideslib_plaintext_rns
+[ 13%] Built target stage1_bootstrap_probe
+[ 15%] Built target fideslib_client_server_probe
+[ 16%] Building CXX object CMakeFiles/rotation_batch_probe.dir/src/rotation_batch_probe.cpp.o
+[ 18%] Built target fideslib_ctpt_probe
+[ 21%] Built target stage1_plaintext_add_probe
+[ 23%] Built target stage1_coefficient_encoding_probe
+[ 25%] Built target stage1_normalization_probe
+[ 27%] Built target stage1_subring_encoding_probe
+[ 30%] Built target stage1_vector_rms_probe
+[ 31%] Building CXX object CMakeFiles/test_shared_plans.dir/tests/test_shared_plans.cpp.o
+[ 33%] Built target test_packed_schedule
+[ 35%] Built target test_plaintext_rns
+[ 37%] Built target test_owned_arithmetic
+[ 40%] Built target test_packed_lifetime
+[ 42%] Built target test_plaintext_cache
+[ 44%] Built target test_packed_depth
+[ 46%] Built target test_packed_routing
+[ 48%] Built target test_packed_program
+[ 51%] Built target test_stage0_layout
+[ 53%] Built target test_stage1_normalization
+[ 55%] Built target test_stage1_vector_rms
+[ 57%] Built target test_stage1_tail_payload
+[ 60%] Built target test_stage1_mamba2_config
+[ 62%] Built target test_stage1_rank_gate_payload
+[ 64%] Built target test_stage1_mamba2_process
+[ 66%] Built target test_stage1_mamba2_payload
+[ 68%] Built target stage1_mamba2_depth
+[ 71%] Built target stage1_mamba2_artifact
+[ 73%] Built target stage1_mamba2_plan
+[ 75%] Built target fideslib_plaintext_encoder
+[ 77%] Built target test_stage1_mamba2_depth
+[ 80%] Built target test_stage1_mamba2_artifact
+[ 82%] Built target test_stage1_joint_gates
+[ 84%] Built target packed_resource_inventory
+[ 86%] Built target test_stage1_mamba2_plan
+[ 87%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[ 90%] Built target packed_rns_probe
+[ 92%] Built target packed_plaintext_probe
+[ 94%] Built target owned_arithmetic_probe
+[ 96%] Built target stage1_mamba2_decode_fideslib
+[ 97%] Linking CXX executable test_shared_plans
+[ 97%] Built target test_shared_plans
+[ 98%] Linking CXX executable rotation_batch_probe
+[ 98%] Built target rotation_batch_probe
+[100%] Linking CXX executable packed_fideslib
+[100%] Built target packed_fideslib

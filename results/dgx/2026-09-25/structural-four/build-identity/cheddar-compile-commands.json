@@ -1,0 +1,188 @@
+[
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/Container.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Container.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Container.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/Container.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/Context.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Context.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Context.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/Context.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/DeviceVector.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/DeviceVector.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/DeviceVector.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/DeviceVector.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/Encode.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Encode.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Encode.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/Encode.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/EvkMap.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/EvkMap.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/EvkMap.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/EvkMap.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/EvkRequest.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/EvkRequest.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/EvkRequest.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/EvkRequest.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/MemoryPool.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/MemoryPool.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/MemoryPool.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/MemoryPool.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/MultiLevelCiphertext.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/MultiLevelCiphertext.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/MultiLevelCiphertext.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/MultiLevelCiphertext.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/NPInfo.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/NPInfo.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/NPInfo.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/NPInfo.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/local/cuda-13.0/bin/nvcc -forward-unknown-to-host-compiler -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS --options-file CMakeFiles/cheddar.dir/includes_CUDA.rsp -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG \"--generate-code=arch=compute_121,code=[compute_121,sm_121]\" -Xcompiler=-fPIC -Xcompiler=-Wall -O3 -x cu -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/ElementWise.cu -o CMakeFiles/cheddar.dir/src/core/ElementWise.cu.o",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/ElementWise.cu",
+  "output": "CMakeFiles/cheddar.dir/src/core/ElementWise.cu.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/local/cuda-13.0/bin/nvcc -forward-unknown-to-host-compiler -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS --options-file CMakeFiles/cheddar.dir/includes_CUDA.rsp -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG \"--generate-code=arch=compute_121,code=[compute_121,sm_121]\" -Xcompiler=-fPIC -Xcompiler=-Wall -O3 -x cu -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/ModSwitch.cu -o CMakeFiles/cheddar.dir/src/core/ModSwitch.cu.o",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/ModSwitch.cu",
+  "output": "CMakeFiles/cheddar.dir/src/core/ModSwitch.cu.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/local/cuda-13.0/bin/nvcc -forward-unknown-to-host-compiler -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS --options-file CMakeFiles/cheddar.dir/includes_CUDA.rsp -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG \"--generate-code=arch=compute_121,code=[compute_121,sm_121]\" -Xcompiler=-fPIC -Xcompiler=-Wall -O3 -x cu -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/NTT.cu -o CMakeFiles/cheddar.dir/src/core/NTT.cu.o",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/NTT.cu",
+  "output": "CMakeFiles/cheddar.dir/src/core/NTT.cu.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/local/cuda-13.0/bin/nvcc -forward-unknown-to-host-compiler -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS --options-file CMakeFiles/cheddar.dir/includes_CUDA.rsp -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG \"--generate-code=arch=compute_121,code=[compute_121,sm_121]\" -Xcompiler=-fPIC -Xcompiler=-Wall -O3 -x cu -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Parameter.cu -o CMakeFiles/cheddar.dir/src/core/Parameter.cu.o",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/Parameter.cu",
+  "output": "CMakeFiles/cheddar.dir/src/core/Parameter.cu.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/local/cuda-13.0/bin/nvcc -forward-unknown-to-host-compiler -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS --options-file CMakeFiles/cheddar.dir/includes_CUDA.rsp -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG \"--generate-code=arch=compute_121,code=[compute_121,sm_121]\" -Xcompiler=-fPIC -Xcompiler=-Wall -O3 -x cu -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/UserInterface.cu -o CMakeFiles/cheddar.dir/src/UserInterface.cu.o",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/UserInterface.cu",
+  "output": "CMakeFiles/cheddar.dir/src/UserInterface.cu.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/core/BigInt_gmp.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/BigInt_gmp.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/core/BigInt_gmp.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/core/BigInt_gmp.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/extension/BootContext.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/BootContext.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/BootContext.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/extension/BootContext.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/extension/BootParameter.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/BootParameter.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/BootParameter.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/extension/BootParameter.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/extension/EvalMod.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/EvalMod.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/EvalMod.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/extension/EvalMod.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/extension/EvalPoly.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/EvalPoly.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/EvalPoly.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/extension/EvalPoly.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/extension/EvalSpecialFFT.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/EvalSpecialFFT.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/EvalSpecialFFT.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/extension/EvalSpecialFFT.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/local/cuda-13.0/bin/nvcc -forward-unknown-to-host-compiler -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS --options-file CMakeFiles/cheddar.dir/includes_CUDA.rsp -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG \"--generate-code=arch=compute_121,code=[compute_121,sm_121]\" -Xcompiler=-fPIC -Xcompiler=-Wall -O3 -x cu -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/Hoist.cu -o CMakeFiles/cheddar.dir/src/extension/Hoist.cu.o",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/Hoist.cu",
+  "output": "CMakeFiles/cheddar.dir/src/extension/Hoist.cu.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/extension/LinearTransform.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/LinearTransform.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/LinearTransform.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/extension/LinearTransform.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -Dcheddar_EXPORTS -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -fPIC -Wall -O3 -o CMakeFiles/cheddar.dir/src/extension/StripedMatrix.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/StripedMatrix.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/src/extension/StripedMatrix.cpp",
+  "output": "CMakeFiles/cheddar.dir/src/extension/StripedMatrix.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+  "command": "/usr/bin/c++ -DENABLE_EXTENSION -DTHRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CUDA -DTHRUST_HOST_SYSTEM=THRUST_HOST_SYSTEM_CPP -DUSE_GMP -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/rmm-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/dependencies/cub -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -o CMakeFiles/composite_probe.dir/composite_probe.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar/composite_probe.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar/composite_probe.cpp",
+  "output": "CMakeFiles/composite_probe.dir/composite_probe.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-build",
+  "command": "/usr/bin/c++ -DSPDLOG_COMPILED_LIB -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -std=c++17 -o CMakeFiles/spdlog.dir/src/spdlog.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/spdlog.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/spdlog.cpp",
+  "output": "_deps/spdlog-build/CMakeFiles/spdlog.dir/src/spdlog.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-build",
+  "command": "/usr/bin/c++ -DSPDLOG_COMPILED_LIB -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -std=c++17 -o CMakeFiles/spdlog.dir/src/stdout_sinks.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/stdout_sinks.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/stdout_sinks.cpp",
+  "output": "_deps/spdlog-build/CMakeFiles/spdlog.dir/src/stdout_sinks.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-build",
+  "command": "/usr/bin/c++ -DSPDLOG_COMPILED_LIB -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -std=c++17 -o CMakeFiles/spdlog.dir/src/color_sinks.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/color_sinks.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/color_sinks.cpp",
+  "output": "_deps/spdlog-build/CMakeFiles/spdlog.dir/src/color_sinks.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-build",
+  "command": "/usr/bin/c++ -DSPDLOG_COMPILED_LIB -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -std=c++17 -o CMakeFiles/spdlog.dir/src/file_sinks.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/file_sinks.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/file_sinks.cpp",
+  "output": "_deps/spdlog-build/CMakeFiles/spdlog.dir/src/file_sinks.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-build",
+  "command": "/usr/bin/c++ -DSPDLOG_COMPILED_LIB -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -std=c++17 -o CMakeFiles/spdlog.dir/src/async.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/async.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/async.cpp",
+  "output": "_deps/spdlog-build/CMakeFiles/spdlog.dir/src/async.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-build",
+  "command": "/usr/bin/c++ -DSPDLOG_COMPILED_LIB -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -std=c++17 -o CMakeFiles/spdlog.dir/src/cfg.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/cfg.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/cfg.cpp",
+  "output": "_deps/spdlog-build/CMakeFiles/spdlog.dir/src/cfg.cpp.o"
+},
+{
+  "directory": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-build",
+  "command": "/usr/bin/c++ -DSPDLOG_COMPILED_LIB -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu -O3 -DNDEBUG -std=c++17 -o CMakeFiles/spdlog.dir/src/fmt.cpp.o -c /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/fmt.cpp",
+  "file": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/spdlog-src/src/fmt.cpp",
+  "output": "_deps/spdlog-build/CMakeFiles/spdlog.dir/src/fmt.cpp.o"
+}
+]

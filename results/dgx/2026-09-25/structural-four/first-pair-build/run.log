@@ -1,0 +1,9 @@
+[ 20%] Built target fideslib_plaintext_rns
+[ 40%] Built target stage1_mamba2_payload
+[ 60%] Built target stage1_mamba2_plan
+[ 80%] Built target fideslib_plaintext_encoder
+[100%] Built target packed_fideslib
+[ 50%] Building CXX object CMakeFiles/rotation_batch_probe.dir/src/rotation_batch_probe.cpp.o
+[100%] Linking CXX executable rotation_batch_probe
+[100%] Built target rotation_batch_probe
+[100%] Built target test_shared_plans

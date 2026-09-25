@@ -39,6 +39,20 @@ sequential schedule. See the
 Polynomial-batching and deferred-layout prototypes are archived there; their
 experimental flags are not part of the current executable.
 
+`--hoist-rotations` shares signed-digit prefixes and sibling key-switch
+preparation for the packed executor's BSGS baby rotations, using existing
+rotation keys. `--share-chebyshev` shares normalized arguments and basis terms
+between live polynomial nodes with the same input, width and interval. A
+refreshed input invalidates the basis; the last consumer releases it. Both
+options preserve the model coefficients and remain opt-in. See the
+[four-candidate study](../docs/research/2026-09-25-structural-four.md).
+
+`rotation_batch_probe OUTPUT.json [--mamba2]` checks complete RNS residues,
+level/scale-degree metadata and input preservation for the shared rotation
+helper. It also records alternating scalar/shared microbenchmarks. The Mamba-2
+option selects complex slots and sparse-ternary keys; it does not change or
+benchmark the specialized Mamba-2 model executor.
+
 `--cache-plaintexts` enables a 64-entry LRU for encoded multiplication masks
 and their GPU handles. It requires exact coefficient bits and CKKS levels,
 bypasses dense diagonals/additive constants, and keeps existing synchronization.

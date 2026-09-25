@@ -1,0 +1,19 @@
+{
+  "artifact_count": 1,
+  "results": [
+    {
+      "error_count": 0,
+      "explicit_non_success_probe": false,
+      "issues": [],
+      "path": "results/dgx/2026-09-25/structural-four/summary.json",
+      "stage": "structural-four-report",
+      "success_claimed": true,
+      "success_predicate_passed": true,
+      "valid": true,
+      "warning_count": 0
+    }
+  ],
+  "stage": "artifact-validation",
+  "valid": true,
+  "version": "0.5.0"
+}

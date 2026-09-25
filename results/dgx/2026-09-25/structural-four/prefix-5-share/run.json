@@ -1,0 +1,39 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel/packed_fideslib",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1/program.txt",
+    "/home/kataiwa/fhemamba/structural-four-20260925/prefix-5-share/native.json",
+    ".001",
+    ".001",
+    "--planned-refresh",
+    "--batch-refresh",
+    "--inplace-ops",
+    "--gpu-plaintext-ntt",
+    "--profile-evaluation",
+    "--naf-rotations",
+    "--reuse-dead-inputs",
+    "--direct-plaintext-upload",
+    "--compact-weights",
+    "--move-plaintext-coefficients",
+    "--borrow-plaintext-upload",
+    "--bsgs-routing-stages",
+    "--cache-plaintexts",
+    "--frontier-refresh",
+    "--s2c-first",
+    "--gpu-plaintext-rns",
+    "--share-chebyshev",
+    "--client-head",
+    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1/client_head.f32"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790332917.7619705,
+  "wall_seconds": 60.55408048629761,
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "binary_sha256": "ddf475897316f0a70cf2354595b5a4aa4426f5c1eea8e24f69068046020f5449"
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel",
+    "-j",
+    "4"
+  ],
+  "exit_code": 0,
+  "started_at_unix": 1790334271.9635668,
+  "wall_seconds": 6.2387659549713135,
+  "binary_sha256": null
+}

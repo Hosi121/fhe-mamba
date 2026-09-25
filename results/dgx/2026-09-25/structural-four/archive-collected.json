@@ -1,0 +1,14 @@
+{
+  "collected": true,
+  "local_directory": "/home/hosi/cipher/results/dgx/2026-09-25/structural-four",
+  "required_files_sha256": {
+    "native-sources.tar.gz": "51013dd2a891ce00f8a7d0e5135a05985573821f29ef077335640196991cc838",
+    "prefix-native-sources.tar.gz": "f22bc27b7d9f007ca33d315fbec36e0e4d524d2d089efb11bd8d0db17519b39c",
+    "source-verification.json": "631063517f126a642b0378504e32b7e993d604b20c2871958184a9fedd11f19e",
+    "alternative-source-verification.json": "3f365ae3c2ee0700ffc5839b582205d2ed692184b138dcd7983fba6a09bb587a",
+    "summary.json": "0d9b95ffd3bb0030d11c4f7cb3ec1b340674bfce4cb847546b115582a3cc4861",
+    "dependency-verification-after.json": "dade2f9452641e3b5601e009ab344c860275aa161e2718695ad5da92cfdf6ac2",
+    "build-identity/libraries-sha256.json": "840fea292cea61d31e81c069a8a39f7af90f0bf1a993ffc9f41d1c10a6dede4e"
+  },
+  "rsync_checksum_dry_run": "No file-content differences; directory timestamp only."
+}

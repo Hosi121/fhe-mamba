@@ -82,6 +82,15 @@ and duplicate input edges under the changed order; feedback epochs remain
 barriers. Omitting this option retains the sequential schedule. The native
 report includes `frontier_deferrals` and `maximum_ready_nodes`.
 
+`--hoist-rotations` shares existing signed-digit prefixes and sibling ModUp
+preparation within BSGS baby rotations, without adding rotation keys.
+`--share-chebyshev` shares the normalized argument and requested basis terms
+between compatible polynomial nodes, including sin/cos pairs. A refresh or
+level/degree change invalidates that basis; its last consumer releases it.
+Both switches are opt-in and preserve the frozen model coefficients. See the
+[four-candidate comparison](research/2026-09-25-structural-four.md) for measured
+scope, correctness probes and alternative-backend trials.
+
 `--profile-evaluation` adds host encoding and mask preparation timers and CUDA
 profiler start/stop markers around evaluation. Use an Nsight Systems wrapper
 with `--capture-range=cudaProfilerApi --capture-range-end=stop` to exclude setup

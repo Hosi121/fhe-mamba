@@ -1,0 +1,20 @@
+{
+  "command": [
+    "cmake",
+    "-S",
+    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar",
+    "-B",
+    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+    "-DBUILD_UNITTEST=OFF",
+    "-DBUILD_TESTS=OFF",
+    "-DUSE_GMP=ON",
+    "-DCMAKE_CUDA_COMPILER=/usr/local/cuda-13.0/bin/nvcc",
+    "-DGMP=/lib/aarch64-linux-gnu/libgmp.so.10",
+    "-DCMAKE_CXX_FLAGS=-I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu",
+    "-DCMAKE_CUDA_FLAGS=-I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include -I/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted/usr/include/aarch64-linux-gnu"
+  ],
+  "cwd": null,
+  "exit_code": 0,
+  "started_at_unix": 1790333564.9127297,
+  "wall_seconds": 14.180227994918823
+}

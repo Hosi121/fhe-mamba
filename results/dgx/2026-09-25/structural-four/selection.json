@@ -1,0 +1,41 @@
+{
+  "stopping_rule_satisfied": true,
+  "implemented_mechanisms": 4,
+  "adopted_opt_in": [
+    "hoist-rotations",
+    "share-chebyshev"
+  ],
+  "rejected": {
+    "32-bit-rns": "The selected nominal 59-bit composite-rescale profile fails the small-circuit numerical gate; its 64-bit control and separate upstream 40-bit 32-bit control pass. No lower model precision is substituted.",
+    "small-ring": "The implemented CPU encrypted ring-switch boundary passes accuracy but costs roughly 55 seconds; the smaller-ring whole probe is slightly slower than its CPU control. A GPU switcher is not implemented or benchmarked."
+  },
+  "full_comparison": {
+    "order": [
+      "baseline",
+      "candidate",
+      "candidate",
+      "baseline"
+    ],
+    "baseline_mean_seconds": 619.410120806,
+    "candidate_mean_seconds": 614.109367931,
+    "reduction_percent": 0.8557743402872631,
+    "ordinary_reduction_percent": 1.3575540235799433,
+    "all_candidate_samples_below_all_baseline_samples": true,
+    "both_model_gates": 0.001,
+    "generated_token_ids": [
+      315,
+      279,
+      1614,
+      315
+    ],
+    "bootstraps_per_run": 484,
+    "evaluation_decryptions_per_run": 0
+  },
+  "reason": "Both qualified options reduce operations and pass isolated, prefix and full-model gates. The combined path improves both full candidate samples, with unchanged refresh circuit/counts and essentially unchanged peak RSS. Adopt as opt-in with a modest fixed-payload gain; no large-speedup or statistical-significance claim.",
+  "limits": [
+    "Two full samples per mode on one fixed prompt/checkpoint.",
+    "Full-depth speed comparison covers Mamba-3 only; Mamba-2 shared rotation primitive passes.",
+    "The two alternative-backend probes are not trained-model implementations.",
+    "The existing single-process client loop and security=not-set scope remain."
+  ]
+}

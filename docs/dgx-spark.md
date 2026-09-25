@@ -38,7 +38,7 @@ dependency and uses `~/fhemamba/spark/` for its own patched FIDESlib snapshot
 and kernel. No B300 container or Slurm allocation is needed. `BUILD_JOBS`
 defaults to 8. `FHEMAMBA_REMOTE_ROOT` overrides the default `~/fhemamba` root.
 
-The build verifies the source snapshot, runs the 20 C++ contract tests,
+The build verifies the source snapshot, runs the 21 C++ contract tests,
 and writes `spark/kernel/stage1_mamba2_decode_fideslib.build.json`. The runner
 checks hashes of the native sources/configuration, executable and OpenFHE
 shared libraries, and sets the matching library path. FIDESlib is linked

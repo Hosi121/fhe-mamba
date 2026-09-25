@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "removed_directory": "/home/hosi/cipher/runs/structural-four-20260925",
+  "source_and_logs_retained": "/home/hosi/cipher/results/dgx/2026-09-25/structural-four",
+  "worktrees_created": 0,
+  "measured_binaries_retained_on_dgx": "cleanup.json"
+}

@@ -1,0 +1,7 @@
+{
+  "state": "failed",
+  "stage": "first-pair-build",
+  "started_at_unix": 1790331885.7194295,
+  "error": "AssertionError(('first-pair-build', 2))",
+  "finished_at_unix": 1790331891.5940702
+}

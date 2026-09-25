@@ -1,0 +1,34 @@
+{
+  "stock32": {
+    "binary_sha256": "7448aec064d8166b0e5ce8271537a4a99d2f97b419e8a876072d398a07dadf3b",
+    "library_sha256": "9ceab53ce3b018531c39cd6de614451648e33b19ca65f8c42a04daef85bc2c50",
+    "source": "alternative-backends/cheddar/composite_probe.cpp",
+    "report_sha256": "046b9239930f663409a89c12ff05a7c7daf9b56eeb72faf357783174c1aad437",
+    "provenance_note": "The stock control and final 32/64 qualification use the same final build; no rebuild occurred between them. Equivalent CLI invocation reconstructed after execution; original start/wall time and a run.json invocation record were not retained.",
+    "equivalent_invocation": [
+      "taskset",
+      "-c",
+      "15-19",
+      "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/composite_probe",
+      "32",
+      "/home/kataiwa/fhemamba/structural-four-20260925/composite-stock32.json",
+      "--stock32"
+    ]
+  },
+  "diagnostic": {
+    "binary_sha256": null,
+    "library_sha256": null,
+    "provenance_note": "Diagnostic-only adapter revision before the stock-control option was added. Exact executable/library hashes and original invocation record were not retained for this diagnostic. Do not attach later final-build identities to it; use the final 32/64 pair for qualified source/binary provenance.",
+    "report_sha256": "879a38c68ba50644c131ec5caa61dab96b18ee393f054fa4290499d8e9322e02",
+    "evaluation_scope": "13 client-only checks after the complete encrypted circuit, not used for final timing qualification.",
+    "equivalent_invocation": [
+      "taskset",
+      "-c",
+      "15-19",
+      "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/composite_probe",
+      "32",
+      "/home/kataiwa/fhemamba/structural-four-20260925/composite-diagnostic.json",
+      "--diagnose"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+WARN: UserInterface is for testing purposes only. Do not use in production.
+CtS preparation phase 0
+CtS preparation phase 1
+CtS preparation phase 2
+CtS preparation phase 3
+StC preparation phase 0
+StC preparation phase 1
+StC preparation phase 2
+WARN: Rotation key for rotation index 1 already prepared
+WARN: Rotation key for rotation index 2 already prepared
+WARN: Rotation key for rotation index 3 already prepared
+WARN: Rotation key for rotation index 4 already prepared
+WARN: Rotation key for rotation index 8 already prepared
+diagnostic input level=21 scale=59 max=0.5 first=(0.0499167,3.49261e-16)
+diagnostic square level=20 scale=59.0004 max=0 first=(nan,nan)
+diagnostic product level=19 scale=59.0006 max=0 first=(nan,nan)
+diagnostic bsgs level=18 scale=59.0009 max=0 first=(nan,nan)
+diagnostic low level=0 scale=57 max=7722.85 first=(-927.513,-101.273)
+diagnostic first level=18 scale=59.0009 max=0 first=(nan,nan)
+diagnostic first_low level=0 scale=57 max=8625.61 first=(1127.66,489.638)
+diagnostic error level=0 scale=57 max=8366.4 first=(-1921.37,-1121.74)
+diagnostic scaled_error level=0 scale=57 max=7166.48 first=(643.677,-954.134)
+diagnostic correction level=18 scale=59.0009 max=0 first=(nan,nan)
+diagnostic divided level=17 scale=59.0011 max=0 first=(nan,nan)
+diagnostic refreshed level=17 scale=59.0011 max=0 first=(nan,nan)
+diagnostic result level=16 scale=58.9999 max=3.28012e+287 first=(3.93013e+286,3.91573e+285)
+iteration=-1 ordinary=1.14959 refresh=0.558489 error=3.28012e+287

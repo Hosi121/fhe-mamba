@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "compiled_cheddar_sources": {
+    "composite_probe.cpp": "1737c510d9e3113bbeede1a59d41f4de4f795820b964769581aecf026d21b0d9",
+    "composite_params.hpp": "ec313dfa19dac675d089b430fd3ac11db1f518352035098b6d6367c32032dcf0",
+    "stock32_params.hpp": "0120e9e60a3e70882629d484c58c9edae0addc6c3bd6fb0a145729d33ae5ee15",
+    "CMakeLists.txt": "9ed021f1d3f7d1a3aaf7d77f48d43a010d14d311259b9d816f7f64b0ce66a9dc"
+  },
+  "cmake_reconstruction": "Apply archived build.patch to pinned upstream CMakeLists.txt and compare all bytes.",
+  "go_binary_matches_recorded_final_run": true,
+  "go_binary_sha256": "80488eba84989346299630ff380398c0786325486c7fdaf67ad4720af75f648b"
+}

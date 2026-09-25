@@ -1,0 +1,17 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/structural-four-20260925/small-ring-probe",
+    "--logn",
+    "15",
+    "--output",
+    "/home/kataiwa/fhemamba/structural-four-20260925/small-ring-15/native.json"
+  ],
+  "cwd": null,
+  "exit_code": 2,
+  "started_at_unix": 1790333107.0951982,
+  "wall_seconds": 229.2468409538269,
+  "binary_sha256": "cf61187b4434b06e68ff8c31cbbe22071c9221a0a8211901d6a6ad25ca6ff125"
+}

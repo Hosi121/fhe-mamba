@@ -1,0 +1,17 @@
+-- Using FIDESlib.
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/install-8f75cf9c2329fd3b/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/install-8f75cf9c2329fd3b/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- Configuring done (0.0s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel
+[ 20%] Built target fideslib_plaintext_rns
+[ 40%] Built target stage1_mamba2_payload
+[ 60%] Built target stage1_mamba2_plan
+[ 80%] Built target fideslib_plaintext_encoder
+[ 90%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[100%] Linking CXX executable packed_fideslib
+[100%] Built target packed_fideslib
+gmake: *** No rule to make target 'rotation_batch_probe'.  Stop.

@@ -1,0 +1,9 @@
+{
+  "command": [
+    "bash",
+    "/home/kataiwa/fhemamba/structural-four-20260925/repo/scripts/build_dgx_spark.sh"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 101.10681366920471,
+  "started_at_unix": 1790331374.218226
+}

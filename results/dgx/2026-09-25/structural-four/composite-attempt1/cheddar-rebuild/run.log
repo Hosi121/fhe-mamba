@@ -1,0 +1,71 @@
+[  3%] Linking CXX shared library libcheddar.so
+[ 92%] Built target cheddar
+[ 96%] Building CXX object CMakeFiles/composite_probe.dir/composite_probe.cpp.o
+In file included from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/system/detail/sequential/copy.inl:26,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/system/detail/sequential/copy.h:61,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/system/detail/adl/copy.h:25,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/detail/copy.inl:23,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/detail/copy.h:90,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/detail/allocator/copy_construct_range.inl:23,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/detail/allocator/copy_construct_range.h:45,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/detail/contiguous_storage.inl:23,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/detail/contiguous_storage.h:234,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/detail/vector_base.h:30,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/host_vector.h:27,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar/include/core/DeviceVector.h:3,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar/include/core/Container.h:3,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar/include/core/Context.h:6,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar/include/UserInterface.h:10,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar/composite_probe.cpp:3:
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:326:39: warning: ‘long4’ is deprecated: use long4_16a or long4_32a [-Wdeprecated-declarations]
+  326 | THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE(long4)
+      |                                       ^~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:229:41: note: in definition of macro ‘THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE’
+  229 |   struct proclaim_trivially_relocatable<T> : THRUST_NS_QUALIFIER::true_type   \
+      |                                         ^
+In file included from /usr/local/cuda-13.0/targets/sbsa-linux/include/driver_types.h:61,
+                 from /usr/local/cuda-13.0/targets/sbsa-linux/include/builtin_types.h:59,
+                 from /usr/local/cuda-13.0/targets/sbsa-linux/include/cuda_runtime_api.h:150,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/system/cuda/detail/guarded_cuda_runtime_api.h:38,
+                 from /home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:297:
+/usr/local/cuda-13.0/targets/sbsa-linux/include/vector_types.h:532:98: note: declared here
+  532 | typedef __device_builtin__ struct long4 __VECTOR_TYPE_DEPRECATED__("use long4_16a or long4_32a") long4;
+      |                                                                                                  ^~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:330:39: warning: ‘ulong4’ is deprecated: use ulong4_16a or ulong4_32a [-Wdeprecated-declarations]
+  330 | THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE(ulong4)
+      |                                       ^~~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:229:41: note: in definition of macro ‘THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE’
+  229 |   struct proclaim_trivially_relocatable<T> : THRUST_NS_QUALIFIER::true_type   \
+      |                                         ^
+/usr/local/cuda-13.0/targets/sbsa-linux/include/vector_types.h:533:101: note: declared here
+  533 | typedef __device_builtin__ struct ulong4 __VECTOR_TYPE_DEPRECATED__("use ulong4_16a or ulong4_32a") ulong4;
+      |                                                                                                     ^~~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:334:39: warning: ‘longlong4’ is deprecated: use longlong4_16a or longlong4_32a [-Wdeprecated-declarations]
+  334 | THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE(longlong4)
+      |                                       ^~~~~~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:229:41: note: in definition of macro ‘THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE’
+  229 |   struct proclaim_trivially_relocatable<T> : THRUST_NS_QUALIFIER::true_type   \
+      |                                         ^
+/usr/local/cuda-13.0/targets/sbsa-linux/include/vector_types.h:550:110: note: declared here
+  550 | typedef __device_builtin__ struct longlong4 __VECTOR_TYPE_DEPRECATED__("use longlong4_16a or longlong4_32a") longlong4;
+      |                                                                                                              ^~~~~~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:338:39: warning: ‘ulonglong4’ is deprecated: use ulonglong4_16a or ulonglong4_32a [-Wdeprecated-declarations]
+  338 | THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE(ulonglong4)
+      |                                       ^~~~~~~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:229:41: note: in definition of macro ‘THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE’
+  229 |   struct proclaim_trivially_relocatable<T> : THRUST_NS_QUALIFIER::true_type   \
+      |                                         ^
+/usr/local/cuda-13.0/targets/sbsa-linux/include/vector_types.h:551:113: note: declared here
+  551 | typedef __device_builtin__ struct ulonglong4 __VECTOR_TYPE_DEPRECATED__("use ulonglong4_16a or ulonglong4_32a") ulonglong4;
+      |                                                                                                                 ^~~~~~~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:353:39: warning: ‘double4’ is deprecated: use double4_16a or double4_32a [-Wdeprecated-declarations]
+  353 | THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE(double4)
+      |                                       ^~~~~~~
+/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/_deps/thrust-src/thrust/type_traits/is_trivially_relocatable.h:229:41: note: in definition of macro ‘THRUST_PROCLAIM_TRIVIALLY_RELOCATABLE’
+  229 |   struct proclaim_trivially_relocatable<T> : THRUST_NS_QUALIFIER::true_type   \
+      |                                         ^
+/usr/local/cuda-13.0/targets/sbsa-linux/include/vector_types.h:561:104: note: declared here
+  561 | typedef __device_builtin__ struct double4 __VECTOR_TYPE_DEPRECATED__("use double4_16a or double4_32a") double4;
+      |                                                                                                        ^~~~~~~
+[100%] Linking CXX executable composite_probe
+[100%] Built target composite_probe

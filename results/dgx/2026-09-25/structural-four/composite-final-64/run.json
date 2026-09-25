@@ -1,0 +1,15 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/composite_probe",
+    "64",
+    "/home/kataiwa/fhemamba/structural-four-20260925/composite-final-64/native.json"
+  ],
+  "binary_sha256": "7448aec064d8166b0e5ce8271537a4a99d2f97b419e8a876072d398a07dadf3b",
+  "library_sha256": "9ceab53ce3b018531c39cd6de614451648e33b19ca65f8c42a04daef85bc2c50",
+  "started_at_unix": 1790335154.834573,
+  "exit_code": 0,
+  "wall_seconds": 65.21473836898804
+}

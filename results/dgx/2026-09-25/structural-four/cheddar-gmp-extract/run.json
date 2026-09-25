@@ -1,0 +1,12 @@
+{
+  "command": [
+    "dpkg-deb",
+    "-x",
+    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/libgmp-dev_2%3a6.3.0+dfsg-2ubuntu6.1_arm64.deb",
+    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps/extracted"
+  ],
+  "cwd": null,
+  "exit_code": 0,
+  "started_at_unix": 1790333564.9015415,
+  "wall_seconds": 0.010717391967773438
+}

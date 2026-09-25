@@ -1,0 +1,62 @@
+{
+  "implementation_commit": "b6817f0e92f5c1fd9c490c8f160c6fcc3b01fa02",
+  "local_checks": {
+    "passed": true,
+    "python_tests_including_cpp_contract_wrapper": 290,
+    "cpp_contracts": 21,
+    "python_coverage_percent": 87.6,
+    "log": "local-checks.log"
+  },
+  "dgx_cpp_contracts": {
+    "passed": true,
+    "count": 21,
+    "log": "final-native-contracts/run.log"
+  },
+  "implementation_ci": {
+    "passed": true,
+    "python_versions": [
+      "3.10",
+      "3.12"
+    ],
+    "run_url": "https://github.com/Hosi121/fhe-mamba/actions/runs/36129650576"
+  },
+  "archive_and_prefix_validation": {
+    "passed": true,
+    "native_archives": 2,
+    "native_files_match_commit": 89,
+    "prefix_processes": 8
+  },
+  "full_comparison": {
+    "passed": true,
+    "processes": 4,
+    "summary": "summary.json",
+    "source_and_dependency_checks": "summarize.py"
+  },
+  "deterministic_prime_generation": {
+    "passed": true,
+    "record": "prime-generation-verification.json"
+  },
+  "artifact_schema": {
+    "passed": true,
+    "errors": 0,
+    "warnings": 0,
+    "command": "fhemamba validate-artifacts --require-commit results/dgx/2026-09-25/structural-four/summary.json"
+  },
+  "compiled_alternative_sources_match_archive": true,
+  "cleanup": {
+    "passed": true,
+    "remote_removed_paths": 71,
+    "retained_measured_executables_and_library": 6,
+    "local_scratch_removed": true,
+    "canonical_dependencies_unchanged": true,
+    "worktrees_created": 0
+  },
+  "documentation_relative_links": {
+    "passed": true,
+    "missing": 0
+  },
+  "git_whitespace": {
+    "edited_code_and_documentation_pass": true,
+    "raw_logs_and_patch_context": "Original trailing spaces and terminal formatting retained as recorded; raw artifacts are not rewritten for whitespace lint."
+  }
+}

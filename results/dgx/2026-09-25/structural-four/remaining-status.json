@@ -1,0 +1,7 @@
+{
+  "state": "failed",
+  "stage": "cheddar-build-log",
+  "started_at_unix": 1790332787.0730257,
+  "error": "RuntimeError(('cheddar-build-log', 2))",
+  "finished_at_unix": 1790333599.332272
+}

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "apt-get",
+    "download",
+    "libgmp-dev"
+  ],
+  "cwd": "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-private-deps",
+  "exit_code": 0,
+  "started_at_unix": 1790333562.3542628,
+  "wall_seconds": 2.5464515686035156
+}
