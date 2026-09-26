@@ -56,6 +56,7 @@ def _run(
     gpu_plaintext_rns=False,
     hoist_rotations=False,
     share_chebyshev=False,
+    gpu_dual_ring=False,
 ):
     binary, payload, output = binary.resolve(), payload.resolve(), output.resolve()
     if not math.isfinite(timeout) or timeout <= 0 or not math.isfinite(tolerance) or tolerance <= 0:
@@ -68,6 +69,8 @@ def _run(
         raise ValueError("batch refresh requires planned refresh and two bootstrap passes")
     if s2c_first and not batch_refresh:
         raise ValueError("S2C-first requires planned two-pass batch refresh")
+    if gpu_dual_ring and not s2c_first:
+        raise ValueError("GPU dual ring requires S2C-first planned two-pass refresh")
     if frontier_refresh and not batch_refresh:
         raise ValueError("frontier refresh requires batch refresh")
     manifest = json.loads((payload / "manifest.json").read_text())
@@ -123,6 +126,7 @@ def _run(
         (gpu_plaintext_rns, "--gpu-plaintext-rns"),
         (hoist_rotations, "--hoist-rotations"),
         (share_chebyshev, "--share-chebyshev"),
+        (gpu_dual_ring, "--gpu-dual-ring"),
     ):
         if enabled:
             command.append(flag)
@@ -210,6 +214,7 @@ def run(
     gpu_plaintext_rns=False,
     hoist_rotations=False,
     share_chebyshev=False,
+    gpu_dual_ring=False,
     budget_file=None,
     budget_seconds=None,
 ):
@@ -245,6 +250,7 @@ def run(
             gpu_plaintext_rns=gpu_plaintext_rns,
             hoist_rotations=hoist_rotations,
             share_chebyshev=share_chebyshev,
+            gpu_dual_ring=gpu_dual_ring,
         )
     import fcntl
 
@@ -301,6 +307,7 @@ def run(
                 gpu_plaintext_rns=gpu_plaintext_rns,
                 hoist_rotations=hoist_rotations,
                 share_chebyshev=share_chebyshev,
+                gpu_dual_ring=gpu_dual_ring,
             )
         finally:
             charged = time.monotonic() - started
@@ -346,6 +353,7 @@ def main():
     parser.add_argument("--gpu-plaintext-rns", action="store_true")
     parser.add_argument("--hoist-rotations", action="store_true")
     parser.add_argument("--share-chebyshev", action="store_true")
+    parser.add_argument("--gpu-dual-ring", action="store_true")
     parser.add_argument("--budget-file", type=Path)
     parser.add_argument("--budget-seconds", type=float)
     args = parser.parse_args()
@@ -377,6 +385,7 @@ def main():
         gpu_plaintext_rns=args.gpu_plaintext_rns,
         hoist_rotations=args.hoist_rotations,
         share_chebyshev=args.share_chebyshev,
+        gpu_dual_ring=args.gpu_dual_ring,
         budget_file=args.budget_file,
         budget_seconds=args.budget_seconds,
     )

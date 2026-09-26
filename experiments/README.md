@@ -51,6 +51,12 @@ are forwarded through ordinary and budgeted execution. Their counters and
 qualification are described in the
 [four-candidate study](../docs/research/2026-09-25-structural-four.md).
 
+The packed runner also forwards `--gpu-dual-ring` through ordinary and
+budgeted execution. It requires the S2C-first/planned/batch refresh flags and
+the corresponding native build option. The independent
+[GPU transfer probe](gpu_dual_ring/README.md) checks the same implementation
+against coefficient-domain and encrypted reference cases before model timing.
+
 ## Supporting files
 
 - [`manifests/`](manifests/README.md): versioned campaign parameters and acceptance gates.

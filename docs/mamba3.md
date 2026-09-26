@@ -91,6 +91,14 @@ Both switches are opt-in and preserve the frozen model coefficients. See the
 [four-candidate comparison](research/2026-09-25-structural-four.md) for measured
 scope, correctness probes and alternative-backend trials.
 
+`--gpu-dual-ring` moves ordinary encrypted arithmetic to N=32,768 while
+keeping the existing N=65,536 S2C-first refresh circuit. It requires
+`--s2c-first --planned-refresh --batch-refresh` and the matching Spark build.
+Logical node widths must fit 16,384 slots; the executor regenerates its
+replicated layouts for that capacity. Model coefficients and error gates
+stay fixed. See the [GPU dual-ring study](research/2026-09-26-gpu-dual-ring.md)
+for qualification and the limitations of this experimental parameter set.
+
 `--profile-evaluation` adds host encoding and mask preparation timers and CUDA
 profiler start/stop markers around evaluation. Use an Nsight Systems wrapper
 with `--capture-range=cudaProfilerApi --capture-range-end=stop` to exclude setup

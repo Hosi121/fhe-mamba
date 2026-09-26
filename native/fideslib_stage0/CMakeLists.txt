@@ -9,6 +9,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(FHE_STAGE0_BUILD_KERNEL "Build the FIDESlib Stage 0 kernel" ON)
 option(FHE_STAGE0_BUILD_TESTS "Build FIDESlib-free Stage 0 layout tests" OFF)
 option(FHE_STAGE0_GPU_RNS "Build exact GPU expansion of compact plaintext coefficients" OFF)
+option(FHE_STAGE0_GPU_DUAL_RING "Build experimental GPU ordinary/refresh ring switching" OFF)
 
 file(
   READ
@@ -98,6 +99,14 @@ if(FHE_STAGE0_BUILD_KERNEL)
   target_link_libraries(stage1_bootstrap_probe PRIVATE fideslib::fideslib)
 
   add_executable(packed_fideslib src/packed_fideslib.cpp)
+  if(FHE_STAGE0_GPU_DUAL_RING)
+    enable_language(CUDA)
+    add_library(fideslib_ring_map STATIC src/fideslib_ring_map.cu)
+    set_target_properties(fideslib_ring_map PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON)
+    target_link_libraries(fideslib_ring_map PUBLIC CUDA::cudart)
+    target_compile_definitions(packed_fideslib PRIVATE FHEMAMBA_GPU_DUAL_RING=1)
+    target_link_libraries(packed_fideslib PRIVATE fideslib_ring_map)
+  endif()
   add_executable(rotation_batch_probe src/rotation_batch_probe.cpp)
   target_link_libraries(rotation_batch_probe PRIVATE fideslib::fideslib CUDA::cudart stage0_layout)
   target_include_directories(rotation_batch_probe PRIVATE ${OpenFHE_INCLUDE} ${OpenFHE_INCLUDE}/core

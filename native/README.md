@@ -47,6 +47,16 @@ refreshed input invalidates the basis; the last consumer releases it. Both
 options preserve the model coefficients and remain opt-in. See the
 [four-candidate study](../docs/research/2026-09-25-structural-four.md).
 
+`--gpu-dual-ring` selects N=32,768 for the packed executor's ordinary
+arithmetic and retains N=65,536 for two-pass S2C-first refresh. The shared
+bridge switches encrypted keys and maps bit-reversed NTT pairs on the GPU;
+no evaluator decryption or ciphertext download is involved. This option
+requires `--s2c-first --planned-refresh --batch-refresh`, a program declared
+with 32,768 slots, and logical node widths at most 16,384. The Spark build
+includes it; custom builds use `-DFHE_STAGE0_GPU_DUAL_RING=ON`. See the
+[dual-ring study](../docs/research/2026-09-26-gpu-dual-ring.md). The specialized
+Mamba-2 executor keeps its existing ring and refresh path.
+
 `rotation_batch_probe OUTPUT.json [--mamba2]` checks complete RNS residues,
 level/scale-degree metadata and input preservation for the shared rotation
 helper. It also records alternating scalar/shared microbenchmarks. The Mamba-2

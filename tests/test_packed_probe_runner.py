@@ -165,6 +165,8 @@ def test_budget_requires_both_path_and_limit(kwargs):
         {"frontier_refresh": True, "planned_refresh": True},
         {"s2c_first": True},
         {"s2c_first": True, "planned_refresh": True},
+        {"gpu_dual_ring": True},
+        {"gpu_dual_ring": True, "planned_refresh": True, "batch_refresh": True},
         {"batch_refresh": True},
         {"planned_refresh": True, "batch_refresh": True, "bootstrap_passes": 1},
         {"planned_refresh": True, "legacy_routing": True},
@@ -201,6 +203,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "assert '--gpu-plaintext-rns' in sys.argv\n"
         "assert '--hoist-rotations' in sys.argv\n"
         "assert '--share-chebyshev' in sys.argv\n"
+        "assert '--gpu-dual-ring' in sys.argv\n"
     )
     binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
@@ -228,6 +231,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         gpu_plaintext_rns=True,
         hoist_rotations=True,
         share_chebyshev=True,
+        gpu_dual_ring=True,
         **budget,
     )
     assert result["returncode"] == 0
@@ -252,6 +256,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "--gpu-plaintext-rns",
         "--hoist-rotations",
         "--share-chebyshev",
+        "--gpu-dual-ring",
     ]
     assert result["command"][-len(expected_flags) :] == expected_flags
     assert result["passed"] is False  # No native result; flags cannot bypass the gate.

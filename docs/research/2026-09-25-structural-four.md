@@ -7,6 +7,10 @@ nominal 59-bit 32-bit adapter fails its numerical gate; the smaller-ring CPU
 route passes accuracy but is not competitive. This campaign does **not**
 demonstrate a large full-model speedup.
 
+The [following GPU dual-ring study](2026-09-26-gpu-dual-ring.md) implements
+the GPU representation change that was outside this completed four-mechanism
+campaign. The CPU ring-switch timing below remains evidence for its own route.
+
 The agreed stopping rule is one mechanism for each of four candidates, small
 qualification, integration of eligible candidates, full inference comparison,
 and an adoption decision. All four mechanisms are implemented as either
@@ -153,9 +157,10 @@ The smaller ring saves 52.17% in ordinary arithmetic, but the measured whole
 probe is about 0.25% slower. Each width has one sample; this tiny total difference
 is not a statistical claim. More decisively, a roughly 55-second CPU boundary
 cannot retain the current GPU refresh speed. This concrete CPU route is not
-integrated into model inference. A GPU ring-switch implementation remains
-unimplemented and unmeasured. No conclusion about its possible speed follows
-from the CPU result.
+integrated into model inference. At this campaign's stopping point, GPU ring
+switching was unimplemented and unmeasured. The
+[GPU follow-up](2026-09-26-gpu-dual-ring.md) tests that separate implementation;
+its possible speed did not follow from the CPU result.
 
 ## Matched model comparisons
 

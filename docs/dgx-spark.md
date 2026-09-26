@@ -60,6 +60,14 @@ plaintext shapes and ranges use the existing encoder. The option is off at
 runtime unless requested; custom CMake builds require
 `-DFHE_STAGE0_GPU_RNS=ON` and an appropriate `CMAKE_CUDA_ARCHITECTURES` value.
 
+The Spark build also compiles the optional GPU dual-ring bridge. Adding
+`--gpu-dual-ring` with `--s2c-first --planned-refresh --batch-refresh` runs
+ordinary arithmetic at N=32,768 and retains N=65,536 for refresh. It requires
+full refresh packing and logical node widths at most 16,384. Custom CMake
+builds use `-DFHE_STAGE0_GPU_DUAL_RING=ON`. Runtime selection remains opt-in;
+see the [GPU dual-ring study](research/2026-09-26-gpu-dual-ring.md) for the
+comparison and experimental parameter scope.
+
 ## Payload
 
 Prepare payloads on the Python development host; no Python ML installation is

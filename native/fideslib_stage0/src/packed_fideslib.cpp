@@ -12,6 +12,9 @@
 #include "fideslib_plaintext_ops.hpp"
 #include "fideslib_plaintext_encoder.hpp"
 #include "stage1_mamba2_plan.hpp"
+#ifdef FHEMAMBA_GPU_DUAL_RING
+#include "fideslib_dual_ring.hpp"
+#endif
 
 #include <algorithm>
 #include <chrono>
@@ -24,9 +27,8 @@
 #include <cstdint>
 #include <sys/resource.h>
 
-extern "C" int cudaDeviceSynchronize(void);
-extern "C" int cudaProfilerStart(void);
-extern "C" int cudaProfilerStop(void);
+#include <cuda_runtime_api.h>
+#include <cuda_profiler_api.h>
 using namespace fideslib;
 using Ct = Ciphertext<DCRTPoly>;
 using Clock = std::chrono::steady_clock;
@@ -79,6 +81,9 @@ struct PackedEvaluator {
   std::map<std::string, OperationStats> operation_stats;
   std::function<Ct(const Ct&)> client_feedback;
   double current_bound = 64;
+#ifdef FHEMAMBA_GPU_DUAL_RING
+  fhemamba::dual_ring::RingBridge* ring_bridge = nullptr;
+#endif
 
   auto scale(const Ct& a, double c) -> Ct {
     ++ct_pt; auto out = a->Clone(); cc->EvalMultInPlace(out, c); sync_gpu(); return out;
@@ -177,21 +182,32 @@ struct PackedEvaluator {
   }
   auto bootstrap_components(Ct input) -> std::pair<Ct, Ct> {
     while (input->GetNoiseScaleDeg() > 1) cc->RescaleInPlace(input);
-    sync_gpu(); auto first = cc->EvalBootstrap(input); sync_gpu(); ++bootstraps;
+#ifdef FHEMAMBA_GPU_DUAL_RING
+    if (ring_bridge) input = ring_bridge->up(input);
+#endif
+    const auto boot_cc = input->parent_context;
+    auto boot_scale = [&](const Ct& value, double factor) {
+      ++ct_pt; auto out = value->Clone(); boot_cc->EvalMultInPlace(out, factor);
+      sync_gpu(); return out;
+    };
+    sync_gpu(); auto first = boot_cc->EvalBootstrap(input); sync_gpu(); ++bootstraps;
     if (bootstrap_passes == 1) return {first, {}};
     auto a = input->Clone(), b = first->Clone();
-    while (b->GetNoiseScaleDeg() > 1) cc->RescaleInPlace(b);
+    while (b->GetNoiseScaleDeg() > 1) boot_cc->RescaleInPlace(b);
     const auto target = std::max(a->GetLevel(), b->GetLevel());
     for (auto* v : {&a, &b}) {
       while ((*v)->GetLevel() < target) {
-        *v = scale(*v, 1.0);
-        while ((*v)->GetNoiseScaleDeg() > 1) cc->RescaleInPlace(*v);
+        *v = boot_scale(*v, 1.0);
+        while ((*v)->GetNoiseScaleDeg() > 1) boot_cc->RescaleInPlace(*v);
       }
     }
-    auto residual = cc->EvalSub(a, b); ++adds;
-    residual = scale(residual, 4096.0);
-    while (residual->GetNoiseScaleDeg() > 1) cc->RescaleInPlace(residual);
-    sync_gpu(); auto second = cc->EvalBootstrap(residual); sync_gpu(); ++bootstraps;
+    auto residual = boot_cc->EvalSub(a, b); ++adds;
+    residual = boot_scale(residual, 4096.0);
+    while (residual->GetNoiseScaleDeg() > 1) boot_cc->RescaleInPlace(residual);
+    sync_gpu(); auto second = boot_cc->EvalBootstrap(residual); sync_gpu(); ++bootstraps;
+#ifdef FHEMAMBA_GPU_DUAL_RING
+    if (ring_bridge) return {ring_bridge->down(first), ring_bridge->down(second)};
+#endif
     return {first, second};
   }
   auto refresh(const Ct& value, double refresh_bound) -> Ct {
@@ -718,7 +734,7 @@ struct GenerationClient {
 
 auto main(int argc, char** argv) -> int {
   try {
-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--hoist-rotations] [--share-chebyshev] [--client-head FILE]");
+    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--hoist-rotations] [--share-chebyshev] [--gpu-dual-ring] [--client-head FILE]");
     bool replicated_linear = true;
     bool legacy_routing = false;
     bool trace_levels = false;
@@ -738,6 +754,7 @@ auto main(int argc, char** argv) -> int {
     bool s2c_first = false;
     bool gpu_plaintext_rns = false;
     bool hoist_rotations = false, share_chebyshev = false;
+    bool gpu_dual_ring = false;
     int bootstrap_passes = 2;
     std::string client_path;
     for (int i = 5; i < argc; ++i) {
@@ -764,6 +781,7 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--gpu-plaintext-rns") gpu_plaintext_rns = true;
       else if (option == "--hoist-rotations") hoist_rotations = true;
       else if (option == "--share-chebyshev") share_chebyshev = true;
+      else if (option == "--gpu-dual-ring") gpu_dual_ring = true;
       else if (option == "--bootstrap-passes" && i + 1 < argc) {
         bootstrap_passes = std::stoi(argv[++i]);
         if (bootstrap_passes != 1 && bootstrap_passes != 2)
@@ -782,6 +800,11 @@ auto main(int argc, char** argv) -> int {
     if (batch_refresh && (!planned_refresh || bootstrap_passes != 2))
       throw std::invalid_argument("batch refresh requires planned refresh and two bootstrap passes");
     if (s2c_first && !batch_refresh) throw std::invalid_argument("S2C-first requires planned two-pass batch refresh");
+    if (gpu_dual_ring && !s2c_first)
+      throw std::invalid_argument("GPU dual ring requires S2C-first planned two-pass refresh");
+#ifndef FHEMAMBA_GPU_DUAL_RING
+    if (gpu_dual_ring) throw std::invalid_argument("GPU dual ring requires -DFHE_STAGE0_GPU_DUAL_RING=ON");
+#endif
 #ifndef FIDESLIB_S2C_FIRST_BOOTSTRAP
     if (s2c_first) throw std::invalid_argument("S2C-first requires the optional FIDESlib bootstrap patch");
 #endif
@@ -795,7 +818,11 @@ auto main(int argc, char** argv) -> int {
     if (!std::isfinite(poly_tol) || !std::isfinite(exact_tol) || poly_tol <= 0 || exact_tol <= 0)
       throw std::invalid_argument("invalid error tolerance");
     std::ifstream input(argv[1]);
-    const auto program = fhemamba::read_packed_program(input, compact_weights);
+    auto program = fhemamba::read_packed_program(input, compact_weights);
+    if (gpu_dual_ring && (program.slots != 32768 ||
+        std::any_of(program.nodes.begin(), program.nodes.end(),
+                    [](const auto& node) { return node.size > 16384; })))
+      throw std::invalid_argument("GPU dual ring requires full refresh packing and logical widths <=16384");
     std::size_t weight_count = 0, weight_bytes = 0, bf16_weight_count = 0;
     for (const auto& node : program.nodes) if (node.operation == "linear") {
       weight_count += node.weights().size();
@@ -829,7 +856,32 @@ auto main(int argc, char** argv) -> int {
 #endif
     cc->EvalBootstrapKeyGen(keys.secretKey, program.slots);
     cc->LoadContext(keys.publicKey); sync_gpu();
+#ifdef FHEMAMBA_GPU_DUAL_RING
+    std::unique_ptr<fhemamba::dual_ring::RingBridge> ring_bridge;
+    if (gpu_dual_ring) {
+      namespace dr = fhemamba::dual_ring;
+      auto small = dr::context(32768);
+      dr::match_small_parameters(small, cc); dr::select_cpu(small);
+      auto small_keys = small->KeyGen(); small->EvalMultKeyGen(small_keys.secretKey);
+      std::vector<int32_t> small_rotations;
+      for (int i=1; i<16384; i*=2) { small_rotations.push_back(i); small_rotations.push_back(-i); }
+      small->EvalRotateKeyGen(small_keys.secretKey, small_rotations);
+      small->LoadContext(small_keys.publicKey); sync_gpu();
+      dr::select_cpu(cc);
+      auto lp = cc->MakeCKKSPackedPlaintext(std::vector<double>(32768, 0));
+      auto lt = cc->Encrypt(keys.publicKey, lp);
+      dr::select_cpu(small);
+      auto sp = small->MakeCKKSPackedPlaintext(std::vector<double>(16384, 0));
+      auto st = small->Encrypt(small_keys.publicKey, sp);
+      ring_bridge = std::make_unique<dr::RingBridge>(cc, small, keys, small_keys, lt, st);
+      cc = small; keys = small_keys; program.slots = 16384;
+      dr::select_cpu(cc);
+    }
+#endif
     PackedEvaluator evaluator{cc, keys.publicKey, program.slots, program.bound};
+#ifdef FHEMAMBA_GPU_DUAL_RING
+    evaluator.ring_bridge = ring_bridge.get();
+#endif
     evaluator.replicated_linear = replicated_linear;
     evaluator.legacy_routing = legacy_routing;
     evaluator.trace_levels = trace_levels;
@@ -894,7 +946,13 @@ auto main(int argc, char** argv) -> int {
     report << std::setprecision(12) << "{\n\"schema\":\"fhemamba-packed-result-v1\","
            << "\"backend\":\"fideslib\",\"encrypted\":true,\"security\":\"not-set\","
            << "\"passed\":" << (passed ? "true" : "false")
-           << ",\"slots\":" << program.slots << ",\"ring_dimension\":65536,\"depth\":44,\"scale_bits\":59"
+           << ",\"slots\":" << program.slots << ",\"ring_dimension\":" << (gpu_dual_ring ? 32768 : 65536)
+           << ",\"depth\":44,\"scale_bits\":59,\"refresh_ring_dimension\":65536"
+           << ",\"gpu_dual_ring\":" << (gpu_dual_ring ? "true" : "false")
+#ifdef FHEMAMBA_GPU_DUAL_RING
+           << ",\"ring_switch_up_calls\":" << (ring_bridge ? ring_bridge->up_calls : 0)
+           << ",\"ring_switch_down_calls\":" << (ring_bridge ? ring_bridge->down_calls : 0)
+#endif
            << ",\"nodes\":" << program.nodes.size() << ",\"setup_seconds\":" << setup_seconds
            << ",\"frontier_refresh\":" << (frontier_refresh ? "true" : "false")
            << ",\"s2c_first\":" << (s2c_first ? "true" : "false")
