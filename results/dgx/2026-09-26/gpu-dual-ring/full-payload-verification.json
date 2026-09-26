@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+  "files_sha256": {
+    "program.txt": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+    "fixture.npz": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57",
+    "client_head.f32": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+  }
+}

@@ -1,0 +1,3 @@
+fhemamba-packed-v2 32768 64 1 1
+input 2 1 0 2 0 0
+0 2 0 0 0 0

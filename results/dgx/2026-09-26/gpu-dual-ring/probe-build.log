@@ -1,0 +1,3 @@
+[ 33%] Building CXX object CMakeFiles/gpu_dual_ring.dir/probe.cpp.o
+[ 66%] Linking CXX executable gpu_dual_ring
+[100%] Built target gpu_dual_ring

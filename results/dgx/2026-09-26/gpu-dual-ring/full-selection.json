@@ -1,0 +1,7 @@
+{
+  "eligible": true,
+  "prefix_baseline_seconds": 30.611619034500002,
+  "prefix_candidate_seconds": 20.0039131435,
+  "reduction_percent": 34.65254771087041,
+  "reason": "Complete matched prefixes pass the unchanged gates and token IDs, retain 16 physical bootstraps, and improve both samples; admit full ABBA comparison."
+}

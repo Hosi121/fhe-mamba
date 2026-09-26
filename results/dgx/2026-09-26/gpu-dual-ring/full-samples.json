@@ -1,0 +1,26 @@
+[
+  {
+    "name": "full-0-baseline",
+    "eval_seconds": 613.871415935,
+    "refresh_seconds": 239.004957744,
+    "bootstraps": 484
+  },
+  {
+    "name": "full-1-candidate",
+    "eval_seconds": 430.067885622,
+    "refresh_seconds": 217.681938942,
+    "bootstraps": 484
+  },
+  {
+    "name": "full-2-candidate",
+    "eval_seconds": 430.961059178,
+    "refresh_seconds": 218.05495664,
+    "bootstraps": 484
+  },
+  {
+    "name": "full-3-baseline",
+    "eval_seconds": 613.790807615,
+    "refresh_seconds": 239.011879168,
+    "bootstraps": 484
+  }
+]

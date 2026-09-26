@@ -1,0 +1,34 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 248 ~ 4960MB
+Rotation keys loaded: 75 ~ 13500MB
+large context ready
+small context ready
+transfer level=18 width=1 worst=1.09696e-10
+transfer level=18 width=32 worst=1.09696e-10
+transfer level=18 width=768 worst=1.09696e-10
+transfer level=18 width=1536 worst=1.09772e-10
+transfer level=18 width=16384 worst=1.09772e-10
+transfer level=26 width=1 worst=1.09772e-10
+transfer level=26 width=32 worst=1.09772e-10
+transfer level=26 width=768 worst=1.09772e-10
+transfer level=26 width=1536 worst=1.09772e-10
+transfer level=26 width=16384 worst=1.09772e-10
+transfer level=34 width=1 worst=1.09772e-10
+transfer level=34 width=32 worst=1.09887e-10
+transfer level=34 width=768 worst=1.09887e-10
+transfer level=34 width=1536 worst=1.09887e-10
+transfer level=34 width=16384 worst=1.09887e-10
+sample width=1 small=1 ordinary=0.0224062 up=0.0030009 refresh=0.899739 down=0.00379207 error=8.02094e-09
+sample width=1 small=0 ordinary=0.0448717 up=0 refresh=0.787528 down=0 error=9.11981e-09
+sample width=1 small=1 ordinary=0.0189136 up=0.00314652 refresh=0.793717 down=0.00428683 error=7.15775e-09
+sample width=32 small=1 ordinary=0.0179533 up=0.00301057 refresh=0.789729 down=0.00379614 error=6.17665e-09
+sample width=32 small=0 ordinary=0.0421605 up=0 refresh=0.792278 down=0 error=9.85674e-09
+sample width=32 small=1 ordinary=0.0180717 up=0.0027101 refresh=0.790718 down=0.00377376 error=6.01899e-09
+sample width=768 small=1 ordinary=0.0179845 up=0.00274783 refresh=0.789042 down=0.00380131 error=5.73153e-09
+sample width=768 small=0 ordinary=0.0430634 up=0 refresh=0.789457 down=0 error=1.08937e-08
+sample width=768 small=1 ordinary=0.0182038 up=0.00319322 refresh=0.791039 down=0.00381105 error=5.80351e-09
+sample width=1536 small=1 ordinary=0.0184406 up=0.00267909 refresh=0.790998 down=0.00385495 error=6.65055e-09
+sample width=1536 small=0 ordinary=0.0429753 up=0 refresh=0.788036 down=0 error=8.91857e-09
+sample width=1536 small=1 ordinary=0.0189226 up=0.00303332 refresh=0.791733 down=0.00424605 error=7.35841e-09

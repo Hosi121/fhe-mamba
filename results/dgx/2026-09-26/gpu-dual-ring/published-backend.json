@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "original_archive": "backend-sources.tar.gz",
+  "original_sha256": "306f06159dc13453c3841a4bd976531927de1bdaa70dbdab242383d28d897020",
+  "original_retained_at": "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/backend-sources.tar.gz",
+  "published_archive": "backend-build-sources.tar.gz",
+  "published_sha256": "d8e4f8fe3e31daf6286d210f8f529f29280c11509378f020ac285c7a9ee93309",
+  "omitted_files": {
+    "examples/bert-tiny/src/python/SST-2-BERT-tiny.bin": "13cdda851f81a03ca0e49ec735fa380893d39e253a331431ee2c423d29ecda63"
+  },
+  "reason": "An unrelated upstream BERT checkpoint is not used to build or qualify this mechanism. The full original archive is retained on the measurement host; all other files are preserved."
+}

@@ -1,0 +1,27 @@
+GPU 0: NVIDIA GB10
+ SMs: 48, SharedMem: 100 KB, Blocks/SM: 24, Threads/SM: 1536, L2 size: 24 MB, Bus: 256-bit
+Adding bootstrap precomputation to GPU for 32768 slots.
+Plaintexts loaded: 248 ~ 4960MB
+Rotation keys loaded: 75 ~ 13500MB
+large context ready
+small context ready
+transfer level=18 width=1 worst=4.08624e-11
+transfer level=18 width=32 worst=4.08624e-11
+transfer level=18 width=768 worst=4.08624e-11
+transfer level=18 width=1536 worst=4.08624e-11
+transfer level=18 width=16384 worst=4.08624e-11
+transfer level=26 width=1 worst=4.08624e-11
+transfer level=26 width=32 worst=4.08624e-11
+transfer level=26 width=768 worst=4.08624e-11
+transfer level=26 width=1536 worst=4.08624e-11
+transfer level=26 width=16384 worst=4.08624e-11
+transfer level=34 width=1 worst=4.08624e-11
+transfer level=34 width=32 worst=4.08624e-11
+transfer level=34 width=768 worst=4.08624e-11
+transfer level=34 width=1536 worst=4.08624e-11
+transfer level=34 width=16384 worst=4.08624e-11
+sample width=1536 small=1 ordinary=0.0219517 up=0.00268406 refresh=0.905986 down=0.00384102 error=6.78503e-09
+sample width=1536 small=1 ordinary=0.018052 up=0.00270228 refresh=0.794441 down=0.00377016 error=6.24258e-09
+sample width=1536 small=0 ordinary=0.0448257 up=0 refresh=0.793097 down=0 error=1.02463e-08
+sample width=1536 small=0 ordinary=0.0424492 up=0 refresh=0.788829 down=0 error=9.0718e-09
+sample width=1536 small=1 ordinary=0.0181766 up=0.00268662 refresh=0.790241 down=0.00375045 error=7.00907e-09

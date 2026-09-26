@@ -1,0 +1,52 @@
+[
+  {
+    "name": "missing-s2c",
+    "command": [
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/missing-s2c.txt",
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/missing-s2c.json",
+      ".001",
+      ".001",
+      "--gpu-dual-ring",
+      "--planned-refresh",
+      "--batch-refresh"
+    ],
+    "exit_code": 2,
+    "expected_message": "GPU dual ring requires S2C-first planned two-pass refresh",
+    "passed": true
+  },
+  {
+    "name": "wrong-slots",
+    "command": [
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/wrong-slots.txt",
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/wrong-slots.json",
+      ".001",
+      ".001",
+      "--gpu-dual-ring",
+      "--planned-refresh",
+      "--batch-refresh",
+      "--s2c-first"
+    ],
+    "exit_code": 2,
+    "expected_message": "GPU dual ring requires full refresh packing and logical widths <=16384",
+    "passed": true
+  },
+  {
+    "name": "excess-width",
+    "command": [
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/excess-width.txt",
+      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/excess-width.json",
+      ".001",
+      ".001",
+      "--gpu-dual-ring",
+      "--planned-refresh",
+      "--batch-refresh",
+      "--s2c-first"
+    ],
+    "exit_code": 2,
+    "expected_message": "GPU dual ring requires full refresh packing and logical widths <=16384",
+    "passed": true
+  }
+]

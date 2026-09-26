@@ -1,0 +1,22 @@
+{
+  "question": "Does GPU N=32768 ordinary arithmetic save time after encrypted transfer to N=65536, existing two-pass S2C-first refresh, and transfer back?",
+  "baseline_commit": "e6bde4d498582071a50e134e5046f09ba28e87dd",
+  "mechanisms": 1,
+  "stopping_rule": "Implement one GPU dual-ring mechanism; verify a matched encrypted small circuit including conversion and refresh; integrate and compare the frozen full model only if qualified and cost-positive; report adoption decision and preserve evidence.",
+  "constraints": {
+    "ordinary_scale_bits": 59,
+    "multiplicative_depth": 44,
+    "refresh_ring": 65536,
+    "refresh_passes": 2,
+    "refresh_s2c_first": true,
+    "micro_error_gate": 1e-06,
+    "model_error_gates": [
+      0.001,
+      0.001
+    ],
+    "frozen_weights_and_polynomials": true,
+    "evaluator_decryptions": 0,
+    "security": "not-set; retain experimental scope, no security equivalence claim"
+  },
+  "status": "implementation"
+}

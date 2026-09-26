@@ -1,0 +1,27 @@
+{
+  "state": "completed",
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/probe-build/gpu_dual_ring",
+    "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/qualification-1/probe.json",
+    "qualification"
+  ],
+  "baseline_commit": "e6bde4d498582071a50e134e5046f09ba28e87dd",
+  "binary_sha256": "06fa81f7c3f28e6beefcf840fbc3feb980c783359183734934519de2955527d1",
+  "source_sha256": {
+    "CMakeLists.txt": "4fae3f63167682b3653c05c4a7125bd74857169e66739109d72e38f041efe28e",
+    "probe.cpp": "8b56a957c51cf1894da60b349125b715bb8393070ace747069e88d0951c7b7fe",
+    "ring_map.cu": "126b2896055455249b6ef27c59ee90688e9108dfabe07ecab007d25ad122d702",
+    "ring_map.hpp": "445b07a6138c3fd3066e84fcf2ff484a7204e1f3820371e73f486fe856c4c9f4",
+    "run_probe.py": "7b0470f6d241d6158cf99c41ae37315df0822d471ff4d50d9f0730334a3cce74"
+  },
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "started_at_unix": 1790405006.4436502,
+  "exit_code": 0,
+  "wall_seconds": 64.53683638572693
+}

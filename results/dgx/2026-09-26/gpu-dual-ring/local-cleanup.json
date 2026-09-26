@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "removed": [
+    "/home/hosi/cipher/runs/gpu-dual-ring-20260926",
+    "/home/hosi/cipher/results/dgx/2026-09-26/gpu-dual-ring/__pycache__"
+  ],
+  "artifacts_verified_before_cleanup": 97,
+  "worktrees_created": 0,
+  "full_backend_backup_retained_on_measurement_host": true
+}

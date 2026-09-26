@@ -1,0 +1,359 @@
+Cloning into '/home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/source-8f75cf9c2329fd3b.tmp.3971248'...
+done.
+HEAD is now at cd171f2 FIDESlib v2.1.0 Release
+-- FIDESlib install path at: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b
+-- OpenFHE install path at: /home/kataiwa/fhe-deps/openfhe-fides
+-- The CXX compiler identification is GNU 13.3.0
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+CMake Warning at cmake/ClangFormat.cmake:41 (message):
+  clang-format not found! The 'format' target will not be available.
+Call Stack (most recent call first):
+  CMakeLists.txt:92 (include)
+
+
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- CUDA found: 13.0.88
+-- CUDA include path: /usr/local/cuda-13.0/targets/sbsa-linux/include
+-- NCCL not found: building without NCCL support
+-- FOUND PACKAGE OpenFHE
+-- OpenFHE Version: 1.4.2
+-- OpenFHE installed as shared libraries: ON
+-- OpenFHE include files location: /home/kataiwa/fhe-deps/openfhe-fides/include/openfhe
+-- OpenFHE lib files location: /home/kataiwa/fhe-deps/openfhe-fides/lib
+-- OpenFHE Native Backend size: 64
+-- IPO / LTO enabled
+-- Configuring done (1.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/fideslib-8f75cf9c2329fd3b
+[  2%] Building CUDA object CMakeFiles/gpu-test.dir/other/GPUTest.cpp.o
+[  4%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/RNSPoly.cpp.o
+[  6%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/RNSPolyBatch.cpp.o
+[  8%] Building CXX object CMakeFiles/fideslib.dir/src/parallel_for.cpp.o
+[ 10%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/ApproxModEval.cu.o
+[ 13%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/AccumulateBroadcast.cu.o
+[ 15%] Building CXX object CMakeFiles/fideslib.dir/src/CKKS/Ciphertext.cpp.o
+[ 17%] Building CUDA object CMakeFiles/fideslib.dir/src/AddSub.cu.o
+[ 19%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Bootstrap.cu.o
+[ 21%] Linking CUDA device code CMakeFiles/gpu-test.dir/cmake_device_link.o
+[ 23%] Linking CUDA executable gpu-test
+[ 23%] Built target gpu-test
+[ 26%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/CoeffsToSlots.cu.o
+[ 28%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Context.cu.o
+[ 30%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Conv.cu.o
+[ 32%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/ElemenwiseBatchKernels.cu.o
+[ 34%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/KeySwitchingKey.cu.o
+[ 36%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Limb.cu.o
+[ 39%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartition.cu.o
+[ 41%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionBatch.cu.o
+[ 43%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionMGPU.cu.o
+[ 45%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/LinearTransform.cu.o
+[ 47%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Parameters.cu.o
+[ 50%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Plaintext.cu.o
+[ 52%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/Rescale.cu.o
+[ 54%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/ParameterSwitch.cu.o
+[ 56%] Building CUDA object CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/RawCiphertext.cu.o
+[ 58%] Building CUDA object CMakeFiles/fideslib.dir/src/ConstantsGPU.cu.o
+[ 60%] Building CUDA object CMakeFiles/fideslib.dir/src/CudaUtils.cu.o
+[ 63%] Building CUDA object CMakeFiles/fideslib.dir/src/Math.cu.o
+[ 65%] Building CUDA object CMakeFiles/fideslib.dir/src/ModMult.cu.o
+[ 67%] Building CUDA object CMakeFiles/fideslib.dir/src/NTT.cu.o
+[ 69%] Building CUDA object CMakeFiles/fideslib.dir/src/PeerUtils.cu.o
+[ 71%] Building CUDA object CMakeFiles/fideslib.dir/src/PolyApprox.cu.o
+[ 73%] Building CUDA object CMakeFiles/fideslib.dir/src/Rotation.cu.o
+[ 76%] Building CUDA object CMakeFiles/fideslib.dir/src/VectorGPU.cu.o
+[ 78%] Building CXX object CMakeFiles/fideslib.dir/api/CCParams.cpp.o
+[ 80%] Building CXX object CMakeFiles/fideslib.dir/api/Ciphertext.cpp.o
+[ 82%] Building CXX object CMakeFiles/fideslib.dir/api/CryptoContext.cpp.o
+[ 84%] Building CXX object CMakeFiles/fideslib.dir/api/GenCryptoContext.cpp.o
+[ 86%] Building CXX object CMakeFiles/fideslib.dir/api/Plaintext.cpp.o
+[ 89%] Building CXX object CMakeFiles/fideslib.dir/api/Serialize.cpp.o
+[ 91%] Linking CUDA device code CMakeFiles/fideslib.dir/cmake_device_link.o
+[ 93%] Linking CXX static library fideslib.a
+[ 93%] Built target fideslib
+[ 95%] Building CXX object CMakeFiles/dummy.dir/other/Dummy.cpp.o
+[ 97%] Linking CUDA device code CMakeFiles/dummy.dir/cmake_device_link.o
+nvlink warning : Ignoring -dlto option because no LTO objects found
+[100%] Linking CXX executable dummy
+[100%] Built target dummy
+Install the project...
+-- Install configuration: "Release"
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/lib/fideslib.a
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CCParams.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/Ciphertext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CryptoContext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/Definitions.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/GenCryptoContext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/KeyPair.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/Plaintext.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/PrivateKey.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/PublicKey.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/Serialize.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/fideslib.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/share/fideslib/cmake/fideslibTargets.cmake
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/share/fideslib/cmake/fideslibTargets-release.cmake
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/share/fideslib/cmake/fideslibConfig.cmake
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/share/fideslib/cmake/fideslibConfigVersion.cmake
+-- Up-to-date: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/VectorGPU.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/Rotation.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/AddSub.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/ConstantsGPU.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/PolyApprox.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CudaUtils.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/LimbUtils.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/Math.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/NTThelper.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Conv.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/LimbPartition.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/AccumulateBroadcast.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/forwardDefs.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/ApproxModEval.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/openfhe-interface
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/openfhe-interface/RawCiphertext.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/openfhe-interface/ParameterSwitch.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/KeySwitchingKey.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/LinearTransform.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Context.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Limb.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Plaintext.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Ciphertext.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/ElemenwiseBatchKernels.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/BootstrapPrecomputation.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/RNSPoly.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/CoeffsToSlots.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Rescale.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Parameters.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/CKKS/Bootstrap.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/NTTfusions.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/PeerUtils.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/ModMult.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/NTT.cuh
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/LogUtil.hpp
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/ntt_types.inc
+-- Installing: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/parallel_for.hpp
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using FIDESlib.
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Configuring done (1.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel
+[  3%] Building CXX object CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o
+[  3%] Building CXX object CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o
+[  3%] Building CXX object CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o
+[  4%] Building CXX object CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o
+[  6%] Building CUDA object CMakeFiles/fideslib_plaintext_rns.dir/src/fideslib_plaintext_rns.cu.o
+[  6%] Building CXX object CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o
+[  7%] Building CXX object CMakeFiles/rotation_batch_probe.dir/src/rotation_batch_probe.cpp.o
+[  8%] Building CXX object CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o
+[ 10%] Linking CXX static library libstage1_mamba2_process.a
+[ 10%] Built target stage1_mamba2_process
+[ 11%] Building CXX object CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o
+[ 12%] Linking CUDA static library libfideslib_plaintext_rns.a
+[ 12%] Built target fideslib_plaintext_rns
+[ 13%] Linking CXX static library libstage1_mamba2_config.a
+[ 14%] Building CXX object CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o
+[ 14%] Built target stage1_mamba2_config
+[ 15%] Building CXX object CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o
+[ 16%] Linking CXX executable fideslib_ctpt_probe
+[ 17%] Linking CXX executable stage1_plaintext_add_probe
+[ 18%] Linking CXX executable stage1_bootstrap_probe
+[ 20%] Linking CXX executable stage1_coefficient_encoding_probe
+[ 21%] Linking CXX static library libstage1_mamba2_payload.a
+[ 21%] Built target stage1_mamba2_payload
+[ 22%] Building CXX object CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o
+[ 22%] Built target fideslib_ctpt_probe
+[ 23%] Building CXX object CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o
+[ 24%] Linking CXX executable stage1_normalization_probe
+[ 24%] Built target stage1_plaintext_add_probe
+[ 25%] Building CXX object CMakeFiles/test_shared_plans.dir/tests/test_shared_plans.cpp.o
+[ 25%] Built target stage1_bootstrap_probe
+[ 26%] Building CXX object CMakeFiles/test_plaintext_rns.dir/tests/test_plaintext_rns.cpp.o
+[ 27%] Linking CXX executable test_plaintext_rns
+[ 27%] Built target test_plaintext_rns
+[ 28%] Building CXX object CMakeFiles/test_packed_schedule.dir/tests/test_packed_schedule.cpp.o
+[ 30%] Linking CXX executable rotation_batch_probe
+[ 30%] Built target stage1_coefficient_encoding_probe
+[ 31%] Building CXX object CMakeFiles/test_owned_arithmetic.dir/tests/test_owned_arithmetic.cpp.o
+[ 32%] Linking CXX executable test_shared_plans
+[ 33%] Linking CXX executable test_owned_arithmetic
+[ 33%] Built target test_owned_arithmetic
+[ 34%] Building CXX object CMakeFiles/test_packed_lifetime.dir/tests/test_packed_lifetime.cpp.o
+[ 34%] Built target test_shared_plans
+[ 35%] Building CXX object CMakeFiles/test_plaintext_cache.dir/tests/test_plaintext_cache.cpp.o
+[ 36%] Linking CXX executable test_packed_lifetime
+[ 36%] Built target test_packed_lifetime
+[ 37%] Building CXX object CMakeFiles/test_packed_depth.dir/tests/test_packed_depth.cpp.o
+[ 38%] Linking CXX executable stage1_vector_rms_probe
+[ 40%] Linking CXX executable stage1_subring_encoding_probe
+[ 41%] Linking CXX executable test_plaintext_cache
+[ 42%] Linking CXX executable test_packed_schedule
+[ 42%] Built target test_packed_schedule
+[ 42%] Built target test_plaintext_cache
+[ 43%] Building CXX object CMakeFiles/test_packed_routing.dir/tests/test_packed_routing.cpp.o
+[ 44%] Building CXX object CMakeFiles/test_packed_program.dir/tests/test_packed_program.cpp.o
+[ 44%] Built target stage1_normalization_probe
+[ 45%] Building CXX object CMakeFiles/test_stage0_layout.dir/tests/test_stage0_layout.cpp.o
+[ 46%] Linking CXX executable test_packed_program
+[ 47%] Linking CXX executable test_stage0_layout
+[ 47%] Built target test_stage0_layout
+[ 47%] Built target test_packed_program
+[ 48%] Building CXX object CMakeFiles/test_stage1_normalization.dir/tests/test_stage1_normalization.cpp.o
+[ 50%] Building CXX object CMakeFiles/test_stage1_vector_rms.dir/tests/test_stage1_vector_rms.cpp.o
+[ 50%] Built target rotation_batch_probe
+[ 51%] Building CXX object CMakeFiles/test_stage1_tail_payload.dir/tests/test_stage1_tail_payload.cpp.o
+[ 52%] Linking CXX executable test_stage1_normalization
+[ 53%] Linking CXX executable test_packed_depth
+[ 53%] Built target test_stage1_normalization
+[ 54%] Building CXX object CMakeFiles/test_stage1_rank_gate_payload.dir/tests/test_stage1_rank_gate_payload.cpp.o
+[ 54%] Built target test_packed_depth
+[ 55%] Linking CXX executable test_packed_routing
+[ 56%] Building CXX object CMakeFiles/test_stage1_mamba2_config.dir/tests/test_stage1_mamba2_config.cpp.o
+[ 56%] Built target test_packed_routing
+[ 57%] Building CXX object CMakeFiles/test_stage1_mamba2_payload.dir/tests/test_stage1_mamba2_payload.cpp.o
+[ 58%] Linking CXX executable test_stage1_vector_rms
+[ 58%] Built target test_stage1_vector_rms
+[ 60%] Building CXX object CMakeFiles/test_stage1_mamba2_process.dir/tests/test_stage1_mamba2_process.cpp.o
+[ 61%] Linking CXX executable test_stage1_mamba2_process
+[ 62%] Linking CXX executable test_stage1_mamba2_config
+[ 63%] Linking CXX executable test_stage1_tail_payload
+[ 63%] Built target test_stage1_mamba2_process
+[ 63%] Built target test_stage1_tail_payload
+[ 64%] Building CXX object CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o
+[ 64%] Built target test_stage1_mamba2_config
+[ 65%] Built target stage1_vector_rms_probe
+[ 65%] Building CXX object CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o
+[ 66%] Building CXX object CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o
+[ 67%] Building CXX object CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o
+[ 67%] Built target stage1_subring_encoding_probe
+[ 68%] Linking CXX executable test_stage1_rank_gate_payload
+[ 70%] Linking CXX executable test_stage1_mamba2_payload
+[ 70%] Built target test_stage1_rank_gate_payload
+[ 70%] Built target test_stage1_mamba2_payload
+[ 71%] Linking CXX static library libstage1_mamba2_artifact.a
+[ 71%] Built target stage1_mamba2_artifact
+[ 72%] Building CXX object CMakeFiles/test_stage1_mamba2_artifact.dir/tests/test_stage1_mamba2_artifact.cpp.o
+[ 73%] Linking CXX static library libstage1_mamba2_depth.a
+[ 73%] Built target stage1_mamba2_depth
+[ 75%] Building CXX object CMakeFiles/test_stage1_joint_gates.dir/tests/test_stage1_joint_gates.cpp.o
+[ 75%] Building CXX object CMakeFiles/test_stage1_mamba2_depth.dir/tests/test_stage1_mamba2_depth.cpp.o
+[ 76%] Linking CXX executable test_stage1_mamba2_artifact
+[ 77%] Linking CXX static library libstage1_mamba2_plan.a
+[ 77%] Built target stage1_mamba2_plan
+[ 78%] Building CXX object CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o
+[ 80%] Building CXX object CMakeFiles/test_stage1_mamba2_plan.dir/tests/test_stage1_mamba2_plan.cpp.o
+[ 80%] Built target test_stage1_mamba2_artifact
+[ 81%] Linking CXX executable test_stage1_joint_gates
+[ 81%] Built target test_stage1_joint_gates
+[ 82%] Linking CXX executable test_stage1_mamba2_depth
+[ 82%] Built target test_stage1_mamba2_depth
+[ 83%] Linking CXX executable test_stage1_mamba2_plan
+[ 83%] Built target test_stage1_mamba2_plan
+[ 84%] Linking CXX executable packed_resource_inventory
+[ 84%] Built target packed_resource_inventory
+[ 85%] Linking CXX static library libfideslib_plaintext_encoder.a
+[ 85%] Built target fideslib_plaintext_encoder
+[ 86%] Building CXX object CMakeFiles/owned_arithmetic_probe.dir/src/owned_arithmetic_probe.cpp.o
+[ 87%] Building CXX object CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o
+[ 88%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[ 90%] Building CXX object CMakeFiles/packed_rns_probe.dir/src/packed_rns_probe.cpp.o
+[ 91%] Linking CXX executable owned_arithmetic_probe
+[ 92%] Linking CXX executable packed_plaintext_probe
+[ 93%] Linking CXX executable packed_rns_probe
+[ 94%] Linking CXX static library libfideslib_handoff.a
+[ 94%] Built target fideslib_handoff
+[ 96%] Building CXX object CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o
+[ 96%] Building CXX object CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o
+[ 96%] Built target owned_arithmetic_probe
+/home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp: In lambda function:
+/home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp:2470:79: note: parameter passing for argument of type ‘std::pair<double, double>’ when C++17 is enabled changed to match C++14 in GCC 10.1
+ 2470 |       return std::pair<double, double>{2.0 / (hi - lo), -(lo + hi) / (hi - lo)};
+      |                                                                               ^
+[ 97%] Linking CXX executable packed_fideslib
+[ 97%] Built target packed_rns_probe
+[ 97%] Built target packed_plaintext_probe
+[ 97%] Built target packed_fideslib
+[ 98%] Linking CXX executable fideslib_client_server_probe
+[ 98%] Built target fideslib_client_server_probe
+[100%] Linking CXX executable stage1_mamba2_decode_fideslib
+[100%] Built target stage1_mamba2_decode_fideslib
+Internal ctest changing into directory: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel
+Test project /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel
+      Start  1: shared_plans
+ 1/21 Test  #1: shared_plans .....................   Passed    0.00 sec
+      Start  2: plaintext_rns
+ 2/21 Test  #2: plaintext_rns ....................   Passed    0.00 sec
+      Start  3: packed_schedule
+ 3/21 Test  #3: packed_schedule ..................   Passed    0.00 sec
+      Start  4: owned_arithmetic
+ 4/21 Test  #4: owned_arithmetic .................   Passed    0.00 sec
+      Start  5: packed_lifetime
+ 5/21 Test  #5: packed_lifetime ..................   Passed    0.00 sec
+      Start  6: plaintext_cache
+ 6/21 Test  #6: plaintext_cache ..................   Passed    0.00 sec
+      Start  7: packed_depth
+ 7/21 Test  #7: packed_depth .....................   Passed    0.01 sec
+      Start  8: packed_routing
+ 8/21 Test  #8: packed_routing ...................   Passed    2.30 sec
+      Start  9: packed_program
+ 9/21 Test  #9: packed_program ...................   Passed    0.00 sec
+      Start 10: stage0_layout
+10/21 Test #10: stage0_layout ....................   Passed    0.00 sec
+      Start 11: stage1_normalization
+11/21 Test #11: stage1_normalization .............   Passed    0.00 sec
+      Start 12: stage1_vector_rms
+12/21 Test #12: stage1_vector_rms ................   Passed    0.00 sec
+      Start 13: stage1_tail_payload
+13/21 Test #13: stage1_tail_payload ..............   Passed    0.00 sec
+      Start 14: stage1_rank_gate_payload
+14/21 Test #14: stage1_rank_gate_payload .........   Passed    0.00 sec
+      Start 15: stage1_mamba2_config
+15/21 Test #15: stage1_mamba2_config .............   Passed    0.00 sec
+      Start 16: stage1_mamba2_depth
+16/21 Test #16: stage1_mamba2_depth ..............   Passed    0.01 sec
+      Start 17: stage1_mamba2_artifact
+17/21 Test #17: stage1_mamba2_artifact ...........   Passed    0.00 sec
+      Start 18: stage1_mamba2_payload
+18/21 Test #18: stage1_mamba2_payload ............   Passed    0.00 sec
+      Start 19: stage1_joint_gates
+19/21 Test #19: stage1_joint_gates ...............   Passed    0.03 sec
+      Start 20: stage1_mamba2_plan
+20/21 Test #20: stage1_mamba2_plan ...............   Passed    0.00 sec
+      Start 21: stage1_mamba2_process
+21/21 Test #21: stage1_mamba2_process ............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 21
+
+Total Test time (real) =   2.39 sec

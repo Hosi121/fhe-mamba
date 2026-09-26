@@ -1,0 +1,8 @@
+[ 16%] Built target stage1_mamba2_payload
+[ 33%] Built target fideslib_plaintext_rns
+[ 50%] Built target fideslib_ring_map
+[ 66%] Built target stage1_mamba2_plan
+[ 83%] Built target fideslib_plaintext_encoder
+[ 91%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+[100%] Linking CXX executable packed_fideslib
+[100%] Built target packed_fideslib

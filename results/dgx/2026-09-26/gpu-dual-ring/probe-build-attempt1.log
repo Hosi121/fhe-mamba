@@ -1,0 +1,36 @@
+-- The CXX compiler identification is GNU 13.3.0
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Using FIDESlib.
+-- Found CUDAToolkit: /usr/local/cuda-13.0/targets/sbsa-linux/include (found version "13.0.88") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done (1.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/probe-build
+[ 33%] Building CXX object CMakeFiles/gpu_dual_ring.dir/probe.cpp.o
+[ 66%] Building CUDA object CMakeFiles/gpu_dual_ring.dir/ring_map.cu.o
+/home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/experiments/gpu_dual_ring/probe.cpp: In function ‘void select_cpu(const Context&)’:
+/home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/experiments/gpu_dual_ring/probe.cpp:41:13: error: ‘ChineseRemainderTransformFTT’ is not a member of ‘lbcrypto’; did you mean ‘ChineseRemainderTransformFTTInterface’?
+   41 |   lbcrypto::ChineseRemainderTransformFTT<lbcrypto::NativeVector> ntt;
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |             ChineseRemainderTransformFTTInterface
+/home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/experiments/gpu_dual_ring/probe.cpp:41:64: error: expected primary-expression before ‘>’ token
+   41 |   lbcrypto::ChineseRemainderTransformFTT<lbcrypto::NativeVector> ntt;
+      |                                                                ^
+/home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/experiments/gpu_dual_ring/probe.cpp:41:66: error: ‘ntt’ was not declared in this scope
+   41 |   lbcrypto::ChineseRemainderTransformFTT<lbcrypto::NativeVector> ntt;
+      |                                                                  ^~~
+gmake[2]: *** [CMakeFiles/gpu_dual_ring.dir/build.make:76: CMakeFiles/gpu_dual_ring.dir/probe.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/gpu_dual_ring.dir/all] Error 2
+gmake: *** [Makefile:91: all] Error 2

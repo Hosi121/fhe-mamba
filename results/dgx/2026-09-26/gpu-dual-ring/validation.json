@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "repo_commit": "c2d7d4d1441f48ee17b25327093e68acf4b868df",
+  "checks": {
+    "pytest": {
+      "passed": 292,
+      "coverage_percent": 87.6,
+      "log": "pytest.log"
+    },
+    "dgx_cpp_contracts": {
+      "passed": 21,
+      "log": "build.log"
+    },
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "committed_native_source_files_verified": 92,
+    "documented_runner_flags_verified": 24
+  },
+  "scope": "Release tests and source/command checks. Encrypted micro, prefix, full and default-path gates are independently asserted by summarize.py from their original records.",
+  "archival_policy": "Raw measured controllers, JSON and logs retain original bytes; archived scripts are outside active-source formatting checks."
+}

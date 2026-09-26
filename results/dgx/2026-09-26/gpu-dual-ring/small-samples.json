@@ -1,0 +1,26 @@
+[
+  {
+    "name": "prefix-0-baseline",
+    "eval_seconds": 30.591680119,
+    "refresh_seconds": 7.009739216,
+    "bootstraps": 16
+  },
+  {
+    "name": "prefix-1-candidate",
+    "eval_seconds": 19.972038291,
+    "refresh_seconds": 6.845860282,
+    "bootstraps": 16
+  },
+  {
+    "name": "prefix-2-candidate",
+    "eval_seconds": 20.035787996,
+    "refresh_seconds": 6.849135843,
+    "bootstraps": 16
+  },
+  {
+    "name": "prefix-3-baseline",
+    "eval_seconds": 30.63155795,
+    "refresh_seconds": 6.999824961,
+    "bootstraps": 16
+  }
+]

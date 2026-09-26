@@ -1,0 +1,11 @@
+--- prefix/src/packed_fideslib.cpp
++++ full/src/packed_fideslib.cpp
+@@ -734,7 +734,7 @@
+ 
+ auto main(int argc, char** argv) -> int {
+   try {
+-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--hoist-rotations] [--share-chebyshev] [--client-head FILE]");
++    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--hoist-rotations] [--share-chebyshev] [--gpu-dual-ring] [--client-head FILE]");
+     bool replicated_linear = true;
+     bool legacy_routing = false;
+     bool trace_levels = false;

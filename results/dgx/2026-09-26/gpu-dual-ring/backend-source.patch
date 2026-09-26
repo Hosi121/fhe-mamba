@@ -1,0 +1,716 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 22e640f..9ba73f8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -227,6 +227,10 @@ target_include_directories(fideslib
+         PRIVATE nvtx/c/include
+ )
+ 
++if (CUDAToolkit_VERSION VERSION_GREATER_EQUAL 13)
++    target_include_directories(fideslib PUBLIC "${CUDAToolkit_INCLUDE_DIRS}/cccl")
++endif ()
++
+ target_link_libraries(fideslib
+         PRIVATE "${OpenFHE_LIBDIR}/libOPENFHEpke_static.a"
+         PRIVATE "${OpenFHE_LIBDIR}/libOPENFHEbinfhe_static.a"
+diff --git a/api/CCParams.cpp b/api/CCParams.cpp
+index 95b0077..62b33f9 100644
+--- a/api/CCParams.cpp
++++ b/api/CCParams.cpp
+@@ -87,6 +87,13 @@ void CCParams<CryptoContextCKKSRNS>::SetSecurityLevel(SecurityLevel level) {
+ 	params.SetSecurityLevel(sl_openfhe);
+ }
+ 
++void CCParams<CryptoContextCKKSRNS>::SetCKKSDataType(CKKSDataType dataType) {
++	auto& params = std::any_cast<lbcrypto::CCParams<lbcrypto::CryptoContextCKKSRNS>&>(cpu);
++	auto data_type_openfhe = static_cast<lbcrypto::CKKSDataType>(dataType);
++	assert((int)data_type_openfhe == (int)dataType);
++	params.SetCKKSDataType(data_type_openfhe);
++}
++
+ // ---- Getters ----
+ 
+ SecretKeyDist CCParams<CryptoContextCKKSRNS>::GetSecretKeyDist() const {
+diff --git a/api/CCParams.hpp b/api/CCParams.hpp
+index 55e5c02..3a2d56a 100644
+--- a/api/CCParams.hpp
++++ b/api/CCParams.hpp
+@@ -43,6 +43,7 @@ template <> class CCParams<CryptoContextCKKSRNS> {
+ 	void SetKeySwitchTechnique(KeySwitchTechnique tech);
+ 	void SetSecretKeyDist(SecretKeyDist dist);
+ 	void SetSecurityLevel(SecurityLevel level);
++	void SetCKKSDataType(CKKSDataType dataType);
+ 
+ 	// ---- Device Parameters ----
+ 
+diff --git a/api/CryptoContext.cpp b/api/CryptoContext.cpp
+index 3e2585a..f71e534 100644
+--- a/api/CryptoContext.cpp
++++ b/api/CryptoContext.cpp
+@@ -1,4 +1,5 @@
+ #include "CryptoContext.hpp"
++#include "CKKS/BootstrapPrecomputation.cuh"
+ #include "CKKS/AccumulateBroadcast.cuh"
+ #include "CKKS/ApproxModEval.cuh"
+ #include "CKKS/Bootstrap.cuh"
+@@ -227,7 +228,10 @@ void CryptoContextImpl<DCRTPoly>::LoadContext(const PublicKey<DCRTPoly>& publicK
+ 	}
+ 	// Bootstrapping keys.
+ 	for (const auto& slot : this->slots_bootstrap) {
++
+ 		FIDESlib::CKKS::AddBootstrapPrecomputation(pkImpl, slot, c);
++		c->GetBootPrecomputation(slot).slotsToCoeffsFirst =
++		    std::find(s2c_first_slots.begin(), s2c_first_slots.end(), slot) != s2c_first_slots.end();
+ 	}
+ 
+ 	this->gpu	 = std::make_any<FIDESlib::CKKS::Context>(std::move(c));
+@@ -312,7 +316,7 @@ void CryptoContextImpl<DCRTPoly>::EvalRotateKeyGen(const PrivateKey<DCRTPoly>& s
+ 
+ // ---- Bootstrapping ----
+ 
+-void CryptoContextImpl<DCRTPoly>::EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor) {
++void CryptoContextImpl<DCRTPoly>::EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor, bool slotsToCoeffsFirst) {
+ 
+ 	// Only before loading one must compute the bootstrapping auxiliary data.
+ 	if (this->loaded) {
+@@ -338,11 +342,27 @@ void CryptoContextImpl<DCRTPoly>::EvalBootstrapSetup(const std::vector<uint32_t>
+ 	int32_t modall = static_cast<int>(lbcrypto::GetMultiplicativeDepthByCoeffVector(coeffchebyshev, false)) + doubleAngleIts;
+ 
+ 	if (this->devices.empty()) {
++		if (slotsToCoeffsFirst) OPENFHE_THROW("S2C-first prototype requires GPU");
+ 		context->EvalBootstrapSetup(levelBudget, std::move(dim1), slots, correctionFactor, true);
+ 		return;
+ 	}
+ 
++
++	if (slotsToCoeffsFirst) {
++		const auto cp = std::dynamic_pointer_cast<lbcrypto::CryptoParametersCKKSRNS>(context->GetCryptoParameters());
++		if (this->keyDist != fideslib::UNIFORM_TERNARY ||
++		    context->GetCKKSDataType() != lbcrypto::REAL || slots != context->GetRingDimension() / 2 ||
++		    cp->GetScalingTechnique() != lbcrypto::FLEXIBLEAUTO || levelBudget != std::vector<uint32_t>{4, 4})
++			OPENFHE_THROW("Experimental S2C-first requires uniform ternary, full real packing, FLEXIBLEAUTO and budget [4,4]");
++		const int l0 = cp->GetElementParams()->GetParams().size();
++		// The pinned OpenFHE fork uses this override only to choose lDec.
++		// lDec = L0 - (modall + encBudget + decBudget) = 2, as in v1.5 StC-first.
++		modall = l0 - levelBudget[0] - levelBudget[1] - 2;
++		if (modall < 0) OPENFHE_THROW("Insufficient modulus chain for S2C-first");
++	}
+ 	context->EvalBootstrapSetup(levelBudget, std::move(dim1), slots, correctionFactor, true, modall);
++	std::erase(this->s2c_first_slots, slots);
++	if (slotsToCoeffsFirst) this->s2c_first_slots.push_back(slots);
+ }
+ 
+ void CryptoContextImpl<DCRTPoly>::EvalBootstrapKeyGen(const PrivateKey<DCRTPoly>& secretKey, uint32_t slots) {
+@@ -355,7 +375,14 @@ void CryptoContextImpl<DCRTPoly>::EvalBootstrapKeyGen(const PrivateKey<DCRTPoly>
+ 
+ 	this->slots_bootstrap.push_back(slots);
+ 
++
+ 	FIDESlib::CKKS::GenBootstrapKeys(skImpl, slots, this->keyDist == fideslib::SPARSE_ENCAPSULATED);
++	if (std::find(s2c_first_slots.begin(), s2c_first_slots.end(), slots) != s2c_first_slots.end()) {
++		FIDESlib::CKKS::BootstrapPrecomputation precom;
++		FIDESlib::CKKS::GetBootstrapIndexes(skImpl->GetCryptoContext(), slots, &precom);
++		const auto offset = precom.ctsOutputRotation;
++		if (offset) this->EvalRotateKeyGen(secretKey, {offset, -offset});
++	}
+ }
+ 
+ // ---- Serialization ----
+@@ -1344,6 +1371,19 @@ void CryptoContextImpl<DCRTPoly>::EvalRotateInPlace(Ciphertext<DCRTPoly>& cipher
+ 	ct_gpu->rotate(index);
+ }
+ 
++Ciphertext<DCRTPoly> CryptoContextImpl<DCRTPoly>::EvalConjugate(const Ciphertext<DCRTPoly>& ciphertext) {
++	if (this->devices.empty()) {
++		OPENFHE_THROW("EvalConjugate is only implemented for the GPU path");
++	}
++
++	this->LoadCiphertext(const_cast<Ciphertext<DCRTPoly>&>(ciphertext));
++	Ciphertext<DCRTPoly> result = std::make_shared<CiphertextImpl<DCRTPoly>>(*ciphertext);
++	auto result_gpu = std::static_pointer_cast<FIDESlib::CKKS::Ciphertext>(this->GetDeviceCiphertext(result->gpu));
++	auto input_gpu = std::static_pointer_cast<FIDESlib::CKKS::Ciphertext>(this->GetDeviceCiphertext(ciphertext->gpu));
++	result_gpu->conjugate(*input_gpu);
++	return result;
++}
++
+ std::shared_ptr<void> CryptoContextImpl<DCRTPoly>::EvalFastRotationPrecompute(const Ciphertext<DCRTPoly>& ct) {
+ 
+ 	// Fall back to CPU.
+@@ -1716,6 +1756,30 @@ void CryptoContextImpl<DCRTPoly>::AccumulateSumInPlace(Ciphertext<DCRTPoly>& ct,
+ 	FIDESlib::CKKS::Accumulate(*res_gpu, 4, stride, slots, start);
+ }
+ 
++void CryptoContextImpl<DCRTPoly>::LinearTransformInPlace(Ciphertext<DCRTPoly>& ct,
++  int rowSize,
++  int bStep,
++  const std::vector<Plaintext>& pts,
++  int stride,
++  int offset) {
++
++	if (this->devices.empty()) {
++		OPENFHE_THROW("Not implemented for CPU path");
++	}
++
++	this->LoadCiphertext(ct);
++	auto ct_gpu = std::static_pointer_cast<FIDESlib::CKKS::Ciphertext>(this->GetDeviceCiphertext(ct->gpu));
++	std::vector<FIDESlib::CKKS::Plaintext*> pts_gpu;
++	pts_gpu.reserve(pts.size());
++	for (const auto& pt : pts) {
++		this->LoadPlaintext(const_cast<Plaintext&>(pt));
++		auto pt_gpu = std::static_pointer_cast<FIDESlib::CKKS::Plaintext>(this->GetDevicePlaintext(pt->gpu));
++		pts_gpu.push_back(pt_gpu.get());
++	}
++
++	FIDESlib::CKKS::LinearTransform(*ct_gpu, rowSize, bStep, pts_gpu, stride, offset);
++}
++
+ void CryptoContextImpl<DCRTPoly>::ConvolutionTransformInPlace(Ciphertext<DCRTPoly>& ct,
+   int gStep,
+   int bStep,
+@@ -1864,4 +1928,4 @@ std::vector<int> CryptoContextImpl<DCRTPoly>::GetConvolutionTransformRotationInd
+ 	return FIDESlib::CKKS::GetConvolutionTransformRotationIndices(rowSize, bStep, stride, gStep);
+ }
+ 
+-} // namespace fideslib
+\ No newline at end of file
++} // namespace fideslib
+diff --git a/api/CryptoContext.hpp b/api/CryptoContext.hpp
+index 0f9928f..0d0fc11 100644
+--- a/api/CryptoContext.hpp
++++ b/api/CryptoContext.hpp
+@@ -1,6 +1,9 @@
+ #ifndef API_CRYPTOCONTEXT_HPP
+ #define API_CRYPTOCONTEXT_HPP
+ 
++// Experimental full-real GPU bootstrap; see EvalBootstrapSetup's fifth argument.
++#define FIDESLIB_S2C_FIRST_BOOTSTRAP 1
++
+ #include <any>
+ #include <complex>
+ #include <cstdint>
+@@ -77,7 +80,7 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 	// ---- Bootstrapping ----
+ 
+ 	/// @brief Generate bootstrap precomputation data.
+-	void EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor);
++	void EvalBootstrapSetup(const std::vector<uint32_t>& levelBudget, std::vector<uint32_t> dim1, uint32_t slots, uint32_t correctionFactor, bool slotsToCoeffsFirst = false);
+ 	/// @brief Generate the evaluation bootstrap keys.
+ 	void EvalBootstrapKeyGen(const PrivateKey<DCRTPoly>& secretKey, uint32_t slots);
+ 
+@@ -160,6 +163,7 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 
+ 	Ciphertext<DCRTPoly> EvalRotate(const Ciphertext<DCRTPoly>& ciphertext, int32_t index);
+ 	void EvalRotateInPlace(Ciphertext<DCRTPoly>& ciphertext, int32_t index);
++	Ciphertext<DCRTPoly> EvalConjugate(const Ciphertext<DCRTPoly>& ciphertext);
+ 
+ 	std::shared_ptr<void> EvalFastRotationPrecompute(const Ciphertext<DCRTPoly>& ct);
+ 	Ciphertext<DCRTPoly> EvalFastRotation(const Ciphertext<DCRTPoly>& ct, int32_t index, uint32_t m, const std::shared_ptr<void>& precomp);
+@@ -184,6 +188,13 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 	void AccumulateSumInPlace(Ciphertext<DCRTPoly>& ct, int slots, int stride = 1);
+ 	void AccumulateSumInPlace(Ciphertext<DCRTPoly>& ct, int slots, int stride, int start);
+ 
++	// Fused baby rotations, plaintext products, giant rotations, and sums.
++	// This exposes the existing CKKS::LinearTransform GPU primitive through
++	// the public context API without leaking device object registries.
++	void LinearTransformInPlace(Ciphertext<DCRTPoly>& ct,
++	  int rowSize, int bStep, const std::vector<Plaintext>& pts,
++	  int stride = 1, int offset = 0);
++
+ 	void ConvolutionTransformInPlace(Ciphertext<DCRTPoly>& ct, int gStep, int bStep, const std::vector<Plaintext>& pts, const std::vector<int>& indexes, int stride = 1, int rowSize = 0);
+ 
+ 	void SpecialConvolutionTransformInPlace(Ciphertext<DCRTPoly>& ct,
+@@ -217,6 +228,7 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 	std::vector<int32_t> rotation_indexes;
+ 	/// @brief Bootstrap slots available.
+ 	std::vector<uint32_t> slots_bootstrap;
++	std::vector<uint32_t> s2c_first_slots;
+ 	/// @brief Secret key distribution.
+ 	SecretKeyDist keyDist = UNIFORM_TERNARY;
+ 
+@@ -247,4 +259,4 @@ template <> class CryptoContextImpl<DCRTPoly> {
+ 
+ } // namespace fideslib
+ 
+-#endif // API_CRYPTOCONTEXT_HPP
+\ No newline at end of file
++#endif // API_CRYPTOCONTEXT_HPP
+diff --git a/api/Definitions.hpp b/api/Definitions.hpp
+index 7b308a0..f783c27 100644
+--- a/api/Definitions.hpp
++++ b/api/Definitions.hpp
+@@ -75,6 +75,11 @@ enum SecretKeyDist {
+     SPARSE_ENCAPSULATED = 3,  
+ };
+ 
++enum CKKSDataType {
++    REAL = 0,
++    COMPLEX,
++};
++
+ /// @brief Enumeration of supported security levels.
+ enum SecurityLevel {
+     HEStd_128_classic,
+diff --git a/api/Serialize.cpp b/api/Serialize.cpp
+index 68c047e..0bc9c4c 100644
+--- a/api/Serialize.cpp
++++ b/api/Serialize.cpp
+@@ -12,6 +12,10 @@
+ namespace fideslib::Serial {
+ 
+ bool SerializeToFile(const std::string& filename, const fideslib::CryptoContext<fideslib::DCRTPoly>& obj, const SerType& sertype) {
++	// The pinned OpenFHE serializer does not preserve this GPU-only circuit mode.
++	// Reject before creating a file instead of silently restoring the other circuit.
++	if (!obj->s2c_first_slots.empty())
++		OPENFHE_THROW("Experimental S2C-first context serialization is not supported");
+ 	auto& context = std::any_cast<const lbcrypto::CryptoContext<lbcrypto::DCRTPoly>&>(obj->cpu);
+ 
+ 	bool res = false;
+@@ -259,4 +263,4 @@ bool DeserializeFromFile(const std::string& filename, fideslib::PrivateKey<fides
+ 	return res;
+ }
+ 
+-} // namespace fideslib::Serial
+\ No newline at end of file
++} // namespace fideslib::Serial
+diff --git a/src/CKKS/Bootstrap.cu b/src/CKKS/Bootstrap.cu
+index 099fff3..f8439db 100644
+--- a/src/CKKS/Bootstrap.cu
++++ b/src/CKKS/Bootstrap.cu
+@@ -210,10 +210,28 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 	uint64_t scalar = std::llround(post);
+ 
+ 	//////////////////////////////////////////////////////////////////////
++
+ 	bool sparse_encaps = cc.GetBootPrecomputation(slots).sparse_encaps;
++	const auto& bp = cc.GetBootPrecomputation(slots);
++	if (bp.slotsToCoeffsFirst) {
++		if (prescaled || slots != cc.N / 2 || isLT)
++			throw std::invalid_argument("Unsupported S2C-first bootstrap input");
++		// FIDES levels count remaining primes minus one (opposite to OpenFHE).
++		// Four StC stages plus one level for AdjustCiphertext require level >= 5.
++		while (ctxt.NoiseLevel > 1) ctxt.rescale();
++		if (ctxt.getLevel() < 5)
++			throw std::invalid_argument("S2C-first requires five remaining levels");
++		ctxt.dropToLevel(5);
++		// The stock affine transforms defer the CtS output rotation until StC.
++		// Restore each transform's boundary when their order is reversed.
++		if (bp.ctsOutputRotation) ctxt.rotate(-bp.ctsOutputRotation);
++		EvalCoeffsToSlots(ctxt, slots, true);
++		cudaDeviceSynchronize();
++	}
+ 
+ 	{
+ 		ModRaise(ctxt, slots, correction, prescaled, sparse_encaps);
++		cudaDeviceSynchronize();
+ 		//------------------------------------------------------------------------------
+ 		// SETTING PARAMETERS FOR APPROXIMATE MODULAR REDUCTION
+ 		//------------------------------------------------------------------------------
+@@ -248,6 +266,7 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 		////////////////////////////////////////////////////////////////
+ 
+ 		Accumulate(ctxt, cc.GetBootPrecomputation(slots).accumulate_bStep, slots, cc.N / 2 / slots);
++		cudaDeviceSynchronize();
+ 	}
+ 
+ 	ctxt.slots = cc.N / 2 == slots ? slots : 2 * slots;
+@@ -263,9 +282,10 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 	} else {
+ 		EvalCoeffsToSlots(ctxt, slots, false);
+ 	}
++	cudaDeviceSynchronize();
+ 	//  std::cout << "ModRed" << std::endl;
+ 
+-	if (cc.N / 2 == slots) {
++	if (cc.N / 2 == slots && !bp.slotsToCoeffsFirst) {
+ 		aux.conjugate(ctxt);
+ 		Ciphertext ctxtEncI(cc_);
+ 		ctxtEncI.sub(ctxt, aux);
+@@ -283,11 +303,20 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 			ctxt.rescale();
+ 		approxModReductionSparse(ctxt, scalar);
+ 	}
++	cudaDeviceSynchronize();
+ 
+ 	if (ctxt.NoiseLevel == 2) {
+ 		ctxt.rescale();
+ 	}
+ 
++	if (bp.slotsToCoeffsFirst) {
++		if (bp.ctsOutputRotation) ctxt.rotate(bp.ctsOutputRotation);
++		multIntScalar(ctxt, uint64_t{1} << correction);
++		cudaDeviceSynchronize();
++		ctxt.slots = old_slots;
++		return;
++	}
++
+ 	//  std::cout << "LT" << std::endl;
+ 
+ 	if (isLT) {
+@@ -295,14 +324,17 @@ void FIDESlib::CKKS::Bootstrap(Ciphertext& ctxt, const int slots, const bool pre
+ 	} else {
+ 		EvalCoeffsToSlots(ctxt, slots, true);
+ 	}
++	cudaDeviceSynchronize();
+ 
+ 	if (cc.N / 2 != slots) {
+ 		aux.rotate(ctxt, slots);
+ 		ctxt.add(aux);
++		cudaDeviceSynchronize();
+ 	}
+ 
+ 	uint64_t corFactor = (uint64_t)1 << std::llround(correction);
+ 	multIntScalar(ctxt, corFactor);
++	cudaDeviceSynchronize();
+ 	if constexpr (PRINT) {
+ 		cudaDeviceSynchronize();
+ 		std::cout << "End bootstrap ";
+diff --git a/src/CKKS/BootstrapPrecomputation.cuh b/src/CKKS/BootstrapPrecomputation.cuh
+index 2d47a16..20f9da9 100644
+--- a/src/CKKS/BootstrapPrecomputation.cuh
++++ b/src/CKKS/BootstrapPrecomputation.cuh
+@@ -33,6 +33,8 @@ class BootstrapPrecomputation {
+ 	std::vector<LTstep> StC;
+ 	std::vector<LTstep> CtS;
+ 	int accumulate_bStep = 4;
++	int ctsOutputRotation = 0;
++	bool slotsToCoeffsFirst = false;
+ 	uint32_t correctionFactor;
+ 	bool sparse_encaps{ false };
+ 	std::weak_ptr<ContextData> sparse_context;
+diff --git a/src/CKKS/Ciphertext.cpp b/src/CKKS/Ciphertext.cpp
+index 953f112..8d4721b 100644
+--- a/src/CKKS/Ciphertext.cpp
++++ b/src/CKKS/Ciphertext.cpp
+@@ -84,6 +84,13 @@ Ciphertext::Ciphertext(Context& cc, const RawCipherText& rawct) : Ciphertext(cc)
+ }
+ 
+ Ciphertext::~Ciphertext() {
++	// Ciphertext storage is recycled by ContextData. Some operations enqueue
++	// kernels on streams owned by their output while still reading an input
++	// ciphertext, so synchronizing only the input RNSPoly streams is not enough.
++	// Blackwell exposes this latent lifetime race without
++	// CUDA_LAUNCH_BLOCKING=1; finish outstanding device work before recycling.
++	if (!c0.GPU.empty() || !c1.GPU.empty())
++		cudaDeviceSynchronize();
+ 	if (!c1.GPU.empty())
+ 		cc.returnAuxilarPoly(std::move(c1));
+ 	if (!c0.GPU.empty())
+@@ -657,15 +664,19 @@ void Ciphertext::mult(const Ciphertext& b, bool rescale, const bool moddown) {
+ 		RNSPoly& in = cc.getKeySwitchAux();
+ 		in.setLevel(c1.getLevel());
+ 		c0.binomialMult(c1, in, b.c0, b.c1, moddown, &b == this);
++		cudaDeviceSynchronize();
+ 
+ 		RNSPoly& aux = MGPUkeySwitchCore(in, kskEval, moddown);
++		cudaDeviceSynchronize();
+ 		c0.add(aux);
+ 		c1.add(in);
++		cudaDeviceSynchronize();
+ 
+ 		// Manage metadata
+ 		this->multMetadata(*this, b);
+ 		if (moddown && rescale && cc.rescaleTechnique == CKKS::FIXEDMANUAL) {
+ 			this->rescale();
++			cudaDeviceSynchronize();
+ 		}
+ 		if constexpr (PRINT)
+ 			std::cout << "End mult" << std::endl;
+@@ -861,9 +872,11 @@ void Ciphertext::rotate(const int index_, const bool moddown) {
+ 		auto& in0 = cc.getKeySwitchAux2();
+ 		auto& in1 = cc.getKeySwitchAux();
+ 		in1.copy(c1);
++		in0.copy(c0);
++		cudaDeviceSynchronize();
+ 		in1.modup();
++		cudaDeviceSynchronize();
+ 		// c1.modupInto(cc.getKeySwitchAux());
+-		in0.copy(c0);
+ 
+ 		std::vector<int> index_;
+ 		std::vector<RNSPoly*> c0_out;
+@@ -882,9 +895,11 @@ void Ciphertext::rotate(const int index_, const bool moddown) {
+ 		}
+ 
+ 		in1.hoistedRotationFused(index_, c0_out, c1_out, ksk_a, ksk_b, in0, in1);
++		cudaDeviceSynchronize();
+ 
+ 		if (moddown) {
+ 			modDown(false);
++			cudaDeviceSynchronize();
+ 		}
+ 	}
+ }
+diff --git a/src/CKKS/openfhe-interface/RawCiphertext.cu b/src/CKKS/openfhe-interface/RawCiphertext.cu
+index 714ab3a..3f0358a 100644
+--- a/src/CKKS/openfhe-interface/RawCiphertext.cu
++++ b/src/CKKS/openfhe-interface/RawCiphertext.cu
+@@ -936,6 +936,7 @@ std::vector<int> FIDESlib::CKKS::GetBootstrapIndexes(lbcrypto::CryptoContext<lbc
+ 			}
+ 		}
+ 
++		result.ctsOutputRotation = ReduceRotation(acc_offset, slots);
+ 		if constexpr (AFFINE_LT && MAKE_STC_LT_FRIENDLY) {
+ 			for (uint32_t s = 0; s < result.StC.size(); s++) {
+ 				int offset = result.StC.at(s).rotOut[0];
+diff --git a/src/PeerUtils.cu b/src/PeerUtils.cu
+index 661d8b1..9d6450c 100644
+--- a/src/PeerUtils.cu
++++ b/src/PeerUtils.cu
+@@ -13,7 +13,7 @@ std::vector<cudaGraphNode_t> get_current_capture_dependencies(cudaStream_t s) {
+ 	cudaGraphNode_t* depNodes = nullptr;
+ 	size_t numDeps			  = 0;
+ 
+-	cudaError_t err = cudaStreamGetCaptureInfo(s, &status, nullptr, nullptr, ((const cudaGraphNode_t**)&depNodes), &numDeps);
++	cudaError_t err = cudaStreamGetCaptureInfo(s, &status, nullptr, nullptr, ((const cudaGraphNode_t**)&depNodes), nullptr, &numDeps);
+ 
+ 	std::vector<cudaGraphNode_t> deps;
+ 	if (err == cudaSuccess && numDeps > 0 && depNodes) {
+@@ -96,6 +96,7 @@ static void launch(cudaFunction_t kernel, dim3 grid, dim3 block, void** args, ui
+ 		// NCCL explicitly updates capture dependencies after cuLaunchKernelEx
+ 		cudaError_t err = cudaStreamUpdateCaptureDependencies(s, // The capturing stream
+ 		  nullptr,												 // No specific nodes to depend on
++		  nullptr,												 // No edge data (CUDA 13)
+ 		  0,													 // No additional nodes
+ 		  cudaStreamAddCaptureDependencies						 // Add implicit dependencies
+ 		);
+@@ -120,6 +121,7 @@ static void launch(cudaFunction_t kernel, dim3 grid, dim3 block, void** args, ui
+ 		  nullptr, // captureID (optional)
+ 		  &captured_graph,
+ 		  (const cudaGraphNode_t**)&deps_after_array,
++		  nullptr, // edge data (CUDA 13)
+ 		  &numDeps_after);
+ 
+ 		if (err != cudaSuccess) {
+@@ -175,6 +177,7 @@ static void launch(cudaFunction_t kernel, dim3 grid, dim3 block, void** args, ui
+ 								err = cudaGraphAddDependencies(captured_graph,
+ 								  deps_before.data(), // From these nodes
+ 								  &latest_node,		  // To this kernel node
++								  nullptr,			  // no edge data (CUDA 13)
+ 								  deps_before.size()  // This many dependencies
+ 								);
+ 								CudaCheckErrorModNoSync;
+@@ -223,7 +226,7 @@ void pollingKernel(TimelineSemaphore* gpu1_complete_flag, uint64_t value, cudaSt
+ 		const cudaGraphNode_t* deps;
+ 		size_t dep_count;
+ 
+-		cudaStreamGetCaptureInfo(s, &capture_status, nullptr, &capturing_graph, &deps, &dep_count);
++		cudaStreamGetCaptureInfo(s, &capture_status, nullptr, &capturing_graph, &deps, nullptr, &dep_count);
+ 
+ 		// ========================================================================
+ 		// Create peer access kernel node with V2 parameters (supports attributes)
+@@ -256,7 +259,7 @@ void pollingKernel(TimelineSemaphore* gpu1_complete_flag, uint64_t value, cudaSt
+ 		cudaGraphKernelNodeSetAttribute(peer_kernel_node, cudaLaunchAttributeMemSyncDomain, &attr_value);
+ 
+ 		// Update stream dependencies so subsequent work depends on peer kernel
+-		cudaStreamUpdateCaptureDependencies(s, &peer_kernel_node, 1, 1);
++		cudaStreamUpdateCaptureDependencies(s, &peer_kernel_node, nullptr, 1, 1);
+ 	}
+ }
+ 
+@@ -293,7 +296,7 @@ void notifyKernel(TimelineSemaphore* gpu1_complete_flag, uint64_t value, cudaStr
+ 		const cudaGraphNode_t* deps;
+ 		size_t dep_count;
+ 
+-		cudaStreamGetCaptureInfo(s, &capture_status, nullptr, &capturing_graph, &deps, &dep_count);
++		cudaStreamGetCaptureInfo(s, &capture_status, nullptr, &capturing_graph, &deps, nullptr, &dep_count);
+ 
+ 		// ========================================================================
+ 		// Create peer access kernel node with V2 parameters (supports attributes)
+@@ -326,7 +329,7 @@ void notifyKernel(TimelineSemaphore* gpu1_complete_flag, uint64_t value, cudaStr
+ 		cudaGraphKernelNodeSetAttribute(peer_kernel_node, cudaLaunchAttributeMemSyncDomain, &attr_value);
+ 
+ 		// Update stream dependencies so subsequent work depends on peer kernel
+-		cudaStreamUpdateCaptureDependencies(s, &peer_kernel_node, 1, 1);
++		cudaStreamUpdateCaptureDependencies(s, &peer_kernel_node, nullptr, 1, 1);
+ 	}
+ }
+ 
+@@ -423,19 +426,19 @@ void printGraphDependencies(cudaGraph_t graph, const char* name) {
+ 
+ 		// Incoming edges (dependencies)
+ 		size_t num_incoming;
+-		cudaGraphNodeGetDependencies(nodes[i], NULL, &num_incoming);
++		cudaGraphNodeGetDependencies(nodes[i], NULL, NULL, &num_incoming);
+ 
+ 		// Outgoing edges (dependents)
+ 		size_t num_outgoing;
+ 
+-		cudaGraphNodeGetDependentNodes(nodes[i], NULL, &num_outgoing);
++		cudaGraphNodeGetDependentNodes(nodes[i], NULL, NULL, &num_outgoing);
+ 
+ 		printf("Node[%zu]: %s | Incoming: %zu | Outgoing: %zu\n", i, getNodeTypeName(type), num_incoming, num_outgoing);
+ 
+ 		// Print incoming edges
+ 		if (num_incoming > 0) {
+ 			std::vector<cudaGraphNode_t> deps(num_incoming);
+-			cudaGraphNodeGetDependencies(nodes[i], deps.data(), &num_incoming);
++			cudaGraphNodeGetDependencies(nodes[i], deps.data(), NULL, &num_incoming);
+ 
+ 			printf("  ← Depends on: ");
+ 			for (size_t j = 0; j < num_incoming; j++) {
+@@ -449,7 +452,7 @@ void printGraphDependencies(cudaGraph_t graph, const char* name) {
+ 		// Print outgoing edges
+ 		if (num_outgoing > 0) {
+ 			std::vector<cudaGraphNode_t> dependents(num_outgoing);
+-			cudaGraphNodeGetDependentNodes(nodes[i], dependents.data(), &num_outgoing);
++			cudaGraphNodeGetDependentNodes(nodes[i], dependents.data(), NULL, &num_outgoing);
+ 
+ 			printf("  → Used by: ");
+ 			for (size_t j = 0; j < num_outgoing; j++) {
+@@ -482,7 +485,7 @@ void printGraphDependencies(cudaGraph_t graph, const char* name) {
+ 	int source_count = 0;
+ 	for (size_t i = 0; i < num_nodes; i++) {
+ 		size_t num_deps;
+-		cudaGraphNodeGetDependencies(nodes[i], NULL, &num_deps);
++		cudaGraphNodeGetDependencies(nodes[i], NULL, NULL, &num_deps);
+ 		if (num_deps == 0) {
+ 			printf("[%zu] ", i);
+ 			source_count++;
+@@ -495,7 +498,7 @@ void printGraphDependencies(cudaGraph_t graph, const char* name) {
+ 	int sink_count = 0;
+ 	for (size_t i = 0; i < num_nodes; i++) {
+ 		size_t num_dependents;
+-		cudaGraphNodeGetDependentNodes(nodes[i], NULL, &num_dependents);
++		cudaGraphNodeGetDependentNodes(nodes[i], NULL, NULL, &num_dependents);
+ 		if (num_dependents == 0) {
+ 			printf("[%zu] ", i);
+ 			sink_count++;
+@@ -509,7 +512,7 @@ void printGraphDependencies(cudaGraph_t graph, const char* name) {
+ 	for (size_t i = 0; i < num_nodes; i++) {
+ 		size_t num_deps;
+ 		size_t num_dependents = 0;
+-		cudaGraphNodeGetDependentNodes(nodes[i], NULL, &num_deps);
++		cudaGraphNodeGetDependentNodes(nodes[i], NULL, NULL, &num_deps);
+ 
+ 		// Orphaned if no incoming AND no outgoing (except sources/sinks)
+ 		if (num_deps == 0 && num_dependents == 0 && num_nodes > 1) {
+@@ -533,11 +536,11 @@ bool pathExists(cudaGraphNode_t source, cudaGraphNode_t sink, const std::vector<
+ 
+ 	// Get dependents of source
+ 	size_t num_dependents;
+-	cudaGraphNodeGetDependentNodes(source, NULL, &num_dependents);
++	cudaGraphNodeGetDependentNodes(source, NULL, NULL, &num_dependents);
+ 
+ 	if (num_dependents > 0) {
+ 		std::vector<cudaGraphNode_t> dependents(num_dependents);
+-		cudaGraphNodeGetDependentNodes(source, dependents.data(), &num_dependents);
++		cudaGraphNodeGetDependentNodes(source, dependents.data(), NULL, &num_dependents);
+ 
+ 		for (auto& dep : dependents) {
+ 			if (visited.find((uintptr_t)dep) == visited.end()) {
+@@ -582,17 +585,17 @@ void printGraphDependencies2(cudaGraph_t graph, const char* name) {
+ 		cudaGraphNodeGetType(nodes[i], &type);
+ 		CudaCheckErrorModNoSync;
+ 		size_t num_incoming;
+-		cudaGraphNodeGetDependencies(nodes[i], NULL, &num_incoming);
++		cudaGraphNodeGetDependencies(nodes[i], NULL, NULL, &num_incoming);
+ 		CudaCheckErrorModNoSync;
+ 		size_t num_outgoing;
+-		cudaGraphNodeGetDependentNodes(nodes[i], NULL, &num_outgoing);
++		cudaGraphNodeGetDependentNodes(nodes[i], NULL, NULL, &num_outgoing);
+ 		CudaCheckErrorModNoSync;
+ 		printf("Node[%zu]: %s | Incoming: %zu | Outgoing: %zu\n", i, getNodeTypeName(type), num_incoming, num_outgoing);
+ 
+ 		// Print incoming edges
+ 		if (num_incoming > 0) {
+ 			std::vector<cudaGraphNode_t> deps(num_incoming);
+-			cudaGraphNodeGetDependencies(nodes[i], deps.data(), &num_incoming);
++			cudaGraphNodeGetDependencies(nodes[i], deps.data(), NULL, &num_incoming);
+ 			CudaCheckErrorModNoSync;
+ 			printf("  ← Depends on: ");
+ 			for (size_t j = 0; j < num_incoming; j++) {
+@@ -606,7 +609,7 @@ void printGraphDependencies2(cudaGraph_t graph, const char* name) {
+ 		// Print outgoing edges
+ 		if (num_outgoing > 0) {
+ 			std::vector<cudaGraphNode_t> dependents(num_outgoing);
+-			cudaGraphNodeGetDependentNodes(nodes[i], dependents.data(), &num_outgoing);
++			cudaGraphNodeGetDependentNodes(nodes[i], dependents.data(), NULL, &num_outgoing);
+ 			CudaCheckErrorModNoSync;
+ 			printf("  → Used by: ");
+ 			for (size_t j = 0; j < num_outgoing; j++) {
+@@ -635,7 +638,7 @@ void printGraphDependencies2(cudaGraph_t graph, const char* name) {
+ 	printf("Source nodes: ");
+ 	for (size_t i = 0; i < num_nodes; i++) {
+ 		size_t num_deps;
+-		cudaGraphNodeGetDependencies(nodes[i], NULL, &num_deps);
++		cudaGraphNodeGetDependencies(nodes[i], NULL, NULL, &num_deps);
+ 		if (num_deps == 0) {
+ 			printf("[%zu] ", i);
+ 			source_nodes.push_back(i);
+@@ -648,7 +651,7 @@ void printGraphDependencies2(cudaGraph_t graph, const char* name) {
+ 	printf("Sink nodes: ");
+ 	for (size_t i = 0; i < num_nodes; i++) {
+ 		size_t num_dependents;
+-		cudaGraphNodeGetDependentNodes(nodes[i], NULL, &num_dependents);
++		cudaGraphNodeGetDependentNodes(nodes[i], NULL, NULL, &num_dependents);
+ 		if (num_dependents == 0) {
+ 			printf("[%zu] ", i);
+ 			sink_nodes.push_back(i);
+@@ -665,13 +668,13 @@ void printGraphDependencies2(cudaGraph_t graph, const char* name) {
+ 
+ 		for (size_t sink_idx : sink_nodes) {
+ 			size_t num_incoming;
+-			cudaGraphNodeGetDependencies(nodes[sink_idx], NULL, &num_incoming);
++			cudaGraphNodeGetDependencies(nodes[sink_idx], NULL, NULL, &num_incoming);
+ 			CudaCheckErrorModNoSync;
+ 			printf("Sink[%zu]: Has %zu incoming dependencies\n", sink_idx, num_incoming);
+ 
+ 			// Get dependencies for this sink
+ 			std::vector<cudaGraphNode_t> deps(num_incoming);
+-			cudaGraphNodeGetDependencies(nodes[sink_idx], deps.data(), &num_incoming);
++			cudaGraphNodeGetDependencies(nodes[sink_idx], deps.data(), NULL, &num_incoming);
+ 			CudaCheckErrorModNoSync;
+ 			printf("  Depends on: ");
+ 			for (size_t i = 0; i < num_incoming; i++) {
+@@ -756,7 +759,7 @@ void transferKernel(float* src, float* dst, size_t elems, cudaStream_t s, int sr
+ 		cudaStreamCaptureStatus _capture_status;
+ 		const cudaGraphNode_t* _deps;
+ 		size_t _dep_count;
+-		cudaStreamGetCaptureInfo(s, &_capture_status, nullptr, &_capturing_graph, &_deps, &_dep_count);
++		cudaStreamGetCaptureInfo(s, &_capture_status, nullptr, &_capturing_graph, &_deps, nullptr, &_dep_count);
+ 
+ 		cudaGraphNode_t copy_0to1;
+ 		cudaMemcpy3DParms memcpyParams = { 0 };
+@@ -774,7 +777,7 @@ void transferKernel(float* src, float* dst, size_t elems, cudaStream_t s, int sr
+ 
+ 		cudaGraphAddMemcpyNode(&copy_0to1, _capturing_graph, _deps, _dep_count, &memcpyParams);
+ 
+-		cudaStreamUpdateCaptureDependencies(s, &copy_0to1, 1, 1);
++		cudaStreamUpdateCaptureDependencies(s, &copy_0to1, nullptr, 1, 1);
+ 
+ 	} else if (!is_stream_being_captured(s)) {
+ 		// p2p_transfer_1d<<<involved_sm, 128, 0, s>>>(src, dst, elems);
+@@ -803,7 +806,7 @@ void transferKernel(float* src, float* dst, size_t elems, cudaStream_t s, int sr
+ 		const cudaGraphNode_t* deps;
+ 		size_t dep_count;
+ 
+-		cudaStreamGetCaptureInfo(s, &capture_status, nullptr, &capturing_graph, &deps, &dep_count);
++		cudaStreamGetCaptureInfo(s, &capture_status, nullptr, &capturing_graph, &deps, nullptr, &dep_count);
+ 
+ 		// ========================================================================
+ 		// Create peer access kernel node with V2 parameters (supports attributes)
+@@ -836,7 +839,7 @@ void transferKernel(float* src, float* dst, size_t elems, cudaStream_t s, int sr
+ 		cudaGraphKernelNodeSetAttribute(peer_kernel_node, cudaLaunchAttributeMemSyncDomain, &attr_value);
+ 
+ 		// Update stream dependencies so subsequent work depends on peer kernel
+-		cudaStreamUpdateCaptureDependencies(s, &peer_kernel_node, 1, 1);
++		cudaStreamUpdateCaptureDependencies(s, &peer_kernel_node, nullptr, 1, 1);
+ 	}
+ }
+ 
+diff --git a/src/PeerUtils.cuh b/src/PeerUtils.cuh
+index c947cfd..d931095 100644
+--- a/src/PeerUtils.cuh
++++ b/src/PeerUtils.cuh
+@@ -14,7 +14,11 @@
+ 
+ #include <cuda.h>
+ #undef duration
++#if __has_include(<cuda/atomic>)
+ #include <cuda/atomic>
++#else
++#include <cccl/cuda/atomic>
++#endif
+ #include <cuda_runtime.h>
+ 
+ namespace FIDESlib {

@@ -1,0 +1,23 @@
+{
+  "source": "native/fideslib_stage0/src/fideslib_dual_ring.hpp",
+  "source_sha256": "679540889eba05a6fcfe6394fd4af4026928d05bb9607060259dcde44178b719",
+  "scope": "Static ownership/cost notes for this mechanism, not another optimization trial.",
+  "observations": [
+    {
+      "location": "RingBridge::down",
+      "operation": "Clones each large-ring refresh component before in-place key switching.",
+      "full_candidate_calls": 484,
+      "possible_follow_up": "Transfer ownership of a final-use component if its preservation contract is changed and separately qualified.",
+      "measured_time_saving": null
+    },
+    {
+      "location": "PackedEvaluator::linear",
+      "operation": "The replicated BSGS shape is recalculated using the smaller slot capacity.",
+      "full_candidate_ct_pt_mul": 135279,
+      "full_baseline_ct_pt_mul": 106481,
+      "possible_follow_up": "Measure dense-linear layout alternatives separately; global ring reduction alone cannot preserve the large-ring replica count.",
+      "measured_time_saving": null
+    }
+  ],
+  "status": "documented_only_not_implemented"
+}

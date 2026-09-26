@@ -1,0 +1,30 @@
+-- Using FIDESlib.
+-- FOUND PACKAGE FIDESlib
+-- FIDESlib Version: 1.0
+-- FIDESlib header files location: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/include/fideslib/fideslib
+-- FIDESlib lib files location: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/install-8f75cf9c2329fd3b/lib
+-- FIDESlib C++ compiler: /usr/bin/g++
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel
+[ 16%] Built target fideslib_plaintext_rns
+[ 25%] Building CUDA object CMakeFiles/fideslib_ring_map.dir/src/fideslib_ring_map.cu.o
+[ 41%] Built target stage1_mamba2_payload
+[ 58%] Built target fideslib_plaintext_encoder
+[ 75%] Built target stage1_mamba2_plan
+[ 83%] Linking CUDA static library libfideslib_ring_map.a
+[ 83%] Built target fideslib_ring_map
+[ 91%] Building CXX object CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o
+/home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/native/fideslib_stage0/src/packed_fideslib.cpp:30:16: error: conflicting declaration of C function ‘int cudaDeviceSynchronize()’
+   30 | extern "C" int cudaDeviceSynchronize(void);
+      |                ^~~~~~~~~~~~~~~~~~~~~
+In file included from /home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/native/fideslib_stage0/src/fideslib_ring_map.hpp:2,
+                 from /home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/native/fideslib_stage0/src/fideslib_dual_ring.hpp:2,
+                 from /home/kataiwa/fhemamba/gpu-dual-ring-20260926/repo/native/fideslib_stage0/src/packed_fideslib.cpp:16:
+/usr/local/cuda-13.0/targets/sbsa-linux/include/cuda_runtime_api.h:352:58: note: previous declaration ‘cudaError_t cudaDeviceSynchronize()’
+  352 | extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceSynchronize(void);
+      |                                                          ^~~~~~~~~~~~~~~~~~~~~
+gmake[3]: *** [CMakeFiles/packed_fideslib.dir/build.make:76: CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o] Error 1
+gmake[2]: *** [CMakeFiles/Makefile2:412: CMakeFiles/packed_fideslib.dir/all] Error 2
+gmake[1]: *** [CMakeFiles/Makefile2:419: CMakeFiles/packed_fideslib.dir/rule] Error 2
+gmake: *** [Makefile:251: packed_fideslib] Error 2

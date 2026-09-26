@@ -47,52 +47,51 @@ and [Spark build instructions](docs/dgx-spark.md#build).
 ## Measured results and scope
 
 Both trained models complete **five encrypted evaluations and four generated
-tokens** on **DGX Spark GB10**. The latest Mamba-3 trial shares rotation
-preparation and same-input Chebyshev bases while retaining GPU plaintext RNS
-preparation, S2C-first refresh and two-pass error correction.
+tokens** on **DGX Spark GB10**. The latest Mamba-3 trial moves ordinary
+arithmetic to N=32,768 while retaining the existing N=65,536 two-pass
+S2C-first refresh, with encrypted transfers between the rings on the GPU.
 
 | Model | Layers | Study baseline → candidate | Reduction | Generated text |
 | --- | ---: | ---: | ---: | --- |
 | Mamba-2-130M | 24 | 1959.30 → **1942.99 s** (32.38 min) | **0.83%** | `The capital of the Republic of` |
-| Mamba-3 SISO 187M | 12 | 619.41 → **614.11 s** (10.24 min) | **0.86%** | `The capital of the state of` |
+| Mamba-3 SISO 187M | 12 | 613.83 → **430.51 s** (7.18 min) | **29.86%** | `The capital of the state of` |
 
-The [four-candidate study](docs/research/2026-09-25-structural-four.md) adopts
-`--hoist-rotations --share-chebyshev` as **opt-in**. Four full processes in
-baseline/candidate/candidate/baseline order average the values above. Ordinary
-evaluation falls **380.94 → 375.77 s (1.36%)**; refresh stays about **238.4 s**
-with **484 bootstraps**. Ciphertext products fall **12,005 → 11,540** and
-rotations **62,969 → 62,369**. Peak process RSS stays about **26.21 GiB**.
+The [GPU dual-ring study](docs/research/2026-09-26-gpu-dual-ring.md) adopts
+`--gpu-dual-ring` as **opt-in** after primitive, prefix and full-model gates.
+Four fresh processes in baseline/candidate/candidate/baseline order average
+the values above. Ordinary evaluation falls **374.82 → 212.65 s (43.27%)**;
+the refresh wrapper, including packing and ring transfers, falls
+**239.01 → 217.87 s (8.84%)** with **484 bootstrap calls**. The large-ring
+bootstrap circuit is unchanged. Peak process RSS stays about **26.21 GiB**.
 
-Weights, model polynomials, CKKS parameters, all four generated IDs and both
-`0.001` error gates are unchanged. The candidate's maximum exact/polynomial
-errors are **4.65294e-5 / 9.65161e-7**. Its mean is **153.5 s per generated
-token**, or **163.7 s including process setup and validation**, amortized over
-this five-evaluation/four-generated-token request. This is a modest additional
-gain, not a large speedup or steady-state token-latency result.
+Weights, model polynomials, the 59-bit scale, depth 44, all four generated IDs
+and both `0.001` error gates are unchanged. The candidate's maximum
+exact/polynomial errors are **4.72545e-5 / 5.98173e-7**. Its mean is
+**107.6 s per generated token**, or **119.1 s including process setup and
+validation**, amortized over this five-evaluation/four-generated-token request.
+Complete process time falls **654.52 → 476.39 s (27.21%)**. These rates are
+not steady-state token latency. The smaller ordinary ring changes encryption
+parameters; this experimental `security=not-set` comparison does not establish
+equal security for both ring sizes.
 
-All four candidate mechanisms have implementations and small-circuit trials.
-The nominal 59-bit **32-bit RNS profile fails numerical validation**; its
-64-bit control and separate lower-precision 32-bit control pass. The **smaller
-ring CPU route passes accuracy but its refresh boundary costs about 55 s**,
-outweighing ordinary-arithmetic savings. Both are rejected for integration;
-[a GPU ring switcher remains unimplemented](docs/research/2026-09-25-structural-four.md#smaller-ordinary-ring).
-Their source, controls and limitations are archived with the study.
+After rebuilding on Spark, add `--gpu-dual-ring` alongside
+`--hoist-rotations --share-chebyshev --gpu-plaintext-rns --s2c-first`
+and `--planned-refresh --batch-refresh --frontier-refresh`. The
+[study's reproduction command](docs/research/2026-09-26-gpu-dual-ring.md#reproduction)
+contains the complete configuration; [raw commands and results](results/dgx/2026-09-26/gpu-dual-ring/)
+retain source, binary and payload hashes. Programs require 32,768 declared
+slots and logical node widths at most 16,384. The final binary also passes a
+prefix regression without the new flag and rejects unsupported configurations
+before key setup.
 
-After rebuilding on Spark, add `--hoist-rotations --share-chebyshev` alongside
-`--gpu-plaintext-rns --s2c-first --planned-refresh --batch-refresh --frontier-refresh`
-to the packed runner. The [recorded controller](results/dgx/2026-09-25/structural-four/full_controller.py)
-contains the complete flags and exact process commands; the
-[study](docs/research/2026-09-25-structural-four.md#reproduction-and-provenance)
-links the build instructions and portable alternative-backend recipes.
-
-The preceding [GPU RNS study](docs/research/2026-09-25-gpu-rns.md) reduced
-750.41 → 618.95 s (17.52%), with ordinary evaluation down 23.96%. The preceding
-[S2C-first study](docs/research/2026-09-25-s2c-first.md) reduced 759.70 → 747.63 s
-(1.59%); its refresh saving was largely offset by ordinary preparation work.
-The [ready-node refresh study](docs/research/2026-09-25-packed-frontiers.md)
-reduced 941.95 → 761.00 s (19.21%), short of that earlier campaign's 20% target.
-Each study retains its own controls; the new comparison reruns the released
-GPU-RNS executable rather than treating an older sample as its control.
+The preceding [four-candidate study](docs/research/2026-09-25-structural-four.md)
+reduced **619.41 → 614.11 s (0.86%)** with rotation and Chebyshev basis sharing.
+Its 32-bit profile failed accuracy and its CPU ring-switch route lost on cost;
+the new GPU transfer is a separate implementation. Earlier
+[GPU RNS](docs/research/2026-09-25-gpu-rns.md),
+[S2C-first](docs/research/2026-09-25-s2c-first.md) and
+[ready-node refresh](docs/research/2026-09-25-packed-frontiers.md) studies retain
+their own matched controls. The new comparison reruns the released baseline.
 
 These are native evaluation times, including encoding, GPU upload and client
 feedback inside the evaluation loop. Setup/key generation, input parsing,
@@ -101,9 +100,9 @@ variants within each study: model sizes, weights and numerical contracts
 differ, so this table does not rank architectures. Two full samples per mode
 on one fixed prompt do not establish statistical significance or arbitrary-prompt
 performance. Fresh-key error differences do not establish accuracy improvements.
-Local release checks pass **290 tests**, including **21 native C++ contracts**;
-the new rotation helper passes **552 complete RNS/metadata cases** across both
-model configurations. The previous GPU-RNS qualification remains recorded.
+Local release checks pass **292 tests**, including **21 native C++ contracts**.
+Three fresh GPU primitive processes each pass six exact NTT maps and 30 paired
+encrypted-transfer cases, covering levels, scale degrees and inactive slots.
 
 The Mamba-2 row retains the earlier
 [shared ownership study](docs/research/2026-09-24-owned-arithmetic.md):

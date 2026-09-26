@@ -1,0 +1,29 @@
+{
+  "state": "completed",
+  "command": [
+    "taskset",
+    "-c",
+    "15-19",
+    "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/probe-build/gpu_dual_ring",
+    "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/micro-qualification/probe.json",
+    "qualification"
+  ],
+  "baseline_commit": "e6bde4d498582071a50e134e5046f09ba28e87dd",
+  "binary_sha256": "ae74aa6ed2eddc169a035a104528f2d6d19f8d95eb4cac6eb5c7fbfe4dc164c3",
+  "source_sha256": {
+    "experiments/gpu_dual_ring/CMakeLists.txt": "727dd98027aaeadc32ecb57641b8e5b50b2a667452cf32c969a7cd39640d916f",
+    "experiments/gpu_dual_ring/campaign.py": "075d00df5b6f82e4485788591e3b2b4ef7cf641918ce099de6a87cb6844632d2",
+    "experiments/gpu_dual_ring/probe.cpp": "1a74a028eeecd1f2b4c3744035a37d83b61e60033e728953d7777d0dac233765",
+    "experiments/gpu_dual_ring/run_probe.py": "5790cb4aec01b52f44018073b98796e84dba353851600ac89ee17fd9dfc553f5",
+    "native/fideslib_stage0/src/fideslib_dual_ring.hpp": "679540889eba05a6fcfe6394fd4af4026928d05bb9607060259dcde44178b719",
+    "native/fideslib_stage0/src/fideslib_ring_map.cu": "3d2de966e822c62ecb18ade123af6b499e0c1d485f97071814daedfbf61aeb31",
+    "native/fideslib_stage0/src/fideslib_ring_map.hpp": "445b07a6138c3fd3066e84fcf2ff484a7204e1f3820371e73f486fe856c4c9f4"
+  },
+  "environment": {
+    "OMP_NUM_THREADS": "4",
+    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+  },
+  "started_at_unix": 1790405419.1744306,
+  "exit_code": 0,
+  "wall_seconds": 64.33846139907837
+}
