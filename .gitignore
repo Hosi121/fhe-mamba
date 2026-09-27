@@ -9,6 +9,10 @@ coverage.xml
 .venv/
 .venv-openfhe/
 build/
+# Curated build-job JSON is public evidence, not a compiler output directory.
+!/results/**/build/
+/results/**/build/*
+!/results/**/build/*.json
 checkpoints/
 dist/
 logs/

@@ -1,3 +1,4 @@
+import json
 import re
 import subprocess
 from pathlib import Path
@@ -37,6 +38,26 @@ def test_results_do_not_expose_operational_scripts_or_logs() -> None:
         for path in (ROOT / "results").rglob("*")
         if path.is_file() and path.suffix in operational
     ] == []
+
+
+def test_published_evidence_is_present_in_git() -> None:
+    """A local-only record can pass hash verification and still break a clone."""
+    tracked = set(subprocess.check_output(["git", "ls-files"], cwd=ROOT, text=True).splitlines())
+    missing = []
+    for path in (ROOT / "results").rglob("publication.json"):
+        manifest = json.loads(path.read_text())
+        files = [path, path.parent / manifest["bundle"]["path"]]
+        files.extend(
+            path.parent / record["path"]
+            for record in manifest["files"]
+            if record["location"] == "file"
+        )
+        missing.extend(
+            str(file.relative_to(ROOT))
+            for file in files
+            if str(file.relative_to(ROOT)) not in tracked
+        )
+    assert missing == [], f"Published evidence must be staged in Git: {missing}"
 
 
 def test_local_settings_and_private_notes_are_ignored() -> None:
