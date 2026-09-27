@@ -83,6 +83,16 @@ does not replace that cheaper transform with a full-ring transform. Mamba-2's
 parallel CPU cache preparation and client encryption retain their stock encoder.
 GPU handle registration occurs on the evaluator thread after CPU workers join.
 
+The packed executor's `--gpu-plaintext-fft` also moves the public inverse FFT,
+scaling and integer rounding to the GPU, feeding device coefficients directly
+into the shared RNS/NTT path. It requires `--gpu-plaintext-rns` with the per-limb
+strategy and retains CPU fallbacks. CPU prefetch workers prepare masks only;
+device work remains on the evaluator thread. See the
+[GPU FFT qualification](../experiments/openfhe_ifft/README.md#gpu-coefficients)
+for exactness checks, limits and counter semantics. The shared implementation
+is qualified with real and complex contexts; the specialized Mamba-2 model
+executor does not yet expose this new option.
+
 `--direct-plaintext-upload` additionally bypasses the pinned library's
 same-type conversion and transfer vectors. The shared bridge copies its owned
 uint64 staging buffer onto each limb's stream and waits before releasing it.

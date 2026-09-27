@@ -9,6 +9,7 @@
 #include "plaintext_rns.hpp"
 
 namespace fhemamba {
+class GpuSpecialInverseFFT;
 
 // Preserve OpenFHE FFT, rounding and scale handling while deferring its final
 // RNS NTT to the GPU. Instances have fixed context/slots and private params.
@@ -33,6 +34,11 @@ class CoefficientPlaintextEncoder {
   auto encode_cpu(const std::vector<double>& values, uint32_t level,
                   std::size_t degree = 1) const -> lbcrypto::Plaintext;
   auto wrap_cpu(lbcrypto::Plaintext plaintext) const -> fideslib::Plaintext;
+  // Loaded device-only plaintext; the CPU member contains metadata, not a
+  // polynomial. Use readback_plaintext for a complete verification polynomial.
+  // Null means the input requires the stock CPU encoder.
+  auto encode_gpu(const std::vector<double>& values, uint32_t level,
+                  std::size_t degree, GpuSpecialInverseFFT& fft) const -> fideslib::Plaintext;
 
  private:
   Context context_;
@@ -76,6 +82,7 @@ struct PlaintextPreparationOptions {
   bool borrow_upload = false;
   bool gpu_rns = false;
   bool gpu_addend_rns = false;
+  bool gpu_fft = false;
   CompactRnsStrategy rns_strategy = CompactRnsStrategy::PerLimb;
 };
 
@@ -102,6 +109,8 @@ class PlaintextPreparation {
   long long direct_uploads = 0, borrowed_uploads = 0, moved_coefficient_encodes = 0;
   long long compact_rns_encodes = 0, compact_rns_uploads = 0, compact_rns_fallbacks = 0;
   long long compact_addend_encodes = 0;
+  long long gpu_fft_encodes = 0, gpu_fft_fallbacks = 0;
+  double gpu_fft_seconds = 0;
   long long batched_rns_uploads = 0, fused_rns_uploads = 0;
   uint64_t compact_rns_saved_host_bytes = 0;
   double upload_seconds = 0;
@@ -118,6 +127,7 @@ class PlaintextPreparation {
   std::unique_ptr<stage1::PeriodicPlaintextEncoder> periodic_;
 #ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
   std::unique_ptr<PlaintextRnsWorkspace> rns_workspace_;
+  std::unique_ptr<GpuSpecialInverseFFT> fft_;
 #endif
 };
 

@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
     if (argc < 2)
       throw std::invalid_argument("usage: packed_rns_probe OUTPUT [--mamba2] [--ring N] [--classical128] [--security-digits N] [--strategy limb|batch|fused] [--prefetch] [--compact-addends] [--prefetch-workers 1|2]");
     bool mamba2 = false, prefetch = false, classical128 = false;
-    bool compact_addends = false;
+    bool compact_addends = false, gpu_fft = false;
     int security_digits = 4;
     int prefetch_workers = 1;
     uint32_t ring = 65536;
@@ -58,6 +58,7 @@ int main(int argc, char** argv) {
       else if (option == "--security-digits" && i + 1 < argc) security_digits = std::stoi(argv[++i]);
       else if (option == "--prefetch") prefetch = true;
       else if (option == "--compact-addends") compact_addends = true;
+      else if (option == "--gpu-fft") gpu_fft = true;
       else if (option == "--prefetch-workers" && i + 1 < argc) prefetch_workers = std::stoi(argv[++i]);
       else if (option == "--ring" && i + 1 < argc) ring = std::stoul(argv[++i]);
       else if (option == "--strategy" && i + 1 < argc) strategy_name = argv[++i];
@@ -71,6 +72,8 @@ int main(int argc, char** argv) {
     if (strategy_name == "batch") strategy = fhemamba::CompactRnsStrategy::Batched;
     else if (strategy_name == "fused") strategy = fhemamba::CompactRnsStrategy::FusedNtt;
     else if (strategy_name != "limb") throw std::invalid_argument("unsupported probe strategy");
+    if (gpu_fft && (prefetch || strategy_name != "limb"))
+      throw std::invalid_argument("GPU FFT probe requires serial per-limb preparation");
     const uint32_t full_slots = ring / 2;
     const bool advanced = strategy != fhemamba::CompactRnsStrategy::PerLimb;
     CCParams<CryptoContextCKKSRNS> params;
@@ -93,10 +96,11 @@ int main(int argc, char** argv) {
     const auto q0 = cp->GetElementParams()->GetParams()[0]->GetModulus().ConvertToInt();
     int exact_cases = 0, compact_cases = 0, fallback_cases = 0, compact_addend_cases = 0;
     long long batched_uploads = 0, fused_uploads = 0;
+    long long gpu_fft_cases = 0;
     for (uint32_t slots : {32u, full_slots}) {
       fhemamba::PlaintextPreparation preparation(cc, slots,
           {.gpu_ntt = true, .move_coefficients = true, .borrow_upload = true, .gpu_rns = true,
-           .gpu_addend_rns = compact_addends,
+           .gpu_addend_rns = compact_addends, .gpu_fft = gpu_fft,
            .rns_strategy = strategy});
       const std::vector<std::size_t> degrees = compact_addends ? std::vector<std::size_t>{1,2,3}
                                                              : std::vector<std::size_t>{1,2};
@@ -132,6 +136,7 @@ int main(int argc, char** argv) {
       std::cout << "exact_slots=" << slots << " cases=" << exact_cases << std::endl;
       batched_uploads += preparation.batched_rns_uploads;
       fused_uploads += preparation.fused_rns_uploads;
+      gpu_fft_cases += preparation.gpu_fft_encodes;
     }
     std::vector<double> input(full_slots);
     for (uint32_t i = 0; i < full_slots; ++i) input[i] = std::sin(i * 0.71 + 0.1) / 8;
@@ -141,7 +146,7 @@ int main(int argc, char** argv) {
     int encrypted_cases = 0;
     fhemamba::PlaintextPreparation preparation(cc, full_slots,
         {.gpu_ntt = true, .move_coefficients = true, .borrow_upload = true, .gpu_rns = true,
-         .gpu_addend_rns = compact_addends,
+         .gpu_addend_rns = compact_addends, .gpu_fft = gpu_fft,
          .rns_strategy = strategy});
     for (uint32_t level : {0u, 18u, 34u}) {
       auto x = encrypted->Clone(); x->SetLevel(level);
@@ -171,7 +176,7 @@ int main(int argc, char** argv) {
       const bool compact = block == 1 || block == 2;
       fhemamba::PlaintextPreparation timed(cc, full_slots,
           {.gpu_ntt = true, .move_coefficients = true, .borrow_upload = true,
-           .gpu_rns = advanced || compact,
+           .gpu_rns = advanced || compact || gpu_fft, .gpu_fft = gpu_fft && compact,
            .rns_strategy = compact ? strategy : fhemamba::CompactRnsStrategy::PerLimb});
       for (int iteration = -1; iteration < 8; ++iteration) {
         std::vector<double> v(full_slots);
@@ -188,6 +193,7 @@ int main(int argc, char** argv) {
     const bool passed = exact_cases == (compact_addends ? 360 : 240) &&
                         (!compact_addends || compact_addend_cases > 0) && compact_cases > 0 && fallback_cases > 0 &&
                         encrypted_cases == 9 && max_error < 1e-6 &&
+                        (!gpu_fft || gpu_fft_cases == compact_cases) &&
                         (strategy != fhemamba::CompactRnsStrategy::Batched || batched_uploads > 0) &&
                         (strategy != fhemamba::CompactRnsStrategy::FusedNtt || fused_uploads > 0);
     std::ofstream out(argv[1]);
@@ -196,12 +202,14 @@ int main(int argc, char** argv) {
         << (passed ? "true" : "false") << ",\"exact_rns_cases\":" << exact_cases
         << ",\"compact_cases\":" << compact_cases << ",\"fallback_cases\":" << fallback_cases
         << ",\"compact_addend_cases\":" << compact_addend_cases
+        << ",\"gpu_fft\":" << (gpu_fft ? "true" : "false")
+        << ",\"gpu_fft_cases\":" << gpu_fft_cases
         << ",\"encrypted_cases\":" << encrypted_cases << ",\"max_abs_error\":" << max_error
         << ",\"prefetch\":" << (prefetch ? "true" : "false")
         << ",\"prefetch_workers\":" << prefetch_workers
         << ",\"ring_dimension\":" << ring << ",\"rns_strategy\":\"" << strategy_name << "\""
         << ",\"batched_uploads\":" << batched_uploads << ",\"fused_uploads\":" << fused_uploads
-        << ",\"timing_baseline\":\"" << (advanced ? "compact-per-limb" : "full-rns-host") << "\""
+        << ",\"timing_baseline\":\"" << (advanced || gpu_fft ? "compact-per-limb" : "full-rns-host") << "\""
         << ",\"tolerance\":1e-6,\"mamba2\":" << (mamba2 ? "true" : "false")
         << ",\"security\":\"" << (classical128 ? "128-classic" : "not-set") << "\",\"security_audit\":";
     if (classical128) security_audit.write_json(out); else out << "null";

@@ -3,6 +3,7 @@
 #include "plaintext_rns.hpp"
 #ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
 #include "fideslib_plaintext_rns.hpp"
+#include "gpu_special_fft.hpp"
 #endif
 #include <CKKS/Context.cuh>
 #include <CKKS/Plaintext.cuh>
@@ -20,6 +21,36 @@ namespace {
 void synchronize() {
   if (cudaDeviceSynchronize() != 0) throw std::runtime_error("plaintext GPU synchronization failed");
 }
+
+#ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
+// Both CPU-staged coefficients and GPU-produced coefficients use the same
+// integer expansion and NTT path. The source must outlive the following sync.
+void expand_compact_limbs(FIDESlib::CKKS::Plaintext& gpu, const uint64_t* source,
+                          int towers, int device, uint64_t scale, bool scaled) {
+  for (int i = 0; i < towers; ++i) {
+    const auto position = gpu.cc.limbGPUid[i];
+    auto& partition = gpu.c0.GPU.at(position.x);
+    if (partition.device != device)
+      throw std::invalid_argument("compact plaintext requires one device");
+    auto* limb = std::get_if<FIDESlib::U64>(&partition.limb.at(position.y));
+    if (!limb) throw std::invalid_argument("compact plaintext requires 64-bit limbs");
+    if (scaled)
+      expand_scaled_plaintext_rns(source, limb->v.data, gpu.cc.N, gpu.cc.prime[0].p,
+                                 gpu.cc.prime[i].p, scale, limb->stream.ptr());
+    else
+      expand_plaintext_rns(source, limb->v.data, gpu.cc.N, gpu.cc.prime[0].p,
+                          gpu.cc.prime[i].p, limb->stream.ptr());
+  }
+}
+
+class DevicePlaintextMetadata final : public lbcrypto::CKKSPackedEncoding {
+ public:
+  using lbcrypto::CKKSPackedEncoding::CKKSPackedEncoding;
+  bool Encode() override {
+    throw std::logic_error("GPU-only plaintext: use readback_plaintext for CPU coefficients");
+  }
+};
+#endif
 
 // Pinned FIDESlib load_convert<uint64_t> and load<uint64_t> each duplicate
 // their input vector. The bridge already owns stable uint64_t staging arrays;
@@ -207,6 +238,43 @@ auto CoefficientPlaintextEncoder::wrap_cpu(lbcrypto::Plaintext plaintext) const 
   return result;
 }
 
+#ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
+auto CoefficientPlaintextEncoder::encode_gpu(const std::vector<double>& values,
+    uint32_t level, std::size_t degree, GpuSpecialInverseFFT& fft) const -> fideslib::Plaintext {
+  if (!compact_rns_ || values.empty() || values.size() > slots_ || level >= full_params_.size() ||
+      (degree != 1 && !(compact_addends_ && degree == 2)) ||
+      full_params_[level]->GetParams().size() <= 1) return nullptr;
+  const auto cp = std::dynamic_pointer_cast<lbcrypto::CryptoParametersCKKSRNS>(cpu_->GetCryptoParameters());
+  const auto sf = cp->GetScalingFactorReal(level);
+  const auto q0 = compact_params_->GetParams()[0]->GetModulus().ConvertToInt();
+  if (!compact_plaintext_fits(values, slots_, sf, q0)) return nullptr;
+  if (degree == 2 && sf >= std::ldexp(1.0, 62)) return nullptr;
+  if (cudaSetDevice(context_->devices[0]) != cudaSuccess)
+    throw std::runtime_error("could not select GPU encoding device");
+  const auto* source = fft.coefficients(values, sf, q0);
+  if (!source) return nullptr;
+  auto& gpu_context = std::any_cast<FIDESlib::CKKS::Context&>(context_->gpu);
+  auto gpu = std::make_shared<FIDESlib::CKKS::Plaintext>(gpu_context);
+  FIDESlib::CKKS::SetCurrentContext(gpu->cc_);
+  const auto towers = static_cast<int>(full_params_[level]->GetParams().size());
+  gpu->c0.grow(towers - 1, false);
+  const uint64_t multiplier = degree == 2 ? static_cast<uint64_t>(std::llround(sf)) : 1;
+  expand_compact_limbs(*gpu, source, towers, context_->devices[0], multiplier, degree == 2);
+  synchronize();
+  gpu->c0.NTT(kPlaintextNttBatch, true);
+  synchronize();
+  gpu->NoiseFactor = std::pow(sf, degree); gpu->NoiseLevel = degree; gpu->slots = slots_;
+  auto metadata = std::make_shared<DevicePlaintextMetadata>(compact_params_,
+      cpu_->GetEncodingParams(), cpu_->GetCKKSDataType());
+  metadata->SetLevel(level); metadata->SetSlots(slots_);
+  metadata->SetNoiseScaleDeg(degree); metadata->SetScalingFactor(gpu->NoiseFactor);
+  auto result = wrap_cpu(std::move(metadata));
+  result->gpu = context_->RegisterDevicePlaintext(std::move(gpu));
+  result->loaded = true;
+  return result;
+}
+#endif
+
 auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
                     fideslib::Plaintext& plaintext, int ntt_batch, PlaintextUploadMode mode,
                     PlaintextRnsWorkspace* workspace, CompactRnsStrategy strategy)
@@ -259,20 +327,7 @@ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
     }
     if (strategy == CompactRnsStrategy::PerLimb || scaled) {
       // Preserve the original dispatch cost when the new path is disabled.
-      for (int i = 0; i < expected_towers; ++i) {
-        const auto position = gpu->cc.limbGPUid[i];
-        auto& partition = gpu->c0.GPU.at(position.x);
-        if (partition.device != context->devices[0])
-          throw std::invalid_argument("compact plaintext requires one device");
-        auto* limb = std::get_if<FIDESlib::U64>(&partition.limb.at(position.y));
-        if (!limb) throw std::invalid_argument("compact plaintext requires 64-bit limbs");
-        if (scaled)
-          expand_scaled_plaintext_rns(source, limb->v.data, gpu->cc.N, gpu->cc.prime[0].p,
-                                     gpu->cc.prime[i].p, scale, limb->stream.ptr());
-        else
-          expand_plaintext_rns(source, limb->v.data, gpu->cc.N, gpu->cc.prime[0].p,
-                               gpu->cc.prime[i].p, limb->stream.ptr());
-      }
+      expand_compact_limbs(*gpu, source, expected_towers, context->devices[0], scale, scaled);
       actual = PlaintextUploadMode::CompactRns;
     } else {
       PlaintextRnsBatch batch;
@@ -404,9 +459,18 @@ PlaintextPreparation::PlaintextPreparation(Context context, uint32_t slots,
     throw std::invalid_argument("batched/fused RNS requires compact GPU RNS encoding");
   if (options.gpu_addend_rns && !options.gpu_rns)
     throw std::invalid_argument("GPU addend RNS requires compact GPU RNS encoding");
+  if (options.gpu_fft && (!options.gpu_rns || rns_strategy_ != CompactRnsStrategy::PerLimb))
+    throw std::invalid_argument("GPU FFT requires compact per-limb GPU RNS encoding");
   if (options.gpu_rns) {
 #ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
     rns_workspace_ = std::make_unique<PlaintextRnsWorkspace>();
+    if (options.gpu_fft) {
+      if (!context_->loaded || context_->devices.size() != 1)
+        throw std::invalid_argument("GPU FFT requires one loaded GPU context");
+      if (cudaSetDevice(context_->devices[0]) != cudaSuccess)
+        throw std::runtime_error("could not select GPU FFT device");
+      fft_ = std::make_unique<GpuSpecialInverseFFT>(slots_);
+    }
 #else
     throw std::invalid_argument("GPU RNS expansion is not built");
 #endif
@@ -431,6 +495,20 @@ auto PlaintextPreparation::encode(const std::vector<double>& values, uint32_t le
     return periodic_->encode(values, level, degree);
   }
   if (coefficient_ && (!packing_slots || packing_slots == slots_)) {
+#ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
+    if (fft_) {
+      const auto start = profile_ ? std::chrono::steady_clock::now() : std::chrono::steady_clock::time_point{};
+      auto result = coefficient_->encode_gpu(values, level, degree, *fft_);
+      if (profile_) gpu_fft_seconds += std::chrono::duration<double>(
+          std::chrono::steady_clock::now() - start).count();
+      if (result) {
+        ++gpu_fft_encodes; ++compact_rns_uploads; ++fast_uploads;
+        record_coefficient(result);
+        return result;
+      }
+      ++gpu_fft_fallbacks;
+    }
+#endif
     auto result = coefficient_->encode(values, level, degree);
     record_coefficient(result);
     return result;
@@ -452,7 +530,7 @@ auto PlaintextPreparation::adopt_cpu(lbcrypto::Plaintext plaintext) -> fideslib:
 
 void PlaintextPreparation::record_coefficient(const fideslib::Plaintext& result) {
   ++gpu_ntt_encodes;
-  if (move_coefficients_) ++moved_coefficient_encodes;
+  if (move_coefficients_ && !result->loaded) ++moved_coefficient_encodes;
   if (gpu_rns_) {
     const auto& cpu = std::any_cast<const lbcrypto::Plaintext&>(result->cpu);
     const auto original = std::any_cast<const lbcrypto::CryptoContext<lbcrypto::DCRTPoly>&>(context_->cpu)->GetElementParams();
@@ -460,7 +538,8 @@ void PlaintextPreparation::record_coefficient(const fideslib::Plaintext& result)
     if (cpu->GetElement<lbcrypto::DCRTPoly>().GetNumOfElements() < towers) {
       ++compact_rns_encodes;
       if (cpu->GetNoiseScaleDeg() == 2) ++compact_addend_encodes;
-      compact_rns_saved_host_bytes += (towers - 1) * original->GetRingDimension() * sizeof(uint64_t);
+      compact_rns_saved_host_bytes += (towers - (result->loaded ? 0 : 1)) *
+          original->GetRingDimension() * sizeof(uint64_t);
     } else ++compact_rns_fallbacks;
   }
 }

@@ -80,6 +80,7 @@ struct PackedEvaluator {
   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
   long long host_encodes = 0;
   bool cache_plaintexts = false, prefetch_plaintexts = false;
+  bool gpu_plaintext_fft = false;
   int prefetch_workers = 1;
   long long prefetched_encodes = 0, prefetch_groups = 0;
   std::size_t prefetch_peak_ready = 0, prefetch_max_item_bytes = 0;
@@ -94,6 +95,8 @@ struct PackedEvaluator {
   std::unique_ptr<fhemamba::PlaintextPreparation> plaintexts;
   struct OperationStats { double seconds = 0, bootstrap_seconds = 0; long long nodes = 0, bootstraps = 0; };
   std::map<std::string, OperationStats> operation_stats;
+  struct PolynomialStats { int node; double seconds, bootstrap_seconds; long long bootstraps; };
+  std::vector<PolynomialStats> polynomial_stats;
   std::function<Ct(const Ct&)> client_feedback;
   double current_bound = 64;
 #ifdef FHEMAMBA_GPU_DUAL_RING
@@ -462,7 +465,7 @@ struct PackedEvaluator {
           result.values = replicated_bsgs_pre_mask(node.weights(), node.size, columns,
                                                    index, shape, slots, 0.0);
           if (profile_evaluation) result.mask_seconds = elapsed(mask_start);
-          if (!cache_plaintexts || !fhemamba::MaskFingerprint{}(result.values)) {
+          if (!gpu_plaintext_fft && (!cache_plaintexts || !fhemamba::MaskFingerprint{}(result.values))) {
             const auto start = profile_evaluation ? Clock::now() : Clock::time_point{};
             result.coefficients = encoder->encode_cpu(result.values, result.level);
             if (profile_evaluation) result.encode_seconds = elapsed(start);
@@ -757,9 +760,13 @@ struct PackedEvaluator {
       auto& stats = operation_stats[op];
       ++stats.nodes;
       ++evaluated_nodes;
-      stats.seconds += elapsed(operation_start);
+      const double operation_seconds = elapsed(operation_start);
+      stats.seconds += operation_seconds;
       stats.bootstrap_seconds += bootstrap_seconds - prior_bootstrap_seconds;
       stats.bootstraps += bootstraps - prior_bootstraps;
+      if (profile_evaluation && op == "cheb")
+        polynomial_stats.push_back({i, operation_seconds, bootstrap_seconds - prior_bootstrap_seconds,
+                                    bootstraps - prior_bootstraps});
       if (completed % 10 == 0 || completed == live_nodes) {
         const auto seconds = elapsed(start);
         std::cout << "node=" << completed << '/' << live_nodes << " op=" << op
@@ -839,6 +846,7 @@ auto main(int argc, char** argv) -> int {
     bool s2c_first = false;
     bool gpu_plaintext_rns = false;
     bool gpu_addend_rns = false;
+    bool gpu_plaintext_fft = false;
     auto rns_strategy = fhemamba::CompactRnsStrategy::PerLimb;
     bool hoist_rotations = false, share_chebyshev = false;
     bool gpu_dual_ring = false;
@@ -878,6 +886,7 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--s2c-first") s2c_first = true;
       else if (option == "--gpu-plaintext-rns") gpu_plaintext_rns = true;
       else if (option == "--gpu-addend-rns") gpu_addend_rns = true;
+      else if (option == "--gpu-plaintext-fft") gpu_plaintext_fft = true;
       else if (option == "--batch-plaintext-rns" || option == "--fuse-plaintext-rns-ntt") {
         if (rns_strategy != fhemamba::CompactRnsStrategy::PerLimb)
           throw std::invalid_argument("choose one compact RNS strategy");
@@ -913,6 +922,8 @@ auto main(int argc, char** argv) -> int {
       throw std::invalid_argument("plaintext cache capacity must be 0..4096 and requires --cache-plaintexts");
     if (gpu_addend_rns && !gpu_plaintext_rns)
       throw std::invalid_argument("GPU addend RNS requires --gpu-plaintext-rns");
+    if (gpu_plaintext_fft && (!gpu_plaintext_rns || rns_strategy != fhemamba::CompactRnsStrategy::PerLimb))
+      throw std::invalid_argument("GPU FFT requires compact per-limb GPU RNS encoding");
     direct_plaintext_upload |= borrow_plaintext_upload;
     if (gpu_plaintext_ntt || direct_plaintext_upload) fast_plaintext_upload = true;
     if (prefetch_workers < 1 || prefetch_workers > 2 || (prefetch_workers != 1 && !prefetch_plaintexts))
@@ -1043,13 +1054,15 @@ auto main(int argc, char** argv) -> int {
     evaluator.cache_plaintexts = cache_plaintexts;
     evaluator.plaintext_cache = decltype(evaluator.plaintext_cache)(plaintext_cache_capacity);
     evaluator.prefetch_plaintexts = prefetch_plaintexts;
+    evaluator.gpu_plaintext_fft = gpu_plaintext_fft;
     evaluator.prefetch_workers = prefetch_workers;
     evaluator.plaintexts = std::make_unique<fhemamba::PlaintextPreparation>(
         cc, program.slots, fhemamba::PlaintextPreparationOptions{
             .fast_upload = fast_plaintext_upload, .gpu_ntt = gpu_plaintext_ntt,
             .profile = profile_evaluation, .direct_upload = direct_plaintext_upload,
             .move_coefficients = move_plaintext_coefficients, .borrow_upload = borrow_plaintext_upload,
-            .gpu_rns = gpu_plaintext_rns, .gpu_addend_rns = gpu_addend_rns, .rns_strategy = rns_strategy});
+            .gpu_rns = gpu_plaintext_rns, .gpu_addend_rns = gpu_addend_rns,
+            .gpu_fft = gpu_plaintext_fft, .rns_strategy = rns_strategy});
     evaluator.bootstrap_passes = bootstrap_passes;
     evaluator.hoist_rotations = hoist_rotations;
     evaluator.share_chebyshev = share_chebyshev;
@@ -1116,6 +1129,10 @@ auto main(int argc, char** argv) -> int {
            << ",\"shared_basis_invalidations\":" << evaluator.shared_basis_invalidations
            << ",\"gpu_plaintext_rns\":" << (gpu_plaintext_rns ? "true" : "false")
            << ",\"gpu_addend_rns\":" << (gpu_addend_rns ? "true" : "false")
+           << ",\"gpu_plaintext_fft\":" << (gpu_plaintext_fft ? "true" : "false")
+           << ",\"gpu_fft_encodes\":" << evaluator.plaintexts->gpu_fft_encodes
+           << ",\"gpu_fft_fallbacks\":" << evaluator.plaintexts->gpu_fft_fallbacks
+           << ",\"gpu_fft_seconds\":" << evaluator.plaintexts->gpu_fft_seconds
            << ",\"compact_addend_encodes\":" << evaluator.plaintexts->compact_addend_encodes
            << ",\"compact_rns_encodes\":" << evaluator.plaintexts->compact_rns_encodes
            << ",\"compact_rns_uploads\":" << evaluator.plaintexts->compact_rns_uploads
@@ -1221,7 +1238,15 @@ auto main(int argc, char** argv) -> int {
       report << '"' << name << "\":{\"nodes\":" << stats.nodes << ",\"seconds\":" << stats.seconds
              << ",\"bootstrap_seconds\":" << stats.bootstrap_seconds << ",\"bootstraps\":" << stats.bootstraps << '}';
     }
-    report << "},\"scope\":\"" << (client_path.empty() ? "packed feasibility; inline client fixture" :
+    report << "},\"polynomial_stats\":[";
+    for (std::size_t i = 0; i < evaluator.polynomial_stats.size(); ++i) {
+      const auto& stats = evaluator.polynomial_stats[i];
+      if (i) report << ',';
+      report << "{\"node\":" << stats.node << ",\"seconds\":" << stats.seconds
+             << ",\"bootstrap_seconds\":" << stats.bootstrap_seconds
+             << ",\"bootstraps\":" << stats.bootstraps << '}';
+    }
+    report << "],\"scope\":\"" << (client_path.empty() ? "packed feasibility; inline client fixture" :
         "encrypted backbone with inline client vocabulary head and actual greedy feedback") << "\"}\n";
     if (!report) throw std::runtime_error("could not write packed result");
     std::cout << "passed=" << passed << " polynomial_error=" << polynomial_error

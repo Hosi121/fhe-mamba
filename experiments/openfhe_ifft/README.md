@@ -64,3 +64,37 @@ in the model's setup time.
 The B300 study retains its exact commands, static-archive overlay build,
 source hashes, profiler summaries and model controls under
 [`results/b300/2026-09-26/nsight-ifft/`](../../results/b300/2026-09-26/nsight-ifft/).
+
+## GPU coefficients
+
+Enable `-DFHE_IFFT_GPU_PROBE=ON` to build `gpu_fft_probe` (CUDA required).
+The probe uses the same
+[`GpuSpecialInverseFFT`](../../native/fideslib_stage0/src/gpu_special_fft.cu)
+as the native plaintext encoder. It compares 204 CPU/GPU transforms bitwise,
+153 rounded coefficient arrays, and 51 expected small-scale rejections over
+powers of two through 65,536 slots. The optional shared-memory tail is measured
+separately and is not the executor's default.
+
+```bash
+cmake -S experiments/openfhe_ifft -B runs/gpu-fft \
+  -DCMAKE_BUILD_TYPE=Release -DOpenFHE_DIR=/path/to/openfhe/lib/OpenFHE \
+  -DFHE_IFFT_GPU_PROBE=ON -DCMAKE_CUDA_ARCHITECTURES=103
+cmake --build runs/gpu-fft --target gpu_fft_probe -j4
+runs/gpu-fft/gpu_fft_probe runs/gpu-fft/result.json
+```
+
+Use the architecture for your GPU. Build the native executor with
+`FHE_STAGE0_GPU_RNS=ON`, then qualify its full RNS/NTT path with
+`packed_rns_probe OUTPUT --classical128 --ring 131072 --compact-addends --gpu-fft`
+and again with `--mamba2`. The packed model runner accepts
+`--gpu-plaintext-rns --gpu-plaintext-fft`. The FFT path is opt-in, supports up
+to 65,536 slots with full packing on one GPU, and uses the CPU encoder for unsupported
+scale degrees, ranges, levels or sparse packing. It retains the original
+rounding order and uses no reduced-precision arithmetic.
+
+CPU producers still prepare masks; encoding and device registration run on
+the evaluator thread. Rounded coefficients remain on the GPU through RNS
+expansion and NTT. `gpu_fft_encodes`, `gpu_fft_fallbacks` and `gpu_fft_seconds`
+report usage and total GPU preparation wall time. The legacy
+`host_encoding_seconds` field measures time spent in encoding calls, including
+this GPU path; it must not be interpreted as CPU-only time with this flag.

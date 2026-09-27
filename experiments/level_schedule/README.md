@@ -29,3 +29,27 @@ nonrefresh operation times by these ratios gives an intentionally optimistic
 12.56-second ranking proxy (5.27% of that trace), before adding scheduling/drop
 cost or changed refresh cost. It is not a time bound. Correction merging was
 chosen for implementation first because it removes known duplicate operations.
+
+## Polynomial attribution
+
+`polynomials.py` joins live polynomial nodes to the frozen calibration manifest
+by their exact interval and coefficients. It reports function counts, degrees
+and calibration intervals, including upper/lower interval ratios for inverse
+square roots. It rejects a manifest whose program hash differs.
+
+```bash
+python experiments/level_schedule/polynomials.py --program program.txt \
+  --manifest manifest.json --native native.json --output polynomial-profile.json
+```
+
+Omit `--native` for a static inventory. Supply `--metadata` instead of
+`--program` to reuse `program_metadata()` output from `analyze.py`. A current
+native run with `--profile-evaluation` emits `polynomial_stats`; these timings
+must cover every live polynomial exactly once and sum to the aggregate `cheb`
+record. Keep the benchmark job's input hashes with the profile: workload sizes
+alone cannot establish that a native result belongs to the same program.
+
+This attributes polynomial-node work, not an entire normalization module.
+Reductions, masks and products remain separate operations. A refresh batch is
+charged to the node that starts it, even when it refreshes other live values.
+Calibration intervals describe the export; they do not certify unseen inputs.

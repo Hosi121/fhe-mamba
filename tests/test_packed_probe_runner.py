@@ -170,6 +170,9 @@ def test_budget_requires_both_path_and_limit(kwargs):
         {"prefetch_workers": 3},
         {"prefetch_workers": 1.5},
         {"batch_plaintext_rns": True, "fuse_plaintext_rns_ntt": True},
+        {"gpu_plaintext_fft": True},
+        {"gpu_plaintext_fft": True, "gpu_plaintext_rns": True, "batch_plaintext_rns": True},
+        {"gpu_plaintext_fft": True, "gpu_plaintext_rns": True, "fuse_plaintext_rns_ntt": True},
         {"frontier_refresh": True},
         {"frontier_refresh": True, "planned_refresh": True},
         {"s2c_first": True},
@@ -329,6 +332,54 @@ def test_refresh_merge_requires_matching_native_evidence(tmp_path, budgeted, fai
         tmp_path / "result",
         planned_refresh=True,
         merge_refresh_correction=True,
+        **budget,
+    )
+    assert result["passed"] is (failure is None)
+
+
+@pytest.mark.parametrize("budgeted", [False, True])
+@pytest.mark.parametrize(
+    "failure", [None, "flag", "missing", "empty", "negative", "boolean", "total"]
+)
+def test_gpu_fft_requires_executed_native_path(tmp_path, budgeted, failure):
+    native = {
+        "schema": "fhemamba-packed-result-v1",
+        "encrypted": True,
+        "passed": True,
+        "max_abs_error_vs_polynomial": 1e-6,
+        "max_abs_error_vs_exact": 1e-6,
+        "per_output_errors": [{}],
+        "non_finite": 0,
+        "gpu_plaintext_fft": True,
+        "gpu_fft_encodes": 8,
+        "gpu_fft_fallbacks": 2,
+        "host_encodes": 10,
+    }
+    if failure == "flag":
+        native["gpu_plaintext_fft"] = False
+    elif failure == "missing":
+        native.pop("gpu_fft_encodes")
+    elif failure == "empty":
+        native["gpu_fft_encodes"] = 0
+    elif failure == "negative":
+        native["gpu_fft_fallbacks"] = -1
+    elif failure == "boolean":
+        native["gpu_fft_encodes"] = True
+    elif failure == "total":
+        native["host_encodes"] = 1
+    body = (
+        "import sys\nfrom pathlib import Path\n"
+        "assert '--gpu-plaintext-fft' in sys.argv\n"
+        f"Path(sys.argv[2]).write_text({json.dumps(native)!r})\n"
+    )
+    binary, payload = fixture_files(tmp_path, body)
+    budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
+    result = RUNNER.run(
+        binary,
+        payload,
+        tmp_path / "result",
+        gpu_plaintext_rns=True,
+        gpu_plaintext_fft=True,
         **budget,
     )
     assert result["passed"] is (failure is None)

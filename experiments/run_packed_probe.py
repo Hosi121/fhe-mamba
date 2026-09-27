@@ -57,6 +57,7 @@ def _run(
     s2c_first=False,
     gpu_plaintext_rns=False,
     gpu_addend_rns=False,
+    gpu_plaintext_fft=False,
     batch_plaintext_rns=False,
     fuse_plaintext_rns_ntt=False,
     prefetch_plaintexts=False,
@@ -87,6 +88,10 @@ def _run(
             raise ValueError("plaintext cache capacity requires cache_plaintexts")
     if gpu_addend_rns and not (gpu_plaintext_rns or batch_plaintext_rns or fuse_plaintext_rns_ntt):
         raise ValueError("GPU addend RNS requires gpu_plaintext_rns")
+    if gpu_plaintext_fft and (
+        not gpu_plaintext_rns or batch_plaintext_rns or fuse_plaintext_rns_ntt
+    ):
+        raise ValueError("GPU FFT requires compact per-limb GPU RNS encoding")
     if security not in ("not-set", "128-classic"):
         raise ValueError("security must be not-set or 128-classic")
     if security == "128-classic" and gpu_dual_ring:
@@ -168,6 +173,7 @@ def _run(
         (s2c_first, "--s2c-first"),
         (gpu_plaintext_rns, "--gpu-plaintext-rns"),
         (gpu_addend_rns, "--gpu-addend-rns"),
+        (gpu_plaintext_fft, "--gpu-plaintext-fft"),
         (batch_plaintext_rns, "--batch-plaintext-rns"),
         (fuse_plaintext_rns_ntt, "--fuse-plaintext-rns-ntt"),
         (prefetch_plaintexts, "--prefetch-plaintexts"),
@@ -238,6 +244,16 @@ def _run(
                 result.get("merge_refresh_correction") is True
                 and all(type(value) is int and value >= 0 for value in counts)
                 and 2 * (counts[0] + counts[1]) == counts[2]
+            )
+        if gpu_plaintext_fft:
+            counts = [
+                result.get(key) for key in ("gpu_fft_encodes", "gpu_fft_fallbacks", "host_encodes")
+            ]
+            record["passed"] = record["passed"] and (
+                result.get("gpu_plaintext_fft") is True
+                and all(type(value) is int and value >= 0 for value in counts)
+                and counts[0] > 0
+                and counts[0] + counts[1] <= counts[2]
             )
         if security == "128-classic":
             audit = result.get("security_audit") or {}
@@ -313,6 +329,7 @@ def run(
     s2c_first=False,
     gpu_plaintext_rns=False,
     gpu_addend_rns=False,
+    gpu_plaintext_fft=False,
     batch_plaintext_rns=False,
     fuse_plaintext_rns_ntt=False,
     prefetch_plaintexts=False,
@@ -358,6 +375,7 @@ def run(
             s2c_first=s2c_first,
             gpu_plaintext_rns=gpu_plaintext_rns,
             gpu_addend_rns=gpu_addend_rns,
+            gpu_plaintext_fft=gpu_plaintext_fft,
             batch_plaintext_rns=batch_plaintext_rns,
             fuse_plaintext_rns_ntt=fuse_plaintext_rns_ntt,
             prefetch_plaintexts=prefetch_plaintexts,
@@ -424,6 +442,7 @@ def run(
                 s2c_first=s2c_first,
                 gpu_plaintext_rns=gpu_plaintext_rns,
                 gpu_addend_rns=gpu_addend_rns,
+                gpu_plaintext_fft=gpu_plaintext_fft,
                 batch_plaintext_rns=batch_plaintext_rns,
                 fuse_plaintext_rns_ntt=fuse_plaintext_rns_ntt,
                 prefetch_plaintexts=prefetch_plaintexts,
@@ -479,6 +498,7 @@ def main():
     parser.add_argument("--s2c-first", action="store_true")
     parser.add_argument("--gpu-plaintext-rns", action="store_true")
     parser.add_argument("--gpu-addend-rns", action="store_true")
+    parser.add_argument("--gpu-plaintext-fft", action="store_true")
     rns = parser.add_mutually_exclusive_group()
     rns.add_argument("--batch-plaintext-rns", action="store_true")
     rns.add_argument("--fuse-plaintext-rns-ntt", action="store_true")
@@ -521,6 +541,7 @@ def main():
         s2c_first=args.s2c_first,
         gpu_plaintext_rns=args.gpu_plaintext_rns,
         gpu_addend_rns=args.gpu_addend_rns,
+        gpu_plaintext_fft=args.gpu_plaintext_fft,
         batch_plaintext_rns=args.batch_plaintext_rns,
         fuse_plaintext_rns_ntt=args.fuse_plaintext_rns_ntt,
         prefetch_plaintexts=args.prefetch_plaintexts,
