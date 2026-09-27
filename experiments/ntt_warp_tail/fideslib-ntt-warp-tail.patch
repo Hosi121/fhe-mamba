@@ -1,0 +1,54 @@
+--- a/src/NTT.cu
++++ b/src/NTT.cu
+@@ -450,7 +450,8 @@
+ 			maskPsi |= (maskPsi >> 1);
+ 			int log_psi = __ffs(blockDim.x) - 2; // Ojo al logaritmo.
+ 
+-			for (; m >= 1 /*warpSize*/; m >>= 1, log_psi--, maskPsi |= (maskPsi >> 1)) {
++			const bool shuffle_tail = sizeof(T) == 8 && algo == ALGO_SHOUP && blockDim.x >= 32;
++			for (; m >= (shuffle_tail ? 32 : 1); m >>= 1, log_psi--, maskPsi |= (maskPsi >> 1)) {
+ 				const int mask		  = m - 1;
+ 				int j1				  = (mask & tid) | ((~mask & tid) << 1);
+ 				int j2				  = j1 + m;
+@@ -472,6 +473,41 @@
+ 						CT_butterfly<T, algo>(aux1, aux2, psiaux, primeid, psiaux_barret);
+ 					} else {
+ 						CT_butterfly<T, algo>(aux1, aux2, psiaux, primeid);
++					}
++				}
++			}
++
++			// After distance 32, a warp owns 64 coefficients per row. Keep its
++			// last five butterfly stages in registers. All 32 lanes participate;
++			// sub-warp blocks and other arithmetic types retain the shared path.
++			if constexpr (sizeof(T) == 8 && algo == ALGO_SHOUP) {
++				if (shuffle_tail) {
++					__syncwarp();
++					T lo[M], hi[M];
++					const int source = ((tid & ~31) << 1) + (tid & 31);
++#pragma unroll
++					for (int i = 0; i < M; ++i) {
++						lo[i] = A(i)[source];
++						hi[i] = A(i)[source + 32];
++					}
++					for (; m >= 1; m >>= 1, --log_psi, maskPsi |= (maskPsi >> 1)) {
++						const int psiid = (tid & maskPsi) >> log_psi;
++						const T twiddle = psi[psiid];
++						const T shoup = psi_barret[psiid];
++						const bool upper = (tid & m) != 0;
++#pragma unroll
++						for (int i = 0; i < M; ++i) {
++							const T outgoing = upper ? lo[i] : hi[i];
++							const T incoming = __shfl_xor_sync(0xffffffffu, outgoing, m);
++							if (upper) lo[i] = incoming;
++							else hi[i] = incoming;
++							CT_butterfly<T, algo>(lo[i], hi[i], twiddle, primeid, shoup);
++						}
++					}
++#pragma unroll
++					for (int i = 0; i < M; ++i) {
++						A(i)[2 * tid] = lo[i];
++						A(i)[2 * tid + 1] = hi[i];
+ 					}
+ 				}
+ 			}

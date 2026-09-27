@@ -6,12 +6,15 @@
 #include <memory>
 #include <vector>
 #include "fideslib_periodic_encoder.hpp"
+#include "plaintext_rns.hpp"
 
 namespace fhemamba {
 
 // Preserve OpenFHE FFT, rounding and scale handling while deferring its final
 // RNS NTT to the GPU. Instances have fixed context/slots and private params.
 // compact_rns uses one COEFFICIENT tower only when its signed lift is unique.
+// Opt-in degree-two staging stores degree-one coefficients; the loader applies
+// the exact rounded scale multiplier before NTT and preserves degree metadata.
 // These staging plaintexts must pass through the CompactRns loader; they are
 // not full CPU plaintexts for encryption or serialization. Use readback_plaintext
 // when a complete OpenFHE polynomial is needed for verification.
@@ -20,9 +23,16 @@ class CoefficientPlaintextEncoder {
   using Context = fideslib::CryptoContext<fideslib::DCRTPoly>;
   using Params = lbcrypto::DCRTPoly::Params;
   CoefficientPlaintextEncoder(Context context, uint32_t slots,
-                              bool move_coefficients = false, bool compact_rns = false);
+                              bool move_coefficients = false, bool compact_rns = false,
+                              bool compact_addends = false);
   auto encode(const std::vector<double>& values, uint32_t level,
               std::size_t degree = 1) const -> fideslib::Plaintext;
+
+  // CPU-only work on immutable, preinitialized parameters. The caller owns
+  // all returned buffers. No FIDESlib registry access occurs on this path.
+  auto encode_cpu(const std::vector<double>& values, uint32_t level,
+                  std::size_t degree = 1) const -> lbcrypto::Plaintext;
+  auto wrap_cpu(lbcrypto::Plaintext plaintext) const -> fideslib::Plaintext;
 
  private:
   Context context_;
@@ -30,6 +40,7 @@ class CoefficientPlaintextEncoder {
   uint32_t slots_;
   bool move_coefficients_;
   bool compact_rns_;
+  bool compact_addends_;
   std::shared_ptr<Params> compact_params_, compact_coefficient_params_;
   std::vector<std::shared_ptr<Params>> full_params_, coefficient_params_;
 };
@@ -38,14 +49,17 @@ class CoefficientPlaintextEncoder {
 // copies and, for coefficient-format inputs, apply its existing GPU NTT.
 // Returns only after upload/NTT complete, preserving all buffer lifetimes.
 inline constexpr int kPlaintextNttBatch = 16;
-enum class PlaintextUploadMode { AlreadyLoaded, Staged, Direct, Borrowed, CompactRns };
+enum class PlaintextUploadMode {
+  AlreadyLoaded, Staged, Direct, Borrowed, CompactRns, BatchedRns, FusedRnsNtt
+};
 class PlaintextRnsWorkspace;
 // Borrowed reads the pinned OpenFHE word layout until synchronization. Unsupported
 // layouts fall back to Direct, then Staged. Report the path actually executed.
 auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
                     fideslib::Plaintext& plaintext, int ntt_batch = kPlaintextNttBatch,
                     PlaintextUploadMode mode = PlaintextUploadMode::Staged,
-                    PlaintextRnsWorkspace* workspace = nullptr) -> PlaintextUploadMode;
+                    PlaintextRnsWorkspace* workspace = nullptr,
+                    CompactRnsStrategy strategy = CompactRnsStrategy::PerLimb) -> PlaintextUploadMode;
 
 // Probe-only readback of the loaded GPU polynomial in ordinary OpenFHE form.
 auto readback_plaintext(const fideslib::Plaintext& plaintext) -> lbcrypto::DCRTPoly;
@@ -61,6 +75,8 @@ struct PlaintextPreparationOptions {
   bool move_coefficients = false;
   bool borrow_upload = false;
   bool gpu_rns = false;
+  bool gpu_addend_rns = false;
+  CompactRnsStrategy rns_strategy = CompactRnsStrategy::PerLimb;
 };
 
 class PlaintextPreparation {
@@ -78,19 +94,26 @@ class PlaintextPreparation {
                     const std::vector<double>& values, long long& reencodes)
       -> fideslib::Plaintext;
   void load(fideslib::Plaintext& plaintext);
+  auto cpu_encoder() const -> const CoefficientPlaintextEncoder&;
+  // Call on the evaluator thread: wraps ownership and updates serial counters.
+  auto adopt_cpu(lbcrypto::Plaintext plaintext) -> fideslib::Plaintext;
 
   long long gpu_ntt_encodes = 0, fast_uploads = 0, subring_encodes = 0;
   long long direct_uploads = 0, borrowed_uploads = 0, moved_coefficient_encodes = 0;
   long long compact_rns_encodes = 0, compact_rns_uploads = 0, compact_rns_fallbacks = 0;
+  long long compact_addend_encodes = 0;
+  long long batched_rns_uploads = 0, fused_rns_uploads = 0;
   uint64_t compact_rns_saved_host_bytes = 0;
   double upload_seconds = 0;
 
  private:
+  void record_coefficient(const fideslib::Plaintext& plaintext);
   Context context_;
   uint32_t slots_;
   bool fast_upload_, profile_, move_coefficients_;
   bool gpu_rns_;
   PlaintextUploadMode upload_mode_;
+  CompactRnsStrategy rns_strategy_;
   std::unique_ptr<CoefficientPlaintextEncoder> coefficient_;
   std::unique_ptr<stage1::PeriodicPlaintextEncoder> periodic_;
 #ifdef FHEMAMBA_GPU_PLAINTEXT_RNS

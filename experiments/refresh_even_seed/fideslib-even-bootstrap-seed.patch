@@ -1,0 +1,190 @@
+--- a/src/CKKS/ApproxModEval.cu
++++ b/src/CKKS/ApproxModEval.cu
+@@ -3,6 +3,8 @@
+ //
+ 
+ #include "CKKS/ApproxModEval.cuh"
++#include "CKKS/EvenBootstrapSeed.cuh"
++#include "CKKS/BootstrapPrecomputation.cuh"
+ #include "CKKS/Ciphertext.cuh"
+ #include "CKKS/Context.cuh"
+ #include "CudaUtils.cuh"
+@@ -97,7 +99,15 @@
+ 
+ 	KeySwitchingKey& keySwitchingKey = cc.GetEvalKey(ctxtEnc.keyID);
+ 
+-	evalChebyshevSeries(ctxtEnc, cc.GetCoeffsChebyshev(), (double)-1.0, (double)1.0);
++	// This optional dependency patch only changes the qualified real S2C-first path.
++	// Keep the original 88-degree setup/depth budget: the new seed adds one square.
++	if (cc.HasBootPrecomputation(ctxtEnc.slots) &&
++	    cc.GetBootPrecomputation(ctxtEnc.slots).slotsToCoeffsFirst &&
++	    HasQualifiedEvenBootstrapSeed(cc)) {
++		EvalEvenBootstrapSeed(ctxtEnc);
++	} else {
++		evalChebyshevSeries(ctxtEnc, cc.GetCoeffsChebyshev(), -1.0, 1.0);
++	}
+ 
+ 	if constexpr (PRINT) {
+ 		std::cout << "ctxtEnc res " << ctxtEnc.getLevel() << " " << ctxtEnc.NoiseLevel << std::endl;
+--- /dev/null
++++ b/src/CKKS/EvenBootstrapSeed.cuh
+@@ -0,0 +1,159 @@
++#pragma once
++// Derived from the pinned uniform-ternary polynomial by exact phase translation.
++// See results/cpu/2026-09-27/refresh-even-polynomial for the interval certificate.
++#include "CKKS/ApproxModEval.cuh"
++#include "CKKS/Ciphertext.cuh"
++#include "CKKS/Context.cuh"
++#include <vector>
++
++namespace FIDESlib::CKKS {
++inline bool HasQualifiedEvenBootstrapSeed(ContextData& cc) {
++  static const std::vector<double> expected = {
++    0x1.3bd4b023bc100p-3,
++    -0x1.edc4b5192b62bp-9,
++    0x1.4855e9ea8c6fep-3,
++    -0x1.c4b7dba36163cp-9,
++    0x1.6abb2ca32965ap-3,
++    -0x1.6a0466da85a93p-9,
++    0x1.98926bb8f9ffap-3,
++    -0x1.a18b3b7ff483bp-10,
++    0x1.bd95121d71b1ap-3,
++    0x1.c20bfa8143606p-14,
++    0x1.ba6072db20c0ep-3,
++    0x1.229adee4a3de7p-9,
++    0x1.696bb9e5ae7d0p-3,
++    0x1.18dccd20c855dp-8,
++    0x1.60f88108b2611p-4,
++    0x1.661721ac406cap-8,
++    -0x1.7e4ddd5951f4bp-5,
++    0x1.364af0fccfafcp-8,
++    -0x1.6ac17cf2bd8eep-3,
++    0x1.a8ce73757beb5p-10,
++    -0x1.d0f5b41eb64bbp-3,
++    -0x1.70e9c98bb126dp-9,
++    -0x1.0cc2c8e120014p-3,
++    -0x1.71444efae37ddp-8,
++    0x1.42d713e848366p-4,
++    -0x1.f05adbf501e73p-9,
++    0x1.dbad68d1b1a69p-3,
++    0x1.14c6acc757277p-9,
++    0x1.1e6c5a7a3a150p-3,
++    0x1.850f086232166p-8,
++    -0x1.1d0ce54e3de55p-3,
++    0x1.e714cf93660efp-10,
++    -0x1.dc3fe79e61f7ap-3,
++    -0x1.6293306ddb8b6p-8,
++    0x1.d1a36aa421434p-5,
++    -0x1.cdbad828301e9p-9,
++    0x1.06d6e22690becp-2,
++    0x1.68a478ff9caf9p-8,
++    -0x1.2c60af261092ap-4,
++    0x1.6c83cae9a3328p-9,
++    -0x1.fe36c7a1097bfp-3,
++    -0x1.c7a35ec950d91p-8,
++    0x1.b3feada6848e9p-3,
++    0x1.d2e1457481e18p-10,
++    0x1.6b909a92efbb6p-4,
++    0x1.6eb895a5b8ee6p-8,
++    -0x1.47096521d7ccbp-2,
++    -0x1.1ed9628381181p-7,
++    0x1.63d3e51930e7ap-2,
++    0x1.edffcd2b2a5b1p-8,
++    -0x1.01317ee966934p-2,
++    -0x1.35e432a1c694cp-8,
++    0x1.1e1dab84884d0p-3,
++    0x1.3647d7cded0e5p-9,
++    -0x1.04b53c00c87c3p-4,
++    -0x1.03813892529ddp-10,
++    0x1.9302d071bf839p-6,
++    0x1.74cd7daf56c11p-12,
++    -0x1.0e497561082a7p-7,
++    -0x1.d4c35d847a2e0p-14,
++    0x1.3fb1303e8bb53p-9,
++    0x1.058f5ddbc7d65p-15,
++    -0x1.5180aead4f9e3p-11,
++    -0x1.05d86bd87e1ccp-17,
++    0x1.41130497cc398p-13,
++    0x1.da58d778233c6p-20,
++    -0x1.156281f1cdd7cp-15,
++    -0x1.877efbdfa1142p-22,
++    0x1.b610fa960e61dp-18,
++    0x1.282bf370a1142p-24,
++    -0x1.3de72dc52b256p-20,
++    -0x1.9cd63ae4ac959p-27,
++    0x1.aa0becbfa3f48p-23,
++    0x1.0a3f53cda9b53p-29,
++    -0x1.08b3d22564ac9p-25,
++    -0x1.3f029ac9592b2p-32,
++    0x1.3215300000000p-28,
++    0x1.64497592b2565p-35,
++    -0x1.4a6e2508a1142p-31,
++    -0x1.74101cc398731p-38,
++    0x1.4e00730e61cc3p-34,
++    0x1.6c1d142284508p-41,
++    -0x1.3cf1eebdd7bafp-37,
++    -0x1.4f0dd7baf75efp-44,
++    0x1.1b175eebdd7bbp-40,
++    0x1.265c0b81702e0p-47,
++    -0x1.dde8fd1fa3f48p-44,
++    -0x1.023f47e8fd1fap-50,
++    0x1.9b81702e05c0bp-47
++  };
++  return cc.GetBootK() == 512 && cc.GetDoubleAngleIts() == 6 &&
++         cc.GetCoeffsChebyshev() == expected;
++}
++inline void EvalEvenBootstrapSeed(Ciphertext& ct) {
++  static std::vector<double> coefficients = {
++    0x1.3bed0bf481ef6p-3,
++    0x1.486f3ca0d91fcp-3,
++    0x1.6ad72675f9c02p-3,
++    0x1.98b1eea26d234p-3,
++    0x1.bdb76fc3f103dp-3,
++    0x1.ba82913720a04p-3,
++    0x1.698799d959d89p-3,
++    0x1.6113ba255a4d5p-4,
++    -0x1.7e6b59a006f18p-5,
++    -0x1.6add7742369dbp-3,
++    -0x1.d119905cc2948p-3,
++    -0x1.0cd783569fb20p-3,
++    0x1.42effa1dc7e1cp-4,
++    0x1.dbd218abebf4cp-3,
++    0x1.1e8271aa529e4p-3,
++    -0x1.1d22e16319530p-3,
++    -0x1.dc64a2c509b6bp-3,
++    0x1.d1c75447fed6dp-5,
++    0x1.06eb27b1dc21dp-2,
++    -0x1.2c77d9dad8b2fp-4,
++    -0x1.fe5e2160bc436p-3,
++    0x1.b4204e01164a7p-3,
++    0x1.6baca4dbbc7ebp-4,
++    -0x1.47229e32d6bf0p-2,
++    0x1.63ef569e8c7b4p-2,
++    -0x1.014554fab93d7p-2,
++    0x1.1e33bca316ed0p-3,
++    -0x1.04c95776b1980p-4,
++    0x1.9321e58f469f3p-6,
++    -0x1.0e5e4df80f173p-7,
++    0x1.3fc9d84c6efd6p-9,
++    -0x1.519ab66298521p-11,
++    0x1.412bc7efc17b9p-13,
++    -0x1.1577e6acef9dap-15,
++    0x1.b632c3d70b2aep-18,
++    -0x1.3dffb27fbf8b4p-20,
++    0x1.aa2cc8b0e62a3p-23,
++    -0x1.08c83c73e00fep-25,
++    0x1.322ccb663f8ebp-28,
++    -0x1.4a87a11d60318p-31,
++    0x1.4e1a372fe5c19p-34,
++    -0x1.3d0a307bba487p-37,
++    0x1.1b2e092740de9p-40,
++    -0x1.de10ae0a11423p-44,
++    0x1.9b81702e05c0bp-47
++  };
++  ct.addScalar(-0x1p-11);
++  ct.square(false);
++  ct.add(ct);
++  ct.addScalar(-1.0);
++  evalChebyshevSeries(ct, coefficients, -1.0, 1.0);
++}
++} // namespace FIDESlib::CKKS

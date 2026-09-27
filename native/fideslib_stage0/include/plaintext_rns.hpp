@@ -6,6 +6,8 @@
 
 namespace fhemamba {
 
+enum class CompactRnsStrategy { PerLimb, Batched, FusedNtt };
+
 // Each inverse CKKS transform coefficient is bounded by mean(abs(slots)).
 // Leave a factor-two margin below q0/2, including FFT and rounding error.
 // This also keeps the pinned 64-bit encoder below its approximate-scaling

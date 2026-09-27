@@ -1,0 +1,35 @@
+--- a/src/CKKS/Ciphertext.cpp
++++ b/src/CKKS/Ciphertext.cpp
+@@ -869,13 +869,20 @@
+ 		//c0.moddown();
+ 		*/
+ 
++		// The one-GPU, reduced-output path already chains copy -> ModUp
++		// graph -> fused key switch -> ModDown through its RNSPoly streams.
++		// Keep the terminal host barrier and the conservative fallback; only
++		// intermediate phase waits are redundant. Storage recycling is unchanged.
++		const bool stream_chained = cc.GPUid.size() == 1 && moddown;
+ 		auto& in0 = cc.getKeySwitchAux2();
+ 		auto& in1 = cc.getKeySwitchAux();
+ 		in1.copy(c1);
+ 		in0.copy(c0);
+-		cudaDeviceSynchronize();
++		if (!stream_chained)
++			cudaDeviceSynchronize();
+ 		in1.modup();
+-		cudaDeviceSynchronize();
++		if (!stream_chained)
++			cudaDeviceSynchronize();
+ 		// c1.modupInto(cc.getKeySwitchAux());
+ 
+ 		std::vector<int> index_;
+@@ -895,7 +902,8 @@
+ 		}
+ 
+ 		in1.hoistedRotationFused(index_, c0_out, c1_out, ksk_a, ksk_b, in0, in1);
+-		cudaDeviceSynchronize();
++		if (!stream_chained)
++			cudaDeviceSynchronize();
+ 
+ 		if (moddown) {
+ 			modDown(false);

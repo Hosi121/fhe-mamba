@@ -108,10 +108,12 @@ bool load_native_borrowed(FIDESlib::CKKS::Plaintext& gpu, const lbcrypto::Plaint
 }
 
 CoefficientPlaintextEncoder::CoefficientPlaintextEncoder(Context context, uint32_t slots,
-                                                       bool move_coefficients, bool compact_rns)
+                                                       bool move_coefficients, bool compact_rns,
+                                                       bool compact_addends)
     : context_(std::move(context)),
       cpu_(std::any_cast<lbcrypto::CryptoContext<lbcrypto::DCRTPoly>>(context_->cpu)),
-      slots_(slots), move_coefficients_(move_coefficients), compact_rns_(compact_rns) {
+      slots_(slots), move_coefficients_(move_coefficients), compact_rns_(compact_rns),
+      compact_addends_(compact_addends) {
   const auto n = cpu_->GetRingDimension();
   if (!std::has_single_bit(slots_) || slots_ > n / 2)
     throw std::invalid_argument("plaintext slots must divide N/2");
@@ -147,10 +149,16 @@ CoefficientPlaintextEncoder::CoefficientPlaintextEncoder(Context context, uint32
 
 auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
     uint32_t level, std::size_t degree) const -> fideslib::Plaintext {
+  return wrap_cpu(encode_cpu(values, level, degree));
+}
+
+auto CoefficientPlaintextEncoder::encode_cpu(const std::vector<double>& values,
+    uint32_t level, std::size_t degree) const -> lbcrypto::Plaintext {
   if (values.size() > slots_ || level >= full_params_.size() || degree == 0)
     throw std::invalid_argument("plaintext values, level or degree out of range");
   const auto cp = std::dynamic_pointer_cast<lbcrypto::CryptoParametersCKKSRNS>(cpu_->GetCryptoParameters());
-  const bool compact = compact_rns_ && degree == 1 && full_params_[level]->GetParams().size() > 1 &&
+  const bool compact = compact_rns_ && (degree == 1 || (compact_addends_ && degree == 2)) &&
+      full_params_[level]->GetParams().size() > 1 &&
       compact_plaintext_fits(values, slots_, cp->GetScalingFactorReal(level),
                             compact_params_->GetParams()[0]->GetModulus().ConvertToInt());
   lbcrypto::Plaintext plaintext;
@@ -162,8 +170,15 @@ auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
       ~SerialIdentity() { omp_set_max_active_levels(previous); }
     } serial;
 #endif
-    plaintext = cpu_->MakeCKKSPackedPlaintext(values, degree, level,
+    plaintext = cpu_->MakeCKKSPackedPlaintext(values, compact ? 1 : degree, level,
         compact ? compact_coefficient_params_ : coefficient_params_[level], slots_);
+  }
+  // OpenFHE first rounds degree-one coefficients, then multiplies every RNS
+  // residue by round(scalingFactor) for degree two. Defer that exact modular
+  // multiplication to the compact GPU loader; keep the requested metadata.
+  if (compact && degree == 2) {
+    plaintext->SetNoiseScaleDeg(degree);
+    plaintext->SetScalingFactor(std::pow(cp->GetScalingFactorReal(level), degree));
   }
   auto& temporary = plaintext->GetElement<lbcrypto::DCRTPoly>();
   lbcrypto::DCRTPoly coefficients(compact ? compact_params_ : full_params_[level], ::Format::COEFFICIENT, false);
@@ -181,6 +196,10 @@ auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
     }
   }
   temporary = std::move(coefficients);
+  return plaintext;
+}
+
+auto CoefficientPlaintextEncoder::wrap_cpu(lbcrypto::Plaintext plaintext) const -> fideslib::Plaintext {
   auto context_copy = context_;
   auto result = std::make_shared<fideslib::PlaintextImpl>(std::move(context_copy));
   result->cpu = std::make_any<lbcrypto::Plaintext>(std::move(plaintext));
@@ -190,7 +209,7 @@ auto CoefficientPlaintextEncoder::encode(const std::vector<double>& values,
 
 auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
                     fideslib::Plaintext& plaintext, int ntt_batch, PlaintextUploadMode mode,
-                    PlaintextRnsWorkspace* workspace)
+                    PlaintextRnsWorkspace* workspace, CompactRnsStrategy strategy)
     -> PlaintextUploadMode {
   if (ntt_batch <= 0) throw std::invalid_argument("NTT batch must be positive");
   if (plaintext->loaded) return PlaintextUploadMode::AlreadyLoaded;
@@ -202,6 +221,7 @@ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
   auto& gpu_context = std::any_cast<FIDESlib::CKKS::Context&>(context->gpu);
   auto gpu = std::make_shared<FIDESlib::CKKS::Plaintext>(gpu_context);
   auto actual = PlaintextUploadMode::Staged;
+  bool ntt_complete = false;
   FIDESlib::CKKS::RawPlainText raw{};
   const auto expected_towers = gpu->cc.L + 1 - static_cast<int>(cpu->GetLevel());
   const bool compact = static_cast<int>(limbs.size()) != expected_towers;
@@ -215,7 +235,8 @@ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
                   std::endian::native != std::endian::little)
       throw std::invalid_argument("unsupported compact plaintext word layout");
     if (context->devices.size() != 1 || limbs.size() != 1 || expected_towers <= 1 ||
-        expected_towers > gpu->cc.L + 1 || cpu->GetNoiseScaleDeg() != 1 ||
+        expected_towers > gpu->cc.L + 1 ||
+        (cpu->GetNoiseScaleDeg() != 1 && cpu->GetNoiseScaleDeg() != 2) ||
         poly.GetFormat() != ::Format::COEFFICIENT || poly.GetRingDimension() != gpu->cc.N ||
         cpu->GetSlots() != gpu->cc.N / 2 || limbs[0].GetValues().GetLength() != gpu->cc.N ||
         limbs[0].GetModulus().ConvertToInt() != gpu->cc.prime[0].p)
@@ -226,22 +247,82 @@ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
     if (!workspace) workspace = &temporary_workspace;
     const auto* source = workspace->upload(std::addressof(limbs[0].GetValues()[0]),
                                           gpu->cc.N * sizeof(uint64_t), context->devices[0]);
-    for (int i = 0; i < expected_towers; ++i) {
-      const auto position = gpu->cc.limbGPUid[i];
-      auto& partition = gpu->c0.GPU.at(position.x);
-      if (partition.device != context->devices[0])
-        throw std::invalid_argument("compact plaintext requires one device");
-      std::visit([&](auto& limb) {
-        if constexpr (std::is_same_v<std::remove_pointer_t<decltype(limb.v.data)>, uint64_t>)
+    const bool scaled = cpu->GetNoiseScaleDeg() == 2;
+    uint64_t scale = 1;
+    if (scaled) {
+      const auto cpu_context = std::any_cast<lbcrypto::CryptoContext<lbcrypto::DCRTPoly>>(context->cpu);
+      const auto cp = std::dynamic_pointer_cast<lbcrypto::CryptoParametersCKKSRNS>(cpu_context->GetCryptoParameters());
+      const auto sf = cp->GetScalingFactorReal(cpu->GetLevel());
+      if (!std::isfinite(sf) || sf <= 0 || sf >= std::ldexp(1.0, 62))
+        throw std::invalid_argument("unsupported compact addend scale");
+      scale = static_cast<uint64_t>(std::llround(sf));
+    }
+    if (strategy == CompactRnsStrategy::PerLimb || scaled) {
+      // Preserve the original dispatch cost when the new path is disabled.
+      for (int i = 0; i < expected_towers; ++i) {
+        const auto position = gpu->cc.limbGPUid[i];
+        auto& partition = gpu->c0.GPU.at(position.x);
+        if (partition.device != context->devices[0])
+          throw std::invalid_argument("compact plaintext requires one device");
+        auto* limb = std::get_if<FIDESlib::U64>(&partition.limb.at(position.y));
+        if (!limb) throw std::invalid_argument("compact plaintext requires 64-bit limbs");
+        if (scaled)
+          expand_scaled_plaintext_rns(source, limb->v.data, gpu->cc.N, gpu->cc.prime[0].p,
+                                     gpu->cc.prime[i].p, scale, limb->stream.ptr());
+        else
+          expand_plaintext_rns(source, limb->v.data, gpu->cc.N, gpu->cc.prime[0].p,
+                               gpu->cc.prime[i].p, limb->stream.ptr());
+      }
+      actual = PlaintextUploadMode::CompactRns;
+    } else {
+      PlaintextRnsBatch batch;
+      bool batch_layout = expected_towers <= kMaxRnsBatch && gpu->c0.GPU.size() == 1;
+      for (int i = 0; i < expected_towers; ++i) {
+        const auto position = gpu->cc.limbGPUid[i];
+        auto& partition = gpu->c0.GPU.at(position.x);
+        if (partition.device != context->devices[0])
+          throw std::invalid_argument("compact plaintext requires one device");
+        std::visit([&](auto& limb) {
+          if constexpr (std::is_same_v<std::remove_pointer_t<decltype(limb.v.data)>, uint64_t>) {
+            batch_layout = batch_layout && position.x == 0 && position.y == i;
+            if (i < kMaxRnsBatch) {
+              batch.output[i] = limb.v.data;
+              batch.modulus[i] = gpu->cc.prime[i].p;
+              if (batch.modulus[i] < 2 || batch.modulus[i] >= (uint64_t{1} << 61))
+                throw std::invalid_argument("unsupported plaintext RNS modulus");
+              batch.reciprocal[i] = static_cast<uint64_t>(
+                  (static_cast<__uint128_t>(1) << 64) / batch.modulus[i]);
+            }
+          }
+          else throw std::invalid_argument("compact plaintext requires 64-bit limbs");
+        }, partition.limb.at(position.y));
+      }
+      auto& partition = gpu->c0.GPU.at(0);
+      if (batch_layout && strategy == CompactRnsStrategy::FusedNtt &&
+          gpu->cc.logN >= 10 && gpu->cc.logN <= 20) {
+        const int source_primeid = std::get<FIDESlib::U64>(partition.limb.at(0)).primeid;
+        fused_plaintext_rns_ntt(partition.getGlobals(), workspace->source_pointer(),
+            partition.auxptr.data, partition.limbptr.data, gpu->cc.logN, expected_towers,
+            FIDESlib::PARTITION(0, 0), source_primeid, partition.getS().ptr());
+        ntt_complete = true;
+        actual = PlaintextUploadMode::FusedRnsNtt;
+      } else if (batch_layout && strategy != CompactRnsStrategy::PerLimb) {
+        expand_plaintext_rns_batch(source, batch, gpu->cc.N, gpu->cc.prime[0].p,
+                                  expected_towers, partition.getS().ptr());
+        actual = PlaintextUploadMode::BatchedRns;
+      } else {
+        for (int i = 0; i < expected_towers; ++i) {
+          const auto position = gpu->cc.limbGPUid[i];
+          auto& limb = std::get<FIDESlib::U64>(gpu->c0.GPU.at(position.x).limb.at(position.y));
           expand_plaintext_rns(source, limb.v.data, gpu->cc.N, gpu->cc.prime[0].p,
                                gpu->cc.prime[i].p, limb.stream.ptr());
-        else throw std::invalid_argument("compact plaintext requires 64-bit limbs");
-      }, partition.limb.at(position.y));
+        }
+        actual = PlaintextUploadMode::CompactRns;
+      }
     }
     // A temporary workspace must not die before any limb finishes reading it.
     synchronize();
-    gpu->NoiseFactor = cpu->GetScalingFactor(); gpu->NoiseLevel = 1; gpu->slots = cpu->GetSlots();
-    actual = PlaintextUploadMode::CompactRns;
+    gpu->NoiseFactor = cpu->GetScalingFactor(); gpu->NoiseLevel = cpu->GetNoiseScaleDeg(); gpu->slots = cpu->GetSlots();
 #else
     throw std::invalid_argument("GPU RNS expansion is not built");
 #endif
@@ -271,7 +352,7 @@ auto load_plaintext(fideslib::CryptoContext<fideslib::DCRTPoly>& context,
       gpu->load(raw);
     }
   }
-  if (poly.GetFormat() == ::Format::COEFFICIENT) gpu->c0.NTT(ntt_batch, true);
+  if (!ntt_complete && poly.GetFormat() == ::Format::COEFFICIENT) gpu->c0.NTT(ntt_batch, true);
   // Both raw staging and borrowed CPU storage remain alive until every device
   // has finished. The measured configuration uses one device.
   int original_device = 0;
@@ -317,7 +398,12 @@ PlaintextPreparation::PlaintextPreparation(Context context, uint32_t slots,
                    options.move_coefficients || options.borrow_upload || options.gpu_rns), profile_(options.profile),
       move_coefficients_(options.move_coefficients), gpu_rns_(options.gpu_rns),
       upload_mode_(options.gpu_rns ? PlaintextUploadMode::CompactRns : options.borrow_upload ? PlaintextUploadMode::Borrowed :
-                   options.direct_upload ? PlaintextUploadMode::Direct : PlaintextUploadMode::Staged) {
+                   options.direct_upload ? PlaintextUploadMode::Direct : PlaintextUploadMode::Staged),
+      rns_strategy_(options.rns_strategy) {
+  if (!options.gpu_rns && rns_strategy_ != CompactRnsStrategy::PerLimb)
+    throw std::invalid_argument("batched/fused RNS requires compact GPU RNS encoding");
+  if (options.gpu_addend_rns && !options.gpu_rns)
+    throw std::invalid_argument("GPU addend RNS requires compact GPU RNS encoding");
   if (options.gpu_rns) {
 #ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
     rns_workspace_ = std::make_unique<PlaintextRnsWorkspace>();
@@ -326,7 +412,8 @@ PlaintextPreparation::PlaintextPreparation(Context context, uint32_t slots,
 #endif
   }
   if (options.gpu_ntt || options.move_coefficients || options.gpu_rns)
-    coefficient_ = std::make_unique<CoefficientPlaintextEncoder>(context_, slots_, options.move_coefficients, options.gpu_rns);
+    coefficient_ = std::make_unique<CoefficientPlaintextEncoder>(context_, slots_, options.move_coefficients,
+                                                               options.gpu_rns, options.gpu_addend_rns);
 }
 
 PlaintextPreparation::~PlaintextPreparation() = default;
@@ -344,22 +431,38 @@ auto PlaintextPreparation::encode(const std::vector<double>& values, uint32_t le
     return periodic_->encode(values, level, degree);
   }
   if (coefficient_ && (!packing_slots || packing_slots == slots_)) {
-    ++gpu_ntt_encodes;
-    if (move_coefficients_) ++moved_coefficient_encodes;
     auto result = coefficient_->encode(values, level, degree);
-    if (gpu_rns_) {
-      const auto& cpu = std::any_cast<const lbcrypto::Plaintext&>(result->cpu);
-      const auto original = std::any_cast<const lbcrypto::CryptoContext<lbcrypto::DCRTPoly>&>(context_->cpu)->GetElementParams();
-      const auto towers = original->GetParams().size() - level;
-      if (cpu->GetElement<lbcrypto::DCRTPoly>().GetNumOfElements() < towers) {
-        ++compact_rns_encodes;
-        compact_rns_saved_host_bytes += (towers - 1) * original->GetRingDimension() * sizeof(uint64_t);
-      } else ++compact_rns_fallbacks;
-    }
+    record_coefficient(result);
     return result;
   }
   return context_->MakeCKKSPackedPlaintext(
       values, degree, level, nullptr, packing_slots ? packing_slots : slots_);
+}
+
+auto PlaintextPreparation::cpu_encoder() const -> const CoefficientPlaintextEncoder& {
+  if (!coefficient_) throw std::invalid_argument("CPU prefetch requires coefficient encoding");
+  return *coefficient_;
+}
+
+auto PlaintextPreparation::adopt_cpu(lbcrypto::Plaintext plaintext) -> fideslib::Plaintext {
+  auto result = cpu_encoder().wrap_cpu(std::move(plaintext));
+  record_coefficient(result);
+  return result;
+}
+
+void PlaintextPreparation::record_coefficient(const fideslib::Plaintext& result) {
+  ++gpu_ntt_encodes;
+  if (move_coefficients_) ++moved_coefficient_encodes;
+  if (gpu_rns_) {
+    const auto& cpu = std::any_cast<const lbcrypto::Plaintext&>(result->cpu);
+    const auto original = std::any_cast<const lbcrypto::CryptoContext<lbcrypto::DCRTPoly>&>(context_->cpu)->GetElementParams();
+    const auto towers = original->GetParams().size() - cpu->GetLevel();
+    if (cpu->GetElement<lbcrypto::DCRTPoly>().GetNumOfElements() < towers) {
+      ++compact_rns_encodes;
+      if (cpu->GetNoiseScaleDeg() == 2) ++compact_addend_encodes;
+      compact_rns_saved_host_bytes += (towers - 1) * original->GetRingDimension() * sizeof(uint64_t);
+    } else ++compact_rns_fallbacks;
+  }
 }
 
 auto PlaintextPreparation::align_addend(const Ciphertext& ciphertext,
@@ -384,8 +487,12 @@ void PlaintextPreparation::load(fideslib::Plaintext& plaintext) {
 #ifdef FHEMAMBA_GPU_PLAINTEXT_RNS
   workspace = rns_workspace_.get();
 #endif
-  const auto mode = load_plaintext(context_, plaintext, kPlaintextNttBatch, upload_mode_, workspace);
-  if (mode == PlaintextUploadMode::CompactRns) ++compact_rns_uploads;
+  const auto mode = load_plaintext(context_, plaintext, kPlaintextNttBatch, upload_mode_, workspace,
+                                  rns_strategy_);
+  if (mode == PlaintextUploadMode::CompactRns || mode == PlaintextUploadMode::BatchedRns ||
+      mode == PlaintextUploadMode::FusedRnsNtt) ++compact_rns_uploads;
+  if (mode == PlaintextUploadMode::BatchedRns) ++batched_rns_uploads;
+  if (mode == PlaintextUploadMode::FusedRnsNtt) ++fused_rns_uploads;
   if (mode == PlaintextUploadMode::Direct || mode == PlaintextUploadMode::Borrowed) ++direct_uploads;
   if (mode == PlaintextUploadMode::Borrowed) ++borrowed_uploads;
   ++fast_uploads;

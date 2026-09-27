@@ -9,8 +9,11 @@
 #include "chebyshev_basis_cache.hpp"
 #include "fideslib_owned_arithmetic.hpp"
 #include "plaintext_cache.hpp"
+#include "bounded_prefetch.hpp"
 #include "fideslib_plaintext_ops.hpp"
 #include "fideslib_plaintext_encoder.hpp"
+#include "fideslib_security.hpp"
+#include "fideslib_refresh_correction.hpp"
 #include "stage1_mamba2_plan.hpp"
 #ifdef FHEMAMBA_GPU_DUAL_RING
 #include "fideslib_dual_ring.hpp"
@@ -51,6 +54,8 @@ struct PackedEvaluator {
   bool trace_levels = false;
   bool planned_refresh = false;
   bool batch_refresh = false;
+  bool merge_refresh_correction = false;
+  long long merged_refreshes = 0, merge_refresh_fallbacks = 0;
   int bootstrap_passes = 2;
   int refresh_ceiling = 39, refreshed_level = 22;
   long long logical_refreshes = 0, refresh_batches = 0, largest_refresh_batch = 1;
@@ -74,7 +79,17 @@ struct PackedEvaluator {
   long long lifetime_clones_eliminated = 0, refresh_rotations = 0;
   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
   long long host_encodes = 0;
-  bool cache_plaintexts = false;
+  bool cache_plaintexts = false, prefetch_plaintexts = false;
+  int prefetch_workers = 1;
+  long long prefetched_encodes = 0, prefetch_groups = 0;
+  std::size_t prefetch_peak_ready = 0, prefetch_max_item_bytes = 0;
+  double prefetch_wait_seconds = 0;
+  struct PreparedOperand {
+    std::vector<double> values;
+    lbcrypto::Plaintext coefficients;
+    uint32_t level = 0;
+    double mask_seconds = 0, encode_seconds = 0;
+  };
   fhemamba::MaskPlaintextCache<Plaintext> plaintext_cache{64};
   std::unique_ptr<fhemamba::PlaintextPreparation> plaintexts;
   struct OperationStats { double seconds = 0, bootstrap_seconds = 0; long long nodes = 0, bootstraps = 0; };
@@ -148,6 +163,28 @@ struct PackedEvaluator {
     if (multiply) { ++ct_pt; auto out = cc->EvalMult(a, p); sync_gpu(); return out; }
     ++adds; auto out = cc->EvalAdd(a, p); sync_gpu(); return out;
   }
+  auto plain_prepared(const Ct& a, PreparedOperand prepared) -> Ct {
+    if (profile_evaluation) mask_preparation_seconds += prepared.mask_seconds;
+    if (a->GetLevel() != prepared.level)
+      throw std::runtime_error("prefetched plaintext level changed");
+    // Cache-admissible masks take the unchanged serial lookup/encoding path.
+    // Dense diagonals bypass the same cache, retaining its counters and policy.
+    if (!prepared.coefficients) return plain(a, std::move(prepared.values), true);
+    const auto bytes = prepared.values.size() * sizeof(double) +
+        prepared.coefficients->GetElement<lbcrypto::DCRTPoly>().GetNumOfElements() *
+        prepared.coefficients->GetElement<lbcrypto::DCRTPoly>().GetRingDimension() * sizeof(uint64_t);
+    prefetch_max_item_bytes = std::max(prefetch_max_item_bytes, bytes);
+    auto encode = [&] {
+      const auto start = profile_evaluation ? Clock::now() : Clock::time_point{};
+      auto p = plaintexts->adopt_cpu(std::move(prepared.coefficients));
+      ++host_encodes; ++prefetched_encodes;
+      if (profile_evaluation) host_encoding_seconds += prepared.encode_seconds + elapsed(start);
+      return p;
+    };
+    auto p = cache_plaintexts ? plaintext_cache.get(prepared.values, prepared.level, encode) : encode();
+    plaintexts->load(p);
+    ++ct_pt; auto out = cc->EvalMult(a, p); sync_gpu(); return out;
+  }
   auto encrypt(std::vector<double> values) -> Ct {
     values.resize(slots);
     auto p = cc->MakeCKKSPackedPlaintext(values, 1, 0, nullptr, slots);
@@ -180,7 +217,8 @@ struct PackedEvaluator {
     rotations += rotation_batch_stats.edges - before;
     return out;
   }
-  auto bootstrap_components(Ct input) -> std::pair<Ct, Ct> {
+  struct BootstrapComponents { Ct first, second; double divisor = 1.0; };
+  auto bootstrap_components(Ct input) -> BootstrapComponents {
     while (input->GetNoiseScaleDeg() > 1) cc->RescaleInPlace(input);
 #ifdef FHEMAMBA_GPU_DUAL_RING
     if (ring_bridge) input = ring_bridge->up(input);
@@ -205,17 +243,23 @@ struct PackedEvaluator {
     residual = boot_scale(residual, 4096.0);
     while (residual->GetNoiseScaleDeg() > 1) boot_cc->RescaleInPlace(residual);
     sync_gpu(); auto second = boot_cc->EvalBootstrap(residual); sync_gpu(); ++bootstraps;
+    double divisor = 1.0;
+    if (merge_refresh_correction) {
+      if (fhemamba::merge_refresh_correction(first, second, sync_gpu)) {
+        divisor = 4096.0; second.reset(); ++merged_refreshes; ++adds;
+      } else ++merge_refresh_fallbacks;
+    }
 #ifdef FHEMAMBA_GPU_DUAL_RING
-    if (ring_bridge) return {ring_bridge->down(first), ring_bridge->down(second)};
+    if (ring_bridge) return {ring_bridge->down(first), second ? ring_bridge->down(second) : Ct{}, divisor};
 #endif
-    return {first, second};
+    return {first, second, divisor};
   }
   auto refresh(const Ct& value, double refresh_bound) -> Ct {
     auto start = Clock::now();
     const auto prior_rotations = rotations;
     ++logical_refreshes;
-    auto [first, second] = bootstrap_components(scale(value, 1.0 / refresh_bound));
-    auto out = !second ? scale(first, refresh_bound) : planned_refresh
+    auto [first, second, divisor] = bootstrap_components(scale(value, 1.0 / refresh_bound));
+    auto out = !second ? scale(first, refresh_bound / divisor) : planned_refresh
         ? add(scale(first, refresh_bound), scale(second, refresh_bound / 4096.0))
         : scale(add(first, scale(second, 1.0 / 4096.0)), refresh_bound);
     refresh_rotations += rotations - prior_rotations;
@@ -235,16 +279,18 @@ struct PackedEvaluator {
       packed = packed ? add(packed, term) : term;
       offset += node.size;
     }
-    auto [first, second] = bootstrap_components(packed);
+    auto [first, second, divisor] = bootstrap_components(packed);
     offset = 0;
     for (int index : indices) {
       const auto& node = program.nodes[index];
       std::vector<double> mask(slots);
-      std::fill_n(mask.begin(), node.size, node.bound);
+      std::fill_n(mask.begin(), node.size, node.bound / divisor);
       auto a = plain(rotate(first, offset), mask, true);
-      for (auto& value : mask) value /= 4096.0;
-      auto b = plain(rotate(second, offset), std::move(mask), true);
-      values[index] = add(a, b);
+      if (second) {
+        for (auto& value : mask) value /= 4096.0;
+        auto b = plain(rotate(second, offset), std::move(mask), true);
+        values[index] = add(a, b);
+      } else values[index] = std::move(a);
       offset += node.size;
     }
     ++refresh_batches;
@@ -400,19 +446,56 @@ struct PackedEvaluator {
       std::vector<int> baby_offsets;
       for (int i = 0; i < shape.baby_step; ++i) baby_offsets.push_back(i * shape.replicas);
       auto babies = rotate_many(replicated, baby_offsets);
+      // All baby levels are fixed before the producer starts. It reads only
+      // public weights and immutable CPU encoder tables; GPU ownership remains
+      // on this thread. Two ready items plus the current consumer bound storage.
+      std::vector<uint32_t> levels;
+      std::unique_ptr<fhemamba::BoundedPrefetch<PreparedOperand>> prefetch;
+      if (prefetch_plaintexts) {
+        for (const auto& baby : babies) levels.push_back(baby->GetLevel());
+        const auto* encoder = &plaintexts->cpu_encoder();
+        prefetch = std::make_unique<fhemamba::BoundedPrefetch<PreparedOperand>>(
+            shape.per_replica, 2, [&, encoder](std::size_t index) {
+          PreparedOperand result;
+          result.level = levels[index % shape.baby_step];
+          const auto mask_start = profile_evaluation ? Clock::now() : Clock::time_point{};
+          result.values = replicated_bsgs_pre_mask(node.weights(), node.size, columns,
+                                                   index, shape, slots, 0.0);
+          if (profile_evaluation) result.mask_seconds = elapsed(mask_start);
+          if (!cache_plaintexts || !fhemamba::MaskFingerprint{}(result.values)) {
+            const auto start = profile_evaluation ? Clock::now() : Clock::time_point{};
+            result.coefficients = encoder->encode_cpu(result.values, result.level);
+            if (profile_evaluation) result.encode_seconds = elapsed(start);
+          }
+          return result;
+        }, prefetch_workers);
+        ++prefetch_groups;
+      }
       Ct out;
       for (int first = 0; first < shape.per_replica; first += shape.baby_step) {
         Ct inner;
         for (int j = 0; j < shape.baby_step && first + j < shape.per_replica; ++j) {
-          const auto preparation = profile_evaluation ? Clock::now() : Clock::time_point{};
-          auto mask = replicated_bsgs_pre_mask(node.weights(), node.size, columns,
-                                               first + j, shape, slots, 0.0);
-          if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
-          auto term = plain(babies[j], std::move(mask), true);
+          Ct term;
+          if (prefetch) {
+            const auto wait_start = profile_evaluation ? Clock::now() : Clock::time_point{};
+            auto prepared = prefetch->pop();
+            if (profile_evaluation) prefetch_wait_seconds += elapsed(wait_start);
+            term = plain_prepared(babies[j], std::move(prepared));
+          } else {
+            const auto preparation = profile_evaluation ? Clock::now() : Clock::time_point{};
+            auto mask = replicated_bsgs_pre_mask(node.weights(), node.size, columns,
+                                                 first + j, shape, slots, 0.0);
+            if (profile_evaluation) mask_preparation_seconds += elapsed(preparation);
+            term = plain(babies[j], std::move(mask), true);
+          }
           inner = inner ? add_temporaries(std::move(inner), std::move(term)) : std::move(term);
         }
         auto term = rotate(inner, first * shape.replicas);
         out = out ? add_temporaries(std::move(out), std::move(term)) : std::move(term);
+      }
+      if (prefetch) {
+        prefetch_peak_ready = std::max(prefetch_peak_ready, prefetch->peak_size());
+        prefetch.reset();  // Join before input views and captured levels can die.
       }
       out = rotation_sum(out, shape.replicas, shape.window + 1, true, rot, sum);
       if (!mask_output) { sync_gpu(); return out; }
@@ -734,17 +817,19 @@ struct GenerationClient {
 
 auto main(int argc, char** argv) -> int {
   try {
-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--hoist-rotations] [--share-chebyshev] [--gpu-dual-ring] [--client-head FILE]");
+    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--plaintext-cache-capacity N] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--gpu-addend-rns] [--batch-plaintext-rns | --fuse-plaintext-rns-ntt] [--prefetch-plaintexts] [--prefetch-workers 1|2] [--hoist-rotations] [--share-chebyshev] [--gpu-dual-ring] [--security not-set|128-classic] [--security-digits N] [--client-head FILE]");
     bool replicated_linear = true;
     bool legacy_routing = false;
     bool trace_levels = false;
     bool planned_refresh = false;
     bool batch_refresh = false;
+    bool merge_refresh_correction = false;
     bool profile_evaluation = false;
     bool inplace_ops = false;
     bool naf_rotations = false, reuse_dead_inputs = false;
     bool compact_weights = false;
-    bool cache_plaintexts = false;
+    bool cache_plaintexts = false, prefetch_plaintexts = false;
+    int prefetch_workers = 1;
     bool fast_plaintext_upload = false, gpu_plaintext_ntt = false;
     bool direct_plaintext_upload = false;
     bool move_plaintext_coefficients = false;
@@ -753,9 +838,16 @@ auto main(int argc, char** argv) -> int {
     bool frontier_refresh = false;
     bool s2c_first = false;
     bool gpu_plaintext_rns = false;
+    bool gpu_addend_rns = false;
+    auto rns_strategy = fhemamba::CompactRnsStrategy::PerLimb;
     bool hoist_rotations = false, share_chebyshev = false;
     bool gpu_dual_ring = false;
+    std::string security = "not-set";
+    int security_digits = 4;
+    bool security_digits_set = false;
     int bootstrap_passes = 2;
+    std::size_t plaintext_cache_capacity = 64;
+    bool plaintext_cache_capacity_set = false;
     std::string client_path;
     for (int i = 5; i < argc; ++i) {
       const std::string option = argv[i];
@@ -764,12 +856,18 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--trace-levels") trace_levels = true;
       else if (option == "--planned-refresh") planned_refresh = true;
       else if (option == "--batch-refresh") batch_refresh = true;
+      else if (option == "--merge-refresh-correction") merge_refresh_correction = true;
       else if (option == "--profile-evaluation") profile_evaluation = true;
       else if (option == "--inplace-ops") inplace_ops = true;
       else if (option == "--naf-rotations") naf_rotations = true;
       else if (option == "--reuse-dead-inputs") reuse_dead_inputs = true;
       else if (option == "--compact-weights") compact_weights = true;
       else if (option == "--cache-plaintexts") cache_plaintexts = true;
+      else if (option == "--plaintext-cache-capacity" && i + 1 < argc) {
+        plaintext_cache_capacity = std::stoull(argv[++i]); plaintext_cache_capacity_set = true;
+      }
+      else if (option == "--prefetch-plaintexts") prefetch_plaintexts = true;
+      else if (option == "--prefetch-workers" && i + 1 < argc) prefetch_workers = std::stoi(argv[++i]);
       else if (option == "--fast-plaintext-upload") fast_plaintext_upload = true;
       else if (option == "--direct-plaintext-upload") direct_plaintext_upload = true;
       else if (option == "--gpu-plaintext-ntt") gpu_plaintext_ntt = true;
@@ -779,9 +877,21 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--frontier-refresh") frontier_refresh = true;
       else if (option == "--s2c-first") s2c_first = true;
       else if (option == "--gpu-plaintext-rns") gpu_plaintext_rns = true;
+      else if (option == "--gpu-addend-rns") gpu_addend_rns = true;
+      else if (option == "--batch-plaintext-rns" || option == "--fuse-plaintext-rns-ntt") {
+        if (rns_strategy != fhemamba::CompactRnsStrategy::PerLimb)
+          throw std::invalid_argument("choose one compact RNS strategy");
+        gpu_plaintext_rns = true;
+        rns_strategy = option == "--batch-plaintext-rns" ? fhemamba::CompactRnsStrategy::Batched
+                                                        : fhemamba::CompactRnsStrategy::FusedNtt;
+      }
       else if (option == "--hoist-rotations") hoist_rotations = true;
       else if (option == "--share-chebyshev") share_chebyshev = true;
       else if (option == "--gpu-dual-ring") gpu_dual_ring = true;
+      else if (option == "--security" && i + 1 < argc) security = argv[++i];
+      else if (option == "--security-digits" && i + 1 < argc) {
+        security_digits = std::stoi(argv[++i]); security_digits_set = true;
+      }
       else if (option == "--bootstrap-passes" && i + 1 < argc) {
         bootstrap_passes = std::stoi(argv[++i]);
         if (bootstrap_passes != 1 && bootstrap_passes != 2)
@@ -791,14 +901,31 @@ auto main(int argc, char** argv) -> int {
       else throw std::invalid_argument("unknown packed option: " + option);
     }
     const double poly_tol = std::stod(argv[3]), exact_tol = std::stod(argv[4]);
+    if (security != "not-set" && security != "128-classic")
+      throw std::invalid_argument("security must be not-set or 128-classic");
+    const bool classical128 = security == "128-classic";
+    if (security_digits < 1 || security_digits > 16 || (security_digits_set && !classical128))
+      throw std::invalid_argument("security digits must be 1..16 and require 128-classic");
+    if (classical128 && gpu_dual_ring)
+      throw std::invalid_argument("classical-128 uses one audited ring; the experimental dual-ring bridge is not supported");
     gpu_plaintext_ntt |= move_plaintext_coefficients;
+    if (plaintext_cache_capacity > 4096 || (plaintext_cache_capacity_set && !cache_plaintexts))
+      throw std::invalid_argument("plaintext cache capacity must be 0..4096 and requires --cache-plaintexts");
+    if (gpu_addend_rns && !gpu_plaintext_rns)
+      throw std::invalid_argument("GPU addend RNS requires --gpu-plaintext-rns");
     direct_plaintext_upload |= borrow_plaintext_upload;
     if (gpu_plaintext_ntt || direct_plaintext_upload) fast_plaintext_upload = true;
+    if (prefetch_workers < 1 || prefetch_workers > 2 || (prefetch_workers != 1 && !prefetch_plaintexts))
+      throw std::invalid_argument("prefetch workers must be 1 or 2 and require plaintext prefetch");
+    if (prefetch_plaintexts && (!replicated_linear || !(gpu_plaintext_ntt || gpu_plaintext_rns)))
+      throw std::invalid_argument("plaintext prefetch requires replicated linear and coefficient encoding");
     if (reuse_dead_inputs) inplace_ops = true;
     if (bsgs_routing_stages && (!planned_refresh || legacy_routing || !replicated_linear))
       throw std::invalid_argument("BSGS routing stages require planned refresh and radix8 routing");
     if (batch_refresh && (!planned_refresh || bootstrap_passes != 2))
       throw std::invalid_argument("batch refresh requires planned refresh and two bootstrap passes");
+    if (merge_refresh_correction && (!planned_refresh || bootstrap_passes != 2))
+      throw std::invalid_argument("refresh correction merging requires planned two-pass refresh");
     if (s2c_first && !batch_refresh) throw std::invalid_argument("S2C-first requires planned two-pass batch refresh");
     if (gpu_dual_ring && !s2c_first)
       throw std::invalid_argument("GPU dual ring requires S2C-first planned two-pass refresh");
@@ -819,6 +946,10 @@ auto main(int argc, char** argv) -> int {
       throw std::invalid_argument("invalid error tolerance");
     std::ifstream input(argv[1]);
     auto program = fhemamba::read_packed_program(input, compact_weights);
+    const int payload_slots = program.slots;
+    // Full packing is required by the S2C-first circuit. Logical node widths,
+    // public values and client references remain those of the frozen payload.
+    if (classical128) program.slots = 65536;
     if (gpu_dual_ring && (program.slots != 32768 ||
         std::any_of(program.nodes.begin(), program.nodes.end(),
                     [](const auto& node) { return node.size > 16384; })))
@@ -837,13 +968,24 @@ auto main(int argc, char** argv) -> int {
     }
     const auto setup = Clock::now();
     CCParams<CryptoContextCKKSRNS> p;
-    p.SetSecurityLevel(HEStd_NotSet); p.SetSecretKeyDist(UNIFORM_TERNARY);
-    p.SetCKKSDataType(REAL); p.SetRingDim(65536); p.SetBatchSize(program.slots);
+    p.SetSecurityLevel(classical128 ? HEStd_128_classic : HEStd_NotSet);
+    p.SetSecretKeyDist(UNIFORM_TERNARY);
+    p.SetCKKSDataType(REAL); p.SetRingDim(classical128 ? 131072 : 65536); p.SetBatchSize(program.slots);
     p.SetMultiplicativeDepth(44); p.SetScalingModSize(59); p.SetFirstModSize(60);
     p.SetScalingTechnique(FLEXIBLEAUTO); p.SetKeySwitchTechnique(HYBRID);
-    p.SetNumLargeDigits(3); p.SetDevices({0});
+    p.SetNumLargeDigits(classical128 ? security_digits : 3); p.SetDevices({0});
     p.SetPlaintextAutoload(false); p.SetCiphertextAutoload(true);
     auto cc = GenCryptoContext(p);
+    const auto security_audit = fhemamba::audit_ckks_context(cc);
+    if (classical128) {
+      security_audit.require_classical128();
+      std::ofstream parameters(std::string(argv[2]) + ".parameters.json");
+      security_audit.write_json(parameters); parameters << '\n';
+      std::cout << "classical128 ring=" << security_audit.ring
+                << " QP_bits=" << security_audit.qp_bits
+                << " bound=" << security_audit.guideline_bound
+                << " digits=" << security_audit.digits << std::endl;
+    }
     for (auto feature : {PKE, KEYSWITCH, LEVELEDSHE, ADVANCEDSHE, FHE}) cc->Enable(feature);
     auto keys = cc->KeyGen(); cc->EvalMultKeyGen(keys.secretKey);
     std::vector<int> rotations;
@@ -887,6 +1029,7 @@ auto main(int argc, char** argv) -> int {
     evaluator.trace_levels = trace_levels;
     evaluator.planned_refresh = planned_refresh;
     evaluator.batch_refresh = batch_refresh;
+    evaluator.merge_refresh_correction = merge_refresh_correction;
     evaluator.profile_evaluation = profile_evaluation;
     evaluator.inplace_ops = inplace_ops;
     evaluator.naf_rotations = naf_rotations;
@@ -898,12 +1041,15 @@ auto main(int argc, char** argv) -> int {
     evaluator.refresh_ceiling = s2c_first ? 35 : 39;
     evaluator.refreshed_level = s2c_first ? 18 : 22;
     evaluator.cache_plaintexts = cache_plaintexts;
+    evaluator.plaintext_cache = decltype(evaluator.plaintext_cache)(plaintext_cache_capacity);
+    evaluator.prefetch_plaintexts = prefetch_plaintexts;
+    evaluator.prefetch_workers = prefetch_workers;
     evaluator.plaintexts = std::make_unique<fhemamba::PlaintextPreparation>(
         cc, program.slots, fhemamba::PlaintextPreparationOptions{
             .fast_upload = fast_plaintext_upload, .gpu_ntt = gpu_plaintext_ntt,
             .profile = profile_evaluation, .direct_upload = direct_plaintext_upload,
             .move_coefficients = move_plaintext_coefficients, .borrow_upload = borrow_plaintext_upload,
-            .gpu_rns = gpu_plaintext_rns});
+            .gpu_rns = gpu_plaintext_rns, .gpu_addend_rns = gpu_addend_rns, .rns_strategy = rns_strategy});
     evaluator.bootstrap_passes = bootstrap_passes;
     evaluator.hoist_rotations = hoist_rotations;
     evaluator.share_chebyshev = share_chebyshev;
@@ -941,13 +1087,18 @@ auto main(int argc, char** argv) -> int {
       per_output_poly.push_back(pe); per_output_exact.push_back(ee);
     }
     const bool passed = non_finite == 0 && polynomial_error <= poly_tol && exact_error <= exact_tol;
+    if (classical128) fhemamba::audit_ckks_context(cc).require_classical128();
     struct rusage usage {}; getrusage(RUSAGE_SELF, &usage);
     std::ofstream report(argv[2]);
     report << std::setprecision(12) << "{\n\"schema\":\"fhemamba-packed-result-v1\","
-           << "\"backend\":\"fideslib\",\"encrypted\":true,\"security\":\"not-set\","
+           << "\"backend\":\"fideslib\",\"encrypted\":true,\"security\":\"" << security << "\","
            << "\"passed\":" << (passed ? "true" : "false")
-           << ",\"slots\":" << program.slots << ",\"ring_dimension\":" << (gpu_dual_ring ? 32768 : 65536)
-           << ",\"depth\":44,\"scale_bits\":59,\"refresh_ring_dimension\":65536"
+           << ",\"slots\":" << program.slots << ",\"payload_slots\":" << payload_slots
+           << ",\"ring_dimension\":" << (gpu_dual_ring ? 32768 : security_audit.ring)
+           << ",\"depth\":44,\"scale_bits\":59,\"refresh_ring_dimension\":" << security_audit.ring
+           << ",\"security_audit\":";
+    if (classical128) security_audit.write_json(report); else report << "null";
+    report
            << ",\"gpu_dual_ring\":" << (gpu_dual_ring ? "true" : "false")
 #ifdef FHEMAMBA_GPU_DUAL_RING
            << ",\"ring_switch_up_calls\":" << (ring_bridge ? ring_bridge->up_calls : 0)
@@ -964,6 +1115,8 @@ auto main(int argc, char** argv) -> int {
            << ",\"shared_basis_hits\":" << evaluator.shared_basis_hits
            << ",\"shared_basis_invalidations\":" << evaluator.shared_basis_invalidations
            << ",\"gpu_plaintext_rns\":" << (gpu_plaintext_rns ? "true" : "false")
+           << ",\"gpu_addend_rns\":" << (gpu_addend_rns ? "true" : "false")
+           << ",\"compact_addend_encodes\":" << evaluator.plaintexts->compact_addend_encodes
            << ",\"compact_rns_encodes\":" << evaluator.plaintexts->compact_rns_encodes
            << ",\"compact_rns_uploads\":" << evaluator.plaintexts->compact_rns_uploads
            << ",\"compact_rns_fallbacks\":" << evaluator.plaintexts->compact_rns_fallbacks
@@ -990,6 +1143,9 @@ auto main(int argc, char** argv) -> int {
            << ",\"refresh_policy\":\"" << (planned_refresh ? "planned" : "baseline") << '"'
            << ",\"bootstrap_passes\":" << bootstrap_passes
            << ",\"batch_refresh\":" << (batch_refresh ? "true" : "false")
+           << ",\"merge_refresh_correction\":" << (merge_refresh_correction ? "true" : "false")
+           << ",\"merged_refreshes\":" << evaluator.merged_refreshes
+           << ",\"merge_refresh_fallbacks\":" << evaluator.merge_refresh_fallbacks
            << ",\"logical_refreshes\":" << evaluator.logical_refreshes
            << ",\"planned_logical_refreshes\":" << evaluator.planned_logical_refreshes
            << ",\"refresh_batches\":" << evaluator.refresh_batches
@@ -1012,6 +1168,8 @@ auto main(int argc, char** argv) -> int {
            << ",\"gpu_ntt_encodes\":" << evaluator.plaintexts->gpu_ntt_encodes
            << ",\"fast_plaintext_uploads\":" << evaluator.plaintexts->fast_uploads
            << ",\"plaintext_upload_seconds\":" << evaluator.plaintexts->upload_seconds
+           << ",\"batched_rns_uploads\":" << evaluator.plaintexts->batched_rns_uploads
+           << ",\"fused_rns_uploads\":" << evaluator.plaintexts->fused_rns_uploads
            << ",\"plaintext_cache_capacity\":" << evaluator.plaintext_cache.capacity()
            << ",\"plaintext_cache_entries\":" << evaluator.plaintext_cache.size()
            << ",\"plaintext_cache_hits\":" << evaluator.plaintext_cache.hits
@@ -1026,6 +1184,13 @@ auto main(int argc, char** argv) -> int {
            << ",\"square_arithmetic_reused_inputs\":" << evaluator.square_arithmetic.reused_inputs
            << ",\"square_arithmetic_cloned_inputs\":" << evaluator.square_arithmetic.cloned_inputs
            << ",\"host_encoding_seconds\":" << evaluator.host_encoding_seconds
+           << ",\"prefetch_plaintexts\":" << (prefetch_plaintexts ? "true" : "false")
+           << ",\"prefetch_workers\":" << evaluator.prefetch_workers
+           << ",\"prefetched_encodes\":" << evaluator.prefetched_encodes
+           << ",\"prefetch_groups\":" << evaluator.prefetch_groups
+           << ",\"prefetch_peak_ready\":" << evaluator.prefetch_peak_ready
+           << ",\"prefetch_max_item_bytes\":" << evaluator.prefetch_max_item_bytes
+           << ",\"prefetch_wait_seconds\":" << evaluator.prefetch_wait_seconds
            << ",\"host_encodes\":" << evaluator.host_encodes
            << ",\"mask_preparation_seconds\":" << evaluator.mask_preparation_seconds
            << ",\"max_abs_error_vs_polynomial\":" << polynomial_error
