@@ -1,0 +1,709 @@
+{
+  "ncu": {
+    "base": {
+      "units": {
+        "gpu__time_duration.sum": "us",
+        "launch__registers_per_thread": "register/thread",
+        "sm__maximum_warps_per_active_cycle_pct": "%",
+        "sm__warps_active.avg.pct_of_peak_sustained_active": "%",
+        "l1tex__throughput.avg.pct_of_peak_sustained_active": "%",
+        "sm__throughput.avg.pct_of_peak_sustained_elapsed": "%",
+        "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": "%",
+        "derived__local_spilling_requests": "",
+        "launch__shared_mem_per_block": "Kbyte/block",
+        "launch__occupancy_limit_registers": "block"
+      },
+      "kernels": [
+        {
+          "ID": "0",
+          "Kernel Name": "void NTT_<0, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(128, 1, 1)",
+          "Grid Size": "(32, 44, 1)",
+          "gpu__time_duration.sum": 31.872,
+          "launch__registers_per_thread": 38.0,
+          "sm__maximum_warps_per_active_cycle_pct": 75.0,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 45.053203,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 67.304183,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 47.611856,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 0.237256,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 11.264,
+          "launch__occupancy_limit_registers": 12.0
+        },
+        {
+          "ID": "1",
+          "Kernel Name": "void NTT_<1, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(64, 1, 1)",
+          "Grid Size": "(64, 44, 1)",
+          "gpu__time_duration.sum": 26.944,
+          "launch__registers_per_thread": 42.0,
+          "sm__maximum_warps_per_active_cycle_pct": 62.5,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 44.626521,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 53.972462,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 42.406359,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 11.215008,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 6.144,
+          "launch__occupancy_limit_registers": 20.0
+        },
+        {
+          "ID": "2",
+          "Kernel Name": "void NTT_<0, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(128, 1, 1)",
+          "Grid Size": "(32, 44, 1)",
+          "gpu__time_duration.sum": 32.32,
+          "launch__registers_per_thread": 38.0,
+          "sm__maximum_warps_per_active_cycle_pct": 75.0,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 44.412085,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 67.304775,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 47.724149,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 0.234096,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 11.264,
+          "launch__occupancy_limit_registers": 12.0
+        },
+        {
+          "ID": "3",
+          "Kernel Name": "void NTT_<1, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(64, 1, 1)",
+          "Grid Size": "(64, 44, 1)",
+          "gpu__time_duration.sum": 25.952,
+          "launch__registers_per_thread": 42.0,
+          "sm__maximum_warps_per_active_cycle_pct": 62.5,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 44.569342,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 54.005675,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 42.288374,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 11.645288,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 6.144,
+          "launch__occupancy_limit_registers": 20.0
+        }
+      ]
+    },
+    "candidate": {
+      "units": {
+        "gpu__time_duration.sum": "us",
+        "launch__registers_per_thread": "register/thread",
+        "sm__maximum_warps_per_active_cycle_pct": "%",
+        "sm__warps_active.avg.pct_of_peak_sustained_active": "%",
+        "l1tex__throughput.avg.pct_of_peak_sustained_active": "%",
+        "sm__throughput.avg.pct_of_peak_sustained_elapsed": "%",
+        "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": "%",
+        "derived__local_spilling_requests": "",
+        "launch__shared_mem_per_block": "Kbyte/block",
+        "launch__occupancy_limit_registers": "block"
+      },
+      "kernels": [
+        {
+          "ID": "0",
+          "Kernel Name": "void NTT_<0, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(128, 1, 1)",
+          "Grid Size": "(32, 44, 1)",
+          "gpu__time_duration.sum": 33.184,
+          "launch__registers_per_thread": 48.0,
+          "sm__maximum_warps_per_active_cycle_pct": 62.5,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 43.413146,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 50.019145,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 46.918465,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 0.22935,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 11.264,
+          "launch__occupancy_limit_registers": 10.0
+        },
+        {
+          "ID": "1",
+          "Kernel Name": "void NTT_<1, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(64, 1, 1)",
+          "Grid Size": "(64, 44, 1)",
+          "gpu__time_duration.sum": 27.296,
+          "launch__registers_per_thread": 48.0,
+          "sm__maximum_warps_per_active_cycle_pct": 62.5,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 43.531198,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 33.356326,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 40.68379,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 11.078118,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 6.144,
+          "launch__occupancy_limit_registers": 20.0
+        },
+        {
+          "ID": "2",
+          "Kernel Name": "void NTT_<0, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(128, 1, 1)",
+          "Grid Size": "(32, 44, 1)",
+          "gpu__time_duration.sum": 34.624,
+          "launch__registers_per_thread": 48.0,
+          "sm__maximum_warps_per_active_cycle_pct": 62.5,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 44.208281,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 49.549113,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 46.200848,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 0.2201,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 11.264,
+          "launch__occupancy_limit_registers": 10.0
+        },
+        {
+          "ID": "3",
+          "Kernel Name": "void NTT_<1, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+          "Block Size": "(64, 1, 1)",
+          "Grid Size": "(64, 44, 1)",
+          "gpu__time_duration.sum": 27.712,
+          "launch__registers_per_thread": 48.0,
+          "sm__maximum_warps_per_active_cycle_pct": 62.5,
+          "sm__warps_active.avg.pct_of_peak_sustained_active": 43.905328,
+          "l1tex__throughput.avg.pct_of_peak_sustained_active": 33.280481,
+          "sm__throughput.avg.pct_of_peak_sustained_elapsed": 40.153448,
+          "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed": 10.904597,
+          "derived__local_spilling_requests": 0.0,
+          "launch__shared_mem_per_block": 6.144,
+          "launch__occupancy_limit_registers": 20.0
+        }
+      ]
+    }
+  },
+  "nsys": {
+    "base": {
+      "profile_eval_seconds": 11.022541562,
+      "gpu_activity": {
+        "CUPTI_ACTIVITY_KIND_KERNEL": {
+          "count": 308734,
+          "sum_seconds": 2.940750429
+        },
+        "CUPTI_ACTIVITY_KIND_MEMCPY": {
+          "count": 43305,
+          "sum_seconds": 0.114994799
+        },
+        "CUPTI_ACTIVITY_KIND_MEMSET": {
+          "count": 3840,
+          "sum_seconds": 0.008558531
+        }
+      },
+      "gpu_interval_union_seconds": 2.38710032,
+      "forward_ntt": {
+        "count": 75962,
+        "sum_seconds": 1.378431738
+      },
+      "kernel_totals": [
+        [
+          "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          24606,
+          0.586033603
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          24606,
+          0.429542778
+        ],
+        [
+          "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+          26402,
+          0.296131484
+        ],
+        [
+          "void FIDESlib::CKKS::ModDown2<(FIDESlib::ALGO)3>(void **, int, void **, int, const FIDESlib::Global::Globals *)",
+          5926,
+          0.201064899
+        ],
+        [
+          "FIDESlib::CKKS::copy_(void **, void **)",
+          36471,
+          0.191816512
+        ],
+        [
+          "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+          26402,
+          0.174175586
+        ],
+        [
+          "FIDESlib::CKKS::hoistedRotateDotKSK_2_(void ***, void **, void ***, void ***, void ***, void ***, int, const int *, void ***, int, int, int, int, void **, bool)",
+          2791,
+          0.171942126
+        ],
+        [
+          "fhemamba::<unnamed>::expand(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, unsigned long)",
+          82303,
+          0.133788919
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          5926,
+          0.125705439
+        ],
+        [
+          "FIDESlib::add_(void **, void **, int)",
+          18289,
+          0.108173986
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          5926,
+          0.100969672
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          7449,
+          0.087622585
+        ],
+        [
+          "void FIDESlib::CKKS::Scalar_mult_<(FIDESlib::ALGO)4>(void **, const unsigned long *, int, const unsigned long *)",
+          12966,
+          0.076219484
+        ],
+        [
+          "FIDESlib::CKKS::dotProductLtBatchedPt2___(void ***, void ***, void ***, void ***, void ***, int, int, int, int)",
+          256,
+          0.06621772
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          7449,
+          0.048557661
+        ],
+        [
+          "FIDESlib::CKKS::Mult_(void **, void **, void **, int)",
+          8424,
+          0.04196863
+        ],
+        [
+          "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+          4162,
+          0.029585268
+        ],
+        [
+          "FIDESlib::CKKS::eval_linear_w_sum_(int, void **, void ***, unsigned long *, int)",
+          480,
+          0.020738198
+        ],
+        [
+          "void FIDESlib::INTT_<unsigned long, (bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+          4162,
+          0.017360064
+        ],
+        [
+          "FIDESlib::CKKS::binomialMult_(int, void **, void **, void **, void **, void **)",
+          599,
+          0.008666765
+        ],
+        [
+          "FIDESlib::scalar_add_(void **, unsigned long *, int)",
+          891,
+          0.007532633
+        ],
+        [
+          "FIDESlib::CKKS::binomialSquare_(int, void **, void **, void **)",
+          434,
+          0.00586441
+        ],
+        [
+          "FIDESlib::sub_(void **, void **, int)",
+          514,
+          0.004385064
+        ],
+        [
+          "FIDESlib::CKKS::scaleByP_(void **, int)",
+          256,
+          0.004279365
+        ],
+        [
+          "<unnamed>::map_ntt(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, bool)",
+          1012,
+          0.001822292
+        ],
+        [
+          "FIDESlib::CKKS::broadcastLimb0_(void **)",
+          32,
+          0.000585286
+        ]
+      ],
+      "runtime_totals": [
+        [
+          "cudaDeviceSynchronize_v3020",
+          54601,
+          2.555721118
+        ],
+        [
+          "cudaLaunchKernel_v7000",
+          310311,
+          1.168188125
+        ],
+        [
+          "cudaMallocAsync_v11020",
+          17789,
+          0.382864733
+        ],
+        [
+          "cudaMemcpyAsync_v3020",
+          39500,
+          0.27141631
+        ],
+        [
+          "cudaStreamWaitEvent_v3020",
+          253889,
+          0.168412032
+        ],
+        [
+          "cudaMemcpy_v3020",
+          3772,
+          0.160823347
+        ],
+        [
+          "cudaEventRecordWithFlags_v11010",
+          191140,
+          0.122696594
+        ],
+        [
+          "cudaStreamSynchronize_v3020",
+          3893,
+          0.083194752
+        ],
+        [
+          "cudaGraphLaunch_v10000",
+          3848,
+          0.058852053
+        ],
+        [
+          "cudaGraphInstantiateWithFlags_v11040",
+          79,
+          0.024956721
+        ],
+        [
+          "cuKernelGetName",
+          310311,
+          0.02072168
+        ],
+        [
+          "cudaFreeAsync_v11020",
+          17736,
+          0.015708693
+        ],
+        [
+          "cudaMemsetAsync_v3020",
+          3840,
+          0.011900399
+        ],
+        [
+          "cudaEventCreateWithFlags_v3020",
+          4226,
+          0.002705835
+        ],
+        [
+          "cudaEventDestroy_v3020",
+          3848,
+          0.001750504
+        ],
+        [
+          "cudaMalloc_v3020",
+          4,
+          0.000679504
+        ],
+        [
+          "cudaMemcpyToSymbolAsync_v3020",
+          33,
+          0.000552187
+        ],
+        [
+          "cudaStreamBeginCapture_v10000",
+          79,
+          0.000315225
+        ],
+        [
+          "cuLibraryLoadData",
+          2,
+          0.000130606
+        ],
+        [
+          "cudaStreamEndCapture_v10000",
+          79,
+          0.000123234
+        ],
+        [
+          "cudaEventRecord_v3020",
+          64,
+          3.0455e-05
+        ],
+        [
+          "cuLibraryGetKernel",
+          27,
+          2.4901e-05
+        ],
+        [
+          "cuProfilerStart",
+          1,
+          5.868e-06
+        ]
+      ]
+    },
+    "candidate": {
+      "profile_eval_seconds": 11.048454734,
+      "gpu_activity": {
+        "CUPTI_ACTIVITY_KIND_KERNEL": {
+          "count": 308734,
+          "sum_seconds": 2.984138499
+        },
+        "CUPTI_ACTIVITY_KIND_MEMCPY": {
+          "count": 43305,
+          "sum_seconds": 0.132093357
+        },
+        "CUPTI_ACTIVITY_KIND_MEMSET": {
+          "count": 3840,
+          "sum_seconds": 0.008480782
+        }
+      },
+      "gpu_interval_union_seconds": 2.446097647,
+      "forward_ntt": {
+        "count": 75962,
+        "sum_seconds": 1.427603652
+      },
+      "kernel_totals": [
+        [
+          "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          24606,
+          0.587484986
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          24606,
+          0.447927205
+        ],
+        [
+          "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+          26402,
+          0.289892894
+        ],
+        [
+          "void FIDESlib::CKKS::ModDown2<(FIDESlib::ALGO)3>(void **, int, void **, int, const FIDESlib::Global::Globals *)",
+          5926,
+          0.199813694
+        ],
+        [
+          "FIDESlib::CKKS::copy_(void **, void **)",
+          36471,
+          0.192780482
+        ],
+        [
+          "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+          26402,
+          0.173773663
+        ],
+        [
+          "FIDESlib::CKKS::hoistedRotateDotKSK_2_(void ***, void **, void ***, void ***, void ***, void ***, int, const int *, void ***, int, int, int, int, void **, bool)",
+          2791,
+          0.172054491
+        ],
+        [
+          "fhemamba::<unnamed>::expand(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, unsigned long)",
+          82303,
+          0.133747682
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          5926,
+          0.130118681
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          5926,
+          0.110524245
+        ],
+        [
+          "FIDESlib::add_(void **, void **, int)",
+          18289,
+          0.109071007
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          7449,
+          0.096632515
+        ],
+        [
+          "void FIDESlib::CKKS::Scalar_mult_<(FIDESlib::ALGO)4>(void **, const unsigned long *, int, const unsigned long *)",
+          12966,
+          0.076167407
+        ],
+        [
+          "FIDESlib::CKKS::dotProductLtBatchedPt2___(void ***, void ***, void ***, void ***, void ***, int, int, int, int)",
+          256,
+          0.066221691
+        ],
+        [
+          "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+          7449,
+          0.05491602
+        ],
+        [
+          "FIDESlib::CKKS::Mult_(void **, void **, void **, int)",
+          8424,
+          0.041959975
+        ],
+        [
+          "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+          4162,
+          0.029539902
+        ],
+        [
+          "FIDESlib::CKKS::eval_linear_w_sum_(int, void **, void ***, unsigned long *, int)",
+          480,
+          0.020887724
+        ],
+        [
+          "void FIDESlib::INTT_<unsigned long, (bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+          4162,
+          0.0173601
+        ],
+        [
+          "FIDESlib::CKKS::binomialMult_(int, void **, void **, void **, void **, void **)",
+          599,
+          0.00866735
+        ],
+        [
+          "FIDESlib::scalar_add_(void **, unsigned long *, int)",
+          891,
+          0.007535104
+        ],
+        [
+          "FIDESlib::CKKS::binomialSquare_(int, void **, void **, void **)",
+          434,
+          0.005889044
+        ],
+        [
+          "FIDESlib::sub_(void **, void **, int)",
+          514,
+          0.004449796
+        ],
+        [
+          "FIDESlib::CKKS::scaleByP_(void **, int)",
+          256,
+          0.00431972
+        ],
+        [
+          "<unnamed>::map_ntt(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, bool)",
+          1012,
+          0.001824558
+        ],
+        [
+          "FIDESlib::CKKS::broadcastLimb0_(void **)",
+          32,
+          0.000578563
+        ]
+      ],
+      "runtime_totals": [
+        [
+          "cudaDeviceSynchronize_v3020",
+          54601,
+          2.65109127
+        ],
+        [
+          "cudaLaunchKernel_v7000",
+          310311,
+          1.214975806
+        ],
+        [
+          "cudaMallocAsync_v11020",
+          17789,
+          0.350996485
+        ],
+        [
+          "cudaMemcpyAsync_v3020",
+          39500,
+          0.269874993
+        ],
+        [
+          "cudaMemcpy_v3020",
+          3772,
+          0.184427624
+        ],
+        [
+          "cudaStreamWaitEvent_v3020",
+          253889,
+          0.164309362
+        ],
+        [
+          "cudaEventRecordWithFlags_v11010",
+          191140,
+          0.133862911
+        ],
+        [
+          "cudaStreamSynchronize_v3020",
+          3893,
+          0.081598225
+        ],
+        [
+          "cudaGraphLaunch_v10000",
+          3848,
+          0.053815389
+        ],
+        [
+          "cudaGraphInstantiateWithFlags_v11040",
+          79,
+          0.02788563
+        ],
+        [
+          "cuKernelGetName",
+          310311,
+          0.019337584
+        ],
+        [
+          "cudaFreeAsync_v11020",
+          17736,
+          0.013313776
+        ],
+        [
+          "cudaMemsetAsync_v3020",
+          3840,
+          0.011229785
+        ],
+        [
+          "cudaStreamEndCapture_v10000",
+          79,
+          0.005575117
+        ],
+        [
+          "cudaEventCreateWithFlags_v3020",
+          4226,
+          0.002659131
+        ],
+        [
+          "cudaEventDestroy_v3020",
+          3848,
+          0.001714774
+        ],
+        [
+          "cudaMalloc_v3020",
+          4,
+          0.000762222
+        ],
+        [
+          "cudaMemcpyToSymbolAsync_v3020",
+          33,
+          0.000523113
+        ],
+        [
+          "cudaStreamBeginCapture_v10000",
+          79,
+          0.000363697
+        ],
+        [
+          "cuLibraryLoadData",
+          2,
+          0.000124522
+        ],
+        [
+          "cudaEventRecord_v3020",
+          64,
+          3.2196e-05
+        ],
+        [
+          "cuLibraryGetKernel",
+          27,
+          2.5479e-05
+        ],
+        [
+          "cuProfilerStart",
+          1,
+          7.291e-06
+        ]
+      ]
+    }
+  },
+  "limits": "Four selected rescale NTT launches and one instrumented prefix per arm. Clocks are unmodified. NCU replay and Nsight overhead exclude these timings from adoption. Kernel sums can overlap. GPU interval union is recorded activity, not SM utilization or a wall-time decomposition."
+}

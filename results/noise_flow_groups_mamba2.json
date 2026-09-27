@@ -1,5 +1,5 @@
 {
-  "checkpoint": "/home/hosi/cipher/checkpoints/mamba2-130m-hf",
+  "checkpoint": "${HOME}/cipher/checkpoints/mamba2-130m-hf",
   "device": "cuda",
   "elapsed_seconds": 15.157216880004853,
   "format": "fhemamba-noise-flow-v2",
@@ -1688,7 +1688,7 @@
     "probes": 3
   },
   "repo_commit": "68a52d44868cb1856a6caba0b0d3af507b96f353",
-  "state_scales_artifact": "/home/hosi/cipher/fhemamba/results/dgx/m2_chain_structural-singlebts-i1-l24t2-v1-cache5_l24_t2.json",
+  "state_scales_artifact": "${HOME}/cipher/fhemamba/results/dgx/m2_chain_structural-singlebts-i1-l24t2-v1-cache5_l24_t2.json",
   "top_normalized_state_groups": [
     {
       "boundary_gain": 21.881739298502605,

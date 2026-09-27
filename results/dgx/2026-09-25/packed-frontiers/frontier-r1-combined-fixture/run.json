@@ -4,9 +4,9 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/layout-batch-20260925/frontier-r1/build/packed_fideslib",
-    "/home/kataiwa/fhemamba/layout-batch-20260925/layout-fixture/program.txt",
-    "/home/kataiwa/fhemamba/layout-batch-20260925/frontier-r1-combined-fixture/native.json",
+    "${HOME}/fhemamba/layout-batch-20260925/frontier-r1/build/packed_fideslib",
+    "${HOME}/fhemamba/layout-batch-20260925/layout-fixture/program.txt",
+    "${HOME}/fhemamba/layout-batch-20260925/frontier-r1-combined-fixture/native.json",
     ".001",
     ".001",
     "--planned-refresh",
@@ -51,7 +51,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS": "4"
   },
   "source_manifest_sha256": "41bd3967ab8421b06f289970b824546cb44304378bd2ce596973a8fe21b2913f",
@@ -63,7 +63,7 @@
     "--defer-layout",
     "--frontier-refresh"
   ],
-  "payload": "/home/kataiwa/fhemamba/layout-batch-20260925/layout-fixture",
+  "payload": "${HOME}/fhemamba/layout-batch-20260925/layout-fixture",
   "manifest_sha256": "2427a3e4073a2d12b4645c215b9d4ee6c17d1c414cebaeae72d2ac6b8d72ac84",
   "program_sha256": "507cbef0ec06ad65a90c7779b5caa03869e96594df6634996f94a3be02aa33a5",
   "campaign_sha256": "b816a2484e11bab52a68b983fd2610a6e09b53acdd089de6c44bca6b7affc506",

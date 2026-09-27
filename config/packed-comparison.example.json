@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "metric": "eval_seconds",
+  "equal": [
+    "security", "slots", "ring_dimension", "refresh_ring_dimension",
+    "depth", "scale_bits", "generated_token_ids", "bootstrap_passes"
+  ],
+  "require": {"passed": true, "evaluation_decryptions": 0, "non_finite": 0},
+  "maximum": {"max_abs_error_vs_exact": 0.001, "max_abs_error_vs_polynomial": 0.001},
+  "minimum_reduction": 0.03
+}

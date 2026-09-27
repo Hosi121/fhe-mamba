@@ -4,8 +4,8 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/packed_plaintext_probe",
-    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/probe-mamba2/native.json",
+    "${HOME}/fhemamba/borrowed-plaintext-20260924/build/packed_plaintext_probe",
+    "${HOME}/fhemamba/borrowed-plaintext-20260924/probe-mamba2/native.json",
     "--mamba2"
   ],
   "started_utc": "2026-09-24T08:35:48.888218+00:00",
@@ -33,7 +33,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS": "4"
   },
   "source_manifest_sha256": "b92f3ff75dbed84f5295d309539ad6dadecec12a0bb66b703eeeb92f03e857c9",

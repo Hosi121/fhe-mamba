@@ -4,8 +4,8 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build/packed_plaintext_probe",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/probe-mamba2/native.json",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/build/packed_plaintext_probe",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/probe-mamba2/native.json",
     "--mamba2"
   ],
   "started_utc": "2026-09-24T08:06:18.384751+00:00",
@@ -33,7 +33,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS": "4"
   },
   "source_manifest_sha256": "c651dc3110a67b0ac3f01a704329acc4211a21d9465b81789dbac48028c0dec6",

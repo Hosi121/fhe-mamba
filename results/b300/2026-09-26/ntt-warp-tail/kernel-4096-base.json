@@ -1,0 +1,11 @@
+{
+  "name": "kernel-4096-base",
+  "command": [
+    "/study/bin/base/ntt_warp_tail",
+    "/study/kernel-4096-base/probe.json",
+    "/study/golden/ring-4096.bin",
+    "4096",
+    "--record"
+  ],
+  "timeout": 1200
+}

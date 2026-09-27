@@ -1,0 +1,118 @@
+{
+  "scope": "Static metadata; includes dead nodes; no coefficient changes or speed estimate",
+  "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "polynomial_nodes": 785,
+  "declared_degrees": {
+    "7": 15,
+    "15": 145,
+    "31": 425,
+    "63": 135,
+    "127": 5,
+    "255": 30,
+    "511": 25,
+    "1023": 5
+  },
+  "widths": {
+    "1": 245,
+    "24": 240,
+    "32": 60,
+    "768": 120,
+    "1536": 120
+  },
+  "even_declared_degree": 0,
+  "exact_even_degree": 0,
+  "significant_even_degree_1e14_screen": 25,
+  "sos_direct_power_of_two_degree": 0,
+  "shapes": [
+    {
+      "width": 1,
+      "degree": 15,
+      "nodes": 50
+    },
+    {
+      "width": 1,
+      "degree": 31,
+      "nodes": 150
+    },
+    {
+      "width": 1,
+      "degree": 63,
+      "nodes": 45
+    },
+    {
+      "width": 24,
+      "degree": 7,
+      "nodes": 15
+    },
+    {
+      "width": 24,
+      "degree": 15,
+      "nodes": 85
+    },
+    {
+      "width": 24,
+      "degree": 31,
+      "nodes": 75
+    },
+    {
+      "width": 24,
+      "degree": 63,
+      "nodes": 5
+    },
+    {
+      "width": 24,
+      "degree": 255,
+      "nodes": 30
+    },
+    {
+      "width": 24,
+      "degree": 511,
+      "nodes": 25
+    },
+    {
+      "width": 24,
+      "degree": 1023,
+      "nodes": 5
+    },
+    {
+      "width": 32,
+      "degree": 31,
+      "nodes": 35
+    },
+    {
+      "width": 32,
+      "degree": 63,
+      "nodes": 25
+    },
+    {
+      "width": 768,
+      "degree": 15,
+      "nodes": 10
+    },
+    {
+      "width": 768,
+      "degree": 31,
+      "nodes": 100
+    },
+    {
+      "width": 768,
+      "degree": 63,
+      "nodes": 10
+    },
+    {
+      "width": 1536,
+      "degree": 31,
+      "nodes": 65
+    },
+    {
+      "width": 1536,
+      "degree": 63,
+      "nodes": 50
+    },
+    {
+      "width": 1536,
+      "degree": 127,
+      "nodes": 5
+    }
+  ]
+}

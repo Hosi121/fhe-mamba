@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "command": [
+    "${python}", "${repo}/experiments/run_packed_probe.py",
+    "--binary", "${binary}", "--payload", "${payload}",
+    "--output", "${output}/validation.json",
+    "--security", "128-classic", "--security-digits", "4",
+    "--planned-refresh", "--batch-refresh", "--timeout", "3600"
+  ],
+  "cwd": "${repo}",
+  "env": {"CUDA_VISIBLE_DEVICES": "${gpu}"},
+  "inputs": {"binary": "${binary}", "program": "${payload}/program.txt"},
+  "timeout_seconds": 3900
+}

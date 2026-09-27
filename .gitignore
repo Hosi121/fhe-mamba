@@ -13,6 +13,8 @@ checkpoints/
 dist/
 logs/
 runs/
+.local/
+config/local/
 slurm/*.out
 slurm/*.err
 experiments/slurm/*.out

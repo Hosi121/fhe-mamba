@@ -7,7 +7,7 @@ All four actual generated IDs match, and the candidate's maximum hidden error
 is **8.83e-5** versus exact FP64, below the unchanged 0.001 gate. Each full mode
 was measured once; a shorter same-binary ABBA comparison also passes.
 
-[Raw runs, comparison script and frozen sources](../../results/dgx/2026-09-24/mamba3-gpu-encoding/).
+[Raw runs, comparison results and frozen sources](../../results/dgx/2026-09-24/mamba3-gpu-encoding/).
 
 ## What changed
 
@@ -173,16 +173,15 @@ long-context accuracy or process-isolation/security claims.
 The final bridge is opt-in. Build the normal packed target and enable
 `--gpu-plaintext-ntt` with the existing planned/batched refresh and in-place
 options. The standalone GPU gate is `packed_plaintext_probe OUTPUT.json`.
-The retained `run_final.sh` and `run_comparison.py` record exact measured
-launches; replace their machine-specific paths and CPU IDs before reuse.
+Recorded job arguments identify the measured launch configuration. Supply
+paths and CPU placement through local settings when running a new comparison.
 The input payloads and their derivations are referenced from earlier evidence,
 and every result is bound to program, manifest and executable hashes.
 
-Run `compare.py` in the retained evidence directory to recheck raw result
-hashes, exact source archives, invariant operation counts, token/error gates
-and the derived metrics. Local checks and target build identities are retained
-separately. The first failed allocation is part of the experiment, not omitted
-from runtime accounting.
+Use the [shared evidence/comparison tools](../experiments.md) to verify public
+hashes and apply an explicit contract to invariant counts and token/error gates.
+Local checks and target build identities are retained separately. The first
+failed allocation remains part of the evidence.
 
 Local formatting/lint and **280 Python tests, including the 16 native CPU
 contracts**, pass. The final GPU probe checks 160 cases at all four NTT batch

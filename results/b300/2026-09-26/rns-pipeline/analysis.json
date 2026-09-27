@@ -1,0 +1,292 @@
+{
+  "stage1": {
+    "state": "completed",
+    "decision": "reject: full reduction does not exceed 0.5%",
+    "samples": {
+      "prefix": {
+        "base": {
+          "eval_seconds": [
+            12.424996826,
+            12.288636794
+          ],
+          "mean_eval_seconds": 12.35681681,
+          "mean_setup_seconds": 77.0460368315,
+          "mean_bootstrap_seconds": 1.292488905,
+          "mean_plaintext_upload_seconds": 1.0242887155,
+          "mean_host_encoding_seconds": 5.764067121,
+          "mean_mask_preparation_seconds": 0.213050768,
+          "process_wall_seconds": [
+            95.64591376087628,
+            95.905012215022
+          ],
+          "mean_process_wall_seconds": 95.77546298794914,
+          "mean_ordinary_seconds": 11.064327904999999,
+          "max_abs_error_vs_polynomial": 7.30387513997e-07,
+          "max_abs_error_vs_exact": 1.97143960707e-05,
+          "host_encodes": 3894,
+          "compact_rns_encodes": 3771,
+          "compact_rns_uploads": 3771,
+          "generated_token_ids": [
+            6864,
+            6864
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 16
+        },
+        "candidate": {
+          "eval_seconds": [
+            12.089631612,
+            8.436052511
+          ],
+          "mean_eval_seconds": 10.262842061499999,
+          "mean_setup_seconds": 75.788843895,
+          "mean_bootstrap_seconds": 1.199874004,
+          "mean_plaintext_upload_seconds": 0.62283232,
+          "mean_host_encoding_seconds": 4.4435137085,
+          "mean_mask_preparation_seconds": 0.2061398155,
+          "process_wall_seconds": [
+            95.23376410314813,
+            89.8256311470177
+          ],
+          "mean_process_wall_seconds": 92.52969762508292,
+          "mean_ordinary_seconds": 9.062968057500001,
+          "max_abs_error_vs_polynomial": 1.04711280172e-06,
+          "max_abs_error_vs_exact": 1.95010266308e-05,
+          "host_encodes": 3894,
+          "compact_rns_encodes": 3771,
+          "compact_rns_uploads": 3771,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 3771,
+          "generated_token_ids": [
+            6864,
+            6864
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 16
+        }
+      },
+      "full": {
+        "base": {
+          "eval_seconds": [
+            170.547219905,
+            166.369537257
+          ],
+          "mean_eval_seconds": 168.45837858099998,
+          "mean_setup_seconds": 73.7810835745,
+          "mean_bootstrap_seconds": 38.016340213,
+          "mean_plaintext_upload_seconds": 16.815620844999998,
+          "mean_host_encoding_seconds": 61.980140429,
+          "mean_mask_preparation_seconds": 4.190794342,
+          "process_wall_seconds": [
+            274.41318288818,
+            271.63881557411514
+          ],
+          "mean_process_wall_seconds": 273.0259992311476,
+          "mean_ordinary_seconds": 130.442038368,
+          "max_abs_error_vs_polynomial": 3.62017351208e-07,
+          "max_abs_error_vs_exact": 4.68509762346e-05,
+          "host_encodes": 78369,
+          "compact_rns_encodes": 75712,
+          "compact_rns_uploads": 75712,
+          "generated_token_ids": [
+            315,
+            279,
+            1614,
+            315
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 484,
+          "seconds_per_generated_token": 42.114594645249994,
+          "wall_seconds_per_generated_token": 68.2564998077869
+        },
+        "candidate": {
+          "eval_seconds": [
+            228.916658062,
+            228.740049997
+          ],
+          "mean_eval_seconds": 228.82835402950002,
+          "mean_setup_seconds": 76.17726975900001,
+          "mean_bootstrap_seconds": 44.803568796,
+          "mean_plaintext_upload_seconds": 13.4633757595,
+          "mean_host_encoding_seconds": 114.50753962350001,
+          "mean_mask_preparation_seconds": 4.621482519,
+          "process_wall_seconds": [
+            336.080851926934,
+            336.19724588491954
+          ],
+          "mean_process_wall_seconds": 336.13904890592676,
+          "mean_ordinary_seconds": 184.0247852335,
+          "max_abs_error_vs_polynomial": 5.45193359347e-07,
+          "max_abs_error_vs_exact": 4.69063481123e-05,
+          "host_encodes": 78369,
+          "compact_rns_encodes": 75712,
+          "compact_rns_uploads": 75712,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 75712,
+          "generated_token_ids": [
+            315,
+            279,
+            1614,
+            315
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 484,
+          "seconds_per_generated_token": 57.207088507375005,
+          "wall_seconds_per_generated_token": 84.03476222648169
+        }
+      }
+    },
+    "exact_cases": 1920,
+    "encrypted_cases": 72
+  },
+  "stage2": {
+    "state": "completed",
+    "decision": "adopt",
+    "samples": {
+      "prefix": {
+        "baseline": {
+          "eval_seconds": [
+            12.503265171,
+            8.663552571
+          ],
+          "mean_eval_seconds": 10.583408871,
+          "mean_setup_seconds": 73.206085951,
+          "mean_bootstrap_seconds": 1.2018706435,
+          "mean_plaintext_upload_seconds": 0.973188908,
+          "mean_host_encoding_seconds": 4.4355588820000005,
+          "mean_mask_preparation_seconds": 0.2055225905,
+          "process_wall_seconds": [
+            96.2945142290555,
+            83.33736252202652
+          ],
+          "mean_process_wall_seconds": 89.81593837554101,
+          "mean_ordinary_seconds": 9.381538227500002,
+          "max_abs_error_vs_polynomial": 8.45164118718e-07,
+          "max_abs_error_vs_exact": 1.96664842784e-05,
+          "host_encodes": 3894,
+          "compact_rns_encodes": 3771,
+          "compact_rns_uploads": 3771,
+          "generated_token_ids": [
+            6864,
+            6864
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 16
+        },
+        "candidate": {
+          "eval_seconds": [
+            10.415975602,
+            10.374354176
+          ],
+          "mean_eval_seconds": 10.395164889,
+          "mean_setup_seconds": 77.1095637925,
+          "mean_bootstrap_seconds": 1.279784182,
+          "mean_plaintext_upload_seconds": 1.1302691610000002,
+          "mean_host_encoding_seconds": 5.288138207499999,
+          "mean_mask_preparation_seconds": 0.1890536155,
+          "mean_prefetch_wait_seconds": 1.232694536,
+          "process_wall_seconds": [
+            93.62912070192397,
+            94.61929991887882
+          ],
+          "mean_process_wall_seconds": 94.1242103104014,
+          "mean_ordinary_seconds": 9.115380707,
+          "max_abs_error_vs_polynomial": 8.45703726049e-07,
+          "max_abs_error_vs_exact": 1.97761217295e-05,
+          "host_encodes": 3894,
+          "compact_rns_encodes": 3771,
+          "compact_rns_uploads": 3771,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 0,
+          "prefetched_encodes": 2562,
+          "prefetch_groups": 12,
+          "prefetch_peak_ready": 2,
+          "prefetch_max_item_bytes": 393216,
+          "generated_token_ids": [
+            6864,
+            6864
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 16
+        }
+      },
+      "full": {
+        "baseline": {
+          "eval_seconds": [
+            234.195144957,
+            235.480502008
+          ],
+          "mean_eval_seconds": 234.8378234825,
+          "mean_setup_seconds": 76.5142411555,
+          "mean_bootstrap_seconds": 45.089369171,
+          "mean_plaintext_upload_seconds": 19.667564102,
+          "mean_host_encoding_seconds": 114.360127614,
+          "mean_mask_preparation_seconds": 4.5183472815000005,
+          "process_wall_seconds": [
+            342.03139508282766,
+            343.0755758760497
+          ],
+          "mean_process_wall_seconds": 342.5534854794387,
+          "mean_ordinary_seconds": 189.7484543115,
+          "max_abs_error_vs_polynomial": 3.96600875696e-07,
+          "max_abs_error_vs_exact": 4.69323081536e-05,
+          "host_encodes": 78369,
+          "compact_rns_encodes": 75712,
+          "compact_rns_uploads": 75712,
+          "generated_token_ids": [
+            315,
+            279,
+            1614,
+            315
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 484,
+          "seconds_per_generated_token": 58.709455870625,
+          "wall_seconds_per_generated_token": 85.63837136985967
+        },
+        "candidate": {
+          "eval_seconds": [
+            202.634772446,
+            202.034989484
+          ],
+          "mean_eval_seconds": 202.334880965,
+          "mean_setup_seconds": 73.90719276749999,
+          "mean_bootstrap_seconds": 44.2266442195,
+          "mean_plaintext_upload_seconds": 22.062466204,
+          "mean_host_encoding_seconds": 110.27680394000001,
+          "mean_mask_preparation_seconds": 4.053840397,
+          "mean_prefetch_wait_seconds": 33.3911344975,
+          "process_wall_seconds": [
+            310.33238025498576,
+            291.05114031606354
+          ],
+          "mean_process_wall_seconds": 300.69176028552465,
+          "mean_ordinary_seconds": 158.1082367455,
+          "max_abs_error_vs_polynomial": 6.66589836162e-07,
+          "max_abs_error_vs_exact": 4.71226719494e-05,
+          "host_encodes": 78369,
+          "compact_rns_encodes": 75712,
+          "compact_rns_uploads": 75712,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 0,
+          "prefetched_encodes": 51240,
+          "prefetch_groups": 240,
+          "prefetch_peak_ready": 2,
+          "prefetch_max_item_bytes": 393216,
+          "generated_token_ids": [
+            315,
+            279,
+            1614,
+            315
+          ],
+          "evaluation_decryptions": 0,
+          "bootstraps": 484,
+          "seconds_per_generated_token": 50.58372024125,
+          "wall_seconds_per_generated_token": 75.17294007138116
+        }
+      }
+    },
+    "exact_cases": 2160,
+    "encrypted_cases": 81
+  }
+}

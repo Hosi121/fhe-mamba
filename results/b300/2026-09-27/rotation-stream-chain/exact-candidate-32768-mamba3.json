@@ -1,0 +1,10 @@
+{
+  "name": "exact-candidate-32768-mamba3",
+  "command": [
+    "/study/bin/candidate/rotation_probe",
+    "/study/exact-candidate-32768-mamba3/probe.json",
+    "32768",
+    "mamba3"
+  ],
+  "timeout": 1200
+}

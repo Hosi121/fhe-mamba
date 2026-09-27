@@ -1,0 +1,9 @@
+{
+  "name": "packaging-check",
+  "cpu_only": true,
+  "timeout": 600,
+  "command": [
+    "bash",
+    "/study/packaging-check.sh"
+  ]
+}

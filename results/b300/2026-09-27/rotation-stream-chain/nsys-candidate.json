@@ -1,0 +1,9 @@
+{
+  "name": "nsys-candidate",
+  "command": [
+    "bash",
+    "/study/profile-candidate.sh"
+  ],
+  "timeout": 1200,
+  "profile": true
+}

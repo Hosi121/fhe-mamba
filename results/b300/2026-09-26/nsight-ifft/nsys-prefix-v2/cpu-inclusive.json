@@ -1,0 +1,177 @@
+[
+  [
+    "[Broken backtraces]",
+    "[Broken backtraces]",
+    2253
+  ],
+  [
+    "PackedEvaluator::evaluate(fhemamba::PackedProgram const&)",
+    "/work/build/native/packed_fideslib",
+    1875
+  ],
+  [
+    "main",
+    "/work/build/native/packed_fideslib",
+    1834
+  ],
+  [
+    "0x78236ec841ca",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    1600
+  ],
+  [
+    "__libc_start_main",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    1575
+  ],
+  [
+    "_start",
+    "/work/build/native/packed_fideslib",
+    1460
+  ],
+  [
+    "lbcrypto::CKKSPackedEncoding::Encode()",
+    "/work/build/native/packed_fideslib",
+    1318
+  ],
+  [
+    "lbcrypto::DiscreteFourierTransform::FFTSpecialInv(std::vector<std::complex<double>, std::allocator<std::complex<double> > >&, unsigned int)",
+    "/work/build/native/packed_fideslib",
+    1307
+  ],
+  [
+    "PackedEvaluator::plain(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::vector<double, std::allocator<double> >, bool)",
+    "/work/build/native/packed_fideslib",
+    1277
+  ],
+  [
+    "lbcrypto::CryptoContextImpl<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > > >::MakeCKKSPackedPlaintext(std::vector<double, std::allocator<double> > const&, unsigned long, unsigned int, std::shared_ptr<lbcrypto::ILDCRTParams<bigintdyn::ubint<unsigned long> > >, unsigned int) const",
+    "/work/build/native/packed_fideslib",
+    954
+  ],
+  [
+    "fhemamba::CoefficientPlaintextEncoder::encode(std::vector<double, std::allocator<double> > const&, unsigned int, unsigned long) const",
+    "/work/build/native/packed_fideslib",
+    951
+  ],
+  [
+    "fhemamba::PlaintextPreparation::encode(std::vector<double, std::allocator<double> > const&, unsigned int, unsigned long, unsigned int)",
+    "/work/build/native/packed_fideslib",
+    920
+  ],
+  [
+    "PackedEvaluator::plain(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::vector<double, std::allocator<double> >, bool)::{lambda()#1}::operator()() const",
+    "/work/build/native/packed_fideslib",
+    920
+  ],
+  [
+    "lbcrypto::CryptoContextImpl<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > > >::MakeCKKSPackedPlaintextInternal(std::vector<std::complex<double>, std::allocator<std::complex<double> > > const&, unsigned long, unsigned int, std::shared_ptr<lbcrypto::ILDCRTParams<bigintdyn::ubint<unsigned long> > >, unsigned int) const",
+    "/work/build/native/packed_fideslib",
+    912
+  ],
+  [
+    "lbcrypto::CKKSPackedEncoding::FitToNativeVector(std::vector<long, std::allocator<long> > const&, long, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*) const",
+    "/work/build/native/packed_fideslib",
+    852
+  ],
+  [
+    "PackedEvaluator::linear(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, fhemamba::PackedNode const&, int, bool)",
+    "/work/build/native/packed_fideslib",
+    851
+  ],
+  [
+    "std::shared_ptr<fideslib::PlaintextImpl> fhemamba::MaskPlaintextCache<std::shared_ptr<fideslib::PlaintextImpl>, fhemamba::MaskFingerprint>::get<PackedEvaluator::plain(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::vector<double, std::allocator<double> >, bool)::{lambda()#1}&>(std::vector<double, std::allocator<double> > const&, unsigned int, PackedEvaluator::plain(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::vector<double, std::allocator<double> >, bool)::{lambda()#1}&)",
+    "/work/build/native/packed_fideslib",
+    838
+  ],
+  [
+    "PackedEvaluator::chebyshev(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, fhemamba::PackedNode const&, int)::{lambda(std::vector<double, std::allocator<double> >)#1}::operator()(std::vector<double, std::allocator<double> >) const",
+    "/work/build/native/packed_fideslib",
+    522
+  ],
+  [
+    "std::_Function_handler<std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > (std::vector<double, std::allocator<double> >), PackedEvaluator::chebyshev(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, fhemamba::PackedNode const&, int)::{lambda(std::vector<double, std::allocator<double> >)#1}>::_M_invoke(std::_Any_data const&, std::vector<double, std::allocator<double> >&&)",
+    "/work/build/native/packed_fideslib",
+    517
+  ],
+  [
+    "0x0",
+    "[Unknown]",
+    448
+  ],
+  [
+    "PackedEvaluator::gather(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::vector<double, std::allocator<double> > const&, int, bool)",
+    "/work/build/native/packed_fideslib",
+    401
+  ],
+  [
+    "PackedEvaluator::transform(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::map<int, std::vector<double, std::allocator<double> >, std::less<int>, std::allocator<std::pair<int const, std::vector<double, std::allocator<double> > > > > const&)",
+    "/work/build/native/packed_fideslib",
+    392
+  ],
+  [
+    "0x78236ecf6aa4",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    339
+  ],
+  [
+    "0x78236ed83c3c",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    339
+  ],
+  [
+    "GOMP_parallel",
+    "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+    323
+  ],
+  [
+    "__pthread_mutex_unlock",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    291
+  ],
+  [
+    "PackedEvaluator::chebyshev(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, fhemamba::PackedNode const&, int)",
+    "/work/build/native/packed_fideslib",
+    258
+  ],
+  [
+    "cudaDeviceSynchronize",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.88",
+    251
+  ],
+  [
+    "cuCtxSynchronize_v2",
+    "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+    247
+  ],
+  [
+    "0x78238040f57b",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.88",
+    247
+  ],
+  [
+    "0x78237a93aa7c",
+    "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+    245
+  ],
+  [
+    "0x78237a7aa6b9",
+    "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+    244
+  ],
+  [
+    "intnat::ChineseRemainderTransformFTTNat<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >::ForwardTransformToBitReverseInPlace(intnat::NativeIntegerT<unsigned long> const&, unsigned int, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*)",
+    "/work/build/native/packed_fideslib",
+    239
+  ],
+  [
+    "cudaLaunchKernel",
+    "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.88",
+    203
+  ],
+  [
+    "__pthread_mutex_lock",
+    "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    194
+  ]
+]

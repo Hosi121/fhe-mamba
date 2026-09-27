@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/program.txt",
+      "bytes": 1253433725,
+      "sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+      "actual_bytes": 1253433725,
+      "actual_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+      "passed": true
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/fixture.npz",
+      "bytes": 62850,
+      "sha256": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57",
+      "actual_bytes": 62850,
+      "actual_sha256": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57",
+      "passed": true
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/client_head.f32",
+      "bytes": 394002440,
+      "sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412",
+      "actual_bytes": 394002440,
+      "actual_sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412",
+      "passed": true
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/prefix/program.txt",
+      "bytes": 104154165,
+      "sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917",
+      "actual_bytes": 104154165,
+      "actual_sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917",
+      "passed": true
+    }
+  ]
+}

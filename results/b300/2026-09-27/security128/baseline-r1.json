@@ -1,0 +1,17 @@
+{
+  "state": "passed",
+  "completed": [
+    {
+      "name": "prefix-d4-r1",
+      "eval_seconds": 18.387754287,
+      "bootstrap_seconds": 1.98971679
+    },
+    {
+      "name": "full-d4-r1",
+      "eval_seconds": 327.508331253,
+      "bootstrap_seconds": 79.195500035
+    }
+  ],
+  "stage": "full-d4-r1",
+  "finished_at": 1790457285.0436442
+}

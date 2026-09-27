@@ -1,0 +1,1 @@
+{"mode":"write","benchmarks":[],"passed":true,"cases":240,"encoded_cases":192,"expected_scaling_failures":48,"coefficient_words":251658240,"all_words":251671504,"scope":"B300 CPU pinned FIDESlib OpenFHE coefficient-root Encode; two rings and real/complex contexts; no GPU or model timing in this probe."}

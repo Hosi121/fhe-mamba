@@ -1,0 +1,382 @@
+{
+  "passed": true,
+  "changed_members": [
+    "dftransform.cpp.o"
+  ],
+  "base_path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEcore_static.a",
+  "candidate_path": "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+  "base": [
+    {
+      "name": "constants-lattice-impl.cpp.o",
+      "bytes": 23368,
+      "sha256": "619bf970be27a7b9a9e1671de4d566b7b9744f9e491d7373177aa0d563e425fb"
+    },
+    {
+      "name": "lattice.cpp.o",
+      "bytes": 1576344,
+      "sha256": "414c587a7553f56fbbf0fb234723e5a6d6dbb38f8ba92d29975ce001155d74e4"
+    },
+    {
+      "name": "stdlatticeparms.cpp.o",
+      "bytes": 42944,
+      "sha256": "77c8905cf29e484af070706aca6a66a4601853c9418fb60dc8e041331a4e3e98"
+    },
+    {
+      "name": "trapdoor-dcrtpoly.cpp.o",
+      "bytes": 696768,
+      "sha256": "b30e3b8edc3dd0a1ad68d8f70de88549c5f97a8714e2d5880ccbd917e2e25a95"
+    },
+    {
+      "name": "trapdoor-poly.cpp.o",
+      "bytes": 811896,
+      "sha256": "daf7007f0689c113fa929c56bad9fda148d74111f437b00e59f61aa267915253"
+    },
+    {
+      "name": "chebyshev.cpp.o",
+      "bytes": 22312,
+      "sha256": "9b28a2236382206c0081970ff136ad00cd4e7cc25ee9cba9c0efc10b4ed19e0f"
+    },
+    {
+      "name": "dftransform.cpp.o",
+      "bytes": 47416,
+      "sha256": "b39dbec8908187e079fec838a2b15a5af7c9db24f4ccc0680d53ea4708281cfe"
+    },
+    {
+      "name": "discretegaussiangeneratorgeneric.cpp.o",
+      "bytes": 45992,
+      "sha256": "c26fd8a40e8df1199af77a9b8c840ff57bcc25d6202b7d8b8993ca9bfad358f8"
+    },
+    {
+      "name": "distributiongenerator.cpp.o",
+      "bytes": 33848,
+      "sha256": "86f7877399a63b36cc94985265281aa5827c56b971388f6d6ea2f63664459fee"
+    },
+    {
+      "name": "be4-math-impl.cpp.o",
+      "bytes": 344296,
+      "sha256": "bf5ebec8660fd1089c7184acb24eeec9a0e2c9d9ac324883fc8e29d4d1fddb82"
+    },
+    {
+      "name": "mubintvecdyn.cpp.o",
+      "bytes": 147872,
+      "sha256": "feca7996698a59995abb615bea9c86802481d9d5ba5f7a15d3f795384b20a98b"
+    },
+    {
+      "name": "ubintdyn.cpp.o",
+      "bytes": 148824,
+      "sha256": "4b30f5ede33b7abd23101e63408031064a50171c212eb0c32959ee79ffb70c8d"
+    },
+    {
+      "name": "be2-math-impl.cpp.o",
+      "bytes": 944,
+      "sha256": "96110363c962105f2bc3b8c5d0ba84cdcf69e0891f2122a2d82e1cbaad4146ac"
+    },
+    {
+      "name": "mubintvecfxd.cpp.o",
+      "bytes": 944,
+      "sha256": "dd3ad66cd1bdfd073d6cde36ac58815f2853747237ac60e1b27ab957afcee373"
+    },
+    {
+      "name": "ubintfxd.cpp.o",
+      "bytes": 936,
+      "sha256": "33b8c29e7d73a21ed99472b439d32b3c0e997cb9b51058f4b796d22402e3d8ba"
+    },
+    {
+      "name": "be6-math-impl.cpp.o",
+      "bytes": 944,
+      "sha256": "1d2fb45f049c757a4248afce96e78700f52c114b0992b5144a18e9b0aa177a5c"
+    },
+    {
+      "name": "mubintvecntl.cpp.o",
+      "bytes": 944,
+      "sha256": "63df0bab415b087790292307a3debca9b19801c2a747d16fcb8f1ede1149fdbe"
+    },
+    {
+      "name": "ubintntl.cpp.o",
+      "bytes": 936,
+      "sha256": "dcde32b49112bb5db0a4b1b5266b5bd932915350a662ecd7e60b0dc0f544af55"
+    },
+    {
+      "name": "benative-math-impl.cpp.o",
+      "bytes": 319328,
+      "sha256": "8660521c6895a2b3932d9cefed02d01ad521578818ffe8071e970516448b84cb"
+    },
+    {
+      "name": "mubintvecnat.cpp.o",
+      "bytes": 123904,
+      "sha256": "941fd234755a74607649a5607b711e12044ed1fb0e96e246d3548784eed9d3ba"
+    },
+    {
+      "name": "hermite.cpp.o",
+      "bytes": 31272,
+      "sha256": "f6981f70023eaa7ec2dae0595068c5a54564e73e3ef02459cb2291622b9188fe"
+    },
+    {
+      "name": "matrix.cpp.o",
+      "bytes": 231328,
+      "sha256": "4a729ddf1bcd97665d9fd1b55218726329547c5c165e8d9ffc5a706b8da414f7"
+    },
+    {
+      "name": "nbtheory2.cpp.o",
+      "bytes": 48256,
+      "sha256": "4c26d705200b00f4fb28f7751614fe33610d55b5e481479eb057409b77a8b609"
+    },
+    {
+      "name": "blockAllocator.cpp.o",
+      "bytes": 22480,
+      "sha256": "1514305346c0b688623accf8958f85f9d16ee017e33c151eaaf714a71d3bd154"
+    },
+    {
+      "name": "xallocator.cpp.o",
+      "bytes": 29376,
+      "sha256": "8a6186188d818376f912aa39d25e1fd34a4370118d6b9254953b8885608491c3"
+    },
+    {
+      "name": "debug.cpp.o",
+      "bytes": 1920,
+      "sha256": "721da998193f6372d93eb68778bfca37e766da09dfbe58120f86bcd0e1f0d906"
+    },
+    {
+      "name": "demangle.cpp.o",
+      "bytes": 4152,
+      "sha256": "d7ca8b50ffe9ca6c51b8793f3771fbeea92e4ce6dc598c15898e1b562596ee9b"
+    },
+    {
+      "name": "get-call-stack.cpp.o",
+      "bytes": 5896,
+      "sha256": "5578acd76a9781ba970171648e18477b61c8e40c801df76fe7ba7fbea0f20934"
+    },
+    {
+      "name": "hashutil.cpp.o",
+      "bytes": 15864,
+      "sha256": "1fa4c6aab9208b2999f2f06868081d7ae38d694545ff0caff1b94f7de837c76b"
+    },
+    {
+      "name": "inttypes.cpp.o",
+      "bytes": 1856,
+      "sha256": "a6c63a878d529b5ae74232d330f10adb68e52cc8c38ff3f3467b74c095e160cf"
+    },
+    {
+      "name": "memory.cpp.o",
+      "bytes": 1280,
+      "sha256": "0e3c831dc4f1c951f61b63a3187217e18f8c62707ecb3f842f1d0f2675affa51"
+    },
+    {
+      "name": "openfhebase64.cpp.o",
+      "bytes": 1136,
+      "sha256": "b18e4182e67f8e12a46416b47349a7a272541cce177e5e4ff5103a2684dba10c"
+    },
+    {
+      "name": "parallel.cpp.o",
+      "bytes": 1864,
+      "sha256": "eebded3d5a9c068a1b0f1bf237a414219020b15518a641026e789d0dc15a530c"
+    },
+    {
+      "name": "blake2b-ref.c.o",
+      "bytes": 11688,
+      "sha256": "dfd17cf6022de474a9a062f4843bc885d2520e3bc122f72bdfa124e8ef77ad0c"
+    },
+    {
+      "name": "blake2engine.cpp.o",
+      "bytes": 26072,
+      "sha256": "3135e92232300dee382747bdfaf4ef2bb38d95297edb643c578b602d02eebbfd"
+    },
+    {
+      "name": "blake2xb-ref.c.o",
+      "bytes": 3880,
+      "sha256": "da6229368e184462f48dd766647dd81f9abedfd121bf18083d2a7f1d1f051054"
+    },
+    {
+      "name": "utilities.cpp.o",
+      "bytes": 1792,
+      "sha256": "1b0634411ef7d270a34c5c2e167f960b56f64a92b5198084d25512320ee0a242"
+    }
+  ],
+  "candidate": [
+    {
+      "name": "constants-lattice-impl.cpp.o",
+      "bytes": 23368,
+      "sha256": "619bf970be27a7b9a9e1671de4d566b7b9744f9e491d7373177aa0d563e425fb"
+    },
+    {
+      "name": "lattice.cpp.o",
+      "bytes": 1576344,
+      "sha256": "414c587a7553f56fbbf0fb234723e5a6d6dbb38f8ba92d29975ce001155d74e4"
+    },
+    {
+      "name": "stdlatticeparms.cpp.o",
+      "bytes": 42944,
+      "sha256": "77c8905cf29e484af070706aca6a66a4601853c9418fb60dc8e041331a4e3e98"
+    },
+    {
+      "name": "trapdoor-dcrtpoly.cpp.o",
+      "bytes": 696768,
+      "sha256": "b30e3b8edc3dd0a1ad68d8f70de88549c5f97a8714e2d5880ccbd917e2e25a95"
+    },
+    {
+      "name": "trapdoor-poly.cpp.o",
+      "bytes": 811896,
+      "sha256": "daf7007f0689c113fa929c56bad9fda148d74111f437b00e59f61aa267915253"
+    },
+    {
+      "name": "chebyshev.cpp.o",
+      "bytes": 22312,
+      "sha256": "9b28a2236382206c0081970ff136ad00cd4e7cc25ee9cba9c0efc10b4ed19e0f"
+    },
+    {
+      "name": "dftransform.cpp.o",
+      "bytes": 50736,
+      "sha256": "dacbcf129f5acb1520dcdc632f6d02a0200b0cb8b423a6c864ebf5770c5a0487"
+    },
+    {
+      "name": "discretegaussiangeneratorgeneric.cpp.o",
+      "bytes": 45992,
+      "sha256": "c26fd8a40e8df1199af77a9b8c840ff57bcc25d6202b7d8b8993ca9bfad358f8"
+    },
+    {
+      "name": "distributiongenerator.cpp.o",
+      "bytes": 33848,
+      "sha256": "86f7877399a63b36cc94985265281aa5827c56b971388f6d6ea2f63664459fee"
+    },
+    {
+      "name": "be4-math-impl.cpp.o",
+      "bytes": 344296,
+      "sha256": "bf5ebec8660fd1089c7184acb24eeec9a0e2c9d9ac324883fc8e29d4d1fddb82"
+    },
+    {
+      "name": "mubintvecdyn.cpp.o",
+      "bytes": 147872,
+      "sha256": "feca7996698a59995abb615bea9c86802481d9d5ba5f7a15d3f795384b20a98b"
+    },
+    {
+      "name": "ubintdyn.cpp.o",
+      "bytes": 148824,
+      "sha256": "4b30f5ede33b7abd23101e63408031064a50171c212eb0c32959ee79ffb70c8d"
+    },
+    {
+      "name": "be2-math-impl.cpp.o",
+      "bytes": 944,
+      "sha256": "96110363c962105f2bc3b8c5d0ba84cdcf69e0891f2122a2d82e1cbaad4146ac"
+    },
+    {
+      "name": "mubintvecfxd.cpp.o",
+      "bytes": 944,
+      "sha256": "dd3ad66cd1bdfd073d6cde36ac58815f2853747237ac60e1b27ab957afcee373"
+    },
+    {
+      "name": "ubintfxd.cpp.o",
+      "bytes": 936,
+      "sha256": "33b8c29e7d73a21ed99472b439d32b3c0e997cb9b51058f4b796d22402e3d8ba"
+    },
+    {
+      "name": "be6-math-impl.cpp.o",
+      "bytes": 944,
+      "sha256": "1d2fb45f049c757a4248afce96e78700f52c114b0992b5144a18e9b0aa177a5c"
+    },
+    {
+      "name": "mubintvecntl.cpp.o",
+      "bytes": 944,
+      "sha256": "63df0bab415b087790292307a3debca9b19801c2a747d16fcb8f1ede1149fdbe"
+    },
+    {
+      "name": "ubintntl.cpp.o",
+      "bytes": 936,
+      "sha256": "dcde32b49112bb5db0a4b1b5266b5bd932915350a662ecd7e60b0dc0f544af55"
+    },
+    {
+      "name": "benative-math-impl.cpp.o",
+      "bytes": 319328,
+      "sha256": "8660521c6895a2b3932d9cefed02d01ad521578818ffe8071e970516448b84cb"
+    },
+    {
+      "name": "mubintvecnat.cpp.o",
+      "bytes": 123904,
+      "sha256": "941fd234755a74607649a5607b711e12044ed1fb0e96e246d3548784eed9d3ba"
+    },
+    {
+      "name": "hermite.cpp.o",
+      "bytes": 31272,
+      "sha256": "f6981f70023eaa7ec2dae0595068c5a54564e73e3ef02459cb2291622b9188fe"
+    },
+    {
+      "name": "matrix.cpp.o",
+      "bytes": 231328,
+      "sha256": "4a729ddf1bcd97665d9fd1b55218726329547c5c165e8d9ffc5a706b8da414f7"
+    },
+    {
+      "name": "nbtheory2.cpp.o",
+      "bytes": 48256,
+      "sha256": "4c26d705200b00f4fb28f7751614fe33610d55b5e481479eb057409b77a8b609"
+    },
+    {
+      "name": "blockAllocator.cpp.o",
+      "bytes": 22480,
+      "sha256": "1514305346c0b688623accf8958f85f9d16ee017e33c151eaaf714a71d3bd154"
+    },
+    {
+      "name": "xallocator.cpp.o",
+      "bytes": 29376,
+      "sha256": "8a6186188d818376f912aa39d25e1fd34a4370118d6b9254953b8885608491c3"
+    },
+    {
+      "name": "debug.cpp.o",
+      "bytes": 1920,
+      "sha256": "721da998193f6372d93eb68778bfca37e766da09dfbe58120f86bcd0e1f0d906"
+    },
+    {
+      "name": "demangle.cpp.o",
+      "bytes": 4152,
+      "sha256": "d7ca8b50ffe9ca6c51b8793f3771fbeea92e4ce6dc598c15898e1b562596ee9b"
+    },
+    {
+      "name": "get-call-stack.cpp.o",
+      "bytes": 5896,
+      "sha256": "5578acd76a9781ba970171648e18477b61c8e40c801df76fe7ba7fbea0f20934"
+    },
+    {
+      "name": "hashutil.cpp.o",
+      "bytes": 15864,
+      "sha256": "1fa4c6aab9208b2999f2f06868081d7ae38d694545ff0caff1b94f7de837c76b"
+    },
+    {
+      "name": "inttypes.cpp.o",
+      "bytes": 1856,
+      "sha256": "a6c63a878d529b5ae74232d330f10adb68e52cc8c38ff3f3467b74c095e160cf"
+    },
+    {
+      "name": "memory.cpp.o",
+      "bytes": 1280,
+      "sha256": "0e3c831dc4f1c951f61b63a3187217e18f8c62707ecb3f842f1d0f2675affa51"
+    },
+    {
+      "name": "openfhebase64.cpp.o",
+      "bytes": 1136,
+      "sha256": "b18e4182e67f8e12a46416b47349a7a272541cce177e5e4ff5103a2684dba10c"
+    },
+    {
+      "name": "parallel.cpp.o",
+      "bytes": 1864,
+      "sha256": "eebded3d5a9c068a1b0f1bf237a414219020b15518a641026e789d0dc15a530c"
+    },
+    {
+      "name": "blake2b-ref.c.o",
+      "bytes": 11688,
+      "sha256": "dfd17cf6022de474a9a062f4843bc885d2520e3bc122f72bdfa124e8ef77ad0c"
+    },
+    {
+      "name": "blake2engine.cpp.o",
+      "bytes": 26072,
+      "sha256": "3135e92232300dee382747bdfaf4ef2bb38d95297edb643c578b602d02eebbfd"
+    },
+    {
+      "name": "blake2xb-ref.c.o",
+      "bytes": 3880,
+      "sha256": "da6229368e184462f48dd766647dd81f9abedfd121bf18083d2a7f1d1f051054"
+    },
+    {
+      "name": "utilities.cpp.o",
+      "bytes": 1792,
+      "sha256": "1b0634411ef7d270a34c5c2e167f960b56f64a92b5198084d25512320ee0a242"
+    }
+  ]
+}

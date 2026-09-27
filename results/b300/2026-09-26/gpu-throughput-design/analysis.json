@@ -1,0 +1,295 @@
+{
+  "kind": "static derivation and analysis of existing measurements; no new GPU run",
+  "inputs_sha256": {
+    "results/b300/2026-09-26/nsight-ifft/nsys-prefix-v2/native.json": "fb1974e84f39a55b924538777a0a058b2897d9eb04c2d4f6c135cd63caf41754",
+    "results/b300/2026-09-26/nsight-ifft/nsys-prefix-v2/stats_cuda_gpu_kern_sum.csv": "3dd952e4f8d687d67778d74ad11e3a537522c444237a5de478292c86c7cd36db",
+    "results/b300/2026-09-26/nsight-ifft/full-1-candidate/native.json": "93b7c33325c23ac18c189f9e15f7c5067f6bd28f104f82a1fcbf4100bb8c489f",
+    "results/b300/2026-09-26/nsight-ifft/full-2-candidate/native.json": "e4b8d250226643a61a451c50eed6c94101066974073ec7f754749cef50c6c243",
+    "results/b300/2026-09-26/nsight-ifft/ncu-ntt/metrics.csv": "8036d1d870e3c69212e4718fea261aaa9ca83dd594899c7b0c8e901870ae09b9",
+    "results/b300/2026-09-26/nsight-ifft/nsys-prefix-v2/analysis.json": "20524ca9e5df7e1096dd6d5ff314e6de9cdd0f23a29bcf394fadb1fcc37d4f52",
+    "results/b300/2026-09-26/nsight-ifft/nsys-prefix-v2/stats_cuda_api_sum.csv": "94896bc73217812cd484ece4fc40d4aceccb4ed050029ab261a07080906069b7",
+    "results/b300/2026-09-26/mamba3-dual-ring/backend-source-verification.json": "3e41d2f1d150e40d80d32fe47357831af44352cfffd13f7cf8a3b2a4bbb94b92"
+  },
+  "full_candidate_means": {
+    "eval_seconds": 234.842279797,
+    "host_encoding_seconds": 114.372020677,
+    "plaintext_upload_seconds": 19.6712192715,
+    "upload_fraction_if_other_costs_fixed": 0.08376353392797922,
+    "encoding_fraction": 0.48701631058881006
+  },
+  "prefix_expansion": {
+    "ring_dimension": 32768,
+    "compact_plaintexts": 3771,
+    "inferred_existing_expansion_launches": 82303,
+    "proposed_all_limb_expansion_launches": 3771,
+    "launches_removed": 78532,
+    "expansion_launch_reduction_fraction": 0.9541815000668262,
+    "mean_limbs_per_plaintext": 21.825245293025723,
+    "proposed_ntt_fusion_removed_logical_intermediate_bytes": 43150475264,
+    "ideal_seconds_for_those_bytes_at_8TBps": 0.005393809408
+  },
+  "full_expansion": {
+    "ring_dimension": 32768,
+    "compact_plaintexts": 75712,
+    "inferred_existing_expansion_launches": 1368344,
+    "proposed_all_limb_expansion_launches": 75712,
+    "launches_removed": 1292632,
+    "expansion_launch_reduction_fraction": 0.9446688844325696,
+    "mean_limbs_per_plaintext": 18.073013524936602,
+    "proposed_ntt_fusion_removed_logical_intermediate_bytes": 717406339072,
+    "ideal_seconds_for_those_bytes_at_8TBps": 0.089675792384
+  },
+  "prefix_expansion_matches_cuda_trace": true,
+  "instrumented_prefix": {
+    "eval_seconds": 15.775732868,
+    "gpu_interval_union_seconds": 2.544831659,
+    "expansion_gpu_seconds_sum": 0.133876331,
+    "api": [
+      {
+        "Time (%)": "41.2",
+        "Total Time (ns)": "2133940482",
+        "Num Calls": "54601",
+        "Avg (ns)": "39082.4",
+        "Med (ns)": "12240.0",
+        "Min (ns)": "4422",
+        "Max (ns)": "2437154",
+        "StdDev (ns)": "103636.7",
+        "Name": "cudaDeviceSynchronize"
+      },
+      {
+        "Time (%)": "28.4",
+        "Total Time (ns)": "1472619157",
+        "Num Calls": "310311",
+        "Avg (ns)": "4745.6",
+        "Med (ns)": "4412.0",
+        "Min (ns)": "843",
+        "Max (ns)": "928463",
+        "StdDev (ns)": "3938.4",
+        "Name": "cudaLaunchKernel"
+      }
+    ]
+  },
+  "selected_rescale_ntt_launches": [
+    {
+      "id": "0",
+      "name": "void NTT_<0, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+      "block": "(128, 1, 1)",
+      "grid": "(32, 44, 1)",
+      "metrics": {
+        "DRAM Throughput": {
+          "value": "0.23",
+          "unit": "%"
+        },
+        "Duration": {
+          "value": "32.29",
+          "unit": "us"
+        },
+        "L1/TEX Cache Throughput": {
+          "value": "67.00",
+          "unit": "%"
+        },
+        "L2 Cache Throughput": {
+          "value": "7.04",
+          "unit": "%"
+        },
+        "Compute (SM) Throughput": {
+          "value": "48.15",
+          "unit": "%"
+        },
+        "Mem Busy": {
+          "value": "55.16",
+          "unit": "%"
+        },
+        "Max Bandwidth": {
+          "value": "17.57",
+          "unit": "%"
+        },
+        "Registers Per Thread": {
+          "value": "38",
+          "unit": "register/thread"
+        },
+        "Waves Per SM": {
+          "value": "0.79",
+          "unit": ""
+        },
+        "Theoretical Occupancy": {
+          "value": "75",
+          "unit": "%"
+        },
+        "Achieved Occupancy": {
+          "value": "44.76",
+          "unit": "%"
+        }
+      }
+    },
+    {
+      "id": "1",
+      "name": "void NTT_<1, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+      "block": "(64, 1, 1)",
+      "grid": "(64, 44, 1)",
+      "metrics": {
+        "DRAM Throughput": {
+          "value": "11.44",
+          "unit": "%"
+        },
+        "Duration": {
+          "value": "26.40",
+          "unit": "us"
+        },
+        "L1/TEX Cache Throughput": {
+          "value": "53.87",
+          "unit": "%"
+        },
+        "L2 Cache Throughput": {
+          "value": "8.76",
+          "unit": "%"
+        },
+        "Compute (SM) Throughput": {
+          "value": "42.49",
+          "unit": "%"
+        },
+        "Mem Busy": {
+          "value": "43.63",
+          "unit": "%"
+        },
+        "Max Bandwidth": {
+          "value": "15.56",
+          "unit": "%"
+        },
+        "Registers Per Thread": {
+          "value": "42",
+          "unit": "register/thread"
+        },
+        "Waves Per SM": {
+          "value": "0.95",
+          "unit": ""
+        },
+        "Theoretical Occupancy": {
+          "value": "62.50",
+          "unit": "%"
+        },
+        "Achieved Occupancy": {
+          "value": "44.40",
+          "unit": "%"
+        }
+      }
+    },
+    {
+      "id": "2",
+      "name": "void NTT_<0, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+      "block": "(128, 1, 1)",
+      "grid": "(32, 44, 1)",
+      "metrics": {
+        "DRAM Throughput": {
+          "value": "0.24",
+          "unit": "%"
+        },
+        "Duration": {
+          "value": "31.87",
+          "unit": "us"
+        },
+        "L1/TEX Cache Throughput": {
+          "value": "67.51",
+          "unit": "%"
+        },
+        "L2 Cache Throughput": {
+          "value": "6.96",
+          "unit": "%"
+        },
+        "Compute (SM) Throughput": {
+          "value": "47.71",
+          "unit": "%"
+        },
+        "Mem Busy": {
+          "value": "54.67",
+          "unit": "%"
+        },
+        "Max Bandwidth": {
+          "value": "17.42",
+          "unit": "%"
+        },
+        "Registers Per Thread": {
+          "value": "38",
+          "unit": "register/thread"
+        },
+        "Waves Per SM": {
+          "value": "0.79",
+          "unit": ""
+        },
+        "Theoretical Occupancy": {
+          "value": "75",
+          "unit": "%"
+        },
+        "Achieved Occupancy": {
+          "value": "44.80",
+          "unit": "%"
+        }
+      }
+    },
+    {
+      "id": "3",
+      "name": "void NTT_<1, 3, 1>(const Globals *, void **, int, void **, void **, int, void **, void **)",
+      "block": "(64, 1, 1)",
+      "grid": "(64, 44, 1)",
+      "metrics": {
+        "DRAM Throughput": {
+          "value": "11.72",
+          "unit": "%"
+        },
+        "Duration": {
+          "value": "25.79",
+          "unit": "us"
+        },
+        "L1/TEX Cache Throughput": {
+          "value": "53.65",
+          "unit": "%"
+        },
+        "L2 Cache Throughput": {
+          "value": "8.93",
+          "unit": "%"
+        },
+        "Compute (SM) Throughput": {
+          "value": "42.66",
+          "unit": "%"
+        },
+        "Mem Busy": {
+          "value": "43.80",
+          "unit": "%"
+        },
+        "Max Bandwidth": {
+          "value": "15.65",
+          "unit": "%"
+        },
+        "Registers Per Thread": {
+          "value": "42",
+          "unit": "register/thread"
+        },
+        "Waves Per SM": {
+          "value": "0.95",
+          "unit": ""
+        },
+        "Theoretical Occupancy": {
+          "value": "62.50",
+          "unit": "%"
+        },
+        "Achieved Occupancy": {
+          "value": "44.19",
+          "unit": "%"
+        }
+      }
+    }
+  ],
+  "inspected_backend_sources_sha256": {
+    "src/NTT.cu": "1d7674f5773c88ea3515871519206b5571dd9b112be91145f336063921801484",
+    "src/NTT.cuh": "bc36a8f3ccc3b354eee21de005760e6b3bcf1c1de530aa3e230633e8f06a819b",
+    "src/NTTfusions.cuh": "0be96ee7baf799acf3f813ea093bd60c58b27be15fd2fdb120a0621e166392b5",
+    "src/CKKS/LimbPartition.cu": "063336a48c4f9db6866d328fd9917b8d804cb5410975490b48a8107a6c633ce0"
+  },
+  "limits": [
+    "Profiler records precede the inverse-FFT plan; current GPU utilization needs a fresh profile.",
+    "Full expansion launches are derived from counters and source; only the prefix has a matching CUDA trace.",
+    "Removed intermediate bytes are logical accesses, not physical HBM traffic or an achieved saving.",
+    "8 TB/s is a published peak used for an ideal calculation, not measured sustained bandwidth.",
+    "Upload and encoding fractions are nested timers, not a complete disjoint time partition."
+  ]
+}

@@ -10,7 +10,7 @@ candidate passes in **1976.145 seconds** (32.94
 minutes). Mamba-2's full run establishes parity; its incremental speed claim
 uses the short ABBA.
 
-[Raw runs, exact source archive, target identity and comparison script](../../results/dgx/2026-09-24/borrowed-plaintext/).
+[Raw runs, exact source archive, target identity and comparison results](../../results/dgx/2026-09-24/borrowed-plaintext/).
 
 ## Mechanisms and dispatch
 

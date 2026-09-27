@@ -1,0 +1,49 @@
+{
+  "state": "completed",
+  "started_at_unix": 1790433119.1492927,
+  "spec": {
+    "name": "build-backend",
+    "cpu_only": true,
+    "build": true,
+    "timeout": 3600,
+    "command": [
+      "bash",
+      "/study/build-backend.sh"
+    ]
+  },
+  "docker_command": [
+    "docker",
+    "run",
+    "--name",
+    "cipher-ntt-build-backend",
+    "--user",
+    "1006:1006",
+    "--cpuset-cpus",
+    "64-79",
+    "--cpuset-mems",
+    "2",
+    "--shm-size",
+    "1g",
+    "--volume",
+    "${HOME}/fhemamba-b300:/workspace:ro",
+    "--volume",
+    "${HOME}/fhemamba-b300/b300-mamba3-20260926:/work:ro",
+    "--volume",
+    "${HOME}/fhemamba-b300/b300-gpu-followup-20260926:/study",
+    "--workdir",
+    "/study",
+    "--env",
+    "OMP_NUM_THREADS=4",
+    "--env",
+    "OMP_PROC_BIND=true",
+    "--env",
+    "OMP_PLACES={64},{66},{67},{68}",
+    "--env",
+    "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+    "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "bash",
+    "/study/build-backend.sh"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 182.84412463894114
+}

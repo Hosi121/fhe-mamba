@@ -3,11 +3,11 @@
   "version": "0.5.0",
   "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
   "source_sha256": {
-    "/home/hosi/cipher/fhemamba/experiments/probe_dissipative_ablation.py": "f471d93f2941c400958834eb2636e06e6566ad0bcf59934d0c18c129f4361011",
-    "/home/hosi/cipher/fhemamba/experiments/diagnose_payload_domain.py": "ba1e2685b8248e99143f069d5b9950559ee2dbdeb3eb4d3851fe1316abfb07af",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/ops.py": "06c14481bca6da390e163ccee07bf0805613b441dc8f6de47e9bb542b8e1a3e1",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/reference.py": "186276064ad2f2da532bf8bf0b2bb94156cff0ae86dbd5429f6c126882aeedf0",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/selective_gates.py": "e51c8b7d25c0908a3b4503035e5426f9d301f2690bd1e3f197b088a2a7e2d15a"
+    "${HOME}/cipher/fhemamba/experiments/probe_dissipative_ablation.py": "f471d93f2941c400958834eb2636e06e6566ad0bcf59934d0c18c129f4361011",
+    "${HOME}/cipher/fhemamba/experiments/diagnose_payload_domain.py": "ba1e2685b8248e99143f069d5b9950559ee2dbdeb3eb4d3851fe1316abfb07af",
+    "${HOME}/cipher/fhemamba/src/fhemamba/ops.py": "06c14481bca6da390e163ccee07bf0805613b441dc8f6de47e9bb542b8e1a3e1",
+    "${HOME}/cipher/fhemamba/src/fhemamba/reference.py": "186276064ad2f2da532bf8bf0b2bb94156cff0ae86dbd5429f6c126882aeedf0",
+    "${HOME}/cipher/fhemamba/src/fhemamba/selective_gates.py": "e51c8b7d25c0908a3b4503035e5426f9d301f2690bd1e3f197b088a2a7e2d15a"
   },
   "bundle_sha256": "c15a58e757b928881d11602f162ba095ac597c9de1cc23cb94a09d669cdaf743",
   "input_payload_sha256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",

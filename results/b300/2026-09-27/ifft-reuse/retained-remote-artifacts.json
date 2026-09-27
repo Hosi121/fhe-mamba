@@ -1,0 +1,22 @@
+[
+  {
+    "path": "${HOME}/fhemamba-b300/b300-ifft-reuse-20260927/bin/base/packed_fideslib",
+    "sha256": "f346a4a001b52f4606fbf97368ce49729f2dfaac7fb4e9c0e195bb4417031542",
+    "bytes": 17351920
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-ifft-reuse-20260927/bin/base/packed_rns_probe",
+    "sha256": "5e9f0a3b8d565d1589c4a92404fcbfae1ef7d346da2ef35c233f2dcaf4b5c857",
+    "bytes": 17060664
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-ifft-reuse-20260927/bin/candidate/packed_fideslib",
+    "sha256": "42ca12d3522aa6aa242c606bb93b7c38532025d6e9283571a7a8e9e4a79623be",
+    "bytes": 17359288
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-ifft-reuse-20260927/bin/candidate/packed_rns_probe",
+    "sha256": "fda1ee4dba45b0e8619e82a59178aea540cbf50147a918eefa81e6c65c33fdf2",
+    "bytes": 17072152
+  }
+]

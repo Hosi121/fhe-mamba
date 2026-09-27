@@ -1,0 +1,9 @@
+{
+  "name": "placement-probe",
+  "cpu_only": true,
+  "timeout": 120,
+  "command": [
+    "bash",
+    "/study/placement-probe.sh"
+  ]
+}

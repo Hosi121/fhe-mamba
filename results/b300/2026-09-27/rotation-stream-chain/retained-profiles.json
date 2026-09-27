@@ -1,0 +1,22 @@
+[
+  {
+    "path": "nsys-base-r2/trace.sqlite",
+    "bytes": 127201280,
+    "sha256": "7ac36506ab5989b2ddaaf6942f49c394c493c5682240970ecf0d81651476ec52"
+  },
+  {
+    "path": "nsys-base-r2/trace.nsys-rep",
+    "bytes": 46084492,
+    "sha256": "75b93d2fc3ed39e91e606ff178b915a23bb20ebfd3d6c0d50f5f327fb4d81f41"
+  },
+  {
+    "path": "nsys-candidate/trace.sqlite",
+    "bytes": 126103552,
+    "sha256": "53220ae5028f0b409617ed3a7b491f19f0d9e8d2c82155eba116b11d6695e56a"
+  },
+  {
+    "path": "nsys-candidate/trace.nsys-rep",
+    "bytes": 45720244,
+    "sha256": "7d5497355a813325099bfb17b6ce5aef5c47170b88d57a9bd4d9b75b23cfa696"
+  }
+]

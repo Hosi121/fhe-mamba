@@ -1,0 +1,54 @@
+{
+  "mechanism": "phase-shifted even EvalMod seed; one candidate",
+  "stage_order": [
+    "source-bound static screen",
+    "encrypted seed/EvalMod and dual-ring two-pass qualification",
+    "prefix A/B",
+    "one full A/B pair"
+  ],
+  "limits": {
+    "full_pairs": 1,
+    "automatic_repetitions": false,
+    "build_timeout_seconds": 1800,
+    "per_job_timeout_seconds": 1200,
+    "additional_search": "static source analysis until this candidate finishes; report ranked follow-ups"
+  },
+  "preserve": {
+    "model": "Mamba-3 SISO 187M frozen 12-layer five-evaluation payload",
+    "generated_ids": [
+      315,
+      279,
+      1614,
+      315
+    ],
+    "exact_and_polynomial_tolerance": 0.001,
+    "primitive_refresh_tolerance": 1e-06,
+    "seed_tolerance": 1e-08,
+    "evalmod_tolerance": 1e-06,
+    "rings": [
+      32768,
+      65536
+    ],
+    "scale_bits": 59,
+    "depth": 44,
+    "K": 512,
+    "double_angle": 6,
+    "bootstrap_passes": 2,
+    "outer_correction_multiplier": 4096,
+    "refresh_ceiling": 35,
+    "refreshed_level": 18,
+    "security": "not-set",
+    "secret": "UNIFORM_TERNARY",
+    "gpu": 4,
+    "cpu_mask": "64-68",
+    "numa": 2,
+    "OMP_NUM_THREADS": 4,
+    "prefetch_workers": 2
+  },
+  "engineering_promotion_screen": {
+    "full_reduction_at_least": 0.01,
+    "refresh_reduction_at_least": 0.03,
+    "all_correctness_and_metadata_checks": true,
+    "note": "Engineering screen for this optional dependency patch, not a user-mandated threshold or a statistical significance test."
+  }
+}

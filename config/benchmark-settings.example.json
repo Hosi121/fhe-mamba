@@ -1,0 +1,7 @@
+{
+  "repo": "/path/to/fhe-mamba",
+  "python": "/path/to/fhe-mamba/.venv/bin/python",
+  "binary": "/path/to/build/packed_fideslib",
+  "payload": "/path/to/exported-payload",
+  "gpu": "0"
+}

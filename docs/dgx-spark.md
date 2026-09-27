@@ -38,7 +38,7 @@ dependency and uses `~/fhemamba/spark/` for its own patched FIDESlib snapshot
 and kernel. No B300 container or Slurm allocation is needed. `BUILD_JOBS`
 defaults to 8. `FHEMAMBA_REMOTE_ROOT` overrides the default `~/fhemamba` root.
 
-The build verifies the source snapshot, runs the 21 C++ contract tests,
+The build verifies the source snapshot, runs the 22 C++ contract tests,
 and writes `spark/kernel/stage1_mamba2_decode_fideslib.build.json`. The runner
 checks hashes of the native sources/configuration, executable and OpenFHE
 shared libraries, and sets the matching library path. FIDESlib is linked
@@ -241,7 +241,7 @@ generated IDs unchanged and maximum polynomial-circuit error **0.011767 <= 0.05*
 It preserves the polynomial coefficients, ciphertext levels and bootstrap count.
 To use it, add `--joint-periodic-coefficients` to the command above, choose a
 new output directory and point `--remote-root` at a matching build. The measured
-candidate is `/home/kataiwa/fhemamba/gate-periodic-20260922`. The launcher records
+candidate is `${HOME}/fhemamba/gate-periodic-20260922`. The launcher records
 the requested mode and checks that the native result actually used it.
 The original root contains the baseline binary; it does not support the new mode.
 
@@ -250,7 +250,7 @@ the same request to **2,310.80 s (38.5 minutes, another 10.2%)**, with maximum
 polynomial-circuit error **0.016255 <= 0.05** and unchanged IDs, operation
 counts and levels. Add both `--joint-periodic-coefficients` and
 `--joint-subring-encoding`, choose a fresh output directory, and use
-`--remote-root /home/kataiwa/fhemamba/gate-subring-serial-20260922` for the
+`--remote-root ${HOME}/fhemamba/gate-subring-serial-20260922` for the
 measured build. This keeps the 50.6-minute and 42.9-minute baseline roots intact.
 The subring mode requires periodic coefficients; the launcher checks the
 reported native mode. The two dedicated campaign manifests are

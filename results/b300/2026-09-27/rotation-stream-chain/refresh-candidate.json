@@ -1,0 +1,9 @@
+{
+  "name": "refresh-candidate",
+  "command": [
+    "/study/bin/candidate/refresh_probe",
+    "/study/refresh-candidate/probe.json",
+    "qualification"
+  ],
+  "timeout": 1200
+}

@@ -1,0 +1,12 @@
+{
+  "name": "exact-batch-65536-mamba3",
+  "timeout": 1200,
+  "command": [
+    "/study/bin/stage1/packed_rns_probe",
+    "/study/exact-batch-65536-mamba3/probe.json",
+    "--ring",
+    "65536",
+    "--strategy",
+    "batch"
+  ]
+}

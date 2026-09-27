@@ -1,0 +1,6 @@
+{
+  "replacements": {
+    "your-private-hostname": "gpu-host",
+    "/path/to/private/workspace": "${WORKSPACE}"
+  }
+}

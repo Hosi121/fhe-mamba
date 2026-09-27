@@ -1,0 +1,32 @@
+[
+  {
+    "path": "bin/base/packed_fideslib",
+    "bytes": 17351920,
+    "sha256": "a2403042f0923528a0100bcea81350b0d33e85fff73fe48eb81a88811d596fb4"
+  },
+  {
+    "path": "bin/base/refresh_probe",
+    "bytes": 16957320,
+    "sha256": "cc3be2a9f834bd8c7b673c26522bdc6cbaaa06054ea1fcaca1b36210d93cdcf5"
+  },
+  {
+    "path": "bin/candidate/packed_fideslib",
+    "bytes": 17352328,
+    "sha256": "d58f93ad186ee5c5159d25ad2a929af98de52d9a522c6abbefa287a26ada607c"
+  },
+  {
+    "path": "bin/candidate/refresh_probe",
+    "bytes": 16957528,
+    "sha256": "7692d9125e893614e4bf480b921d3f92aefb2d9d3e203d8720dc54a2b70a2897"
+  },
+  {
+    "path": "lib/base/fideslib.a",
+    "bytes": 42309178,
+    "sha256": "6a922173cc35fd33c83bc20c8e3bad2a17b5ee08951b504d51f5987e77551066"
+  },
+  {
+    "path": "lib/candidate/fideslib.a",
+    "bytes": 42312934,
+    "sha256": "7bfa24264f694f92d5de334c2db4d39c3ce1c43d16e31d39a80caad964300f14"
+  }
+]

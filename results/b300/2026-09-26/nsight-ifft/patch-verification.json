@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "path": "src/core/include/math/dftransform.h",
+      "sha256": "e007705b528082fef7b9f39c51019a3e58ef5d1bd240f75dca762aed512e7686"
+    },
+    {
+      "path": "src/core/lib/math/dftransform.cpp",
+      "sha256": "d06310133dc8bdf28aaa1237e8c55b3c997b5c6ce8ae4bf50adbc2fbd94cd53c"
+    }
+  ],
+  "output": "patching file src/core/include/math/dftransform.h\npatching file src/core/lib/math/dftransform.cpp\n"
+}

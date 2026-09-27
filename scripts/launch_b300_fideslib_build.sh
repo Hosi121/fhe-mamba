@@ -4,9 +4,9 @@ set -euo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 source "${REPO_DIR}/scripts/b300_platform.sh"
 b300_load_platform "${REPO_DIR}"
-ROOT_DIR="${ROOT_DIR:-/home/kataiwa/fhemamba-b300}"
+ROOT_DIR="${ROOT_DIR:-${HOME}/fhemamba-b300}"
 IMAGE="${IMAGE:-${B300_IMAGE}}"
-GPU_DEVICE="${GPU_DEVICE:-3}"
+GPU_DEVICE="${GPU_DEVICE:?Set GPU_DEVICE to the GPU index reserved for this job}"
 FIDESLIB_SOURCE_NAME="${FIDESLIB_SOURCE_NAME:-FIDESlib}"
 B300_SYNC_PROFILE="${B300_SYNC_PROFILE:-${B300_DEFAULT_SYNC_PROFILE}}"
 BUILD_VARIANT="$(b300_variant "${B300_SYNC_PROFILE}")"
@@ -15,8 +15,8 @@ b300_assert_equal image "${IMAGE}" "${B300_IMAGE}"
 image_id="$(b300_image_id "${IMAGE}")"
 platform_config_sha256="$(sha256sum "${REPO_DIR}/config/b300-platform.env" | cut -d' ' -f1)"
 
-if [[ "${GPU_DEVICE}" != "2" && "${GPU_DEVICE}" != "3" ]]; then
-  echo "GPU_DEVICE must be 2 or 3" >&2
+if [[ ! "${GPU_DEVICE}" =~ ^[0-9]+$ ]]; then
+  echo "GPU_DEVICE must be a non-negative GPU index" >&2
   exit 2
 fi
 

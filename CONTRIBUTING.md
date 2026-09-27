@@ -30,13 +30,16 @@ OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
 
 GPU probes are separate because they require OpenFHE/FIDESlib, dedicated
 hardware, and substantial memory. A passing local suite does not validate an
-encrypted GPU claim. DGX Spark is the current platform; use the
-[Spark runbook](docs/dgx-spark.md). Historical B300 evidence recovery does not
-block new Spark experiments.
+encrypted GPU claim. Use the [Spark runbook](docs/dgx-spark.md) or the pinned
+CUDA 13 / SM103 build recorded in the
+[B300 study](docs/research/2026-09-26-b300-nsight-ifft.md).
+The older B300 build helpers target a different CUDA/SM configuration;
+historical evidence recovery remains separate from new measurements.
 
 ## Active code
 
-- `src/fhemamba/` and `native/fideslib_stage0/` are the active Mamba-2 path.
+- `src/fhemamba/` and `native/fideslib_stage0/` contain the active model paths
+  and shared arithmetic backend for Mamba-2 and Mamba-3 SISO.
 - All Python tests live in `tests/`; see the [repository map](docs/repository.md)
   for experiments, manifests, results and archives.
 - New Mamba-2 formula, lowering, packing, and runtime work belongs in the
@@ -63,10 +66,18 @@ PBI instead of reconstructing a fake backend artifact.
 
 ## Benchmark artifacts
 
-Write fresh output under ignored `runs/<experiment>/`. Use `results/` for
-reviewed, claim-bearing artifacts and preserve their original bytes. The
+Write fresh output under ignored `runs/<experiment>/`. Use the shared
+[experiment workflow](docs/experiments.md) for execution, completion events and
+publication. Preserve original bytes locally and publish reviewed derivatives
+with separate original/public hashes. Keep local paths and host settings in
+ignored `config/local/`, and session notes in `.local/`. The
 [result index](results/README.md) separates current measurements from archived
 evidence. Large payloads, checkpoints and transient logs stay outside Git.
+
+Delete superseded controllers, watchers and cleanup scripts after moving useful
+behavior into maintained tools. Do not preserve disposable scripts in another
+archive. Keep the measured implementation and records needed to assess a result,
+including failed controls and explicit reproduction requirements.
 
 A direct backend artifact should include:
 

@@ -1,0 +1,12 @@
+{
+  "name": "final-exact-serial-32768-mamba3",
+  "timeout": 1200,
+  "command": [
+    "/study/bin/stage2/packed_rns_probe",
+    "/study/final-exact-serial-32768-mamba3/probe.json",
+    "--ring",
+    "32768",
+    "--strategy",
+    "limb"
+  ]
+}

@@ -1,3 +1,5 @@
+import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,3 +27,44 @@ def test_active_tree_does_not_import_compatibility_package() -> None:
 
 def test_compatibility_source_package_is_absent() -> None:
     assert not (ROOT / "src" / "fhe_native_mamba3").exists()
+
+
+def test_results_do_not_expose_operational_scripts_or_logs() -> None:
+    """Historical operational files belong in provenance, not the public API."""
+    operational = {".py", ".sh", ".log", ".jsonl", ".make", ".pyc"}
+    assert [
+        str(path.relative_to(ROOT))
+        for path in (ROOT / "results").rglob("*")
+        if path.is_file() and path.suffix in operational
+    ] == []
+
+
+def test_local_settings_and_private_notes_are_ignored() -> None:
+    completed = subprocess.run(
+        [
+            "git",
+            "check-ignore",
+            "config/local/settings.json",
+            ".local/notes.md",
+            "runs/job/run.json",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert len(completed.stdout.splitlines()) == 3
+
+
+def test_public_text_has_no_personal_home_directories() -> None:
+    pattern = re.compile(r"/(?:home|Users)/[A-Za-z0-9_.-]+")
+    trees = ("src", "native", "experiments", "scripts", "config", "docs", "results")
+    suffixes = {".py", ".cpp", ".hpp", ".cu", ".cuh", ".sh", ".md", ".json", ".env"}
+    offenders = []
+    for tree in trees:
+        for path in (ROOT / tree).rglob("*"):
+            if path.suffix not in suffixes or "local" in path.parts or not path.is_file():
+                continue
+            if pattern.search(path.read_text(encoding="utf-8")):
+                offenders.append(str(path.relative_to(ROOT)))
+    assert offenders == []

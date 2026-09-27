@@ -1,0 +1,15 @@
+{
+  "candidate": "Immutable public-weight inverse FFT reuse before level-dependent scale and rounding",
+  "baseline": "qualified two-worker preparation; no fused RNS/NTT trial",
+  "memory_capacity_mib": 4096,
+  "workers": 2,
+  "admission_window": 2,
+  "correctness": "Exact RNS/metadata parity for both Mamba configurations, same errors and generated tokens, unchanged crypto and refresh",
+  "small_gate": "one fresh prefix A/B pair, candidate must improve evaluation by >0.5% and pass exactness",
+  "full_gate": "if small passes, one fresh full A/B pair; report adoption without automatic additional repetitions",
+  "source_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c",
+  "review_interval_seconds": 10800,
+  "mutable_inputs": "never admitted; only stable frozen PackedNode weight identities",
+  "cold_cache": true,
+  "adoption_gate": "full reduction >=5%, exact/model parity and memory within configured bound; otherwise retain evidence without promotion"
+}

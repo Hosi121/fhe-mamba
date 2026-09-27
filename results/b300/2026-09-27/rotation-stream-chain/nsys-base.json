@@ -1,0 +1,9 @@
+{
+  "name": "nsys-base",
+  "profile": true,
+  "timeout": 600,
+  "command": [
+    "python3",
+    "/study/profile.py"
+  ]
+}

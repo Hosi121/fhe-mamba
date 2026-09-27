@@ -1,0 +1,9 @@
+{
+  "name": "build-ifft",
+  "cpu_only": true,
+  "timeout": 900,
+  "command": [
+    "bash",
+    "/study/build-ifft.sh"
+  ]
+}

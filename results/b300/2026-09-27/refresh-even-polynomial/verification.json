@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "manifest_files": 115,
+  "decision": "adopt optional dependency patch, single-pair scope",
+  "full_seconds": [
+    148.357655089,
+    145.960740869
+  ],
+  "refresh_seconds": [
+    37.76758024,
+    34.661290649
+  ],
+  "seconds_per_generated_token": 36.49018521725
+}

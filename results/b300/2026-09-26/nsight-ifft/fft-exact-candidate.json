@@ -1,0 +1,11 @@
+{
+  "name": "fft-exact-candidate",
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "/study/bin/candidate/fft_probe",
+    "compare",
+    "/study/fft-golden.bin",
+    "/study/fft-exact-candidate/probe.json"
+  ]
+}

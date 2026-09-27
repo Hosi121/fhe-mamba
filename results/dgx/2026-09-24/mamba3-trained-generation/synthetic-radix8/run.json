@@ -2,9 +2,9 @@
   "schema": "fhemamba-packed-run-v1",
   "started_utc": "2026-09-23T19:13:44.462669+00:00",
   "command": [
-    "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-radix8",
-    "/home/kataiwa/fhemamba/mamba3-20260924/payload/program.txt",
-    "/home/kataiwa/fhemamba/mamba3-20260924/optimization-synthetic-radix8/native.json",
+    "${HOME}/fhemamba/mamba3-20260924/packed_fideslib-radix8",
+    "${HOME}/fhemamba/mamba3-20260924/payload/program.txt",
+    "${HOME}/fhemamba/mamba3-20260924/optimization-synthetic-radix8/native.json",
     "0.001",
     "0.001"
   ],

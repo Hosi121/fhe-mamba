@@ -1,0 +1,242 @@
+[
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/src/CKKS/Ciphertext.cpp.o -c /study/backend/src/CKKS/Ciphertext.cpp",
+  "file": "/study/backend/src/CKKS/Ciphertext.cpp",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Ciphertext.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/src/CKKS/RNSPoly.cpp.o -c /study/backend/src/CKKS/RNSPoly.cpp",
+  "file": "/study/backend/src/CKKS/RNSPoly.cpp",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/RNSPoly.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/src/CKKS/RNSPolyBatch.cpp.o -c /study/backend/src/CKKS/RNSPolyBatch.cpp",
+  "file": "/study/backend/src/CKKS/RNSPolyBatch.cpp",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/RNSPolyBatch.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/src/parallel_for.cpp.o -c /study/backend/src/parallel_for.cpp",
+  "file": "/study/backend/src/parallel_for.cpp",
+  "output": "CMakeFiles/fideslib.dir/src/parallel_for.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/AddSub.cu -o CMakeFiles/fideslib.dir/src/AddSub.cu.o",
+  "file": "/study/backend/src/AddSub.cu",
+  "output": "CMakeFiles/fideslib.dir/src/AddSub.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/AccumulateBroadcast.cu -o CMakeFiles/fideslib.dir/src/CKKS/AccumulateBroadcast.cu.o",
+  "file": "/study/backend/src/CKKS/AccumulateBroadcast.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/AccumulateBroadcast.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/ApproxModEval.cu -o CMakeFiles/fideslib.dir/src/CKKS/ApproxModEval.cu.o",
+  "file": "/study/backend/src/CKKS/ApproxModEval.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/ApproxModEval.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/Bootstrap.cu -o CMakeFiles/fideslib.dir/src/CKKS/Bootstrap.cu.o",
+  "file": "/study/backend/src/CKKS/Bootstrap.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Bootstrap.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/CoeffsToSlots.cu -o CMakeFiles/fideslib.dir/src/CKKS/CoeffsToSlots.cu.o",
+  "file": "/study/backend/src/CKKS/CoeffsToSlots.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/CoeffsToSlots.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/Context.cu -o CMakeFiles/fideslib.dir/src/CKKS/Context.cu.o",
+  "file": "/study/backend/src/CKKS/Context.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Context.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/Conv.cu -o CMakeFiles/fideslib.dir/src/CKKS/Conv.cu.o",
+  "file": "/study/backend/src/CKKS/Conv.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Conv.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/ElemenwiseBatchKernels.cu -o CMakeFiles/fideslib.dir/src/CKKS/ElemenwiseBatchKernels.cu.o",
+  "file": "/study/backend/src/CKKS/ElemenwiseBatchKernels.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/ElemenwiseBatchKernels.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/KeySwitchingKey.cu -o CMakeFiles/fideslib.dir/src/CKKS/KeySwitchingKey.cu.o",
+  "file": "/study/backend/src/CKKS/KeySwitchingKey.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/KeySwitchingKey.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/Limb.cu -o CMakeFiles/fideslib.dir/src/CKKS/Limb.cu.o",
+  "file": "/study/backend/src/CKKS/Limb.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Limb.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/LimbPartition.cu -o CMakeFiles/fideslib.dir/src/CKKS/LimbPartition.cu.o",
+  "file": "/study/backend/src/CKKS/LimbPartition.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/LimbPartition.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/LimbPartitionBatch.cu -o CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionBatch.cu.o",
+  "file": "/study/backend/src/CKKS/LimbPartitionBatch.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionBatch.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/LimbPartitionMGPU.cu -o CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionMGPU.cu.o",
+  "file": "/study/backend/src/CKKS/LimbPartitionMGPU.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/LimbPartitionMGPU.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/LinearTransform.cu -o CMakeFiles/fideslib.dir/src/CKKS/LinearTransform.cu.o",
+  "file": "/study/backend/src/CKKS/LinearTransform.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/LinearTransform.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/Parameters.cu -o CMakeFiles/fideslib.dir/src/CKKS/Parameters.cu.o",
+  "file": "/study/backend/src/CKKS/Parameters.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Parameters.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/Plaintext.cu -o CMakeFiles/fideslib.dir/src/CKKS/Plaintext.cu.o",
+  "file": "/study/backend/src/CKKS/Plaintext.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Plaintext.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/Rescale.cu -o CMakeFiles/fideslib.dir/src/CKKS/Rescale.cu.o",
+  "file": "/study/backend/src/CKKS/Rescale.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/Rescale.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/openfhe-interface/ParameterSwitch.cu -o CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/ParameterSwitch.cu.o",
+  "file": "/study/backend/src/CKKS/openfhe-interface/ParameterSwitch.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/ParameterSwitch.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CKKS/openfhe-interface/RawCiphertext.cu -o CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/RawCiphertext.cu.o",
+  "file": "/study/backend/src/CKKS/openfhe-interface/RawCiphertext.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CKKS/openfhe-interface/RawCiphertext.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/ConstantsGPU.cu -o CMakeFiles/fideslib.dir/src/ConstantsGPU.cu.o",
+  "file": "/study/backend/src/ConstantsGPU.cu",
+  "output": "CMakeFiles/fideslib.dir/src/ConstantsGPU.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/CudaUtils.cu -o CMakeFiles/fideslib.dir/src/CudaUtils.cu.o",
+  "file": "/study/backend/src/CudaUtils.cu",
+  "output": "CMakeFiles/fideslib.dir/src/CudaUtils.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/Math.cu -o CMakeFiles/fideslib.dir/src/Math.cu.o",
+  "file": "/study/backend/src/Math.cu",
+  "output": "CMakeFiles/fideslib.dir/src/Math.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/ModMult.cu -o CMakeFiles/fideslib.dir/src/ModMult.cu.o",
+  "file": "/study/backend/src/ModMult.cu",
+  "output": "CMakeFiles/fideslib.dir/src/ModMult.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/NTT.cu -o CMakeFiles/fideslib.dir/src/NTT.cu.o",
+  "file": "/study/backend/src/NTT.cu",
+  "output": "CMakeFiles/fideslib.dir/src/NTT.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/PeerUtils.cu -o CMakeFiles/fideslib.dir/src/PeerUtils.cu.o",
+  "file": "/study/backend/src/PeerUtils.cu",
+  "output": "CMakeFiles/fideslib.dir/src/PeerUtils.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/PolyApprox.cu -o CMakeFiles/fideslib.dir/src/PolyApprox.cu.o",
+  "file": "/study/backend/src/PolyApprox.cu",
+  "output": "CMakeFiles/fideslib.dir/src/PolyApprox.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/Rotation.cu -o CMakeFiles/fideslib.dir/src/Rotation.cu.o",
+  "file": "/study/backend/src/Rotation.cu",
+  "output": "CMakeFiles/fideslib.dir/src/Rotation.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/fideslib.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIC -x cu -rdc=true -c /study/backend/src/VectorGPU.cu -o CMakeFiles/fideslib.dir/src/VectorGPU.cu.o",
+  "file": "/study/backend/src/VectorGPU.cu",
+  "output": "CMakeFiles/fideslib.dir/src/VectorGPU.cu.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/api/CCParams.cpp.o -c /study/backend/api/CCParams.cpp",
+  "file": "/study/backend/api/CCParams.cpp",
+  "output": "CMakeFiles/fideslib.dir/api/CCParams.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/api/Ciphertext.cpp.o -c /study/backend/api/Ciphertext.cpp",
+  "file": "/study/backend/api/Ciphertext.cpp",
+  "output": "CMakeFiles/fideslib.dir/api/Ciphertext.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/api/CryptoContext.cpp.o -c /study/backend/api/CryptoContext.cpp",
+  "file": "/study/backend/api/CryptoContext.cpp",
+  "output": "CMakeFiles/fideslib.dir/api/CryptoContext.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/api/GenCryptoContext.cpp.o -c /study/backend/api/GenCryptoContext.cpp",
+  "file": "/study/backend/api/GenCryptoContext.cpp",
+  "output": "CMakeFiles/fideslib.dir/api/GenCryptoContext.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/api/Plaintext.cpp.o -c /study/backend/api/Plaintext.cpp",
+  "file": "/study/backend/api/Plaintext.cpp",
+  "output": "CMakeFiles/fideslib.dir/api/Plaintext.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/study/backend/api -I/study/backend/nvtx/c/include -I/usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /usr/local/cuda/targets/x86_64-linux/include -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIC -o CMakeFiles/fideslib.dir/api/Serialize.cpp.o -c /study/backend/api/Serialize.cpp",
+  "file": "/study/backend/api/Serialize.cpp",
+  "output": "CMakeFiles/fideslib.dir/api/Serialize.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -ccbin=g++ -DMULTI_GPU -DNCCL -DRCCL --options-file CMakeFiles/gpu-test.dir/includes_CUDA.rsp  -Wno-deprecated-gpu-targets -Wno-restrict -Wall -rdc=true --diag-suppress=3133,611 -Xcompiler -fopenmp -Xcompiler -O3 -Xcompiler -DNCCL -O3 -DNDEBUG -std=c++20 \"--generate-code=arch=compute_103,code=[lto_103]\" -Xcompiler=-fPIE -x cu -rdc=true -c /study/backend/other/GPUTest.cpp -o CMakeFiles/gpu-test.dir/other/GPUTest.cpp.o",
+  "file": "/study/backend/other/GPUTest.cpp",
+  "output": "CMakeFiles/gpu-test.dir/other/GPUTest.cpp.o"
+},
+{
+  "directory": "/study/build/backend",
+  "command": "/usr/bin/g++ -DMULTI_GPU -DNCCL -DRCCL -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/study/backend/src -I/study/backend/api -I/study/backend/DESTINATION -I/study/backend/include/fideslib -I/usr/local/cuda/targets/x86_64-linux/include/cccl -x c++  -Wall -fopenmp -DNCCL -O3 -DNDEBUG -std=gnu++20 -flto=auto -fno-fat-lto-objects -fPIE -o CMakeFiles/dummy.dir/other/Dummy.cpp.o -c /study/backend/other/Dummy.cpp",
+  "file": "/study/backend/other/Dummy.cpp",
+  "output": "CMakeFiles/dummy.dir/other/Dummy.cpp.o"
+}
+]

@@ -15,7 +15,7 @@
     19
   ],
   "native_binary_sha256": "a0ae813fa79c66564e902cde97b4e235eee3fac51d779e9d5bdce321726be5af",
-  "frozen_remote_binary": "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-cache",
+  "frozen_remote_binary": "${HOME}/fhemamba/mamba3-20260924/packed_fideslib-cache",
   "runner_sha256": "d04f2b9f8a17e8e952f78f1f234195e89d4acacc52d5882f7a4943aee5aad932",
   "compiled_sources_sha256": {
     "experiments/run_packed_probe.py": "d04f2b9f8a17e8e952f78f1f234195e89d4acacc52d5882f7a4943aee5aad932",
@@ -78,18 +78,18 @@
     "src/fhemamba/_version.py": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3"
   },
   "target_dependency_and_api_source_sha256": {
-    "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Ciphertext.cpp": "a32ddf43c08daf2696b0520d0c8094bf866935579b57e596254e34ead598b951"
+    "${HOME}/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/src/CKKS/Ciphertext.cpp": "a32ddf43c08daf2696b0520d0c8094bf866935579b57e596254e34ead598b951"
   },
   "arm_contract_binary_sha256": "0eb53054ec4cd81f6ef1b7c2ab2370a9efe7928a818ee4b0cee5213dfc075974",
   "compile_command": {
-    "directory": "/home/kataiwa/fhemamba/mamba3-20260924/build",
-    "command": "/usr/bin/g++  -I/home/kataiwa/fhemamba/mamba3-20260924/source/native/fideslib_stage0/include -I/home/kataiwa/fhemamba/mamba3-20260924/source/native/fideslib_stage0/src -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o -c /home/kataiwa/fhemamba/mamba3-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
-    "file": "/home/kataiwa/fhemamba/mamba3-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+    "directory": "${HOME}/fhemamba/mamba3-20260924/build",
+    "command": "/usr/bin/g++  -I${HOME}/fhemamba/mamba3-20260924/source/native/fideslib_stage0/include -I${HOME}/fhemamba/mamba3-20260924/source/native/fideslib_stage0/src -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o -c ${HOME}/fhemamba/mamba3-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+    "file": "${HOME}/fhemamba/mamba3-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
     "output": "CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o"
   },
   "checks": {

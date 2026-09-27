@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "measured_source_count": 97,
+  "product_source_count": 98,
+  "measured_differences": [
+    "native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp"
+  ],
+  "same_compile_commands": true,
+  "gpu_backend_changed": false,
+  "common_measurement_helper": "native/fideslib_stage0/include/benchmark_prefetch_affinity.hpp",
+  "product_queue_leading_indentation_only": true
+}

@@ -2,9 +2,9 @@
   {
     "name": "missing-s2c",
     "command": [
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/missing-s2c.txt",
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/missing-s2c.json",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/default-path-regression/missing-s2c.txt",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/default-path-regression/missing-s2c.json",
       ".001",
       ".001",
       "--gpu-dual-ring",
@@ -18,9 +18,9 @@
   {
     "name": "wrong-slots",
     "command": [
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/wrong-slots.txt",
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/wrong-slots.json",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/default-path-regression/wrong-slots.txt",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/default-path-regression/wrong-slots.json",
       ".001",
       ".001",
       "--gpu-dual-ring",
@@ -35,9 +35,9 @@
   {
     "name": "excess-width",
     "command": [
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/excess-width.txt",
-      "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/default-path-regression/excess-width.json",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/spark/kernel/packed_fideslib",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/default-path-regression/excess-width.txt",
+      "${HOME}/fhemamba/gpu-dual-ring-20260926/default-path-regression/excess-width.json",
       ".001",
       ".001",
       "--gpu-dual-ring",

@@ -1,0 +1,17 @@
+{
+  "adopt": false,
+  "status": "retain experimental patch; preserve the qualified two-worker baseline",
+  "reason": "The one-pair full gain is 1.50%, substantially smaller than the preceding 14.07% ABBA result. Do not add repetitions after the user asked to move forward on clear effects; this pair does not establish a robust general benefit.",
+  "observed_full_pair_seconds": {
+    "base": 147.722885987,
+    "candidate": 145.509733
+  },
+  "full_paired_reduction": 0.014981788178676458,
+  "source_restoration": {
+    "path": "native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+    "restored_sha256": "7b2879d6fded8904b5e9a29d27c71d435bd204165e00d9cc10f082ff9ab7effa",
+    "candidate_sha256": "a6ed17a4fbd068dec530ed8bb788f30620e99c5a589e75f55a86dcd4f8f62e38"
+  },
+  "no_crypto_or_accuracy_gate_changes": true,
+  "no_additional_mechanism_implemented": true
+}

@@ -1,0 +1,16 @@
+{
+  "state": "passed",
+  "memory_screen": {
+    "observed_peak_mib": 133538.0,
+    "device_mib": 275040.0,
+    "extra_payload_upper_bound_mib": 92160.0,
+    "condition": "observed peak + extra bound < 90% device capacity"
+  },
+  "stage": "full-cache2048-r1",
+  "baseline_seconds": 244.400548966,
+  "candidate_seconds": 235.750153116,
+  "reduction": 0.03539433886952281,
+  "selected_capacity": 2048,
+  "selection_rule": "retain larger memory use only with at least 2% full-evaluation reduction; one full pair, not statistical significance",
+  "finished_at": 1790459864.0502822
+}

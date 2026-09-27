@@ -1,0 +1,10 @@
+{
+  "name": "build-parameter-report-r3",
+  "build": true,
+  "cpu_only": true,
+  "command": [
+    "bash",
+    "/study/build-parameter-report-r3.sh"
+  ],
+  "timeout": 1200
+}

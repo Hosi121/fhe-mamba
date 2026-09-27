@@ -3,9 +3,9 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/gpu-rns-20260925/native-build/packed_fideslib",
-    "/home/kataiwa/fhemamba/mamba3-20260924/lm-full/program.txt",
-    "/home/kataiwa/fhemamba/gpu-rns-20260925/full-candidate/native.json",
+    "${HOME}/fhemamba/gpu-rns-20260925/native-build/packed_fideslib",
+    "${HOME}/fhemamba/mamba3-20260924/lm-full/program.txt",
+    "${HOME}/fhemamba/gpu-rns-20260925/full-candidate/native.json",
     ".001",
     ".001",
     "--planned-refresh",
@@ -24,7 +24,7 @@
     "--frontier-refresh",
     "--s2c-first",
     "--client-head",
-    "/home/kataiwa/fhemamba/mamba3-20260924/lm-full/client_head.f32",
+    "${HOME}/fhemamba/mamba3-20260924/lm-full/client_head.f32",
     "--gpu-plaintext-rns"
   ],
   "exit_code": 0,
@@ -32,7 +32,7 @@
   "wall_seconds": 660.293384552002,
   "environment": {
     "OMP_NUM_THREADS": "4",
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   },
   "binary_sha256": "bd7ab3c1fca7465a7186bf098c876ae16c199f7b7f19d3ae888731ce2b67e994"
 }

@@ -5,7 +5,7 @@
   "timeout_seconds": 4200,
   "gpu_preflight": {
     "required": true,
-    "gpu_index": 3,
+    "gpu_index": 0,
     "max_utilization_percent": 5,
     "min_mem_available_gib": 135,
     "stable_polls": 2,
@@ -22,10 +22,7 @@
     "required_sync_profile": "full"
   },
   "defaults": {
-    "ROOT_DIR": "/home/kataiwa/fhemamba-b300",
-    "RESULTS_DIR": "/home/kataiwa/fhemamba-b300/results",
-    "INPUT_CHAIN": "/home/kataiwa/fhemamba-b300/payloads/m2_chain_payload_sqnewton_wiki512_t2",
-    "GPU_DEVICE": "3",
+    "GPU_DEVICE": "0",
     "LAYERS": "24",
     "TOKENS": "5",
     "ARTIFACT_VERSION": "0.4.5",

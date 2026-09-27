@@ -1,0 +1,127 @@
+{
+  "base": {
+    "sqlite_sha256": "955570925face5584f4366cccb69ab0577f35779598fc4284245e9347b6de074",
+    "sqlite_bytes": 128524288,
+    "phases": {
+      "bootstrap": {
+        "calls": 16,
+        "host_inclusive_seconds": 1.060786486,
+        "gpu_activity_count": 23336,
+        "gpu_activity_sum_seconds": 0.536060704,
+        "gpu_activity_union_seconds": 0.418485931
+      },
+      "S2C": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.096905278,
+        "gpu_activity_count": 4780,
+        "gpu_activity_sum_seconds": 0.057355727,
+        "gpu_activity_union_seconds": 0.051940109
+      },
+      "C2S": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.339694041,
+        "gpu_activity_count": 4536,
+        "gpu_activity_sum_seconds": 0.193806348,
+        "gpu_activity_union_seconds": 0.172047511
+      },
+      "ModRaise": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.007754121,
+        "gpu_activity_count": 512,
+        "gpu_activity_sum_seconds": 0.005899619,
+        "gpu_activity_union_seconds": 0.004523106
+      },
+      "EvalMod": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.571859588,
+        "gpu_activity_count": 12232,
+        "gpu_activity_sum_seconds": 0.247298304,
+        "gpu_activity_union_seconds": 0.169106319
+      },
+      "seed": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.482520475,
+        "gpu_activity_count": 10632,
+        "gpu_activity_sum_seconds": 0.220098884,
+        "gpu_activity_union_seconds": 0.149804666
+      },
+      "double_angle": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.088808672,
+        "gpu_activity_count": 1536,
+        "gpu_activity_sum_seconds": 0.026830971,
+        "gpu_activity_union_seconds": 0.018951732
+      },
+      "boundary_rotation": {
+        "calls": 32,
+        "host_inclusive_seconds": 0.026048664,
+        "gpu_activity_count": 452,
+        "gpu_activity_sum_seconds": 0.010999853,
+        "gpu_activity_union_seconds": 0.00756305
+      }
+    }
+  },
+  "candidate": {
+    "sqlite_sha256": "e00027e8f8f36e505df36c158a0f5d21b00c5109237f7efc521626c9749d6a20",
+    "sqlite_bytes": 128831488,
+    "phases": {
+      "bootstrap": {
+        "calls": 16,
+        "host_inclusive_seconds": 1.064671794,
+        "gpu_activity_count": 23336,
+        "gpu_activity_sum_seconds": 0.536832737,
+        "gpu_activity_union_seconds": 0.418465779
+      },
+      "S2C": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.096281131,
+        "gpu_activity_count": 4780,
+        "gpu_activity_sum_seconds": 0.057572016,
+        "gpu_activity_union_seconds": 0.051956421
+      },
+      "C2S": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.349592399,
+        "gpu_activity_count": 4536,
+        "gpu_activity_sum_seconds": 0.193738272,
+        "gpu_activity_union_seconds": 0.172056636
+      },
+      "ModRaise": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.012360735,
+        "gpu_activity_count": 512,
+        "gpu_activity_sum_seconds": 0.005916364,
+        "gpu_activity_union_seconds": 0.004486347
+      },
+      "EvalMod": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.55918082,
+        "gpu_activity_count": 12232,
+        "gpu_activity_sum_seconds": 0.247728744,
+        "gpu_activity_union_seconds": 0.169224317
+      },
+      "seed": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.468997841,
+        "gpu_activity_count": 10632,
+        "gpu_activity_sum_seconds": 0.220475685,
+        "gpu_activity_union_seconds": 0.149876973
+      },
+      "double_angle": {
+        "calls": 16,
+        "host_inclusive_seconds": 0.089661005,
+        "gpu_activity_count": 1536,
+        "gpu_activity_sum_seconds": 0.02688525,
+        "gpu_activity_union_seconds": 0.018999919
+      },
+      "boundary_rotation": {
+        "calls": 32,
+        "host_inclusive_seconds": 0.036298436,
+        "gpu_activity_count": 452,
+        "gpu_activity_sum_seconds": 0.011122452,
+        "gpu_activity_union_seconds": 0.007508368
+      }
+    }
+  },
+  "limits": "Existing parallel-prefetch instrumented prefix, both using the old refresh polynomial. Only complete bootstrap NVTX ranges captured in the profiling window are included. Host inclusive ranges nest; GPU activities are attributed via CUDA runtime correlation ID. Activity sums can overlap and unions for different phases need not be additive. These are neither full-run phase times nor utilization or uninstrumented latency measurements."
+}

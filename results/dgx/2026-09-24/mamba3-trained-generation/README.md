@@ -1,20 +1,19 @@
 # Trained Mamba-3 generation and slot routing
 
-See the [study](../../../../docs/research/2026-09-24-mamba3-trained-generation.md)
-for conditions, commands and limitations.
+Technical report: [method, results and limitations](../../../../docs/research/2026-09-24-mamba3-trained-generation.md).
 
-- `layer1-legacy/` and `layer1-radix8/`: matched, single-layer, three-evaluation
-  runs from one executable and payload. `layer1-comparison.json` binds their hashes.
-- `full-radix8/`: complete 12-layer, five-evaluation run and the actual client
-  generation report. Four generated IDs match the exact model.
-- `synthetic-radix8/`: four-step mixer regression, including carried-state errors.
-- `*-payload/`: input manifests and CPU fixtures. Large public-checkpoint
-  programs and vocabulary matrices are regenerated with the documented exporter.
-- `budget.json`: all four runs charged against a shared 7200-second limit.
-- `provenance.json`: executable, compiled source, Python source and artifact hashes.
-- `checks.log` and `native-tests.log`: local regression results.
+This directory contains public measurement records. Numerical values and pass/fail
+statuses are preserved. Environment identifiers are normalized.
 
-All encrypted runs use `security=not-set` and an inline client. Source changes
-were uncommitted when measured; the base commit and exact source hashes are
-recorded. The 22.54% speedup applies to the one-layer comparison, not to a
-matched full-model experiment or a comparison with Mamba-2.
+Relevant logs and measured source snapshots are in the shared
+[provenance bundle](../../../provenance.tar.gz), indexed by
+[the publication manifest](../../../publication.json). Original hashes refer to
+the retained raw files; published hashes verify these derivatives.
+
+Use the [experiment workflow](../../../../docs/experiments.md) to verify or inspect
+the archive. Run new experiments through maintained runners in `experiments/`,
+with machine settings supplied separately. Superseded operational scripts have been deleted.
+
+## Measurements
+
+- [full-radix8/native.json](full-radix8/native.json)

@@ -1,0 +1,12 @@
+{
+  "name": "exact-candidate-no-graph",
+  "command": [
+    "env",
+    "FIDESLIB_USE_GRAPH_CAPTURE=0",
+    "/study/bin/candidate/rotation_probe",
+    "/study/exact-candidate-no-graph/probe.json",
+    "32768",
+    "mamba3"
+  ],
+  "timeout": 1200
+}

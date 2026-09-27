@@ -1,0 +1,9 @@
+{
+  "name": "refresh-d5-r1",
+  "command": [
+    "/study/build/security/security_refresh",
+    "/study/refresh-d5-r1/probe.json",
+    "5"
+  ],
+  "timeout": 1800
+}

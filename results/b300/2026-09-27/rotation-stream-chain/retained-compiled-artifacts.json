@@ -1,0 +1,52 @@
+{
+  "path": "${HOME}/fhemamba-b300/b300-graph-block-20260927/compiled-artifacts.tar.gz",
+  "bytes": 69836314,
+  "sha256": "7ffcfef811678829fdc69ec40421cb125601f692230e8bb0891684bd8e6c03f4",
+  "verified_members": [
+    {
+      "path": "bin/base/packed_fideslib",
+      "bytes": 17352328,
+      "sha256": "8ce027def6f82a8291c7a5e892c9f8e0abfbbb4f88b0937b75983fada5e19de8"
+    },
+    {
+      "path": "bin/base/refresh_probe",
+      "bytes": 16957528,
+      "sha256": "141ad481342601ab2e1caf19918c1d40e54dd0fcf32617c98a25f0c5a4f5031b"
+    },
+    {
+      "path": "bin/base/rotation_probe",
+      "bytes": 16882072,
+      "sha256": "6a28bc2bf6bf7c6d2b4464e2548f5029e2dfc4055db837bca529ac8f23e13fca"
+    },
+    {
+      "path": "bin/candidate/packed_fideslib",
+      "bytes": 17352328,
+      "sha256": "d79b840317c719977c8ed40d2335e206513ccdacf556ff0d5ed656644aae6418"
+    },
+    {
+      "path": "bin/candidate/refresh_probe",
+      "bytes": 16957336,
+      "sha256": "125bbbc92cb4bb77a88be0563c65501d4eb0c485ac08324605c6daa0aa4b11d2"
+    },
+    {
+      "path": "bin/candidate/rotation_probe",
+      "bytes": 16881984,
+      "sha256": "f26cd7230a2e1fb49418e4e09939114ef0dde2851c3d73fe9edda5155f53c550"
+    },
+    {
+      "path": "bin/profile/packed_fideslib",
+      "bytes": 17352328,
+      "sha256": "d58f93ad186ee5c5159d25ad2a929af98de52d9a522c6abbefa287a26ada607c"
+    },
+    {
+      "path": "lib/base/fideslib.a",
+      "bytes": 42312934,
+      "sha256": "7bfa24264f694f92d5de334c2db4d39c3ce1c43d16e31d39a80caad964300f14"
+    },
+    {
+      "path": "lib/candidate/fideslib.a",
+      "bytes": 42313230,
+      "sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad"
+    }
+  ]
+}

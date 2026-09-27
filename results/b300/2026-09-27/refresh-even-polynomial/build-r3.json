@@ -1,0 +1,10 @@
+{
+  "name": "build-r3",
+  "command": [
+    "bash",
+    "/study/resume-native.sh"
+  ],
+  "build": true,
+  "cpu_only": true,
+  "timeout": 1800
+}

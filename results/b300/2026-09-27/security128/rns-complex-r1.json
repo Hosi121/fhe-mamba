@@ -1,0 +1,12 @@
+{
+  "name": "rns-complex-r1",
+  "command": [
+    "/study/build/native/packed_rns_probe",
+    "/study/rns-complex-r1/probe.json",
+    "--classical128",
+    "--mamba2",
+    "--prefetch",
+    "--prefetch-workers",
+    "2"
+  ]
+}

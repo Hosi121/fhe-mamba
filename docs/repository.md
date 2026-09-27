@@ -1,8 +1,8 @@
 # Repository layout
 
 The repository contains one installable Python package and a separate native
-backend. Numerical implementations live in `src/` and `native/`; experiment
-orchestration and recorded evidence live outside the package.
+backend. Numerical implementations and shared experiment utilities live in
+`src/` and `native/`; workload specifications and evidence live outside the package.
 
 | Location | Ownership |
 | --- | --- |
@@ -10,16 +10,18 @@ orchestration and recorded evidence live outside the package.
 | `native/fideslib_stage0/` | C++/FIDESlib backend, patches, probes and native contracts |
 | `tests/` | Python unit tests and repository/native integration tests |
 | `examples/` | Small runnable examples for new users |
-| `config/` | Platform pins, checkpoint hashes and frozen coefficient bundles |
+| `config/` | Public platform pins, checkpoint hashes, coefficient bundles and configuration templates |
 | `experiments/` | Research runners and shared runner helpers |
 | `experiments/manifests/` | Declarative campaign configurations |
 | `experiments/slurm/` | Historical cluster launchers for the active model code |
 | `scripts/` | Local checks, checkpoint setup and platform build/run helpers |
-| `results/` | Curated artifacts; see the [result index](../results/README.md) |
+| `results/` | Public measurements and bundled provenance; see the [result index](../results/README.md) |
 | `results/archive/` | Artifacts from the retired implementation |
 | `docs/research/` | Dated studies and their evidence links |
 | `docs/archive/` | Historical plans and ledgers |
 | `docker/` | Historical B300 build image |
+| `src/fhemamba/benchmarks/` | Shared job execution, completion events, publication and verification |
+| `config/local/`, `.local/`, `runs/` | Ignored machine settings, private notes, original evidence and working output |
 
 ## Generated files
 
@@ -29,8 +31,9 @@ isolated platform prefix. These directories, `.venv/`, `dist/` and cache files
 are ignored by Git. Existing local files under the previous paths need not be
 moved to follow the current source layout.
 
-Promote only the artifacts needed to substantiate a reviewed result into
-`results/`. Keep raw result bytes and failing statuses intact. Checkpoints,
+Publish reviewed derivatives into `results/` through the
+[experiment workflow](experiments.md). Keep original bytes locally and record
+their hashes separately from public hashes. Preserve failing statuses. Checkpoints,
 private/evaluation keys, large exported payloads and build products are not
 repository content. Public numerical coefficient bundles belong in `config/`.
 
@@ -56,10 +59,12 @@ measurements. Current guides and launchers use the paths below.
 | `docs/legacy-archive.md` | [Legacy implementation archive](archive/legacy-implementation.md) |
 | `docs/probes/2026-05-10-b200-fideslib.md` | [Historical B200 probe log](archive/2026-05-10-b200-fideslib.md) |
 
-Recorded JSON, logs and coefficient bundles were preserved byte for byte.
-Paths embedded inside those artifacts identify the original environment and
-were not rewritten. Updated source/build paths produce new provenance hashes;
-rebuild the native backend after upgrading a checkout across this change.
+The September 22 migration preserved recorded bytes. The subsequent publication
+cleanup normalizes environment identifiers and deletes superseded operational
+scripts. Necessary measured sources and logs are bundled. `results/publication.json` distinguishes original
+hashes from public derivatives; numerical values and failure statuses are retained.
+Existing Git history is not rewritten. Updated source/build paths produce new
+provenance hashes; rebuild the native backend after changing source layout.
 
 The installed `fhemamba` API and CLI name are unchanged. For an existing editable
 environment, run `uv sync --locked --extra dev` after updating the checkout.
@@ -67,9 +72,9 @@ environment, run `uv sync --locked --extra dev` after updating the checkout.
 ## Project name
 
 The public repository is `Hosi121/fhe-mamba`, and the project is **FHE Mamba**.
-The implemented and measured checkpoint workload is **Mamba-2-130M**. Mamba-3
-appears in research comparisons and algebra studies; it is not a measured
-full-model backend in this repository.
+Implemented and measured checkpoint workloads include **Mamba-2-130M** and
+**Mamba-3 SISO 187M**, with distinct security and precision scopes documented in
+the [evidence registry](evidence.md).
 
 The repository was renamed from `fhe-native-mamba3` to align its public name
 with that scope. Historical artifact paths, retired package names and recorded

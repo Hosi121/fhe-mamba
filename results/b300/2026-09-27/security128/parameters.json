@@ -1,0 +1,10 @@
+{
+  "name": "parameters",
+  "command": [
+    "/study/build/parameters/security_parameters",
+    "/study/parameters/probe.json"
+  ],
+  "cpu_only": true,
+  "build": false,
+  "timeout": 1200
+}

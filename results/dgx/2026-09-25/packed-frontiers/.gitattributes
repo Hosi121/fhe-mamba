@@ -1,3 +1,0 @@
-# Preserve measured output and the hashed controller verbatim.
-*.log -whitespace
-runlib.py -whitespace

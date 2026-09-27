@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "command": ["${python}", "${repo}/examples/cpu_smoke.py"],
+  "cwd": "${repo}",
+  "env": {"OMP_NUM_THREADS": "2"},
+  "inputs": {"example": "examples/cpu_smoke.py"},
+  "timeout_seconds": 120
+}

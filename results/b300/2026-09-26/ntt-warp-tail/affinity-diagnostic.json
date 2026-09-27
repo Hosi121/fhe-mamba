@@ -1,0 +1,6 @@
+{
+  "name": "affinity-diagnostic",
+  "cpu_only": true,
+  "timeout": 120,
+  "command": ["bash", "/study/affinity-diagnostic.sh"]
+}

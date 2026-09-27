@@ -1,0 +1,80 @@
+[
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/base/packed_fideslib",
+    "relative_path": "bin/base/packed_fideslib",
+    "bytes": 17245232,
+    "sha256": "2a4a24ceaaafc0f382f01e3536f9f8c04487c4d2a28bf057dde537de394d3cc0"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage1/packed_fideslib",
+    "relative_path": "bin/stage1/packed_fideslib",
+    "bytes": 17312656,
+    "sha256": "59986476ba25c2a035239a9faa9690f3c2f84ab2c3374fa738fa73efd14f37cf"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage1/packed_plaintext_probe",
+    "relative_path": "bin/stage1/packed_plaintext_probe",
+    "bytes": 17038632,
+    "sha256": "22a006b11617d8f7a7814e38176313fd7ba3ef147d50952fa8f0916cca7d9af4"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage1/packed_rns_probe",
+    "relative_path": "bin/stage1/packed_rns_probe",
+    "bytes": 17034144,
+    "sha256": "5f0ab2ffb45f2f774b4c9653b8b8d30abf3f4261f4963b535db9b59c585a5e14"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage2/packed_fideslib",
+    "relative_path": "bin/stage2/packed_fideslib",
+    "bytes": 17339424,
+    "sha256": "61b942dece1ba5cdb16ca4f7b6542f8e0514e17a189a6bb52be392fe7af246ee"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage2/packed_plaintext_probe",
+    "relative_path": "bin/stage2/packed_plaintext_probe",
+    "bytes": 17039720,
+    "sha256": "9c80b64a35a18133a11afd33d97e464e83840525b4fa115906476032aee90ece"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage2/packed_rns_probe",
+    "relative_path": "bin/stage2/packed_rns_probe",
+    "bytes": 17050696,
+    "sha256": "4eed869e710a50e29694cc685c63a142745ccf78c53f21b736a416f6a0860e0d"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/nsys-original/trace.nsys-rep",
+    "relative_path": "nsys-original/trace.nsys-rep",
+    "bytes": 47061973,
+    "sha256": "5ac0e5270e85ac1be7dffd6bea6f74467a188f20149f2648c0d680087f718fad"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/nsys-stage1/trace.nsys-rep",
+    "relative_path": "nsys-stage1/trace.nsys-rep",
+    "bytes": 41777028,
+    "sha256": "5348751951f52dc12a20f50f3c51088a8cfde827e60a72eb25b353c02cc40368"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/nsys-stage2/trace.nsys-rep",
+    "relative_path": "nsys-stage2/trace.nsys-rep",
+    "bytes": 46918780,
+    "sha256": "75e5683c99995c6699de11130ac0554f5f287e8056e07c07500ce32495edbcb6"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/nsys-original/trace.sqlite",
+    "relative_path": "nsys-original/trace.sqlite",
+    "bytes": 128593920,
+    "sha256": "47ef843ddde179c23806c015395950ea195299a99f8f17d0dc85e4ba8ec35a12"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/nsys-stage1/trace.sqlite",
+    "relative_path": "nsys-stage1/trace.sqlite",
+    "bytes": 113455104,
+    "sha256": "f852c2ec4133b3fe45802d4972cad121d8264e6d1d86f8483e56c4e011338dda"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/nsys-stage2/trace.sqlite",
+    "relative_path": "nsys-stage2/trace.sqlite",
+    "bytes": 129044480,
+    "sha256": "153f222962bc967758554666a9153f8aee7d96cedbe97f157fec968f2dce29f9"
+  }
+]

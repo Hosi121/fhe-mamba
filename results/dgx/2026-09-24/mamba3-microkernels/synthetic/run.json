@@ -2,9 +2,9 @@
   "schema": "fhemamba-packed-run-v1",
   "started_utc": "2026-09-23T20:57:32.455248+00:00",
   "command": [
-    "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-inplace",
-    "/home/kataiwa/fhemamba/mamba3-20260924/payload/program.txt",
-    "/home/kataiwa/fhemamba/mamba3-20260924/micro-synthetic/native.json",
+    "${HOME}/fhemamba/mamba3-20260924/packed_fideslib-inplace",
+    "${HOME}/fhemamba/mamba3-20260924/payload/program.txt",
+    "${HOME}/fhemamba/mamba3-20260924/micro-synthetic/native.json",
     "0.001",
     "0.001",
     "--planned-refresh",

@@ -1,0 +1,30 @@
+{
+  "scope": "Implement and qualify RNS batching/NTT input fusion first, then one bounded CPU preparation queue inside replicated BSGS; report per-stage adoption after small qualification and conditional full ABBA.",
+  "baseline": "retained inverse-FFT candidate, 234.842279797 s mean in prior study",
+  "baseline_binary_sha256": "2a4a24ceaaafc0f382f01e3536f9f8c04487c4d2a28bf057dde537de394d3cc0",
+  "gpu": 4,
+  "cpus": "64-68",
+  "numa": 2,
+  "omp_threads": 4,
+  "security": "not-set",
+  "error_gates": {
+    "exact": 0.001,
+    "polynomial": 0.001
+  },
+  "full_ids": [
+    315,
+    279,
+    1614,
+    315
+  ],
+  "invariants": [
+    "frozen model inputs",
+    "ordinary N=32768 / refresh N=65536",
+    "depth44 scale59 first60",
+    "two-pass S2C-first refresh",
+    "inverse-FFT plan retained",
+    "no evaluation decryptions"
+  ],
+  "qualification": "Exact RNS/metadata and encrypted arithmetic; independent prefix ABBA, conditional full ABBA. Retain negative results. At most one diagnostic additional prefix ABBA per stage when baseline-only variation prevents interpretation.",
+  "completion": "Report both stages and integrated qualified behavior; no further kernel mechanisms in this campaign."
+}

@@ -1,5 +1,5 @@
 {
-  "user_authorization": "GPU use expanded by user: any number of hours; continue optimization cycles",
+  "user_authorization": "<private>",
   "review_window_seconds": 21600,
   "previous_ledger": "optimization-budget-20260924.json (7174.2396297976375/7200 seconds; immutable history)",
   "new_ledger": "optimization-cycle2-budget-20260924.json",

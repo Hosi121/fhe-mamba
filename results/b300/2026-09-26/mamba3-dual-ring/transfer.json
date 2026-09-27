@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "compressed_payload_bytes": 410708647,
+  "uncompressed_files_bytes": 1647874210,
+  "bandwidth_limit_kib_per_second": 2048,
+  "rsync_bytes_sent": 410809020,
+  "rsync_bytes_received": 35,
+  "rsync_reported_bytes_per_second": 781748.92,
+  "effective_mib_per_second": 0.7455338668823243,
+  "approximate_seconds_from_rsync_statistics": 525.4999968532096,
+  "scope": "Input staging only; excluded from inference/process timing. Frozen payload retained on B300 for reuse."
+}

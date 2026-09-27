@@ -1,0 +1,10 @@
+{
+  "name": "build-stage1-link",
+  "cpu_only": true,
+  "timeout": 600,
+  "command": [
+    "bash",
+    "/study/relink.sh",
+    "stage1"
+  ]
+}

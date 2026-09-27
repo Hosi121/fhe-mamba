@@ -1,0 +1,12 @@
+{
+  "patch_applies": true,
+  "candidate_sources_match_measured": true,
+  "portable_probe_source_matches": true,
+  "files": {
+    "probe.cpp": "b1b050de9b97acc74dfe34b7d2e266eb427f446bb9c544cf2d4445d433fe7cf1",
+    "CMakeLists.txt": "a2478d7cd500b10258621ed8922e6d3ed019f661d95c169984a41e9db83728ca",
+    "fideslib-even-bootstrap-seed.patch": "944c650ac1489ad0ef8464cc9428fb2f4185bd09d1e4b4e370e2e503f86054c8",
+    "EvenBootstrapSeed.cuh": "6810e5c88f004c73e35b1427b626c453f2253e3b40c814f2415a17f2f8a72866",
+    "README.md": "d8f67dd631f69322711ff44cb8b1cd84a6dc8cd50431f098ad1fdff8830d6b00"
+  }
+}

@@ -3,8 +3,8 @@
   "version": "0.5.0",
   "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
   "source_sha256": {
-    "/home/hosi/cipher/fhemamba/experiments/certify_payload_ranges.py": "b4611dfda7a36314f2fed193793b3753902780332562797d0204a42700f12569",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/polynomial_certificate.py": "162bc6af34b338148a140a93645d82e4f8f5d64898461373f982b226fb99302e"
+    "${HOME}/cipher/fhemamba/experiments/certify_payload_ranges.py": "b4611dfda7a36314f2fed193793b3753902780332562797d0204a42700f12569",
+    "${HOME}/cipher/fhemamba/src/fhemamba/polynomial_certificate.py": "162bc6af34b338148a140a93645d82e4f8f5d64898461373f982b226fb99302e"
   },
   "input_payload_sha256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
   "all_newton_initializers_certified": true,

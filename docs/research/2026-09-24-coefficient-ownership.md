@@ -7,7 +7,7 @@ complete 12-layer/five-evaluation candidate passes in **1038.777 seconds
 exact/polynomial gates. That full run validates completion and parity; the
 incremental timing comparison is the same-binary prefix ABBA.
 
-[Raw runs, frozen sources and comparison script](../../results/dgx/2026-09-24/coefficient-ownership/).
+[Raw runs, frozen sources and comparison results](../../results/dgx/2026-09-24/coefficient-ownership/).
 
 ## Change and comparison
 

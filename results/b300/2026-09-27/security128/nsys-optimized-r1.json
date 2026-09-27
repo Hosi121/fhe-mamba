@@ -1,0 +1,9 @@
+{
+  "name": "nsys-optimized-r1",
+  "profile": true,
+  "timeout": 1800,
+  "command": [
+    "bash",
+    "/study/profile-optimized-r1.sh"
+  ]
+}

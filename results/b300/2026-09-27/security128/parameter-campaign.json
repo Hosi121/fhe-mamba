@@ -1,0 +1,6 @@
+{
+  "state": "failed",
+  "stage": "parameters",
+  "error": "Traceback (most recent call last):\n  File \"${HOME}/fhemamba-b300/b300-security128-20260927/parameter-campaign.py\", line 8, in <module>\n    subprocess.run(['python3',str(r/'job.py'),name+'.json'],check=True)\n  File \"/usr/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['python3', '${HOME}/fhemamba-b300/b300-security128-20260927/job.py', 'parameters.json']' returned non-zero exit status 1.\n",
+  "finished_at_unix": 1790455774.174178
+}

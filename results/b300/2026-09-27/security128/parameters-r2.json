@@ -1,0 +1,8 @@
+{
+  "name": "parameters-r2",
+  "command": [
+    "/study/build/parameters/security_parameters",
+    "/study/parameters-r2/probe.json"
+  ],
+  "timeout": 1200
+}

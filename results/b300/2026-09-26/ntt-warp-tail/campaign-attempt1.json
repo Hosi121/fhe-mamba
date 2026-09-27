@@ -1,0 +1,8 @@
+{
+  "state": "failed",
+  "stage": "build-native",
+  "probes": [],
+  "samples": {},
+  "error": "Traceback (most recent call last):\n  File \"${HOME}/fhemamba-b300/b300-gpu-followup-20260926/campaign.py\", line 51, in <module>\n    raise RuntimeError('native build failed; preserve the failure')\nRuntimeError: native build failed; preserve the failure\n",
+  "finished_at_unix": 1790433625.9609172
+}

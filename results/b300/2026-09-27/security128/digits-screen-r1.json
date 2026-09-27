@@ -1,0 +1,17 @@
+{
+  "state": "passed",
+  "samples": [
+    {
+      "digits": 5,
+      "eval_seconds": 18.292569183,
+      "bootstrap_seconds": 2.05096103
+    },
+    {
+      "digits": 6,
+      "eval_seconds": 18.654945889,
+      "bootstrap_seconds": 2.138837962
+    }
+  ],
+  "stage": "prefix-d6-r1",
+  "finished_at": 1790458069.4218907
+}

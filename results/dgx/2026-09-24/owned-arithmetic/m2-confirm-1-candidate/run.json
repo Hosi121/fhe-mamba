@@ -2,8 +2,8 @@
   "name": "m2-confirm-1-candidate",
   "command": [
     "bash",
-    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/launch_m2.sh",
-    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/m2-confirm-1-candidate/native.json",
+    "${HOME}/fhemamba/owned-arithmetic-20260924/launch_m2.sh",
+    "${HOME}/fhemamba/owned-arithmetic-20260924/m2-confirm-1-candidate/native.json",
     "2",
     "2"
   ],
@@ -32,7 +32,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "ARTIFACT_VERSION": "0.5.0",
     "AUTOREGRESSIVE_CLIENT_LOOP": "0",
     "AUTO_HEADROOM": "4",
@@ -46,7 +46,7 @@
     "FIRST_MOD_SIZE": "60",
     "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
     "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
-    "INPUT_CHAIN": "/home/kataiwa/fhemamba/gate-integration-20260921/generation/client-generation-20260922/payload",
+    "INPUT_CHAIN": "${HOME}/fhemamba/gate-integration-20260921/generation/client-generation-20260922/payload",
     "INPUT_CHAIN_SHA256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
     "INTERLEAVED_REPLICATED_PROJECTION": "1",
     "JOINT_PERIODIC_COEFFICIENTS": "1",
@@ -79,7 +79,7 @@
     "STATE_META_BTS_ALPHA": "-1",
     "STATE_REFRESH_INTERVAL": "1",
     "TOKENS": "2",
-    "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba/owned-arithmetic-20260924",
+    "FHEMAMBA_REMOTE_ROOT": "${HOME}/fhemamba/owned-arithmetic-20260924",
     "REPO_COMMIT": "3084ebc32dceb0358bbbe761b5dfb795c2ed5f4c",
     "CUDA_LAUNCH_BLOCKING": "1",
     "FAST_PLAINTEXT_UPLOAD": "1",
@@ -92,7 +92,7 @@
   "controller_sha256": "df1b467aeba049617e6922caf2a1d9aedc666e971dc6982b1357e0d9885200a9",
   "launcher_sha256": "03c25292ac695f452ad6af0e4987ac91bd36c6bcbad8f880e17ef9b4c722424a",
   "candidate": true,
-  "source_manifest_path": "/home/kataiwa/fhemamba/owned-arithmetic-20260924/compiled-sources.json",
+  "source_manifest_path": "${HOME}/fhemamba/owned-arithmetic-20260924/compiled-sources.json",
   "binary_sha256": "a7ed8d63259bbcc138c557ed2e0d775825410a5a9f89a9e2c8abe01e20cae20d",
   "pid": 3003066,
   "process_sample": [

@@ -28,7 +28,7 @@
     {
       "all_tokens_decrypt": true,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/row-state-ab/m2_chain_spark-group-state_l24_t5.json"
+        "${HOME}/fhemamba/results/row-state-ab/m2_chain_spark-group-state_l24_t5.json"
       ],
       "artifacts": [
         {
@@ -44,13 +44,13 @@
               "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
               "sync_profile": "full"
             },
-            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "library_path": "${HOME}/fhe-deps/openfhe-fides/lib",
             "platform": "dgx-spark",
             "schema_version": 1,
             "shared_libraries": {
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
             },
             "source_sha256": "7aa00209d3eb83b08235c7249608d5abbfdfe674fe6a3826e994f3061569e159",
             "toolchain": {
@@ -102,7 +102,7 @@
             "tokens": 5
           },
           "passed": false,
-          "path": "/home/kataiwa/fhemamba/results/row-state-ab/m2_chain_spark-group-state_l24_t5.json",
+          "path": "${HOME}/fhemamba/results/row-state-ab/m2_chain_spark-group-state_l24_t5.json",
           "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.5ee0deb19a812e5f",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "failed",
@@ -127,7 +127,7 @@
         "ARTIFACT_VERSION": "0.5.0",
         "AUTOREGRESSIVE_CLIENT_LOOP": "1",
         "AUTO_HEADROOM": "4",
-        "BINARY": "/home/kataiwa/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY": "${HOME}/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
         "BINARY_SHA256": "578f8080d889e244692d0cbb831a523830652e5aa30de27cce3826d47e71e09c",
         "BSGS_REPLICAS": "auto",
         "CARRIED_HEADROOM": "0",
@@ -135,12 +135,12 @@
         "DEBUG_LAYER_ERRORS": "0",
         "DEBUG_NORMALIZED_STATE_BOOTSTRAP_RANGE": "0",
         "ENCODE_THREADS": "8",
-        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba",
+        "FHEMAMBA_REMOTE_ROOT": "${HOME}/fhemamba",
         "FIDESLIB_SYNC_PROFILE": "full",
         "FIRST_MOD_SIZE": "60",
         "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
         "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
-        "INPUT_CHAIN": "/home/kataiwa/fhemamba/cipher/fhemamba/results/m2_chain_payload_rows",
+        "INPUT_CHAIN": "${HOME}/fhemamba/cipher/fhemamba/results/m2_chain_payload_rows",
         "INPUT_CHAIN_SHA256": "e788c496847701fae2bbc5ad8ccff7b670b9d51f5e66594d9d6b2099beeb8c69",
         "INTERLEAVED_REPLICATED_PROJECTION": "1",
         "LAYERS": "24",
@@ -163,7 +163,7 @@
         "REPLICATED_TRUE_BSGS": "1",
         "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.5ee0deb19a812e5f",
         "RESIDUAL_HEADROOM": "0",
-        "RESULTS_DIR": "/home/kataiwa/fhemamba/results/row-state-ab",
+        "RESULTS_DIR": "${HOME}/fhemamba/results/row-state-ab",
         "RING_DIM": "65536",
         "ROTATION_KEYS": "balanced",
         "ROTATION_KEY_GIB": "30",
@@ -192,7 +192,7 @@
     {
       "all_tokens_decrypt": true,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/row-state-ab/m2_chain_spark-row-state_l24_t5.json"
+        "${HOME}/fhemamba/results/row-state-ab/m2_chain_spark-row-state_l24_t5.json"
       ],
       "artifacts": [
         {
@@ -208,13 +208,13 @@
               "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
               "sync_profile": "full"
             },
-            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "library_path": "${HOME}/fhe-deps/openfhe-fides/lib",
             "platform": "dgx-spark",
             "schema_version": 1,
             "shared_libraries": {
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
             },
             "source_sha256": "7aa00209d3eb83b08235c7249608d5abbfdfe674fe6a3826e994f3061569e159",
             "toolchain": {
@@ -266,7 +266,7 @@
             "tokens": 5
           },
           "passed": true,
-          "path": "/home/kataiwa/fhemamba/results/row-state-ab/m2_chain_spark-row-state_l24_t5.json",
+          "path": "${HOME}/fhemamba/results/row-state-ab/m2_chain_spark-row-state_l24_t5.json",
           "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.5ee0deb19a812e5f",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "passed",
@@ -291,7 +291,7 @@
         "ARTIFACT_VERSION": "0.5.0",
         "AUTOREGRESSIVE_CLIENT_LOOP": "1",
         "AUTO_HEADROOM": "4",
-        "BINARY": "/home/kataiwa/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY": "${HOME}/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib",
         "BINARY_SHA256": "578f8080d889e244692d0cbb831a523830652e5aa30de27cce3826d47e71e09c",
         "BSGS_REPLICAS": "auto",
         "CARRIED_HEADROOM": "0",
@@ -299,12 +299,12 @@
         "DEBUG_LAYER_ERRORS": "0",
         "DEBUG_NORMALIZED_STATE_BOOTSTRAP_RANGE": "0",
         "ENCODE_THREADS": "8",
-        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba",
+        "FHEMAMBA_REMOTE_ROOT": "${HOME}/fhemamba",
         "FIDESLIB_SYNC_PROFILE": "full",
         "FIRST_MOD_SIZE": "60",
         "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
         "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
-        "INPUT_CHAIN": "/home/kataiwa/fhemamba/cipher/fhemamba/results/m2_chain_payload_rows",
+        "INPUT_CHAIN": "${HOME}/fhemamba/cipher/fhemamba/results/m2_chain_payload_rows",
         "INPUT_CHAIN_SHA256": "e788c496847701fae2bbc5ad8ccff7b670b9d51f5e66594d9d6b2099beeb8c69",
         "INTERLEAVED_REPLICATED_PROJECTION": "1",
         "LAYERS": "24",
@@ -327,7 +327,7 @@
         "REPLICATED_TRUE_BSGS": "1",
         "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.5ee0deb19a812e5f",
         "RESIDUAL_HEADROOM": "0",
-        "RESULTS_DIR": "/home/kataiwa/fhemamba/results/row-state-ab",
+        "RESULTS_DIR": "${HOME}/fhemamba/results/row-state-ab",
         "RING_DIM": "65536",
         "ROTATION_KEYS": "balanced",
         "ROTATION_KEY_GIB": "30",

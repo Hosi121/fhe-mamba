@@ -1,0 +1,448 @@
+{
+  "decision": "adopt",
+  "workloads": {
+    "prefix": {
+      "base": {
+        "eval_seconds": [
+          8.881335047,
+          8.884950169
+        ],
+        "mean_eval_seconds": 8.883142608,
+        "mean_setup_seconds": 69.4856732435,
+        "mean_bootstrap_seconds": 1.0937638785,
+        "mean_prefetch_wait_seconds": 1.855689985,
+        "mean_host_encoding_seconds": 4.584957514,
+        "mean_mask_preparation_seconds": 0.1935098565,
+        "mean_plaintext_upload_seconds": 1.033817884,
+        "mean_peak_rss_gib": 26.11831092835,
+        "mean_ordinary_seconds": 7.7893787295,
+        "process_wall_seconds": [
+          83.02904941490851,
+          83.4991667191498
+        ],
+        "mean_process_wall_seconds": 83.26410806702916,
+        "max_abs_error_vs_polynomial": 8.90073791365e-07,
+        "max_abs_error_vs_exact": 1.97159876496e-05,
+        "mean_linear_node_seconds": 3.798958959,
+        "mean_linear_bootstrap_seconds": 0.2296602385,
+        "generated_token_ids": [
+          6864,
+          6864
+        ]
+      },
+      "candidate": {
+        "eval_seconds": [
+          7.654855588,
+          7.800140171
+        ],
+        "mean_eval_seconds": 7.7274978794999996,
+        "mean_setup_seconds": 70.225530561,
+        "mean_bootstrap_seconds": 1.092191291,
+        "mean_prefetch_wait_seconds": 0.774023771,
+        "mean_host_encoding_seconds": 4.6331297545000005,
+        "mean_mask_preparation_seconds": 0.22830415599999998,
+        "mean_plaintext_upload_seconds": 0.9664264915,
+        "mean_peak_rss_gib": 26.118581771850003,
+        "mean_ordinary_seconds": 6.6353065885,
+        "process_wall_seconds": [
+          82.67089054407552,
+          82.81867380905896
+        ],
+        "mean_process_wall_seconds": 82.74478217656724,
+        "max_abs_error_vs_polynomial": 8.9999381464e-07,
+        "max_abs_error_vs_exact": 1.96117494164e-05,
+        "mean_linear_node_seconds": 2.61746764,
+        "mean_linear_bootstrap_seconds": 0.2299905485,
+        "generated_token_ids": [
+          6864,
+          6864
+        ]
+      },
+      "eval_reduction": 0.13009413216661048,
+      "prefetch_wait_reduction_seconds": 1.081666214
+    },
+    "full": {
+      "base": {
+        "eval_seconds": [
+          173.13535116,
+          173.186675116
+        ],
+        "mean_eval_seconds": 173.161013138,
+        "mean_setup_seconds": 69.2294559585,
+        "mean_bootstrap_seconds": 37.820119463,
+        "mean_prefetch_wait_seconds": 39.8433143925,
+        "mean_host_encoding_seconds": 90.9969735555,
+        "mean_mask_preparation_seconds": 4.017931465,
+        "mean_plaintext_upload_seconds": 19.511355236500002,
+        "mean_peak_rss_gib": 26.29169464115,
+        "mean_ordinary_seconds": 135.340893675,
+        "process_wall_seconds": [
+          259.6315624839626,
+          260.05994911515154
+        ],
+        "mean_process_wall_seconds": 259.8457557995571,
+        "max_abs_error_vs_polynomial": 9.5497679431e-07,
+        "max_abs_error_vs_exact": 4.69963538006e-05,
+        "mean_linear_node_seconds": 73.27613317800001,
+        "mean_linear_bootstrap_seconds": 2.552859602,
+        "generated_token_ids": [
+          315,
+          279,
+          1614,
+          315
+        ],
+        "seconds_per_generated_token": 43.2902532845,
+        "process_wall_seconds_per_generated_token": 64.96143894988927
+      },
+      "candidate": {
+        "eval_seconds": [
+          148.521933951,
+          149.086651202
+        ],
+        "mean_eval_seconds": 148.80429257650002,
+        "mean_setup_seconds": 69.2864309215,
+        "mean_bootstrap_seconds": 37.7026454375,
+        "mean_prefetch_wait_seconds": 17.953000918500003,
+        "mean_host_encoding_seconds": 93.0913385835,
+        "mean_mask_preparation_seconds": 5.0200855555,
+        "mean_plaintext_upload_seconds": 18.033468858,
+        "mean_peak_rss_gib": 26.29095840455,
+        "mean_ordinary_seconds": 111.10164713900002,
+        "process_wall_seconds": [
+          235.49224889301695,
+          235.7707784359809
+        ],
+        "mean_process_wall_seconds": 235.63151366449893,
+        "max_abs_error_vs_polynomial": 5.48639019105e-07,
+        "max_abs_error_vs_exact": 4.70779677126e-05,
+        "mean_linear_node_seconds": 49.33395830400001,
+        "mean_linear_bootstrap_seconds": 2.5443377290000004,
+        "generated_token_ids": [
+          315,
+          279,
+          1614,
+          315
+        ],
+        "seconds_per_generated_token": 37.201073144125004,
+        "process_wall_seconds_per_generated_token": 58.90787841612473
+      },
+      "eval_reduction": 0.14065937892202662,
+      "prefetch_wait_reduction_seconds": 21.890313473999996
+    }
+  },
+  "cpu_placement": {
+    "prefix-0-base": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 77,
+          "minimum": 699751,
+          "median": 4599953,
+          "maximum": 4600046
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 4,
+          "minimum": 2300000,
+          "median": 2300000.0,
+          "maximum": 2300023
+        }
+      },
+      "container_entrypoint_samples": [
+        {
+          "tid": 11568,
+          "main": true,
+          "name": "nvidia_entrypoi",
+          "cpu": 68,
+          "allowed": "64-68",
+          "frequency_khz": 2263470,
+          "schedstat": "78132271 7700545 211"
+        }
+      ],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 4,
+        "minimum": 4486430,
+        "median": 4555077.0,
+        "maximum": 4564846
+      }
+    },
+    "prefix-1-candidate": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 77,
+          "minimum": 714767,
+          "median": 4600000,
+          "maximum": 4600046
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 2,
+          "minimum": 2291939,
+          "median": 2295969.5,
+          "maximum": 2300000
+        }
+      },
+      "fhe-prefetch1": {
+        "cpu": 66,
+        "allowed": "66",
+        "frequency_khz": {
+          "samples": 2,
+          "minimum": 2299976,
+          "median": 2299988.0,
+          "maximum": 2300000
+        }
+      },
+      "container_entrypoint_samples": [
+        {
+          "tid": 18614,
+          "main": true,
+          "name": "nvidia_entrypoi",
+          "cpu": 66,
+          "allowed": "64-68",
+          "frequency_khz": 1659193,
+          "schedstat": "65565187 370629 72"
+        }
+      ],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 2,
+        "minimum": 4583292,
+        "median": 4591646.0,
+        "maximum": 4600000
+      }
+    },
+    "prefix-2-candidate": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 77,
+          "minimum": 790621,
+          "median": 4600000,
+          "maximum": 4600046
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 1,
+          "minimum": 2300000,
+          "median": 2300000,
+          "maximum": 2300000
+        }
+      },
+      "fhe-prefetch1": {
+        "cpu": 66,
+        "allowed": "66",
+        "frequency_khz": {
+          "samples": 1,
+          "minimum": 2291563,
+          "median": 2291563,
+          "maximum": 2291563
+        }
+      },
+      "container_entrypoint_samples": [
+        {
+          "tid": 25630,
+          "main": true,
+          "name": "nvidia_entrypoi",
+          "cpu": 65,
+          "allowed": "64-68",
+          "frequency_khz": 2275195,
+          "schedstat": "78183814 220838 56"
+        }
+      ],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 1,
+        "minimum": 4589692,
+        "median": 4589692,
+        "maximum": 4589692
+      }
+    },
+    "prefix-3-base": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 77,
+          "minimum": 714192,
+          "median": 4600000,
+          "maximum": 4600046
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 2,
+          "minimum": 2299976,
+          "median": 2299988.0,
+          "maximum": 2300000
+        }
+      },
+      "container_entrypoint_samples": [
+        {
+          "tid": 34195,
+          "main": true,
+          "name": "nvidia_entrypoi",
+          "cpu": 68,
+          "allowed": "64-68",
+          "frequency_khz": 2081712,
+          "schedstat": "77899230 563468 56"
+        }
+      ],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 2,
+        "minimum": 4519859,
+        "median": 4541045.0,
+        "maximum": 4562231
+      }
+    },
+    "full-0-base": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 244,
+          "minimum": 747377,
+          "median": 4600000.0,
+          "maximum": 4602267
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 63,
+          "minimum": 799991,
+          "median": 2300000,
+          "maximum": 2301523
+        }
+      },
+      "container_entrypoint_samples": [],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 63,
+        "minimum": 3465032,
+        "median": 4550006,
+        "maximum": 4600000
+      }
+    },
+    "full-1-candidate": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 222,
+          "minimum": 799199,
+          "median": 4600000.0,
+          "maximum": 4600508
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 41,
+          "minimum": 800000,
+          "median": 2299265,
+          "maximum": 2300023
+        }
+      },
+      "fhe-prefetch1": {
+        "cpu": 66,
+        "allowed": "66",
+        "frequency_khz": {
+          "samples": 41,
+          "minimum": 799991,
+          "median": 2299722,
+          "maximum": 2300025
+        }
+      },
+      "container_entrypoint_samples": [],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 41,
+        "minimum": 4085822,
+        "median": 4580998,
+        "maximum": 4600046
+      }
+    },
+    "full-2-candidate": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 222,
+          "minimum": 737381,
+          "median": 4600000.0,
+          "maximum": 4602583
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 41,
+          "minimum": 800000,
+          "median": 2299561,
+          "maximum": 2300025
+        }
+      },
+      "fhe-prefetch1": {
+        "cpu": 66,
+        "allowed": "66",
+        "frequency_khz": {
+          "samples": 41,
+          "minimum": 1439280,
+          "median": 2299555,
+          "maximum": 2300230
+        }
+      },
+      "container_entrypoint_samples": [],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 41,
+        "minimum": 3327217,
+        "median": 4573850,
+        "maximum": 4600046
+      }
+    },
+    "full-3-base": {
+      "main": {
+        "cpu": 64,
+        "allowed": "64",
+        "frequency_khz": {
+          "samples": 245,
+          "minimum": 752058,
+          "median": 4600000,
+          "maximum": 4604707
+        }
+      },
+      "fhe-prefetch0": {
+        "cpu": 65,
+        "allowed": "65",
+        "frequency_khz": {
+          "samples": 70,
+          "minimum": 800000,
+          "median": 2300000.0,
+          "maximum": 2300023
+        }
+      },
+      "container_entrypoint_samples": [],
+      "main_when_producer_observed_frequency_khz": {
+        "samples": 70,
+        "minimum": 4119724,
+        "median": 4564033.5,
+        "maximum": 4600046
+      }
+    }
+  },
+  "limits": "Two samples per arm on one prompt. CPU clock/governor unchanged. Most observation samples include setup; named producer samples identify preparation only. Summed host encoding and mask preparation service times overlap each other and GPU work; they cannot be subtracted from evaluation wall time. The two-arm placement helper is measurement-only. Process wall includes setup, client checks and container overhead; eval/token is not cold-request latency."
+}

@@ -1,0 +1,10 @@
+{
+  "name": "build",
+  "command": [
+    "bash",
+    "/study/build.sh"
+  ],
+  "timeout": 1200,
+  "cpu_only": true,
+  "build": true
+}

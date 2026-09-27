@@ -4,8 +4,8 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/build/owned_arithmetic_probe",
-    "/home/kataiwa/fhemamba/owned-arithmetic-20260924/probe-mamba3/native.json"
+    "${HOME}/fhemamba/owned-arithmetic-20260924/build/owned_arithmetic_probe",
+    "${HOME}/fhemamba/owned-arithmetic-20260924/probe-mamba3/native.json"
   ],
   "started_utc": "2026-09-24T14:16:48.309466+00:00",
   "timeout_seconds": 300,
@@ -32,7 +32,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS": "4"
   },
   "source_manifest_sha256": "f1fc7be29fb0915a6caf886e6d064574a3a4f97376b9716e4cd7c0a3ccdfad75",
@@ -45,5 +45,5 @@
   "wall_seconds": 3.394107239320874,
   "ended_utc": "2026-09-24T14:16:51.715405+00:00",
   "passed": false,
-  "validation_error": "[Errno 2] No such file or directory: '/home/kataiwa/fhemamba/owned-arithmetic-20260924/probe-mamba3/native.json'"
+  "validation_error": "[Errno 2] No such file or directory: '${HOME}/fhemamba/owned-arithmetic-20260924/probe-mamba3/native.json'"
 }

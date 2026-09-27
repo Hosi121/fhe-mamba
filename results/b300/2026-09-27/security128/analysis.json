@@ -1,0 +1,129 @@
+{
+  "passed": true,
+  "selected_capacity": 2048,
+  "full_seconds": {
+    "baseline": 327.508331253,
+    "gpu_addends_cache1024": 244.400548966,
+    "gpu_addends_cache2048": 235.750153116
+  },
+  "reduction": 0.2801705159253395,
+  "seconds_per_generated_token": 58.937538279,
+  "refresh_seconds": {
+    "baseline": 79.195500035,
+    "cache1024": 83.493620005,
+    "cache2048": 85.964496135
+  },
+  "gpu_sampled_peaks_mib": {
+    "full-optimized-r1": 133538.0,
+    "full-cache2048-r1": 177570.0
+  },
+  "cpu_placement": {
+    "addends-prefix-control-r2": {
+      "all_main_cpus": [
+        64,
+        66
+      ],
+      "main_cpus_after_first_two_seconds": [
+        64
+      ],
+      "early_unpinned_main_samples": [
+        {
+          "offset_seconds": 0.6695723533630371,
+          "cpu": 66,
+          "allowed": "64-68"
+        }
+      ],
+      "worker_observed_single_cpu_masks": [
+        "65",
+        "66"
+      ],
+      "samples": 79
+    },
+    "addends-prefix-candidate-r2": {
+      "all_main_cpus": [
+        64
+      ],
+      "main_cpus_after_first_two_seconds": [
+        64
+      ],
+      "early_unpinned_main_samples": [],
+      "worker_observed_single_cpu_masks": [
+        "65",
+        "66"
+      ],
+      "samples": 77
+    },
+    "addends-prefix-cache-r2": {
+      "all_main_cpus": [
+        64
+      ],
+      "main_cpus_after_first_two_seconds": [
+        64
+      ],
+      "early_unpinned_main_samples": [],
+      "worker_observed_single_cpu_masks": [
+        "66"
+      ],
+      "samples": 78
+    },
+    "addends-prefix-combined-r2": {
+      "all_main_cpus": [
+        64,
+        65
+      ],
+      "main_cpus_after_first_two_seconds": [
+        64
+      ],
+      "early_unpinned_main_samples": [
+        {
+          "offset_seconds": 0.3648979663848877,
+          "cpu": 65,
+          "allowed": "64-68"
+        }
+      ],
+      "worker_observed_single_cpu_masks": [
+        "66"
+      ],
+      "samples": 77
+    },
+    "full-optimized-r1": {
+      "all_main_cpus": [
+        64
+      ],
+      "main_cpus_after_first_two_seconds": [
+        64
+      ],
+      "early_unpinned_main_samples": [],
+      "worker_observed_single_cpu_masks": [
+        "65",
+        "66"
+      ],
+      "samples": 197
+    },
+    "full-cache2048-r1": {
+      "all_main_cpus": [
+        64
+      ],
+      "main_cpus_after_first_two_seconds": [
+        64
+      ],
+      "early_unpinned_main_samples": [],
+      "worker_observed_single_cpu_masks": [
+        "65",
+        "66"
+      ],
+      "samples": 191
+    }
+  },
+  "next_cache_screen": {
+    "maximum_potential_reload_count": 3103,
+    "observed_seconds_per_avoided_miss": 0.002825080290659698,
+    "extrapolated_total_reload_saving_seconds": 8.766224141917043,
+    "extrapolated_fraction": 0.0371843836623243,
+    "capacity3072_conservative_peak_mib": 269730.0,
+    "ninety_percent_device_mib": 247536.0,
+    "decision": "stop capacity sweep: projected residual gain below the 5% material-opportunity screen; 3072 entries exceed the conservative headroom screen",
+    "limits": "The reload count is an upper bound; the time extrapolation is an estimate from one pair, not a latency lower bound or proof of optimality."
+  },
+  "comparison_scope": "One frozen full sample per setting; fresh keys and cold caches; same audited security and circuit; no statistical significance or arbitrary-prompt claim."
+}

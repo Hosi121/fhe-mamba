@@ -1,0 +1,53 @@
+{
+  "state": "completed",
+  "started_at_unix": 1790453214.4990218,
+  "spec": {
+    "name": "exact-base-32768-mamba3",
+    "command": [
+      "/study/bin/base/rotation_probe",
+      "/study/exact-base-32768-mamba3/probe.json",
+      "32768",
+      "mamba3"
+    ],
+    "timeout": 1200
+  },
+  "docker_command": [
+    "docker",
+    "run",
+    "--name",
+    "cipher-graph-block-exact-base-32768-mamba3",
+    "--user",
+    "1006:1006",
+    "--cpuset-cpus",
+    "64-68",
+    "--cpuset-mems",
+    "2",
+    "--shm-size",
+    "1g",
+    "--volume",
+    "${HOME}/fhemamba-b300:/workspace:ro",
+    "--volume",
+    "${HOME}/fhemamba-b300/b300-mamba3-20260926:/work:ro",
+    "--volume",
+    "${HOME}/fhemamba-b300/b300-graph-block-20260927:/study",
+    "--workdir",
+    "/study",
+    "--env",
+    "OMP_NUM_THREADS=4",
+    "--env",
+    "OMP_PROC_BIND=true",
+    "--env",
+    "OMP_PLACES={64},{66},{67},{68}",
+    "--env",
+    "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+    "--gpus",
+    "device=4",
+    "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "/study/bin/base/rotation_probe",
+    "/study/exact-base-32768-mamba3/probe.json",
+    "32768",
+    "mamba3"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 8.565946409944445
+}

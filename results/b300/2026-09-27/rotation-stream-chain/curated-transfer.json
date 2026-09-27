@@ -1,0 +1,6 @@
+{
+  "files": 174,
+  "bytes": 380537,
+  "sha256": "d4280089997fa00fb5d7e94a302e84714b33d19174bced6e0db61daa4721e8cb",
+  "excluded": "Large compiled binaries/static libraries and Nsight SQLite/report files retained remotely with identities."
+}

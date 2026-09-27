@@ -17,7 +17,7 @@ export, input loading and external transport are outside that timer. The models
 have different sizes, weights and error contracts, so this table does not rank
 architectures.
 
-[Raw runs, failed probes, source archives, hashes and comparison script](../../results/dgx/2026-09-24/owned-arithmetic/).
+[Raw runs, failed probes, source archives, hashes and comparison results](../../results/dgx/2026-09-24/owned-arithmetic/).
 
 ## Mechanism
 
@@ -192,7 +192,7 @@ about 3.51× for that isolated scan. A separate
 2.31–3.92% shorter full plaintext construction across four fixtures. Neither
 local measurement establishes DGX or model performance. The production
 model/library code does not include this prototype. See
-[the detailed follow-up and all raw local samples](../../results/dgx/2026-09-24/owned-arithmetic/next-encoding-candidates.md)
+[the detailed follow-up and all raw local samples; archive member `dgx/2026-09-24/owned-arithmetic/next-encoding-candidates.md`](../../results/README.md#archived-provenance)
 for proposed exact-RNS gates and unsupported cases.
 
 The subsequent [preparation design study](2026-09-25-preparation-design.md)

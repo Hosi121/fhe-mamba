@@ -1,0 +1,14 @@
+{
+  "verified_files": 257,
+  "kernel_cases": 720,
+  "coefficient_words": 289415168,
+  "rns_cases": 960,
+  "encrypted_cases": 36,
+  "model_reports": 8,
+  "prefix_mean_seconds": {
+    "base": 8.711569359999999,
+    "candidate": 8.912408255999999
+  },
+  "prefix_reduction": -0.023054272737834225,
+  "decision": "not adopted; full gate not reached"
+}

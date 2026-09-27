@@ -1,0 +1,15 @@
+{
+  "name": "addends-rns-32768-complex-r2",
+  "command": [
+    "/study/build/addends-r2/packed_rns_probe",
+    "/study/addends-rns-32768-complex-r2/probe.json",
+    "--compact-addends",
+    "--prefetch",
+    "--prefetch-workers",
+    "2",
+    "--ring",
+    "32768",
+    "--mamba2"
+  ],
+  "timeout": 1800
+}

@@ -1,0 +1,8 @@
+{
+  "name": "refresh-d4-r1",
+  "command": [
+    "/study/build/security/security_refresh",
+    "/study/refresh-d4-r1/probe.json",
+    "4"
+  ]
+}

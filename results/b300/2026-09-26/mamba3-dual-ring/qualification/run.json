@@ -1,0 +1,48 @@
+{
+  "command": [
+    "/work/build/probe/gpu_dual_ring",
+    "/work/qualification/probe.json",
+    "qualification"
+  ],
+  "docker_command": [
+    "docker",
+    "run",
+    "--name",
+    "cipher-m3-probe-20260926",
+    "--gpus",
+    "device=4",
+    "--user",
+    "1006:1006",
+    "--cpuset-cpus",
+    "64-68",
+    "--cpuset-mems",
+    "2",
+    "--shm-size",
+    "1g",
+    "--volume",
+    "${HOME}/fhemamba-b300:/workspace:ro",
+    "--volume",
+    "${HOME}/fhemamba-b300/b300-mamba3-20260926:/work",
+    "--workdir",
+    "/work",
+    "--env",
+    "OMP_NUM_THREADS=4",
+    "--env",
+    "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+    "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "/work/build/probe/gpu_dual_ring",
+    "/work/qualification/probe.json",
+    "qualification"
+  ],
+  "binary_sha256": "6480bc3dfbaefb8082ada9ee7ad6f59eae7ff05ac6e050da71b49a7e8b4b2f61",
+  "started_at_unix": 1790417374.1507301,
+  "environment": {
+    "OMP_NUM_THREADS": "4"
+  },
+  "host_gpu": 4,
+  "cpu_affinity": "64-68",
+  "numa_node": 2,
+  "state": "completed",
+  "exit_code": 0,
+  "wall_seconds": 93.22480556089431
+}

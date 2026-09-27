@@ -92,7 +92,7 @@ Follow the [fresh-host build instructions](dgx-spark.md#build) on a DGX Spark
 with CUDA 13.0. The expected layout is:
 
 ```text
-/home/YOUR_USER/fhemamba/
+${HOME}/fhemamba/
   cipher/       repository checkout
   spark/        isolated native build and dependency manifest
 ```
@@ -109,7 +109,7 @@ Configure ordinary SSH access, then set these two values for your host:
 
 ```bash
 export FHEMAMBA_SSH_HOST=your-user@your-spark
-export FHEMAMBA_REMOTE_ROOT=/home/your-user/fhemamba
+export FHEMAMBA_REMOTE_ROOT=${HOME}/fhemamba
 
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
   uv run --no-sync python experiments/run_dgx_generation.py \

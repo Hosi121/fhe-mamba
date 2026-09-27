@@ -1,21 +1,19 @@
 # Coefficient ownership transfer
 
-Mamba-3's same-binary prefix ABBA measures **15.4315→15.1540 s (−1.80%)**.
-Its full candidate passes in 17.31 minutes; this is a completion/parity check,
-not a new paired full-runtime comparison. Mamba-2's short mean is 0.48% higher,
-so that model's full follow-up is explicitly skipped.
+Technical report: [method, results and limitations](../../../../docs/research/2026-09-24-coefficient-ownership.md).
 
-See the [study](../../../../docs/research/2026-09-24-coefficient-ownership.md).
+This directory contains public measurement records. Numerical values and pass/fail
+statuses are preserved. Environment identifiers are normalized.
 
-- `m3-*`, `m2-*`, `cache-move/`: raw native results and launch records.
-- `m3-full-move/generation.json`: actual selected tokens, decoded with the pinned tokenizer.
-- `probe-*`: both configurations, 160 original plus 160 moved RNS inputs and 126 policy cases.
-- `prototype/`: separate initial exactness/phase prototype and immutable source archive.
-- `compiled-sources.*`, `target-provenance.json`: model source, actual binaries, dependencies and compiler identity.
-- `validation-sources.json`, `validation/`: the runner assertion repair after the native snapshot, with the initial failure and omitted CTest option retained.
-- `compare.py`: recompute comparisons and check source archives, binaries, payloads, counts, gates and predecessor identity. Run `python3 compare.py` with the adjacent `packed-resources/` evidence present.
-- `finish_reports.py`: regenerate decoded reports with local pinned tokenizer files.
-- `plan.json`, `budget.json`, `completion*.json`, `notification.json`, `postprocess-completion.json`: finite jobs, collection/notification and successful postprocessing.
+Relevant logs and measured source snapshots are in the shared
+[provenance bundle](../../../provenance.tar.gz), indexed by
+[the publication manifest](../../../publication.json). Original hashes refer to
+the retained raw files; published hashes verify these derivatives.
 
-Measured controllers retain their exact bytes and target paths. Use new output
-directories for reproduction. Build trees, large payloads and checkpoints are omitted.
+Use the [experiment workflow](../../../../docs/experiments.md) to verify or inspect
+the archive. Run new experiments through maintained runners in `experiments/`,
+with machine settings supplied separately. Superseded operational scripts have been deleted.
+
+## Measurements
+
+- [comparison.json](comparison.json)

@@ -96,7 +96,7 @@ gate. Those remain separate milestones.
 The [Spark runbook](../dgx-spark.md#complete-prompt-to-text-generation) contains
 the complete command. The experiment directory is
 `runs/client-generation-20260922/`; the remote copy is under
-`/home/kataiwa/fhemamba/gate-integration-20260921/generation/`.
+`${HOME}/fhemamba/gate-integration-20260921/generation/`.
 It retains the request, exact input hash, Python source archive and source
 manifest, native log, raw numerical artifact, campaign and decoded report.
 The decoded report was reconstructed only to add explicit input-mode and

@@ -1,0 +1,89 @@
+{
+  "comparisons": {
+    "prefix": {
+      "base": 7.649179921,
+      "candidate": 7.64149383,
+      "reduction": 0.0010048254949395208,
+      "base_refresh": 1.085788161,
+      "candidate_refresh": 1.002476766,
+      "refresh_reduction": 0.07672895873470476,
+      "base_process_seconds": 82.4471553680487,
+      "candidate_process_seconds": 82.94011733494699,
+      "base_setup_seconds": 70.007425343,
+      "candidate_setup_seconds": 70.428063517,
+      "base_other_seconds": 6.56339176,
+      "candidate_other_seconds": 6.639017064,
+      "base_peak_rss_gib": 26.119556427,
+      "candidate_peak_rss_gib": 26.1182327271,
+      "base_polynomial_error": 8.2623614367e-07,
+      "candidate_polynomial_error": 8.29311032324e-06,
+      "base_exact_error": 1.95994570893e-05,
+      "candidate_exact_error": 1.9941943596e-05
+    },
+    "full": {
+      "base": 148.357655089,
+      "candidate": 145.960740869,
+      "reduction": 0.016156323167564657,
+      "base_refresh": 37.76758024,
+      "candidate_refresh": 34.661290649,
+      "refresh_reduction": 0.08224751417116472,
+      "base_process_seconds": 235.52329657203518,
+      "candidate_process_seconds": 232.74313620501198,
+      "base_setup_seconds": 69.71777071,
+      "candidate_setup_seconds": 69.342364218,
+      "base_other_seconds": 110.59007484899999,
+      "candidate_other_seconds": 111.29945022000001,
+      "base_peak_rss_gib": 26.2889175415,
+      "candidate_peak_rss_gib": 26.2918357849,
+      "base_polynomial_error": 8.13180398462e-07,
+      "candidate_polynomial_error": 3.10010662519e-06,
+      "base_exact_error": 4.70619575328e-05,
+      "candidate_exact_error": 4.66201173399e-05
+    }
+  },
+  "qualification": {
+    "base_max_error": 9.53540743586778e-09,
+    "candidate_max_error": 8.78829533451642e-08
+  },
+  "candidate_seconds_per_generated_token": 36.49018521725,
+  "decision": "adopt optional dependency patch, single-pair scope",
+  "placement": {
+    "full-0-base/packed_fideslib": [
+      [
+        64,
+        "64"
+      ]
+    ],
+    "full-0-base/fhe-prefetch0": [
+      [
+        65,
+        "65"
+      ]
+    ],
+    "full-0-base/fhe-prefetch1": [
+      [
+        66,
+        "66"
+      ]
+    ],
+    "full-1-candidate/packed_fideslib": [
+      [
+        64,
+        "64"
+      ]
+    ],
+    "full-1-candidate/fhe-prefetch0": [
+      [
+        65,
+        "65"
+      ]
+    ],
+    "full-1-candidate/fhe-prefetch1": [
+      [
+        66,
+        "66"
+      ]
+    ]
+  },
+  "scope": "One prefix and one full A/B pair; one frozen prompt; no statistical-significance, security, or full Mamba-2 claim. Ordinary operation counters exclude backend bootstrap work."
+}

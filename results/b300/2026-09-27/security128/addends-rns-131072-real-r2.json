@@ -1,0 +1,15 @@
+{
+  "name": "addends-rns-131072-real-r2",
+  "command": [
+    "/study/build/addends-r2/packed_rns_probe",
+    "/study/addends-rns-131072-real-r2/probe.json",
+    "--compact-addends",
+    "--prefetch",
+    "--prefetch-workers",
+    "2",
+    "--classical128",
+    "--security-digits",
+    "4"
+  ],
+  "timeout": 1800
+}

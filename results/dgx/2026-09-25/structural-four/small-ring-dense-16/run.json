@@ -3,11 +3,11 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/structural-four-20260925/small-ring-dense-probe",
+    "${HOME}/fhemamba/structural-four-20260925/small-ring-dense-probe",
     "--logn",
     "16",
     "--output",
-    "/home/kataiwa/fhemamba/structural-four-20260925/small-ring-dense-16/native.json"
+    "${HOME}/fhemamba/structural-four-20260925/small-ring-dense-16/native.json"
   ],
   "exit_code": 0,
   "started_at_unix": 1790333940.9317477,

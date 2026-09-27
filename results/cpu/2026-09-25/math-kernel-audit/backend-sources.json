@@ -1,5 +1,5 @@
 {
-  "root": "/home/kataiwa/fhemamba/spark/source-2a70798e869944af",
+  "root": "${HOME}/fhemamba/spark/source-2a70798e869944af",
   "git_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
   "git_diff_raw_sha256": "e797fabf171824d8f5f9478bf251ef25d4f37cd70e52f1b75ed2368edaa46e4f",
   "files": {

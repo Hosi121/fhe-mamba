@@ -1,0 +1,5 @@
+{
+  "path": "${HOME}/fhemamba-b300/b300-graph-block-20260927/bin/base/packed_fideslib",
+  "sha256": "d58f93ad186ee5c5159d25ad2a929af98de52d9a522c6abbefa287a26ada607c",
+  "source": "previous adopted even-seed candidate; two CPU producers and inverse FFT patch retained"
+}

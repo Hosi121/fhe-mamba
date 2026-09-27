@@ -1,0 +1,103 @@
+{
+  "profile_eval_seconds": 15.775732868,
+  "host_encoding_seconds": 7.37340428,
+  "gpu_activity": {
+    "CUPTI_ACTIVITY_KIND_KERNEL": {
+      "count": 308734,
+      "sum_seconds": 2.859246986
+    },
+    "CUPTI_ACTIVITY_KIND_MEMCPY": {
+      "count": 43304,
+      "sum_seconds": 0.141923328
+    },
+    "CUPTI_ACTIVITY_KIND_MEMSET": {
+      "count": 3840,
+      "sum_seconds": 0.007623972
+    }
+  },
+  "gpu_interval_union_seconds": 2.544831659,
+  "dominant_thread_samples": 7659,
+  "dominant_thread_leaf_samples": [
+    [
+      "lbcrypto::DiscreteFourierTransform::FFTSpecialInv(std::vector<std::complex<double>, std::allocator<std::complex<double> > >&, unsigned int)",
+      1262
+    ],
+    [
+      "lbcrypto::CKKSPackedEncoding::FitToNativeVector(std::vector<long, std::allocator<long> > const&, long, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*) const",
+      852
+    ],
+    [
+      "lbcrypto::CKKSPackedEncoding::Encode()",
+      585
+    ],
+    [
+      "intnat::ChineseRemainderTransformFTTNat<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >::ForwardTransformToBitReverseInPlace(intnat::NativeIntegerT<unsigned long> const&, unsigned int, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*)",
+      177
+    ],
+    [
+      "lbcrypto::DiscreteFourierTransform::BitReverse(std::vector<std::complex<double>, std::allocator<std::complex<double> > >&)",
+      150
+    ],
+    [
+      "llround",
+      148
+    ],
+    [
+      "__pthread_mutex_unlock",
+      130
+    ],
+    [
+      "intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >::ModMul(intnat::NativeIntegerT<unsigned long> const&) const",
+      124
+    ],
+    [
+      "0x78236edfbb7a",
+      120
+    ],
+    [
+      "__pthread_mutex_trylock",
+      119
+    ],
+    [
+      "0x78237aa585b1",
+      118
+    ],
+    [
+      "0x78237a85d8e7",
+      116
+    ],
+    [
+      "0x78237aa6088e",
+      115
+    ],
+    [
+      "fhemamba::stage1::replicated_bsgs_mask(fhemamba::PublicWeightView, int, int, int, fhemamba::stage1::ReplicatedShape const&, int, double)",
+      98
+    ],
+    [
+      "__pthread_rwlock_unlock",
+      93
+    ],
+    [
+      "_init",
+      85
+    ],
+    [
+      "__pthread_rwlock_tryrdlock",
+      83
+    ],
+    [
+      "0x78237a9bfe14",
+      79
+    ],
+    [
+      "lbcrypto::CKKSPackedEncoding::CKKSPackedEncoding<lbcrypto::ILDCRTParams<bigintdyn::ubint<unsigned long> >, true>(std::shared_ptr<lbcrypto::ILDCRTParams<bigintdyn::ubint<unsigned long> > >, std::shared_ptr<lbcrypto::EncodingParamsImpl>, std::vector<std::complex<double>, std::allocator<std::complex<double> > > const&, unsigned long, unsigned int, double, unsigned int, lbcrypto::CKKSDataType)",
+      68
+    ],
+    [
+      "GenerationClient::select(std::vector<double, std::allocator<double> > const&)",
+      61
+    ]
+  ],
+  "limits": "Instrumented prefix, not unprofiled timing. GPU interval union excludes work absent from CUPTI; kernel sums overlap. CPU samples are counts, not elapsed wall time. Some callchains are broken."
+}

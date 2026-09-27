@@ -11,6 +11,16 @@
   SHA-256: `c15a58e757b928881d11602f162ba095ac597c9de1cc23cb94a09d669cdaf743`.
 - `dgx-spark.env` identifies the CUDA/FIDESlib build used by the Spark scripts.
 - `b300-platform.env` retains the historical B300 build configuration.
+- `benchmark-settings.example.json` shows local runner variables. Copy it to
+  ignored `config/local/` and set paths and an allocated device there.
+- `publication-policy.example.json` shows environment-identifier replacements
+  for reviewed public evidence. Local replacement values stay in `config/local/`.
+- `packed-comparison.example.json` defines common equality, error and timing
+  checks for the reusable comparison command; add study-specific invariants.
+
+Platform pins describe public hardware/software requirements. They must not
+contain operator usernames, SSH routes, private addresses or machine-local paths.
+See the [experiment workflow](../docs/experiments.md).
 
 See [the reproduction guide](../docs/reproducing.md). The export path validates
 the approximation certificates against the checkpoint and regenerates matching

@@ -127,7 +127,7 @@ all output decryptions finite; zero intermediate diagnostic decryptions
 ```
 
 The isolated candidate checkout/build is
-`/home/kataiwa/fhemamba/gate-periodic-20260922`; it reuses the immutable baseline
+`${HOME}/fhemamba/gate-periodic-20260922`; it reuses the immutable baseline
 payload and installed FIDESlib/OpenFHE dependencies. The validated baseline
 checkout and binary are preserved. The campaign manifests are
 `experiments/manifests/dgx_spark_periodic_gate_smoke.json` and
@@ -189,5 +189,5 @@ parameters remain separate gates.
 
 For a fresh prompt-to-text run on the measured host, use the existing generation
 command with `--joint-periodic-coefficients`, a new output directory, and
-`--remote-root /home/kataiwa/fhemamba/gate-periodic-20260922`. The original
+`--remote-root ${HOME}/fhemamba/gate-periodic-20260922`. The original
 baseline binary remains available in its separate checkout.

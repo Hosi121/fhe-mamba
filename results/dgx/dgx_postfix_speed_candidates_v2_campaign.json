@@ -9,7 +9,7 @@
     {
       "all_tokens_decrypt": true,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/m2_chain_postfix-balanced30-cache5-l24-t1_l24_t1.json"
+        "${HOME}/fhemamba/results/m2_chain_postfix-balanced30-cache5-l24-t1_l24_t1.json"
       ],
       "artifacts": [
         {
@@ -29,7 +29,7 @@
             ]
           },
           "passed": true,
-          "path": "/home/kataiwa/fhemamba/results/m2_chain_postfix-balanced30-cache5-l24-t1_l24_t1.json",
+          "path": "${HOME}/fhemamba/results/m2_chain_postfix-balanced30-cache5-l24-t1_l24_t1.json",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "passed",
           "timing": {
@@ -80,7 +80,7 @@
     {
       "all_tokens_decrypt": false,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/m2_chain_postfix-compact-cache40-l24-t1_l24_t1.json"
+        "${HOME}/fhemamba/results/m2_chain_postfix-compact-cache40-l24-t1_l24_t1.json"
       ],
       "artifacts": [],
       "candidate_passed": false,
@@ -114,7 +114,7 @@
       "gpu_wait_seconds": 0.022403082926757634,
       "infrastructure_ok": false,
       "issues": [
-        "missing artifact: /home/kataiwa/fhemamba/results/m2_chain_postfix-compact-cache40-l24-t1_l24_t1.json"
+        "missing artifact: ${HOME}/fhemamba/results/m2_chain_postfix-compact-cache40-l24-t1_l24_t1.json"
       ],
       "max_abs_error": null,
       "name": "postfix-compact-cache40-l24-t1",

@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "source_counts": {
+    "base": 96,
+    "base_measured": 97,
+    "candidate_measured": 97,
+    "candidate_product": 98
+  },
+  "measured_differences": [
+    "native/fideslib_stage0/include/bounded_prefetch.hpp",
+    "native/fideslib_stage0/src/packed_fideslib.cpp",
+    "native/fideslib_stage0/src/packed_rns_probe.cpp",
+    "native/fideslib_stage0/tests/test_bounded_prefetch.cpp"
+  ],
+  "common_measurement_helper": "native/fideslib_stage0/include/benchmark_prefetch_affinity.hpp",
+  "product_only_sources": [
+    "experiments/run_packed_probe.py",
+    "tests/test_packed_probe_runner.py"
+  ],
+  "product_queue_leading_indentation_only": true,
+  "same_compile_commands": true,
+  "gpu_backend_changed": false,
+  "backend_identity": "resident-identity-verification.json"
+}

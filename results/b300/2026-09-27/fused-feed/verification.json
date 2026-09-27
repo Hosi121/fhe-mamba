@@ -1,0 +1,20 @@
+{
+  "verified_files": 155,
+  "source_audit_passed": true,
+  "rns_cases": 960,
+  "encrypted_cases": 36,
+  "model_reports": 5,
+  "decision": "qualified paired gain; review magnitude and CPU placement without automatic repetitions",
+  "prefix_comparison": {
+    "base": 7.676493795,
+    "candidate": 7.550394569,
+    "reduction": 0.016426669436264474
+  },
+  "full_comparison": {
+    "base": 147.722885987,
+    "candidate": 145.509733,
+    "reduction": 0.014981788178676458
+  },
+  "removed_stopped_containers": 12,
+  "comparison_scope": "one fresh process per arm; no statistical-significance claim"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "kernel-2048-base",
+  "command": [
+    "/study/bin/base/ntt_warp_tail",
+    "/study/kernel-2048-base/probe.json",
+    "/study/golden/ring-2048.bin",
+    "2048",
+    "--record"
+  ],
+  "timeout": 1200
+}

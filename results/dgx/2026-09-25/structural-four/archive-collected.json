@@ -1,6 +1,6 @@
 {
   "collected": true,
-  "local_directory": "/home/hosi/cipher/results/dgx/2026-09-25/structural-four",
+  "local_directory": "${HOME}/cipher/results/dgx/2026-09-25/structural-four",
   "required_files_sha256": {
     "native-sources.tar.gz": "51013dd2a891ce00f8a7d0e5135a05985573821f29ef077335640196991cc838",
     "prefix-native-sources.tar.gz": "f22bc27b7d9f007ca33d315fbec36e0e4d524d2d089efb11bd8d0db17519b39c",

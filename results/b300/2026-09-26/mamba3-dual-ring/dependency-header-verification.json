@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "checks": {
+    "include/openfhe/core/config_core.h": true,
+    "include/openfhe/core/math/hal/intnat/ubintnat.h": true,
+    "include/openfhe/core/math/hal/intnat/mubintvecnat.h": true
+  }
+}

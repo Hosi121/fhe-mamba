@@ -1,0 +1,11 @@
+{
+  "name": "kernel-32768-base",
+  "command": [
+    "/study/bin/base/ntt_warp_tail",
+    "/study/kernel-32768-base/probe.json",
+    "/study/golden/ring-32768.bin",
+    "32768",
+    "--record"
+  ],
+  "timeout": 1200
+}

@@ -1,0 +1,9 @@
+{
+  "name": "refresh-base",
+  "command": [
+    "/study/bin/base/refresh_probe",
+    "/study/refresh-base/probe.json",
+    "qualification"
+  ],
+  "timeout": 1200
+}

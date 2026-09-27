@@ -71,6 +71,6 @@
     "OMP_MAX_ACTIVE_LEVELS": null,
     "MKL_NUM_THREADS": null,
     "OPENBLAS_NUM_THREADS": null,
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   }
 }

@@ -9,9 +9,9 @@
       "taskset",
       "-c",
       "15-19",
-      "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/composite_probe",
+      "${HOME}/fhemamba/structural-four-20260925/cheddar-build/composite_probe",
       "32",
-      "/home/kataiwa/fhemamba/structural-four-20260925/composite-stock32.json",
+      "${HOME}/fhemamba/structural-four-20260925/composite-stock32.json",
       "--stock32"
     ]
   },
@@ -25,9 +25,9 @@
       "taskset",
       "-c",
       "15-19",
-      "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build/composite_probe",
+      "${HOME}/fhemamba/structural-four-20260925/cheddar-build/composite_probe",
       "32",
-      "/home/kataiwa/fhemamba/structural-four-20260925/composite-diagnostic.json",
+      "${HOME}/fhemamba/structural-four-20260925/composite-diagnostic.json",
       "--diagnose"
     ]
   }

@@ -2,7 +2,7 @@
   "command": [
     "cmake",
     "--build",
-    "/home/kataiwa/fhemamba/s2c-first-20260925/legacy-build",
+    "${HOME}/fhemamba/s2c-first-20260925/legacy-build",
     "--target",
     "packed_fideslib",
     "-j",

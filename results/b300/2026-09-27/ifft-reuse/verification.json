@@ -1,0 +1,152 @@
+{
+  "passed": true,
+  "verified_files": 140,
+  "exact_rns_cases": 960,
+  "encrypted_cases": 36,
+  "comparisons": {
+    "prefix": {
+      "reduction": 0.033894910482718754,
+      "metrics": {
+        "eval_seconds": {
+          "base": 7.735296812,
+          "candidate": 7.473109619
+        },
+        "setup_seconds": {
+          "base": 70.074552066,
+          "candidate": 70.17415081
+        },
+        "bootstrap_seconds": {
+          "base": 1.091235898,
+          "candidate": 1.094820031
+        },
+        "host_encoding_seconds": {
+          "base": 4.633678209,
+          "candidate": 4.228534839
+        },
+        "plaintext_upload_seconds": {
+          "base": 0.961365424,
+          "candidate": 0.93469346
+        },
+        "prefetch_wait_seconds": {
+          "base": 0.77794147,
+          "candidate": 0.581300745
+        },
+        "mask_preparation_seconds": {
+          "base": 0.225583665,
+          "candidate": 0.243842695
+        },
+        "peak_rss_gib": {
+          "base": 26.1182632446,
+          "candidate": 26.1179962158
+        },
+        "max_abs_error_vs_polynomial": {
+          "base": 8.01265207073e-07,
+          "candidate": 6.97130683611e-07
+        },
+        "max_abs_error_vs_exact": {
+          "base": 1.97065755376e-05,
+          "candidate": 1.95361454365e-05
+        }
+      },
+      "process_wall_seconds": {
+        "base": 82.61972335889004,
+        "candidate": 82.52184649300762
+      },
+      "cache": {
+        "ifft_cache_mib": 4096,
+        "ifft_cache_hits": 1708,
+        "ifft_cache_misses": 854,
+        "ifft_cache_bypasses": 0,
+        "ifft_cache_entries": 854,
+        "ifft_cache_bytes": 223870976,
+        "ifft_cache_peak_bytes": 223870976
+      }
+    },
+    "full": {
+      "reduction": 0.02847630789854827,
+      "metrics": {
+        "eval_seconds": {
+          "base": 148.322526398,
+          "candidate": 144.098848468
+        },
+        "setup_seconds": {
+          "base": 69.471386985,
+          "candidate": 69.346096795
+        },
+        "bootstrap_seconds": {
+          "base": 37.831535659,
+          "candidate": 38.014825762
+        },
+        "host_encoding_seconds": {
+          "base": 92.411807385,
+          "candidate": 82.288635574
+        },
+        "plaintext_upload_seconds": {
+          "base": 18.023089497,
+          "candidate": 17.592903783
+        },
+        "prefetch_wait_seconds": {
+          "base": 17.629672754,
+          "candidate": 12.983467379
+        },
+        "mask_preparation_seconds": {
+          "base": 4.849526459,
+          "candidate": 5.531187529
+        },
+        "peak_rss_gib": {
+          "base": 26.2911643982,
+          "candidate": 26.3335914612
+        },
+        "max_abs_error_vs_polynomial": {
+          "base": 7.024934634e-07,
+          "candidate": 4.15354185383e-07
+        },
+        "max_abs_error_vs_exact": {
+          "base": 4.68527506339e-05,
+          "candidate": 4.72353449883e-05
+        }
+      },
+      "process_wall_seconds": {
+        "base": 235.24628294096328,
+        "candidate": 231.02607825980522
+      },
+      "cache": {
+        "ifft_cache_mib": 4096,
+        "ifft_cache_hits": 40992,
+        "ifft_cache_misses": 10248,
+        "ifft_cache_bypasses": 0,
+        "ifft_cache_entries": 10248,
+        "ifft_cache_bytes": 2686451712,
+        "ifft_cache_peak_bytes": 2686451712
+      }
+    }
+  },
+  "decision": "retain experimental patch without promotion: full reduction <5%",
+  "cpu_placement_samples": {
+    "prefix-0-base": {
+      "main": 76,
+      "fhe-prefetch0": 2,
+      "fhe-prefetch1": 2
+    },
+    "prefix-1-candidate": {
+      "main": 77,
+      "fhe-prefetch0": 1,
+      "fhe-prefetch1": 1
+    },
+    "full-0-base": {
+      "main": 222,
+      "fhe-prefetch0": 42,
+      "fhe-prefetch1": 42
+    },
+    "full-1-candidate": {
+      "main": 218,
+      "fhe-prefetch0": 37,
+      "fhe-prefetch1": 37
+    }
+  },
+  "limits": [
+    "One A/B pair per workload, fixed prompt, cold cache.",
+    "No statistical-significance, new GPU utilization or full Mamba-2 speed claim.",
+    "Pinned GNU/LLVM ELF static OpenFHE bridge; default disabled."
+  ]
+}

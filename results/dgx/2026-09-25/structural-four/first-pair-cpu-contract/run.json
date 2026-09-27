@@ -2,7 +2,7 @@
   "command": [
     "ctest",
     "--test-dir",
-    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel",
+    "${HOME}/fhemamba/structural-four-20260925/backend/spark/kernel",
     "-R",
     "shared_plans",
     "--output-on-failure"
@@ -12,6 +12,6 @@
   "wall_seconds": 0.015903711318969727,
   "environment": {
     "OMP_NUM_THREADS": "4",
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   }
 }

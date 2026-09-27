@@ -1,0 +1,30 @@
+{
+  "native_tests": {
+    "passed": true,
+    "count": 22,
+    "log": "native-tests.log"
+  },
+  "runner_tests": {
+    "command": "uv run pytest tests/test_packed_probe_runner.py -q",
+    "passed": true,
+    "count": 29
+  },
+  "bounded_prefetch_asan_ubsan": {
+    "passed": true,
+    "exit_code": 0
+  },
+  "bounded_prefetch_tsan": {
+    "passed": false,
+    "runtime_unavailable": true,
+    "exit_code": 66,
+    "output": "FATAL: ThreadSanitizer: unexpected memory mapping 0x61c7446e9000-0x61c7446ed000"
+  },
+  "ruff": {
+    "passed": true,
+    "files": [
+      "experiments/run_packed_probe.py",
+      "tests/test_packed_probe_runner.py"
+    ]
+  },
+  "scope": "Inherited unchanged queue and runner checks from the ordered parallel preparation study; GPU-side completion change is qualified by the fresh GPU probes."
+}

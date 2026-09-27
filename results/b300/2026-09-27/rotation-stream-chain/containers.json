@@ -1,0 +1,744 @@
+[
+  {
+    "name": "cipher-graph-block-build",
+    "id": "af2102056693e3415d673e547fd8abaa0ca48ada31d5ff55ec507b50ddf4107e",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 2,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:03:20.515762856Z",
+      "FinishedAt": "2026-09-26T20:04:05.212894661Z"
+    },
+    "cpus": "64-79",
+    "mems": "2",
+    "devices": null
+  },
+  {
+    "name": "cipher-graph-block-build-r2",
+    "id": "167348d87a13eacd29897d2a8a8b89760f8318c8b86a4e40fe27401f8d66e368",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:05:59.747281155Z",
+      "FinishedAt": "2026-09-26T20:06:42.643867229Z"
+    },
+    "cpus": "64-79",
+    "mems": "2",
+    "devices": null
+  },
+  {
+    "name": "cipher-graph-block-exact-base-32768-mamba2",
+    "id": "bd93137f0bc72bd6e927f9bad97e9c964004a4e9372812013a7f2c9127df6a3f",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:06:46.167830466Z",
+      "FinishedAt": "2026-09-26T20:06:54.17955608Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-base-32768-mamba3",
+    "id": "099001149cefb42b30d07ae8ca8d1b5db3a62993733cb5cfabc396960ce7f0b5",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:06:54.784315392Z",
+      "FinishedAt": "2026-09-26T20:07:02.779159067Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-base-65536-mamba2",
+    "id": "15daf316b5827205e0e762e2240f8c776634676b3d8d2d72bad24366f1560bf7",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:07:03.446452484Z",
+      "FinishedAt": "2026-09-26T20:07:17.724228148Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-base-65536-mamba3",
+    "id": "97e86fff60973bb3c43e9c8ed72d830b44fa807101c98d6f23851c02a1e840b0",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:07:18.395052663Z",
+      "FinishedAt": "2026-09-26T20:07:32.557897516Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-candidate-32768-mamba2",
+    "id": "4a0d518068eb014f96857c49d8d28ade4402cc4992ec9f8560d040fe1e34c308",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:07:33.120689342Z",
+      "FinishedAt": "2026-09-26T20:07:40.779093931Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-candidate-32768-mamba3",
+    "id": "2f0ffaa46c1fc2630acd439592441fbd4ab3f9759980e22e72c4c95645d554aa",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:07:41.39627953Z",
+      "FinishedAt": "2026-09-26T20:07:49.170810652Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-candidate-65536-mamba2",
+    "id": "1839d7ab01b7278146a5794b47574a9d316b08a9189f22e272d0ca785b12ed5f",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:07:49.827506954Z",
+      "FinishedAt": "2026-09-26T20:08:03.807968282Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-candidate-65536-mamba3",
+    "id": "259152eac3328461a94bfa74223052e3d993b098755899279f08e08a86b2d740",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:08:04.410554758Z",
+      "FinishedAt": "2026-09-26T20:08:18.400296428Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-exact-candidate-no-graph",
+    "id": "27c95327fc8cb4fde67079e953d9c3cd4aaf5e363d8fe66e80200a4cd7205f9a",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:08:19.001418689Z",
+      "FinishedAt": "2026-09-26T20:08:26.675697475Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-full-0-base",
+    "id": "f87891827a8c518e08fa5f857e177ab302c15af7847b0c7a74618e4cc9b0de62",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:14:12.465502195Z",
+      "FinishedAt": "2026-09-26T20:18:05.651084302Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-full-1-candidate",
+    "id": "424f85ff8fc06ada1f89792546a5ed568d1c7b555c9a1228186d51c156b8489d",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:18:06.287247985Z",
+      "FinishedAt": "2026-09-26T20:21:54.323025688Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-full-2-candidate",
+    "id": "add3b613bda213ad6dee80fc1ceb15f76e31404328ea527055a3c8dd9da09887",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:21:54.954297906Z",
+      "FinishedAt": "2026-09-26T20:25:43.828571399Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-full-3-base",
+    "id": "11f3ff618937c00512a15311745918724db752ad13438b8167597bc9d5586d27",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:25:44.507813994Z",
+      "FinishedAt": "2026-09-26T20:29:37.351625382Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-nsys-base",
+    "id": "9a54ebca035be13b09bb1759cd8c9e0270ddd84d3419de515fe3a3e160011e32",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 127,
+      "Error": "",
+      "StartedAt": "2026-09-26T19:54:51.150479909Z",
+      "FinishedAt": "2026-09-26T19:54:51.575992424Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-nsys-base-r2",
+    "id": "3ad0900246cba9b9d4a88dc1d8b7c2d6ab90b026c5f425e31c8cec1ee215e7f8",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T19:55:58.584410136Z",
+      "FinishedAt": "2026-09-26T19:57:48.370451995Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-nsys-candidate",
+    "id": "00b6eb413c810680d0157550270de8373113af56e7af5bc0bef1d6ce2541e025",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:29:38.022575625Z",
+      "FinishedAt": "2026-09-26T20:31:26.999626009Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-prefix-0-base",
+    "id": "a02fbacb9e88d1383d145735e93759997eb12147b37c349223fb9d1b01798322",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:11:28.086592768Z",
+      "FinishedAt": "2026-09-26T20:12:49.364733479Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-prefix-1-candidate",
+    "id": "02c6f0cbd920c1c2a3b9a0125ae53a424e6beb3021bd793c8f81303b8dd358e7",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:12:49.984748512Z",
+      "FinishedAt": "2026-09-26T20:14:11.817273234Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-refresh-base",
+    "id": "b4c8eb15c66771b472b7616c186e71f69532d1a4055cb793e2a1061ec4b39dae",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:08:27.318726593Z",
+      "FinishedAt": "2026-09-26T20:09:57.353578913Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-graph-block-refresh-candidate",
+    "id": "bacbec6f257fd783c3c5c6e4891b7d5170f8f48da4f956c5ec3482040d07e894",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T20:09:57.979995098Z",
+      "FinishedAt": "2026-09-26T20:11:27.481513025Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "markdown_local_links_checked": 10,
+  "python_syntax": "passed",
+  "exact_rational_coefficient_screen": "passed",
+  "patch_application_and_measured_source_equality": "passed",
+  "prior_native_sources": "unchanged",
+  "encrypted_validation": "see qualification, prefix and full raw reports; no broad unrelated CPU tests required",
+  "git_diff_check": "passed"
+}

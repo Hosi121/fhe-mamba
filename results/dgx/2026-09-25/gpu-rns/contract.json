@@ -40,7 +40,7 @@
     "cpu_affinity": "15-19"
   },
   "stopping_rule": "one implementation; exact small encrypted qualification, then full comparison and adoption decision",
-  "baseline_binary": "/home/kataiwa/fhemamba/s2c-first-20260925/final-native-build/packed_fideslib",
+  "baseline_binary": "${HOME}/fhemamba/s2c-first-20260925/final-native-build/packed_fideslib",
   "baseline_binary_sha256": "4504ee7ba95d7e5420def9dab07da8760c362b4471644735a9c993fcd0b9fec9",
   "invariants": [
     "Keep S2C-first and two-pass residual correction",

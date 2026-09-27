@@ -2,7 +2,7 @@
   "command": [
     "cmake",
     "--build",
-    "/home/kataiwa/fhemamba/s2c-first-20260925/final-native-build",
+    "${HOME}/fhemamba/s2c-first-20260925/final-native-build",
     "--target",
     "packed_fideslib",
     "-j",
@@ -13,6 +13,6 @@
   "wall_seconds": 9.364371299743652,
   "environment": {
     "OMP_NUM_THREADS": "4",
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   }
 }

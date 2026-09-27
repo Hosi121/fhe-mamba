@@ -14,6 +14,8 @@ generation. Commands use the repository root as their working directory.
 | [Mamba-3](mamba3.md) | Trained SISO model, common arithmetic backend and complete encrypted generation |
 | [Repository layout](repository.md) | File ownership, generated outputs and previous paths |
 | [Testing](testing.md) | Formatting, Python tests, coverage, C++ contracts and artifact checks |
+| [Experiment workflow](experiments.md) | Reusable job execution, local settings, completion events and public evidence |
+| [Optimization mechanisms](optimizations.md) | Shared implementations, optional kernels and qualification suites |
 | [Research validation](validation.md) | Approximation quality, encrypted probes and GPU promotion gates |
 | [Contributing](../CONTRIBUTING.md) | Development setup, review and evidence requirements |
 
@@ -30,6 +32,8 @@ generation. Commands use the repository root as their working directory.
 | [Maintenance](maintenance.md) | Implementation boundaries and technical debt |
 | [Archive](archive/README.md) | Historical designs, ledgers and the retired implementation |
 
-Published artifacts retain the paths, commits and hashes recorded when they
-were produced. See [previous layout](repository.md#previous-layout) when an
-older study uses the original directory structure.
+Published measurements retain numerical values and failure statuses. Environment
+identifiers are normalized, with original and published hashes recorded separately.
+Relevant logs and measured source snapshots are archived provenance. Disposable
+operational scripts are removed; use the [experiment workflow](experiments.md)
+for shared execution, comparison and verification.

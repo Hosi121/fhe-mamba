@@ -22,11 +22,11 @@
     "command": [
       "rsync",
       "-az",
-      "high:/home/asuser30135/cipher/fhe-native-mamba3/runs/stage1-s055-tiny-model-handoff-v03130.json",
+      "high:${HOME}/cipher/fhe-native-mamba3/runs/stage1-s055-tiny-model-handoff-v03130.json",
       "runs/stage1-s055-tiny-model-handoff-v03130.json"
     ],
     "destination": "runs/stage1-s055-tiny-model-handoff-v03130.json",
-    "remote_path": "high:/home/asuser30135/cipher/fhe-native-mamba3/runs/stage1-s055-tiny-model-handoff-v03130.json",
+    "remote_path": "high:${HOME}/cipher/fhe-native-mamba3/runs/stage1-s055-tiny-model-handoff-v03130.json",
     "returncode": 0,
     "status": "pulled",
     "stderr": "",

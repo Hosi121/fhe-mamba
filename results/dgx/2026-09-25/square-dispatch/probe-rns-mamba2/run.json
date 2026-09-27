@@ -4,8 +4,8 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/square-dispatch-20260925/build/owned_arithmetic_probe",
-    "/home/kataiwa/fhemamba/square-dispatch-20260925/probe-rns-mamba2/native.json",
+    "${HOME}/fhemamba/square-dispatch-20260925/build/owned_arithmetic_probe",
+    "${HOME}/fhemamba/square-dispatch-20260925/probe-rns-mamba2/native.json",
     "--mamba2"
   ],
   "started_utc": "2026-09-24T23:07:35.683245+00:00",
@@ -33,7 +33,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS": "4"
   },
   "source_manifest_sha256": "11a0ea2cb9393050d6a1f988894ff36edef7c4eb29b94f404c18058b921b194c",

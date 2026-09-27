@@ -1,13 +1,32 @@
 # Research studies
 
-Dated notes record the assumptions and evidence available during each study.
+Dated technical reports record the assumptions and evidence available during each study.
 Use the [evidence registry](../evidence.md) for current claim status and the
 [reproduction guide](../reproducing.md) for portable commands.
+
+For reusable code, start with [optimization mechanisms](../optimizations.md)
+and the [experiment workflow](../experiments.md). Session diaries, infrastructure
+access details and working scripts are not maintained documentation. Historical
+logs and measured source snapshots are in the results provenance bundle;
+superseded controllers are removed. Public derivatives distinguish original and
+published hashes.
 
 ## Complete generation and optimization
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-27 — B300 classical-128 prototype](2026-09-27-b300-classical128.md) | Audited uniform-ternary QP=3,376 bits at N=131,072; full Mamba-3 numerical/token gates, exact GPU addend qualification and larger mask cache, secure full pair 327.51→235.75 s (28.02%) |
+| [2026-09-27 — Sylph and Cachemir review](2026-09-27-sylph-cachemir.md) | Primary-paper review mapped to existing packing and new secure-level scheduling; slim-polynomial applicability screened on all 785 payload nodes; no new speed claim |
+| [2026-09-27 — B300 rotation stream chaining](2026-09-27-b300-rotation-stream-chain.md) | Three internal rotation barriers removed; both model/ring exact checks, new Nsight comparison, full ABBA 146.36→141.77 s (3.14%), 35.44 s/generated token; previous refresh gain preserved |
+| [2026-09-27 — B300 even-polynomial refresh](2026-09-27-b300-refresh-even-polynomial.md) | Optional dependency patch; encrypted seed/refresh/level gates pass, full single pair 148.36→145.96 s (1.62%), refresh 37.77→34.66 s (8.22%), 36.49 s/generated token; three further candidates screened |
+| [2026-09-27 — Refresh polynomial symmetry](2026-09-27-refresh-even-polynomial.md) | Static design screen: phase shift exposes an even polynomial; square + degree 44 replaces degree 88, seed difference bounded by 2.431e-14 over [-1,1], EvalMod products 24→20; static stage; encrypted follow-up above |
+| [2026-09-27 — B300 public-weight inverse FFT reuse](2026-09-27-b300-ifft-reuse.md) | 80% hit rate with 2.502 GiB retained; exact gates pass, cold full single pair 148.32 → 144.10 s (2.85%); below the predeclared 5% promotion gate, prototype archived and active sources restored |
+| [2026-09-27 — B300 fused RNS/NTT feed](2026-09-27-b300-fused-feed.md) | Two-worker control, 960 exact and 36 encrypted primitive cases; full single pair 147.72 → 145.51 s (1.50%); patch retained without promotion, active two-worker source restored |
+| [2026-09-27 — B300 parallel plaintext preparation](2026-09-27-b300-parallel-prefetch.md) | Two ordered workers within the same two-item window; full ABBA 173.16 → 148.80 s (14.07%), 37.20 s/generated token; verified CPU placement, 960 exact and 36 encrypted primitive cases |
+| [2026-09-26 — B300 NTT warp-shuffle tail](2026-09-26-b300-ntt-warp-tail.md) | One GPU candidate rejected: 720 exact kernel cases pass, but matched prefix ABBA 8.712 → 8.912 s (2.31% slower); full comparison gated off, Nsight diagnosis retained |
+| [2026-09-26 — B300 RNS fusion and CPU preparation](2026-09-26-b300-rns-pipeline.md) | RNS fusion not adopted; bounded CPU pipeline full ABBA 234.84 → 202.33 s (13.84%), unchanged gates; exact probes, three Nsight prefixes and critical-path bounds with CPU variation retained |
+| [2026-09-26 — B300 GPU throughput design](2026-09-26-b300-gpu-throughput-design.md) | Static follow-up: derive 1.37M expansion launches; all-modulus batching, preparation overlap and NTT shared-memory candidates; no new GPU run or speed claim |
+| [2026-09-26 — B300 Nsight and inverse-FFT plan](2026-09-26-b300-nsight-ifft.md) | Systems/Compute profiling; exact public twiddle plan, 249 bitwise FFT cases and 251.7M coefficient words; full B300 ABBA 266.22 → 234.84 s (11.79%), optional dependency patch |
 | [2026-09-26 — GPU ordinary/refresh ring switching](2026-09-26-gpu-dual-ring.md) | One GPU dual-ring mechanism qualified and adopted opt-in; full Mamba-3 ABBA 613.83 → 430.51 s (29.86%), same accuracy/token gates and large-ring refresh circuit |
 | [2026-09-25 — Four structural trials](2026-09-25-structural-four.md) | Four mechanisms implemented; rotation/basis sharing adopted opt-in, full ABBA mean 619.41 → 614.11 s (0.86%); nominal 59-bit 32-bit profile fails, CPU ring-switch route is uncompetitive |
 | [2026-09-25 — GPU plaintext RNS expansion](2026-09-25-gpu-rns.md) | One shared preparation mechanism; full Mamba-3 750.41 → 618.95 s (17.52%), ordinary evaluation −23.96%; S2C-first retained, 720 exact-RNS cases, opt-in adoption |

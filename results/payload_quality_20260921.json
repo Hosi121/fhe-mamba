@@ -3,10 +3,10 @@
   "version": "0.5.0",
   "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
   "source_sha256": {
-    "/home/hosi/cipher/fhemamba/experiments/run_payload_quality.py": "eeeeff52a6fda08db91da128927011e16cac33946f2bc0322b13ee67fbb73840",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/reference.py": "3f3edc173cb9d39856f16a76520ce1444215637ac7766a9243d90dcf84f457f0",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/ops.py": "a20ec4f72e86cac5a08d2f0dfab3b8f734cc08e840304f014010db63b23db0b5",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/m1_payload.py": "5f0effc72231f19da5bf5ea824ec44a45d312338619e025b106086bf6bd9d2bd"
+    "${HOME}/cipher/fhemamba/experiments/run_payload_quality.py": "eeeeff52a6fda08db91da128927011e16cac33946f2bc0322b13ee67fbb73840",
+    "${HOME}/cipher/fhemamba/src/fhemamba/reference.py": "3f3edc173cb9d39856f16a76520ce1444215637ac7766a9243d90dcf84f457f0",
+    "${HOME}/cipher/fhemamba/src/fhemamba/ops.py": "a20ec4f72e86cac5a08d2f0dfab3b8f734cc08e840304f014010db63b23db0b5",
+    "${HOME}/cipher/fhemamba/src/fhemamba/m1_payload.py": "5f0effc72231f19da5bf5ea824ec44a45d312338619e025b106086bf6bd9d2bd"
   },
   "input_payload_sha256": "4e2bc7f2550ab632dc6174d78bcccc34221910e27441b9d678571f8f39c2bbe2",
   "checkpoint_sha256": {

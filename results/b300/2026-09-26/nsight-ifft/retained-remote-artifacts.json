@@ -1,0 +1,98 @@
+[
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/nsys-prefix-v2/trace.nsys-rep",
+    "relative_path": "nsys-prefix-v2/trace.nsys-rep",
+    "bytes": 47032188,
+    "sha256": "1217ee8af6999ef52e8ed97d9ae156830a40c4e68330ff192b43a86f90dccd7f"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/nsys-prefix-v2/trace.sqlite",
+    "relative_path": "nsys-prefix-v2/trace.sqlite",
+    "bytes": 128950272,
+    "sha256": "f7954fa83db70b08282afb6a04e27f6150ab8e790e187208c817c085a00977dd"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/ncu-ntt/profile.ncu-rep",
+    "relative_path": "ncu-ntt/profile.ncu-rep",
+    "bytes": 9489017,
+    "sha256": "3719999501869db4c31cb6f0875dcd158aa608cf695f676e7943816f20d03f7f"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/encoding-golden.bin",
+    "relative_path": "encoding-golden.bin",
+    "bytes": 2013372032,
+    "sha256": "dc2ed30a9c51ebdc2d72a2a052ef26967d8f2817857dccb29439614f10978c7d"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/fft-golden.bin",
+    "relative_path": "fft-golden.bin",
+    "bytes": 12582688,
+    "sha256": "1b68cfff458820c51f63a5ff54ac288de2d25717f55e3ddd000b7bef4f4a8b8f"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/base/encoding_probe",
+    "relative_path": "bin/base/encoding_probe",
+    "bytes": 4186032,
+    "sha256": "f4cb33ee51a8245cff9be141c52478bfb332fa6dcdd3b9da9db1cee5e6d3ba51"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/base/fft_probe",
+    "relative_path": "bin/base/fft_probe",
+    "bytes": 69272,
+    "sha256": "6a3b4e43adab86c4155b2d5c958ab40ec9e0dffde572c3b96c73ca739df748b4"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/base/packed_fideslib",
+    "relative_path": "bin/base/packed_fideslib",
+    "bytes": 17240520,
+    "sha256": "8cb994ce27faca23115e93c2a8b11cccd203013ff49515c7ea6ad85a31db08a2"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/candidate/encoding_probe",
+    "relative_path": "bin/candidate/encoding_probe",
+    "bytes": 4190744,
+    "sha256": "955da478c35e0a447deb5bd821b96e8dce5c24dd97154140a8816f17d1cf2bcc"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/candidate/fft_probe",
+    "relative_path": "bin/candidate/fft_probe",
+    "bytes": 69888,
+    "sha256": "de516c08a23c8593965b2a4885268968e03608bea084aa759e4806e36b4add1c"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/candidate/packed_fideslib",
+    "relative_path": "bin/candidate/packed_fideslib",
+    "bytes": 17245232,
+    "sha256": "2a4a24ceaaafc0f382f01e3536f9f8c04487c4d2a28bf057dde537de394d3cc0"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/packaging-base/encoding_probe",
+    "relative_path": "bin/packaging-base/encoding_probe",
+    "bytes": 4181984,
+    "sha256": "c89420a770adf03c927a5aac712b1bc2eec8adf55747f5828bd37bd903b87904"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/packaging-base/fft_probe",
+    "relative_path": "bin/packaging-base/fft_probe",
+    "bytes": 69272,
+    "sha256": "6a3b4e43adab86c4155b2d5c958ab40ec9e0dffde572c3b96c73ca739df748b4"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/packaging-candidate/encoding_probe",
+    "relative_path": "bin/packaging-candidate/encoding_probe",
+    "bytes": 4190744,
+    "sha256": "48092c88635a62aecb0277126b324041c2e8b8f72d975226831c6b30ebafbcc6"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/bin/packaging-candidate/fft_probe",
+    "relative_path": "bin/packaging-candidate/fft_probe",
+    "bytes": 69888,
+    "sha256": "de516c08a23c8593965b2a4885268968e03608bea084aa759e4806e36b4add1c"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+    "relative_path": "lib/libOPENFHEcore_static.a",
+    "bytes": 5237444,
+    "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+  }
+]

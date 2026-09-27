@@ -1,6 +1,10 @@
 # Campaign manifests
 
-These JSON files configure [`run_dgx_campaign.py`](../run_dgx_campaign.py).
+`cpu-smoke-job.json` and `packed-job.example.json` use the shared
+[`fhemamba.benchmarks` job runner](../../docs/experiments.md). They separate
+reusable commands from machine-local variables in ignored `config/local/`.
+
+The other JSON files configure [`run_dgx_campaign.py`](../run_dgx_campaign.py).
 Paths passed on the command line are relative to the repository root. Keep
 numerical parameters and acceptance gates explicit when adapting a manifest.
 

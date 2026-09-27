@@ -1,0 +1,10 @@
+{
+  "name": "kernel-4096-candidate",
+  "command": [
+    "/study/bin/candidate/ntt_warp_tail",
+    "/study/kernel-4096-candidate/probe.json",
+    "/study/golden/ring-4096.bin",
+    "4096"
+  ],
+  "timeout": 1200
+}

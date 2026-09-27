@@ -3,9 +3,9 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/gpu-rns-20260925/native-build/packed_fideslib",
-    "/home/kataiwa/fhemamba/structural-four-20260925/basis-probe.txt",
-    "/home/kataiwa/fhemamba/structural-four-20260925/basis-probe-baseline/native.json",
+    "${HOME}/fhemamba/gpu-rns-20260925/native-build/packed_fideslib",
+    "${HOME}/fhemamba/structural-four-20260925/basis-probe.txt",
+    "${HOME}/fhemamba/structural-four-20260925/basis-probe-baseline/native.json",
     ".001",
     ".001",
     "--planned-refresh",
@@ -30,7 +30,7 @@
   "wall_seconds": 29.1686749458313,
   "environment": {
     "OMP_NUM_THREADS": "4",
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   },
   "binary_sha256": "bd7ab3c1fca7465a7186bf098c876ae16c199f7b7f19d3ae888731ce2b67e994"
 }

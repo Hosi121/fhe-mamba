@@ -1,0 +1,58 @@
+{
+  "mechanism": "One-GPU rotation: remove three intermediate host barriers; existing stream dependencies and terminal barrier retained",
+  "stage_order": [
+    "latest baseline Nsight prefix",
+    "exact same-input RNS oracle on both rings and model configurations",
+    "two-pass refresh qualification",
+    "prefix A/B",
+    "full ABBA",
+    "candidate Nsight prefix"
+  ],
+  "limits": {
+    "full_samples": 4,
+    "automatic_repetitions": false,
+    "per_job_timeout_seconds": 1200,
+    "build_timeout_seconds": 1200
+  },
+  "preserve": {
+    "model": "Mamba-3 SISO 187M frozen 12-layer five-evaluation payload",
+    "generated_ids": [
+      315,
+      279,
+      1614,
+      315
+    ],
+    "exact_and_polynomial_tolerance": 0.001,
+    "primitive_refresh_tolerance": 1e-06,
+    "seed_tolerance": 1e-08,
+    "evalmod_tolerance": 1e-06,
+    "rings": [
+      32768,
+      65536
+    ],
+    "scale_bits": 59,
+    "depth": 44,
+    "K": 512,
+    "double_angle": 6,
+    "bootstrap_passes": 2,
+    "outer_correction_multiplier": 4096,
+    "refresh_ceiling": 35,
+    "refreshed_level": 18,
+    "security": "not-set",
+    "secret": "UNIFORM_TERNARY",
+    "gpu": 4,
+    "cpu_mask": "64-68",
+    "numa": 2,
+    "OMP_NUM_THREADS": 4,
+    "prefetch_workers": 2,
+    "baseline": "adopted even seed, two CPU prefetch workers, inverse FFT plan"
+  },
+  "engineering_promotion_screen": {
+    "full_mean_reduction_at_least": 0.01,
+    "full_candidate_samples_both_faster_than_baseline_mean": true,
+    "prefix_regression_at_most": 0.01,
+    "refresh_mean_regression_at_most": 0.01,
+    "all_correctness_and_metadata_checks": true,
+    "note": "Engineering screens, not user-mandated targets or significance tests."
+  }
+}

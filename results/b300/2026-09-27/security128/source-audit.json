@@ -1,0 +1,1061 @@
+[
+  {
+    "archive": {
+      "path": "sources-r1.tar.gz",
+      "bytes": 215186,
+      "sha256": "cfa6da21581d323775dced188925dbc14a309959ef42781d2a2d4aa6f07a27d2"
+    },
+    "measured_folder": "repo",
+    "changes": [
+      "native/fideslib_stage0/include/bounded_prefetch.hpp"
+    ],
+    "additional_helper": "benchmark_prefetch_affinity.hpp",
+    "members": [
+      {
+        "path": "repo/native/fideslib_stage0/CMakeLists.txt",
+        "bytes": 14403,
+        "sha256": "767e21c8902a1ee79c4fa77f48c2f66d6dc87a391613982b806305b9f848088c"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/bounded_prefetch.hpp",
+        "bytes": 5738,
+        "sha256": "27685116e839cb0a18298dc1789c10e47538089f383c5091f88ca7d73ba532b3"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/chebyshev_basis_cache.hpp",
+        "bytes": 1690,
+        "sha256": "18c984729c14d8997f4ff906da25cde45d542a682fabb9786bac63790ea66f16"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/owned_arithmetic.hpp",
+        "bytes": 1735,
+        "sha256": "4b3d3ee116cb5000aea1da8eb3435ca57014e8983e5d4ea141550c792eb9657d"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/packed_depth.hpp",
+        "bytes": 5632,
+        "sha256": "023ae552228499bb2e0b7d5ba77cc83149d881523cf3c6b21ed75c76f3bf0af0"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/packed_lifetime.hpp",
+        "bytes": 1307,
+        "sha256": "1ad7f86c48483b876a020e3ee0c0249132d6d2a26d13b125a8804431f1f967e6"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/packed_program.hpp",
+        "bytes": 5763,
+        "sha256": "876e38041605e8a56fbd44a1e8f94052609ff7ba34479e8182baf0fffede8ab6"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/packed_routing.hpp",
+        "bytes": 4481,
+        "sha256": "64367e7a0a7fd1938831d511aee5d8571db9659cb734c22c88e00d9a5236562b"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/packed_schedule.hpp",
+        "bytes": 3039,
+        "sha256": "f4823477beb17536a909348124f1dcef1834fede9520e181b40b61583899db73"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/plaintext_cache.hpp",
+        "bytes": 2819,
+        "sha256": "5e0b675a7b2e16d76104638fcdf9ca34b540ecd5b6c40a580ff7571530fc99aa"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/plaintext_mask.hpp",
+        "bytes": 916,
+        "sha256": "14d8492acd56c15a40941e92df24fd783ef53e42f99690cfba750f2a7328fe16"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/plaintext_rns.hpp",
+        "bytes": 997,
+        "sha256": "43a8e34247f1d8e2f859e6b3bec1aaeddd06d385e82ba3b4ccac4b848def63ed"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/public_weights.hpp",
+        "bytes": 1749,
+        "sha256": "b2920a4f866c78da0beb4bd4584e066232b712bbe0cbd2169932d8a220edf0b6"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/rotation_batch.hpp",
+        "bytes": 2390,
+        "sha256": "94cac70d03fa72ed618098374e2f7a75e3030bec54f599b56d9f314b282a3fee"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/rotation_steps.hpp",
+        "bytes": 1600,
+        "sha256": "d2868d7d23c8b1844b57a41064661af0ccfa5ec1d4e442957a8d6a553c15a106"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage0_layout.hpp",
+        "bytes": 2994,
+        "sha256": "38b4cb42fbe5f54bd9f479d54d96929f8819d70d00543bb2980b13f2945cc14e"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage1_joint_gates.hpp",
+        "bytes": 6280,
+        "sha256": "7f2c8f7f82726513678c1efb4ee4e9b58818c1ec31b33849424b87236e078f65"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage1_normalization.hpp",
+        "bytes": 6268,
+        "sha256": "4c4251239a231ab70127528833b3993c0d6099b4b1ad4874db68c377a23ce458"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage1_rank_gate_eval.hpp",
+        "bytes": 4700,
+        "sha256": "bc99e11334c286aada5a21b24de327ccc1941731f246c6795cc3469d33fcda7d"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage1_rank_gate_payload.hpp",
+        "bytes": 9450,
+        "sha256": "917258a99785e0b38e3dd0d04a758adc4d83cbb269cd3a4d0cc22ecf8b001a87"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage1_tail_eval.hpp",
+        "bytes": 4263,
+        "sha256": "4225bd47357dd134558244dab7e1e14727b27d942dbeb2f36cb7eee9afb7139e"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage1_tail_payload.hpp",
+        "bytes": 5974,
+        "sha256": "f2285a721f34140cd58ca7f1984831f68b5e4bdbd45733594f2794aacf59e362"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/include/stage1_vector_rms.hpp",
+        "bytes": 3053,
+        "sha256": "e1b245ab518f224c1a3c97d3f40425a701a13100407e783ce52564e0fb707df1"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-b300-ciphertext-lifetime-sync.patch",
+        "bytes": 716,
+        "sha256": "2e4208c0112f3411bf4c7f0be38e5290d2ee382aa6f4269cc5489496df7a5c94"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-b300-keyswitch-stage-sync.patch",
+        "bytes": 1387,
+        "sha256": "f8e4e3dc3d089e1e7b9dd06a0e2092aa38b7f116e206d1a7b21ef4ea91cff674"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-bootstrap-stage-sync.patch",
+        "bytes": 1441,
+        "sha256": "4e76efd20bc023e94651e9ea874174a608260adc50d5667983f0888e6c3090e0"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-ckks-data-type-api.patch",
+        "bytes": 1259,
+        "sha256": "defefd8cfcfd488ca5d6ea19eb5a38b13e777bc4184f6e417ecb2622e54e56f7"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-conjugate-api.patch",
+        "bytes": 1587,
+        "sha256": "465940858bca9a3d4666dc1c22d659051b21e9f99215ca25088b6004f4aea0ee"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-cuda13-cccl-include.patch",
+        "bytes": 720,
+        "sha256": "0441cf008ae92c7f531d592eef3b848bdbbddf08f7fdae3f238679029f45f073"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-cuda13-graph-api.patch",
+        "bytes": 11926,
+        "sha256": "989e41859249819fa6619e76fb13eb4207afff80369a1680e4b3b9fcea0bcccc"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-linear-transform-api.patch",
+        "bytes": 2038,
+        "sha256": "68211162615ecc4587d2840d6ebc47c66ca8076da4cf1e8c76cd7a0c03d60e05"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/fideslib-v2.1.0-s2c-first-bootstrap.patch",
+        "bytes": 9542,
+        "sha256": "9bf562eaf352da12706d70cfc65352704c9ef071335e04366739711ba2f44dbe"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/patches/openfhe-v1.4.2-inverse-fft-plan.patch",
+        "bytes": 3616,
+        "sha256": "a5b397a62060ea150a3bbfbfec76c810f2318e0402e72c10fea990d76aba0665"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+        "bytes": 8825,
+        "sha256": "c8aef016fcbb734f286b0d01cb9e416cabf05eb290692463965426aa29a3340d"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+        "bytes": 12524,
+        "sha256": "07fe2f4ead6d7cc460b972a120925dad84e16f21a0131fb69471351af4e90c9c"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_dual_ring.hpp",
+        "bytes": 7849,
+        "sha256": "679540889eba05a6fcfe6394fd4af4026928d05bb9607060259dcde44178b719"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_handoff.cpp",
+        "bytes": 3457,
+        "sha256": "182519823f6c2d434caaffbc5129adbac7279e376bf38ad8fd2895ba00035874"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_handoff.hpp",
+        "bytes": 903,
+        "sha256": "61f9cfdf55498754baa47bf9fc5d9e52e96997e2de3c0edcf24fa54b55d62285"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp",
+        "bytes": 1853,
+        "sha256": "2bc6087cf224d531feb047cd973916f2cd08d9938dc4d814024dfd6c9a4a24c5"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_periodic_encoder.hpp",
+        "bytes": 5487,
+        "sha256": "b60d7058eccd1b1e50d75b462a63db8e6c74283e5a737583dee35dc0df4cf44b"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+        "bytes": 24606,
+        "sha256": "7b2879d6fded8904b5e9a29d27c71d435bd204165e00d9cc10f082ff9ab7effa"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp",
+        "bytes": 5435,
+        "sha256": "8d90f82dd0cd85ff0d6372edd7a115df5ecbaef22b98e52d2c95f66a0fa59927"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_plaintext_ops.hpp",
+        "bytes": 1508,
+        "sha256": "deb4b5832965181c76fac38644ace907d2a0e35174fcf0d5d21abfd57d430b2d"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_plaintext_rns.cu",
+        "bytes": 5107,
+        "sha256": "2489a75778785614ab256de7a360b7b73d26a4a48d8e5145e7db3c498734736b"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_plaintext_rns.hpp",
+        "bytes": 1824,
+        "sha256": "ced0f4966e18483ef03d40a195eea897c71b33b8e802ef4a36ecd3b361f27d27"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_ring_map.cu",
+        "bytes": 1357,
+        "sha256": "3d2de966e822c62ecb18ade123af6b499e0c1d485f97071814daedfbf61aeb31"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_ring_map.hpp",
+        "bytes": 426,
+        "sha256": "445b07a6138c3fd3066e84fcf2ff484a7204e1f3820371e73f486fe856c4c9f4"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_rotation_batch.hpp",
+        "bytes": 932,
+        "sha256": "281cffbd683ae434e81ac8e4c6027d492969c9458eeed6453c0ec9d4a38d59c4"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/fideslib_security.hpp",
+        "bytes": 3654,
+        "sha256": "851d7e7a73fc1ef2641180a666f0d3729166efc89062f6f12b45f176d7fb7eaf"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+        "bytes": 8732,
+        "sha256": "d8d4601a4064bc4e67f29636db10243d25513486a4c831a436f1e5b796a242f8"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/packed_fideslib.cpp",
+        "bytes": 64374,
+        "sha256": "ef20ef0d1f31fe7528408c5c5a2b47b9c207b8ff7694d105adf596e6050e97f1"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+        "bytes": 13721,
+        "sha256": "6a6736f0c71c47c1e72e08a6940011725af5e39cf4ff94c7eb518c018dad2896"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+        "bytes": 6853,
+        "sha256": "87495baa98db4eeaf03094abe4a8629baa13db43659c94a88a5da63b9c5befc0"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/packed_rns_probe.cpp",
+        "bytes": 12546,
+        "sha256": "2a877be8f1ca707bffbc592ac7601958846f3dfd88e0d0b37513e305aab19d79"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/rotation_batch_probe.cpp",
+        "bytes": 5491,
+        "sha256": "9e881d5c648bd17d8cfbbd7cab9e1a6146bf94ba17abdc67f5b9da2abee44531"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+        "bytes": 30699,
+        "sha256": "7ae67f0f0791dab2833a9950e2b7bf9c6008eb408a07b5b08552c7107a265de4"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+        "bytes": 7447,
+        "sha256": "8f4fc4dc9497699c50414cf9a4fa8d5f51dda05402fe3625b9bb468e10fc5b28"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+        "bytes": 7353,
+        "sha256": "81173b9604dbef3728b076946774d701fa6d11b257ffbbee506a9f1b917fea32"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_artifact.hpp",
+        "bytes": 1356,
+        "sha256": "958ec2800e35f80d3f432714840e2e835afd95d3cad51955bba5a4f0a463d0c2"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+        "bytes": 21270,
+        "sha256": "3ddc704d7d008eff5e338bcb4ecac93632463fe4c770311853906e11201683f1"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_config.hpp",
+        "bytes": 16728,
+        "sha256": "14c7806db0c5bc281f18d16d3a90c2809d0ce2ab49d9779e83537fde3a832b30"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+        "bytes": 263960,
+        "sha256": "99965660db784dfa602935ffdc30112821f37e6fa446685a2b328c30f8572710"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+        "bytes": 12745,
+        "sha256": "71e423f9969784996865e48c3b2c524244c5b8e92c2932dc9ab7a82a009d5f93"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_depth.hpp",
+        "bytes": 3003,
+        "sha256": "dc5e272cd89ad7bf3cbb8fc7d2c229fdd527096802b50e5d2ecf285ccb6a272b"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+        "bytes": 23907,
+        "sha256": "fb27e9b8e743776f629827c8ebede6b3c47c1da7e5c9f86001e94301c1933202"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_payload.hpp",
+        "bytes": 2866,
+        "sha256": "5426f065c4674efac77199ac39e074b57fe98a10b23ce038169792e91fac857b"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+        "bytes": 26720,
+        "sha256": "ac19557a2cea47319b4ab5cdc0fec229420a5588894ac5faa6462798e9f354c2"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_plan.hpp",
+        "bytes": 6409,
+        "sha256": "bdb2bd0de8fdac049218bacb9c01cb333a9abc36740e891cb9217974db40ad03"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+        "bytes": 2301,
+        "sha256": "b929a6962a4995b5a0adaad1365c9f567a5a9fc119debe23335e6552f7cff855"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_mamba2_process.hpp",
+        "bytes": 524,
+        "sha256": "a89bd3851edc6325f273650da854481e118521520fa652d104dd1e6d2701d42a"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+        "bytes": 12982,
+        "sha256": "023b70475a0f9018f18cba7e537e9cc800cc920ec9e7cd125c187d86d8458c37"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+        "bytes": 5026,
+        "sha256": "6f150a1af7462a3d4750bd5e0900f37b5ce118d762c4a8be36335fd544620d85"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+        "bytes": 10196,
+        "sha256": "4cccba3e8b1d8a71a4d4a8891bcb737e28a9bb07f4c61b196ddefd4bf5700c76"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+        "bytes": 24020,
+        "sha256": "59c5cac00e1864f79ccfc2bd9450617755353ad192344e59dc11a5e266ad0f90"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_bounded_prefetch.cpp",
+        "bytes": 4164,
+        "sha256": "3936be4e5360f6fec75bd22bb5a092b8ff674e2912a2b0c555f52cf6dd870c48"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_owned_arithmetic.cpp",
+        "bytes": 3418,
+        "sha256": "fcbff4553583234d0d6b31e64be63d0c419bad9c384c25ffbb929bf9251596fb"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_packed_depth.cpp",
+        "bytes": 5087,
+        "sha256": "cf78b2b9bc3de216f0bf347cf6d0fa977d630e791ed7d2c15f6ac5440e7e82b4"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_packed_lifetime.cpp",
+        "bytes": 1045,
+        "sha256": "69efd00b0d670bae6222e5c2ef585c6fbb84ce880480096e9f9ae9f3aaea29ab"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_packed_program.cpp",
+        "bytes": 3004,
+        "sha256": "6642a5a9275047721393fb94ffe595c1a0be3d5b49b9ba1bdebbabf613c57fb5"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_packed_routing.cpp",
+        "bytes": 6592,
+        "sha256": "bea6ebcf6f1d189af314665e60674f4540e0a8017f175318b58c5a84bdebada7"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_packed_schedule.cpp",
+        "bytes": 1837,
+        "sha256": "5f38b07f76490f42aa433a87dee711b879e189711f22befc7a2af3c4ef4d7cdc"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_plaintext_cache.cpp",
+        "bytes": 2465,
+        "sha256": "406d5baf3f8e3a6f0a181e234a7b487720b6fbddacdae9d7f81d3a8fa1fe1e59"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_plaintext_rns.cpp",
+        "bytes": 1110,
+        "sha256": "4723acec215c52ec726270e0d4871c12e5b71efb0369a920238dcc7fa3a2c278"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_shared_plans.cpp",
+        "bytes": 2262,
+        "sha256": "5ea09afb2b0fdbdb2448f658f4faba9faab5b69fe0ac7ff9f79366df99bff430"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage0_layout.cpp",
+        "bytes": 4283,
+        "sha256": "5134c2ecf1f81ceb157abf07087fd25f4dd94826e5c4712b6698628401025127"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_joint_gates.cpp",
+        "bytes": 3888,
+        "sha256": "985378f01cff4361a599e81fa94e8cb72519eb882847848d53aa468cef833aaf"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_mamba2_artifact.cpp",
+        "bytes": 3118,
+        "sha256": "06d598a987d0b0a05a752ea743988273c70b0806d767c1ec1cdfd49a70081fe6"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_mamba2_config.cpp",
+        "bytes": 13082,
+        "sha256": "325d595017e1ddf9b958a0ebacc8a6cf167b1e7d636007843f06ffa857a2dfd9"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_mamba2_depth.cpp",
+        "bytes": 7630,
+        "sha256": "1e3469e8dd9c9bc42646f9bb5d6944e899c044c300f7d6f2c43a16c6a1e6a0ee"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_mamba2_payload.cpp",
+        "bytes": 3644,
+        "sha256": "7350b9e689d30fe4ba6d177123890fdb5a6783fb179db291145164196a92ff71"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_mamba2_plan.cpp",
+        "bytes": 18442,
+        "sha256": "9a39ed07728e8d7fbf0a5c6a81cb4f1c857cc310c4be92eb754bc304b2cba640"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_mamba2_process.cpp",
+        "bytes": 2019,
+        "sha256": "27e94e778a36fb7c9639a58041a659cb93d4c63f1ea2a29e30dc3aeabd1b7001"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_normalization.cpp",
+        "bytes": 3936,
+        "sha256": "f74797f147af2ae09be1669e905a95d05fdfadb9b38120095d8c3bc41ea8ad95"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_rank_gate_payload.cpp",
+        "bytes": 10059,
+        "sha256": "971d29b3cd432bbd8b8eb6f94a5973050bfc82950140ec628e9048ffdf8267bf"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_tail_payload.cpp",
+        "bytes": 7722,
+        "sha256": "a9bcb06c474c730c6696e9c6fcc51005464242d1eba2b75e50d584fd86947a96"
+      },
+      {
+        "path": "repo/native/fideslib_stage0/tests/test_stage1_vector_rms.cpp",
+        "bytes": 2360,
+        "sha256": "a944bb5b8d0a42a704dad11cd23158453d8fe2bdabacb73d426b815db7ee362d"
+      },
+      {
+        "path": "repo/experiments/security128/CMakeLists.txt",
+        "bytes": 772,
+        "sha256": "e2b66d836a86abcc46f39c6881d64f4bdbf4921e6591f2e7daa8a1e48282ee0a"
+      },
+      {
+        "path": "repo/experiments/security128/parameters.cpp",
+        "bytes": 3184,
+        "sha256": "268ee63946db5fe6c25af9f8936d1eeb47a543c6bb28a30c264e5ca7b665dc02"
+      },
+      {
+        "path": "repo/experiments/security128/refresh.cpp",
+        "bytes": 5397,
+        "sha256": "00f9369d96bda48909979d29ec4d90ecad60c423dc49fbb498e2d03e08ba0e46"
+      },
+      {
+        "path": "repo/src/fhemamba/_version.py",
+        "bytes": 90,
+        "sha256": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3"
+      }
+    ]
+  },
+  {
+    "archive": {
+      "path": "sources-addends-r2.tar.gz",
+      "bytes": 216284,
+      "sha256": "350d49d7cee8332652fbf61b454ea24179b8f41ae88fcf8ea499f76459387222"
+    },
+    "measured_folder": "repo-addends-r2",
+    "changes": [
+      "native/fideslib_stage0/include/bounded_prefetch.hpp"
+    ],
+    "additional_helper": "benchmark_prefetch_affinity.hpp",
+    "members": [
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/CMakeLists.txt",
+        "bytes": 14403,
+        "sha256": "767e21c8902a1ee79c4fa77f48c2f66d6dc87a391613982b806305b9f848088c"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/bounded_prefetch.hpp",
+        "bytes": 5738,
+        "sha256": "27685116e839cb0a18298dc1789c10e47538089f383c5091f88ca7d73ba532b3"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/chebyshev_basis_cache.hpp",
+        "bytes": 1690,
+        "sha256": "18c984729c14d8997f4ff906da25cde45d542a682fabb9786bac63790ea66f16"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/owned_arithmetic.hpp",
+        "bytes": 1735,
+        "sha256": "4b3d3ee116cb5000aea1da8eb3435ca57014e8983e5d4ea141550c792eb9657d"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/packed_depth.hpp",
+        "bytes": 5632,
+        "sha256": "023ae552228499bb2e0b7d5ba77cc83149d881523cf3c6b21ed75c76f3bf0af0"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/packed_lifetime.hpp",
+        "bytes": 1307,
+        "sha256": "1ad7f86c48483b876a020e3ee0c0249132d6d2a26d13b125a8804431f1f967e6"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/packed_program.hpp",
+        "bytes": 5763,
+        "sha256": "876e38041605e8a56fbd44a1e8f94052609ff7ba34479e8182baf0fffede8ab6"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/packed_routing.hpp",
+        "bytes": 4481,
+        "sha256": "64367e7a0a7fd1938831d511aee5d8571db9659cb734c22c88e00d9a5236562b"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/packed_schedule.hpp",
+        "bytes": 3039,
+        "sha256": "f4823477beb17536a909348124f1dcef1834fede9520e181b40b61583899db73"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/plaintext_cache.hpp",
+        "bytes": 2819,
+        "sha256": "5e0b675a7b2e16d76104638fcdf9ca34b540ecd5b6c40a580ff7571530fc99aa"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/plaintext_mask.hpp",
+        "bytes": 916,
+        "sha256": "14d8492acd56c15a40941e92df24fd783ef53e42f99690cfba750f2a7328fe16"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/plaintext_rns.hpp",
+        "bytes": 997,
+        "sha256": "43a8e34247f1d8e2f859e6b3bec1aaeddd06d385e82ba3b4ccac4b848def63ed"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/public_weights.hpp",
+        "bytes": 1749,
+        "sha256": "b2920a4f866c78da0beb4bd4584e066232b712bbe0cbd2169932d8a220edf0b6"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/rotation_batch.hpp",
+        "bytes": 2390,
+        "sha256": "94cac70d03fa72ed618098374e2f7a75e3030bec54f599b56d9f314b282a3fee"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/rotation_steps.hpp",
+        "bytes": 1600,
+        "sha256": "d2868d7d23c8b1844b57a41064661af0ccfa5ec1d4e442957a8d6a553c15a106"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage0_layout.hpp",
+        "bytes": 2994,
+        "sha256": "38b4cb42fbe5f54bd9f479d54d96929f8819d70d00543bb2980b13f2945cc14e"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage1_joint_gates.hpp",
+        "bytes": 6280,
+        "sha256": "7f2c8f7f82726513678c1efb4ee4e9b58818c1ec31b33849424b87236e078f65"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage1_normalization.hpp",
+        "bytes": 6268,
+        "sha256": "4c4251239a231ab70127528833b3993c0d6099b4b1ad4874db68c377a23ce458"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage1_rank_gate_eval.hpp",
+        "bytes": 4700,
+        "sha256": "bc99e11334c286aada5a21b24de327ccc1941731f246c6795cc3469d33fcda7d"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage1_rank_gate_payload.hpp",
+        "bytes": 9450,
+        "sha256": "917258a99785e0b38e3dd0d04a758adc4d83cbb269cd3a4d0cc22ecf8b001a87"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage1_tail_eval.hpp",
+        "bytes": 4263,
+        "sha256": "4225bd47357dd134558244dab7e1e14727b27d942dbeb2f36cb7eee9afb7139e"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage1_tail_payload.hpp",
+        "bytes": 5974,
+        "sha256": "f2285a721f34140cd58ca7f1984831f68b5e4bdbd45733594f2794aacf59e362"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/include/stage1_vector_rms.hpp",
+        "bytes": 3053,
+        "sha256": "e1b245ab518f224c1a3c97d3f40425a701a13100407e783ce52564e0fb707df1"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-b300-ciphertext-lifetime-sync.patch",
+        "bytes": 716,
+        "sha256": "2e4208c0112f3411bf4c7f0be38e5290d2ee382aa6f4269cc5489496df7a5c94"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-b300-keyswitch-stage-sync.patch",
+        "bytes": 1387,
+        "sha256": "f8e4e3dc3d089e1e7b9dd06a0e2092aa38b7f116e206d1a7b21ef4ea91cff674"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-bootstrap-stage-sync.patch",
+        "bytes": 1441,
+        "sha256": "4e76efd20bc023e94651e9ea874174a608260adc50d5667983f0888e6c3090e0"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-ckks-data-type-api.patch",
+        "bytes": 1259,
+        "sha256": "defefd8cfcfd488ca5d6ea19eb5a38b13e777bc4184f6e417ecb2622e54e56f7"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-conjugate-api.patch",
+        "bytes": 1587,
+        "sha256": "465940858bca9a3d4666dc1c22d659051b21e9f99215ca25088b6004f4aea0ee"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-cuda13-cccl-include.patch",
+        "bytes": 720,
+        "sha256": "0441cf008ae92c7f531d592eef3b848bdbbddf08f7fdae3f238679029f45f073"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-cuda13-graph-api.patch",
+        "bytes": 11926,
+        "sha256": "989e41859249819fa6619e76fb13eb4207afff80369a1680e4b3b9fcea0bcccc"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-linear-transform-api.patch",
+        "bytes": 2038,
+        "sha256": "68211162615ecc4587d2840d6ebc47c66ca8076da4cf1e8c76cd7a0c03d60e05"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/fideslib-v2.1.0-s2c-first-bootstrap.patch",
+        "bytes": 9542,
+        "sha256": "9bf562eaf352da12706d70cfc65352704c9ef071335e04366739711ba2f44dbe"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/patches/openfhe-v1.4.2-inverse-fft-plan.patch",
+        "bytes": 3616,
+        "sha256": "a5b397a62060ea150a3bbfbfec76c810f2318e0402e72c10fea990d76aba0665"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+        "bytes": 8825,
+        "sha256": "c8aef016fcbb734f286b0d01cb9e416cabf05eb290692463965426aa29a3340d"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+        "bytes": 12524,
+        "sha256": "07fe2f4ead6d7cc460b972a120925dad84e16f21a0131fb69471351af4e90c9c"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_dual_ring.hpp",
+        "bytes": 7849,
+        "sha256": "679540889eba05a6fcfe6394fd4af4026928d05bb9607060259dcde44178b719"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_handoff.cpp",
+        "bytes": 3457,
+        "sha256": "182519823f6c2d434caaffbc5129adbac7279e376bf38ad8fd2895ba00035874"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_handoff.hpp",
+        "bytes": 903,
+        "sha256": "61f9cfdf55498754baa47bf9fc5d9e52e96997e2de3c0edcf24fa54b55d62285"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_owned_arithmetic.hpp",
+        "bytes": 1853,
+        "sha256": "2bc6087cf224d531feb047cd973916f2cd08d9938dc4d814024dfd6c9a4a24c5"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_periodic_encoder.hpp",
+        "bytes": 5487,
+        "sha256": "b60d7058eccd1b1e50d75b462a63db8e6c74283e5a737583dee35dc0df4cf44b"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+        "bytes": 26340,
+        "sha256": "d24a25cf96e15b082d638b850de3ab238206945c752f32c8447787e28481ddd2"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp",
+        "bytes": 5751,
+        "sha256": "c7f582005f8fc283a76845e3229c17605b747ba156b7e0a12f97680e51c9774c"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_plaintext_ops.hpp",
+        "bytes": 1508,
+        "sha256": "deb4b5832965181c76fac38644ace907d2a0e35174fcf0d5d21abfd57d430b2d"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_plaintext_rns.cu",
+        "bytes": 6733,
+        "sha256": "297b52c9b158c0d8b117cbf595e6583cf4ccb48efaebc1bb62a2eb12d459d2ce"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_plaintext_rns.hpp",
+        "bytes": 2222,
+        "sha256": "248dc2c103fefffeee2bfe6fb9b792df9a24d14a78bd907452e29a65ef6eb102"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_ring_map.cu",
+        "bytes": 1357,
+        "sha256": "3d2de966e822c62ecb18ade123af6b499e0c1d485f97071814daedfbf61aeb31"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_ring_map.hpp",
+        "bytes": 426,
+        "sha256": "445b07a6138c3fd3066e84fcf2ff484a7204e1f3820371e73f486fe856c4c9f4"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_rotation_batch.hpp",
+        "bytes": 932,
+        "sha256": "281cffbd683ae434e81ac8e4c6027d492969c9458eeed6453c0ec9d4a38d59c4"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/fideslib_security.hpp",
+        "bytes": 3654,
+        "sha256": "851d7e7a73fc1ef2641180a666f0d3729166efc89062f6f12b45f176d7fb7eaf"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/owned_arithmetic_probe.cpp",
+        "bytes": 8732,
+        "sha256": "d8d4601a4064bc4e67f29636db10243d25513486a4c831a436f1e5b796a242f8"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/packed_fideslib.cpp",
+        "bytes": 65429,
+        "sha256": "eb2d52478549736c541a9b0d3097b1c01ee616cacfac146c219707ca2e256912"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+        "bytes": 13721,
+        "sha256": "6a6736f0c71c47c1e72e08a6940011725af5e39cf4ff94c7eb518c018dad2896"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+        "bytes": 6853,
+        "sha256": "87495baa98db4eeaf03094abe4a8629baa13db43659c94a88a5da63b9c5befc0"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/packed_rns_probe.cpp",
+        "bytes": 13263,
+        "sha256": "1d31c2d19a651bafff8b1f9fa1a7ecddcb50f5f640f9e896816373747ea9b78e"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/rotation_batch_probe.cpp",
+        "bytes": 5491,
+        "sha256": "9e881d5c648bd17d8cfbbd7cab9e1a6146bf94ba17abdc67f5b9da2abee44531"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+        "bytes": 30699,
+        "sha256": "7ae67f0f0791dab2833a9950e2b7bf9c6008eb408a07b5b08552c7107a265de4"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+        "bytes": 7447,
+        "sha256": "8f4fc4dc9497699c50414cf9a4fa8d5f51dda05402fe3625b9bb468e10fc5b28"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+        "bytes": 7353,
+        "sha256": "81173b9604dbef3728b076946774d701fa6d11b257ffbbee506a9f1b917fea32"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_artifact.hpp",
+        "bytes": 1356,
+        "sha256": "958ec2800e35f80d3f432714840e2e835afd95d3cad51955bba5a4f0a463d0c2"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+        "bytes": 21270,
+        "sha256": "3ddc704d7d008eff5e338bcb4ecac93632463fe4c770311853906e11201683f1"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_config.hpp",
+        "bytes": 16728,
+        "sha256": "14c7806db0c5bc281f18d16d3a90c2809d0ce2ab49d9779e83537fde3a832b30"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+        "bytes": 263960,
+        "sha256": "99965660db784dfa602935ffdc30112821f37e6fa446685a2b328c30f8572710"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+        "bytes": 12745,
+        "sha256": "71e423f9969784996865e48c3b2c524244c5b8e92c2932dc9ab7a82a009d5f93"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_depth.hpp",
+        "bytes": 3003,
+        "sha256": "dc5e272cd89ad7bf3cbb8fc7d2c229fdd527096802b50e5d2ecf285ccb6a272b"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+        "bytes": 23907,
+        "sha256": "fb27e9b8e743776f629827c8ebede6b3c47c1da7e5c9f86001e94301c1933202"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_payload.hpp",
+        "bytes": 2866,
+        "sha256": "5426f065c4674efac77199ac39e074b57fe98a10b23ce038169792e91fac857b"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+        "bytes": 26720,
+        "sha256": "ac19557a2cea47319b4ab5cdc0fec229420a5588894ac5faa6462798e9f354c2"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_plan.hpp",
+        "bytes": 6409,
+        "sha256": "bdb2bd0de8fdac049218bacb9c01cb333a9abc36740e891cb9217974db40ad03"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+        "bytes": 2301,
+        "sha256": "b929a6962a4995b5a0adaad1365c9f567a5a9fc119debe23335e6552f7cff855"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_mamba2_process.hpp",
+        "bytes": 524,
+        "sha256": "a89bd3851edc6325f273650da854481e118521520fa652d104dd1e6d2701d42a"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+        "bytes": 12982,
+        "sha256": "023b70475a0f9018f18cba7e537e9cc800cc920ec9e7cd125c187d86d8458c37"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+        "bytes": 5026,
+        "sha256": "6f150a1af7462a3d4750bd5e0900f37b5ce118d762c4a8be36335fd544620d85"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+        "bytes": 10196,
+        "sha256": "4cccba3e8b1d8a71a4d4a8891bcb737e28a9bb07f4c61b196ddefd4bf5700c76"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+        "bytes": 24020,
+        "sha256": "59c5cac00e1864f79ccfc2bd9450617755353ad192344e59dc11a5e266ad0f90"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_bounded_prefetch.cpp",
+        "bytes": 4164,
+        "sha256": "3936be4e5360f6fec75bd22bb5a092b8ff674e2912a2b0c555f52cf6dd870c48"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_owned_arithmetic.cpp",
+        "bytes": 3418,
+        "sha256": "fcbff4553583234d0d6b31e64be63d0c419bad9c384c25ffbb929bf9251596fb"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_packed_depth.cpp",
+        "bytes": 5087,
+        "sha256": "cf78b2b9bc3de216f0bf347cf6d0fa977d630e791ed7d2c15f6ac5440e7e82b4"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_packed_lifetime.cpp",
+        "bytes": 1045,
+        "sha256": "69efd00b0d670bae6222e5c2ef585c6fbb84ce880480096e9f9ae9f3aaea29ab"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_packed_program.cpp",
+        "bytes": 3004,
+        "sha256": "6642a5a9275047721393fb94ffe595c1a0be3d5b49b9ba1bdebbabf613c57fb5"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_packed_routing.cpp",
+        "bytes": 6592,
+        "sha256": "bea6ebcf6f1d189af314665e60674f4540e0a8017f175318b58c5a84bdebada7"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_packed_schedule.cpp",
+        "bytes": 1837,
+        "sha256": "5f38b07f76490f42aa433a87dee711b879e189711f22befc7a2af3c4ef4d7cdc"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_plaintext_cache.cpp",
+        "bytes": 2465,
+        "sha256": "406d5baf3f8e3a6f0a181e234a7b487720b6fbddacdae9d7f81d3a8fa1fe1e59"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_plaintext_rns.cpp",
+        "bytes": 1110,
+        "sha256": "4723acec215c52ec726270e0d4871c12e5b71efb0369a920238dcc7fa3a2c278"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_shared_plans.cpp",
+        "bytes": 2262,
+        "sha256": "5ea09afb2b0fdbdb2448f658f4faba9faab5b69fe0ac7ff9f79366df99bff430"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage0_layout.cpp",
+        "bytes": 4283,
+        "sha256": "5134c2ecf1f81ceb157abf07087fd25f4dd94826e5c4712b6698628401025127"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_joint_gates.cpp",
+        "bytes": 3888,
+        "sha256": "985378f01cff4361a599e81fa94e8cb72519eb882847848d53aa468cef833aaf"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_mamba2_artifact.cpp",
+        "bytes": 3118,
+        "sha256": "06d598a987d0b0a05a752ea743988273c70b0806d767c1ec1cdfd49a70081fe6"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_mamba2_config.cpp",
+        "bytes": 13082,
+        "sha256": "325d595017e1ddf9b958a0ebacc8a6cf167b1e7d636007843f06ffa857a2dfd9"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_mamba2_depth.cpp",
+        "bytes": 7630,
+        "sha256": "1e3469e8dd9c9bc42646f9bb5d6944e899c044c300f7d6f2c43a16c6a1e6a0ee"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_mamba2_payload.cpp",
+        "bytes": 3644,
+        "sha256": "7350b9e689d30fe4ba6d177123890fdb5a6783fb179db291145164196a92ff71"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_mamba2_plan.cpp",
+        "bytes": 18442,
+        "sha256": "9a39ed07728e8d7fbf0a5c6a81cb4f1c857cc310c4be92eb754bc304b2cba640"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_mamba2_process.cpp",
+        "bytes": 2019,
+        "sha256": "27e94e778a36fb7c9639a58041a659cb93d4c63f1ea2a29e30dc3aeabd1b7001"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_normalization.cpp",
+        "bytes": 3936,
+        "sha256": "f74797f147af2ae09be1669e905a95d05fdfadb9b38120095d8c3bc41ea8ad95"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_rank_gate_payload.cpp",
+        "bytes": 10059,
+        "sha256": "971d29b3cd432bbd8b8eb6f94a5973050bfc82950140ec628e9048ffdf8267bf"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_tail_payload.cpp",
+        "bytes": 7722,
+        "sha256": "a9bcb06c474c730c6696e9c6fcc51005464242d1eba2b75e50d584fd86947a96"
+      },
+      {
+        "path": "repo-addends-r2/native/fideslib_stage0/tests/test_stage1_vector_rms.cpp",
+        "bytes": 2360,
+        "sha256": "a944bb5b8d0a42a704dad11cd23158453d8fe2bdabacb73d426b815db7ee362d"
+      },
+      {
+        "path": "repo-addends-r2/experiments/security128/CMakeLists.txt",
+        "bytes": 772,
+        "sha256": "e2b66d836a86abcc46f39c6881d64f4bdbf4921e6591f2e7daa8a1e48282ee0a"
+      },
+      {
+        "path": "repo-addends-r2/experiments/security128/parameters.cpp",
+        "bytes": 3184,
+        "sha256": "268ee63946db5fe6c25af9f8936d1eeb47a543c6bb28a30c264e5ca7b665dc02"
+      },
+      {
+        "path": "repo-addends-r2/experiments/security128/refresh.cpp",
+        "bytes": 5397,
+        "sha256": "00f9369d96bda48909979d29ec4d90ecad60c423dc49fbb498e2d03e08ba0e46"
+      },
+      {
+        "path": "repo-addends-r2/src/fhemamba/_version.py",
+        "bytes": 90,
+        "sha256": "39ece54d45cfd926fc7c5471edd2c21291ea855be09e374e5ee7935cb8f788f3"
+      }
+    ]
+  },
+  {
+    "archive": {
+      "path": "sources-parameter-report-r3.tar.gz",
+      "bytes": 5016,
+      "sha256": "6a8c594eca0f4cf29e3b3db6a928697a81cdd063087e24d5b4f9c8626e055896"
+    },
+    "measured_folder": "repo-parameter-report-r3",
+    "changes": [],
+    "members": [
+      {
+        "path": "repo-parameter-report-r3/experiments/security128/CMakeLists.txt",
+        "bytes": 772,
+        "sha256": "e2b66d836a86abcc46f39c6881d64f4bdbf4921e6591f2e7daa8a1e48282ee0a"
+      },
+      {
+        "path": "repo-parameter-report-r3/experiments/security128/parameters.cpp",
+        "bytes": 3197,
+        "sha256": "86e089db81ade8f692462c88d8046aefb149fb081a56c3c1d5ce2b765ae2be63"
+      },
+      {
+        "path": "repo-parameter-report-r3/experiments/security128/refresh.cpp",
+        "bytes": 5397,
+        "sha256": "00f9369d96bda48909979d29ec4d90ecad60c423dc49fbb498e2d03e08ba0e46"
+      },
+      {
+        "path": "repo-parameter-report-r3/native/fideslib_stage0/src/fideslib_security.hpp",
+        "bytes": 3654,
+        "sha256": "851d7e7a73fc1ef2641180a666f0d3729166efc89062f6f12b45f176d7fb7eaf"
+      }
+    ]
+  }
+]

@@ -4,9 +4,9 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build/packed_fideslib",
-    "/home/kataiwa/fhemamba/mamba3-20260924/payload/program.txt",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/cache-move/native.json",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/build/packed_fideslib",
+    "${HOME}/fhemamba/mamba3-20260924/payload/program.txt",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/cache-move/native.json",
     ".001",
     ".001",
     "--planned-refresh",
@@ -46,7 +46,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS": "4"
   },
   "source_manifest_sha256": "c651dc3110a67b0ac3f01a704329acc4211a21d9465b81789dbac48028c0dec6",
@@ -55,7 +55,7 @@
   "mode": "move",
   "manifest_sha256": "461351e19053c34e36713abcafa206bbbe1549c4c561564a036ccc1e4ac6d872",
   "program_sha256": "7e4ad8f9b91b3e885e3b1dae9d2cfd29a2fac92d94b68b4ac72cfe59fc372831",
-  "payload": "/home/kataiwa/fhemamba/mamba3-20260924/payload",
+  "payload": "${HOME}/fhemamba/mamba3-20260924/payload",
   "binary_sha256": "d196d737ccf09a041bb8abf3e8d511003863af50aed9f6d6e38b4a99ba158b20",
   "pid": 2679872,
   "process_sample": [

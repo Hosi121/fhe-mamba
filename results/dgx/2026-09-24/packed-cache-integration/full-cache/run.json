@@ -4,9 +4,9 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/borrowed-plaintext-20260924/build/packed_fideslib",
-    "/home/kataiwa/fhemamba/mamba3-20260924/lm-full/program.txt",
-    "/home/kataiwa/fhemamba/packed-cache-integration-20260924/full-cache/native.json",
+    "${HOME}/fhemamba/borrowed-plaintext-20260924/build/packed_fideslib",
+    "${HOME}/fhemamba/mamba3-20260924/lm-full/program.txt",
+    "${HOME}/fhemamba/packed-cache-integration-20260924/full-cache/native.json",
     ".001",
     ".001",
     "--planned-refresh",
@@ -22,7 +22,7 @@
     "--borrow-plaintext-upload",
     "--bsgs-routing-stages",
     "--client-head",
-    "/home/kataiwa/fhemamba/mamba3-20260924/lm-full/client_head.f32",
+    "${HOME}/fhemamba/mamba3-20260924/lm-full/client_head.f32",
     "--cache-plaintexts"
   ],
   "started_utc": "2026-09-24T10:02:07.718072+00:00",
@@ -50,14 +50,14 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS": "4"
   },
   "source_manifest_sha256": "b92f3ff75dbed84f5295d309539ad6dadecec12a0bb66b703eeeb92f03e857c9",
   "controller_sha256": "84ac2f2ed2e3ddf1019e10f3a0a5c248d35cc01e01631d89d93851ada4892185",
   "launcher_sha256": "cdab26bfaea4baafb998a42286094ebd71b57f161710af10f032ed0f7c5e0619",
   "cache": true,
-  "payload": "/home/kataiwa/fhemamba/mamba3-20260924/lm-full",
+  "payload": "${HOME}/fhemamba/mamba3-20260924/lm-full",
   "manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
   "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
   "baseline_native_sha256": "917b07e0169204219cb1ca49eaad3a4dd339d9f9037ad4d991ec65fb69ef73b8",

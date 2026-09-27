@@ -1,0 +1,14 @@
+{
+  "name": "addends-rns-65536-real-r2",
+  "command": [
+    "/study/build/addends-r2/packed_rns_probe",
+    "/study/addends-rns-65536-real-r2/probe.json",
+    "--compact-addends",
+    "--prefetch",
+    "--prefetch-workers",
+    "2",
+    "--ring",
+    "65536"
+  ],
+  "timeout": 1800
+}

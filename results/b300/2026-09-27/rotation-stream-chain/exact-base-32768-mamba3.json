@@ -1,0 +1,10 @@
+{
+  "name": "exact-base-32768-mamba3",
+  "command": [
+    "/study/bin/base/rotation_probe",
+    "/study/exact-base-32768-mamba3/probe.json",
+    "32768",
+    "mamba3"
+  ],
+  "timeout": 1200
+}

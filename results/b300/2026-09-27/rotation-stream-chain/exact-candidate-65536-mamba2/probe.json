@@ -1,0 +1,1 @@
+{"passed":true,"ring_dimension":65536,"model":"mamba2","exact_rns_cases":120,"extended_fallback_cases":120,"chain_cases":3,"max_abs_error":1.30717454160249e-12,"tolerance":1e-6,"live_input_unchanged":true,"security":"not-set"}

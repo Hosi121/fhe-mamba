@@ -1,0 +1,11 @@
+{
+  "name": "kernel-1024-base",
+  "command": [
+    "/study/bin/base/ntt_warp_tail",
+    "/study/kernel-1024-base/probe.json",
+    "/study/golden/ring-1024.bin",
+    "1024",
+    "--record"
+  ],
+  "timeout": 1200
+}

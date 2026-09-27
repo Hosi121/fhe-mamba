@@ -3,8 +3,8 @@
   "version": "0.5.0",
   "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0",
   "source_sha256": {
-    "/home/hosi/cipher/fhemamba/experiments/regularize_payload_state.py": "e54c3aa9988f47539a3ae1823199b3fdd3ac28d53e704bfbedfb09ffaaa1a65c",
-    "/home/hosi/cipher/fhemamba/src/fhemamba/state_coordinates.py": "9bf1d627925543cdac45334a09a9c7db510c6c0e336712a2ada4059d8218cd75"
+    "${HOME}/cipher/fhemamba/experiments/regularize_payload_state.py": "e54c3aa9988f47539a3ae1823199b3fdd3ac28d53e704bfbedfb09ffaaa1a65c",
+    "${HOME}/cipher/fhemamba/src/fhemamba/state_coordinates.py": "9bf1d627925543cdac45334a09a9c7db510c6c0e336712a2ada4059d8218cd75"
   },
   "regularization": {
     "parent_payload_sha256": "e788c496847701fae2bbc5ad8ccff7b670b9d51f5e66594d9d6b2099beeb8c69",

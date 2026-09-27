@@ -1,0 +1,968 @@
+{
+  "original": {
+    "profile_eval_seconds": 14.218847184,
+    "gpu_activity": {
+      "CUPTI_ACTIVITY_KIND_KERNEL": {
+        "count": 308734,
+        "sum_seconds": 2.860098414
+      },
+      "CUPTI_ACTIVITY_KIND_MEMCPY": {
+        "count": 43304,
+        "sum_seconds": 0.141631408
+      },
+      "CUPTI_ACTIVITY_KIND_MEMSET": {
+        "count": 3840,
+        "sum_seconds": 0.007743864
+      }
+    },
+    "gpu_interval_union_seconds": 2.547689876,
+    "kernels": [
+      [
+        "fhemamba::<unnamed>::expand(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, unsigned long)",
+        82303,
+        0.133998107
+      ],
+      [
+        "FIDESlib::CKKS::copy_(void **, void **)",
+        36471,
+        0.19216921
+      ],
+      [
+        "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+        26402,
+        0.253391604
+      ],
+      [
+        "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+        26402,
+        0.171481059
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        24606,
+        0.437353673
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        24606,
+        0.563394791
+      ],
+      [
+        "FIDESlib::add_(void **, void **, int)",
+        18289,
+        0.109182832
+      ],
+      [
+        "void FIDESlib::CKKS::Scalar_mult_<(FIDESlib::ALGO)4>(void **, const unsigned long *, int, const unsigned long *)",
+        12966,
+        0.074113693
+      ],
+      [
+        "FIDESlib::CKKS::Mult_(void **, void **, void **, int)",
+        8424,
+        0.041820888
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        7449,
+        0.048641361
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        7449,
+        0.087805853
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        5926,
+        0.091582477
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        5926,
+        0.117396097
+      ],
+      [
+        "void FIDESlib::CKKS::ModDown2<(FIDESlib::ALGO)3>(void **, int, void **, int, const FIDESlib::Global::Globals *)",
+        5926,
+        0.200798666
+      ],
+      [
+        "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+        4162,
+        0.029621839
+      ],
+      [
+        "void FIDESlib::INTT_<unsigned long, (bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+        4162,
+        0.017371312
+      ],
+      [
+        "FIDESlib::CKKS::hoistedRotateDotKSK_2_(void ***, void **, void ***, void ***, void ***, void ***, int, const int *, void ***, int, int, int, int, void **, bool)",
+        2791,
+        0.172011959
+      ],
+      [
+        "<unnamed>::map_ntt(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, bool)",
+        1012,
+        0.001814814
+      ],
+      [
+        "FIDESlib::scalar_add_(void **, unsigned long *, int)",
+        891,
+        0.007314945
+      ],
+      [
+        "FIDESlib::CKKS::binomialMult_(int, void **, void **, void **, void **, void **)",
+        599,
+        0.008687601
+      ],
+      [
+        "FIDESlib::sub_(void **, void **, int)",
+        514,
+        0.004434296
+      ],
+      [
+        "FIDESlib::CKKS::eval_linear_w_sum_(int, void **, void ***, unsigned long *, int)",
+        480,
+        0.019246988
+      ],
+      [
+        "FIDESlib::CKKS::binomialSquare_(int, void **, void **, void **)",
+        434,
+        0.005692755
+      ],
+      [
+        "FIDESlib::CKKS::dotProductLtBatchedPt2___(void ***, void ***, void ***, void ***, void ***, int, int, int, int)",
+        256,
+        0.066211175
+      ],
+      [
+        "FIDESlib::CKKS::scaleByP_(void **, int)",
+        256,
+        0.00401689
+      ],
+      [
+        "FIDESlib::CKKS::broadcastLimb0_(void **)",
+        32,
+        0.000543529
+      ]
+    ],
+    "runtime_apis": [
+      [
+        "cudaLaunchKernel_v7000",
+        310311,
+        1.499627425
+      ],
+      [
+        "cuKernelGetName",
+        310311,
+        0.031478294
+      ],
+      [
+        "cudaStreamWaitEvent_v3020",
+        253889,
+        0.27292209
+      ],
+      [
+        "cudaEventRecordWithFlags_v11010",
+        191140,
+        0.197674814
+      ],
+      [
+        "cudaDeviceSynchronize_v3020",
+        54601,
+        2.141515726
+      ],
+      [
+        "cudaMemcpyAsync_v3020",
+        39500,
+        0.321493274
+      ],
+      [
+        "cudaMallocAsync_v11020",
+        17789,
+        0.394111955
+      ],
+      [
+        "cudaFreeAsync_v11020",
+        17736,
+        0.022384632
+      ],
+      [
+        "cudaEventCreateWithFlags_v3020",
+        4226,
+        0.004239968
+      ],
+      [
+        "cudaStreamSynchronize_v3020",
+        3893,
+        0.077312369
+      ],
+      [
+        "cudaEventDestroy_v3020",
+        3848,
+        0.002778755
+      ],
+      [
+        "cudaGraphLaunch_v10000",
+        3848,
+        0.064408578
+      ],
+      [
+        "cudaMemsetAsync_v3020",
+        3840,
+        0.016149809
+      ],
+      [
+        "cudaMemcpy_v3020",
+        3771,
+        0.150006026
+      ],
+      [
+        "cudaGraphInstantiateWithFlags_v11040",
+        79,
+        0.022105746
+      ],
+      [
+        "cudaStreamEndCapture_v10000",
+        79,
+        0.000196795
+      ],
+      [
+        "cudaStreamBeginCapture_v10000",
+        79,
+        0.000401006
+      ],
+      [
+        "cudaEventRecord_v3020",
+        64,
+        5.0187e-05
+      ],
+      [
+        "cudaMemcpyToSymbolAsync_v3020",
+        33,
+        0.000681661
+      ],
+      [
+        "cuLibraryGetKernel",
+        27,
+        5.0509e-05
+      ],
+      [
+        "cudaMalloc_v3020",
+        4,
+        0.000824228
+      ],
+      [
+        "cuLibraryLoadData",
+        2,
+        0.000125968
+      ],
+      [
+        "cuProfilerStart",
+        1,
+        1.0024e-05
+      ]
+    ],
+    "standalone_rns_expansion_launches": 82303,
+    "fused_rns_uploads": 0,
+    "prefetched_encodes": 0,
+    "limits": "One instrumented prefix per variant. Kernel sums can overlap; interval union is CUPTI-visible GPU activity, not SM/DRAM utilization or unprofiled latency.",
+    "cpu_thread_samples": [
+      [
+        281476486660186,
+        6899
+      ],
+      [
+        281476486660189,
+        644
+      ],
+      [
+        281476486660193,
+        367
+      ],
+      [
+        281476486660197,
+        119
+      ],
+      [
+        281476486660196,
+        113
+      ],
+      [
+        281476486660198,
+        95
+      ],
+      [
+        281476486660320,
+        13
+      ],
+      [
+        281476486660190,
+        5
+      ],
+      [
+        281476486660195,
+        2
+      ]
+    ]
+  },
+  "stage1": {
+    "profile_eval_seconds": 13.826454178,
+    "gpu_activity": {
+      "CUPTI_ACTIVITY_KIND_KERNEL": {
+        "count": 219621,
+        "sum_seconds": 2.699582009
+      },
+      "CUPTI_ACTIVITY_KIND_MEMCPY": {
+        "count": 43305,
+        "sum_seconds": 0.142713335
+      },
+      "CUPTI_ACTIVITY_KIND_MEMSET": {
+        "count": 3840,
+        "sum_seconds": 0.007584634
+      }
+    },
+    "gpu_interval_union_seconds": 2.389280944,
+    "kernels": [
+      [
+        "FIDESlib::CKKS::copy_(void **, void **)",
+        36471,
+        0.192308879
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        28377,
+        0.63313475
+      ],
+      [
+        "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+        26402,
+        0.25317429
+      ],
+      [
+        "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+        26402,
+        0.171080947
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        24606,
+        0.437326001
+      ],
+      [
+        "FIDESlib::add_(void **, void **, int)",
+        18289,
+        0.109116067
+      ],
+      [
+        "void FIDESlib::CKKS::Scalar_mult_<(FIDESlib::ALGO)4>(void **, const unsigned long *, int, const unsigned long *)",
+        12966,
+        0.074312849
+      ],
+      [
+        "FIDESlib::CKKS::Mult_(void **, void **, void **, int)",
+        8424,
+        0.041856279
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        5926,
+        0.091417692
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        5926,
+        0.117490603
+      ],
+      [
+        "void FIDESlib::CKKS::ModDown2<(FIDESlib::ALGO)3>(void **, int, void **, int, const FIDESlib::Global::Globals *)",
+        5926,
+        0.200654713
+      ],
+      [
+        "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+        4162,
+        0.029634415
+      ],
+      [
+        "void FIDESlib::INTT_<unsigned long, (bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+        4162,
+        0.017416598
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        4044,
+        0.036160757
+      ],
+      [
+        "FIDESlib::CKKS::hoistedRotateDotKSK_2_(void ***, void **, void ***, void ***, void ***, void ***, int, const int *, void ***, int, int, int, int, void **, bool)",
+        2791,
+        0.171995453
+      ],
+      [
+        "<unnamed>::map_ntt(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, bool)",
+        1012,
+        0.001819397
+      ],
+      [
+        "FIDESlib::scalar_add_(void **, unsigned long *, int)",
+        891,
+        0.007317476
+      ],
+      [
+        "FIDESlib::CKKS::binomialMult_(int, void **, void **, void **, void **, void **)",
+        599,
+        0.008688586
+      ],
+      [
+        "FIDESlib::sub_(void **, void **, int)",
+        514,
+        0.004434754
+      ],
+      [
+        "FIDESlib::CKKS::eval_linear_w_sum_(int, void **, void ***, unsigned long *, int)",
+        480,
+        0.019242128
+      ],
+      [
+        "FIDESlib::CKKS::binomialSquare_(int, void **, void **, void **)",
+        434,
+        0.005690638
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        273,
+        0.004503102
+      ],
+      [
+        "FIDESlib::CKKS::dotProductLtBatchedPt2___(void ***, void ***, void ***, void ***, void ***, int, int, int, int)",
+        256,
+        0.066193165
+      ],
+      [
+        "FIDESlib::CKKS::scaleByP_(void **, int)",
+        256,
+        0.004072015
+      ],
+      [
+        "FIDESlib::CKKS::broadcastLimb0_(void **)",
+        32,
+        0.000540455
+      ]
+    ],
+    "runtime_apis": [
+      [
+        "cudaStreamWaitEvent_v3020",
+        253889,
+        0.274639466
+      ],
+      [
+        "cudaLaunchKernel_v7000",
+        221198,
+        1.115246397
+      ],
+      [
+        "cuKernelGetName",
+        221198,
+        0.023889744
+      ],
+      [
+        "cudaEventRecordWithFlags_v11010",
+        191140,
+        0.197016039
+      ],
+      [
+        "cudaDeviceSynchronize_v3020",
+        54601,
+        2.076695207
+      ],
+      [
+        "cudaMemcpyAsync_v3020",
+        39500,
+        0.318345295
+      ],
+      [
+        "cudaMallocAsync_v11020",
+        17789,
+        0.397548375
+      ],
+      [
+        "cudaFreeAsync_v11020",
+        17736,
+        0.023104734
+      ],
+      [
+        "cudaEventCreateWithFlags_v3020",
+        4226,
+        0.005508533
+      ],
+      [
+        "cudaStreamSynchronize_v3020",
+        3893,
+        0.077932634
+      ],
+      [
+        "cudaEventDestroy_v3020",
+        3848,
+        0.003698431
+      ],
+      [
+        "cudaGraphLaunch_v10000",
+        3848,
+        0.064822599
+      ],
+      [
+        "cudaMemsetAsync_v3020",
+        3840,
+        0.016670239
+      ],
+      [
+        "cudaMemcpy_v3020",
+        3772,
+        0.152202062
+      ],
+      [
+        "cudaGraphInstantiateWithFlags_v11040",
+        79,
+        0.023706112
+      ],
+      [
+        "cudaStreamEndCapture_v10000",
+        79,
+        0.000198671
+      ],
+      [
+        "cudaStreamBeginCapture_v10000",
+        79,
+        0.000408779
+      ],
+      [
+        "cudaEventRecord_v3020",
+        64,
+        5.1213e-05
+      ],
+      [
+        "cudaMemcpyToSymbolAsync_v3020",
+        33,
+        0.000710082
+      ],
+      [
+        "cuLibraryGetKernel",
+        26,
+        5.0732e-05
+      ],
+      [
+        "cudaMalloc_v3020",
+        4,
+        0.000786153
+      ],
+      [
+        "cuLibraryLoadData",
+        1,
+        6.6659e-05
+      ],
+      [
+        "cuProfilerStart",
+        1,
+        9.628e-06
+      ]
+    ],
+    "standalone_rns_expansion_launches": 0,
+    "fused_rns_uploads": 3771,
+    "prefetched_encodes": 0,
+    "limits": "One instrumented prefix per variant. Kernel sums can overlap; interval union is CUPTI-visible GPU activity, not SM/DRAM utilization or unprofiled latency.",
+    "cpu_thread_samples": [
+      [
+        281476520214620,
+        6680
+      ],
+      [
+        281476520214623,
+        571
+      ],
+      [
+        281476520214627,
+        269
+      ],
+      [
+        281476520214630,
+        112
+      ],
+      [
+        281476520214631,
+        105
+      ],
+      [
+        281476520214632,
+        86
+      ],
+      [
+        281476520214754,
+        12
+      ],
+      [
+        281476520214624,
+        6
+      ],
+      [
+        281476520214629,
+        1
+      ]
+    ]
+  },
+  "stage2": {
+    "profile_eval_seconds": 10.956448955,
+    "gpu_activity": {
+      "CUPTI_ACTIVITY_KIND_KERNEL": {
+        "count": 308734,
+        "sum_seconds": 2.896987541
+      },
+      "CUPTI_ACTIVITY_KIND_MEMCPY": {
+        "count": 43305,
+        "sum_seconds": 0.119837894
+      },
+      "CUPTI_ACTIVITY_KIND_MEMSET": {
+        "count": 3840,
+        "sum_seconds": 0.00835681
+      }
+    },
+    "gpu_interval_union_seconds": 2.465355323,
+    "kernels": [
+      [
+        "fhemamba::<unnamed>::expand(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, unsigned long)",
+        82303,
+        0.133779841
+      ],
+      [
+        "FIDESlib::CKKS::copy_(void **, void **)",
+        36471,
+        0.192006951
+      ],
+      [
+        "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+        26402,
+        0.272850993
+      ],
+      [
+        "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+        26402,
+        0.173130603
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        24606,
+        0.433564175
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        24606,
+        0.573264215
+      ],
+      [
+        "FIDESlib::add_(void **, void **, int)",
+        18289,
+        0.108885048
+      ],
+      [
+        "void FIDESlib::CKKS::Scalar_mult_<(FIDESlib::ALGO)4>(void **, const unsigned long *, int, const unsigned long *)",
+        12966,
+        0.074987637
+      ],
+      [
+        "FIDESlib::CKKS::Mult_(void **, void **, void **, int)",
+        8424,
+        0.041892517
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        7449,
+        0.048562279
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        7449,
+        0.087675678
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        5926,
+        0.096138769
+      ],
+      [
+        "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+        5926,
+        0.121909761
+      ],
+      [
+        "void FIDESlib::CKKS::ModDown2<(FIDESlib::ALGO)3>(void **, int, void **, int, const FIDESlib::Global::Globals *)",
+        5926,
+        0.200057732
+      ],
+      [
+        "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+        4162,
+        0.029596325
+      ],
+      [
+        "void FIDESlib::INTT_<unsigned long, (bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+        4162,
+        0.017365916
+      ],
+      [
+        "FIDESlib::CKKS::hoistedRotateDotKSK_2_(void ***, void **, void ***, void ***, void ***, void ***, int, const int *, void ***, int, int, int, int, void **, bool)",
+        2791,
+        0.171965394
+      ],
+      [
+        "<unnamed>::map_ntt(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, bool)",
+        1012,
+        0.001819737
+      ],
+      [
+        "FIDESlib::scalar_add_(void **, unsigned long *, int)",
+        891,
+        0.00745034
+      ],
+      [
+        "FIDESlib::CKKS::binomialMult_(int, void **, void **, void **, void **, void **)",
+        599,
+        0.008671723
+      ],
+      [
+        "FIDESlib::sub_(void **, void **, int)",
+        514,
+        0.004417786
+      ],
+      [
+        "FIDESlib::CKKS::eval_linear_w_sum_(int, void **, void ***, unsigned long *, int)",
+        480,
+        0.020308988
+      ],
+      [
+        "FIDESlib::CKKS::binomialSquare_(int, void **, void **, void **)",
+        434,
+        0.00577842
+      ],
+      [
+        "FIDESlib::CKKS::dotProductLtBatchedPt2___(void ***, void ***, void ***, void ***, void ***, int, int, int, int)",
+        256,
+        0.066218393
+      ],
+      [
+        "FIDESlib::CKKS::scaleByP_(void **, int)",
+        256,
+        0.004131834
+      ],
+      [
+        "FIDESlib::CKKS::broadcastLimb0_(void **)",
+        32,
+        0.000556486
+      ]
+    ],
+    "runtime_apis": [
+      [
+        "cudaLaunchKernel_v7000",
+        310311,
+        1.336691511
+      ],
+      [
+        "cuKernelGetName",
+        310311,
+        0.026604215
+      ],
+      [
+        "cudaStreamWaitEvent_v3020",
+        253889,
+        0.221869271
+      ],
+      [
+        "cudaEventRecordWithFlags_v11010",
+        191140,
+        0.163025858
+      ],
+      [
+        "cudaDeviceSynchronize_v3020",
+        54601,
+        2.187788177
+      ],
+      [
+        "cudaMemcpyAsync_v3020",
+        39500,
+        0.321746114
+      ],
+      [
+        "cudaMallocAsync_v11020",
+        17789,
+        0.365161047
+      ],
+      [
+        "cudaFreeAsync_v11020",
+        17736,
+        0.021041017
+      ],
+      [
+        "cudaEventCreateWithFlags_v3020",
+        4226,
+        0.006621812
+      ],
+      [
+        "cudaStreamSynchronize_v3020",
+        3893,
+        0.073111859
+      ],
+      [
+        "cudaEventDestroy_v3020",
+        3848,
+        0.0032711
+      ],
+      [
+        "cudaGraphLaunch_v10000",
+        3848,
+        0.056981807
+      ],
+      [
+        "cudaMemsetAsync_v3020",
+        3840,
+        0.01296615
+      ],
+      [
+        "cudaMemcpy_v3020",
+        3772,
+        0.176329395
+      ],
+      [
+        "cudaGraphInstantiateWithFlags_v11040",
+        79,
+        0.017618882
+      ],
+      [
+        "cudaStreamEndCapture_v10000",
+        79,
+        0.000179282
+      ],
+      [
+        "cudaStreamBeginCapture_v10000",
+        79,
+        0.00037669
+      ],
+      [
+        "cudaEventRecord_v3020",
+        64,
+        4.6098e-05
+      ],
+      [
+        "cudaMemcpyToSymbolAsync_v3020",
+        33,
+        0.000570706
+      ],
+      [
+        "cuLibraryGetKernel",
+        27,
+        2.5715e-05
+      ],
+      [
+        "cudaMalloc_v3020",
+        4,
+        0.00829478
+      ],
+      [
+        "cuLibraryLoadData",
+        2,
+        0.000128552
+      ],
+      [
+        "cuProfilerStart",
+        1,
+        6.275e-06
+      ]
+    ],
+    "standalone_rns_expansion_launches": 82303,
+    "fused_rns_uploads": 0,
+    "prefetched_encodes": 2562,
+    "limits": "One instrumented prefix per variant. Kernel sums can overlap; interval union is CUPTI-visible GPU activity, not SM/DRAM utilization or unprofiled latency.",
+    "cpu_thread_samples": [
+      [
+        281476453105752,
+        4688
+      ],
+      [
+        281476453105755,
+        681
+      ],
+      [
+        281476453105759,
+        347
+      ],
+      [
+        281476453105888,
+        178
+      ],
+      [
+        281476453105887,
+        178
+      ],
+      [
+        281476453105895,
+        175
+      ],
+      [
+        281476453105890,
+        174
+      ],
+      [
+        281476453105897,
+        166
+      ],
+      [
+        281476453105893,
+        118
+      ],
+      [
+        281476453105889,
+        118
+      ],
+      [
+        281476453105898,
+        114
+      ],
+      [
+        281476453105896,
+        114
+      ],
+      [
+        281476453105894,
+        114
+      ],
+      [
+        281476453105891,
+        113
+      ],
+      [
+        281476453105762,
+        106
+      ],
+      [
+        281476453105764,
+        105
+      ],
+      [
+        281476453105763,
+        103
+      ],
+      [
+        281476453105892,
+        95
+      ],
+      [
+        281476453105886,
+        10
+      ],
+      [
+        281476453105756,
+        7
+      ]
+    ]
+  }
+}

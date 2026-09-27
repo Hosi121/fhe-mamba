@@ -2,7 +2,7 @@
   "command": [
     "cmake",
     "--build",
-    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build",
+    "${HOME}/fhemamba/structural-four-20260925/cheddar-build",
     "--target",
     "composite_probe",
     "-j",

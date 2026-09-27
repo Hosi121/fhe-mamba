@@ -1,0 +1,8 @@
+{
+  "name": "parameters-r3",
+  "command": [
+    "/study/build/parameter-report-r3/security_parameters",
+    "/study/parameters-r3/probe.json"
+  ],
+  "timeout": 180
+}

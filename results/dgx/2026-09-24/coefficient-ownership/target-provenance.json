@@ -7,143 +7,143 @@
   "backend_status": "M CMakeLists.txt\n M api/CCParams.cpp\n M api/CCParams.hpp\n M api/CryptoContext.cpp\n M api/CryptoContext.hpp\n M api/Definitions.hpp\n M src/CKKS/Bootstrap.cu\n M src/CKKS/Ciphertext.cpp\n M src/PeerUtils.cu\n M src/PeerUtils.cuh\n?? .source-diff",
   "backend_diff_sha256": "e525c7951facbfad0a834a35d8893e8e09c639e109f09c33239334eae1657b6f",
   "source_and_binary_sha256": {
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build/packed_fideslib": "d196d737ccf09a041bb8abf3e8d511003863af50aed9f6d6e38b4a99ba158b20",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build/packed_plaintext_probe": "2a3da74c80f2d026274e1c411d7a12cca7e3c13238cc91c9c523f0c7668fa96e",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build/stage1_mamba2_decode_fideslib": "a168cd47709de0ad9810e39986f83b39b0461d0ea77136cd81ec6622dc4d2c1c",
-    "/home/kataiwa/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68",
-    "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Plaintext.cu": "08feb9adb7a3809db59dd867f39cf79de96df546451d1953724292077659bf31",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/RNSPoly.cpp": "83c7234b5e45fe89447b0d524efb455c2e6ecb9680c538bc999d9dca52b07941",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/LimbPartition.cu": "063336a48c4f9db6866d328fd9917b8d804cb5410975490b48a8107a6c633ce0",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/Limb.cu": "9e0eccc93e31a92a05db9919d62734b59ae152b70ffe2f30e39277984b2156e3",
-    "/home/kataiwa/fhemamba/spark/source-2a70798e869944af/src/CKKS/openfhe-interface/RawCiphertext.cu": "1ff5d81255930803de56184b628a902972e8dc67ccf794be1359355d59bde63a"
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/build/packed_fideslib": "d196d737ccf09a041bb8abf3e8d511003863af50aed9f6d6e38b4a99ba158b20",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/build/packed_plaintext_probe": "2a3da74c80f2d026274e1c411d7a12cca7e3c13238cc91c9c523f0c7668fa96e",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/build/stage1_mamba2_decode_fideslib": "a168cd47709de0ad9810e39986f83b39b0461d0ea77136cd81ec6622dc4d2c1c",
+    "${HOME}/fhemamba/spark/install-2a70798e869944af/lib/fideslib.a": "8cdd13aaae58aa58f2c72b0f3417f611de9d3fa8a35b3fa213d1ea86367ea972",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEcore_static.a": "97c65e1baeaba15588c1105830ddae6ba168d1cb2df1ffba249466002836aed3",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe_static.a": "8411f9238dc79b25645143ce804406fabb83df5a16155694f5d5058ac5b2bd67",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEpke_static.a": "d0206c9837842e83c2db2ebe6e7bc21bffbb085a2ee8553314527a436035b20f",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68",
+    "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/api/CryptoContext.cpp": "9f09e0f5f2643edf6ff768a03cd3f4200a696d7aca1ac197cc25448975c14d7a",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/api/Plaintext.cpp": "06c0ac0207a26f0acd8760eb5fd152ee959bc2d7e99fbe1452f80a17aaa6c3f9",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/src/CKKS/Plaintext.cu": "08feb9adb7a3809db59dd867f39cf79de96df546451d1953724292077659bf31",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/src/CKKS/RNSPoly.cpp": "83c7234b5e45fe89447b0d524efb455c2e6ecb9680c538bc999d9dca52b07941",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/src/CKKS/LimbPartition.cu": "063336a48c4f9db6866d328fd9917b8d804cb5410975490b48a8107a6c633ce0",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/src/CKKS/Limb.cu": "9e0eccc93e31a92a05db9919d62734b59ae152b70ffe2f30e39277984b2156e3",
+    "${HOME}/fhemamba/spark/source-2a70798e869944af/src/CKKS/openfhe-interface/RawCiphertext.cu": "1ff5d81255930803de56184b628a902972e8dc67ccf794be1359355d59bde63a"
   },
   "compile_commands": [
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_config.cpp",
       "output": "CMakeFiles/stage1_mamba2_config.dir/src/stage1_mamba2_config.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_payload.cpp",
       "output": "CMakeFiles/stage1_mamba2_payload.dir/src/stage1_mamba2_payload.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_depth.cpp",
       "output": "CMakeFiles/stage1_mamba2_depth.dir/src/stage1_mamba2_depth.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_artifact.cpp",
       "output": "CMakeFiles/stage1_mamba2_artifact.dir/src/stage1_mamba2_artifact.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
       "output": "CMakeFiles/stage1_mamba2_plan.dir/src/stage1_mamba2_plan.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_resource_inventory.cpp",
       "output": "CMakeFiles/packed_resource_inventory.dir/src/packed_resource_inventory.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_process.cpp",
       "output": "CMakeFiles/stage1_mamba2_process.dir/src/stage1_mamba2_process.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhe-deps/openfhe-fides/include/openfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/core -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/pke -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/binfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_handoff.cpp",
       "output": "CMakeFiles/fideslib_handoff.dir/src/fideslib_handoff.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_bootstrap_probe.cpp",
       "output": "CMakeFiles/stage1_bootstrap_probe.dir/src/stage1_bootstrap_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhe-deps/openfhe-fides/include/openfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/core -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/pke -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/binfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
       "output": "CMakeFiles/fideslib_plaintext_encoder.dir/src/fideslib_plaintext_encoder.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhe-deps/openfhe-fides/include/openfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/core -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/pke -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/binfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_fideslib.cpp",
       "output": "CMakeFiles/packed_fideslib.dir/src/packed_fideslib.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhe-deps/openfhe-fides/include/openfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/core -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/pke -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/binfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/packed_plaintext_probe.cpp",
       "output": "CMakeFiles/packed_plaintext_probe.dir/src/packed_plaintext_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++  -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++  -I${HOME}/fhe-deps/openfhe-fides/include/openfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/core -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/pke -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/binfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/third-party/include -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_mamba2_decode_fideslib.cpp",
       "output": "CMakeFiles/stage1_mamba2_decode_fideslib.dir/src/stage1_mamba2_decode_fideslib.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I${HOME}/fhe-deps/openfhe-fides/include/openfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/core -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/pke -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/binfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_client_server_probe.cpp",
       "output": "CMakeFiles/fideslib_client_server_probe.dir/src/fideslib_client_server_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/fideslib_ctpt_probe.cpp",
       "output": "CMakeFiles/fideslib_ctpt_probe.dir/src/fideslib_ctpt_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_plaintext_add_probe.cpp",
       "output": "CMakeFiles/stage1_plaintext_add_probe.dir/src/stage1_plaintext_add_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_coefficient_encoding_probe.cpp",
       "output": "CMakeFiles/stage1_coefficient_encoding_probe.dir/src/stage1_coefficient_encoding_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/core -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/pke -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/binfhe -I/home/kataiwa/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I${HOME}/fhe-deps/openfhe-fides/include/openfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/core -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/pke -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/binfhe -I${HOME}/fhe-deps/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_subring_encoding_probe.cpp",
       "output": "CMakeFiles/stage1_subring_encoding_probe.dir/src/stage1_subring_encoding_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_normalization_probe.cpp",
       "output": "CMakeFiles/stage1_normalization_probe.dir/src/stage1_normalization_probe.cpp.o"
     },
     {
-      "directory": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/build",
-      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem /home/kataiwa/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o -c /home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
-      "file": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "directory": "${HOME}/fhemamba/coefficient-ownership-models-20260924/build",
+      "command": "/usr/bin/c++ -DFHEMAMBA_VERSION=\\\"0.5.0\\\" -I${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/include -isystem /usr/local/cuda-13.0/targets/sbsa-linux/include/cccl -isystem ${HOME}/fhemamba/spark/install-2a70798e869944af/include/fideslib -isystem /usr/local/cuda/targets/sbsa-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o -c ${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
+      "file": "${HOME}/fhemamba/coefficient-ownership-models-20260924/source/native/fideslib_stage0/src/stage1_vector_rms_probe.cpp",
       "output": "CMakeFiles/stage1_vector_rms_probe.dir/src/stage1_vector_rms_probe.cpp.o"
     }
   ],

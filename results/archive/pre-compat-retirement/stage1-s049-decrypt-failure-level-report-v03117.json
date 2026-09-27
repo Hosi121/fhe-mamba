@@ -15,7 +15,7 @@
     "artifact has no bootstrap; multi-layer scheduling remains open"
   ],
   "decrypt_failure": true,
-  "error_message": "/home/asuser30135/fhe-native-mamba3-deps/FIDESlib/deps/openfhe-src/src/pke/lib/encoding/ckkspackedencoding.cpp:l.453:Decode(): The decryption failed because the approximation error is too high. Check the parameters. ",
+  "error_message": "${HOME}/fhe-native-mamba3-deps/FIDESlib/deps/openfhe-src/src/pke/lib/encoding/ckkspackedencoding.cpp:l.453:Decode(): The decryption failed because the approximation error is too high. Check the parameters. ",
   "inputs": {
     "artifact_json": "runs/stage1-s049-decrypt-failure-json-tiny-prev0125-v03117.json"
   },

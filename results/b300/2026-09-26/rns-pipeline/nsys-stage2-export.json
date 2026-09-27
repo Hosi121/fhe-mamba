@@ -1,0 +1,15 @@
+{
+  "name": "nsys-stage2-export",
+  "cpu_only": true,
+  "profile": true,
+  "timeout": 300,
+  "command": [
+    "/workspace/b300-nsight-20260926/tools/nsys/opt/nvidia/nsight-systems-cli/2025.5.1/target-linux-x64/nsys",
+    "export",
+    "--type=sqlite",
+    "--force-overwrite=true",
+    "--output",
+    "/study/nsys-stage2/trace.sqlite",
+    "/study/nsys-stage2/trace.nsys-rep"
+  ]
+}

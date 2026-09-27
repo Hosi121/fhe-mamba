@@ -1,0 +1,93 @@
+{
+  "status": "static screen passed; encrypted candidate not implemented or measured",
+  "input_sha256": "a448cd7c52b27e486f750eb59b2c88c22e729c5ca828dcaf1f7b6e9110748705",
+  "baseline_degree": 88,
+  "candidate_Q_degree": 44,
+  "candidate_degree_in_original_x": 88,
+  "shift": "1/2048",
+  "formula": "Q(2*(x-1/2048)^2-1); Q uses c[0]/2 convention",
+  "original_x_domain": [
+    -1,
+    1
+  ],
+  "candidate_Q_argument_domain": [
+    -1,
+    1.0019536018371582
+  ],
+  "largest_discarded_odd_coefficient": 6.871651804875838e-16,
+  "seed_uniform_absolute_difference_bound": {
+    "upper_binary64": 2.4307835611064548e-14,
+    "exact_fraction": "248394537728543463090031828186374180437532759969515177204600981615385996285659836693321428441520373027948852304224302393050215899607378328705156662713521060529668703886935192181437210269264111077718668143673136009808895309679750255106204867763132586553100631573244670928692239571979/10218702384817765435680628290748613458265350453429542612493041881278524886369096016818984783322294789577433327842265575649138882500575199542984559607218336872038429045509558663769793133795138494375185186532064890845853749530218856391110938974453986086436459043203870933208875495579361330830770176",
+    "method": "sum of absolute exact Chebyshev difference coefficients in ORIGINAL x",
+    "covers": "all real x in [-1,1], including binary64 coefficient rounding",
+    "excludes": "CKKS rounding/noise, floating evaluation, double-angle propagation and bootstrap output"
+  },
+  "independent_exact_composition_check_points": [
+    "-1",
+    "-2047/2048",
+    "-1/2",
+    "-1/2048",
+    "0",
+    "1/2048",
+    "1/2",
+    "2047/2048",
+    "1"
+  ],
+  "static_ciphertext_products": {
+    "baseline_seed": {
+      "degree": 88,
+      "k": 6,
+      "m": 4,
+      "baby_products": 5,
+      "giant_squares": 3,
+      "artificial_top_term_products": 3,
+      "recursive_products": 7,
+      "total": 18,
+      "squares": 6,
+      "general_multiplications": 12
+    },
+    "candidate_seed_Q": {
+      "degree": 44,
+      "k": 7,
+      "m": 3,
+      "baby_products": 6,
+      "giant_squares": 2,
+      "artificial_top_term_products": 2,
+      "recursive_products": 3,
+      "total": 13,
+      "squares": 5,
+      "general_multiplications": 8
+    },
+    "candidate_preparation_square": 1,
+    "unchanged_double_angle_squares": 6,
+    "baseline_per_backend_bootstrap": 24,
+    "candidate_per_backend_bootstrap": 20,
+    "baseline_squares_including_double_angle": 12,
+    "candidate_squares_including_double_angle": 12,
+    "baseline_general_multiplications": 12,
+    "candidate_general_multiplications": 8,
+    "fraction_removed_in_this_count": 0.16666666666666666,
+    "backend_bootstrap_calls": 484,
+    "baseline_full_count": 11616,
+    "candidate_full_count": 9680,
+    "full_count_removed": 1936,
+    "scope": "static EvalMod ct-ct products/squares; not kernel counts or runtime"
+  },
+  "planner_depth_estimate": {
+    "baseline_seed_unnormalized": 8,
+    "candidate_Q_unnormalized": 7,
+    "candidate_preparation_square": 1,
+    "baseline_including_double_angle": 14,
+    "candidate_including_double_angle": 14,
+    "qualification": "lookup-table estimate only; FIDESlib FLEXIBLEAUTO levels must be checked"
+  },
+  "adopted_B300_reference": {
+    "mean_evaluation_seconds": 148.80429257650002,
+    "generated_tokens": 4,
+    "seconds_per_generated_token": 37.201073144125004,
+    "mean_refresh_wrapper_seconds": 37.7026454375,
+    "refresh_wrapper_fraction": 0.2533706843041315,
+    "pure_EvalMod_seconds": null,
+    "candidate_seconds": null
+  }
+}

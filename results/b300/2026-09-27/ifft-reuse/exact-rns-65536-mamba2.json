@@ -1,0 +1,15 @@
+{
+  "name": "exact-rns-65536-mamba2",
+  "command": [
+    "/study/bin/candidate/packed_rns_probe",
+    "/study/exact-rns-65536-mamba2/probe.json",
+    "--ring",
+    "65536",
+    "--prefetch",
+    "--prefetch-workers",
+    "2",
+    "--ifft-cache",
+    "--mamba2"
+  ],
+  "timeout": 1200
+}

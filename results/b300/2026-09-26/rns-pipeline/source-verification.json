@@ -1,0 +1,12 @@
+[
+  {
+    "variant": "stage1-r2",
+    "files": 94,
+    "archive_sha256": "f56a23a9c6a9d74547c89550b9903010060b105ff727229198e89459387d3769"
+  },
+  {
+    "variant": "stage2",
+    "files": 96,
+    "archive_sha256": "5aec45f0061823284952859dab3d4edee96edbb3fa4d01d78a32db31d1407320"
+  }
+]

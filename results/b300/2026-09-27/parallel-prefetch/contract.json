@@ -1,0 +1,8 @@
+{
+  "mechanism": "Two ordered CPU plaintext producers within the same two-item admission window; GPU math, upload, sync and refresh unchanged.",
+  "baseline": "Current adopted single-producer pipeline, original unmodified FIDESlib backend and inverse-FFT plan.",
+  "bounds": "One candidate with 2 workers. Exact/parallel and encrypted probes, small ABBA >0.5% improvement, then conditional full ABBA >0.5%; at most one unchanged diagnostic ABBA if placement/noise requires it.",
+  "controls": "Same model, prompt, GPU4, CPU64-68 NUMA2 and 4 OpenMP threads. Main and producers must have observed comparable placement. Preserve precision/security/refresh, workload counts and item order; total prepared/in-flight window <=2 plus current consumer.",
+  "prior_result": "202.334880965 s historical full mean; new paired controls required, not a subtraction baseline.",
+  "repository_base_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c"
+}

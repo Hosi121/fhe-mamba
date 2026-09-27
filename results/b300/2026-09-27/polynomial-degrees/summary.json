@@ -1,0 +1,73 @@
+{
+  "scope": "Model Chebyshev approximation nodes; excludes refresh internals and ring dimension",
+  "manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+  "program_sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+  "maximum_degree": 1023,
+  "manifest_degree_counts": {
+    "7": 3,
+    "15": 29,
+    "31": 85,
+    "63": 27,
+    "127": 1,
+    "255": 6,
+    "511": 5,
+    "1023": 1
+  },
+  "maximum_entries": [
+    {
+      "name": "9:m3_negative_a",
+      "kind": "negative_a",
+      "parameter": 0.0001,
+      "lo": -11.471378167458036,
+      "hi": 17.253704437525514,
+      "degree": 1023,
+      "grid_max_abs_error": 4.613304331724244e-05,
+      "fit_tolerance": 0.0001,
+      "grid_points": 8193,
+      "interval_certified": false
+    }
+  ],
+  "kind_maximum_degrees": {
+    "cos": 63,
+    "exp": 15,
+    "inv_sqrt": 63,
+    "negative_a": 1023,
+    "sigmoid": 63,
+    "silu": 127,
+    "sin": 63,
+    "softplus": 31,
+    "tanh": 63
+  },
+  "program_degree_counts": {
+    "7": 15,
+    "15": 145,
+    "31": 425,
+    "63": 135,
+    "127": 5,
+    "255": 30,
+    "511": 25,
+    "1023": 5
+  },
+  "program_maximum_nodes": [
+    {
+      "line": 1079,
+      "degree": 1023
+    },
+    {
+      "line": 2553,
+      "degree": 1023
+    },
+    {
+      "line": 4114,
+      "degree": 1023
+    },
+    {
+      "line": 5759,
+      "degree": 1023
+    },
+    {
+      "line": 7488,
+      "degree": 1023
+    }
+  ]
+}

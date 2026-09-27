@@ -1,0 +1,27 @@
+{
+  "scope": "One GPU mechanism: 64-bit Shoup forward-NTT register/shuffle tail. Exact kernel oracle, small ABBA, conditional full ABBA, adoption report. No further optimization mechanisms.",
+  "baseline": "Retained CPU-prefetch native source and inverse-FFT patch; rebuild unmodified backend and candidate in the same directory/toolchain.",
+  "baseline_previous_binary_sha256": "61b942dece1ba5cdb16ca4f7b6542f8e0514e17a189a6bb52be392fe7af246ee",
+  "invariants": [
+    "CPU plaintext prefetch enabled",
+    "per-limb compact RNS loader",
+    "same model/prompt",
+    "ordinary N32768/refresh N65536",
+    "depth44 scale59 first60",
+    "two-pass S2C-first refresh",
+    "same bootstrap/count/token/accuracy gates",
+    "no new evaluation decryptions",
+    "no host clock/governor change",
+    "ciphertext lifetime barriers retained"
+  ],
+  "qualification": "Exact residues against separate unmodified-kernel golden streams, CPU RNS and encrypted checks. Prefix ABBA mean improvement >0.5%, then full ABBA same threshold. At most one unchanged diagnostic prefix ABBA for variability; retain all samples.",
+  "gpu": 4,
+  "NUMA": 2,
+  "OMP_NUM_THREADS": 4,
+  "comparability": "Fix main/producer physical CPU placement identically for both arms, record implementation of controls before timing. Do not subtract historical 202.33 s from new runs.",
+  "source_sha256": {
+    "base": "1d7674f5773c88ea3515871519206b5571dd9b112be91145f336063921801484",
+    "candidate": "771379d29a0546406a0274da6e90c0f95af426395b22085d3cd141b70121c2b9"
+  },
+  "completion": "One mechanism implemented and small-qualified; full comparison only after small gate; negative results retained; evidence/docs/cleanup."
+}

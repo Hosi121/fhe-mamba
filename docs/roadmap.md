@@ -1,8 +1,54 @@
 # Roadmap
 
-The active line is `fhemamba` 0.5.x on DGX Spark. The objective and invariants
+The active line is `fhemamba` 0.5.x on DGX Spark and B300. The objective and invariants
 are in [design.md](design.md); [backlog.md](backlog.md) records executable gates.
-B300 recovery is historical provenance work and does not block Spark progress.
+Recovery of the historical B300 0.4.5 result is separate from the new
+[Mamba-3 dual-ring execution](../results/b300/2026-09-26/mamba3-dual-ring/).
+
+The [classical-128 prototype](research/2026-09-27-b300-classical128.md) now
+passes the twelve-layer Mamba-3 request with the actual QP/secret/error
+assumptions audited before key generation. Its secure full pair improves
+327.51 → 235.75 seconds through GPU additive-plaintext expansion and mask
+reuse. The earlier 35.44 s/token timing remains a `security=not-set` result.
+The [Sylph/Cachemir review](research/2026-09-27-sylph-cachemir.md) identifies
+measured level placement and layout/refresh fusion as further design work;
+its static polynomial screen is not an encrypted performance result.
+
+The [B300 Nsight study](research/2026-09-26-b300-nsight-ifft.md) adopts an
+optional shared OpenFHE inverse-FFT plan: full Mamba-3 ABBA **266.22 → 234.84 s
+(11.79%)**, with unchanged refresh, parameters, numerical gates and generated
+IDs. Exact coefficient checks cover real and complex configurations. The
+remaining measured preparation work includes integer residue conversion and
+scaling/rounding; full Mamba-2 performance remains a separate gate. The later
+inverse-FFT reuse trial below measures the transformed-weight boundary.
+Prefix timing variance and the fixed-prompt scope are retained
+in the study.
+
+The subsequent [RNS/pipeline study](research/2026-09-26-b300-rns-pipeline.md)
+adopts bounded CPU preparation as an opt-in path: full Mamba-3 ABBA
+**234.84 → 202.33 s (13.84%)**, with unchanged operation counts and gates.
+RNS/NTT fusion is not adopted after its separate full comparison. Frequency
+and thread-placement variation require controlled follow-up before attributing
+that negative result to fusion itself. The pipeline's remaining 33.39 s of
+queue-pop time motivates separating producer work from scheduling and extending
+the preparation window; these are investigation targets, not measured gains.
+
+The [ordered parallel preparation follow-up](research/2026-09-27-b300-parallel-prefetch.md)
+verifies producer placement after OpenMP initialization and tests two workers
+within the same two-item window. Its new matched full ABBA improves
+**173.16 → 148.80 s (14.07%)**, or **37.20 s/generated token**, with unchanged
+GPU kernels and numerical/security/refresh gates. Queue-pop wait falls
+39.84 → 17.95 s. The common CPU-affinity helper is a measurement control;
+the portable option remains opt-in. Remaining targets include exposed
+preparation waits and GPU submission, with fresh controls against this baseline.
+
+The [public-weight inverse-FFT cache](research/2026-09-27-b300-ifft-reuse.md)
+passes exact checks and reaches 80% reuse across changing levels. A cold full
+single pair improves **148.32 → 144.10 s (2.85%)**, below its predeclared 5%
+promotion criterion, with 2.502 GiB retained. The prototype is archived and
+active sources restored. Scale/range scanning and rounding remain unmeasured
+on the current GPU-RNS/two-worker baseline; the older CPU-only range-scan
+result does not establish their end-to-end benefit here.
 
 The stabilized prompt-to-text baseline now passes: tokenize the whole prompt,
 carry encrypted state through every layer, select the next token at the client
@@ -123,8 +169,9 @@ This protocol work can proceed alongside numerical horizon research.
 
 ## 4. Full-chain security and output protocol
 
-Extend the layer-0 128-bit parameter result to all 24 layers, with bounded key
-memory and the same numerical gate. Separately specify the output/decryption
+The twelve-layer Mamba-3 profile now passes the shared classical-128 parameter
+audit and frozen generation gates. Extend coverage to all 24 Mamba-2 layers,
+with bounded key memory and the same numerical gate. Separately specify the output/decryption
 security construction and its compatibility with bootstrapping. Parameter
 selection alone is not a complete security proof.
 
@@ -160,7 +207,8 @@ for cheaper selection or discrete state is a separate quality/cost experiment.
 
 Recover the missing B300 three-token artifact if the original machine/data
 become available. Do not reconstruct it from prose or retag a failed artifact.
-B300 synchronization experiments are deferred while that platform is unavailable.
+B300 access is restored. Removing global synchronization still requires an
+event/lifetime proof; the current RNS/pipeline study retains those barriers.
 
 `0.5.0` names the compatibility-stack retirement, not completion of the protocol.
 A future `1.0.0` requires reproducible interactive encrypted generation, a

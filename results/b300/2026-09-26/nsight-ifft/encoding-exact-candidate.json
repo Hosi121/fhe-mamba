@@ -1,0 +1,11 @@
+{
+  "name": "encoding-exact-candidate",
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "/study/bin/candidate/encoding_probe",
+    "compare",
+    "/study/encoding-golden.bin",
+    "/study/encoding-exact-candidate/probe.json"
+  ]
+}

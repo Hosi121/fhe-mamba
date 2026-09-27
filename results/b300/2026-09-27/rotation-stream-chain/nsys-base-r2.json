@@ -1,0 +1,9 @@
+{
+  "name": "nsys-base-r2",
+  "profile": true,
+  "timeout": 600,
+  "command": [
+    "bash",
+    "/study/profile-r2.sh"
+  ]
+}

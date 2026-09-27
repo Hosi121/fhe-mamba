@@ -2,7 +2,7 @@
   "passed": true,
   "original_archive": "backend-sources.tar.gz",
   "original_sha256": "306f06159dc13453c3841a4bd976531927de1bdaa70dbdab242383d28d897020",
-  "original_retained_at": "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/backend-sources.tar.gz",
+  "original_retained_at": "${HOME}/fhemamba/gpu-dual-ring-20260926/backend-sources.tar.gz",
   "published_archive": "backend-build-sources.tar.gz",
   "published_sha256": "d8e4f8fe3e31daf6286d210f8f529f29280c11509378f020ac285c7a9ee93309",
   "omitted_files": {

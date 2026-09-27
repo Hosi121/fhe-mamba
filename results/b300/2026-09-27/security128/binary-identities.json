@@ -1,0 +1,37 @@
+[
+  {
+    "path": "build/parameters/security_parameters",
+    "bytes": 16811032,
+    "sha256": "4219799a1cbd002853eb07fe9e0c0987f440ce203906bc65010c2e3f871d191b"
+  },
+  {
+    "path": "build/security/security_refresh",
+    "bytes": 16896968,
+    "sha256": "0fb66052af8b15ef4216fcd203cf879a8e517e3c836856cc64adabef65883427"
+  },
+  {
+    "path": "build/native/packed_fideslib",
+    "bytes": 17356952,
+    "sha256": "35e42c2a0c587f44c65d246fb5a4ac66383884f002ac1adc5dca3bb33b84037b"
+  },
+  {
+    "path": "build/native/packed_rns_probe",
+    "bytes": 17065536,
+    "sha256": "1f0f497c2a86f2658358371517a46d38b095da5b0fccaecdd388d6102f4af656"
+  },
+  {
+    "path": "build/addends-r2/packed_fideslib",
+    "bytes": 17370848,
+    "sha256": "20a1ac466e0779bfd62da1602ea90e0cf065d0f1117dd6ba9e697dc25bf2d0c5"
+  },
+  {
+    "path": "build/addends-r2/packed_rns_probe",
+    "bytes": 17079528,
+    "sha256": "c277bfedbac2d1b99c49a5388b96a5d7882a7080b3cdf810778b57d41ec986db"
+  },
+  {
+    "path": "build/parameter-report-r3/security_parameters",
+    "bytes": 16811032,
+    "sha256": "5cc9736293e62b419464cc20866d8cd10c2d9f0740e07ef494145ed53b3a74f0"
+  }
+]

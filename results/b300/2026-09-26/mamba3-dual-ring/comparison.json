@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "sample_counts": {
+    "dgx_spark": 2,
+    "b300": 1
+  },
+  "scope": "Different hardware and CPU affinity; preserved frozen payload and arithmetic work. This is not an isolated implementation speedup.",
+  "security": "not-set",
+  "metrics": {
+    "eval_seconds": {
+      "dgx_spark_mean": 430.51447240000005,
+      "b300_single_run": 265.158743764,
+      "spark_divided_by_b300": 1.623610318440685
+    },
+    "setup_seconds": {
+      "dgx_spark_mean": 31.7883046155,
+      "b300_single_run": 74.102867021,
+      "spark_divided_by_b300": 0.4289753675318867
+    },
+    "bootstrap_seconds": {
+      "dgx_spark_mean": 217.868447791,
+      "b300_single_run": 46.361269451,
+      "spark_divided_by_b300": 4.699363291190048
+    },
+    "host_encoding_seconds": {
+      "dgx_spark_mean": 47.2147703645,
+      "b300_single_run": 144.333013863,
+      "spark_divided_by_b300": 0.3271238443708795
+    },
+    "plaintext_upload_seconds": {
+      "dgx_spark_mean": 15.375401267,
+      "b300_single_run": 19.794661549,
+      "spark_divided_by_b300": 0.7767448424889459
+    },
+    "mask_preparation_seconds": {
+      "dgx_spark_mean": 1.070201849,
+      "b300_single_run": 4.582044754,
+      "spark_divided_by_b300": 0.23356425055991498
+    },
+    "ordinary_seconds": {
+      "dgx_spark_mean": 212.64602460900002,
+      "b300_single_run": 218.797474313,
+      "spark_divided_by_b300": 0.9718851886964652
+    }
+  },
+  "arithmetic_count_mismatches": {},
+  "operation_seconds": {
+    "add": {
+      "dgx_spark_mean": 0.211449379,
+      "b300_single_run": 0.093823712
+    },
+    "addp": {
+      "dgx_spark_mean": 1.162657806,
+      "b300_single_run": 3.580015046
+    },
+    "cheb": {
+      "dgx_spark_mean": 203.3674919625,
+      "b300_single_run": 62.862051605
+    },
+    "feedback": {
+      "dgx_spark_mean": 0.418096283,
+      "b300_single_run": 1.547078154
+    },
+    "gather": {
+      "dgx_spark_mean": 18.913543824,
+      "b300_single_run": 23.713459141
+    },
+    "input": {
+      "dgx_spark_mean": 0.1287955355,
+      "b300_single_run": 0.358799381
+    },
+    "linear": {
+      "dgx_spark_mean": 22.306292151,
+      "b300_single_run": 24.930749886
+    },
+    "linear_ref": {
+      "dgx_spark_mean": 81.3023680345,
+      "b300_single_run": 96.411588214
+    },
+    "mul": {
+      "dgx_spark_mean": 20.168418094,
+      "b300_single_run": 4.721444622
+    },
+    "mulp": {
+      "dgx_spark_mean": 2.5820121240000002,
+      "b300_single_run": 1.555225879
+    },
+    "public": {
+      "dgx_spark_mean": 0.7857853705,
+      "b300_single_run": 2.021141731
+    },
+    "repeat": {
+      "dgx_spark_mean": 19.859208099,
+      "b300_single_run": 13.842064925
+    },
+    "scatter": {
+      "dgx_spark_mean": 43.72401141,
+      "b300_single_run": 21.563000549
+    },
+    "sum": {
+      "dgx_spark_mean": 15.441208396499999,
+      "b300_single_run": 7.704400078
+    }
+  },
+  "timing_caveat": "Encoding/upload timers can overlap parent operation timings; do not add them to evaluation totals."
+}

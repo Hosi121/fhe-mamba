@@ -2,7 +2,7 @@
   "command": [
     "cmake",
     "--build",
-    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel",
+    "${HOME}/fhemamba/structural-four-20260925/backend/spark/kernel",
     "-j",
     "4"
   ],

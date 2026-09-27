@@ -2,8 +2,8 @@
   "name": "m2-2-candidate",
   "command": [
     "bash",
-    "/home/kataiwa/fhemamba/square-dispatch-20260925/launch_m2.sh",
-    "/home/kataiwa/fhemamba/square-dispatch-20260925/m2-2-candidate/native.json",
+    "${HOME}/fhemamba/square-dispatch-20260925/launch_m2.sh",
+    "${HOME}/fhemamba/square-dispatch-20260925/m2-2-candidate/native.json",
     "2",
     "2"
   ],
@@ -32,7 +32,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "ARTIFACT_VERSION": "0.5.0",
     "AUTOREGRESSIVE_CLIENT_LOOP": "0",
     "AUTO_HEADROOM": "4",
@@ -46,7 +46,7 @@
     "FIRST_MOD_SIZE": "60",
     "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
     "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
-    "INPUT_CHAIN": "/home/kataiwa/fhemamba/gate-integration-20260921/generation/client-generation-20260922/payload",
+    "INPUT_CHAIN": "${HOME}/fhemamba/gate-integration-20260921/generation/client-generation-20260922/payload",
     "INPUT_CHAIN_SHA256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
     "INTERLEAVED_REPLICATED_PROJECTION": "1",
     "JOINT_PERIODIC_COEFFICIENTS": "1",
@@ -79,7 +79,7 @@
     "STATE_META_BTS_ALPHA": "-1",
     "STATE_REFRESH_INTERVAL": "1",
     "TOKENS": "2",
-    "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba/square-dispatch-20260925",
+    "FHEMAMBA_REMOTE_ROOT": "${HOME}/fhemamba/square-dispatch-20260925",
     "REPO_COMMIT": "88870f92968b5e2789a9114a87506d00f87e3a2a",
     "CUDA_LAUNCH_BLOCKING": "1",
     "FAST_PLAINTEXT_UPLOAD": "1",
@@ -92,7 +92,7 @@
   "controller_sha256": "d11394b3c7c14864d9e15132b9fcd74f2c3a3466e466e9532a501c36bb29e1f5",
   "launcher_sha256": "b39629ab18c4a5581e378859a8ac245b96d79c88fd4d8aef5cf2180e5b607bfe",
   "candidate": true,
-  "source_manifest_path": "/home/kataiwa/fhemamba/square-dispatch-20260925/compiled-sources.json",
+  "source_manifest_path": "${HOME}/fhemamba/square-dispatch-20260925/compiled-sources.json",
   "campaign_sha256": "6614d98a328d26042becc1d5d92bcb4540e7179dab80790c7a6b7d98691da263",
   "binary_sha256": "45ced07f8bf64b26549446cce436f163925fc6c3afc35cacc78eb03d7c53b193",
   "pid": 3108994,

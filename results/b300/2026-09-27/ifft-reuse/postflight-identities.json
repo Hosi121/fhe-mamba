@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "inputs": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/program.txt",
+      "bytes": 1253433725,
+      "sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/fixture.npz",
+      "bytes": 62850,
+      "sha256": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/client_head.f32",
+      "bytes": 394002440,
+      "sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/prefix/program.txt",
+      "bytes": 104154165,
+      "sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917"
+    }
+  ],
+  "libraries": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/install/fideslib/lib/fideslib.a",
+      "bytes": 42308770,
+      "sha256": "6f463d8d8c596de8c4d6e4141b83a8d82fbc635d601b29d496468833e0044992"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEcore_static.a",
+      "bytes": 5233558,
+      "sha256": "80054697967a249993e9bd9ab53d64f16138ef08861d398c28402488ca430367"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEpke_static.a",
+      "bytes": 22058212,
+      "sha256": "91a1467c5a5e07b13084f2f2014dc4741075d1a5d79e804a01a4529aa4dd9a0e"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEbinfhe_static.a",
+      "bytes": 1435444,
+      "sha256": "985b1cf191edc4946e17226c0e24984e65eed9437a7af754f09996850cf99573"
+    }
+  ],
+  "verified_at_unix": 1790443295.620351
+}

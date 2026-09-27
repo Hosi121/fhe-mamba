@@ -1,0 +1,15 @@
+{
+  "name": "final-exact-prefetch-omp1",
+  "timeout": 1200,
+  "command": [
+    "env",
+    "OMP_NUM_THREADS=1",
+    "/study/bin/stage2/packed_rns_probe",
+    "/study/final-exact-prefetch-omp1/probe.json",
+    "--ring",
+    "32768",
+    "--strategy",
+    "limb",
+    "--prefetch"
+  ]
+}

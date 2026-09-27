@@ -1,0 +1,117 @@
+{
+  "repository_base_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c",
+  "fideslib_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "openfhe_commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+  "inputs": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/program.txt",
+      "bytes": 1253433725,
+      "sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/fixture.npz",
+      "bytes": 62850,
+      "sha256": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/client_head.f32",
+      "bytes": 394002440,
+      "sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/prefix/program.txt",
+      "bytes": 104154165,
+      "sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917"
+    }
+  ],
+  "libraries": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/install/fideslib/lib/fideslib.a",
+      "bytes": 42308770,
+      "sha256": "6f463d8d8c596de8c4d6e4141b83a8d82fbc635d601b29d496468833e0044992"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEcore_static.a",
+      "bytes": 5233558,
+      "sha256": "80054697967a249993e9bd9ab53d64f16138ef08861d398c28402488ca430367"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEpke_static.a",
+      "bytes": 22058212,
+      "sha256": "91a1467c5a5e07b13084f2f2014dc4741075d1a5d79e804a01a4529aa4dd9a0e"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEbinfhe_static.a",
+      "bytes": 1435444,
+      "sha256": "985b1cf191edc4946e17226c0e24984e65eed9437a7af754f09996850cf99573"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/base/packed_fideslib",
+      "bytes": 17245232,
+      "sha256": "2a4a24ceaaafc0f382f01e3536f9f8c04487c4d2a28bf057dde537de394d3cc0"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage1/packed_fideslib",
+      "bytes": 17312656,
+      "sha256": "59986476ba25c2a035239a9faa9690f3c2f84ab2c3374fa738fa73efd14f37cf"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage1/packed_plaintext_probe",
+      "bytes": 17038632,
+      "sha256": "22a006b11617d8f7a7814e38176313fd7ba3ef147d50952fa8f0916cca7d9af4"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage1/packed_rns_probe",
+      "bytes": 17034144,
+      "sha256": "5f0ab2ffb45f2f774b4c9653b8b8d30abf3f4261f4963b535db9b59c585a5e14"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage2/packed_fideslib",
+      "bytes": 17339424,
+      "sha256": "61b942dece1ba5cdb16ca4f7b6542f8e0514e17a189a6bb52be392fe7af246ee"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage2/packed_plaintext_probe",
+      "bytes": 17039720,
+      "sha256": "9c80b64a35a18133a11afd33d97e464e83840525b4fa115906476032aee90ece"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/bin/stage2/packed_rns_probe",
+      "bytes": 17050696,
+      "sha256": "4eed869e710a50e29694cc685c63a142745ccf78c53f21b736a416f6a0860e0d"
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/stage1-r2-sources.tar.gz",
+      "bytes": 205416,
+      "sha256": "f56a23a9c6a9d74547c89550b9903010060b105ff727229198e89459387d3769"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/stage1-sources.tar.gz",
+      "bytes": 205385,
+      "sha256": "c5f9b8292e4cd2eccb3ebc861bbf384d40b445c4e1070c838ae1d34cd191a833"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-rns-pipeline-20260926/stage2-sources.tar.gz",
+      "bytes": 208407,
+      "sha256": "5aec45f0061823284952859dab3d4edee96edbb3fa4d01d78a32db31d1407320"
+    }
+  ],
+  "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+  "controls": {
+    "gpu": 4,
+    "cpus": "64-68",
+    "numa": 2,
+    "OMP_NUM_THREADS": 4,
+    "clock_control": "driver and OS defaults; no changes"
+  },
+  "at_unix": 1790430053.2127335
+}

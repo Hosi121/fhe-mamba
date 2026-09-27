@@ -1,0 +1,11 @@
+{
+  "rotation_calls": 2560,
+  "rotation_host_inclusive_seconds": 1.3692667989999996,
+  "rotation_device_synchronize_calls": 10144,
+  "rotation_device_synchronize_seconds": 1.0114683210000037,
+  "derived_moddown_false_calls": 96,
+  "derived_moddown_true_calls": 2464,
+  "expected_removed_device_synchronize_calls": 7392,
+  "expected_candidate_device_synchronize_calls": 46825,
+  "derivation": "Pinned rotate has four barriers for moddown=true and three for false. Candidate removes only the first three in true. Applies to this complete captured prefix; runtime duration savings not assumed."
+}

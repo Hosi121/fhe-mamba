@@ -1,0 +1,82 @@
+{
+  "repository_base_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c",
+  "fideslib_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "openfhe_commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+  "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+  "inherited_input_identity_source": {
+    "path": "../rns-pipeline/provenance.json",
+    "sha256": "367bcec259abf1222d6eb2a2b58c1a1d244ba5f645af66c844e2505f9b020356"
+  },
+  "inputs": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/program.txt",
+      "bytes": 1253433725,
+      "sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/fixture.npz",
+      "bytes": 62850,
+      "sha256": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/client_head.f32",
+      "bytes": 394002440,
+      "sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/prefix/program.txt",
+      "bytes": 104154165,
+      "sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917"
+    }
+  ],
+  "input_identity_note": "Resident input identities retained from the immediately preceding study. Full program was not evaluated in this trial because the prefix gate failed.",
+  "retained_openfhe_libraries": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEcore_static.a",
+      "bytes": 5233558,
+      "sha256": "80054697967a249993e9bd9ab53d64f16138ef08861d398c28402488ca430367"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEpke_static.a",
+      "bytes": 22058212,
+      "sha256": "91a1467c5a5e07b13084f2f2014dc4741075d1a5d79e804a01a4529aa4dd9a0e"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEbinfhe_static.a",
+      "bytes": 1435444,
+      "sha256": "985b1cf191edc4946e17226c0e24984e65eed9437a7af754f09996850cf99573"
+    }
+  ],
+  "backend_archives": {
+    "base": {
+      "sha256": "d6f4e44327ef3056d19e832f1c2d1191677fc09170e3d2cb6aefb6205de088f7"
+    },
+    "candidate": {
+      "sha256": "b04143dbf82487043646e52c811640961efec0dd7a514f5f273d7f94425d045d"
+    }
+  },
+  "binaries": {
+    "bin/base/ntt_warp_tail": "9b2cc7c2107e962770213feb27e4c655e2efc780022db7ec94dd623edeca4e14",
+    "bin/base/packed_fideslib": "2eb76e4eb31bf4fb57b0fbdf854b30fd66ca2ae3c08ce53bd5bd9dcd0da95696",
+    "bin/base/packed_rns_probe": "729060487d6cc798574f98396f5b1e352c9de3f7b4ba2a1cc4d735489228d8ec",
+    "bin/candidate/ntt_warp_tail": "97bca42d72d1ef534b321c371356e11c8e3c2e65506e7ce86b95351f2ab57d4e",
+    "bin/candidate/packed_fideslib": "a4376cce10c4af381109da93e839e639a89949e0040ea2d992f3240fc0acff56",
+    "bin/candidate/packed_rns_probe": "94cf2dc8d4c4bced81de99bebc4acc8d11448e77c37136546f4995e978652c6e"
+  },
+  "source_snapshot": "native-r2-sources.tar.gz",
+  "controls": {
+    "gpu": 4,
+    "cpus": "64-68",
+    "numa": 2,
+    "OMP_NUM_THREADS": 4,
+    "OMP_PROC_BIND": "true",
+    "OMP_PLACES": "{64},{66},{67},{68}",
+    "clock_control": "unchanged",
+    "producer_affinity": "65 requested; OpenMP serialized region rebinds to 64; diagnostic retained"
+  }
+}

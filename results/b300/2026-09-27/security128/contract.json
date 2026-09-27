@@ -1,0 +1,32 @@
+{
+  "objective": "Classical-128 CKKS prototype, full frozen Mamba-3 evaluation, then measured optimization while material candidates remain.",
+  "authorization": "User 2026-09-27: classical128 prototype and repeated speedups while sufficiently promising ideas remain.",
+  "scope": "Shared packed executor and parameter audit; B300 GPU4. Prior rotation experiment complete; no further insecure-baseline tuning.",
+  "preserve": {
+    "polynomial_and_exact_error": 0.001,
+    "expected_tokens": [
+      315,
+      279,
+      1614,
+      315
+    ],
+    "evaluator_decryptions": 0,
+    "security": "classical128 with actual Q*P and uniform ternary",
+    "client_protocol": "existing inline client head/greedy feedback"
+  },
+  "initial_design": {
+    "ring": 131072,
+    "depth": 44,
+    "scale_bits": 59,
+    "first_mod_bits": 60,
+    "hybrid_digits": 4,
+    "full_slots": 65536,
+    "dual_ring": false,
+    "refresh_passes": 2,
+    "s2c_first": true,
+    "even_seed": true,
+    "rotation_stream_chain": true
+  },
+  "review": "After each qualified candidate use same-security full comparisons. Continue when measured bottleneck and feasible mechanism support material improvement; stop/report when candidates are unsupported, fail gates, or have little projected benefit. 5% whole-evaluation opportunity is an engineering prioritization screen, not a user target.",
+  "execution": "Completion hooks; one GPU job at a time; no compilation during GPU timing; model/key material remains remote; per-job timeout controls failures, not global user budget."
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "command": [
+      "python3",
+      "experiments/ntt_warp_tail/check_lane_mapping.py"
+    ],
+    "exit_code": 0,
+    "output": "{\"passed\": true, \"cases\": 192, \"scope\": \"warp-tail lane mapping\"}\n"
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "check",
+      "experiments/ntt_warp_tail/check_lane_mapping.py"
+    ],
+    "exit_code": 0,
+    "output": "All checks passed!\n"
+  },
+  {
+    "command": [
+      "uv",
+      "run",
+      "ruff",
+      "format",
+      "--check",
+      "experiments/ntt_warp_tail/check_lane_mapping.py"
+    ],
+    "exit_code": 0,
+    "output": "1 file already formatted\n"
+  }
+]

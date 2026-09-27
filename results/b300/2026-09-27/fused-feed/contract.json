@@ -1,0 +1,11 @@
+{
+  "mechanism": "Integrated compact RNS input/NTT fusion with one completion barrier for persistent workspaces; temporary workspace and split-expansion barriers retained.",
+  "baseline": "Two ordered CPU producers, same two-item admission window and verified CPU65/66 placement; original per-limb RNS upload.",
+  "scope": "One candidate. Four exact/encrypted qualification processes, one prefix A/B pair, then one full A/B pair if prefix passes. No automatic repeated ABBA blocks.",
+  "admission": "All correctness and parity checks; prefix paired improvement >0.5%.",
+  "decision": "About-ten-percent full paired gain is sufficient to move forward per user steering. Smaller gains are reported as one-pair evidence, with any uncertain adoption left experimental rather than adding automatic repetitions.",
+  "invariants": "Same crypto parameters, refresh, accuracy gates, prompt, model, token IDs, GPU4, CPU64-68/NUMA2, OMP4; baseline and candidate both prefetch-workers=2.",
+  "predecessor": "${HOME}/fhemamba-b300/b300-gpu-feed-20260927",
+  "user_steering": "<private>",
+  "repository_base_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c"
+}

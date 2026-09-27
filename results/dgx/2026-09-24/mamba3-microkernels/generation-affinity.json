@@ -1,7 +1,7 @@
 {
   "command_prefix": [
     "env",
-    "LD_LIBRARY_PATH=/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH=${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "OMP_NUM_THREADS=4",
     "taskset",
     "-c",

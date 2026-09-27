@@ -1,6 +1,7 @@
 # Maintenance boundary and debt register
 
-This repository ships one Mamba-2 implementation. The pre-rebuild research
+This repository ships Mamba-2 and Mamba-3 SISO references with shared arithmetic
+and an encrypted GPU backend. The pre-rebuild research
 stack is preserved on `archive/pre-compat-retirement-20260811` and is not part
 of `main`, the wheel, coverage, or the supported command line.
 
@@ -17,8 +18,9 @@ files and migration from older paths.
 | Current experiments | `experiments/` | Active only when backed by a manifest or documented command. |
 | Artifact schema validation | `src/fhemamba/artifacts.py` | Active shared provenance contract. |
 | Current Spark platform identity | `config/dgx-spark.env` | Versioned CUDA/SM/FIDESlib build with isolated dependencies and source/binary/library validation. |
-| Historical B300 platform identity | `config/b300-platform.env` | Preserved reproduction path; B300 is currently unavailable. |
+| Historical B300 build template | `config/b300-platform.env` | CUDA 12 / SM100 reproduction configuration; current B300 studies document CUDA 13 / SM103 separately. |
 | Root `scripts/` | Local checks and current DGX/B300 helpers only | Keep wrappers narrow; experiments belong under `experiments/`. |
+| Job lifecycle and evidence publication | `src/fhemamba/benchmarks/` | Reuse shared utilities; machine settings live in ignored `config/local/`. |
 
 The installed command is `fhemamba`. The historical `fhe-mamba3` command is
 available only from the archive branch.
@@ -48,8 +50,9 @@ uv sync --locked --extra dev
   add another `sys.path.insert` workaround.
 - New native options require a parser test and an artifact field. Prefer a
   versioned manifest field over another shell environment variable.
-- Headline results require a tracked raw artifact. Prose-only measurements stay
-  visibly labeled as such.
+- Headline results require a published measurement and provenance manifest.
+  Retain raw originals locally, distinguish public derivatives, and label
+  prose-only measurements as such.
 
 ## Archive boundary
 
@@ -58,8 +61,10 @@ uv sync --locked --extra dev
 - Retired commands and Slurm files remain reproducible from the dedicated
   archive branch pinned in [legacy implementation](archive/legacy-implementation.md).
   The active-model cluster launchers are under `experiments/slurm/`.
-- Claim-bearing raw artifacts and research notes stay in the main history even
-  when their generating implementation is archived.
+- Claim-bearing measurements and technical reports stay publicly inspectable.
+  Keep necessary measured sources and failure records; delete superseded operational
+  scripts instead of archiving them. Reuse the installed benchmark utilities.
+  Never add host access details, personal absolute paths or session diaries.
 
 ## Native decomposition queue
 

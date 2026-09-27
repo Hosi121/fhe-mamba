@@ -1,0 +1,1505 @@
+{
+  "sqlite_sha256": "7ac36506ab5989b2ddaaf6942f49c394c493c5682240970ecf0d81651476ec52",
+  "sqlite_bytes": 127201280,
+  "profile_eval_seconds": 9.294972689,
+  "gpu_activity_union_seconds": 2.348229687,
+  "gpu_activity": {
+    "CUPTI_ACTIVITY_KIND_KERNEL": {
+      "count": 305998,
+      "sum_seconds": 2.87128126
+    },
+    "CUPTI_ACTIVITY_KIND_MEMCPY": {
+      "count": 42485,
+      "sum_seconds": 0.130063849
+    },
+    "CUPTI_ACTIVITY_KIND_MEMSET": {
+      "count": 3840,
+      "sum_seconds": 0.008515108
+    }
+  },
+  "runtime": [
+    [
+      "cudaDeviceSynchronize_v3020",
+      54217,
+      2.386635148999993
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      307575,
+      1.0976471069999962
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      17037,
+      0.32527638599999986
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      38680,
+      0.27277851300000205
+    ],
+    [
+      "cudaMemcpy_v3020",
+      3772,
+      0.17009418100000018
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      248037,
+      0.15557208599999947
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      187070,
+      0.12713167199999467
+    ],
+    [
+      "cudaStreamSynchronize_v3020",
+      3893,
+      0.08110976099999984
+    ],
+    [
+      "cudaGraphLaunch_v10000",
+      3784,
+      0.06501159599999995
+    ],
+    [
+      "cudaGraphInstantiateWithFlags_v11040",
+      79,
+      0.018135952999999996
+    ],
+    [
+      "cuKernelGetName",
+      307575,
+      0.016684164999999158
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      16984,
+      0.012936315999999901
+    ],
+    [
+      "cudaMemsetAsync_v3020",
+      3840,
+      0.01109567099999999
+    ],
+    [
+      "cudaEventCreateWithFlags_v3020",
+      4158,
+      0.002503458000000004
+    ],
+    [
+      "cudaEventDestroy_v3020",
+      3784,
+      0.0017325239999999968
+    ],
+    [
+      "cudaMalloc_v3020",
+      4,
+      0.0007012520000000001
+    ],
+    [
+      "cudaMemcpyToSymbolAsync_v3020",
+      33,
+      0.00057985
+    ],
+    [
+      "cudaStreamBeginCapture_v10000",
+      79,
+      0.000359639
+    ],
+    [
+      "cuLibraryLoadData",
+      2,
+      0.00016437100000000002
+    ],
+    [
+      "cudaStreamEndCapture_v10000",
+      79,
+      0.00012873500000000002
+    ],
+    [
+      "cuLibraryGetKernel",
+      27,
+      4.654499999999999e-05
+    ],
+    [
+      "cudaEventRecord_v3020",
+      64,
+      3.6842000000000004e-05
+    ],
+    [
+      "cuProfilerStart",
+      1,
+      5.45e-06
+    ]
+  ],
+  "runtime_attribution": [
+    [
+      "cudaDeviceSynchronize_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      10144,
+      1.0114683210000037
+    ],
+    [
+      "cudaDeviceSynchronize_v3020",
+      "outside_function_range",
+      38229,
+      0.7409603309999981
+    ],
+    [
+      "cudaDeviceSynchronize_v3020",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      3346,
+      0.544252915
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "outside_function_range",
+      98149,
+      0.35327837100000686
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::rescale()",
+      80112,
+      0.2745683969999998
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::multScalarNoPrecheck(double, bool)",
+      8612,
+      0.1821903660000001
+    ],
+    [
+      "cudaMemcpy_v3020",
+      "outside_function_range",
+      3772,
+      0.17009418100000018
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "outside_function_range",
+      3109,
+      0.12896899600000034
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::modDown(bool)",
+      29070,
+      0.1065144869999995
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::copy(const FIDESlib::CKKS::Ciphertext&)",
+      26670,
+      0.09903888599999978
+    ],
+    [
+      "cudaDeviceSynchronize_v3020",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      2048,
+      0.08308325300000013
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::LimbPartition::generate(std::vector<FIDESlib::LimbRecord>&, std::vector<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<long unsigned int> > >&, FIDESlib::VectorGPU<void*>&, int, FIDESlib::VectorGPU<void*>*, uint64_t*, size_t, uint64_t*, size_t, bool)",
+      17188,
+      0.08223613899999997
+    ],
+    [
+      "cudaStreamSynchronize_v3020",
+      "outside_function_range",
+      3771,
+      0.08080333299999987
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Plaintext::rescale()",
+      16648,
+      0.06294397299999996
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Plaintext::multScalar(double, bool)",
+      4162,
+      0.06178816899999986
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::add(const FIDESlib::CKKS::Ciphertext&)",
+      15840,
+      0.057564090000000095
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::copy(const FIDESlib::CKKS::Ciphertext&)",
+      44049,
+      0.04250560399999975
+    ],
+    [
+      "cudaGraphLaunch_v10000",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      2560,
+      0.04044941899999999
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rescale()",
+      59040,
+      0.03899361700000054
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::copy(const FIDESlib::CKKS::Ciphertext&)",
+      53024,
+      0.038059620999999814
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::multPt(const FIDESlib::CKKS::Plaintext&, bool, bool)",
+      8424,
+      0.03266404899999994
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      8027,
+      0.03165968500000009
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::LimbPartition::generate(std::vector<FIDESlib::LimbRecord>&, std::vector<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<long unsigned int> > >&, FIDESlib::VectorGPU<void*>&, int, FIDESlib::VectorGPU<void*>*, uint64_t*, size_t, uint64_t*, size_t, bool)",
+      7,
+      0.029607712
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      2560,
+      0.028702450999999986
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::multScalarNoPrecheck(double, bool)",
+      8612,
+      0.026778954000000035
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::multScalarNoPrecheck(double, bool)",
+      8612,
+      0.022457904000000112
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::rescale()",
+      43845,
+      0.02106888600000018
+    ],
+    [
+      "cudaGraphLaunch_v10000",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      969,
+      0.020849868000000008
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::add(const FIDESlib::CKKS::Ciphertext&)",
+      30060,
+      0.019319877000000207
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      30776,
+      0.01740492000000003
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::add(const FIDESlib::CKKS::Ciphertext&)",
+      26627,
+      0.016707122000000005
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::modDown(bool)",
+      11568,
+      0.015899452000000064
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Plaintext::multScalar(double, bool)",
+      4162,
+      0.015162718999999976
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Plaintext::copy(const FIDESlib::CKKS::Plaintext&)",
+      4162,
+      0.014172726999999994
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Plaintext::multScalar(double, bool)",
+      4162,
+      0.013131211
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::addScalar(double)",
+      779,
+      0.012578119000000026
+    ],
+    [
+      "cudaGraphInstantiateWithFlags_v11040",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      42,
+      0.012487570000000002
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      4087,
+      0.011561423000000006
+    ],
+    [
+      "cudaMemsetAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::extend(bool)",
+      3840,
+      0.01109567099999999
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::modDown(bool)",
+      17352,
+      0.010509114000000075
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      18281,
+      0.009692459000000014
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      16080,
+      0.00918002099999998
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::LimbPartition::generate(std::vector<FIDESlib::LimbRecord>&, std::vector<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<long unsigned int> > >&, FIDESlib::VectorGPU<void*>&, int, FIDESlib::VectorGPU<void*>*, uint64_t*, size_t, uint64_t*, size_t, bool)",
+      19310,
+      0.008754130999999958
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      2560,
+      0.008414451999999987
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::LimbPartition::generate(std::vector<FIDESlib::LimbRecord>&, std::vector<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<long unsigned int> > >&, FIDESlib::VectorGPU<void*>&, int, FIDESlib::VectorGPU<void*>*, uint64_t*, size_t, uint64_t*, size_t, bool)",
+      19310,
+      0.008203008999999893
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      10958,
+      0.006327027000000022
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      9544,
+      0.005996919000000019
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::load(const FIDESlib::CKKS::RawCipherText&)",
+      360,
+      0.005912919000000002
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::Plaintext::multScalar(double, bool)",
+      4162,
+      0.0054628830000000034
+    ],
+    [
+      "cuKernelGetName",
+      "outside_function_range",
+      98149,
+      0.0049771039999991626
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      8476,
+      0.00468443
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::multScalarNoPrecheck(double, bool)",
+      8612,
+      0.0045845140000000065
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      448,
+      0.0042486529999999955
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::rescale()",
+      80112,
+      0.00418589900000015
+    ],
+    [
+      "cudaDeviceSynchronize_v3020",
+      "void FIDESlib::CKKS::Bootstrap(Ciphertext&, int, bool)",
+      160,
+      0.004050296999999999
+    ],
+    [
+      "cudaGraphInstantiateWithFlags_v11040",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      25,
+      0.003190699000000001
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      977,
+      0.0031255059999999923
+    ],
+    [
+      "cudaGraphLaunch_v10000",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      215,
+      0.003025212
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      4814,
+      0.002952299000000002
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      215,
+      0.0029105319999999982
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      816,
+      0.0027940409999999945
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::store(FIDESlib::CKKS::RawCipherText&)",
+      30,
+      0.002730754
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::addScalar(double)",
+      779,
+      0.0026718949999999984
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::addScalar(double)",
+      779,
+      0.0024331100000000005
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      4549,
+      0.0021669730000000095
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      2560,
+      0.0018421760000000042
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      515,
+      0.001756727000000001
+    ],
+    [
+      "cudaEventCreateWithFlags_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      2560,
+      0.0017147559999999996
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      128,
+      0.0016785409999999998
+    ],
+    [
+      "cudaGraphInstantiateWithFlags_v11040",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      8,
+      0.00165003
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      2688,
+      0.0016147739999999974
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::modDown(bool)",
+      29070,
+      0.0015425150000000778
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::sub(const FIDESlib::CKKS::Ciphertext&)",
+      514,
+      0.0015382800000000021
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::copy(const FIDESlib::CKKS::Ciphertext&)",
+      26670,
+      0.0014661350000000706
+    ],
+    [
+      "cudaDeviceSynchronize_v3020",
+      "void FIDESlib::CKKS::evalChebyshevSeries(Ciphertext&, std::vector<double>&, double, double)",
+      192,
+      0.0014609579999999998
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      448,
+      0.0013457679999999998
+    ],
+    [
+      "cudaDeviceSynchronize_v3020",
+      "void innerEvalChebyshevPS(const FIDESlib::CKKS::Ciphertext&, FIDESlib::CKKS::Ciphertext&, const std::vector<double>&, uint32_t, uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, const std::vector<FIDESlib::CKKS::Ciphertext*>&, int, int)",
+      96,
+      0.001303816
+    ],
+    [
+      "cudaEventDestroy_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      2560,
+      0.0012014950000000016
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Plaintext::rescale()",
+      16648,
+      0.0011109490000000013
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      215,
+      0.000990542
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::add(const FIDESlib::CKKS::Ciphertext&)",
+      15840,
+      0.0008735779999999901
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::extend(bool)",
+      256,
+      0.0008729149999999996
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      1568,
+      0.0008207360000000005
+    ],
+    [
+      "cudaGraphInstantiateWithFlags_v11040",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      4,
+      0.000807654
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      224,
+      0.0007836639999999999
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::multIntScalar(Ciphertext&, uint64_t)",
+      64,
+      0.0006450800000000001
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      42,
+      0.000597264
+    ],
+    [
+      "cudaMemcpyToSymbolAsync_v3020",
+      "void FIDESlib::CKKS::SetCurrentContext(Context&)",
+      33,
+      0.00057985
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::sub(const FIDESlib::CKKS::Ciphertext&)",
+      1028,
+      0.0005723569999999997
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::ModRaise(Ciphertext&, int, uint32_t, bool, bool)",
+      160,
+      0.0005219569999999999
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::multPt(const FIDESlib::CKKS::Plaintext&, bool, bool)",
+      8424,
+      0.0005141430000000073
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::addScalar(double)",
+      779,
+      0.0004987830000000004
+    ],
+    [
+      "cudaEventCreateWithFlags_v3020",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      977,
+      0.0004932869999999996
+    ],
+    [
+      "cudaMalloc_v3020",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      2,
+      0.000477873
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::sub(const FIDESlib::CKKS::Ciphertext&)",
+      996,
+      0.00046518999999999944
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      8027,
+      0.0004589150000000072
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      128,
+      0.00044918600000000013
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::multScalarNoPrecheck(double, bool)",
+      8612,
+      0.00043092500000000143
+    ],
+    [
+      "cudaGraphLaunch_v10000",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      24,
+      0.00042366600000000006
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Plaintext::multScalar(double, bool)",
+      4162,
+      0.00041760800000000095
+    ],
+    [
+      "cudaEventDestroy_v3020",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      969,
+      0.0004148359999999999
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::addPt(const FIDESlib::CKKS::Plaintext&)",
+      103,
+      0.0003676580000000001
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      149,
+      0.00036180800000000025
+    ],
+    [
+      "cudaStreamSynchronize_v3020",
+      "void FIDESlib::CKKS::Ciphertext::store(FIDESlib::CKKS::RawCipherText&)",
+      122,
+      0.0003064280000000001
+    ],
+    [
+      "cudaGraphLaunch_v10000",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      16,
+      0.000263431
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      4087,
+      0.00026006099999999985
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      16,
+      0.000254338
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      448,
+      0.00023604599999999993
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      323,
+      0.00021002700000000003
+    ],
+    [
+      "cudaMalloc_v3020",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      1,
+      0.000208088
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::multIntScalar(Ciphertext&, uint64_t)",
+      64,
+      0.00020066399999999997
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Plaintext::copy(const FIDESlib::CKKS::Plaintext&)",
+      4162,
+      0.00019271299999999982
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      215,
+      0.00018718900000000004
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "FIDESlib::CKKS::Ciphertext::Ciphertext(FIDESlib::CKKS::Context&)",
+      180,
+      0.00018147699999999993
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::multIntScalar(Ciphertext&, uint64_t)",
+      64,
+      0.000176118
+    ],
+    [
+      "cuLibraryLoadData",
+      "outside_function_range",
+      2,
+      0.00016437100000000002
+    ],
+    [
+      "cudaStreamBeginCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      25,
+      0.000164152
+    ],
+    [
+      "cudaEventCreateWithFlags_v3020",
+      "FIDESlib::CKKS::Ciphertext::Ciphertext(FIDESlib::CKKS::Context&)",
+      360,
+      0.00015056200000000008
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      230,
+      0.000146215
+    ],
+    [
+      "cudaStreamBeginCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      42,
+      0.00013795599999999995
+    ],
+    [
+      "cudaEventCreateWithFlags_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      215,
+      0.0001225660000000001
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "FIDESlib::CKKS::Ciphertext::Ciphertext(FIDESlib::CKKS::Context&)",
+      180,
+      0.00011893799999999999
+    ],
+    [
+      "cudaLaunchKernel_v7000",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      32,
+      0.00010852199999999999
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      32,
+      0.00010306699999999998
+    ],
+    [
+      "cudaEventDestroy_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      215,
+      9.182199999999996e-05
+    ],
+    [
+      "cudaStreamWaitEvent_v3020",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      156,
+      9.080100000000003e-05
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      128,
+      7.9165e-05
+    ],
+    [
+      "cudaMallocAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      4,
+      7.5161e-05
+    ],
+    [
+      "cudaStreamEndCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      42,
+      6.5446e-05
+    ],
+    [
+      "cudaMemcpyAsync_v3020",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      16,
+      6.405600000000001e-05
+    ],
+    [
+      "cudaEventRecordWithFlags_v11010",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      95,
+      5.7762e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::addScalar(double)",
+      779,
+      5.6858999999999904e-05
+    ],
+    [
+      "cudaDeviceSynchronize_v3020",
+      "void FIDESlib::CKKS::Ciphertext::store(FIDESlib::CKKS::RawCipherText&)",
+      2,
+      5.5258e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      816,
+      4.687499999999985e-05
+    ],
+    [
+      "cudaStreamEndCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      25,
+      4.6521000000000004e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::sub(const FIDESlib::CKKS::Ciphertext&)",
+      514,
+      4.472499999999991e-05
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::multIntScalar(Ciphertext&, uint64_t)",
+      64,
+      3.352599999999999e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      515,
+      3.036400000000003e-05
+    ],
+    [
+      "cudaStreamBeginCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      8,
+      3.0362e-05
+    ],
+    [
+      "cudaEventRecord_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      47,
+      2.9341000000000006e-05
+    ],
+    [
+      "cudaStreamBeginCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      4,
+      2.7168999999999997e-05
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      12,
+      2.3506000000000005e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::extend(bool)",
+      256,
+      2.0985999999999992e-05
+    ],
+    [
+      "cudaEventDestroy_v3020",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      24,
+      1.7286000000000004e-05
+    ],
+    [
+      "cudaMalloc_v3020",
+      "outside_function_range",
+      1,
+      1.5291e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      224,
+      1.4044999999999997e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::ModRaise(Ciphertext&, int, uint32_t, bool, bool)",
+      160,
+      1.3318000000000002e-05
+    ],
+    [
+      "cudaEventCreateWithFlags_v3020",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      30,
+      1.2332999999999999e-05
+    ],
+    [
+      "cudaFreeAsync_v11020",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      16,
+      1.2033999999999999e-05
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::addPt(const FIDESlib::CKKS::Plaintext&)",
+      103,
+      1.1227000000000004e-05
+    ],
+    [
+      "cudaEventCreateWithFlags_v3020",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      16,
+      9.954e-06
+    ],
+    [
+      "cudaStreamEndCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      8,
+      9.862e-06
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      149,
+      9.103e-06
+    ],
+    [
+      "cudaEventRecord_v3020",
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      17,
+      7.501e-06
+    ],
+    [
+      "cudaEventDestroy_v3020",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      16,
+      7.085e-06
+    ],
+    [
+      "cudaStreamEndCapture_v10000",
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      4,
+      6.906e-06
+    ],
+    [
+      "cuProfilerStart",
+      "outside_function_range",
+      1,
+      5.45e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Plaintext::rescale()",
+      2,
+      4.879e-06
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::multIntScalar(Ciphertext&, uint64_t)",
+      64,
+      4.548999999999998e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::rescale()",
+      2,
+      4.525e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Plaintext::multScalar(double, bool)",
+      1,
+      2.39e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::extend(bool)",
+      1,
+      2.11e-06
+    ],
+    [
+      "cuKernelGetName",
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      32,
+      1.5690000000000001e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      1,
+      1.411e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "outside_function_range",
+      2,
+      1.391e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      1,
+      1.35e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::multPt(const FIDESlib::CKKS::Plaintext&, bool, bool)",
+      1,
+      1.303e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::addScalar(double)",
+      1,
+      1.276e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::ModRaise(Ciphertext&, int, uint32_t, bool, bool)",
+      1,
+      1.133e-06
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::Ciphertext::sub(const FIDESlib::CKKS::Ciphertext&)",
+      1,
+      7.64e-07
+    ],
+    [
+      "cuLibraryGetKernel",
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      1,
+      5.07e-07
+    ]
+  ],
+  "functions_inclusive": [
+    [
+      "void FIDESlib::CKKS::Ciphertext::rotate(int, bool)",
+      2560,
+      1.3692667989999996
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::mult(const FIDESlib::CKKS::Ciphertext&, bool, bool)",
+      1408,
+      0.9374599449999996
+    ],
+    [
+      "void FIDESlib::CKKS::Bootstrap(Ciphertext&, int, bool)",
+      16,
+      0.8299695189999999
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::multPt(const FIDESlib::CKKS::Plaintext&, bool, bool)",
+      8374,
+      0.7458525689999995
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::rescale()",
+      10014,
+      0.42447038799999987
+    ],
+    [
+      "void FIDESlib::CKKS::approxModReductionSparse(Ciphertext&, uint64_t)",
+      16,
+      0.4020719769999999
+    ],
+    [
+      "void FIDESlib::CKKS::EvalCoeffsToSlots(Ciphertext&, int, bool)",
+      32,
+      0.3874754899999999
+    ],
+    [
+      "void FIDESlib::CKKS::LinearTransform(Ciphertext&, int, int, const std::vector<Plaintext*>&, int, int)",
+      128,
+      0.38735673299999995
+    ],
+    [
+      "bool FIDESlib::CKKS::Plaintext::adjustPlaintextToCiphertext(const FIDESlib::CKKS::Plaintext&, const FIDESlib::CKKS::Ciphertext&)",
+      4162,
+      0.3813610599999991
+    ],
+    [
+      "void FIDESlib::CKKS::LimbPartition::generate(std::vector<FIDESlib::LimbRecord>&, std::vector<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<long unsigned int> > >&, FIDESlib::VectorGPU<void*>&, int, FIDESlib::VectorGPU<void*>*, uint64_t*, size_t, uint64_t*, size_t, bool)",
+      8780,
+      0.3757660550000017
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::square(bool)",
+      434,
+      0.33194562500000013
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::copy(const FIDESlib::CKKS::Ciphertext&)",
+      13335,
+      0.29360359400000063
+    ],
+    [
+      "void FIDESlib::CKKS::evalChebyshevSeries(Ciphertext&, std::vector<double>&, double, double)",
+      16,
+      0.27596626199999996
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::multScalar(double, bool)",
+      2715,
+      0.26825247900000015
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::multScalarNoPrecheck(double, bool)",
+      4306,
+      0.26650476500000025
+    ],
+    [
+      "void FIDESlib::CKKS::Plaintext::copy(const FIDESlib::CKKS::Plaintext&)",
+      4162,
+      0.1714552090000001
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::modDown(bool)",
+      2907,
+      0.16975958599999988
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::dropToLevel(int, bool)",
+      20234,
+      0.16507307900000526
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::add(const FIDESlib::CKKS::Ciphertext&)",
+      7792,
+      0.14519900800000002
+    ],
+    [
+      "void innerEvalChebyshevPS(const FIDESlib::CKKS::Ciphertext&, FIDESlib::CKKS::Ciphertext&, const std::vector<double>&, uint32_t, uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, const std::vector<FIDESlib::CKKS::Ciphertext*>&, int, int)",
+      48,
+      0.12636295900000005
+    ],
+    [
+      "void FIDESlib::CKKS::Plaintext::multScalar(double, bool)",
+      4162,
+      0.12338464900000007
+    ],
+    [
+      "FIDESlib::CKKS::LimbPartition::~LimbPartition()",
+      7992,
+      0.10629028600000016
+    ],
+    [
+      "void applyDoubleAngleIterations(FIDESlib::CKKS::Ciphertext&, int, const FIDESlib::CKKS::KeySwitchingKey&)",
+      16,
+      0.091389588
+    ],
+    [
+      "void FIDESlib::CKKS::Plaintext::rescale()",
+      4162,
+      0.07704495400000014
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::rotate_hoisted(const std::vector<int>&, std::vector<FIDESlib::CKKS::Ciphertext*>, bool)",
+      215,
+      0.06479488099999996
+    ],
+    [
+      "FIDESlib::CKKS::Plaintext::Plaintext(FIDESlib::CKKS::Context&)",
+      8056,
+      0.0607023099999999
+    ],
+    [
+      "bool FIDESlib::CKKS::Ciphertext::adjustForMult(const FIDESlib::CKKS::Ciphertext&)",
+      1991,
+      0.053387277000000004
+    ],
+    [
+      "bool FIDESlib::CKKS::Ciphertext::adjustForAddOrSub(const FIDESlib::CKKS::Ciphertext&)",
+      10168,
+      0.03890304199999987
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::addScalar(double)",
+      779,
+      0.036621875
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::keySwitch(const FIDESlib::CKKS::KeySwitchingKey&)",
+      24,
+      0.023441401999999997
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::extend(bool)",
+      2304,
+      0.016617270000000076
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::load(const FIDESlib::CKKS::RawCipherText&)",
+      4,
+      0.013853903
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::evalLinearWSumMutable(uint32_t, const std::vector<FIDESlib::CKKS::Ciphertext*>&, std::vector<double>)",
+      112,
+      0.012905800999999998
+    ],
+    [
+      "FIDESlib::CKKS::Ciphertext::Ciphertext(FIDESlib::CKKS::Context&)",
+      15331,
+      0.005939868999999964
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::store(FIDESlib::CKKS::RawCipherText&)",
+      1,
+      0.005582716
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::sub(const FIDESlib::CKKS::Ciphertext&)",
+      257,
+      0.0042060749999999975
+    ],
+    [
+      "void FIDESlib::CKKS::ModRaise(Ciphertext&, int, uint32_t, bool, bool)",
+      16,
+      0.0031954310000000003
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::conjugate(const FIDESlib::CKKS::Ciphertext&)",
+      16,
+      0.002313841
+    ],
+    [
+      "void FIDESlib::CKKS::multIntScalar(Ciphertext&, uint64_t)",
+      32,
+      0.0011702589999999997
+    ],
+    [
+      "void FIDESlib::CKKS::SetCurrentContext(Context&)",
+      33,
+      0.0006505330000000001
+    ],
+    [
+      "void FIDESlib::CKKS::Ciphertext::addPt(const FIDESlib::CKKS::Plaintext&)",
+      103,
+      0.000596412
+    ]
+  ],
+  "kernels": [
+    [
+      "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      24190,
+      0.563911735
+    ],
+    [
+      "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      24190,
+      0.408978786
+    ],
+    [
+      "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+      25986,
+      0.293464046
+    ],
+    [
+      "void FIDESlib::CKKS::ModDown2<(FIDESlib::ALGO)3>(void **, int, void **, int, const FIDESlib::Global::Globals *)",
+      5926,
+      0.20053352
+    ],
+    [
+      "FIDESlib::CKKS::copy_(void **, void **)",
+      36343,
+      0.190069906
+    ],
+    [
+      "FIDESlib::CKKS::hoistedRotateDotKSK_2_(void ***, void **, void ***, void ***, void ***, void ***, int, const int *, void ***, int, int, int, int, void **, bool)",
+      2791,
+      0.171952473
+    ],
+    [
+      "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+      25986,
+      0.171016755
+    ],
+    [
+      "fhemamba::<unnamed>::expand(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, unsigned long)",
+      82303,
+      0.133743925
+    ],
+    [
+      "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      5926,
+      0.126546518
+    ],
+    [
+      "FIDESlib::add_(void **, void **, int)",
+      17905,
+      0.103159074
+    ],
+    [
+      "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      5926,
+      0.101774382
+    ],
+    [
+      "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      7449,
+      0.08776311
+    ],
+    [
+      "void FIDESlib::CKKS::Scalar_mult_<(FIDESlib::ALGO)4>(void **, const unsigned long *, int, const unsigned long *)",
+      12838,
+      0.074583653
+    ],
+    [
+      "FIDESlib::CKKS::dotProductLtBatchedPt2___(void ***, void ***, void ***, void ***, void ***, int, int, int, int)",
+      256,
+      0.066204077
+    ],
+    [
+      "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      7449,
+      0.048539842
+    ],
+    [
+      "FIDESlib::CKKS::Mult_(void **, void **, void **, int)",
+      8424,
+      0.041945771
+    ],
+    [
+      "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+      4162,
+      0.029595688
+    ],
+    [
+      "void FIDESlib::INTT_<unsigned long, (bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+      4162,
+      0.017368225
+    ],
+    [
+      "FIDESlib::CKKS::eval_linear_w_sum_(int, void **, void ***, unsigned long *, int)",
+      224,
+      0.0101332
+    ],
+    [
+      "FIDESlib::CKKS::binomialMult_(int, void **, void **, void **, void **, void **)",
+      535,
+      0.006994266
+    ],
+    [
+      "FIDESlib::scalar_add_(void **, unsigned long *, int)",
+      779,
+      0.006137913
+    ],
+    [
+      "FIDESlib::CKKS::binomialSquare_(int, void **, void **, void **)",
+      434,
+      0.005846605
+    ],
+    [
+      "FIDESlib::CKKS::scaleByP_(void **, int)",
+      256,
+      0.004356993
+    ],
+    [
+      "FIDESlib::sub_(void **, void **, int)",
+      514,
+      0.004246083
+    ],
+    [
+      "<unnamed>::map_ntt(const unsigned long *, unsigned long *, unsigned long, unsigned long, unsigned long, bool)",
+      1012,
+      0.001820498
+    ],
+    [
+      "FIDESlib::CKKS::broadcastLimb0_(void **)",
+      32,
+      0.000594216
+    ]
+  ],
+  "limits": "Instrumented prefix only; nested host timings and GPU sums are nonadditive. Synchronization durations include necessary GPU execution. Kernel API counts can include graph capture. Activity union is not SM utilization or ideal headroom."
+}

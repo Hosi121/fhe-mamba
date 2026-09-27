@@ -1,0 +1,1 @@
+{"ring_dimension":131072,"q_bits":2656,"p_bits":480,"qp_bits":3136,"q_towers":45,"p_towers":8,"hybrid_digits":6,"error_sigma":3.19,"guideline_max_qp_bits":3523,"library_classical128":true,"uniform_ternary":true,"hybrid":true,"passed":true,"basis":"2024 Security Guidelines Table 5.2; classical RLWE parameter bound"}

@@ -146,7 +146,7 @@ a passing encrypted integration. This failed result is retained separately
 from the one-layer probes and plaintext quality reports.
 
 The [phase diagnostic](../../results/dgx/2026-09-21/stabilized-integration/m2_chain_stabilized-diagnostic-r1_l24_t1.json)
-and its [verbatim log excerpt](../../results/dgx/2026-09-21/stabilized-integration/stabilized-diagnostic-r1-excerpt.txt)
+and its [verbatim log excerpt; archive member `dgx/2026-09-21/stabilized-integration/stabilized-diagnostic-r1-excerpt.txt`](../../results/README.md#archived-provenance)
 locate the first corruption at `t0.L08.y_scaled`.
 The first eight layer boundaries differ from their references by at most
 `0.000221`. The ninth readout reaches level 40 with maximum real magnitude

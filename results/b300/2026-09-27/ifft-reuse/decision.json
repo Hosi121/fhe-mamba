@@ -1,0 +1,26 @@
+{
+  "adopt": false,
+  "reason": "Full single-pair reduction 2.85% is below the predeclared 5% promotion criterion; retain experimental patch, preserve qualified two-worker baseline.",
+  "full_seconds": {
+    "base": 148.322526398,
+    "candidate": 144.098848468
+  },
+  "reduction": 0.02847630789854827,
+  "restored_files": [
+    "native/fideslib_stage0/CMakeLists.txt",
+    "native/fideslib_stage0/src/fideslib_plaintext_encoder.cpp",
+    "native/fideslib_stage0/src/fideslib_plaintext_encoder.hpp",
+    "native/fideslib_stage0/src/packed_fideslib.cpp",
+    "native/fideslib_stage0/src/packed_rns_probe.cpp",
+    "experiments/run_packed_probe.py",
+    "tests/test_packed_probe_runner.py"
+  ],
+  "removed_candidate_only_files": [
+    "native/fideslib_stage0/include/public_inverse_cache.hpp",
+    "native/fideslib_stage0/src/fideslib_inverse_cache.hpp",
+    "native/fideslib_stage0/tests/test_public_inverse_cache.cpp",
+    "native/fideslib_stage0/src/fideslib_inverse_cache.cpp"
+  ],
+  "matching_baseline_files": 98,
+  "prior_uncommitted_work_preserved": true
+}

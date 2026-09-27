@@ -1,0 +1,25 @@
+{
+  "repo_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c",
+  "native_files_compared": 92,
+  "native_matches_prior_full_run": true,
+  "mismatches": [],
+  "reference_results": "results/dgx/2026-09-26/gpu-dual-ring",
+  "user_scope": "One full inference in existing experimental security=not-set configuration on B300, preceded by small hardware qualification.",
+  "hardware_changes": [
+    "DGX Spark GB10 to one NVIDIA B300 SXM6 AC (GPU 4)",
+    "aarch64 CPU to x86_64 CPU",
+    "CUDA target 121-real to 103-real",
+    "CPU affinity 15-19 to 64-68, NUMA node 2",
+    "CUDA 13 container"
+  ],
+  "preserved": [
+    "frozen program and vocabulary-head bytes",
+    "FIDESlib source files",
+    "OpenFHE 1.4.2 and core integer headers",
+    "four OpenMP threads",
+    "full model flags",
+    "both 0.001 error gates",
+    "experimental security=not-set"
+  ],
+  "interpretation": "A one-run hardware feasibility and timing result, not an equal-security speedup or a multi-GPU scaling result."
+}

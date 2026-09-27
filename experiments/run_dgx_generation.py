@@ -42,7 +42,7 @@ def main():
         action="store_true",
         help="encode public joint-gate coefficients with a compact period and masked basis",
     )
-    parser.add_argument("--ssh-host", default="dgx")
+    parser.add_argument("--ssh-host", required=True, help="your configured SSH host or alias")
     parser.add_argument("--fast-plaintext-upload", action="store_true")
     parser.add_argument("--direct-plaintext-upload", action="store_true")
     parser.add_argument("--gpu-plaintext-ntt", action="store_true")

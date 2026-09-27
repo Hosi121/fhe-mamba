@@ -5,7 +5,7 @@ sharing Mamba-3's plaintext preparation improvements. Both modes use the same
 binary, frozen 24-layer/five-evaluation request and numerical contract.
 Mamba-3's complete generation also passes after extracting the common policy.
 
-[Raw runs, comparison script and frozen sources](../../results/dgx/2026-09-24/shared-plaintext-preparation/).
+[Raw runs, comparison results and frozen sources](../../results/dgx/2026-09-24/shared-plaintext-preparation/).
 
 ## Implementation
 
@@ -59,7 +59,6 @@ Local formatting/lint, 280 Python tests and 16 native CPU contracts pass for
 this source snapshot. Both GPU policy probes, all mirrored controls and the
 complete generation gates pass. The source archive contains the measured
 70 files; later direct-upload/NAF/weight changes have a separate build and
-study. The completion hook collected the final raw files and submitted a
-desktop notification. `compare.py` rechecks raw hashes, archived sources,
-parameters, counts, levels, token IDs and numerical gates before regenerating
-the summary.
+study. The reported comparison checked source identity, parameters, counts,
+levels, token IDs and numerical gates. Use the [shared experiment tools](../experiments.md)
+for current job completion events, public hash verification and sample comparisons.

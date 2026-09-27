@@ -6,6 +6,7 @@ import signal
 import subprocess
 import sys
 import time
+from contextlib import suppress
 from pathlib import Path
 
 import pytest
@@ -783,13 +784,27 @@ def test_campaign_sighup_terminates_active_runner_group(tmp_path: Path) -> None:
         ],
         cwd=ROOT,
     )
-    deadline = time.monotonic() + 3
-    while not pid_file.exists() and time.monotonic() < deadline:
-        time.sleep(0.02)
-    assert pid_file.exists()
-    runner_pid = int(pid_file.read_text(encoding="utf-8"))
+    try:
+        # Import/startup can be delayed by the parallel native build tests.
+        # This test checks signal handling after readiness, not startup latency.
+        deadline = time.monotonic() + 30
+        while not pid_file.exists() and process.poll() is None and time.monotonic() < deadline:
+            time.sleep(0.02)
+        assert pid_file.exists()
+        runner_pid = int(pid_file.read_text(encoding="utf-8"))
 
-    os.kill(process.pid, signal.SIGHUP)
-    assert process.wait(timeout=7) == 128 + signal.SIGHUP
-    with pytest.raises(ProcessLookupError):
-        os.kill(runner_pid, 0)
+        os.kill(process.pid, signal.SIGHUP)
+        assert process.wait(timeout=7) == 128 + signal.SIGHUP
+        with pytest.raises(ProcessLookupError):
+            os.kill(runner_pid, 0)
+    finally:
+        if process.poll() is None:
+            process.terminate()
+            try:
+                process.wait(timeout=7)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+        if pid_file.exists():
+            with suppress(ProcessLookupError):
+                os.kill(int(pid_file.read_text(encoding="utf-8")), signal.SIGKILL)

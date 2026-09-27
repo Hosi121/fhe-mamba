@@ -1,8 +1,8 @@
 {
   "name": "probe-mamba2",
   "command": [
-    "/home/kataiwa/fhemamba/packed-resources-20260924/build/packed_plaintext_probe",
-    "/home/kataiwa/fhemamba/packed-resources-20260924/probe-mamba2/native.json",
+    "${HOME}/fhemamba/packed-resources-20260924/build/packed_plaintext_probe",
+    "${HOME}/fhemamba/packed-resources-20260924/probe-mamba2/native.json",
     "--mamba2"
   ],
   "started_utc": "2026-09-24T06:21:20.083419+00:00",
@@ -30,7 +30,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   },
   "source_manifest_sha256": "9d1af128a2017acd3fa632452ead88de71fd6ee0699c8f51a8486d2fc030c4a6",
   "controller_sha256": "5b0177f27eea66157731dfe0e2a832dda087acef68974f16fe333ebe4a51ff1c",

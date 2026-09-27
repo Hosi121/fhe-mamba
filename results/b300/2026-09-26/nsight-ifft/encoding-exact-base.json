@@ -1,0 +1,11 @@
+{
+  "name": "encoding-exact-base",
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "/study/bin/base/encoding_probe",
+    "write",
+    "/study/encoding-golden.bin",
+    "/study/encoding-exact-base/probe.json"
+  ]
+}

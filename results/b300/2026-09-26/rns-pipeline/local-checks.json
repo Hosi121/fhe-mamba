@@ -1,0 +1,24 @@
+{
+  "native_contracts": {
+    "passed": 22,
+    "log": "native-tests.log"
+  },
+  "python_suite": {
+    "passed": 292,
+    "coverage_percent": 87.6,
+    "log": "python-tests.log"
+  },
+  "runner_followup": {
+    "passed": 25,
+    "additional_invalid_option_cases": 2
+  },
+  "sanitizers": {
+    "queue_contract": "AddressSanitizer and UndefinedBehaviorSanitizer passed",
+    "whole_backend": false
+  },
+  "ruff": {
+    "check": "passed",
+    "format_check": "120 files already formatted"
+  },
+  "source_verification": "source-verification.json"
+}

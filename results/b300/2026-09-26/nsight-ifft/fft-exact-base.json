@@ -1,0 +1,11 @@
+{
+  "name": "fft-exact-base",
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "/study/bin/base/fft_probe",
+    "write",
+    "/study/fft-golden.bin",
+    "/study/fft-exact-base/probe.json"
+  ]
+}

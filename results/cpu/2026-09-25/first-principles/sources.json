@@ -3,7 +3,7 @@
   "repository_base": "f2452997f603c6dfd4556a73f8023ae621469253",
   "backend": {
     "host": "dgx",
-    "directory": "/home/kataiwa/fhemamba/spark/source-2a70798e869944af",
+    "directory": "${HOME}/fhemamba/spark/source-2a70798e869944af",
     "commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
     "files_sha256": {
       "src/CKKS/Bootstrap.cu": "86f815a9af430ad3dd7e88c04902302f638ccf56e744dd9c2fd0e0e8af760536",

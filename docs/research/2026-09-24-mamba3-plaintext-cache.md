@@ -7,7 +7,7 @@ This is a small component result. Complete trained generation was not rerun;
 the previous [24.95-minute full-session result](2026-09-24-mamba3-depth-batching.md)
 does not include this change.
 
-[Raw runs, comparison script and frozen sources](../../results/dgx/2026-09-24/mamba3-plaintext-cache/).
+[Raw runs, comparison results and frozen sources](../../results/dgx/2026-09-24/mamba3-plaintext-cache/).
 
 ## Mechanism and constraints
 
@@ -99,8 +99,7 @@ inline-client limitations remain unchanged (`security=not-set`).
 Build the packed target and add `--cache-plaintexts` to the existing
 `experiments/run_packed_probe.py` command. Native JSON records the enabled flag,
 capacity, retained entries, hits, misses, bypasses and evictions.
-`run_abba.py` and `run_synthetic.sh` retain the measured launchers; their CPU
-numbers and dependency paths are specific to this Spark. Reuse requires an
-explicitly authorized budget and prepared payloads, not resetting this ledger.
-Run the retained `compare.py` against the saved results to verify the input,
-binary, arithmetic counts and error gates before regenerating the summary.
+The measured arguments are recorded with the results. Use the
+[shared workflow](../experiments.md) with local machine settings for new runs,
+and an explicit comparison contract covering input identity, arithmetic counts
+and error gates. The superseded study-specific launchers have been removed.

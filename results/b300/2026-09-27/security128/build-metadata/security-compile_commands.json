@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/study/build/security",
+  "command": "/usr/bin/g++  -I/study/repo/experiments/security128/../../native/fideslib_stage0/src -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /study/install/fideslib/include/fideslib -isystem /usr/local/cuda/targets/x86_64-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/security_parameters.dir/parameters.cpp.o -c /study/repo/experiments/security128/parameters.cpp",
+  "file": "/study/repo/experiments/security128/parameters.cpp",
+  "output": "CMakeFiles/security_parameters.dir/parameters.cpp.o"
+},
+{
+  "directory": "/study/build/security",
+  "command": "/usr/bin/g++  -I/study/repo/experiments/security128/../../native/fideslib_stage0/src -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -isystem /usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /study/install/fideslib/include/fideslib -isystem /usr/local/cuda/targets/x86_64-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/security_refresh.dir/refresh.cpp.o -c /study/repo/experiments/security128/refresh.cpp",
+  "file": "/study/repo/experiments/security128/refresh.cpp",
+  "output": "CMakeFiles/security_refresh.dir/refresh.cpp.o"
+}
+]

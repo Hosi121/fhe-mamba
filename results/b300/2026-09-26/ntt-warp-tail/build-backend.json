@@ -1,0 +1,10 @@
+{
+  "name": "build-backend",
+  "cpu_only": true,
+  "build": true,
+  "timeout": 3600,
+  "command": [
+    "bash",
+    "/study/build-backend.sh"
+  ]
+}

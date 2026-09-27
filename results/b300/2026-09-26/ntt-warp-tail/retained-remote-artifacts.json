@@ -1,0 +1,105 @@
+{
+  "root": "${HOME}/fhemamba-b300/b300-gpu-followup-20260926",
+  "files": [
+    {
+      "path": "bin/base/ntt_warp_tail",
+      "bytes": 16899584,
+      "sha256": "9b2cc7c2107e962770213feb27e4c655e2efc780022db7ec94dd623edeca4e14"
+    },
+    {
+      "path": "bin/base/packed_fideslib",
+      "bytes": 17339488,
+      "sha256": "2eb76e4eb31bf4fb57b0fbdf854b30fd66ca2ae3c08ce53bd5bd9dcd0da95696"
+    },
+    {
+      "path": "bin/base/packed_rns_probe",
+      "bytes": 17050752,
+      "sha256": "729060487d6cc798574f98396f5b1e352c9de3f7b4ba2a1cc4d735489228d8ec"
+    },
+    {
+      "path": "bin/candidate/ntt_warp_tail",
+      "bytes": 16997888,
+      "sha256": "97bca42d72d1ef534b321c371356e11c8e3c2e65506e7ce86b95351f2ab57d4e"
+    },
+    {
+      "path": "bin/candidate/packed_fideslib",
+      "bytes": 17437792,
+      "sha256": "a4376cce10c4af381109da93e839e639a89949e0040ea2d992f3240fc0acff56"
+    },
+    {
+      "path": "bin/candidate/packed_rns_probe",
+      "bytes": 17149056,
+      "sha256": "94cf2dc8d4c4bced81de99bebc4acc8d11448e77c37136546f4995e978652c6e"
+    },
+    {
+      "path": "lib/base/fideslib.a",
+      "bytes": 42309266,
+      "sha256": "d6f4e44327ef3056d19e832f1c2d1191677fc09170e3d2cb6aefb6205de088f7"
+    },
+    {
+      "path": "lib/candidate/fideslib.a",
+      "bytes": 42406810,
+      "sha256": "b04143dbf82487043646e52c811640961efec0dd7a514f5f273d7f94425d045d"
+    },
+    {
+      "path": "golden/ring-1024.bin",
+      "bytes": 22479232,
+      "sha256": "422c1144a9bafa75a9d2d88bae3a4a9b0fb9e72569a3da89cf9f2273dfd8fe02"
+    },
+    {
+      "path": "golden/ring-2048.bin",
+      "bytes": 44958080,
+      "sha256": "e73c60f2f1b71e7482e85e2dcee0c0605421f9fcc26dfeedfbdece36cccf7e33"
+    },
+    {
+      "path": "golden/ring-32768.bin",
+      "bytes": 719323520,
+      "sha256": "a3e073842e99275d71febb728a44dfe1278e5707c28fa0ec2f469dbfa6745b6c"
+    },
+    {
+      "path": "golden/ring-4096.bin",
+      "bytes": 89915776,
+      "sha256": "cb3b9716a08dfe8e949dbe1182d2354570c8939dde142ded78a5e0526a04b0ed"
+    },
+    {
+      "path": "golden/ring-65536.bin",
+      "bytes": 1438646656,
+      "sha256": "761abe77c949e050877b352662d462e743e94c41b243c66551f400e4168dded0"
+    },
+    {
+      "path": "ncu-base/profile.ncu-rep",
+      "bytes": 9489021,
+      "sha256": "5b35834c489bf09f1c7e0233103fa87d5b833e248161e23cabe5e9acb9358e5c"
+    },
+    {
+      "path": "ncu-candidate/profile.ncu-rep",
+      "bytes": 9601108,
+      "sha256": "e8f0be634c0984b0a46e34b6d5745f772f1335b77fab6286501951fb7ef15922"
+    },
+    {
+      "path": "nsys-base/trace.nsys-rep",
+      "bytes": 46709455,
+      "sha256": "507b97b445f0954d962c9f691fe60c6ee61a01392f85b4ae4d0bf18717aa9f4b"
+    },
+    {
+      "path": "nsys-candidate/trace.nsys-rep",
+      "bytes": 46674255,
+      "sha256": "4a3be1b7e661ffee67dfcd68af44b9858a769ad8998ff13beae7173c370f9b30"
+    },
+    {
+      "path": "nsys-base/trace.sqlite",
+      "bytes": 128585728,
+      "sha256": "3a075a5f721b741e1237b833cec960d316ef7d7a0be193f825b997fa54b86b82"
+    },
+    {
+      "path": "nsys-candidate/trace.sqlite",
+      "bytes": 128602112,
+      "sha256": "ffc04fb2fc1aa0a9fa9bda2ac9ffcec1aa31e4f51fe3af09216562e28bca2b8b"
+    },
+    {
+      "path": "affinity-diagnostic/probe",
+      "bytes": 23520,
+      "sha256": "a300f59995b99a8e4899934fceda9263d3d1a2bafb5e24ba7f394fc7b123feec"
+    }
+  ]
+}

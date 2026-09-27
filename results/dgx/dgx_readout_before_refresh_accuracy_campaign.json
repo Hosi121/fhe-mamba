@@ -9,7 +9,7 @@
     {
       "all_tokens_decrypt": false,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/m2_chain_readout-before-refresh-balanced30-cache5-l24-t2_l24_t2.json"
+        "${HOME}/fhemamba/results/m2_chain_readout-before-refresh-balanced30-cache5-l24-t2_l24_t2.json"
       ],
       "artifacts": [
         {
@@ -31,7 +31,7 @@
             ]
           },
           "passed": false,
-          "path": "/home/kataiwa/fhemamba/results/m2_chain_readout-before-refresh-balanced30-cache5-l24-t2_l24_t2.json",
+          "path": "${HOME}/fhemamba/results/m2_chain_readout-before-refresh-balanced30-cache5-l24-t2_l24_t2.json",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "failed",
           "timing": {

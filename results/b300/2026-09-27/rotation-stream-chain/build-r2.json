@@ -1,0 +1,10 @@
+{
+  "name": "build-r2",
+  "build": true,
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "bash",
+    "/study/resume-build-r2.sh"
+  ]
+}

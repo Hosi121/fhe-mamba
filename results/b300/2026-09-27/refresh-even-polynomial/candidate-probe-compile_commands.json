@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/study/build/probe",
+  "command": "/usr/bin/g++ -DREFRESH_CANDIDATE=1 -I/study/repo/native/fideslib_stage0/src -I/workspace/install/openfhe-fides/include/openfhe -I/workspace/install/openfhe-fides/include/openfhe/core -I/workspace/install/openfhe-fides/include/openfhe/pke -I/workspace/install/openfhe-fides/include/openfhe/binfhe -I/workspace/install/openfhe-fides/include/openfhe/third-party/include -I/study/feature -isystem /usr/local/cuda/targets/x86_64-linux/include/cccl -isystem /study/install/fideslib/include/fideslib -isystem /usr/local/cuda/targets/x86_64-linux/include  -fopenmp -O3 -DNDEBUG -std=gnu++20 -o CMakeFiles/refresh_probe.dir/probe.cpp.o -c /study/probe/probe.cpp",
+  "file": "/study/probe/probe.cpp",
+  "output": "CMakeFiles/refresh_probe.dir/probe.cpp.o"
+},
+{
+  "directory": "/study/build/probe",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -DREFRESH_CANDIDATE=1 --options-file CMakeFiles/refresh_probe.dir/includes_CUDA.rsp -O3 -DNDEBUG \"--generate-code=arch=compute_103,code=[sm_103]\" -x cu -c /study/repo/native/fideslib_stage0/src/fideslib_ring_map.cu -o CMakeFiles/refresh_probe.dir/study/repo/native/fideslib_stage0/src/fideslib_ring_map.cu.o",
+  "file": "/study/repo/native/fideslib_stage0/src/fideslib_ring_map.cu",
+  "output": "CMakeFiles/refresh_probe.dir/study/repo/native/fideslib_stage0/src/fideslib_ring_map.cu.o"
+}
+]

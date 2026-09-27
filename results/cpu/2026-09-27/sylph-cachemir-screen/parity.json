@@ -1,0 +1,10 @@
+{
+  "scope": "One exact algebraic split, checked in float64 at 131 or fewer normalized points; no coefficient dropping, FHE test, interval certificate or speed claim",
+  "nodes": 785,
+  "points_per_node": 130,
+  "max_abs_sample_error": 7.105427357601002e-15,
+  "max_scale_relative_sample_error": 4.746203430272544e-15,
+  "max_branch_coefficient_l1_growth": 5.359826767458912,
+  "both_branches_still_odd_degree": 785,
+  "source_polynomials_sha256": "1fa25c8304a0141c0f47ae540a708461e216b3142818cc4c91546065cd538716"
+}

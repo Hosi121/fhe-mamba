@@ -115,7 +115,7 @@ def _platform_campaign_defaults(
     manifest_defaults: dict[str, Any],
 ) -> dict[str, Any]:
     platform = _read_platform_config(path)
-    root_dir = str(manifest_defaults.get("ROOT_DIR", "/home/kataiwa/fhemamba-b300"))
+    root_dir = str(manifest_defaults.get("ROOT_DIR", Path.home() / "fhemamba-b300"))
     derived = {
         "B300_PLATFORM_CONFIG": str(path),
         "B300_PLATFORM_CONFIG_SHA256": _file_sha256(path),
@@ -129,6 +129,11 @@ def _platform_campaign_defaults(
         "FIDESLIB_VARIANT": platform["B300_DEFAULT_VARIANT"],
         "BINARY_PATH": str(Path(root_dir) / platform["B300_BINARY_RELATIVE_PATH"]),
     }
+    local_defaults = {
+        "ROOT_DIR": root_dir,
+        "RESULTS_DIR": str(Path(root_dir) / "results"),
+        "INPUT_CHAIN": str(Path(root_dir) / "payloads/m2_chain_payload_sqnewton_wiki512_t2"),
+    }
     conflicts = sorted(
         key
         for key, expected in derived.items()
@@ -138,7 +143,7 @@ def _platform_campaign_defaults(
         raise ValueError(
             "manifest overrides authoritative B300 platform fields: " + ", ".join(conflicts)
         )
-    return {**derived, **manifest_defaults}
+    return {**local_defaults, **derived, **manifest_defaults}
 
 
 def _is_sha256(value: Any) -> bool:
@@ -1005,6 +1010,11 @@ def main() -> int:
         if not platform_path.is_absolute():
             platform_path = (args.manifest.parent / platform_path).resolve()
         defaults = _platform_campaign_defaults(platform_path, defaults)
+        if gpu_preflight is not None and "GPU_DEVICE" in defaults:
+            device = str(defaults["GPU_DEVICE"])
+            if not device.isdecimal():
+                raise ValueError("GPU_DEVICE must be a non-negative GPU index")
+            gpu_preflight = {**gpu_preflight, "gpu_index": int(device)}
 
     if manifest.get("platform") == "dgx-spark":
         # Resolve machine-local paths before recording the effective environment.

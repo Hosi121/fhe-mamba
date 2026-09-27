@@ -3,9 +3,9 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/s2c-first-20260925/executor-build/packed_fideslib",
-    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1/program.txt",
-    "/home/kataiwa/fhemamba/s2c-first-20260925/prefix-3-baseline/native.json",
+    "${HOME}/fhemamba/s2c-first-20260925/executor-build/packed_fideslib",
+    "${HOME}/fhemamba/mamba3-20260924/lm-layer1/program.txt",
+    "${HOME}/fhemamba/s2c-first-20260925/prefix-3-baseline/native.json",
     ".001",
     ".001",
     "--planned-refresh",
@@ -23,7 +23,7 @@
     "--cache-plaintexts",
     "--frontier-refresh",
     "--client-head",
-    "/home/kataiwa/fhemamba/mamba3-20260924/lm-layer1/client_head.f32"
+    "${HOME}/fhemamba/mamba3-20260924/lm-layer1/client_head.f32"
   ],
   "exit_code": 0,
   "started_at_unix": 1790319232.0185134,

@@ -1,0 +1,50 @@
+{
+  "root": "${HOME}/fhemamba-b300/b300-gpu-feed-20260927",
+  "files": [
+    {
+      "path": "bin/base/packed_fideslib",
+      "bytes": 17339656,
+      "sha256": "6efd3cffa30ab4bbabcc85ee95887da81509dd2f3ef309e32bb7811b5ec50b1e"
+    },
+    {
+      "path": "bin/base/packed_rns_probe",
+      "bytes": 17050928,
+      "sha256": "fe785e92c5fbc12f1d48a6841f52c0b49069337ab627b599de1682e82f086134"
+    },
+    {
+      "path": "bin/candidate/packed_fideslib",
+      "bytes": 17351920,
+      "sha256": "df71f10a170f017c450caaa29ba85d6d87340eb1a57cf5a0b9d785dfec93dc34"
+    },
+    {
+      "path": "bin/candidate/packed_rns_probe",
+      "bytes": 17060664,
+      "sha256": "f7907b5fba2d388123b42d950306bde36464c8e6d9afe18c66c8a9cb20f1568f"
+    },
+    {
+      "path": "nsys-base/trace.nsys-rep",
+      "bytes": 46615924,
+      "sha256": "442e755ee6ab9c427e26a1467d7636cb8e5ad6bc6707e0eaacf6564a722e9f37"
+    },
+    {
+      "path": "nsys-candidate/trace.nsys-rep",
+      "bytes": 46722359,
+      "sha256": "c4682586aa1089981d485bae10298ba8838102f8a3cf3f592f0c136d0b409acd"
+    },
+    {
+      "path": "nsys-base/trace.sqlite",
+      "bytes": 128524288,
+      "sha256": "955570925face5584f4366cccb69ab0577f35779598fc4284245e9347b6de074"
+    },
+    {
+      "path": "nsys-candidate/trace.sqlite",
+      "bytes": 128831488,
+      "sha256": "e00027e8f8f36e505df36c158a0f5d21b00c5109237f7efc521626c9749d6a20"
+    },
+    {
+      "path": "placement-probe/probe",
+      "bytes": 23568,
+      "sha256": "7b58906e81ad9381cd3edbcda3fe9637ed5f80424064529b352cc006520ef205"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "native_tests": {
+    "command": "ctest --test-dir runs/b300-ifft-reuse-20260927/build-local --output-on-failure",
+    "passed": 23,
+    "failed": 0
+  },
+  "runner_tests": {
+    "command": "uv run --no-sync pytest -q tests/test_packed_probe_runner.py",
+    "passed": 33
+  },
+  "cache_asan_ubsan": {
+    "command": "ASAN_OPTIONS=detect_leaks=1 runs/b300-ifft-reuse-20260927/test_inverse_cache_asan",
+    "exit_code": 0
+  },
+  "thread_sanitizer": "not rerun; this environment failed to start TSan in the preceding study",
+  "test_source_sha256": "6ca45d874f99817161a6f28d20d6a23a99feb7b41675d3b048cf8a3de8505571"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "kernel-65536-base",
+  "command": [
+    "/study/bin/base/ntt_warp_tail",
+    "/study/kernel-65536-base/probe.json",
+    "/study/golden/ring-65536.bin",
+    "65536",
+    "--record"
+  ],
+  "timeout": 1200
+}

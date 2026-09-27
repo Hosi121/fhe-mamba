@@ -1,0 +1,275 @@
+[
+  {
+    "name": "cipher-refresh-even-build",
+    "id": "61623a7fb657fd783ba1098f91ebdf805b8e3e061d9d25626cddd6cfcc848284",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 1,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:27:35.179167088Z",
+      "FinishedAt": "2026-09-26T18:27:35.59036406Z"
+    },
+    "cpus": "64-79",
+    "mems": "2",
+    "devices": null
+  },
+  {
+    "name": "cipher-refresh-even-build-r2",
+    "id": "cc31cbe559d00d50656cb54522e678398bf956d196fc44d78be0d05a08fdd7fc",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 1,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:30:20.045063495Z",
+      "FinishedAt": "2026-09-26T18:33:29.738586874Z"
+    },
+    "cpus": "64-79",
+    "mems": "2",
+    "devices": null
+  },
+  {
+    "name": "cipher-refresh-even-build-r3",
+    "id": "58e87b9c9832b4d88c1f6519ef1d1ac1d20d87d55b93bcef4fb341287dd35b52",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:39:04.879061651Z",
+      "FinishedAt": "2026-09-26T18:40:14.47524416Z"
+    },
+    "cpus": "64-79",
+    "mems": "2",
+    "devices": null
+  },
+  {
+    "name": "cipher-refresh-even-full-0-base",
+    "id": "4555eff9d0d3eca00d4007e02c0b5d77b9484e0a2b4be218ca7cc9dfe3bd040b",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:46:07.25814341Z",
+      "FinishedAt": "2026-09-26T18:50:02.220560997Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-refresh-even-full-1-candidate",
+    "id": "799885e36e4e637c341faad3f5e1054bcbbf5ac1f05139c1a455957665372e39",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:50:02.830188031Z",
+      "FinishedAt": "2026-09-26T18:53:54.983389867Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-refresh-even-prefix-0-base",
+    "id": "f53a7a8581bc2cbfb79d5570c9e9be78b3b18ddb1dfc5293a7d321daa7a6d456",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:43:21.704313829Z",
+      "FinishedAt": "2026-09-26T18:44:43.595757024Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-refresh-even-prefix-1-candidate",
+    "id": "148643cb9612713847812205675122ab1115992497820a0c4ea7d2984a0a15fb",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:44:44.221869435Z",
+      "FinishedAt": "2026-09-26T18:46:06.629224105Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-refresh-even-qualification-base",
+    "id": "8a4a332ca11939925cffd824a049593125eb1e6ca71a280784ba9383deaec342",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:40:17.428723804Z",
+      "FinishedAt": "2026-09-26T18:41:49.856797645Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  },
+  {
+    "name": "cipher-refresh-even-qualification-candidate",
+    "id": "d18016daaf799b530fee410ab8cf742dfa1bcb690b59b5479a617aed7114b110",
+    "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-09-26T18:41:50.512897769Z",
+      "FinishedAt": "2026-09-26T18:43:21.07934231Z"
+    },
+    "cpus": "64-68",
+    "mems": "2",
+    "devices": [
+      {
+        "Driver": "",
+        "Count": 0,
+        "DeviceIDs": [
+          "4"
+        ],
+        "Capabilities": [
+          [
+            "gpu"
+          ]
+        ],
+        "Options": {}
+      }
+    ]
+  }
+]

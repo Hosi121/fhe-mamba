@@ -3,9 +3,9 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel/packed_fideslib",
-    "/home/kataiwa/fhemamba/structural-four-20260925/basis-probe.txt",
-    "/home/kataiwa/fhemamba/structural-four-20260925/basis-probe-share/native.json",
+    "${HOME}/fhemamba/structural-four-20260925/backend/spark/kernel/packed_fideslib",
+    "${HOME}/fhemamba/structural-four-20260925/basis-probe.txt",
+    "${HOME}/fhemamba/structural-four-20260925/basis-probe-share/native.json",
     ".001",
     ".001",
     "--planned-refresh",
@@ -31,7 +31,7 @@
   "wall_seconds": 29.168591499328613,
   "environment": {
     "OMP_NUM_THREADS": "4",
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   },
   "binary_sha256": "ddf475897316f0a70cf2354595b5a4aa4426f5c1eea8e24f69068046020f5449"
 }

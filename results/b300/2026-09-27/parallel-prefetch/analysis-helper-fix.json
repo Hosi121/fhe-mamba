@@ -1,0 +1,5 @@
+{
+  "reason": "Container nvidia_entrypoi startup samples were classified as native evaluator main-thread samples. Four prefix entrypoint observations precede exec of packed_fideslib; all native main-thread samples are CPU64/allowed64. Retain startup samples separately.",
+  "gpu_runs_changed": false,
+  "timing_samples_changed": false
+}

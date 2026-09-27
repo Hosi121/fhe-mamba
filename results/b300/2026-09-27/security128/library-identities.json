@@ -1,0 +1,26 @@
+[
+  {
+    "path": "${HOME}/fhemamba-b300/b300-security128-20260927/install/fideslib/lib/fideslib.a",
+    "bytes": 42313230,
+    "sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad",
+    "expected_sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+    "bytes": 5237444,
+    "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4",
+    "expected_sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEpke_static.a",
+    "bytes": 22058212,
+    "sha256": "91a1467c5a5e07b13084f2f2014dc4741075d1a5d79e804a01a4529aa4dd9a0e",
+    "expected_sha256": "91a1467c5a5e07b13084f2f2014dc4741075d1a5d79e804a01a4529aa4dd9a0e"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/install/openfhe-fides/lib/libOPENFHEbinfhe_static.a",
+    "bytes": 1435444,
+    "sha256": "985b1cf191edc4946e17226c0e24984e65eed9437a7af754f09996850cf99573",
+    "expected_sha256": "985b1cf191edc4946e17226c0e24984e65eed9437a7af754f09996850cf99573"
+  }
+]

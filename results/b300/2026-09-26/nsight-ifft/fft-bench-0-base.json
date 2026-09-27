@@ -1,0 +1,11 @@
+{
+  "name": "fft-bench-0-base",
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "/study/bin/base/fft_probe",
+    "bench",
+    "unused",
+    "/study/fft-bench-0-base/probe.json"
+  ]
+}

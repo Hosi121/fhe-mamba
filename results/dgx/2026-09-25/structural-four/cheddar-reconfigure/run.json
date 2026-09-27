@@ -2,9 +2,9 @@
   "command": [
     "cmake",
     "-S",
-    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar",
+    "${HOME}/fhemamba/structural-four-20260925/cheddar",
     "-B",
-    "/home/kataiwa/fhemamba/structural-four-20260925/cheddar-build"
+    "${HOME}/fhemamba/structural-four-20260925/cheddar-build"
   ],
   "started_at_unix": 1790334553.8285377,
   "exit_code": 0,

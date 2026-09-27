@@ -12,11 +12,11 @@
     "issues": [
       "one or more experiments have an infrastructure failure",
       "one or more candidate artifacts did not pass",
-      "artifacts do not report the required 24 layers: /home/kataiwa/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json",
+      "artifacts do not report the required 24 layers: ${HOME}/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json",
       "maximum error missing exceeds 0.05",
       "not every artifact reports successful decryption for every token",
       "one or more artifacts do not prove zero intermediate decrypts",
-      "artifacts do not use required sync profile 'full': /home/kataiwa/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json"
+      "artifacts do not use required sync profile 'full': ${HOME}/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json"
     ],
     "passed": false,
     "required": true
@@ -32,7 +32,7 @@
     {
       "all_tokens_decrypt": false,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json"
+        "${HOME}/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json"
       ],
       "artifacts": [
         {
@@ -48,13 +48,13 @@
               "patch_set_sha256": "2a70798e869944af993ad467fac3a9cd26c34474ff16e5d0dadaeb1cd51a94b2",
               "sync_profile": "full"
             },
-            "library_path": "/home/kataiwa/fhe-deps/openfhe-fides/lib",
+            "library_path": "${HOME}/fhe-deps/openfhe-fides/lib",
             "platform": "dgx-spark",
             "schema_version": 1,
             "shared_libraries": {
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
-              "/home/kataiwa/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEbinfhe.so.1.4.2": "5163b9b10be5c8696071e138e2c1a95f370ab8b7bf7580309505cf70d75a918c",
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEcore.so.1.4.2": "0caf5f2eb6fcf0cc3e3a7ca95e5e88b987e8bec077a63033668a13320a13ae20",
+              "${HOME}/fhe-deps/openfhe-fides/lib/libOPENFHEpke.so.1.4.2": "43f79e2ef6229aca85628a795f44fb29a3831e9453543e2edc92e12d4d31be68"
             },
             "source_sha256": "db021eebf14e8e8301940517a6785821262cd5a940486fd3e6c6e9c707f7e233",
             "toolchain": {
@@ -68,7 +68,7 @@
             "tokens": 2
           },
           "passed": false,
-          "path": "/home/kataiwa/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json",
+          "path": "${HOME}/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json",
           "repo_commit": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.0c1d493c1546c40e",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "failed",
@@ -102,7 +102,7 @@
         "ARTIFACT_VERSION": "0.5.0",
         "AUTOREGRESSIVE_CLIENT_LOOP": "0",
         "AUTO_HEADROOM": "4",
-        "BINARY": "/home/kataiwa/fhemamba/norm-integration-20260921/spark/kernel/stage1_mamba2_decode_fideslib",
+        "BINARY": "${HOME}/fhemamba/norm-integration-20260921/spark/kernel/stage1_mamba2_decode_fideslib",
         "BINARY_SHA256": "59ebfc15a704b990c08db37137dde23829cb5e872491b7539011aea91623539b",
         "BSGS_REPLICAS": "auto",
         "CARRIED_HEADROOM": "0",
@@ -110,12 +110,12 @@
         "DEBUG_LAYER_ERRORS": "0",
         "DEBUG_NORMALIZED_STATE_BOOTSTRAP_RANGE": "0",
         "ENCODE_THREADS": "8",
-        "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba/norm-integration-20260921",
+        "FHEMAMBA_REMOTE_ROOT": "${HOME}/fhemamba/norm-integration-20260921",
         "FIDESLIB_SYNC_PROFILE": "full",
         "FIRST_MOD_SIZE": "60",
         "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
         "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
-        "INPUT_CHAIN": "/home/kataiwa/fhemamba/norm-integration-20260921/payload",
+        "INPUT_CHAIN": "${HOME}/fhemamba/norm-integration-20260921/payload",
         "INPUT_CHAIN_SHA256": "90ffd42aa49c998016117dd81452faa503e92ae5b8c70b7489b25880dcf691fe",
         "INTERLEAVED_REPLICATED_PROJECTION": "1",
         "LAYERS": "24",
@@ -138,7 +138,7 @@
         "REPLICATED_TRUE_BSGS": "1",
         "REPO_COMMIT": "f65c6778e23e0117ac0f9534ebd74936608c9dc0-dirty.0c1d493c1546c40e",
         "RESIDUAL_HEADROOM": "0",
-        "RESULTS_DIR": "/home/kataiwa/fhemamba/norm-integration-20260921/results",
+        "RESULTS_DIR": "${HOME}/fhemamba/norm-integration-20260921/results",
         "RING_DIM": "65536",
         "ROTATION_KEYS": "balanced",
         "ROTATION_KEY_GIB": "30",
@@ -154,8 +154,8 @@
       "gpu_wait_seconds": 5.1131286742165685,
       "infrastructure_ok": false,
       "issues": [
-        "artifact layer count mismatch for /home/kataiwa/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json: expected 24, got None",
-        "artifact sync profile mismatch for /home/kataiwa/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json: expected 'full', got None"
+        "artifact layer count mismatch for ${HOME}/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json: expected 24, got None",
+        "artifact sync profile mismatch for ${HOME}/fhemamba/norm-integration-20260921/results/m2_chain_scheduled-norm-full-chain-r1_l24_t2.json: expected 'full', got None"
       ],
       "max_abs_error": null,
       "name": "scheduled-norm-full-chain",

@@ -112,7 +112,7 @@ The opt-in native flag is `--joint-subring-encoding 1`, requiring
 `JOINT_PERIODIC_COEFFICIENTS=1`; the prompt-to-text launcher accepts the same
 two options without values. Native artifacts record both mode selection and
 the number of subring encodes. The isolated root is
-`/home/kataiwa/fhemamba/gate-subring-serial-20260922`; the 42.9-minute baseline root
+`${HOME}/fhemamba/gate-subring-serial-20260922`; the 42.9-minute baseline root
 remains intact.
 
 The smoke campaign compares off/on/on/off in independent processes using the

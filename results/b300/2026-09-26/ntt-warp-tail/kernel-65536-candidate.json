@@ -1,0 +1,10 @@
+{
+  "name": "kernel-65536-candidate",
+  "command": [
+    "/study/bin/candidate/ntt_warp_tail",
+    "/study/kernel-65536-candidate/probe.json",
+    "/study/golden/ring-65536.bin",
+    "65536"
+  ],
+  "timeout": 1200
+}

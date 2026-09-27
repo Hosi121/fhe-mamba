@@ -1,7 +1,7 @@
 {
   "command": [
-    "/home/kataiwa/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt-final",
-    "/home/kataiwa/fhemamba/mamba3-20260924/gpu-ntt-probe-final/native.json"
+    "${HOME}/fhemamba/mamba3-20260924/packed_plaintext_probe-gpu-ntt-final",
+    "${HOME}/fhemamba/mamba3-20260924/gpu-ntt-probe-final/native.json"
   ],
   "started_utc": "2026-09-24T02:13:49.664965+00:00",
   "binary_sha256": "55c97cf885e5901091dc177e04a401856c8106d4bc6a8fa0ab660d7e14e7bdae",

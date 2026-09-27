@@ -4,8 +4,8 @@
     "taskset",
     "-c",
     "15-19",
-    "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/probe-build/gpu_dual_ring",
-    "/home/kataiwa/fhemamba/gpu-dual-ring-20260926/qualification-1/probe.json",
+    "${HOME}/fhemamba/gpu-dual-ring-20260926/probe-build/gpu_dual_ring",
+    "${HOME}/fhemamba/gpu-dual-ring-20260926/qualification-1/probe.json",
     "qualification"
   ],
   "baseline_commit": "e6bde4d498582071a50e134e5046f09ba28e87dd",
@@ -19,7 +19,7 @@
   },
   "environment": {
     "OMP_NUM_THREADS": "4",
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   },
   "started_at_unix": 1790405006.4436502,
   "exit_code": 0,

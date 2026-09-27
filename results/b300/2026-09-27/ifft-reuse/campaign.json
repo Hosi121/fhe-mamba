@@ -1,0 +1,4518 @@
+{
+  "state": "completed",
+  "stage": "full-1-candidate",
+  "probes": [
+    {
+      "name": "exact-rns-32768-mamba3",
+      "report": {
+        "schema": "fhemamba-compact-rns-probe-v1",
+        "passed": true,
+        "ifft_cache_enabled": true,
+        "ifft_cache_hits": 226,
+        "ifft_cache_misses": 23,
+        "ifft_cache_bytes": 3412992,
+        "exact_rns_cases": 240,
+        "compact_cases": 35,
+        "fallback_cases": 205,
+        "encrypted_cases": 9,
+        "max_abs_error": 1.03277109086974e-12,
+        "prefetch": true,
+        "prefetch_workers": 2,
+        "ring_dimension": 32768,
+        "rns_strategy": "limb",
+        "batched_uploads": 0,
+        "fused_uploads": 0,
+        "timing_baseline": "full-rns-host",
+        "tolerance": 1e-06,
+        "mamba2": false,
+        "samples": [
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 4.287201,
+            "upload_ms": 1.114257
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 4.074467,
+            "upload_ms": 0.712037
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 3.991019,
+            "upload_ms": 0.742133
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 4.157725,
+            "upload_ms": 0.734706
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 4.035885,
+            "upload_ms": 0.778298
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 4.01588,
+            "upload_ms": 0.738921
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 4.048564,
+            "upload_ms": 0.698341
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 4.005111,
+            "upload_ms": 0.706234
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 4.187174,
+            "upload_ms": 0.714222
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.605893,
+            "upload_ms": 0.250699
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.641897,
+            "upload_ms": 0.215333
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.625053,
+            "upload_ms": 0.213458
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.587961,
+            "upload_ms": 0.2102
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.593008,
+            "upload_ms": 0.211219
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.594634,
+            "upload_ms": 0.214417
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.593786,
+            "upload_ms": 0.218389
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.597547,
+            "upload_ms": 0.217186
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.594408,
+            "upload_ms": 0.213422
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.604124,
+            "upload_ms": 0.238848
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.629865,
+            "upload_ms": 0.214566
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.599634,
+            "upload_ms": 0.217529
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.597014,
+            "upload_ms": 0.222264
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.607739,
+            "upload_ms": 0.215971
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.600102,
+            "upload_ms": 0.22537
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.597551,
+            "upload_ms": 0.229702
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.604352,
+            "upload_ms": 0.21801
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.625678,
+            "upload_ms": 0.22518
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 4.170459,
+            "upload_ms": 1.091189
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 4.034227,
+            "upload_ms": 0.739513
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 4.032357,
+            "upload_ms": 0.714023
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 4.004996,
+            "upload_ms": 0.733262
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 4.012724,
+            "upload_ms": 0.724332
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 4.019872,
+            "upload_ms": 0.701666
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 4.027509,
+            "upload_ms": 0.734171
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 4.002242,
+            "upload_ms": 0.718271
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 4.005805,
+            "upload_ms": 0.84655
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 2.962879,
+            "upload_ms": 0.524536
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 2.926401,
+            "upload_ms": 0.524128
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 2.965052,
+            "upload_ms": 0.497033
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 2.924502,
+            "upload_ms": 0.518423
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 2.975844,
+            "upload_ms": 0.51353
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 2.975792,
+            "upload_ms": 0.517903
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 2.941692,
+            "upload_ms": 0.545574
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 2.946513,
+            "upload_ms": 0.496882
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 2.940886,
+            "upload_ms": 0.527316
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.606963,
+            "upload_ms": 0.18778
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.599463,
+            "upload_ms": 0.176395
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.592816,
+            "upload_ms": 0.175687
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.59147,
+            "upload_ms": 0.176918
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.593324,
+            "upload_ms": 0.178281
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.586653,
+            "upload_ms": 0.222224
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.586078,
+            "upload_ms": 0.180336
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.605623,
+            "upload_ms": 0.177667
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.615434,
+            "upload_ms": 0.181323
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.600666,
+            "upload_ms": 0.195439
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.606106,
+            "upload_ms": 0.181917
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.618494,
+            "upload_ms": 0.184833
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.61589,
+            "upload_ms": 0.187064
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.618886,
+            "upload_ms": 0.19352
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.631704,
+            "upload_ms": 0.197579
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.605796,
+            "upload_ms": 0.191875
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.629515,
+            "upload_ms": 0.189894
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.600694,
+            "upload_ms": 0.196417
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 3.100722,
+            "upload_ms": 0.789449
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 2.985298,
+            "upload_ms": 0.510209
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 3.016017,
+            "upload_ms": 0.51803
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 3.025478,
+            "upload_ms": 0.516489
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 2.959742,
+            "upload_ms": 0.500881
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 2.928307,
+            "upload_ms": 0.506169
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 2.985778,
+            "upload_ms": 0.506599
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 2.980966,
+            "upload_ms": 0.499227
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 2.933166,
+            "upload_ms": 0.516589
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 1.904986,
+            "upload_ms": 0.307784
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 1.903658,
+            "upload_ms": 0.307307
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 1.917782,
+            "upload_ms": 0.293249
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 1.947886,
+            "upload_ms": 0.301281
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 1.909782,
+            "upload_ms": 0.293558
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 1.913086,
+            "upload_ms": 0.297606
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 1.916091,
+            "upload_ms": 0.308891
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 2.01291,
+            "upload_ms": 0.296008
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 2.088057,
+            "upload_ms": 0.300922
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.610369,
+            "upload_ms": 0.141842
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.619614,
+            "upload_ms": 0.125397
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.600119,
+            "upload_ms": 0.12754
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.620716,
+            "upload_ms": 0.131106
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.585684,
+            "upload_ms": 0.124757
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.590991,
+            "upload_ms": 0.125137
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.594492,
+            "upload_ms": 0.128834
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.59128,
+            "upload_ms": 0.127852
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.588717,
+            "upload_ms": 0.132187
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.604932,
+            "upload_ms": 0.14353
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.598124,
+            "upload_ms": 0.131277
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.59561,
+            "upload_ms": 0.132663
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.604787,
+            "upload_ms": 0.13481
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.597871,
+            "upload_ms": 0.135387
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.610188,
+            "upload_ms": 0.137139
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.602164,
+            "upload_ms": 0.137479
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.627603,
+            "upload_ms": 0.142785
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.623753,
+            "upload_ms": 0.135734
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 1.994944,
+            "upload_ms": 0.461421
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 1.930906,
+            "upload_ms": 0.312162
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 1.9078,
+            "upload_ms": 0.293886
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 1.914802,
+            "upload_ms": 0.295876
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 1.915214,
+            "upload_ms": 0.301388
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 2.049693,
+            "upload_ms": 0.305174
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 1.951915,
+            "upload_ms": 0.293596
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 1.928738,
+            "upload_ms": 0.299972
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 1.929882,
+            "upload_ms": 0.294573
+          }
+        ]
+      }
+    },
+    {
+      "name": "exact-rns-32768-mamba2",
+      "report": {
+        "schema": "fhemamba-compact-rns-probe-v1",
+        "passed": true,
+        "ifft_cache_enabled": true,
+        "ifft_cache_hits": 226,
+        "ifft_cache_misses": 23,
+        "ifft_cache_bytes": 3412992,
+        "exact_rns_cases": 240,
+        "compact_cases": 35,
+        "fallback_cases": 205,
+        "encrypted_cases": 9,
+        "max_abs_error": 7.74505459766317e-13,
+        "prefetch": true,
+        "prefetch_workers": 2,
+        "ring_dimension": 32768,
+        "rns_strategy": "limb",
+        "batched_uploads": 0,
+        "fused_uploads": 0,
+        "timing_baseline": "full-rns-host",
+        "tolerance": 1e-06,
+        "mamba2": true,
+        "samples": [
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 4.277425,
+            "upload_ms": 1.125218
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 4.015903,
+            "upload_ms": 0.733104
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 4.04133,
+            "upload_ms": 0.73447
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 4.031277,
+            "upload_ms": 0.700197
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 3.971254,
+            "upload_ms": 0.700455
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 3.973843,
+            "upload_ms": 0.685639
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 4.048672,
+            "upload_ms": 0.717561
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 3.984913,
+            "upload_ms": 0.706096
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 3.950421,
+            "upload_ms": 0.676792
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.60387,
+            "upload_ms": 0.228694
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.613724,
+            "upload_ms": 0.203568
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.580058,
+            "upload_ms": 0.202552
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.585244,
+            "upload_ms": 0.202952
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.58503,
+            "upload_ms": 0.202393
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.58221,
+            "upload_ms": 0.208677
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.586172,
+            "upload_ms": 0.205975
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.612059,
+            "upload_ms": 0.20949
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.591138,
+            "upload_ms": 0.206994
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.591849,
+            "upload_ms": 0.220873
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.591169,
+            "upload_ms": 0.276457
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.590037,
+            "upload_ms": 0.213274
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.590405,
+            "upload_ms": 0.212522
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.599391,
+            "upload_ms": 0.211257
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.589763,
+            "upload_ms": 0.212591
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.595016,
+            "upload_ms": 0.220059
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.600444,
+            "upload_ms": 0.217125
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.594527,
+            "upload_ms": 0.219796
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 4.185132,
+            "upload_ms": 1.063296
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 3.975103,
+            "upload_ms": 0.71947
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 4.029303,
+            "upload_ms": 0.750294
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 4.089097,
+            "upload_ms": 0.713913
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 4.055685,
+            "upload_ms": 0.770052
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 4.005108,
+            "upload_ms": 0.73623
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 4.062342,
+            "upload_ms": 0.702469
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 3.987619,
+            "upload_ms": 0.70178
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 4.047198,
+            "upload_ms": 0.71338
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 2.96443,
+            "upload_ms": 0.568833
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 2.923676,
+            "upload_ms": 0.521107
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 2.953337,
+            "upload_ms": 0.521574
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 2.978586,
+            "upload_ms": 0.494461
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 2.987716,
+            "upload_ms": 0.528685
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 2.984717,
+            "upload_ms": 0.511357
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 2.931851,
+            "upload_ms": 0.507573
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 2.993173,
+            "upload_ms": 0.503357
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 2.960493,
+            "upload_ms": 0.504049
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.593338,
+            "upload_ms": 0.191781
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.581724,
+            "upload_ms": 0.166868
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.580494,
+            "upload_ms": 0.16913
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.611403,
+            "upload_ms": 0.167941
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.59506,
+            "upload_ms": 0.168843
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.587513,
+            "upload_ms": 0.170185
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.608147,
+            "upload_ms": 0.17074
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.584716,
+            "upload_ms": 0.175857
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.578489,
+            "upload_ms": 0.172539
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.594402,
+            "upload_ms": 0.183679
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.595681,
+            "upload_ms": 0.174057
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.586266,
+            "upload_ms": 0.173946
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.580064,
+            "upload_ms": 0.182258
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.590648,
+            "upload_ms": 0.179871
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.58213,
+            "upload_ms": 0.177206
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.586774,
+            "upload_ms": 0.180836
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.593909,
+            "upload_ms": 0.181391
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.588129,
+            "upload_ms": 0.179756
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 2.996789,
+            "upload_ms": 0.688807
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 2.952982,
+            "upload_ms": 0.535411
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 2.963647,
+            "upload_ms": 0.51081
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 2.93264,
+            "upload_ms": 0.498697
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 3.065382,
+            "upload_ms": 0.519647
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 2.997631,
+            "upload_ms": 0.501093
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 2.985261,
+            "upload_ms": 0.516203
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 2.973241,
+            "upload_ms": 0.509642
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 2.932823,
+            "upload_ms": 0.499683
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 1.894444,
+            "upload_ms": 0.298113
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 1.890546,
+            "upload_ms": 0.296027
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 1.900562,
+            "upload_ms": 0.298455
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 1.913011,
+            "upload_ms": 0.302002
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 1.91275,
+            "upload_ms": 0.29668
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 1.89847,
+            "upload_ms": 0.312409
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 1.901248,
+            "upload_ms": 0.296497
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 1.906105,
+            "upload_ms": 0.295819
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 1.894591,
+            "upload_ms": 0.299199
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.600704,
+            "upload_ms": 0.140186
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.582241,
+            "upload_ms": 0.12455
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.585526,
+            "upload_ms": 0.123569
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.588879,
+            "upload_ms": 0.12247
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.582435,
+            "upload_ms": 0.12264
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.580175,
+            "upload_ms": 0.123849
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.598976,
+            "upload_ms": 0.122299
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.587216,
+            "upload_ms": 0.12244
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.58532,
+            "upload_ms": 0.126759
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 0.595937,
+            "upload_ms": 0.142111
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 0.594221,
+            "upload_ms": 0.129682
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 0.615145,
+            "upload_ms": 0.130992
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 0.589177,
+            "upload_ms": 0.132493
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 0.585907,
+            "upload_ms": 0.129007
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 0.589809,
+            "upload_ms": 0.125563
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 0.587623,
+            "upload_ms": 0.130838
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 0.600459,
+            "upload_ms": 0.142227
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 0.592457,
+            "upload_ms": 0.138638
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 1.971913,
+            "upload_ms": 0.467066
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 1.9264,
+            "upload_ms": 0.303147
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 1.903074,
+            "upload_ms": 0.304355
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 1.892769,
+            "upload_ms": 0.297205
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 1.907577,
+            "upload_ms": 0.306637
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 1.896618,
+            "upload_ms": 0.325305
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 1.908783,
+            "upload_ms": 0.31995
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 1.893727,
+            "upload_ms": 0.295929
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 1.88254,
+            "upload_ms": 0.295583
+          }
+        ]
+      }
+    },
+    {
+      "name": "exact-rns-65536-mamba3",
+      "report": {
+        "schema": "fhemamba-compact-rns-probe-v1",
+        "passed": true,
+        "ifft_cache_enabled": true,
+        "ifft_cache_hits": 226,
+        "ifft_cache_misses": 23,
+        "ifft_cache_bytes": 6820864,
+        "exact_rns_cases": 240,
+        "compact_cases": 35,
+        "fallback_cases": 205,
+        "encrypted_cases": 9,
+        "max_abs_error": 2.57904114731033e-12,
+        "prefetch": true,
+        "prefetch_workers": 2,
+        "ring_dimension": 65536,
+        "rns_strategy": "limb",
+        "batched_uploads": 0,
+        "fused_uploads": 0,
+        "timing_baseline": "full-rns-host",
+        "tolerance": 1e-06,
+        "mamba2": false,
+        "samples": [
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 9.004564,
+            "upload_ms": 1.608908
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 8.345648,
+            "upload_ms": 1.40487
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 8.324568,
+            "upload_ms": 1.309304
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 8.131044,
+            "upload_ms": 1.425107
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 8.221935,
+            "upload_ms": 1.425185
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 8.270987,
+            "upload_ms": 1.24919
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 8.261977,
+            "upload_ms": 1.388919
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 8.357285,
+            "upload_ms": 1.334003
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 8.208728,
+            "upload_ms": 1.349673
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.286752,
+            "upload_ms": 0.316448
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.301835,
+            "upload_ms": 0.265961
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.243232,
+            "upload_ms": 0.274581
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.272791,
+            "upload_ms": 0.27444
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.343846,
+            "upload_ms": 0.281545
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.283072,
+            "upload_ms": 0.280588
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.338115,
+            "upload_ms": 0.289269
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.703398,
+            "upload_ms": 0.314843
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.409682,
+            "upload_ms": 0.310672
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.388501,
+            "upload_ms": 0.327244
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.418886,
+            "upload_ms": 0.299932
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.369384,
+            "upload_ms": 0.289866
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.358985,
+            "upload_ms": 0.294434
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.387062,
+            "upload_ms": 0.288604
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.385242,
+            "upload_ms": 0.300206
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.329662,
+            "upload_ms": 0.291945
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.385917,
+            "upload_ms": 0.308283
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.376646,
+            "upload_ms": 0.269516
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 8.639236,
+            "upload_ms": 1.533217
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 8.336588,
+            "upload_ms": 1.326655
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 8.172685,
+            "upload_ms": 1.332218
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 8.318968,
+            "upload_ms": 1.449759
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 8.325413,
+            "upload_ms": 1.448517
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 8.104404,
+            "upload_ms": 1.278286
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 8.45724,
+            "upload_ms": 1.302385
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 8.306881,
+            "upload_ms": 1.274344
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 8.236023,
+            "upload_ms": 1.406816
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 6.063254,
+            "upload_ms": 0.982676
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 6.192511,
+            "upload_ms": 0.900202
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 6.039909,
+            "upload_ms": 0.926537
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 6.041717,
+            "upload_ms": 0.971876
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 6.046647,
+            "upload_ms": 0.924255
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 6.010513,
+            "upload_ms": 0.991028
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 6.135614,
+            "upload_ms": 0.921392
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 6.157652,
+            "upload_ms": 1.006529
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 6.220715,
+            "upload_ms": 0.975218
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.243197,
+            "upload_ms": 0.246333
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.258435,
+            "upload_ms": 0.221108
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.294415,
+            "upload_ms": 0.229076
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.24078,
+            "upload_ms": 0.226515
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.27793,
+            "upload_ms": 0.224211
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.28376,
+            "upload_ms": 0.227278
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.312673,
+            "upload_ms": 0.231831
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.312697,
+            "upload_ms": 0.230674
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.321669,
+            "upload_ms": 0.239442
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.333769,
+            "upload_ms": 0.25518
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.345374,
+            "upload_ms": 0.24598
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.310587,
+            "upload_ms": 0.245204
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.328529,
+            "upload_ms": 0.248158
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.346229,
+            "upload_ms": 0.249464
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.369348,
+            "upload_ms": 0.245326
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.322114,
+            "upload_ms": 0.24072
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.36799,
+            "upload_ms": 0.242528
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.36373,
+            "upload_ms": 0.238788
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 6.322031,
+            "upload_ms": 1.447663
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 5.975239,
+            "upload_ms": 0.982384
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 6.095112,
+            "upload_ms": 0.890125
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 6.054996,
+            "upload_ms": 0.95303
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 6.230527,
+            "upload_ms": 1.060318
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 5.939353,
+            "upload_ms": 0.944577
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 5.996766,
+            "upload_ms": 0.899153
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 5.973323,
+            "upload_ms": 0.909396
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 5.990446,
+            "upload_ms": 0.897004
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 3.85892,
+            "upload_ms": 0.549638
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 3.85944,
+            "upload_ms": 0.533033
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 4.001897,
+            "upload_ms": 0.54038
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 4.225481,
+            "upload_ms": 0.564426
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 3.880089,
+            "upload_ms": 0.548423
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 4.059583,
+            "upload_ms": 0.548411
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 3.894497,
+            "upload_ms": 0.558861
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 3.883642,
+            "upload_ms": 0.566018
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 3.877435,
+            "upload_ms": 0.549151
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.249489,
+            "upload_ms": 0.177748
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.244371,
+            "upload_ms": 0.160401
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.242599,
+            "upload_ms": 0.159454
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.24659,
+            "upload_ms": 0.161413
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.252039,
+            "upload_ms": 0.172848
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.252545,
+            "upload_ms": 0.162774
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.300588,
+            "upload_ms": 0.169586
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.278852,
+            "upload_ms": 0.171747
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.275615,
+            "upload_ms": 0.175565
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.292721,
+            "upload_ms": 0.210793
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.311978,
+            "upload_ms": 0.169594
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.313364,
+            "upload_ms": 0.175145
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.331837,
+            "upload_ms": 0.182431
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.350394,
+            "upload_ms": 0.179694
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.356965,
+            "upload_ms": 0.183461
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.337172,
+            "upload_ms": 0.177918
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.329175,
+            "upload_ms": 0.182453
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.330116,
+            "upload_ms": 0.180255
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 4.096982,
+            "upload_ms": 0.842228
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 3.898479,
+            "upload_ms": 0.551918
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 3.934586,
+            "upload_ms": 0.575246
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 3.965086,
+            "upload_ms": 0.547266
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 3.85536,
+            "upload_ms": 0.522034
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 3.887393,
+            "upload_ms": 0.54697
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 3.910318,
+            "upload_ms": 0.553753
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 3.899509,
+            "upload_ms": 0.575357
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 3.986312,
+            "upload_ms": 0.649924
+          }
+        ]
+      }
+    },
+    {
+      "name": "exact-rns-65536-mamba2",
+      "report": {
+        "schema": "fhemamba-compact-rns-probe-v1",
+        "passed": true,
+        "ifft_cache_enabled": true,
+        "ifft_cache_hits": 226,
+        "ifft_cache_misses": 23,
+        "ifft_cache_bytes": 6820864,
+        "exact_rns_cases": 240,
+        "compact_cases": 35,
+        "fallback_cases": 205,
+        "encrypted_cases": 9,
+        "max_abs_error": 1.45726486433517e-12,
+        "prefetch": true,
+        "prefetch_workers": 2,
+        "ring_dimension": 65536,
+        "rns_strategy": "limb",
+        "batched_uploads": 0,
+        "fused_uploads": 0,
+        "timing_baseline": "full-rns-host",
+        "tolerance": 1e-06,
+        "mamba2": true,
+        "samples": [
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 8.809113,
+            "upload_ms": 1.740588
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 8.278288,
+            "upload_ms": 1.414551
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 8.432459,
+            "upload_ms": 1.388186
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 8.155282,
+            "upload_ms": 1.433039
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 8.083747,
+            "upload_ms": 1.251857
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 8.134943,
+            "upload_ms": 1.414537
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 8.135486,
+            "upload_ms": 1.468676
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 8.092172,
+            "upload_ms": 1.228066
+          },
+          {
+            "level": 18,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 8.0425,
+            "upload_ms": 1.346614
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.21734,
+            "upload_ms": 0.302005
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.287441,
+            "upload_ms": 0.269422
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.219586,
+            "upload_ms": 0.269642
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.221099,
+            "upload_ms": 0.266688
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.236546,
+            "upload_ms": 0.272276
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.247438,
+            "upload_ms": 0.284129
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.254279,
+            "upload_ms": 0.283337
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.315247,
+            "upload_ms": 0.286805
+          },
+          {
+            "level": 18,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.296274,
+            "upload_ms": 0.293167
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.299923,
+            "upload_ms": 0.3174
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.30803,
+            "upload_ms": 0.291569
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.301302,
+            "upload_ms": 0.287149
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.344314,
+            "upload_ms": 0.287344
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.314815,
+            "upload_ms": 0.299138
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.338456,
+            "upload_ms": 0.295032
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.31144,
+            "upload_ms": 0.283163
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.311839,
+            "upload_ms": 0.29289
+          },
+          {
+            "level": 18,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.303451,
+            "upload_ms": 0.289836
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 8.485338,
+            "upload_ms": 1.512553
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 8.08958,
+            "upload_ms": 1.371553
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 8.174075,
+            "upload_ms": 1.321362
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 8.183447,
+            "upload_ms": 1.254106
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 8.240878,
+            "upload_ms": 1.34376
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 7.976123,
+            "upload_ms": 1.27142
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 8.149712,
+            "upload_ms": 1.293553
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 8.133473,
+            "upload_ms": 1.373428
+          },
+          {
+            "level": 18,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 8.103311,
+            "upload_ms": 1.508036
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 5.919287,
+            "upload_ms": 1.014869
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 6.10812,
+            "upload_ms": 0.954709
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 5.98843,
+            "upload_ms": 0.926776
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 5.919057,
+            "upload_ms": 0.947318
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 6.000691,
+            "upload_ms": 0.901533
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 5.993774,
+            "upload_ms": 0.980374
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 6.100715,
+            "upload_ms": 1.002009
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 5.971183,
+            "upload_ms": 0.992548
+          },
+          {
+            "level": 26,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 5.922289,
+            "upload_ms": 0.936699
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.207232,
+            "upload_ms": 0.23525
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.215703,
+            "upload_ms": 0.219319
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.216802,
+            "upload_ms": 0.222144
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.220479,
+            "upload_ms": 0.223281
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.279423,
+            "upload_ms": 0.228437
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.236284,
+            "upload_ms": 0.22927
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.519867,
+            "upload_ms": 0.232826
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.316215,
+            "upload_ms": 0.239242
+          },
+          {
+            "level": 26,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.30463,
+            "upload_ms": 0.243175
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.31073,
+            "upload_ms": 0.256557
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.317225,
+            "upload_ms": 0.250747
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.348533,
+            "upload_ms": 0.236578
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.302597,
+            "upload_ms": 0.244517
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.303626,
+            "upload_ms": 0.242681
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.326222,
+            "upload_ms": 0.24334
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.37007,
+            "upload_ms": 0.242121
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.29741,
+            "upload_ms": 0.246575
+          },
+          {
+            "level": 26,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.352465,
+            "upload_ms": 0.242889
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 6.283223,
+            "upload_ms": 1.185685
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 5.999016,
+            "upload_ms": 0.897371
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 5.967037,
+            "upload_ms": 0.981754
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 5.964046,
+            "upload_ms": 0.914223
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 6.002061,
+            "upload_ms": 0.997057
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 6.191575,
+            "upload_ms": 0.984998
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 5.992176,
+            "upload_ms": 0.919297
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 5.97343,
+            "upload_ms": 0.908598
+          },
+          {
+            "level": 26,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 6.009409,
+            "upload_ms": 0.986626
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 3.872456,
+            "upload_ms": 0.548614
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 3.843282,
+            "upload_ms": 0.541395
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 3.85608,
+            "upload_ms": 0.540564
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 3.908005,
+            "upload_ms": 0.521328
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 3.872906,
+            "upload_ms": 0.552658
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 3.966376,
+            "upload_ms": 0.537882
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 3.861093,
+            "upload_ms": 0.549653
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 3.849154,
+            "upload_ms": 0.520187
+          },
+          {
+            "level": 34,
+            "block": 0,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 3.890609,
+            "upload_ms": 0.568377
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.212158,
+            "upload_ms": 0.177178
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.27422,
+            "upload_ms": 0.160216
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.272807,
+            "upload_ms": 0.160383
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.272466,
+            "upload_ms": 0.163593
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.240556,
+            "upload_ms": 0.16485
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.232904,
+            "upload_ms": 0.163618
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.234631,
+            "upload_ms": 0.167921
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.300178,
+            "upload_ms": 0.170364
+          },
+          {
+            "level": 34,
+            "block": 1,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.300655,
+            "upload_ms": 0.178214
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": -1,
+            "compact": true,
+            "encode_ms": 1.311295,
+            "upload_ms": 0.197822
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 0,
+            "compact": true,
+            "encode_ms": 1.342031,
+            "upload_ms": 0.187232
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 1,
+            "compact": true,
+            "encode_ms": 1.296217,
+            "upload_ms": 0.172546
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 2,
+            "compact": true,
+            "encode_ms": 1.330679,
+            "upload_ms": 0.17462
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 3,
+            "compact": true,
+            "encode_ms": 1.318389,
+            "upload_ms": 0.186036
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 4,
+            "compact": true,
+            "encode_ms": 1.31019,
+            "upload_ms": 0.186686
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 5,
+            "compact": true,
+            "encode_ms": 1.299598,
+            "upload_ms": 0.172277
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 6,
+            "compact": true,
+            "encode_ms": 1.349251,
+            "upload_ms": 0.190431
+          },
+          {
+            "level": 34,
+            "block": 2,
+            "iteration": 7,
+            "compact": true,
+            "encode_ms": 1.370489,
+            "upload_ms": 0.179452
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": -1,
+            "compact": false,
+            "encode_ms": 4.058348,
+            "upload_ms": 0.70159
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 0,
+            "compact": false,
+            "encode_ms": 3.819651,
+            "upload_ms": 0.556943
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 1,
+            "compact": false,
+            "encode_ms": 3.83062,
+            "upload_ms": 0.567445
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 2,
+            "compact": false,
+            "encode_ms": 3.913877,
+            "upload_ms": 0.549916
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 3,
+            "compact": false,
+            "encode_ms": 3.910442,
+            "upload_ms": 0.545818
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 4,
+            "compact": false,
+            "encode_ms": 3.855354,
+            "upload_ms": 0.544189
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 5,
+            "compact": false,
+            "encode_ms": 3.925922,
+            "upload_ms": 0.538243
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 6,
+            "compact": false,
+            "encode_ms": 3.834223,
+            "upload_ms": 0.547079
+          },
+          {
+            "level": 34,
+            "block": 3,
+            "iteration": 7,
+            "compact": false,
+            "encode_ms": 3.876245,
+            "upload_ms": 0.543437
+          }
+        ]
+      }
+    }
+  ],
+  "samples": {
+    "prefix": [
+      {
+        "name": "prefix-0-base",
+        "variant": "base",
+        "native": {
+          "schema": "fhemamba-packed-result-v1",
+          "backend": "fideslib",
+          "encrypted": true,
+          "security": "not-set",
+          "passed": true,
+          "slots": 16384,
+          "ring_dimension": 32768,
+          "depth": 44,
+          "scale_bits": 59,
+          "refresh_ring_dimension": 65536,
+          "gpu_dual_ring": true,
+          "ring_switch_up_calls": 8,
+          "ring_switch_down_calls": 16,
+          "nodes": 402,
+          "setup_seconds": 70.074552066,
+          "frontier_refresh": true,
+          "s2c_first": true,
+          "hoist_rotations": true,
+          "share_chebyshev": true,
+          "rotation_batch_edges": 630,
+          "rotation_batch_preparations": 402,
+          "rotation_sibling_batches": 87,
+          "shared_basis_hits": 3,
+          "shared_basis_invalidations": 0,
+          "gpu_plaintext_rns": true,
+          "compact_rns_encodes": 3771,
+          "compact_rns_uploads": 3771,
+          "compact_rns_fallbacks": 123,
+          "compact_rns_saved_host_bytes": 20586692608,
+          "refresh_ceiling": 35,
+          "refreshed_level": 18,
+          "frontier_deferrals": 167,
+          "maximum_ready_nodes": 16,
+          "evaluated_nodes": 394,
+          "eval_seconds": 7.735296812,
+          "bootstrap_seconds": 1.091235898,
+          "bootstraps": 16,
+          "ct_ct_mul": 649,
+          "ct_pt_mul": 6872,
+          "rotations": 2731,
+          "refresh_rotations": 114,
+          "rotation_decomposition": "naf",
+          "reuse_dead_inputs": true,
+          "lifetime_clones_eliminated": 183,
+          "compact_weights": true,
+          "public_weight_count": 7354368,
+          "public_weight_bytes": 14708736,
+          "bf16_weight_count": 7354368,
+          "linear_method": "replicated-bsgs",
+          "routing_method": "radix8-bsgs32",
+          "refresh_policy": "planned",
+          "bootstrap_passes": 2,
+          "batch_refresh": true,
+          "logical_refreshes": 27,
+          "planned_logical_refreshes": 20,
+          "refresh_batches": 6,
+          "largest_refresh_batch": 9,
+          "profile_evaluation": true,
+          "inplace_ops": true,
+          "cache_plaintexts": true,
+          "fast_plaintext_upload": true,
+          "direct_plaintext_upload": true,
+          "direct_plaintext_uploads": 123,
+          "gpu_plaintext_ntt": true,
+          "move_plaintext_coefficients": true,
+          "moved_coefficient_encodes": 3894,
+          "borrow_plaintext_upload": true,
+          "borrowed_plaintext_uploads": 123,
+          "bsgs_routing_stages": true,
+          "optimized_routing_stages": 84,
+          "routing_stage_rotations_saved": 456,
+          "plaintext_ntt_batch": 16,
+          "gpu_ntt_encodes": 3894,
+          "fast_plaintext_uploads": 3894,
+          "plaintext_upload_seconds": 0.961365424,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 0,
+          "plaintext_cache_capacity": 64,
+          "plaintext_cache_entries": 64,
+          "plaintext_cache_hits": 421,
+          "plaintext_cache_misses": 1211,
+          "plaintext_cache_bypasses": 2580,
+          "plaintext_cache_evictions": 1147,
+          "scratch_clones_eliminated": 8631,
+          "owned_arithmetic_calls": 6337,
+          "owned_arithmetic_reused_inputs": 12674,
+          "owned_arithmetic_cloned_inputs": 0,
+          "square_arithmetic_calls": 242,
+          "square_arithmetic_reused_inputs": 15,
+          "square_arithmetic_cloned_inputs": 227,
+          "host_encoding_seconds": 4.633678209,
+          "prefetch_plaintexts": true,
+          "prefetch_workers": 2,
+          "prefetched_encodes": 2562,
+          "prefetch_groups": 12,
+          "prefetch_peak_ready": 2,
+          "prefetch_max_item_bytes": 393216,
+          "prefetch_wait_seconds": 0.77794147,
+          "host_encodes": 3894,
+          "mask_preparation_seconds": 0.225583665,
+          "max_abs_error_vs_polynomial": 8.01265207073e-07,
+          "max_abs_error_vs_exact": 1.97065755376e-05,
+          "non_finite": 0,
+          "polynomial_tolerance": 0.001,
+          "exact_tolerance": 0.001,
+          "peak_rss_gib": 26.1182632446,
+          "per_output_errors": [
+            {
+              "polynomial": 2.02188521418e-07,
+              "exact": 2.28109642109e-06
+            },
+            {
+              "polynomial": 1.9385831368e-07,
+              "exact": 1.97065755376e-05
+            },
+            {
+              "polynomial": 8.01265207073e-07,
+              "exact": 1.32877235668e-05
+            }
+          ],
+          "evaluation_decryptions": 0,
+          "client_output_decrypt_count": 2,
+          "generated_token_ids": [
+            6864,
+            6864
+          ],
+          "client_logit_margins": [
+            5.730485398,
+            5.21146368605
+          ],
+          "operation_stats": {
+            "add": {
+              "nodes": 41,
+              "seconds": 0.003323948,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "addp": {
+              "nodes": 26,
+              "seconds": 0.165222923,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "cheb": {
+              "nodes": 40,
+              "seconds": 1.80737529,
+              "bootstrap_seconds": 0.480408073,
+              "bootstraps": 8
+            },
+            "feedback": {
+              "nodes": 1,
+              "seconds": 0.369392706,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "gather": {
+              "nodes": 47,
+              "seconds": 0.684088984,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "input": {
+              "nodes": 2,
+              "seconds": 0.241030248,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "linear": {
+              "nodes": 4,
+              "seconds": 0.935166386,
+              "bootstrap_seconds": 0.124440809,
+              "bootstraps": 2
+            },
+            "linear_ref": {
+              "nodes": 8,
+              "seconds": 1.684334776,
+              "bootstrap_seconds": 0.105081617,
+              "bootstraps": 2
+            },
+            "mul": {
+              "nodes": 93,
+              "seconds": 0.059106403,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "mulp": {
+              "nodes": 44,
+              "seconds": 0.035643082,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "public": {
+              "nodes": 1,
+              "seconds": 0.141103516,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "repeat": {
+              "nodes": 33,
+              "seconds": 0.379218962,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "scatter": {
+              "nodes": 33,
+              "seconds": 0.982072839,
+              "bootstrap_seconds": 0.381305399,
+              "bootstraps": 4
+            },
+            "sum": {
+              "nodes": 21,
+              "seconds": 0.244623038,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            }
+          },
+          "scope": "encrypted backbone with inline client vocabulary head and actual greedy feedback"
+        }
+      },
+      {
+        "name": "prefix-1-candidate",
+        "variant": "candidate",
+        "native": {
+          "schema": "fhemamba-packed-result-v1",
+          "backend": "fideslib",
+          "encrypted": true,
+          "security": "not-set",
+          "passed": true,
+          "slots": 16384,
+          "ring_dimension": 32768,
+          "depth": 44,
+          "scale_bits": 59,
+          "refresh_ring_dimension": 65536,
+          "gpu_dual_ring": true,
+          "ring_switch_up_calls": 8,
+          "ring_switch_down_calls": 16,
+          "nodes": 402,
+          "setup_seconds": 70.17415081,
+          "frontier_refresh": true,
+          "s2c_first": true,
+          "hoist_rotations": true,
+          "share_chebyshev": true,
+          "rotation_batch_edges": 630,
+          "rotation_batch_preparations": 402,
+          "rotation_sibling_batches": 87,
+          "shared_basis_hits": 3,
+          "shared_basis_invalidations": 0,
+          "gpu_plaintext_rns": true,
+          "compact_rns_encodes": 3771,
+          "compact_rns_uploads": 3771,
+          "compact_rns_fallbacks": 123,
+          "compact_rns_saved_host_bytes": 20586692608,
+          "refresh_ceiling": 35,
+          "refreshed_level": 18,
+          "frontier_deferrals": 167,
+          "maximum_ready_nodes": 16,
+          "evaluated_nodes": 394,
+          "eval_seconds": 7.473109619,
+          "bootstrap_seconds": 1.094820031,
+          "bootstraps": 16,
+          "ct_ct_mul": 649,
+          "ct_pt_mul": 6872,
+          "rotations": 2731,
+          "refresh_rotations": 114,
+          "rotation_decomposition": "naf",
+          "reuse_dead_inputs": true,
+          "lifetime_clones_eliminated": 183,
+          "compact_weights": true,
+          "public_weight_count": 7354368,
+          "public_weight_bytes": 14708736,
+          "bf16_weight_count": 7354368,
+          "linear_method": "replicated-bsgs",
+          "routing_method": "radix8-bsgs32",
+          "refresh_policy": "planned",
+          "bootstrap_passes": 2,
+          "batch_refresh": true,
+          "logical_refreshes": 27,
+          "planned_logical_refreshes": 20,
+          "refresh_batches": 6,
+          "largest_refresh_batch": 9,
+          "profile_evaluation": true,
+          "inplace_ops": true,
+          "cache_plaintexts": true,
+          "fast_plaintext_upload": true,
+          "direct_plaintext_upload": true,
+          "direct_plaintext_uploads": 123,
+          "gpu_plaintext_ntt": true,
+          "move_plaintext_coefficients": true,
+          "moved_coefficient_encodes": 3894,
+          "borrow_plaintext_upload": true,
+          "borrowed_plaintext_uploads": 123,
+          "bsgs_routing_stages": true,
+          "optimized_routing_stages": 84,
+          "routing_stage_rotations_saved": 456,
+          "plaintext_ntt_batch": 16,
+          "gpu_ntt_encodes": 3894,
+          "fast_plaintext_uploads": 3894,
+          "plaintext_upload_seconds": 0.93469346,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 0,
+          "plaintext_cache_capacity": 64,
+          "plaintext_cache_entries": 64,
+          "plaintext_cache_hits": 421,
+          "plaintext_cache_misses": 1211,
+          "plaintext_cache_bypasses": 2580,
+          "plaintext_cache_evictions": 1147,
+          "scratch_clones_eliminated": 8631,
+          "owned_arithmetic_calls": 6337,
+          "owned_arithmetic_reused_inputs": 12674,
+          "owned_arithmetic_cloned_inputs": 0,
+          "square_arithmetic_calls": 242,
+          "square_arithmetic_reused_inputs": 15,
+          "square_arithmetic_cloned_inputs": 227,
+          "host_encoding_seconds": 4.228534839,
+          "prefetch_plaintexts": true,
+          "prefetch_workers": 2,
+          "prefetched_encodes": 2562,
+          "prefetch_groups": 12,
+          "prefetch_peak_ready": 2,
+          "prefetch_max_item_bytes": 393216,
+          "prefetch_wait_seconds": 0.581300745,
+          "ifft_cache_mib": 4096,
+          "ifft_cache_hits": 1708,
+          "ifft_cache_misses": 854,
+          "ifft_cache_bypasses": 0,
+          "ifft_cache_entries": 854,
+          "ifft_cache_bytes": 223870976,
+          "ifft_cache_peak_bytes": 223870976,
+          "host_encodes": 3894,
+          "mask_preparation_seconds": 0.243842695,
+          "max_abs_error_vs_polynomial": 6.97130683611e-07,
+          "max_abs_error_vs_exact": 1.95361454365e-05,
+          "non_finite": 0,
+          "polynomial_tolerance": 0.001,
+          "exact_tolerance": 0.001,
+          "peak_rss_gib": 26.1179962158,
+          "per_output_errors": [
+            {
+              "polynomial": 3.11198781217e-07,
+              "exact": 2.18744686009e-06
+            },
+            {
+              "polynomial": 2.26396807079e-07,
+              "exact": 1.95361454365e-05
+            },
+            {
+              "polynomial": 6.97130683611e-07,
+              "exact": 1.3610150317e-05
+            }
+          ],
+          "evaluation_decryptions": 0,
+          "client_output_decrypt_count": 2,
+          "generated_token_ids": [
+            6864,
+            6864
+          ],
+          "client_logit_margins": [
+            5.730482197,
+            5.21146996709
+          ],
+          "operation_stats": {
+            "add": {
+              "nodes": 41,
+              "seconds": 0.003690863,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "addp": {
+              "nodes": 26,
+              "seconds": 0.167283399,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "cheb": {
+              "nodes": 40,
+              "seconds": 1.822345521,
+              "bootstrap_seconds": 0.482651575,
+              "bootstraps": 8
+            },
+            "feedback": {
+              "nodes": 1,
+              "seconds": 0.329391856,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "gather": {
+              "nodes": 47,
+              "seconds": 0.688354888,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "input": {
+              "nodes": 2,
+              "seconds": 0.238215398,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "linear": {
+              "nodes": 4,
+              "seconds": 0.999224634,
+              "bootstrap_seconds": 0.124177493,
+              "bootstraps": 2
+            },
+            "linear_ref": {
+              "nodes": 8,
+              "seconds": 1.38431349,
+              "bootstrap_seconds": 0.104970693,
+              "bootstraps": 2
+            },
+            "mul": {
+              "nodes": 93,
+              "seconds": 0.057308884,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "mulp": {
+              "nodes": 44,
+              "seconds": 0.037335431,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "public": {
+              "nodes": 1,
+              "seconds": 0.135044223,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "repeat": {
+              "nodes": 33,
+              "seconds": 0.378740717,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "scatter": {
+              "nodes": 33,
+              "seconds": 0.984116772,
+              "bootstrap_seconds": 0.38302027,
+              "bootstraps": 4
+            },
+            "sum": {
+              "nodes": 21,
+              "seconds": 0.244156043,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            }
+          },
+          "scope": "encrypted backbone with inline client vocabulary head and actual greedy feedback"
+        }
+      }
+    ],
+    "full": [
+      {
+        "name": "full-0-base",
+        "variant": "base",
+        "native": {
+          "schema": "fhemamba-packed-result-v1",
+          "backend": "fideslib",
+          "encrypted": true,
+          "security": "not-set",
+          "passed": true,
+          "slots": 16384,
+          "ring_dimension": 32768,
+          "depth": 44,
+          "scale_bits": 59,
+          "refresh_ring_dimension": 65536,
+          "gpu_dual_ring": true,
+          "ring_switch_up_calls": 242,
+          "ring_switch_down_calls": 484,
+          "nodes": 7910,
+          "setup_seconds": 69.471386985,
+          "frontier_refresh": true,
+          "s2c_first": true,
+          "hoist_rotations": true,
+          "share_chebyshev": true,
+          "rotation_batch_edges": 13560,
+          "rotation_batch_preparations": 8760,
+          "rotation_sibling_batches": 1860,
+          "shared_basis_hits": 60,
+          "shared_basis_invalidations": 0,
+          "gpu_plaintext_rns": true,
+          "compact_rns_encodes": 75712,
+          "compact_rns_uploads": 75712,
+          "compact_rns_fallbacks": 2657,
+          "compact_rns_saved_host_bytes": 338855723008,
+          "refresh_ceiling": 35,
+          "refreshed_level": 18,
+          "frontier_deferrals": 2980,
+          "maximum_ready_nodes": 17,
+          "evaluated_nodes": 7814,
+          "eval_seconds": 148.322526398,
+          "bootstrap_seconds": 37.831535659,
+          "bootstraps": 484,
+          "ct_ct_mul": 11540,
+          "ct_pt_mul": 135279,
+          "rotations": 66464,
+          "refresh_rotations": 12204,
+          "rotation_decomposition": "naf",
+          "reuse_dead_inputs": true,
+          "lifetime_clones_eliminated": 3898,
+          "compact_weights": true,
+          "public_weight_count": 88252416,
+          "public_weight_bytes": 176504832,
+          "bf16_weight_count": 88252416,
+          "linear_method": "replicated-bsgs",
+          "routing_method": "radix8-bsgs32",
+          "refresh_policy": "planned",
+          "bootstrap_passes": 2,
+          "batch_refresh": true,
+          "logical_refreshes": 1334,
+          "planned_logical_refreshes": 1212,
+          "refresh_batches": 210,
+          "largest_refresh_batch": 16,
+          "profile_evaluation": true,
+          "inplace_ops": true,
+          "cache_plaintexts": true,
+          "fast_plaintext_upload": true,
+          "direct_plaintext_upload": true,
+          "direct_plaintext_uploads": 2657,
+          "gpu_plaintext_ntt": true,
+          "move_plaintext_coefficients": true,
+          "moved_coefficient_encodes": 78369,
+          "borrow_plaintext_upload": true,
+          "borrowed_plaintext_uploads": 2657,
+          "bsgs_routing_stages": true,
+          "optimized_routing_stages": 1680,
+          "routing_stage_rotations_saved": 9120,
+          "plaintext_ntt_batch": 16,
+          "gpu_ntt_encodes": 78369,
+          "fast_plaintext_uploads": 78369,
+          "plaintext_upload_seconds": 18.023089497,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 0,
+          "plaintext_cache_capacity": 64,
+          "plaintext_cache_entries": 64,
+          "plaintext_cache_hits": 12896,
+          "plaintext_cache_misses": 24889,
+          "plaintext_cache_bypasses": 51545,
+          "plaintext_cache_evictions": 24825,
+          "scratch_clones_eliminated": 174446,
+          "owned_arithmetic_calls": 120756,
+          "owned_arithmetic_reused_inputs": 241512,
+          "owned_arithmetic_cloned_inputs": 0,
+          "square_arithmetic_calls": 4091,
+          "square_arithmetic_reused_inputs": 245,
+          "square_arithmetic_cloned_inputs": 3846,
+          "host_encoding_seconds": 92.411807385,
+          "prefetch_plaintexts": true,
+          "prefetch_workers": 2,
+          "prefetched_encodes": 51240,
+          "prefetch_groups": 240,
+          "prefetch_peak_ready": 2,
+          "prefetch_max_item_bytes": 393216,
+          "prefetch_wait_seconds": 17.629672754,
+          "host_encodes": 78369,
+          "mask_preparation_seconds": 4.849526459,
+          "max_abs_error_vs_polynomial": 7.024934634e-07,
+          "max_abs_error_vs_exact": 4.68527506339e-05,
+          "non_finite": 0,
+          "polynomial_tolerance": 0.001,
+          "exact_tolerance": 0.001,
+          "peak_rss_gib": 26.2911643982,
+          "per_output_errors": [
+            {
+              "polynomial": 4.34151512962e-07,
+              "exact": 3.14500374934e-05
+            },
+            {
+              "polynomial": 7.024934634e-07,
+              "exact": 2.11992836023e-05
+            },
+            {
+              "polynomial": 2.71260592169e-07,
+              "exact": 4.68527506339e-05
+            },
+            {
+              "polynomial": 3.12638463121e-07,
+              "exact": 3.33024149004e-05
+            },
+            {
+              "polynomial": 3.74328257502e-07,
+              "exact": 2.81151946453e-05
+            }
+          ],
+          "evaluation_decryptions": 0,
+          "client_output_decrypt_count": 4,
+          "generated_token_ids": [
+            315,
+            279,
+            1614,
+            315
+          ],
+          "client_logit_margins": [
+            1.89748659435,
+            2.90221719453,
+            0.201379460549,
+            0.674905579379
+          ],
+          "operation_stats": {
+            "add": {
+              "nodes": 888,
+              "seconds": 0.072658708,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "addp": {
+              "nodes": 473,
+              "seconds": 1.992191302,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "cheb": {
+              "nodes": 761,
+              "seconds": 47.878926208,
+              "bootstrap_seconds": 26.678189307,
+              "bootstraps": 340
+            },
+            "feedback": {
+              "nodes": 3,
+              "seconds": 1.104909476,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "gather": {
+              "nodes": 948,
+              "seconds": 13.058521641,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "input": {
+              "nodes": 2,
+              "seconds": 0.234640729,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "linear": {
+              "nodes": 48,
+              "seconds": 10.333010505,
+              "bootstrap_seconds": 0.92094407,
+              "bootstraps": 10
+            },
+            "linear_ref": {
+              "nodes": 192,
+              "seconds": 38.545845813,
+              "bootstrap_seconds": 1.61957497,
+              "bootstraps": 30
+            },
+            "mul": {
+              "nodes": 2014,
+              "seconds": 3.899912598,
+              "bootstrap_seconds": 2.921625527,
+              "bootstraps": 38
+            },
+            "mulp": {
+              "nodes": 778,
+              "seconds": 0.90513411,
+              "bootstrap_seconds": 0.309530967,
+              "bootstraps": 4
+            },
+            "public": {
+              "nodes": 12,
+              "seconds": 1.297161677,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "repeat": {
+              "nodes": 665,
+              "seconds": 8.978301333,
+              "bootstrap_seconds": 0.180905246,
+              "bootstraps": 2
+            },
+            "scatter": {
+              "nodes": 605,
+              "seconds": 14.341217463,
+              "bootstrap_seconds": 4.693299339,
+              "bootstraps": 52
+            },
+            "sum": {
+              "nodes": 425,
+              "seconds": 5.520564382,
+              "bootstrap_seconds": 0.507466233,
+              "bootstraps": 8
+            }
+          },
+          "scope": "encrypted backbone with inline client vocabulary head and actual greedy feedback"
+        }
+      },
+      {
+        "name": "full-1-candidate",
+        "variant": "candidate",
+        "native": {
+          "schema": "fhemamba-packed-result-v1",
+          "backend": "fideslib",
+          "encrypted": true,
+          "security": "not-set",
+          "passed": true,
+          "slots": 16384,
+          "ring_dimension": 32768,
+          "depth": 44,
+          "scale_bits": 59,
+          "refresh_ring_dimension": 65536,
+          "gpu_dual_ring": true,
+          "ring_switch_up_calls": 242,
+          "ring_switch_down_calls": 484,
+          "nodes": 7910,
+          "setup_seconds": 69.346096795,
+          "frontier_refresh": true,
+          "s2c_first": true,
+          "hoist_rotations": true,
+          "share_chebyshev": true,
+          "rotation_batch_edges": 13560,
+          "rotation_batch_preparations": 8760,
+          "rotation_sibling_batches": 1860,
+          "shared_basis_hits": 60,
+          "shared_basis_invalidations": 0,
+          "gpu_plaintext_rns": true,
+          "compact_rns_encodes": 75712,
+          "compact_rns_uploads": 75712,
+          "compact_rns_fallbacks": 2657,
+          "compact_rns_saved_host_bytes": 338855723008,
+          "refresh_ceiling": 35,
+          "refreshed_level": 18,
+          "frontier_deferrals": 2980,
+          "maximum_ready_nodes": 17,
+          "evaluated_nodes": 7814,
+          "eval_seconds": 144.098848468,
+          "bootstrap_seconds": 38.014825762,
+          "bootstraps": 484,
+          "ct_ct_mul": 11540,
+          "ct_pt_mul": 135279,
+          "rotations": 66464,
+          "refresh_rotations": 12204,
+          "rotation_decomposition": "naf",
+          "reuse_dead_inputs": true,
+          "lifetime_clones_eliminated": 3898,
+          "compact_weights": true,
+          "public_weight_count": 88252416,
+          "public_weight_bytes": 176504832,
+          "bf16_weight_count": 88252416,
+          "linear_method": "replicated-bsgs",
+          "routing_method": "radix8-bsgs32",
+          "refresh_policy": "planned",
+          "bootstrap_passes": 2,
+          "batch_refresh": true,
+          "logical_refreshes": 1334,
+          "planned_logical_refreshes": 1212,
+          "refresh_batches": 210,
+          "largest_refresh_batch": 16,
+          "profile_evaluation": true,
+          "inplace_ops": true,
+          "cache_plaintexts": true,
+          "fast_plaintext_upload": true,
+          "direct_plaintext_upload": true,
+          "direct_plaintext_uploads": 2657,
+          "gpu_plaintext_ntt": true,
+          "move_plaintext_coefficients": true,
+          "moved_coefficient_encodes": 78369,
+          "borrow_plaintext_upload": true,
+          "borrowed_plaintext_uploads": 2657,
+          "bsgs_routing_stages": true,
+          "optimized_routing_stages": 1680,
+          "routing_stage_rotations_saved": 9120,
+          "plaintext_ntt_batch": 16,
+          "gpu_ntt_encodes": 78369,
+          "fast_plaintext_uploads": 78369,
+          "plaintext_upload_seconds": 17.592903783,
+          "batched_rns_uploads": 0,
+          "fused_rns_uploads": 0,
+          "plaintext_cache_capacity": 64,
+          "plaintext_cache_entries": 64,
+          "plaintext_cache_hits": 12896,
+          "plaintext_cache_misses": 24889,
+          "plaintext_cache_bypasses": 51545,
+          "plaintext_cache_evictions": 24825,
+          "scratch_clones_eliminated": 174446,
+          "owned_arithmetic_calls": 120756,
+          "owned_arithmetic_reused_inputs": 241512,
+          "owned_arithmetic_cloned_inputs": 0,
+          "square_arithmetic_calls": 4091,
+          "square_arithmetic_reused_inputs": 245,
+          "square_arithmetic_cloned_inputs": 3846,
+          "host_encoding_seconds": 82.288635574,
+          "prefetch_plaintexts": true,
+          "prefetch_workers": 2,
+          "prefetched_encodes": 51240,
+          "prefetch_groups": 240,
+          "prefetch_peak_ready": 2,
+          "prefetch_max_item_bytes": 393216,
+          "prefetch_wait_seconds": 12.983467379,
+          "ifft_cache_mib": 4096,
+          "ifft_cache_hits": 40992,
+          "ifft_cache_misses": 10248,
+          "ifft_cache_bypasses": 0,
+          "ifft_cache_entries": 10248,
+          "ifft_cache_bytes": 2686451712,
+          "ifft_cache_peak_bytes": 2686451712,
+          "host_encodes": 78369,
+          "mask_preparation_seconds": 5.531187529,
+          "max_abs_error_vs_polynomial": 4.15354185383e-07,
+          "max_abs_error_vs_exact": 4.72353449883e-05,
+          "non_finite": 0,
+          "polynomial_tolerance": 0.001,
+          "exact_tolerance": 0.001,
+          "peak_rss_gib": 26.3335914612,
+          "per_output_errors": [
+            {
+              "polynomial": 3.6867905856e-07,
+              "exact": 3.14383354176e-05
+            },
+            {
+              "polynomial": 3.65665259017e-07,
+              "exact": 2.12717288823e-05
+            },
+            {
+              "polynomial": 4.15354185383e-07,
+              "exact": 4.72353449883e-05
+            },
+            {
+              "polynomial": 2.39257970741e-07,
+              "exact": 3.32216336592e-05
+            },
+            {
+              "polynomial": 1.8934317314e-07,
+              "exact": 2.81504848854e-05
+            }
+          ],
+          "evaluation_decryptions": 0,
+          "client_output_decrypt_count": 4,
+          "generated_token_ids": [
+            315,
+            279,
+            1614,
+            315
+          ],
+          "client_logit_margins": [
+            1.89748573975,
+            2.90221852619,
+            0.2013797297,
+            0.674904504842
+          ],
+          "operation_stats": {
+            "add": {
+              "nodes": 888,
+              "seconds": 0.074556461,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "addp": {
+              "nodes": 473,
+              "seconds": 2.014176443,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "cheb": {
+              "nodes": 761,
+              "seconds": 48.192859376,
+              "bootstrap_seconds": 26.76716624,
+              "bootstraps": 340
+            },
+            "feedback": {
+              "nodes": 3,
+              "seconds": 1.034025266,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "gather": {
+              "nodes": 948,
+              "seconds": 13.263020448,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "input": {
+              "nodes": 2,
+              "seconds": 0.229499097,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "linear": {
+              "nodes": 48,
+              "seconds": 11.079908897,
+              "bootstrap_seconds": 0.926375786,
+              "bootstraps": 10
+            },
+            "linear_ref": {
+              "nodes": 192,
+              "seconds": 32.57454666,
+              "bootstrap_seconds": 1.626748717,
+              "bootstraps": 30
+            },
+            "mul": {
+              "nodes": 2014,
+              "seconds": 3.951520437,
+              "bootstrap_seconds": 2.965760516,
+              "bootstraps": 38
+            },
+            "mulp": {
+              "nodes": 778,
+              "seconds": 0.920335424,
+              "bootstrap_seconds": 0.31244082,
+              "bootstraps": 4
+            },
+            "public": {
+              "nodes": 12,
+              "seconds": 1.416705466,
+              "bootstrap_seconds": 0,
+              "bootstraps": 0
+            },
+            "repeat": {
+              "nodes": 665,
+              "seconds": 9.040773014,
+              "bootstrap_seconds": 0.182417757,
+              "bootstraps": 2
+            },
+            "scatter": {
+              "nodes": 605,
+              "seconds": 14.487809723,
+              "bootstrap_seconds": 4.719692277,
+              "bootstraps": 52
+            },
+            "sum": {
+              "nodes": 425,
+              "seconds": 5.661304167,
+              "bootstrap_seconds": 0.514223649,
+              "bootstraps": 8
+            }
+          },
+          "scope": "encrypted backbone with inline client vocabulary head and actual greedy feedback"
+        }
+      }
+    ]
+  },
+  "prefix_comparison": {
+    "base": 7.735296812,
+    "candidate": 7.473109619,
+    "reduction": 0.033894910482718754
+  },
+  "full_comparison": {
+    "base": 148.322526398,
+    "candidate": 144.098848468,
+    "reduction": 0.02847630789854827
+  },
+  "decision": "retain experimental patch without promotion: full reduction <5%",
+  "finished_at_unix": 1790443289.6376452
+}

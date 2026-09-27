@@ -1,0 +1,4 @@
+{
+  "state": "failed",
+  "error": "Traceback (most recent call last):\n  File \"${HOME}/fhemamba-b300/b300-refresh-even-20260927/postflight.py\", line 58, in <module>\n    assert len(set(names)) == len(names), \"Duplicate archive member names\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Duplicate archive member names\n"
+}

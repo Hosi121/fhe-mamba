@@ -1,0 +1,12 @@
+[
+  {
+    "path": "${HOME}/fhemamba-b300/b300-refresh-even-20260927/backend-build-sources.tar.gz",
+    "bytes": 1241839,
+    "sha256": "d8e4f8fe3e31daf6286d210f8f529f29280c11509378f020ac285c7a9ee93309"
+  },
+  {
+    "path": "${HOME}/fhemamba-b300/b300-refresh-even-20260927/measured-product-sources.tar.gz",
+    "bytes": 217527,
+    "sha256": "71174ebc1b8bad07c74e3fcd18ddadbd1890215228cc32b2b5f26b5e715dcde4"
+  }
+]

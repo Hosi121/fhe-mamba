@@ -1,0 +1,35 @@
+{
+  "root": "${HOME}/fhemamba-b300/b300-fused-feed-20260927",
+  "files": [
+    {
+      "path": "bin/base/packed_fideslib",
+      "bytes": 17351920,
+      "sha256": "18a39be511317d3940a92ffdd62689fcc5774b8331db8c2a7564692c1784f16b"
+    },
+    {
+      "path": "bin/base/packed_rns_probe",
+      "bytes": 17060664,
+      "sha256": "5e9f0a3b8d565d1589c4a92404fcbfae1ef7d346da2ef35c233f2dcaf4b5c857"
+    },
+    {
+      "path": "bin/candidate/packed_fideslib",
+      "bytes": 17352056,
+      "sha256": "76deddfcce9550deefffa54f3a193a48faa525741e3511d29036d6fd08cb0ec4"
+    },
+    {
+      "path": "bin/candidate/packed_rns_probe",
+      "bytes": 17060800,
+      "sha256": "991e546c9d3507e2addb9b7c7de84262c81ba264a9821538d51b3045d61cac69"
+    },
+    {
+      "path": "nsys-candidate/trace.nsys-rep",
+      "bytes": 41349220,
+      "sha256": "ee3694fff86b531e35344d6d438ab3b327875dadec728caaa3314646a96c61e5"
+    },
+    {
+      "path": "nsys-candidate/trace.sqlite",
+      "bytes": 113295360,
+      "sha256": "39e57554a9c8dae29c10d8982e9b833be6a1ee318c66f5d13194ec832626d8b0"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "fft-bench-1-candidate",
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "/study/bin/candidate/fft_probe",
+    "bench",
+    "unused",
+    "/study/fft-bench-1-candidate/probe.json"
+  ]
+}

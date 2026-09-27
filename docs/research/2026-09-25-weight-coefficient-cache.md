@@ -135,8 +135,8 @@ it is not a claim that every public-weight cache is unhelpful.
 ## Evidence and reproduction
 
 [Raw runs, comparisons, source archives and failed attempts](../../results/dgx/2026-09-25/weight-coefficient-cache/)
-are preserved. `compare.py` independently reconstructs the rejection from
-native JSON and source/binary hashes. The baseline and all three prototype
+are preserved. The rejection is recorded with native JSON and source/binary
+identities; shared comparison utilities replace the one-off wrapper. The baseline and all three prototype
 source snapshots are included; `revision-3` is the final measured version.
 This rejected option is intentionally absent from the active runner and binary.
 

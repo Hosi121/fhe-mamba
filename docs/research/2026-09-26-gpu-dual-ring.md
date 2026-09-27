@@ -220,7 +220,7 @@ The [artifact directory](../../results/dgx/2026-09-26/gpu-dual-ring/) contains
 Each command uses its original frozen payload, four OpenMP threads and CPU
 affinity 15–19. The preceding ownership, routing, cache, GPU-RNS, S2C-first,
 rotation-sharing and basis-sharing flags are enabled in both modes; the
-candidate adds `--gpu-dual-ring`. Source archives retain the exact controller
+candidate adds `--gpu-dual-ring`. Source archives retain the recorded commands
 and probe revisions used at each stage, including the initial standalone
 qualification before the stronger asymmetric-half and NTT-oracle checks.
 

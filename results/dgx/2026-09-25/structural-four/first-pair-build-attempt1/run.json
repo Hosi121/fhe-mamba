@@ -2,7 +2,7 @@
   "command": [
     "cmake",
     "--build",
-    "/home/kataiwa/fhemamba/structural-four-20260925/backend/spark/kernel",
+    "${HOME}/fhemamba/structural-four-20260925/backend/spark/kernel",
     "--target",
     "packed_fideslib",
     "rotation_batch_probe",
@@ -15,6 +15,6 @@
   "wall_seconds": 5.857248783111572,
   "environment": {
     "OMP_NUM_THREADS": "4",
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64"
   }
 }

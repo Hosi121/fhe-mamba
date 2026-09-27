@@ -1,0 +1,14 @@
+{
+  "name": "exact-rns-32768-mamba2",
+  "command": [
+    "/study/bin/candidate/packed_rns_probe",
+    "/study/exact-rns-32768-mamba2/probe.json",
+    "--ring",
+    "32768",
+    "--strategy",
+    "limb",
+    "--prefetch",
+    "--mamba2"
+  ],
+  "timeout": 1200
+}

@@ -1,0 +1,14 @@
+{
+  "repository_pytest": {
+    "passed": 331,
+    "seconds": 47.59,
+    "provenance": "Observed during implementation before documentation-only and parameter-report metadata changes; not rerun for those edits."
+  },
+  "ruff_check": "passed",
+  "ruff_format_changed_python": "passed",
+  "git_diff_check": "passed",
+  "later_checks": [
+    "parameter report metadata rebuilt and rerun on B300",
+    "paper parity screen reproduced from the frozen full program"
+  ]
+}

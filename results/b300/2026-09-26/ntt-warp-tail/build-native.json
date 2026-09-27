@@ -1,0 +1,10 @@
+{
+  "name": "build-native",
+  "cpu_only": true,
+  "build": true,
+  "timeout": 1800,
+  "command": [
+    "bash",
+    "/study/build-native.sh"
+  ]
+}

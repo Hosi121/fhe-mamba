@@ -2,9 +2,9 @@
   "schema": "fhemamba-packed-run-v1",
   "started_utc": "2026-09-24T02:15:56.986342+00:00",
   "command": [
-    "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-gpu-ntt-final",
-    "/home/kataiwa/fhemamba/mamba3-20260924/payload/program.txt",
-    "/home/kataiwa/fhemamba/mamba3-20260924/gpu-encoding-synthetic-c1/native.json",
+    "${HOME}/fhemamba/mamba3-20260924/packed_fideslib-gpu-ntt-final",
+    "${HOME}/fhemamba/mamba3-20260924/payload/program.txt",
+    "${HOME}/fhemamba/mamba3-20260924/gpu-encoding-synthetic-c1/native.json",
     "0.001",
     "0.001",
     "--planned-refresh",

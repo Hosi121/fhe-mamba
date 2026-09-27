@@ -1,0 +1,43 @@
+{
+  "scope": "Nsight Systems and Compute analysis, one candidate implementation and small validation; if qualified, matched full-model comparison and adoption decision.",
+  "baseline_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c",
+  "security": "not-set",
+  "error_gates": {
+    "exact": 0.001,
+    "polynomial": 0.001
+  },
+  "generated_token_ids": [
+    315,
+    279,
+    1614,
+    315
+  ],
+  "comparison": "one GPU 4, OMP 4, CPU 64-68, NUMA 2; identical frozen input and cryptographic parameters",
+  "baseline_seconds": 265.158743764,
+  "transfer_policy": "No artificial bandwidth limit, per user steering; reuse existing remote large payloads.",
+  "candidate": "Precompute public inverse-FFT stage twiddles; no arithmetic reassociation or encoded-input cache.",
+  "qualification": {
+    "fft": "249 bitwise cases including fallback and nonfinite inputs",
+    "encoding": "192 successful exact integer encodes and 48 expected small-scale exceptions; both rings and real/complex contexts",
+    "prefix": "Independent-process ABBA, same counts and IDs, mean reduction > 0.5% for full follow-up",
+    "full": "Independent-process ABBA; unchanged error gates, counts and token IDs; report all samples and adoption decision"
+  },
+  "review_extension": {
+    "reason": "Baseline-only variation 9.641556189 to 13.775878348 seconds in first prefix ABBA",
+    "maximum_additional_prefixes": 4,
+    "settings_unchanged": true,
+    "include_original_samples": true
+  },
+  "local_checks": {
+    "command": "OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 CHECK_JOBS=2 scripts/run_checks.sh",
+    "passed": 292,
+    "coverage_percent": 87.6,
+    "native_contracts": 21
+  },
+  "input_sha256": {
+    "program.txt": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199",
+    "fixture.npz": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57",
+    "client_head.f32": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412",
+    "prefix_program": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917"
+  }
+}

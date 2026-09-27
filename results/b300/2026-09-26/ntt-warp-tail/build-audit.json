@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "backend_archives": {
+    "base": {
+      "sha256": "d6f4e44327ef3056d19e832f1c2d1191677fc09170e3d2cb6aefb6205de088f7",
+      "members": {
+        "Ciphertext.cpp.o#1": "fb2a15dfe7802199ae293c57248df8955cf98445b90679194ef709a58bc6efde",
+        "RNSPoly.cpp.o#1": "d7854df8c4b61a470b82a250b3c4afba6d3461ba3d8ec83746c162472cb82900",
+        "RNSPolyBatch.cpp.o#1": "9f2fc53d02b6b7a086871a93255cfd2fb140595428256a1a2bec1d608f31bab4",
+        "parallel_for.cpp.o#1": "84c169a26d19c61cbb7cdb307bf4323f57873c4caa9b430fbaec663878095deb",
+        "AddSub.cu.o#1": "879ae939550805ba814324f8a8ee23a79ef1655f6ca086090491fd2d667b7a8b",
+        "AccumulateBroadcast.cu.o#1": "85f317c0cbab16048adbba72f4abf33ff333b6a1dac7804fa61eb428b9deb9b6",
+        "ApproxModEval.cu.o#1": "f3b193329396bf5d17884f44fd4c111a76ad04e0e2c8a3c515cc3f89b23ae198",
+        "Bootstrap.cu.o#1": "ba0e6a2d8e6f1f2bcaebf781c9a5dc4e4369cc64dff5c9d798850dd35c4f1ecb",
+        "CoeffsToSlots.cu.o#1": "f8645ddc7880a63d5b4a0d186908cc13572f78e149e3d077c92bd08f8e30fba8",
+        "Context.cu.o#1": "dcc240372ca05be8803732126e13ceae6c83d61be3e047fbbf64485eff7dda86",
+        "Conv.cu.o#1": "fb984e5388467b4e641f1f30c29ba9634cbb2e063a9ed27210d998c234a8b954",
+        "ElemenwiseBatchKernels.cu.o#1": "6aff89dff5ff94ad6c64af82b53f6ac10ea736947e72f7da3db40fbe1aedf991",
+        "KeySwitchingKey.cu.o#1": "66bc7053a7ce06a9de63c06bab3c83590bc361d6b2c4474be6785767686e14fc",
+        "Limb.cu.o#1": "fbf58094a7ac25b333bd6f60e99cd3fa3916c9cd7d8b3ded7dd0644ef68566cd",
+        "LimbPartition.cu.o#1": "6d1c40ff0eefa50c0253a02470825be97ae3dfa17cb44ecd87b8f12fb1679e33",
+        "LimbPartitionBatch.cu.o#1": "9b835ab053eb986712d9197cb55b5065c3dcfac4215a78c7633f3682d6ef4c8e",
+        "LimbPartitionMGPU.cu.o#1": "5e33a8481c79bf032deaa8f013db95b1986bd366823dfe732e9e8933782a9e91",
+        "LinearTransform.cu.o#1": "809a4aec2edc028bd9178799e438ed247e5c7dd7e8e2e858c8ac4efd736cdac8",
+        "Parameters.cu.o#1": "d8a0d8163a115f70132e40724ea484a07ac780664c944315415b87187c59a1d9",
+        "Plaintext.cu.o#1": "9af825cd56bcee2c11c379037e27851e7809718fb02638415d4bd7baf5111e0a",
+        "Rescale.cu.o#1": "fcd2605289ae44c09153b418aeb683c7ac1ba6451e6996069f89977d65d0d1aa",
+        "ParameterSwitch.cu.o#1": "ecf98c92321ac73ac955d48a8d944a08a21048943b93fd0463736202eca5b0e9",
+        "RawCiphertext.cu.o#1": "4dfa1e996b188a9296dbe31a275b37c57fa2d5409fc8fe8ff4b98801d63cfeeb",
+        "ConstantsGPU.cu.o#1": "c15f0cee9fca3edc5a1f7958c3ba746134838fc3b8e2d4a92a08c893ab0c6246",
+        "CudaUtils.cu.o#1": "1407c27705fe2e691f05983ce8fd09f8912a966219e81cf2e768be0f9fa887b7",
+        "Math.cu.o#1": "3d96aa3446f6b59829a76b632602869b5875694abc8c989c52a80bdc34696e7f",
+        "ModMult.cu.o#1": "26e1dcf8b3a3fbd5cfd48bce6dfebae06364c5bf455563faaf501686bf0f16bd",
+        "NTT.cu.o#1": "bac2ae308db8d05fcc11e856574ab8cc00d2a0bbb8bdd03fd349c66e2278ec60",
+        "PeerUtils.cu.o#1": "1ed3f9b154601545c3b9b4011957516fbc404cd8c8375147d98c9c62d2859db9",
+        "PolyApprox.cu.o#1": "32a3061093d094e34054fcfc9c27bf4e0232a4ce8565f54ef7b32e5caf4f1df2",
+        "Rotation.cu.o#1": "911c84a4d290cdddb56637da732f8938db3cbf5428c97d228a0fa6355926d6c6",
+        "VectorGPU.cu.o#1": "a665aaef279061d603c6ba4deadf3107868836ba3f2ad5772925c35891a39c3b",
+        "CCParams.cpp.o#1": "ac4a78ac51aaf4bcc2fae4beb955ad2a283bd301ae463358d52051eace218722",
+        "Ciphertext.cpp.o#2": "f3bba045edcf13a885c538c520981a087e2445a0f36c02183514fecf37d2738b",
+        "CryptoContext.cpp.o#1": "fbcf10edd953ec138e23539f7a2e29b5f778361e3d2d30aae9316a977c8c3862",
+        "GenCryptoContext.cpp.o#1": "7f6fcdd24cbb1b8cd36595c5c7138df7fd0e26353da967c50c8b053a8a578815",
+        "Plaintext.cpp.o#1": "69f141d90de5af990081802756ab1934af7eed444d89215c247515032b5e55d9",
+        "Serialize.cpp.o#1": "11424bba1ea78be31c636919042eba25acaa07f526e26025e222b9f967719333",
+        "cmake_device_link.o#1": "1d54aa8b006f753e0f769b9b4679fa59ccdf7b4ca031c4ddd1d7050dea80b8f5"
+      }
+    },
+    "candidate": {
+      "sha256": "b04143dbf82487043646e52c811640961efec0dd7a514f5f273d7f94425d045d",
+      "members": {
+        "Ciphertext.cpp.o#1": "fb2a15dfe7802199ae293c57248df8955cf98445b90679194ef709a58bc6efde",
+        "RNSPoly.cpp.o#1": "d7854df8c4b61a470b82a250b3c4afba6d3461ba3d8ec83746c162472cb82900",
+        "RNSPolyBatch.cpp.o#1": "9f2fc53d02b6b7a086871a93255cfd2fb140595428256a1a2bec1d608f31bab4",
+        "parallel_for.cpp.o#1": "84c169a26d19c61cbb7cdb307bf4323f57873c4caa9b430fbaec663878095deb",
+        "AddSub.cu.o#1": "879ae939550805ba814324f8a8ee23a79ef1655f6ca086090491fd2d667b7a8b",
+        "AccumulateBroadcast.cu.o#1": "85f317c0cbab16048adbba72f4abf33ff333b6a1dac7804fa61eb428b9deb9b6",
+        "ApproxModEval.cu.o#1": "f3b193329396bf5d17884f44fd4c111a76ad04e0e2c8a3c515cc3f89b23ae198",
+        "Bootstrap.cu.o#1": "ba0e6a2d8e6f1f2bcaebf781c9a5dc4e4369cc64dff5c9d798850dd35c4f1ecb",
+        "CoeffsToSlots.cu.o#1": "f8645ddc7880a63d5b4a0d186908cc13572f78e149e3d077c92bd08f8e30fba8",
+        "Context.cu.o#1": "dcc240372ca05be8803732126e13ceae6c83d61be3e047fbbf64485eff7dda86",
+        "Conv.cu.o#1": "fb984e5388467b4e641f1f30c29ba9634cbb2e063a9ed27210d998c234a8b954",
+        "ElemenwiseBatchKernels.cu.o#1": "6aff89dff5ff94ad6c64af82b53f6ac10ea736947e72f7da3db40fbe1aedf991",
+        "KeySwitchingKey.cu.o#1": "66bc7053a7ce06a9de63c06bab3c83590bc361d6b2c4474be6785767686e14fc",
+        "Limb.cu.o#1": "fbf58094a7ac25b333bd6f60e99cd3fa3916c9cd7d8b3ded7dd0644ef68566cd",
+        "LimbPartition.cu.o#1": "6d1c40ff0eefa50c0253a02470825be97ae3dfa17cb44ecd87b8f12fb1679e33",
+        "LimbPartitionBatch.cu.o#1": "9b835ab053eb986712d9197cb55b5065c3dcfac4215a78c7633f3682d6ef4c8e",
+        "LimbPartitionMGPU.cu.o#1": "5e33a8481c79bf032deaa8f013db95b1986bd366823dfe732e9e8933782a9e91",
+        "LinearTransform.cu.o#1": "809a4aec2edc028bd9178799e438ed247e5c7dd7e8e2e858c8ac4efd736cdac8",
+        "Parameters.cu.o#1": "d8a0d8163a115f70132e40724ea484a07ac780664c944315415b87187c59a1d9",
+        "Plaintext.cu.o#1": "9af825cd56bcee2c11c379037e27851e7809718fb02638415d4bd7baf5111e0a",
+        "Rescale.cu.o#1": "fcd2605289ae44c09153b418aeb683c7ac1ba6451e6996069f89977d65d0d1aa",
+        "ParameterSwitch.cu.o#1": "ecf98c92321ac73ac955d48a8d944a08a21048943b93fd0463736202eca5b0e9",
+        "RawCiphertext.cu.o#1": "4dfa1e996b188a9296dbe31a275b37c57fa2d5409fc8fe8ff4b98801d63cfeeb",
+        "ConstantsGPU.cu.o#1": "c15f0cee9fca3edc5a1f7958c3ba746134838fc3b8e2d4a92a08c893ab0c6246",
+        "CudaUtils.cu.o#1": "1407c27705fe2e691f05983ce8fd09f8912a966219e81cf2e768be0f9fa887b7",
+        "Math.cu.o#1": "3d96aa3446f6b59829a76b632602869b5875694abc8c989c52a80bdc34696e7f",
+        "ModMult.cu.o#1": "26e1dcf8b3a3fbd5cfd48bce6dfebae06364c5bf455563faaf501686bf0f16bd",
+        "NTT.cu.o#1": "f315f5de3a36cadc1178f2c818be992374b32dfcdfca5a43bfefa40d4fb129c6",
+        "PeerUtils.cu.o#1": "1ed3f9b154601545c3b9b4011957516fbc404cd8c8375147d98c9c62d2859db9",
+        "PolyApprox.cu.o#1": "32a3061093d094e34054fcfc9c27bf4e0232a4ce8565f54ef7b32e5caf4f1df2",
+        "Rotation.cu.o#1": "911c84a4d290cdddb56637da732f8938db3cbf5428c97d228a0fa6355926d6c6",
+        "VectorGPU.cu.o#1": "a665aaef279061d603c6ba4deadf3107868836ba3f2ad5772925c35891a39c3b",
+        "CCParams.cpp.o#1": "ac4a78ac51aaf4bcc2fae4beb955ad2a283bd301ae463358d52051eace218722",
+        "Ciphertext.cpp.o#2": "f3bba045edcf13a885c538c520981a087e2445a0f36c02183514fecf37d2738b",
+        "CryptoContext.cpp.o#1": "fbcf10edd953ec138e23539f7a2e29b5f778361e3d2d30aae9316a977c8c3862",
+        "GenCryptoContext.cpp.o#1": "7f6fcdd24cbb1b8cd36595c5c7138df7fd0e26353da967c50c8b053a8a578815",
+        "Plaintext.cpp.o#1": "69f141d90de5af990081802756ab1934af7eed444d89215c247515032b5e55d9",
+        "Serialize.cpp.o#1": "11424bba1ea78be31c636919042eba25acaa07f526e26025e222b9f967719333",
+        "cmake_device_link.o#1": "c1c0530ecbcd276fa86355fbe381e9e5a8d116770bdce81f534a302cf979723d"
+      }
+    }
+  },
+  "changed_members": [
+    "NTT.cu.o#1",
+    "cmake_device_link.o#1"
+  ],
+  "backend_source_differences": [
+    {
+      "path": "src/NTT.cu",
+      "base_sha256": "1d7674f5773c88ea3515871519206b5571dd9b112be91145f336063921801484",
+      "candidate_sha256": "771379d29a0546406a0274da6e90c0f95af426395b22085d3cd141b70121c2b9"
+    }
+  ],
+  "verified_native_source_count": 99,
+  "binaries": {
+    "bin/base/ntt_warp_tail": "9b2cc7c2107e962770213feb27e4c655e2efc780022db7ec94dd623edeca4e14",
+    "bin/base/packed_fideslib": "2eb76e4eb31bf4fb57b0fbdf854b30fd66ca2ae3c08ce53bd5bd9dcd0da95696",
+    "bin/base/packed_rns_probe": "729060487d6cc798574f98396f5b1e352c9de3f7b4ba2a1cc4d735489228d8ec",
+    "bin/candidate/ntt_warp_tail": "97bca42d72d1ef534b321c371356e11c8e3c2e65506e7ce86b95351f2ab57d4e",
+    "bin/candidate/packed_fideslib": "a4376cce10c4af381109da93e839e639a89949e0040ea2d992f3240fc0acff56",
+    "bin/candidate/packed_rns_probe": "94cf2dc8d4c4bced81de99bebc4acc8d11448e77c37136546f4995e978652c6e"
+  }
+}

@@ -78,25 +78,13 @@ revision are retained. The corrected actual-encoding and benchmark runs pass.
 
 ## Reproduce and next decision
 
-Recalculate the recorded comparison without rebuilding:
-
-```bash
-python3 results/cpu/2026-09-25/encoding-range/compare.py
-```
-
-For a fresh CPU build and comparison, use an unused output directory:
-
-```bash
-python3 results/cpu/2026-09-25/encoding-range/reproduce.py \
-  runs/encoding-range-reproduction
-```
-
-Git, CMake and a C++20 GCC toolchain are required. The recipe fetches the pinned
-source, retains separate library variants, runs the exact comparison, then
-repeats the interleaved timings. It leaves its own build products for inspection.
-The original experiment's temporary checkout, builds, libraries and large
-reference stream have been removed after verification; portable evidence and
-both source revisions remain.
+The recorded samples, compiler commands, comparison and both encoder source
+revisions remain in the evidence bundle. The one-off build/comparison wrappers
+have been retired. A fresh reconstruction requires the pinned source, Git,
+CMake and a C++20 GCC toolchain, with separate library variants and the same
+exact-coefficient gate before interleaved timings. Use the
+[shared experiment workflow](../experiments.md) for job management and evidence
+verification; this historical prototype is not a supported one-command build.
 
 Target integration still needs a finite/invalid-input policy, the actual FIDESlib
 patch set, target exact-RNS checks and matched model controls. The modest local

@@ -1,0 +1,19 @@
+{
+  "verified_files": 191,
+  "source_audit_passed": true,
+  "rns_cases": 960,
+  "encrypted_cases": 36,
+  "model_reports": 10,
+  "decision": "adopt",
+  "prefix_comparison": {
+    "base": 8.883142608,
+    "candidate": 7.7274978794999996,
+    "reduction": 0.13009413216661048
+  },
+  "full_comparison": {
+    "base": 173.161013138,
+    "candidate": 148.80429257650002,
+    "reduction": 0.14065937892202662
+  },
+  "removed_stopped_containers": 18
+}

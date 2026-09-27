@@ -1,0 +1,362 @@
+{
+  "stage1": {
+    "means": {
+      "base": {
+        "eval_seconds": 168.45837858099998,
+        "host_encoding_seconds": 61.980140429,
+        "plaintext_upload_seconds": 16.815620844999998,
+        "bootstrap_seconds": 38.016340213,
+        "linear_node_seconds": 66.98225849800001,
+        "outside_linear_node_seconds": 101.47612008299997,
+        "operation_node_seconds": {
+          "add": 0.073687092,
+          "addp": 2.070266692,
+          "cheb": 48.260954388,
+          "feedback": 1.2316763125,
+          "gather": 13.44930918,
+          "input": 0.3105769295,
+          "linear": 14.240355948000001,
+          "linear_ref": 52.741902550000006,
+          "mul": 3.9160670035000003,
+          "mulp": 0.9239461405,
+          "public": 1.8200735319999999,
+          "repeat": 9.0510483185,
+          "scatter": 14.623041843,
+          "sum": 5.551927622499999
+        }
+      },
+      "candidate": {
+        "eval_seconds": 228.82835402950002,
+        "host_encoding_seconds": 114.50753962350001,
+        "plaintext_upload_seconds": 13.4633757595,
+        "bootstrap_seconds": 44.803568796,
+        "linear_node_seconds": 97.09199998099999,
+        "outside_linear_node_seconds": 131.73635404850003,
+        "operation_node_seconds": {
+          "add": 0.0943218975,
+          "addp": 3.460676426,
+          "cheb": 60.8520504025,
+          "feedback": 1.5463097495,
+          "gather": 19.343483509499997,
+          "input": 0.37658783100000004,
+          "linear": 19.9716991615,
+          "linear_ref": 77.12030081949999,
+          "mul": 4.5943101465,
+          "mulp": 1.3103107095,
+          "public": 2.092977685,
+          "repeat": 11.8806819135,
+          "scatter": 18.983808652999997,
+          "sum": 6.950269667000001
+        }
+      }
+    },
+    "eval_seconds_saved": -60.36997544850004,
+    "linear_node_seconds_saved": -30.10974148299998,
+    "outside_linear_node_seconds_saved": -30.260233965500063,
+    "fraction_of_observed_saving_in_linear_nodes": 0.4987535817152314,
+    "linear_node_reduction_fraction": -0.4495181583627702,
+    "outside_linear_node_reduction_fraction": -0.2982005415732236
+  },
+  "stage2": {
+    "means": {
+      "baseline": {
+        "eval_seconds": 234.8378234825,
+        "host_encoding_seconds": 114.360127614,
+        "plaintext_upload_seconds": 19.667564102,
+        "bootstrap_seconds": 45.089369171,
+        "linear_node_seconds": 101.08447096949999,
+        "outside_linear_node_seconds": 133.753352513,
+        "operation_node_seconds": {
+          "add": 0.093967929,
+          "addp": 3.427832916,
+          "cheb": 61.2328026525,
+          "feedback": 1.551859088,
+          "gather": 20.004533988,
+          "input": 0.3715953945,
+          "linear": 20.8027742465,
+          "linear_ref": 80.281696723,
+          "mul": 4.6083985415,
+          "mulp": 1.339782169,
+          "public": 2.0941645605,
+          "repeat": 12.2150707115,
+          "scatter": 19.478063675500003,
+          "sum": 7.0756901855
+        }
+      },
+      "candidate": {
+        "eval_seconds": 202.334880965,
+        "host_encoding_seconds": 110.27680394000001,
+        "plaintext_upload_seconds": 22.062466204,
+        "bootstrap_seconds": 44.2266442195,
+        "linear_node_seconds": 72.049639759,
+        "outside_linear_node_seconds": 130.285241206,
+        "operation_node_seconds": {
+          "add": 0.0921917455,
+          "addp": 3.2999821065,
+          "cheb": 59.790465265,
+          "feedback": 1.509848523,
+          "gather": 19.341886662,
+          "input": 0.36075273649999995,
+          "linear": 14.953963877,
+          "linear_ref": 57.095675881999995,
+          "mul": 4.5255498775,
+          "mulp": 1.3072578325,
+          "public": 2.0629872445000004,
+          "repeat": 11.9003112055,
+          "scatter": 18.919132357,
+          "sum": 6.919099686499999
+        },
+        "prefetch_wait_seconds": 33.3911344975
+      }
+    },
+    "eval_seconds_saved": 32.5029425175,
+    "linear_node_seconds_saved": 29.034831210499988,
+    "outside_linear_node_seconds_saved": 3.468111307000015,
+    "fraction_of_observed_saving_in_linear_nodes": 0.8932985435047076,
+    "linear_node_reduction_fraction": 0.28723334981157106,
+    "outside_linear_node_reduction_fraction": 0.025929154236810144
+  },
+  "pipeline_limits": {
+    "prefetched_fraction_of_host_encodes": 0.6538299582743177,
+    "serial_host_encodes_remaining": 27129,
+    "mean_prefetched_items_per_group": 213.5,
+    "max_three_payload_bytes": 1179648,
+    "eliminate_pop_wait_only_seconds_lower_bound_if_every_other_cost_fixed": 168.9437464675,
+    "eliminate_pop_wait_only_fraction_upper_bound_if_every_other_cost_fixed": 0.16502905647433086,
+    "all_linear_nodes_eliminated_seconds_lower_bound_if_other_costs_fixed": 130.285241206,
+    "current_seconds_per_generated_token": 50.58372024125,
+    "recurrence": {
+      "definitions": "e_i: producer service; c_i: consumer service through next pop; P_i: production completion; S_i: consumer pop/start; D_i: consumption completion; q: queue capacity. Nonpositive indices are zero; all times start at group entry.",
+      "producer": "P_i = max(P_(i-1), S_(i-q)) + e_i",
+      "consumer": "S_i = max(P_i, D_(i-1)); D_i = S_i + c_i",
+      "group_lower_bound": "D_n >= max(sum(e_i) + c_n, e_1 + sum(c_i))",
+      "group_saving_upper_bound": "sum(e_i+c_i) - D_n <= min(sum(e_i)-e_1, sum(c_i)-c_n)",
+      "assumptions": "Fixed per-item services and order, one producer, one consumer; omits launch/join/locking/scheduling and service changes from shared resources. No actual per-item e_i or c_i are available in these aggregate records."
+    },
+    "limits": [
+      "Counts do not weight encoding cost; the 65% count fraction is not 65% of CPU time.",
+      "pop time includes lock/wakeup/return work, not only waiting for encoding.",
+      "Removing pop time alone is conditional, not a prediction for a faster encoder.",
+      "host_encoding_seconds contains overlapped producer work; it is not removable wall time.",
+      "Linear node wall time includes some refresh; it cannot be added to bootstrap_seconds.",
+      "The three-payload bound excludes scratch, allocator retention and backend buffers."
+    ]
+  },
+  "same_retained_baseline_across_blocks": {
+    "eval_seconds": [
+      170.547219905,
+      166.369537257,
+      234.195144957,
+      235.480502008
+    ],
+    "max_over_min": 1.415406365194372,
+    "warning": "Do not subtract cross-block times as implementation speedups or normalize by guessed CPU clocks."
+  },
+  "cpu_observation_summary": {
+    "stage1-full-2-candidate": {
+      "samples": 63,
+      "samples_with_main_thread_mapping": 63,
+      "observed_span_seconds": 124.36652135848999,
+      "main_thread_processor_counts": {
+        "67": 63
+      },
+      "median_frequency_khz_at_last_processor": 2300000,
+      "main_thread_scheduled_seconds_in_observed_span": 123.280311853,
+      "main_thread_runqueue_seconds_in_observed_span": 0.104735586
+    },
+    "stage1-full-3-base": {
+      "samples": 135,
+      "samples_with_main_thread_mapping": 135,
+      "observed_span_seconds": 268.8483626842499,
+      "main_thread_processor_counts": {
+        "65": 38,
+        "67": 11,
+        "64": 86
+      },
+      "median_frequency_khz_at_last_processor": 4600000,
+      "main_thread_scheduled_seconds_in_observed_span": 267.343618458,
+      "main_thread_runqueue_seconds_in_observed_span": 0.372786463
+    },
+    "final-exact-serial-32768-mamba3": {
+      "samples": 3,
+      "samples_with_main_thread_mapping": 3,
+      "observed_span_seconds": 4.013466119766235,
+      "main_thread_processor_counts": {
+        "64": 3
+      },
+      "median_frequency_khz_at_last_processor": 4600000,
+      "main_thread_scheduled_seconds_in_observed_span": 3.706911429,
+      "main_thread_runqueue_seconds_in_observed_span": 0.022461491
+    },
+    "final-exact-serial-32768-mamba2": {
+      "samples": 5,
+      "samples_with_main_thread_mapping": 0,
+      "observed_span_seconds": 8.02098035812378,
+      "main_thread_processor_counts": {},
+      "median_frequency_khz_at_last_processor": null
+    },
+    "final-exact-serial-65536-mamba3": {
+      "samples": 8,
+      "samples_with_main_thread_mapping": 7,
+      "observed_span_seconds": 14.04950475692749,
+      "main_thread_processor_counts": {
+        "66": 7
+      },
+      "median_frequency_khz_at_last_processor": 2300000,
+      "main_thread_scheduled_seconds_in_observed_span": 11.505697039,
+      "main_thread_runqueue_seconds_in_observed_span": 0.04720323
+    },
+    "final-exact-serial-65536-mamba2": {
+      "samples": 7,
+      "samples_with_main_thread_mapping": 7,
+      "observed_span_seconds": 12.04386854171753,
+      "main_thread_processor_counts": {
+        "67": 7
+      },
+      "median_frequency_khz_at_last_processor": 2300000,
+      "main_thread_scheduled_seconds_in_observed_span": 11.515678653,
+      "main_thread_runqueue_seconds_in_observed_span": 0.059092209
+    },
+    "final-exact-prefetch-32768-mamba3": {
+      "samples": 5,
+      "samples_with_main_thread_mapping": 0,
+      "observed_span_seconds": 8.031278371810913,
+      "main_thread_processor_counts": {},
+      "median_frequency_khz_at_last_processor": null
+    },
+    "final-exact-prefetch-32768-mamba2": {
+      "samples": 3,
+      "samples_with_main_thread_mapping": 3,
+      "observed_span_seconds": 4.014613389968872,
+      "main_thread_processor_counts": {
+        "64": 1,
+        "65": 2
+      },
+      "median_frequency_khz_at_last_processor": 2300000,
+      "main_thread_scheduled_seconds_in_observed_span": 3.708418258,
+      "main_thread_runqueue_seconds_in_observed_span": 0.002238818
+    },
+    "final-exact-prefetch-65536-mamba3": {
+      "samples": 8,
+      "samples_with_main_thread_mapping": 0,
+      "observed_span_seconds": 14.067872524261475,
+      "main_thread_processor_counts": {},
+      "median_frequency_khz_at_last_processor": null
+    },
+    "final-exact-prefetch-65536-mamba2": {
+      "samples": 7,
+      "samples_with_main_thread_mapping": 7,
+      "observed_span_seconds": 12.062105178833008,
+      "main_thread_processor_counts": {
+        "66": 7
+      },
+      "median_frequency_khz_at_last_processor": 2300000,
+      "main_thread_scheduled_seconds_in_observed_span": 11.38407773,
+      "main_thread_runqueue_seconds_in_observed_span": 0.034669633
+    },
+    "final-exact-prefetch-omp1": {
+      "samples": 6,
+      "samples_with_main_thread_mapping": 6,
+      "observed_span_seconds": 10.052875280380249,
+      "main_thread_processor_counts": {
+        "65": 1,
+        "66": 5
+      },
+      "median_frequency_khz_at_last_processor": 2299988.0,
+      "main_thread_scheduled_seconds_in_observed_span": 9.704541291,
+      "main_thread_runqueue_seconds_in_observed_span": 0.018441966
+    },
+    "stage2-prefix-0-baseline": {
+      "samples": 48,
+      "samples_with_main_thread_mapping": 48,
+      "observed_span_seconds": 94.45676302909851,
+      "main_thread_processor_counts": {
+        "65": 37,
+        "66": 11
+      },
+      "median_frequency_khz_at_last_processor": 2300000.0,
+      "main_thread_scheduled_seconds_in_observed_span": 92.285251688,
+      "main_thread_runqueue_seconds_in_observed_span": 0.190085809
+    },
+    "stage2-prefix-1-candidate": {
+      "samples": 46,
+      "samples_with_main_thread_mapping": 46,
+      "observed_span_seconds": 90.46261930465698,
+      "main_thread_processor_counts": {
+        "66": 25,
+        "67": 19,
+        "64": 2
+      },
+      "median_frequency_khz_at_last_processor": 2300000.0,
+      "main_thread_scheduled_seconds_in_observed_span": 86.336050279,
+      "main_thread_runqueue_seconds_in_observed_span": 0.157229193
+    },
+    "stage2-prefix-2-candidate": {
+      "samples": 47,
+      "samples_with_main_thread_mapping": 0,
+      "observed_span_seconds": 92.46604657173157,
+      "main_thread_processor_counts": {},
+      "median_frequency_khz_at_last_processor": null
+    },
+    "stage2-prefix-3-baseline": {
+      "samples": 42,
+      "samples_with_main_thread_mapping": 0,
+      "observed_span_seconds": 82.4511330127716,
+      "main_thread_processor_counts": {},
+      "median_frequency_khz_at_last_processor": null
+    },
+    "stage2-full-0-baseline": {
+      "samples": 170,
+      "samples_with_main_thread_mapping": 170,
+      "observed_span_seconds": 339.79423809051514,
+      "main_thread_processor_counts": {
+        "67": 167,
+        "66": 3
+      },
+      "median_frequency_khz_at_last_processor": 2300000.0,
+      "main_thread_scheduled_seconds_in_observed_span": 338.061693628,
+      "main_thread_runqueue_seconds_in_observed_span": 0.320225267
+    },
+    "stage2-full-1-candidate": {
+      "samples": 154,
+      "samples_with_main_thread_mapping": 154,
+      "observed_span_seconds": 307.64332485198975,
+      "main_thread_processor_counts": {
+        "66": 49,
+        "65": 55,
+        "68": 32,
+        "64": 6,
+        "67": 12
+      },
+      "median_frequency_khz_at_last_processor": 2300000.0,
+      "main_thread_scheduled_seconds_in_observed_span": 274.033991511,
+      "main_thread_runqueue_seconds_in_observed_span": 0.230372832
+    },
+    "stage2-full-2-candidate": {
+      "samples": 145,
+      "samples_with_main_thread_mapping": 0,
+      "observed_span_seconds": 289.0779938697815,
+      "main_thread_processor_counts": {},
+      "median_frequency_khz_at_last_processor": null
+    },
+    "stage2-full-3-baseline": {
+      "samples": 171,
+      "samples_with_main_thread_mapping": 0,
+      "observed_span_seconds": 341.0218322277069,
+      "main_thread_processor_counts": {},
+      "median_frequency_khz_at_last_processor": null
+    }
+  },
+  "cpu_observation_limits": [
+    "Read-only sysfs/proc samples cover partial runs and include setup; no isolated eval frequency integral.",
+    "scaling_cur_freq is a point sample, not an effective-cycle measurement for the whole operation.",
+    "The observer resolves a container PID once on stage change; early lookup failures leave missing mappings.",
+    "Only the main thread is mapped; this is not a producer-thread frequency or scheduling measurement.",
+    "Late stage1 observations correlate fast/slow encoding with frequency; they do not prove all causes."
+  ],
+  "inputs_sha256": {
+    "stage1-status.json": "5f59b150ec1a2a00c75a0cac3fde174ded0db4c695859d321875de4d75f4563f",
+    "stage2-status.json": "bccd9617677166468f2c53a7a3554684d2a7f9c34ae03eb8fda1e6b0b7887bab",
+    "cpu-observations.jsonl": "4f67dac4fa1f13cac05802ef8014b32e4c2083efefcbac822fc4b405ac31343c"
+  }
+}

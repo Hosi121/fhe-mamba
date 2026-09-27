@@ -1,0 +1,7 @@
+{
+  "url": "https://developer.download.nvidia.com/devtools/repos/ubuntu2404/amd64/NsightSystems-linux-cli-public-2025.5.1.121-3638078.deb",
+  "sha256": "506a8a3fdd94cec84c4c216d159ce3a6496170e8cf22b95b603b4bef4e0fb6e2",
+  "bytes": 196140272,
+  "seconds": 8.72060050512664,
+  "scope": "Task-local extraction; no host package or driver settings changed."
+}

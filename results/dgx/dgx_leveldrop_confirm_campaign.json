@@ -9,7 +9,7 @@
     {
       "all_tokens_decrypt": true,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/m2_chain_sqnewton-dualref-statepost-a6-leveldrop-nodecrypt-balanced30-h4-cache5_l24_t2.json"
+        "${HOME}/fhemamba/results/m2_chain_sqnewton-dualref-statepost-a6-leveldrop-nodecrypt-balanced30-h4-cache5_l24_t2.json"
       ],
       "artifacts": [
         {
@@ -31,7 +31,7 @@
             ]
           },
           "passed": false,
-          "path": "/home/kataiwa/fhemamba/results/m2_chain_sqnewton-dualref-statepost-a6-leveldrop-nodecrypt-balanced30-h4-cache5_l24_t2.json",
+          "path": "${HOME}/fhemamba/results/m2_chain_sqnewton-dualref-statepost-a6-leveldrop-nodecrypt-balanced30-h4-cache5_l24_t2.json",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "failed",
           "timing": {

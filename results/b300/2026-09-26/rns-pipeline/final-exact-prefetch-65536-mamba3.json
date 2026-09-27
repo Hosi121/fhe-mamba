@@ -1,0 +1,13 @@
+{
+  "name": "final-exact-prefetch-65536-mamba3",
+  "timeout": 1200,
+  "command": [
+    "/study/bin/stage2/packed_rns_probe",
+    "/study/final-exact-prefetch-65536-mamba3/probe.json",
+    "--ring",
+    "65536",
+    "--strategy",
+    "limb",
+    "--prefetch"
+  ]
+}

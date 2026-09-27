@@ -2,9 +2,9 @@
   "schema": "fhemamba-packed-run-v1",
   "started_utc": "2026-09-23T20:08:46.630121+00:00",
   "command": [
-    "/home/kataiwa/fhemamba/mamba3-20260924/packed_fideslib-deepopt-final",
-    "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-payload/program.txt",
-    "/home/kataiwa/fhemamba/mamba3-20260924/deepopt-full-prefix-batch/native.json",
+    "${HOME}/fhemamba/mamba3-20260924/packed_fideslib-deepopt-final",
+    "${HOME}/fhemamba/mamba3-20260924/deepopt-full-prefix-payload/program.txt",
+    "${HOME}/fhemamba/mamba3-20260924/deepopt-full-prefix-batch/native.json",
     "0.001",
     "0.001",
     "--trace-levels",

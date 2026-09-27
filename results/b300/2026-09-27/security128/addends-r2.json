@@ -1,0 +1,65 @@
+{
+  "state": "passed",
+  "probes": [
+    "addends-rns-131072-real-r2",
+    "addends-rns-131072-complex-r2",
+    "addends-rns-32768-real-r2",
+    "addends-rns-32768-complex-r2",
+    "addends-rns-65536-real-r2",
+    "addends-rns-65536-complex-r2"
+  ],
+  "digit_decision": {
+    "screen": [
+      {
+        "digits": 5,
+        "eval_seconds": 18.292569183,
+        "bootstrap_seconds": 2.05096103
+      },
+      {
+        "digits": 6,
+        "eval_seconds": 18.654945889,
+        "bootstrap_seconds": 2.138837962
+      },
+      {
+        "digits": 4,
+        "eval_seconds": 18.387754287
+      }
+    ],
+    "rule": "require 3% prefix reduction to carry a digit candidate into full evaluation"
+  },
+  "selected_digits": 4,
+  "stage": "addends-prefix-combined-r2",
+  "control": {
+    "eval_seconds": 18.269015065,
+    "bootstrap_seconds": 1.976419184,
+    "compact_addend_encodes": 0,
+    "cache_hits": 421,
+    "cache_misses": 1211,
+    "cache_capacity": 64
+  },
+  "candidate": {
+    "eval_seconds": 16.075815982,
+    "bootstrap_seconds": 2.004894536,
+    "compact_addend_encodes": 103,
+    "cache_hits": 421,
+    "cache_misses": 1211,
+    "cache_capacity": 64
+  },
+  "cache": {
+    "eval_seconds": 16.258232726,
+    "bootstrap_seconds": 2.007747986,
+    "compact_addend_encodes": 0,
+    "cache_hits": 1186,
+    "cache_misses": 446,
+    "cache_capacity": 1024
+  },
+  "combined": {
+    "eval_seconds": 14.18527649,
+    "bootstrap_seconds": 2.034875812,
+    "compact_addend_encodes": 103,
+    "cache_hits": 1186,
+    "cache_misses": 446,
+    "cache_capacity": 1024
+  },
+  "finished_at": 1790458867.0906417
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ncu-base-export",
+  "profile": true,
+  "cpu_only": true,
+  "timeout": 1200,
+  "command": [
+    "/usr/local/cuda/bin/ncu",
+    "--import",
+    "/study/ncu-base/profile.ncu-rep",
+    "--csv",
+    "--page",
+    "raw"
+  ]
+}

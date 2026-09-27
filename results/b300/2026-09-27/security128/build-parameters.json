@@ -1,0 +1,10 @@
+{
+  "name": "build-parameters",
+  "command": [
+    "bash",
+    "/study/build-parameters.sh"
+  ],
+  "cpu_only": true,
+  "build": true,
+  "timeout": 1200
+}

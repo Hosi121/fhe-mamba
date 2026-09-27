@@ -9,7 +9,7 @@
     {
       "all_tokens_decrypt": true,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/m2_chain_levelalign-native-a6-h4-compact-cache20_l2_t2.json"
+        "${HOME}/fhemamba/results/m2_chain_levelalign-native-a6-h4-compact-cache20_l2_t2.json"
       ],
       "artifacts": [
         {
@@ -31,7 +31,7 @@
             ]
           },
           "passed": true,
-          "path": "/home/kataiwa/fhemamba/results/m2_chain_levelalign-native-a6-h4-compact-cache20_l2_t2.json",
+          "path": "${HOME}/fhemamba/results/m2_chain_levelalign-native-a6-h4-compact-cache20_l2_t2.json",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "passed",
           "timing": {
@@ -77,7 +77,7 @@
     {
       "all_tokens_decrypt": true,
       "artifact_paths": [
-        "/home/kataiwa/fhemamba/results/m2_chain_levelalign-drop-a6-h4-compact-cache20_l2_t2.json"
+        "${HOME}/fhemamba/results/m2_chain_levelalign-drop-a6-h4-compact-cache20_l2_t2.json"
       ],
       "artifacts": [
         {
@@ -99,7 +99,7 @@
             ]
           },
           "passed": true,
-          "path": "/home/kataiwa/fhemamba/results/m2_chain_levelalign-drop-a6-h4-compact-cache20_l2_t2.json",
+          "path": "${HOME}/fhemamba/results/m2_chain_levelalign-drop-a6-h4-compact-cache20_l2_t2.json",
           "stage": "stage1-mamba2-decode-fideslib",
           "status": "passed",
           "timing": {

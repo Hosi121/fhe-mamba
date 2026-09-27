@@ -2,8 +2,8 @@
   "name": "m2-2-move",
   "command": [
     "bash",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/launch_m2.sh",
-    "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924/m2-2-move/native.json",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/launch_m2.sh",
+    "${HOME}/fhemamba/coefficient-ownership-models-20260924/m2-2-move/native.json",
     "2",
     "2"
   ],
@@ -32,7 +32,7 @@
     19
   ],
   "environment": {
-    "LD_LIBRARY_PATH": "/home/kataiwa/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
+    "LD_LIBRARY_PATH": "${HOME}/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64",
     "ARTIFACT_VERSION": "0.5.0",
     "AUTOREGRESSIVE_CLIENT_LOOP": "0",
     "AUTO_HEADROOM": "4",
@@ -46,7 +46,7 @@
     "FIRST_MOD_SIZE": "60",
     "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
     "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
-    "INPUT_CHAIN": "/home/kataiwa/fhemamba/gate-integration-20260921/generation/client-generation-20260922/payload",
+    "INPUT_CHAIN": "${HOME}/fhemamba/gate-integration-20260921/generation/client-generation-20260922/payload",
     "INPUT_CHAIN_SHA256": "9869571e4253ceb36a853aecf99ce44a0fa502d41181ef6bdcf12bee80c54375",
     "INTERLEAVED_REPLICATED_PROJECTION": "1",
     "JOINT_PERIODIC_COEFFICIENTS": "1",
@@ -79,7 +79,7 @@
     "STATE_META_BTS_ALPHA": "-1",
     "STATE_REFRESH_INTERVAL": "1",
     "TOKENS": "2",
-    "FHEMAMBA_REMOTE_ROOT": "/home/kataiwa/fhemamba/coefficient-ownership-models-20260924",
+    "FHEMAMBA_REMOTE_ROOT": "${HOME}/fhemamba/coefficient-ownership-models-20260924",
     "REPO_COMMIT": "70bf711cf4968bd2c818bc4637382acd8afe5d4c-dirty.c651dc3110a67b0a",
     "CUDA_LAUNCH_BLOCKING": "1",
     "FAST_PLAINTEXT_UPLOAD": "1",

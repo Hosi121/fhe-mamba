@@ -1,0 +1,9 @@
+{
+  "name": "build-stage1-r2",
+  "cpu_only": true,
+  "timeout": 1800,
+  "command": [
+    "bash",
+    "/study/build-stage1-r2.sh"
+  ]
+}

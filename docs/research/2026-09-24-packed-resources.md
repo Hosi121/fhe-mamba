@@ -7,7 +7,7 @@ exact/polynomial errors stay below the unchanged 0.001 gates. Matrix storage
 falls from 673.3 to 168.3 MiB without changing coefficient values. There is
 one complete fresh-key run per mode and a separate mirrored prefix control.
 
-[Raw runs, comparison script and frozen source](../../results/dgx/2026-09-24/packed-resources/).
+[Raw runs, comparison results and frozen source](../../results/dgx/2026-09-24/packed-resources/).
 
 The full Mamba-3 program's static inventory reproduces 78,740 binary rotations versus 59,900 signed-power NAF rotations (23.93% fewer, runtime refresh work excluded), 2,345 of 2,902 add/multiply nodes with a final-use input, and 88,252,416 matrix coefficients exactly representable in BF16. These are counts and storage facts; target runtime comparisons decide speed claims.
 

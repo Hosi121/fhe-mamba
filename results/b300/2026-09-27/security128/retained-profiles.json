@@ -1,0 +1,12 @@
+[
+  {
+    "path": "nsys-optimized-r1/trace.nsys-rep",
+    "bytes": 33151392,
+    "sha256": "7e33706e165cfb36d6ef862401a68452cd2468b80d2def5843a81fa8da21df3a"
+  },
+  {
+    "path": "nsys-optimized-r1/trace.sqlite",
+    "bytes": 90968064,
+    "sha256": "a5a72b0581e6cd5a5f8dae57ce2e79d1e2852ad13c21b2e6e8e879b8709f5050"
+  }
+]

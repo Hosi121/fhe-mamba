@@ -1,8 +1,8 @@
 {
   "command": [
-    "/home/kataiwa/fhemamba/s2c-first-20260925/legacy-build/packed_fideslib",
+    "${HOME}/fhemamba/s2c-first-20260925/legacy-build/packed_fideslib",
     "/dev/null",
-    "/home/kataiwa/fhemamba/s2c-first-20260925/legacy-rejection/unused.json",
+    "${HOME}/fhemamba/s2c-first-20260925/legacy-rejection/unused.json",
     ".001",
     ".001",
     "--s2c-first",
