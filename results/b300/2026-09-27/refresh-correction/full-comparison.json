@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "metric": "eval_seconds",
+  "baseline": {
+    "samples": [
+      235.839496989
+    ],
+    "mean": 235.839496989
+  },
+  "candidate": {
+    "samples": [
+      210.32573807
+    ],
+    "mean": 210.32573807
+  },
+  "reduction": 0.10818272276161611,
+  "contract": {
+    "schema_version": 1,
+    "metric": "eval_seconds",
+    "equal": [
+      "security_audit",
+      "slots",
+      "payload_slots",
+      "ring_dimension",
+      "refresh_ring_dimension",
+      "depth",
+      "scale_bits",
+      "nodes",
+      "evaluated_nodes",
+      "generated_token_ids",
+      "client_output_decrypt_count",
+      "bootstrap_passes",
+      "bootstraps",
+      "logical_refreshes",
+      "planned_logical_refreshes",
+      "refresh_batches",
+      "refresh_ceiling",
+      "refreshed_level",
+      "ct_ct_mul",
+      "plaintext_cache_capacity",
+      "prefetch_workers",
+      "exact_tolerance",
+      "polynomial_tolerance"
+    ],
+    "require": {
+      "passed": true,
+      "encrypted": true,
+      "security": "128-classic",
+      "security_audit.passed": true,
+      "security_audit.library_classical128": true,
+      "security_audit.uniform_ternary": true,
+      "security_audit.hybrid": true,
+      "gpu_dual_ring": false,
+      "ring_switch_up_calls": 0,
+      "ring_switch_down_calls": 0,
+      "evaluation_decryptions": 0,
+      "non_finite": 0,
+      "bootstrap_passes": 2,
+      "s2c_first": true,
+      "frontier_refresh": true,
+      "batch_refresh": true,
+      "refresh_policy": "planned",
+      "merge_refresh_fallbacks": 0,
+      "exact_tolerance": 0.001,
+      "polynomial_tolerance": 0.001
+    },
+    "maximum": {
+      "max_abs_error_vs_exact": 0.001,
+      "max_abs_error_vs_polynomial": 0.001
+    },
+    "minimum_reduction": 0.03
+  },
+  "inputs": [
+    {
+      "path": ".local/gpu-ifft-20260927/refresh-evidence/full-correction-control-r3/native.json",
+      "bytes": 5276,
+      "sha256": "adeb04eac284bacf208dff4af04ccdccda21a369559203c68637121d6466ea58"
+    },
+    {
+      "path": ".local/gpu-ifft-20260927/refresh-evidence/full-correction-candidate-r3/native.json",
+      "bytes": 5262,
+      "sha256": "07161b2a7ed5a9cdba52eb3a45d10c054a0fb10e90a45a36db165e3a8a36d053"
+    }
+  ],
+  "scope": "Descriptive matched comparison; no statistical significance claim."
+}

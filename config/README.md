@@ -17,6 +17,9 @@
   for reviewed public evidence. Local replacement values stay in `config/local/`.
 - `packed-comparison.example.json` defines common equality, error and timing
   checks for the reusable comparison command; add study-specific invariants.
+- `packed-classical128-comparison.json` defines the fixed two-pass classical-128
+  comparison: audited context and workload equality, absolute error gates,
+  generated-token parity and a 3% timing screen. Input hashes must also agree.
 
 Platform pins describe public hardware/software requirements. They must not
 contain operator usernames, SSH routes, private addresses or machine-local paths.

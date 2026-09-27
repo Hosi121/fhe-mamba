@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790508544.1105351,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--name",
+      "cipher-gpu-ifft-probe-fft-r2",
+      "--user",
+      "1006:1006",
+      "--cpuset-cpus",
+      "64-68",
+      "--cpuset-mems",
+      "2",
+      "--shm-size",
+      "1g",
+      "--volume",
+      "${HOME}/fhemamba-b300:/workspace:ro",
+      "--volume",
+      "${HOME}/fhemamba-b300/b300-mamba3-20260926:/work:ro",
+      "--volume",
+      "${HOME}/fhemamba-b300/b300-gpu-ifft-20260927:/study",
+      "--volume",
+      "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a:/workspace/install/openfhe-fides/lib/libOPENFHEcore_static.a:ro",
+      "--volume",
+      "${HOME}/fhemamba-b300/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a:/work/install/fideslib/lib/fideslib.a:ro",
+      "--workdir",
+      "/study",
+      "--env",
+      "OMP_NUM_THREADS=4",
+      "--env",
+      "OMP_PROC_BIND=true",
+      "--env",
+      "OMP_PLACES={64},{66},{67},{68}",
+      "--env",
+      "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+      "--gpus",
+      "device=4",
+      "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+      "/study/build/fft-r2/gpu_fft_probe",
+      "/study/probe-fft-r2/result.json"
+    ],
+    "cwd": "${HOME}/fhemamba-b300/b300-gpu-ifft-20260927",
+    "inputs": {
+      "source": "${HOME}/fhemamba-b300/b300-gpu-ifft-20260927/source-r2.tar.gz",
+      "openfhe_core": "${HOME}/fhemamba-b300/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "fideslib": "${HOME}/fhemamba-b300/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a"
+    },
+    "timeout_seconds": 1800
+  },
+  "inputs": {
+    "source": {
+      "bytes": 312909,
+      "sha256": "bb1033ccde0c6c051d8da6324bdf7d0be593e6e0a71808804413dbf4999fe5a3"
+    },
+    "openfhe_core": {
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    "fideslib": {
+      "bytes": 42313230,
+      "sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.0003455500118434429,
+  "wall_seconds": 2.4748697590548545
+}

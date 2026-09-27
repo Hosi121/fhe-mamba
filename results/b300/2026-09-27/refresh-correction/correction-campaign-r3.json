@@ -1,0 +1,30 @@
+{
+  "state": "passed",
+  "completed": [
+    "probe-correction-complex-r3",
+    "prefix-correction-control-r3",
+    "prefix-correction-candidate-r3",
+    "full-correction-control-r3",
+    "full-correction-candidate-r3"
+  ],
+  "stage": "full-correction-candidate-r3",
+  "prefix": {
+    "control_seconds": 14.040814584,
+    "candidate_seconds": 13.367792603,
+    "reduction": 0.04793325750251931,
+    "control_refresh_seconds": 2.038067343,
+    "candidate_refresh_seconds": 1.670831763,
+    "refresh_reduction": 0.18018814798309624
+  },
+  "full": {
+    "control_seconds": 235.839496989,
+    "candidate_seconds": 210.32573807,
+    "reduction": 0.10818272276161611,
+    "control_refresh_seconds": 86.212447873,
+    "candidate_refresh_seconds": 61.782071201,
+    "refresh_reduction": 0.2833741214260441
+  },
+  "adopted": true,
+  "decision_rule": "one fresh process per arm; >=3% full evaluation reduction, same security/precision/refresh count; no significance claim",
+  "finished_at_unix": 1790497493.0911188
+}

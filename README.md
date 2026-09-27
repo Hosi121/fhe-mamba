@@ -64,7 +64,7 @@ separate from numerical parity and the classical RLWE parameter audit.
 
 | Workload and platform | Native evaluation | Security profile | Evidence |
 | --- | ---: | --- | --- |
-| Mamba-3 SISO 187M, B300 | 235.75 s / 58.94 s per generated token | Classical-128, N=131,072, QP=3,376 bits | [Parameter audit and optimization](docs/research/2026-09-27-b300-classical128.md) |
+| Mamba-3 SISO 187M, B300 | 165.37 s / 41.34 s per generated token | Classical-128, N=131,072, QP=3,376 bits | [GPU plaintext preparation](docs/research/2026-09-27-b300-gpu-plaintext-fft.md) |
 | Mamba-3 SISO 187M, B300 | 141.77 s / 35.44 s per generated token | Experimental `not-set`, dual ring | [Rotation stream chaining](docs/research/2026-09-27-b300-rotation-stream-chain.md) |
 | Mamba-2-130M, DGX Spark | 1,942.99 s / 485.75 s per generated token | Experimental `not-set` | [Shared ownership](docs/research/2026-09-24-owned-arithmetic.md) |
 
@@ -83,7 +83,9 @@ Machine-specific settings belong in ignored `config/local/`; raw output belongs
 in ignored `runs/`. Public records distinguish original and published hashes.
 
 ```bash
-uv run --no-sync python -m fhemamba.benchmarks verify results
+uv run --no-sync python -m fhemamba.benchmarks verify results \
+  results/b300/2026-09-27/refresh-correction \
+  results/b300/2026-09-27/gpu-plaintext-fft
 ```
 
 The [optimization guide](docs/optimizations.md) maps mechanisms to maintained
@@ -102,8 +104,7 @@ shared utilities, necessary measured source snapshots and failure records remain
 
 For development, run `uv sync --locked --extra dev` and `scripts/run_checks.sh`.
 See [contributing](CONTRIBUTING.md) and [testing](docs/testing.md) for the local
-and hardware validation gates. The cleanup changes file organization and
-publication, without changing inference kernels or benchmark numbers.
+and hardware validation gates.
 
 Code and original coefficient bundles are [MIT licensed](LICENSE). Checkpoints
 and native dependencies are downloaded separately; see [third-party notices](THIRD_PARTY_NOTICES.md).

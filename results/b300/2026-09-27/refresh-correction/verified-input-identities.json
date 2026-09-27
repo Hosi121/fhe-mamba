@@ -1,0 +1,36 @@
+{
+  "repository_base_commit": "c5dd1fe4269ac81e9dc28006de4fd9e1d02cfa5c",
+  "fideslib_commit": "cd171f20f510eeca04c71d7b0034ef073829f761",
+  "openfhe_commit": "aa391988d354d4360f390f223a90e0d1b98839d7",
+  "inputs": [
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/program.txt",
+      "bytes": 1253433725,
+      "sha256": "9a76a6b65c86112811638d579f9046c2cb46516437f64acdbdc9fbf1355be199"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/fixture.npz",
+      "bytes": 62850,
+      "sha256": "e46d8cafb3d57fa4e0328a727a4f9fefd45b76cdfc602d9b78cd0356385a4d57"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-mamba3-20260926/payload/client_head.f32",
+      "bytes": 394002440,
+      "sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+    },
+    {
+      "path": "${HOME}/fhemamba-b300/b300-nsight-20260926/prefix/program.txt",
+      "bytes": 104154165,
+      "sha256": "9c2df86c380a8053406e163f4485eaafabd2d85f14e9ce0df62294c8fbe27917"
+    }
+  ],
+  "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+  "controls": {
+    "gpu": 4,
+    "cpus": "64-68",
+    "numa": 2,
+    "OMP_NUM_THREADS": 4,
+    "clock_control": "driver and OS defaults; no changes"
+  },
+  "verified": true
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${HOME}/fhemamba-b300/b300-gpu-ifft-20260927/full-fft-control-r3",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790509778.2220864
+}

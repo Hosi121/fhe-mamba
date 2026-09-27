@@ -15,6 +15,8 @@ published hashes.
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-27 — B300 GPU plaintext FFT](2026-09-27-b300-gpu-plaintext-fft.md) | Shared GPU FFT/rounding through RNS/NTT; exact primitive gates, classical-128 full pair 211.71→165.37 s (21.89%), 41.34 s/generated token; RMSNorm timing attribution |
+| [2026-09-27 — B300 refresh correction merging](2026-09-27-b300-refresh-correction.md) | Exact integer merge before extraction; classical-128 full pair 235.84→210.33 s (10.82%), unchanged 484 bootstraps and numerical/token gates |
 | [2026-09-27 — B300 classical-128 prototype](2026-09-27-b300-classical128.md) | Audited uniform-ternary QP=3,376 bits at N=131,072; full Mamba-3 numerical/token gates, exact GPU addend qualification and larger mask cache, secure full pair 327.51→235.75 s (28.02%) |
 | [2026-09-27 — Sylph and Cachemir review](2026-09-27-sylph-cachemir.md) | Primary-paper review mapped to existing packing and new secure-level scheduling; slim-polynomial applicability screened on all 785 payload nodes; no new speed claim |
 | [2026-09-27 — B300 rotation stream chaining](2026-09-27-b300-rotation-stream-chain.md) | Three internal rotation barriers removed; both model/ring exact checks, new Nsight comparison, full ABBA 146.36→141.77 s (3.14%), 35.44 s/generated token; previous refresh gain preserved |

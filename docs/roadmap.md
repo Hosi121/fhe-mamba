@@ -7,9 +7,12 @@ Recovery of the historical B300 0.4.5 result is separate from the new
 
 The [classical-128 prototype](research/2026-09-27-b300-classical128.md) now
 passes the twelve-layer Mamba-3 request with the actual QP/secret/error
-assumptions audited before key generation. Its secure full pair improves
-327.51 → 235.75 seconds through GPU additive-plaintext expansion and mask
-reuse. The earlier 35.44 s/token timing remains a `security=not-set` result.
+assumptions audited before key generation. GPU additive-plaintext expansion and
+mask reuse first reduced evaluation from 327.51 to 235.75 seconds. Subsequent
+matched comparisons adopt [correction merging](research/2026-09-27-b300-refresh-correction.md)
+(235.84 → 210.33 s) and [GPU plaintext FFT](research/2026-09-27-b300-gpu-plaintext-fft.md)
+(211.71 → 165.37 s), reaching 41.34 s/generated token on the frozen request.
+The earlier 35.44 s/token timing remains a `security=not-set` result.
 The [Sylph/Cachemir review](research/2026-09-27-sylph-cachemir.md) identifies
 measured level placement and layout/refresh fusion as further design work;
 its static polynomial screen is not an encrypted performance result.

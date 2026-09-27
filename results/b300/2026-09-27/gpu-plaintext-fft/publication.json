@@ -1,0 +1,606 @@
+{
+  "schema_version": 1,
+  "kind": "fhemamba-public-evidence",
+  "description": "Public derivative; original hashes refer to unpublished raw bytes.",
+  "binary_suffixes_preserved_without_text_redaction": [
+    ".bin",
+    ".jpg",
+    ".npy",
+    ".npz",
+    ".png"
+  ],
+  "omitted_archive_members": [],
+  "excluded_disposable_scripts": 0,
+  "bundle": {
+    "path": "provenance.tar.gz",
+    "sha256": "70a36fd555755a68c5b128ed8b98b191620724081aa1ba3dfe1928488338eaf4",
+    "bytes": 1218820
+  },
+  "files": [
+    {
+      "path": "benchmark_prefetch_affinity.hpp",
+      "location": "provenance.tar.gz",
+      "original_sha256": "77c26b1429be70d4f3a2268da47f3fe907cd7ebd913f15c131fb7f6c45371d8c",
+      "original_bytes": 776,
+      "published_sha256": "77c26b1429be70d4f3a2268da47f3fe907cd7ebd913f15c131fb7f6c45371d8c",
+      "published_bytes": 776,
+      "transformed": false
+    },
+    {
+      "path": "build-fft-r2/completion.json",
+      "location": "file",
+      "original_sha256": "1e4426d9416afce4d334a2cce45f520933ea8f7c7beb158afbd0b73d02f925b2",
+      "original_bytes": 184,
+      "published_sha256": "93b0294777eaa923992ea61400bc96f81cb6d133039d592720aa3520a601aec3",
+      "published_bytes": 178,
+      "transformed": true
+    },
+    {
+      "path": "build-fft-r2/run.json",
+      "location": "file",
+      "original_sha256": "5ca292548f697349b388b39f355fe405d1a9cbdadc042fe9cf8837f1f36096ed",
+      "original_bytes": 2372,
+      "published_sha256": "5171925efd259dad18869bed8d5df56ff2f4820dc7a12f939ce9eb8d5db79f06",
+      "published_bytes": 2318,
+      "transformed": true
+    },
+    {
+      "path": "build-fft-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "3de90784a452d3d53ce3809dc944182820bbc3b9f4f5bfee41b8d5f8e2d78bba",
+      "original_bytes": 796,
+      "published_sha256": "3de90784a452d3d53ce3809dc944182820bbc3b9f4f5bfee41b8d5f8e2d78bba",
+      "published_bytes": 796,
+      "transformed": false
+    },
+    {
+      "path": "build-native-r2/completion.json",
+      "location": "file",
+      "original_sha256": "4d030f5429e3f4c8e2fb2aa7cc6f4ddf6bfc49454045aae124e5bc0de2ab10bb",
+      "original_bytes": 187,
+      "published_sha256": "f677575b9e4752fdfe55ee4d5f4243393507755efabf97bbc35f840355459eb6",
+      "published_bytes": 181,
+      "transformed": true
+    },
+    {
+      "path": "build-native-r2/run.json",
+      "location": "file",
+      "original_sha256": "0a8d4790ed043c6eb6f4b94a75621bbb6bca5cfe1697b3dd05013e28a3d07247",
+      "original_bytes": 2406,
+      "published_sha256": "fd94d69845d34d23ba9d2f4110fdd14a82c622350c79e72832a225fa8a0c9598",
+      "published_bytes": 2352,
+      "transformed": true
+    },
+    {
+      "path": "build-native-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "7f96bd177694ca872025c77784d982bcea7377e05fc82fce7d7c035954eeb365",
+      "original_bytes": 2032,
+      "published_sha256": "7f96bd177694ca872025c77784d982bcea7377e05fc82fce7d7c035954eeb365",
+      "published_bytes": 2032,
+      "transformed": false
+    },
+    {
+      "path": "build-native-r3/completion.json",
+      "location": "file",
+      "original_sha256": "2281cd03b96d1a4d8873ed7b760bc358500c46ff4325a545318e684b42a1b14f",
+      "original_bytes": 186,
+      "published_sha256": "239ede867bdd8f16adba204cb342dd8df02f2b1062f0b082c91b32a1ebddc07d",
+      "published_bytes": 180,
+      "transformed": true
+    },
+    {
+      "path": "build-native-r3/run.json",
+      "location": "file",
+      "original_sha256": "8f2fca2a0b617793daafceb6ce495e6d3fa52957c85e7275213f18426c6f8648",
+      "original_bytes": 2407,
+      "published_sha256": "06638566bd1ab9fd4811d594a2fb802a299d64abd93d68ea6839c06272808e0e",
+      "published_bytes": 2353,
+      "transformed": true
+    },
+    {
+      "path": "build-native-r3/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "72cfef2ad1f4a22b51829c273a9c107d1fc5fdea0faf6815cece6b14b2fe63bb",
+      "original_bytes": 2032,
+      "published_sha256": "72cfef2ad1f4a22b51829c273a9c107d1fc5fdea0faf6815cece6b14b2fe63bb",
+      "published_bytes": 2032,
+      "transformed": false
+    },
+    {
+      "path": "calibration-manifest.json",
+      "location": "file",
+      "original_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+      "original_bytes": 375195,
+      "published_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+      "published_bytes": 375195,
+      "transformed": false
+    },
+    {
+      "path": "configure-fft-r2/completion.json",
+      "location": "file",
+      "original_sha256": "e5671c525d05a4f76c668fc91ab2e6050a4e73a3f5ffa0a281e7de5dfa0b3efd",
+      "original_bytes": 188,
+      "published_sha256": "768a1a5de9a1e4a9caea7698627d3920973c1dbdea9b70b25619292b659c1e2a",
+      "published_bytes": 182,
+      "transformed": true
+    },
+    {
+      "path": "configure-fft-r2/run.json",
+      "location": "file",
+      "original_sha256": "2809d8b3bd2310e49c09d756419a3d16a726e94e58c74da767ad3540a0d13128",
+      "original_bytes": 2666,
+      "published_sha256": "ce2bd11c5157304ce00e3fcdc8b179e49977cf95266030fe5fb5add9810298ba",
+      "published_bytes": 2612,
+      "transformed": true
+    },
+    {
+      "path": "configure-fft-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "06287504bfd9cb942ff608c52d1c16c8145ca071899f4e02c86c0f5fce3c8caa",
+      "original_bytes": 1388,
+      "published_sha256": "06287504bfd9cb942ff608c52d1c16c8145ca071899f4e02c86c0f5fce3c8caa",
+      "published_bytes": 1388,
+      "transformed": false
+    },
+    {
+      "path": "configure-native-r2/completion.json",
+      "location": "file",
+      "original_sha256": "52608c1a09b0efa78407f69268e553ad9a58ac37a81278559769ae6e942ae568",
+      "original_bytes": 191,
+      "published_sha256": "0db6522ab27a1d0575e21cbc0d0de86a027db69a163aa4960d7f6f0510879006",
+      "published_bytes": 185,
+      "transformed": true
+    },
+    {
+      "path": "configure-native-r2/run.json",
+      "location": "file",
+      "original_sha256": "009c679c39fc369111a130379adf227618af515dc2f9eff45cd857d9f7702256",
+      "original_bytes": 2731,
+      "published_sha256": "1efe8c0dd3683503b14206776eb7a23cb196503473ebf91c05ef8ae3e20fce83",
+      "published_bytes": 2677,
+      "transformed": true
+    },
+    {
+      "path": "configure-native-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "1c179059cf8d4250e6d084032f6f7867159a74defa1ea3d3b8eeca868d52548e",
+      "original_bytes": 1643,
+      "published_sha256": "1c179059cf8d4250e6d084032f6f7867159a74defa1ea3d3b8eeca868d52548e",
+      "published_bytes": 1643,
+      "transformed": false
+    },
+    {
+      "path": "configure-native-r3/completion.json",
+      "location": "file",
+      "original_sha256": "a4f11595a7f14ef19ca12ce903cda1a09604c192a7c1e1edec9f03a894ab812c",
+      "original_bytes": 191,
+      "published_sha256": "ee8c60262ba264bff686b70992e24256a9bf922155b4eaed04ac760b3a69ed79",
+      "published_bytes": 185,
+      "transformed": true
+    },
+    {
+      "path": "configure-native-r3/run.json",
+      "location": "file",
+      "original_sha256": "e795145d9b716bb72ebefd28b78bae44c494263bac2e566fad940458f4d62528",
+      "original_bytes": 2726,
+      "published_sha256": "b6252e1f62b6695b8cffdfcc99663b907877594d948122cd53fa46caae5b184a",
+      "published_bytes": 2672,
+      "transformed": true
+    },
+    {
+      "path": "configure-native-r3/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "3d62676f1981eedfe87f2a63bd190321766f917e93ec401782a5f5826f2e5724",
+      "original_bytes": 1643,
+      "published_sha256": "3d62676f1981eedfe87f2a63bd190321766f917e93ec401782a5f5826f2e5724",
+      "published_bytes": 1643,
+      "transformed": false
+    },
+    {
+      "path": "full-comparison.json",
+      "location": "file",
+      "original_sha256": "c1d93de89ae4ee58739bd2de9bb184b259c76acb865bad6a8429913ae343348b",
+      "original_bytes": 3922,
+      "published_sha256": "c1d93de89ae4ee58739bd2de9bb184b259c76acb865bad6a8429913ae343348b",
+      "published_bytes": 3922,
+      "transformed": false
+    },
+    {
+      "path": "full-fft-candidate-r3/completion.json",
+      "location": "file",
+      "original_sha256": "c992379b07a4b7fd34b0a2182546e6e40dc4f90850b8b994e9c45320c119452b",
+      "original_bytes": 193,
+      "published_sha256": "b2b9884110f8f02c1cba1cb1f5f57d0f315fd4011871a915aa019a606ff312ab",
+      "published_bytes": 187,
+      "transformed": true
+    },
+    {
+      "path": "full-fft-candidate-r3/native.json",
+      "location": "file",
+      "original_sha256": "c4d28244c378f51f979bae1c69c5e8a9b19002babae4655a9a1d8b5e60c16f8e",
+      "original_bytes": 62426,
+      "published_sha256": "c4d28244c378f51f979bae1c69c5e8a9b19002babae4655a9a1d8b5e60c16f8e",
+      "published_bytes": 62426,
+      "transformed": false
+    },
+    {
+      "path": "full-fft-candidate-r3/native.json.parameters.json",
+      "location": "file",
+      "original_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "original_bytes": 318,
+      "published_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "published_bytes": 318,
+      "transformed": false
+    },
+    {
+      "path": "full-fft-candidate-r3/run.json",
+      "location": "file",
+      "original_sha256": "8eb285a42cd4d596c2af7a4ace32b6b0385d98e918d06a559ad140bb89bbec04",
+      "original_bytes": 4714,
+      "published_sha256": "f85d04d6d7ec8640974c52bd41f6cb4a1dbd65df466ca0acf769bafb76b2695f",
+      "published_bytes": 4624,
+      "transformed": true
+    },
+    {
+      "path": "full-fft-candidate-r3/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "6aa25ee124def99e3f9f6099d00e53d45de147f3e01378f24205af321a1b7555",
+      "original_bytes": 1107739,
+      "published_sha256": "6aa25ee124def99e3f9f6099d00e53d45de147f3e01378f24205af321a1b7555",
+      "published_bytes": 1107739,
+      "transformed": false
+    },
+    {
+      "path": "full-fft-control-r3/completion.json",
+      "location": "file",
+      "original_sha256": "21593315140eaf770055162f0b25ffb0e815cff09d499a06fefd4b816ed0c29c",
+      "original_bytes": 191,
+      "published_sha256": "d0a3d545bb3cf814cf0bda0f58a0b8f6e1c0b0a80d6a262c5460b166409733b0",
+      "published_bytes": 185,
+      "transformed": true
+    },
+    {
+      "path": "full-fft-control-r3/native.json",
+      "location": "file",
+      "original_sha256": "dffcdb2982044a036cea19d9bf9a8e044fc31b8d8ea338767e0f3a58e7cb8675",
+      "original_bytes": 62431,
+      "published_sha256": "dffcdb2982044a036cea19d9bf9a8e044fc31b8d8ea338767e0f3a58e7cb8675",
+      "published_bytes": 62431,
+      "transformed": false
+    },
+    {
+      "path": "full-fft-control-r3/native.json.parameters.json",
+      "location": "file",
+      "original_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "original_bytes": 318,
+      "published_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "published_bytes": 318,
+      "transformed": false
+    },
+    {
+      "path": "full-fft-control-r3/run.json",
+      "location": "file",
+      "original_sha256": "436f3d4e4150b959998660af443595b3d9b6590032e372edff4232c07ada9245",
+      "original_bytes": 4682,
+      "published_sha256": "ec3354073b0137a6044ae761df7570310977859ea8ac633145c85dbf5621b850",
+      "published_bytes": 4592,
+      "transformed": true
+    },
+    {
+      "path": "full-fft-control-r3/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "18995d5ebf27733ef6cfc096afdcdc3b8a49b929015a72c03fadf21dd363ae1a",
+      "original_bytes": 1107769,
+      "published_sha256": "18995d5ebf27733ef6cfc096afdcdc3b8a49b929015a72c03fadf21dd363ae1a",
+      "published_bytes": 1107769,
+      "transformed": false
+    },
+    {
+      "path": "measurement.patch",
+      "location": "provenance.tar.gz",
+      "original_sha256": "063ea802b49b0ab761b5152db30e4bcf77122785feff23a6ca978932e87309cf",
+      "original_bytes": 881,
+      "published_sha256": "063ea802b49b0ab761b5152db30e4bcf77122785feff23a6ca978932e87309cf",
+      "published_bytes": 881,
+      "transformed": false
+    },
+    {
+      "path": "polynomial-candidate.json",
+      "location": "file",
+      "original_sha256": "0b71b7d7fdef2f50b71634af9f83b4ea68f341389a2828d20eb7f35d902a978b",
+      "original_bytes": 34839,
+      "published_sha256": "0b71b7d7fdef2f50b71634af9f83b4ea68f341389a2828d20eb7f35d902a978b",
+      "published_bytes": 34839,
+      "transformed": false
+    },
+    {
+      "path": "polynomial-control.json",
+      "location": "file",
+      "original_sha256": "82ba7f869ce6940e9d55865484ff68e816b3dbbecc952847023e514bfba37228",
+      "original_bytes": 34854,
+      "published_sha256": "82ba7f869ce6940e9d55865484ff68e816b3dbbecc952847023e514bfba37228",
+      "published_bytes": 34854,
+      "transformed": false
+    },
+    {
+      "path": "polynomial-inventory.json",
+      "location": "file",
+      "original_sha256": "bf7440858a1ba11212cff1d52eff52099bfc40e27133ccbf6309a1307e69ef4b",
+      "original_bytes": 33419,
+      "published_sha256": "bf7440858a1ba11212cff1d52eff52099bfc40e27133ccbf6309a1307e69ef4b",
+      "published_bytes": 33419,
+      "transformed": false
+    },
+    {
+      "path": "prefix-comparison.json",
+      "location": "file",
+      "original_sha256": "83ef6ffd199bb8cbda5672d25e5f096b6475ffde2cb616ecf52b963625090864",
+      "original_bytes": 2286,
+      "published_sha256": "83ef6ffd199bb8cbda5672d25e5f096b6475ffde2cb616ecf52b963625090864",
+      "published_bytes": 2286,
+      "transformed": false
+    },
+    {
+      "path": "prefix-fft-candidate-r2/completion.json",
+      "location": "file",
+      "original_sha256": "0377988bbe1d02b4e1572db96523f53a770abf2d51e20879515234cfedfe2f51",
+      "original_bytes": 195,
+      "published_sha256": "b643067387b6406c4d271ed1d1e9d42fca6812b9ff51cc5b2f1cacab2bed1c6e",
+      "published_bytes": 189,
+      "transformed": true
+    },
+    {
+      "path": "prefix-fft-candidate-r2/native.json",
+      "location": "file",
+      "original_sha256": "154cc59ff7bc678c430210f89f48b13222aca9a7b783934a519a891117ab0af6",
+      "original_bytes": 5062,
+      "published_sha256": "154cc59ff7bc678c430210f89f48b13222aca9a7b783934a519a891117ab0af6",
+      "published_bytes": 5062,
+      "transformed": false
+    },
+    {
+      "path": "prefix-fft-candidate-r2/native.json.parameters.json",
+      "location": "file",
+      "original_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "original_bytes": 318,
+      "published_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "published_bytes": 318,
+      "transformed": false
+    },
+    {
+      "path": "prefix-fft-candidate-r2/run.json",
+      "location": "file",
+      "original_sha256": "49cce0257e715d19e198b18d411cdefbf317947bdabb319dcaac3080a1068a7b",
+      "original_bytes": 3347,
+      "published_sha256": "9d0887ef638df43a45f81b3c0dd3285d60c4a4ccd70da7bbc566d0df75486fa7",
+      "published_bytes": 3293,
+      "transformed": true
+    },
+    {
+      "path": "prefix-fft-candidate-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "1102e09c57260ce8000b9c7a6dcace966a1d11ad3ed53d1d12dabf44781283ac",
+      "original_bytes": 54627,
+      "published_sha256": "1102e09c57260ce8000b9c7a6dcace966a1d11ad3ed53d1d12dabf44781283ac",
+      "published_bytes": 54627,
+      "transformed": false
+    },
+    {
+      "path": "prefix-fft-control-r2/completion.json",
+      "location": "file",
+      "original_sha256": "110d877ec57bc381be381e0efdcaf6fa6eed4316791aeff57e608cfcc9824d67",
+      "original_bytes": 193,
+      "published_sha256": "e8c3dd7bd0e8128eb30141e42ce5af8fc2db93b4b73add28938ea06655a98e67",
+      "published_bytes": 187,
+      "transformed": true
+    },
+    {
+      "path": "prefix-fft-control-r2/native.json",
+      "location": "file",
+      "original_sha256": "f99ff05f4b76444a3b1a2bd1c6b7e2e6694568ac13684f5d4c7a746902d17177",
+      "original_bytes": 5068,
+      "published_sha256": "f99ff05f4b76444a3b1a2bd1c6b7e2e6694568ac13684f5d4c7a746902d17177",
+      "published_bytes": 5068,
+      "transformed": false
+    },
+    {
+      "path": "prefix-fft-control-r2/native.json.parameters.json",
+      "location": "file",
+      "original_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "original_bytes": 318,
+      "published_sha256": "395daa3c0d45442882a7c25c7f33ea5db03d764037daf2b5f96b8e4dcc60a42c",
+      "published_bytes": 318,
+      "transformed": false
+    },
+    {
+      "path": "prefix-fft-control-r2/run.json",
+      "location": "file",
+      "original_sha256": "17ddd4e5357b050d84545adfa701e11e9fc2d3134d15515e03450055ce034740",
+      "original_bytes": 3314,
+      "published_sha256": "9f8060641c3494ed7448d78266c845a1ebfed73088a1f2c1435c43ffb6bbdf10",
+      "published_bytes": 3260,
+      "transformed": true
+    },
+    {
+      "path": "prefix-fft-control-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "f0b346f015e80371b97bc04f873ced525f39f4c44d1ed53efb9a82c1ac90f642",
+      "original_bytes": 54619,
+      "published_sha256": "f0b346f015e80371b97bc04f873ced525f39f4c44d1ed53efb9a82c1ac90f642",
+      "published_bytes": 54619,
+      "transformed": false
+    },
+    {
+      "path": "probe-fft-r1/completion.json",
+      "location": "file",
+      "original_sha256": "b6ce408808ffbb173bbf9c385678d823e7e844f7f21fbf5d3924161d0aa54805",
+      "original_bytes": 184,
+      "published_sha256": "070c23cb7346223507e07c67c5686a3605b7fbb80d25b15307814c564ef591fa",
+      "published_bytes": 178,
+      "transformed": true
+    },
+    {
+      "path": "probe-fft-r1/result.json",
+      "location": "file",
+      "original_sha256": "0878b0d32ed042b64a79e358436087ef74a54f71bd6770776f7f1e2820423eea",
+      "original_bytes": 643,
+      "published_sha256": "0878b0d32ed042b64a79e358436087ef74a54f71bd6770776f7f1e2820423eea",
+      "published_bytes": 643,
+      "transformed": false
+    },
+    {
+      "path": "probe-fft-r1/run.json",
+      "location": "file",
+      "original_sha256": "f37c919727897bace9877d170ca132b0c81f7c375cb4a3e15de162b13786c1eb",
+      "original_bytes": 2108,
+      "published_sha256": "57f819e1cae51bc62dfee1924bd55eb36ff2db1dd66456d8ae9586c72af25e04",
+      "published_bytes": 2060,
+      "transformed": true
+    },
+    {
+      "path": "probe-fft-r1/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "fa5137297cb992ff6ac21601696fa70ceec647819989c18ecfb0d8794963a2a8",
+      "original_bytes": 945,
+      "published_sha256": "fa5137297cb992ff6ac21601696fa70ceec647819989c18ecfb0d8794963a2a8",
+      "published_bytes": 945,
+      "transformed": false
+    },
+    {
+      "path": "probe-fft-r2/completion.json",
+      "location": "file",
+      "original_sha256": "ad98dc0e4538ec824fcf14a494abfaf9b96ea66a8c278ce118512b1fba20faa8",
+      "original_bytes": 183,
+      "published_sha256": "5fb6ee874ce5bf49ff35ca7ed665698f76416a6aca76649901722cce1e6f5e69",
+      "published_bytes": 177,
+      "transformed": true
+    },
+    {
+      "path": "probe-fft-r2/result.json",
+      "location": "file",
+      "original_sha256": "c7a77ea51cd40e2753f8445fa45c350db63ff766a44e2784d8331052dc463747",
+      "original_bytes": 723,
+      "published_sha256": "c7a77ea51cd40e2753f8445fa45c350db63ff766a44e2784d8331052dc463747",
+      "published_bytes": 723,
+      "transformed": false
+    },
+    {
+      "path": "probe-fft-r2/run.json",
+      "location": "file",
+      "original_sha256": "4e0cff6ad9abdf58778357e47f5a877321c8f242606aa63d4483565da491c4af",
+      "original_bytes": 2341,
+      "published_sha256": "a1649e5180b25f74b2ea40e1ec20448111d38bbd4a816ee3269d4c061519d0dd",
+      "published_bytes": 2287,
+      "transformed": true
+    },
+    {
+      "path": "probe-fft-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "140abb152c709d9c33832963a6fdff272fc0bbb6fee1c2ba1a5aeb3af1d43ce4",
+      "original_bytes": 944,
+      "published_sha256": "140abb152c709d9c33832963a6fdff272fc0bbb6fee1c2ba1a5aeb3af1d43ce4",
+      "published_bytes": 944,
+      "transformed": false
+    },
+    {
+      "path": "probe-rns-complex-r2/completion.json",
+      "location": "file",
+      "original_sha256": "2726c293c2a03e1ad5033da16d2dab7b3874b970571c7e348f9654054486f9d0",
+      "original_bytes": 192,
+      "published_sha256": "aa2e1cb1adafc256c22bf3e0680dc28795e06da583d6b6a30c19948a8cb4fd14",
+      "published_bytes": 186,
+      "transformed": true
+    },
+    {
+      "path": "probe-rns-complex-r2/result.json",
+      "location": "file",
+      "original_sha256": "fddb7ae5efbf51f935fff30faa8f09674ba1908aa4a0da4d5a07feb79e07ba94",
+      "original_bytes": 11010,
+      "published_sha256": "fddb7ae5efbf51f935fff30faa8f09674ba1908aa4a0da4d5a07feb79e07ba94",
+      "published_bytes": 11010,
+      "transformed": false
+    },
+    {
+      "path": "probe-rns-complex-r2/run.json",
+      "location": "file",
+      "original_sha256": "ed3c234b83f43ae81db002a234e3932877ed709a41e38ae9c7eefd3aa09e398a",
+      "original_bytes": 2451,
+      "published_sha256": "37d93cc8ce246e6975618015e4cc6811b79681f7c07d6e2b27f111002fe0ded2",
+      "published_bytes": 2397,
+      "transformed": true
+    },
+    {
+      "path": "probe-rns-complex-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "a771e9847c07564cbad69252eb0dc17c1c5841f77445e18475c033256cdd640d",
+      "original_bytes": 769,
+      "published_sha256": "a771e9847c07564cbad69252eb0dc17c1c5841f77445e18475c033256cdd640d",
+      "published_bytes": 769,
+      "transformed": false
+    },
+    {
+      "path": "probe-rns-real-r2/completion.json",
+      "location": "file",
+      "original_sha256": "a16034c1a907adcd06d798a786c115f4d392d6c9b6effc8058cb62654646237a",
+      "original_bytes": 189,
+      "published_sha256": "eea3d891684fc92a95cadde83c72a56c4a805a96ad229d40849407c5319419c3",
+      "published_bytes": 183,
+      "transformed": true
+    },
+    {
+      "path": "probe-rns-real-r2/result.json",
+      "location": "file",
+      "original_sha256": "676ee716d68822f8c89be1cda98e22e52c12c79fe0eea3d3945ea61d77f22a05",
+      "original_bytes": 11009,
+      "published_sha256": "676ee716d68822f8c89be1cda98e22e52c12c79fe0eea3d3945ea61d77f22a05",
+      "published_bytes": 11009,
+      "transformed": false
+    },
+    {
+      "path": "probe-rns-real-r2/run.json",
+      "location": "file",
+      "original_sha256": "fe5f0829f0f48b94107680ab5e809833bbd707df1562288b2290dc95a49aaa13",
+      "original_bytes": 2427,
+      "published_sha256": "208039819634dbf9dc5a10d6b65e2851424558db7ffa480a34d6e81fdb14183b",
+      "published_bytes": 2373,
+      "transformed": true
+    },
+    {
+      "path": "probe-rns-real-r2/run.log",
+      "location": "provenance.tar.gz",
+      "original_sha256": "effdc1ac341df9ff0d8a00e261157fc338eb39c24198fb3ee379a4188a1f1b4a",
+      "original_bytes": 771,
+      "published_sha256": "effdc1ac341df9ff0d8a00e261157fc338eb39c24198fb3ee379a4188a1f1b4a",
+      "published_bytes": 771,
+      "transformed": false
+    },
+    {
+      "path": "source-r1.tar.gz",
+      "location": "provenance.tar.gz",
+      "original_sha256": "e719bde83bc327d68f61ad308a6b72b9708e118912d25a60d12f69fe4925ecab",
+      "original_bytes": 310225,
+      "published_sha256": "8012846711c3f1758f3a71630bc734c489f375a3c65445209da69feaf65bc274",
+      "published_bytes": 302877,
+      "transformed": true
+    },
+    {
+      "path": "source-r2.tar.gz",
+      "location": "provenance.tar.gz",
+      "original_sha256": "bb1033ccde0c6c051d8da6324bdf7d0be593e6e0a71808804413dbf4999fe5a3",
+      "original_bytes": 312909,
+      "published_sha256": "eb85c22c0b55b697451d3a900b0d12c159c9b11e96c254d12fd4af886f0125fb",
+      "published_bytes": 305524,
+      "transformed": true
+    },
+    {
+      "path": "source-r3.tar.gz",
+      "location": "provenance.tar.gz",
+      "original_sha256": "77594f3245eae6e834eec57f222c92df1fc47d77f9a69a6556e542f7c2b12dd7",
+      "original_bytes": 313139,
+      "published_sha256": "1e6dc261a52128fb5af6bf21531e8079db672dfd6b5775edf279785c7021476d",
+      "published_bytes": 305832,
+      "transformed": true
+    }
+  ]
+}

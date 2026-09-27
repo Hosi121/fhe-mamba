@@ -19,7 +19,9 @@ cloned before mutation.
 Build `refresh_correction_probe` with this directory's CMake project against
 the same FIDESlib and OpenFHE libraries used by the packed executable. The
 qualified B300 libraries include the existing even bootstrap seed and rotation
-stream chaining; the retained study scripts also link the patched inverse FFT.
+stream chaining, together with the patched inverse FFT. The
+[full comparison](../../docs/research/2026-09-27-b300-refresh-correction.md)
+records qualification, measured commands and source identities.
 
 ```text
 refresh_correction_probe result.json real

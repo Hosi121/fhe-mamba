@@ -119,6 +119,43 @@ python experiments/security128/screen_polynomials.py /path/to/program.txt \
   --parity --output screen.json
 ```
 
+## RMSNorm outliers and the frozen Mamba export
+
+Sylph's model calibration is not an RNS coefficient-layout optimization.
+[Section III-A and Table II](https://arxiv.org/html/2601.18511v2#S3.SS1)
+report that prefixing reduces the maximum RMSNorm input magnitude from
+2,243.97 to 7.65. This is a range measurement, not a normalization speedup.
+The prefix supplies precomputed attention-sink state and changes the input
+context. Separately, orthogonal rotations redistribute coordinate outliers
+and are folded into neighboring projections. For an orthogonal matrix R,
+`||Rx||² = ||x||²`: rotation alone cannot narrow the mean-square argument of
+the inverse square root. The paper's 12-bit noise/perplexity criterion also
+differs from this repository's frozen absolute-error gates.
+
+The current Mamba-3 export applies RMSNorm directly, without sink-prefix
+processing or that rotation calibration. Its 245 live inverse-square-root
+nodes use degrees 15, 31 and 63 (50, 150 and 45 nodes respectively). The
+maximum degree 1,023 belongs to `negative_a`, not RMSNorm. There are 761 live
+polynomial nodes in total. These counts are obtained by joining the exact
+coefficients to the export manifest with
+[`polynomials.py`](../../experiments/level_schedule/polynomials.py).
+
+An inverse square root over [a,b] depends on the ratio b/a as well as its
+required error. Multiplying all inputs by a public constant reduces their
+magnitude but preserves that ratio; our Chebyshev evaluator already maps the
+interval to [-1,1]. Thus simple rescaling does not establish a lower-degree
+replacement. The current investigation attributes measured polynomial time
+before selecting an exact evaluation/layout change. Altering calibration
+intervals requires independent range and full-output validation.
+
+The [GPU preparation comparison](2026-09-27-b300-gpu-plaintext-fft.md) now
+provides that attribution. On its 165.373-second candidate, inverse-square-root
+nodes take 20.325 seconds (12.29%), including 12.403 seconds of refresh batches
+initiated at those nodes. `negative_a` takes 15.741 seconds, including 5.676
+seconds of refresh. Reductions and surrounding products are separate, and
+batched refresh can serve other values. These figures establish priorities,
+not an achievable saving from outlier suppression.
+
 ## Scope limits
 
 Mamba has recurrent state rather than Transformer KV attention. The general
