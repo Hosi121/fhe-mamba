@@ -3,6 +3,7 @@
 from fhemamba._commands import dispatch
 
 COMMANDS = {
+    "ckks": ("fhemamba.diagnostics.ckks", "main", "recipe-defined CPU CKKS feasibility probes"),
     "domain": ("fhemamba.diagnostics.domain", "main", "diagnose Mamba-2 polynomial domains"),
     "export": ("fhemamba.diagnostics.references", "main", "export frozen CPU references"),
     "verify": ("fhemamba.diagnostics.prefix", "main", "verify the exact program prefix"),

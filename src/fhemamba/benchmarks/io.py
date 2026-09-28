@@ -45,11 +45,13 @@ def repository_root(start: Path | None = None) -> Path:
     raise ValueError("this command needs a source checkout; run from the repository or pass --repo")
 
 
-def write_json(path: Path, value: Any) -> None:
+def write_json(path: Path, value: Any, *, sort_keys: bool = False) -> None:
     """Replace a record atomically; readers never observe half-written JSON."""
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    temporary.write_text(
+        json.dumps(value, indent=2, allow_nan=False, sort_keys=sort_keys) + "\n", encoding="utf-8"
+    )
     temporary.replace(path)
 
 

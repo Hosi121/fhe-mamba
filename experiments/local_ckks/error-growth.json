@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "suite": "growth",
+  "context": {
+    "ring_dimension": 16384,
+    "batch": 8192,
+    "depth": 40,
+    "scale_bits": 59,
+    "first_mod_bits": 60
+  },
+  "coefficient_floor": 1e-12,
+  "seed": 0,
+  "n_steps": 8,
+  "b_norm": 3.0,
+  "state_clip": 2.9,
+  "decay_range": [
+    0.85,
+    0.999
+  ],
+  "error_target": 0.05,
+  "bootstrap": {
+    "level_budget": [
+      4,
+      4
+    ],
+    "correction_factor": 0,
+    "forced_input_towers": 18
+  },
+  "decay_polynomial": {
+    "name": "squared_exp_deg24_sq3",
+    "kind": "exp",
+    "interval": [
+      -64.0,
+      0.0
+    ],
+    "degree": 24
+  },
+  "arms": {
+    "A": {
+      "name": "A_refresh_only",
+      "mode": "recurrence",
+      "decay": false,
+      "refresh": true
+    },
+    "B": {
+      "name": "B_decay_mult_only",
+      "mode": "recurrence",
+      "decay": true,
+      "refresh": false
+    },
+    "C": {
+      "name": "C_decay_plus_refresh",
+      "mode": "recurrence",
+      "decay": true,
+      "refresh": true
+    },
+    "D": {
+      "name": "D_poly_in_the_loop",
+      "mode": "recurrence",
+      "decay": true,
+      "polynomial": true,
+      "refresh": true
+    },
+    "E": {
+      "name": "E_additive_update",
+      "mode": "recurrence",
+      "decay": true,
+      "update": true,
+      "refresh": true
+    },
+    "F16": {
+      "name": "F16_meta_bts_amp16",
+      "mode": "meta",
+      "amp_bits": 16,
+      "label": "Meta-BTS amp 2^16"
+    },
+    "F12": {
+      "name": "F12_meta_bts_amp12",
+      "mode": "meta",
+      "amp_bits": 12,
+      "label": "Meta-BTS amp 2^12"
+    },
+    "G": {
+      "name": "G_kahan_split",
+      "mode": "compensated",
+      "s_bits": 13,
+      "b_lo": 32.0,
+      "label": "Kahan split"
+    }
+  },
+  "notes": [
+    "errors are max-abs over all 8192 slots vs a float64 replica of the identical circuit (fit error excluded; arm D reports its poly fit error separately)",
+    "arm B never exhausts levels (8 ct-ct mults << depth 40), so the re-encrypt fallback was not needed",
+    "poly_eval_noise component = slope(D) - slope(C): D differs from C only by sourcing the decay from an encrypted deg-24 squared-exp evaluation instead of a fresh encryption",
+    "OpenFHE EvalBootstrap on a shallow ciphertext (more towers than a bootstrap restores) returns a level-preserving, near-noiseless result (~5e-13) -- useless as a refresh model. Every refresh here first descends noiselessly (Compress to 18 towers, level 23) to force the genuine depth-exhausted refresh (~1.5e-4), matching how the kernel bootstraps",
+    "scale 59 is the validated bootstrap geometry; the dgx kernel bootstraps at scale 40 on GPU (128-bit FIDESlib), so absolute refresh noise there may differ -- attribution ratios are the transferable result"
+  ]
+}

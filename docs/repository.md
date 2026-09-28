@@ -13,6 +13,7 @@ backend. Numerical implementations and shared experiment utilities live in
 | `config/` | Public platform pins, checkpoint hashes, coefficient bundles and configuration templates |
 | `experiments/` | Specialized research workflows grouped by purpose; common code is in the package |
 | `experiments/manifests/` | Declarative campaign configurations |
+| `experiments/local_ckks/` | CPU feasibility recipes for `fhemamba diagnose ckks` |
 | `experiments/slurm/` | Historical cluster launchers for the active model code |
 | `scripts/` | Local checks, checkpoint setup and platform build/run helpers |
 | `results/` | Public measurements and bundled provenance; see the [result index](../results/README.md) |

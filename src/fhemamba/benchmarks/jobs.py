@@ -14,11 +14,12 @@ import re
 import signal
 import subprocess
 import time
-from contextlib import contextmanager, suppress
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
 from .io import file_identity, read_object, write_json
+from .process import run_process
 
 _VARIABLE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
 
@@ -61,19 +62,6 @@ def _resource_lock(path: Path | None, deadline: float):
             yield
         finally:
             fcntl.flock(lock, fcntl.LOCK_UN)
-
-
-def _stop_group(process: subprocess.Popen) -> None:
-    # The group may contain children even if the original command has exited.
-    try:
-        os.killpg(process.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        return
-    with suppress(subprocess.TimeoutExpired):
-        process.wait(timeout=2)
-    with suppress(ProcessLookupError):
-        os.killpg(process.pid, signal.SIGKILL)
-    process.wait()
 
 
 def run_job(
@@ -134,7 +122,6 @@ def run_job(
         "exit_code": None,
     }
     write_json(output / "run.json", record)
-    process = None
 
     def interrupted(signum: int, _frame: Any) -> None:
         raise InterruptedError(f"interrupted by signal {signum}")
@@ -146,31 +133,23 @@ def run_job(
                 raise TimeoutError("deadline expired waiting for the resource lock")
             record.update(state="running", lock_wait_seconds=time.monotonic() - started)
             write_json(output / "run.json", record)
-            try:
-                with (output / "run.log").open("wb") as log:
-                    process = subprocess.Popen(
-                        command,
-                        cwd=cwd,
-                        env={**os.environ, **environment},
-                        stdout=log,
-                        stderr=subprocess.STDOUT,
-                        start_new_session=True,
-                    )
-                    remaining = max(0, started + timeout - time.monotonic())
-                    record["exit_code"] = process.wait(timeout=remaining)
-                    record["state"] = "completed" if process.returncode == 0 else "failed"
-            finally:
-                # Release the resource lock only after all job children stop.
-                if process is not None:
-                    _stop_group(process)
-                    process = None
-    except (TimeoutError, subprocess.TimeoutExpired):
+            with (output / "run.log").open("wb") as log:
+                code, timed_out = run_process(
+                    command,
+                    cwd=cwd,
+                    env={**os.environ, **environment},
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    timeout=max(0, started + timeout - time.monotonic()),
+                )
+            if timed_out:
+                raise TimeoutError("job deadline expired")
+            record.update(exit_code=code, state="completed" if code == 0 else "failed")
+    except TimeoutError:
         record.update(state="timed_out", error="job deadline expired")
     except OSError as exc:
         record.update(state="failed", error=str(exc))
     finally:
-        if process is not None:
-            _stop_group(process)
         for sig, handler in previous.items():
             signal.signal(sig, handler)
         record["wall_seconds"] = time.monotonic() - started

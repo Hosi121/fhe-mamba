@@ -10,9 +10,9 @@ import numpy as np
 CHEB_COEFF_FLOOR = 1e-12
 
 
-def floor_coeffs(coeffs) -> list[float]:
+def floor_coeffs(coeffs, threshold: float = CHEB_COEFF_FLOOR) -> list[float]:
     """Apply the kernel's coefficient floor so ct and replica share terms."""
-    return [0.0 if abs(float(c)) < CHEB_COEFF_FLOOR else float(c) for c in coeffs]
+    return [0.0 if abs(float(c)) < threshold else float(c) for c in coeffs]
 
 
 def affine(lo: float, hi: float) -> tuple[float, float]:

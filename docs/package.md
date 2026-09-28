@@ -60,6 +60,9 @@ Call functions directly when composing work, for example
 `fhemamba.profiling.nsys.summarize(connection)` or
 `fhemamba.benchmarks.packed.run(binary, payload, output, security="128-classic")`.
 The packed runner has one option-forwarding path for ordinary and budgeted jobs.
+Generic jobs, packed runs and campaigns share subprocess execution and process-group
+cleanup in `fhemamba.benchmarks.process`; their acceptance criteria remain local
+to each workload.
 
 Use `fhemamba.benchmarks.io.file_sha256`, `payload_sha256`, `read_object` and
 `write_json` instead of copying file helpers. `repository_root` resolves an
@@ -68,6 +71,10 @@ Repository-specific build/export commands should run from a checkout; the Spark
 build command also accepts `--repo`.
 
 `fhemamba.ckks_probes` shares the Chebyshev circuit and local CPU CKKS setup.
+`fhemamba diagnose ckks --recipe ... --output ...` runs
+[CPU primitive and error-growth recipes](../experiments/local_ckks/README.md)
+through common curve evaluators and recurrence loops. Degree, interval, input
+and arm changes belong in the recipe instead of another Python script.
 OpenFHE is imported only when constructing that optional feasibility context;
 its small-ring `not-set` configuration is not a classical-128 claim.
 Specialized experiment configurations remain in the grouped

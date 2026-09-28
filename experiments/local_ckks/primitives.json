@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "suite": "primitives",
+  "context": {
+    "ring_dimension": 16384,
+    "batch": 8192,
+    "depth": 40,
+    "scale_bits": 40,
+    "first_mod_bits": 60
+  },
+  "coefficient_floor": 1e-12,
+  "seed": 0,
+  "n_inputs": 2048,
+  "layout_block": 128,
+  "cases": {
+    "silu": {
+      "name": "ps_cheb_silu_deg96",
+      "kind": "silu",
+      "interval": [
+        -25.0,
+        25.0
+      ],
+      "degree": 96
+    },
+    "softplus": {
+      "name": "sqrt_softplus_sq_deg64",
+      "kind": "softplus",
+      "interval": [
+        -40.0,
+        13.0
+      ],
+      "degree": 64
+    },
+    "exp": {
+      "name": "squared_exp_deg24_sq3",
+      "kind": "exp",
+      "interval": [
+        -64.0,
+        0.0
+      ],
+      "degree": 24
+    },
+    "rsqrt": {
+      "name": "poly_newton_invsqrt_deg47_it4",
+      "kind": "rsqrt",
+      "interval": [
+        0.05,
+        100.0
+      ],
+      "degree": 47,
+      "iterations": 4,
+      "damping": 0.9
+    },
+    "sq_rsqrt": {
+      "name": "sq_poly_newton_invsqrt_deg31_it4",
+      "kind": "sq_rsqrt",
+      "interval": [
+        0.05,
+        100.0
+      ],
+      "degree": 31,
+      "iterations": 4,
+      "damping": 0.85
+    }
+  },
+  "chain": {
+    "input_interval": [
+      -3.0,
+      3.0
+    ],
+    "glue": {
+      "a": -2.0,
+      "scale": 90.0,
+      "shift": 5.0
+    },
+    "level_budget": [
+      4,
+      4
+    ],
+    "correction_factor": 20,
+    "refresh_error_limit": 0.05,
+    "fallback_scale_bits": 59,
+    "fallback_correction_factor": 0
+  },
+  "notes": [
+    "plain64 = float64 replica of the identical polynomial circuit; ckks-vs-plain64 isolates CKKS noise from fit error",
+    "FLEXIBLEAUTO reports scalar-multiply levels lazily: GetLevel() reads ~1 lower than the FIDESlib eager ledger at fold points",
+    "OpenFHE auto-aligns operand levels/scales; the kernel's align_levels multiply-by-1.0 ladder is unnecessary here",
+    "bootstrap level budget (4,4) instead of kernel default (5,4): at depth 40 the poly-Newton tail needs ~16 post-bootstrap levels",
+    "OpenFHE 64-bit EvalBootstrap requires correctionFactor >= FirstMod-scale (=20 here) or it throws 'Degree [20] must be less than or equal to the correction factor [9]'",
+    "even with correctionFactor=20 the scale-40/FirstMod-60 bootstrap output carries ~0 bits of message precision on 64-bit OpenFHE (probe: max err 3.3e-1 on 0.33-magnitude data; scale 59 gives 7.2e-5). The FIDESlib kernel bootstraps at scale 40 on GPU -- flagged as a cross-backend risk to verify against FIDESlib's own stage1_bootstrap_probe error output",
+    "sparse-packed bootstrap (slots << N/2) at tiny rings decoded to garbage in probes even at scale 59; fully packed slots = N/2 (as used here and by the kernel) is the validated path"
+  ]
+}

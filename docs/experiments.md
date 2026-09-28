@@ -53,6 +53,9 @@ own lifecycle management.
 Process success is separate from numerical acceptance. Keep using the packed
 runner's error/token/security checks or the campaign's declared acceptance gates.
 `wall_seconds` includes orchestration and is not native `eval_seconds`.
+Generic jobs, packed runs and campaigns use the same process-group runner,
+including descendant cleanup after the group leader exits. Their existing
+timeout return codes and numerical acceptance checks are preserved.
 
 ## Compare without a study-specific script
 

@@ -13,12 +13,12 @@ import inspect
 import json
 import math
 import os
-import signal
 import subprocess
 import time
 from pathlib import Path
 
 from fhemamba.benchmarks.io import file_sha256 as digest
+from fhemamba.benchmarks.process import run_process
 
 
 def _run(
@@ -213,20 +213,9 @@ def _run(
     }
     started = time.monotonic()
     with (output / "native.log").open("w") as log:
-        process = subprocess.Popen(
-            command, stdout=log, stderr=subprocess.STDOUT, start_new_session=True
+        returncode, record["timed_out"] = run_process(
+            command, stdout=log, stderr=subprocess.STDOUT, timeout=timeout, terminate_grace=10
         )
-        try:
-            returncode = process.wait(timeout=timeout)
-            record["timed_out"] = False
-        except subprocess.TimeoutExpired:
-            os.killpg(process.pid, signal.SIGTERM)
-            try:
-                process.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                os.killpg(process.pid, signal.SIGKILL)
-                process.wait()
-            returncode, record["timed_out"] = process.returncode, True
     record.update(returncode=returncode, wall_seconds=time.monotonic() - started, passed=False)
     native = output / "native.json"
     if native.exists():

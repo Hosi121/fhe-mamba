@@ -19,7 +19,9 @@ from typing import Any
 from fhemamba import __version__
 from fhemamba.artifacts import validate_benchmark_artifact
 from fhemamba.benchmarks.io import file_sha256 as _file_sha256
-from fhemamba.benchmarks.io import repository_root
+from fhemamba.benchmarks.io import read_object as _read_object
+from fhemamba.benchmarks.io import repository_root, write_json
+from fhemamba.benchmarks.process import run_process
 
 
 class CampaignInterruptedError(Exception):
@@ -30,29 +32,6 @@ class CampaignInterruptedError(Exception):
 
 def _raise_campaign_signal(signum: int, _frame: Any) -> None:
     raise CampaignInterruptedError(signum)
-
-
-def _read_object(path: Path) -> dict[str, Any]:
-    def reject_non_finite(value: str) -> Any:
-        raise ValueError(f"non-finite JSON number {value!r} in {path}")
-
-    payload = json.loads(
-        path.read_text(encoding="utf-8"),
-        parse_constant=reject_non_finite,
-    )
-    if not isinstance(payload, dict):
-        raise ValueError(f"expected a JSON object: {path}")
-    return payload
-
-
-def _write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(
-        json.dumps(payload, allow_nan=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
-    temporary.replace(path)
 
 
 def _timeout_seconds(value: Any) -> float | None:
@@ -718,34 +697,14 @@ def _run_runner(
     env: dict[str, str],
     timeout_seconds: float | None,
 ) -> tuple[int, bool]:
-    process = subprocess.Popen(
+    returncode, timed_out = run_process(
         [str(runner)],
         cwd=root,
         env=env,
-        start_new_session=True,
+        timeout=timeout_seconds,
+        terminate_grace=5,
     )
-    try:
-        return process.wait(timeout=timeout_seconds), False
-    except subprocess.TimeoutExpired:
-        _terminate_process_group(process)
-        return 124, True
-    except BaseException:
-        _terminate_process_group(process)
-        raise
-
-
-def _terminate_process_group(process: subprocess.Popen[Any]) -> None:
-    if process.poll() is not None:
-        return
-    try:
-        os.killpg(process.pid, signal.SIGTERM)
-        try:
-            process.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            os.killpg(process.pid, signal.SIGKILL)
-            process.wait()
-    except ProcessLookupError:
-        process.wait()
+    return (124 if timed_out else returncode), timed_out
 
 
 def _nvidia_smi_command(nvidia_smi: str, gpu_index: int | None, *args: str) -> list[str]:
@@ -1055,7 +1014,7 @@ def main() -> int:
             complete=complete,
             dry_run=args.dry_run,
         )
-        _write_json(args.output_json, payload)
+        write_json(args.output_json, payload, sort_keys=True)
         return payload
 
     for spec in experiments_spec:

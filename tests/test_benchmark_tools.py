@@ -13,6 +13,46 @@ import pytest
 from fhemamba.benchmarks.comparison import compare
 from fhemamba.benchmarks.evidence import Redactor, extract_provenance, publish, verify
 from fhemamba.benchmarks.jobs import run_job
+from fhemamba.benchmarks.process import run_process
+
+
+def test_common_runner_stops_children_after_leader_exits(tmp_path):
+    import time
+
+    marker = tmp_path / "orphan-finished"
+    child = f"import time; from pathlib import Path; time.sleep(0.3); Path({str(marker)!r}).touch()"
+    command = [
+        sys.executable,
+        "-c",
+        f"import subprocess, sys; subprocess.Popen([sys.executable, '-c', {child!r}])",
+    ]
+    assert run_process(command, timeout=5) == (0, False)
+    time.sleep(0.5)
+    assert not marker.exists()
+
+
+def test_common_runner_reaps_process_on_cancellation(monkeypatch):
+    from fhemamba.benchmarks import process as runner
+
+    popen = subprocess.Popen
+    children = []
+
+    def start(*args, **kwargs):
+        process = popen(*args, **kwargs)
+        children.append(process)
+        wait = process.wait
+
+        def interrupted(*args, **kwargs):
+            process.wait = wait
+            raise KeyboardInterrupt
+
+        process.wait = interrupted
+        return process
+
+    monkeypatch.setattr(runner.subprocess, "Popen", start)
+    with pytest.raises(KeyboardInterrupt):
+        runner.run_process([sys.executable, "-c", "import time; time.sleep(10)"])
+    assert children[0].poll() is not None
 
 
 def test_publication_preserves_measurements_and_originals(tmp_path: Path) -> None:

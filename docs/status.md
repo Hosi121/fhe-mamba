@@ -61,7 +61,9 @@ failed controls, Nsight exports, diagnostic vectors and source identities.
 Use [the Python tool map](package.md#research-tools) and
 [experiment entry points](../experiments/README.md). Common diagnostics,
 profiling, recurrent probes, qualification and build identity are installed
-modules. Remaining specialized scripts are grouped by purpose.
+modules. CPU CKKS primitive and error-growth studies now use
+[JSON recipes and one shared command](../experiments/local_ckks/README.md).
+Remaining specialized scripts are grouped by purpose.
 
 For local checks run `CHECK_JOBS=2 scripts/run_checks.sh`; GPU verification
 is a separate step. The maintenance reorganization did not rerun encrypted

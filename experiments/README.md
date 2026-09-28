@@ -24,6 +24,7 @@ python -m fhemamba workload --help
 | Actual generated-token qualification | `fhemamba benchmark generation-report` | [Model export](../docs/mamba3.md#trained-checkpoint-and-generation) |
 | Native build identity | `fhemamba benchmark spark-build` / `b300-build` | [Build scope](../docs/dgx-spark.md); B300 helper is historical |
 | Frozen references, operator errors and replay cases | `fhemamba diagnose` | [Diagnostics](packed_diagnostics/README.md) |
+| CPU CKKS primitives and recurrent error attribution | `fhemamba diagnose ckks --recipe ... --output ...` | [Recipes](local_ckks/README.md) |
 | Nsight SQLite/CSV summaries | `fhemamba profile` | [Profiling](profiling/README.md) |
 | Recurrent-state fixtures and comparison | `fhemamba recurrent` | [Component studies](recurrent_state/README.md) |
 | Mamba-3 model/mixer export and upstream parity | `fhemamba workload` | [Mamba-3](../docs/mamba3.md) |
@@ -52,7 +53,7 @@ math and infrastructure are imported from `fhemamba`; they are not extra APIs.
 | [normalization/](normalization/) | Build, run and compare isolated normalization probes |
 | [algebra/](algebra/) | Phase, decay, selective-gate and recurrence experiments |
 | [execution/](execution/) | Existing manifest-driven Mamba-2 campaigns and remote generation |
-| [local_ckks/](local_ckks/) | CPU feasibility probes; separately installed OpenFHE bindings required |
+| [local_ckks/](local_ckks/README.md) | Declarative CPU feasibility recipes; separately installed OpenFHE bindings required |
 | [manifests/](manifests/README.md) | Versioned workloads and acceptance gates |
 
 Native candidates retain their probe/build assets in [ntt_lazy/](ntt_lazy/README.md),

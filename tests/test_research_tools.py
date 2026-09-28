@@ -38,7 +38,8 @@ def test_lightweight_tools_work_outside_checkout_without_loading_models(tmp_path
     code = """
 import sys
 from fhemamba.cli import main
-for args in [['--help'], ['diagnose', 'verify', '--help'], ['benchmark', 'packed', '--help']]:
+for args in [['--help'], ['diagnose', 'verify', '--help'],
+             ['diagnose', 'ckks', '--help'], ['benchmark', 'packed', '--help']]:
     try:
         main(args)
     except SystemExit as error:
