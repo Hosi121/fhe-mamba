@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "command": [
+    "python3",
+    "${study}/analyze-operations.py",
+    "--metadata",
+    "${study}/references-cache/references.json",
+    "--manifest",
+    "${payload_study}/payload/tiled16/manifest.json",
+    "--program",
+    "${payload_study}/payload/tiled16/program.txt",
+    "--observations",
+    "${study}/diagnostic-cache/observations.jsonl",
+    "--output",
+    "${study}/analyze-operations-diagnostic-cache/analysis.json"
+  ],
+  "cwd": "${study}",
+  "inputs": {
+    "analyzer": "${study}/analyze-operations.py",
+    "metadata": "${study}/references-cache/references.json",
+    "manifest": "${payload_study}/payload/tiled16/manifest.json",
+    "program": "${payload_study}/payload/tiled16/program.txt",
+    "observations": "${study}/diagnostic-cache/observations.jsonl"
+  },
+  "timeout_seconds": 300
+}

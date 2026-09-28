@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/small-tiled-40-limit128",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790519246.1801126
+}

@@ -1,0 +1,53 @@
+{
+  "diagnostic_only": true,
+  "original_refresh_errors": [
+    0.01111648820054982,
+    0.0539747846347722
+  ],
+  "exact_clone_words": 5242880,
+  "controls": {
+    "identical_group": {
+      "errors": [
+        7.885250929086547e-07,
+        4.659071753908978e-06
+      ],
+      "bootstraps": 2
+    },
+    "double_bound_group": {
+      "errors": [
+        1.441842740940863e-06,
+        7.920870880050168e-06
+      ],
+      "bootstraps": 2
+    },
+    "separate_groups": {
+      "errors": [
+        7.465753975042025e-07,
+        4.042427593907438e-06
+      ],
+      "bootstraps": 4
+    },
+    "unmerged_group": {
+      "errors": [
+        7.425201511979118e-07,
+        4.554876053781964e-06
+      ],
+      "bootstraps": 2
+    }
+  },
+  "comparison_basis": "Both original retained inputs decode; all control comparisons use those observed inputs, not CPU fallback",
+  "observation_count": 684,
+  "observed_node_count": 524,
+  "decode_rejections": 0,
+  "final_polynomial_error": 0.0250861,
+  "final_exact_error": 0.0250837,
+  "interpretation": "The first full-history refresh fails, but an identical-group replay on retained ciphertext clones is accurate; logical inputs, their decode accuracy, grouping, bounds and merged correction alone do not explain the first-call failure.",
+  "limitations": [
+    "Clone residues are compared after the original refresh. No pre-refresh raw snapshot proves the retained inputs were bitwise immutable across that original call.",
+    "Replay changes allocation, cache and backend workspace state and includes additional client-side diagnostics; this does not identify which difference matters.",
+    "No CPU reference or control output replaces encrypted state; original model still fails selection 24.",
+    "Fresh-input standalone reproduction passes; no minimal standalone failing case is established."
+  ],
+  "report_sha256": "1deaf7b66dde99c8770389192d5d85211d4e099ead329d411bc7de91a3047466",
+  "analysis_sha256": "6e6430d20e848a3b329ac22ce6690f37c4af8adfcfa38fa4df5cc66a5e2a458c"
+}

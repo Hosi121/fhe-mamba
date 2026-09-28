@@ -121,7 +121,7 @@ supported by this calculation or by the earlier failed integration runs.
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
-  .venv/bin/python experiments/analyze_normalization_bounds.py \
+  .venv/bin/python experiments/analysis/analyze_normalization_bounds.py \
   --native results/dgx/2026-09-22/periodic-gates/m2_chain_periodic-client-generation_l24_t5.json \
   --payload runs/client-generation-20260922/payload \
   --bundle config/mamba2-130m-normalization-20260921.json \

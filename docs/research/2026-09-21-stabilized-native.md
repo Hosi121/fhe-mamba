@@ -78,7 +78,7 @@ in [testing](../testing.md). A byte-identical copy is now included under
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python \
-  experiments/export_m1_payload.py \
+  experiments/export/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --normalization-bundle config/mamba2-130m-normalization-20260921.json \
   --stabilized-gate-bundle config/mamba2-130m-gates-20260921.npz \
@@ -95,7 +95,7 @@ quality study:
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 .venv/bin/python \
-  experiments/run_payload_quality.py \
+  experiments/quality/run_payload_quality.py \
   --payload runs/stabilized-payload \
   --tokens-pt runs/state-study-20260921/wikitext2.test.pt \
   --windows 1024 4096 --max-windows 1 --threads 2 --device cuda \

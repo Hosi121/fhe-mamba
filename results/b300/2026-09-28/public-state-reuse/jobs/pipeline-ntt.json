@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "command": [
+    "${REPO}/.venv/bin/python",
+    "${REPO}/experiments/profiling/ncu_summary.py",
+    "${REPO}/results/b300/2026-09-28/long-generation/profiling/ncu-ntt/metrics.csv",
+    "--output",
+    "${output}/counters.json",
+    "--metric",
+    "sm__issue_active.avg.pct_of_peak_sustained_elapsed",
+    "--metric",
+    "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed",
+    "--metric",
+    "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed",
+    "--metric",
+    "lts__throughput.avg.pct_of_peak_sustained_elapsed"
+  ],
+  "cwd": "${REPO}",
+  "inputs": {
+    "metrics": "${REPO}/results/b300/2026-09-28/long-generation/profiling/ncu-ntt/metrics.csv",
+    "analyzer": "${REPO}/experiments/profiling/ncu_summary.py"
+  },
+  "timeout_seconds": 30
+}

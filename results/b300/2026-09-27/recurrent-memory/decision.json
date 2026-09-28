@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "decision": "adopt-opt-in-memory-admission",
+  "option": "--frontier-live-limit 128",
+  "default_limit": 0,
+  "default_schedule_unchanged": true,
+  "reason": "Both 64-step recurrences complete where their unlimited controls fail with CUDA OOM, retaining the existing classical-128 and 0.001 error gates.",
+  "qualified_cases": [
+    "small-tiled-40-limit128",
+    "candidate-tiled-64",
+    "candidate-factored-64",
+    "control-tiled-40",
+    "candidate-tiled-40"
+  ],
+  "intentionally_failed_controls": [
+    "control-tiled-64",
+    "control-factored-64"
+  ],
+  "matched_40_step": {
+    "eval_seconds": [
+      275.864392554,
+      264.078763357
+    ],
+    "evaluation_reduction": 0.04272254598676761,
+    "state_arithmetic_seconds": [
+      110.92610867,
+      110.648861011
+    ],
+    "state_arithmetic_reduction": 0.0024993904710459702,
+    "sampled_peak_device_bytes": [
+      203383570432,
+      143254028288
+    ],
+    "sampled_memory_reduction": 0.29564601514409905,
+    "bootstraps": [
+      46,
+      46
+    ],
+    "interpretation": "Single matched pair, descriptive only. Most evaluation-time difference is input materialization; state arithmetic is effectively unchanged."
+  },
+  "limits": [
+    "One recurrence layer with offline inputs; not full-model long encrypted generation",
+    "Soft count threshold, not an allocation or byte cap",
+    "Pinned outputs and mandatory history still grow with length",
+    "No timing ratio against failed 64-step controls",
+    "No statistical significance claim",
+    "Existing frozen full-model polynomial domains still fail from step 8"
+  ],
+  "next_static_candidate": "384 adjacent repeat chains can algebraically coalesce; implementation and FHE performance remain unqualified"
+}

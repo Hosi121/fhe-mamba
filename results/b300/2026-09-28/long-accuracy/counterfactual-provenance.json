@@ -1,0 +1,33 @@
+{
+  "tool": "experiments/packed_diagnostics/counterfactual.py",
+  "source_files": {
+    "experiments/packed_diagnostics/counterfactual.py": "e93bc5aa5c5df610379c6cd3454a18709051be6d95ecf2155ab005e25aa1efda",
+    "experiments/packed_diagnostics/packed_analysis.py": "cd625b087bc113707bb75c2f49b6796dc083cebf8c834232c33c5d72c70fbb78",
+    "tests/test_packed_diagnostics.py": "244c3006127d646d7126301f09b648f3b4ec8a6d83c88cbacb8699c418b4416a"
+  },
+  "source_archive_sha256": "a15c89fd5fa3437e67032daa7c6e16f6931c87043f99a9151137baa1aaecd397",
+  "injection_orders_in_published_selection": [
+    2,
+    3
+  ],
+  "injection_orders_in_full_fine_trace": [
+    625,
+    626
+  ],
+  "target_node": 75969,
+  "selected_observations": "isolation-refresh/counterfactual-observations.jsonl.gz",
+  "metadata": "references-fine-r3/references.json",
+  "scope": "Frozen CPU diagnostic propagation; no encrypted model values replaced",
+  "second_trace": {
+    "selected_observations": "diagnostic-replay-r5/selected-observations.jsonl.gz",
+    "injection_orders_in_selection": [
+      4,
+      5
+    ],
+    "injection_orders_in_full_trace": [
+      625,
+      626
+    ],
+    "result": "refresh-counterfactual-replay-r5.json"
+  }
+}

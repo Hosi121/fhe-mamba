@@ -1,13 +1,15 @@
 # Documentation
 
-Start with [reproducing the research snapshot](reproducing.md) to run the CPU
-example, obtain the pinned checkpoint, export a payload or run encrypted
-generation. Commands use the repository root as their working directory.
+For a development handoff, read [current state](status.md), then the relevant
+tool or evidence link. There is no need to load every dated report.
+Start with [reproduction](reproducing.md) to run the model from a checkout.
+Commands use the repository root as their working directory.
 
 ## Guides
 
 | Document | Use it for |
 | --- | --- |
+| [Current state](status.md) | Qualified baseline, unresolved failure and next investigation |
 | [Reproduction](reproducing.md) | A complete path from checkout to the measured workload |
 | [DGX Spark](dgx-spark.md) | Native dependencies, builds, machine requirements and campaigns |
 | [Python package](package.md) | Model, operator, layout and CLI modules |

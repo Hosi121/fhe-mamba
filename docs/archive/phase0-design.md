@@ -69,7 +69,7 @@ references: [`CKKS_NOISE_FLOODING.md`](https://github.com/openfheorg/openfhe-dev
 WikiText-2 test PPL, non-overlapping 1024-token windows. Budget: the fully
 substituted surrogate must stay within **+10% PPL** of the official fp32 model
 (tighten later if affordable). Every substitution rung is measured alone and
-combined (`experiments/run_ppl_ladder.py`).
+combined (`experiments/quality/run_ppl_ladder.py`).
 
 ## Measured budget (2026-07-03, from lowering.py + B200 constants)
 

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "path": "docs/research/figures/recurrent-memory-20260927.png",
+  "sha256": "d57e2225fa5835d4049390c73d2c263e1d918547090c6676aef7cb0d99534272",
+  "matplotlib": "3.10.8",
+  "command": "python experiments/recurrent_state/plot_memory.py --report comparison.json --results measurements --steps 64 --output docs/research/figures/recurrent-memory-20260927.png",
+  "source_sha256": "f1eb1030cdda1a9b720274ebc0d33a2c44f17371810f51dacdc8aff7f93389bd",
+  "scope": "64-step completed-node memory and liveness samples; no timing comparison"
+}

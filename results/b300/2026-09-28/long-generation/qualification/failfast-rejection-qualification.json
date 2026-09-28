@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "kind": "expected-rejection test, not a generation qualification",
+  "deliberately_strict_tolerance": 1e-12,
+  "normal_tolerance": 0.001,
+  "contract": {
+    "process_state": "failed",
+    "exception_exit_code": 2,
+    "message": "client hidden fails reference tolerance before token 1",
+    "client_selection_count": 0,
+    "native_success_result": false
+  },
+  "rejected_before_any_token_selection": true,
+  "source_adds_no_evaluator_decryptions": true,
+  "verification_correction": "The first verifier expected exit 1. Native exception handling returns 2; revalidated the unchanged raw run against that documented code path.",
+  "run_sha256": "23250e30ddc322b1dba6dcc11942e5a98f929bd723f46dede862ebd9224a2362",
+  "log_sha256": "36564c4fead108112b77bdeff759fc2310cb574da262e0189ce34e881fd1a096"
+}

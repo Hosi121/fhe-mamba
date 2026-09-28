@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/r2/factored-40",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790516370.3776917
+}

@@ -1,0 +1,573 @@
+{
+  "scope": "Four selected replay launches per half and variant; no full-model timing claim",
+  "metrics": {
+    "base-half0": {
+      "duration": {
+        "mean": 106.504,
+        "unit": "us"
+      },
+      "sm_throughput": {
+        "mean": 63.25282775,
+        "unit": "%"
+      },
+      "dram_throughput": {
+        "mean": 0.35950624999999997,
+        "unit": "%"
+      },
+      "dram_bandwidth": {
+        "mean": 27.573582000000002,
+        "unit": "Gbyte/s"
+      },
+      "achieved_occupancy": {
+        "mean": 67.35133325,
+        "unit": "%"
+      },
+      "waves_per_sm": {
+        "mean": 3.17,
+        "unit": ""
+      },
+      "registers_per_thread": {
+        "mean": 38.0,
+        "unit": "register/thread"
+      },
+      "shared_memory_per_block": {
+        "mean": 21.504,
+        "unit": "Kbyte/block"
+      },
+      "launch__registers_per_thread_allocated": {
+        "mean": 40.0,
+        "unit": "register/thread"
+      },
+      "launch__occupancy_limit_registers": {
+        "mean": 6.0,
+        "unit": "block"
+      },
+      "launch__occupancy_limit_shared_mem": {
+        "mean": 6.0,
+        "unit": "block"
+      },
+      "derived__local_spilling_requests": {
+        "mean": 0.0,
+        "unit": ""
+      },
+      "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 62.541056749999996,
+        "unit": "%"
+      },
+      "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 52.092643249999995,
+        "unit": "%"
+      },
+      "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 63.25282775,
+        "unit": "%"
+      },
+      "inst_executed": {
+        "mean": 79718400.0,
+        "unit": "inst"
+      },
+      "smsp__warps_active.avg.per_cycle_active": {
+        "mean": 10.78497125,
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "mean": 3.61805575,
+        "unit": "warp"
+      },
+      "smsp__average_warps_issue_stalled_barrier_per_issue_active.ratio": {
+        "mean": 0.7630975,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_branch_resolving_per_issue_active.ratio": {
+        "mean": 0.1000675,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_dispatch_stall_per_issue_active.ratio": {
+        "mean": 1.77980425,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_drain_per_issue_active.ratio": {
+        "mean": 0.01990725,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_lg_throttle_per_issue_active.ratio": {
+        "mean": 0.06281425,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": {
+        "mean": 0.5436255,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_math_pipe_throttle_per_issue_active.ratio": {
+        "mean": 3.17386825,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_membar_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_mio_throttle_per_issue_active.ratio": {
+        "mean": 0.434834,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_misc_per_issue_active.ratio": {
+        "mean": 1e-05,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_no_instruction_per_issue_active.ratio": {
+        "mean": 0.1006375,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_not_selected_per_issue_active.ratio": {
+        "mean": 4.348149,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_selected_per_issue_active.ratio": {
+        "mean": 1.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": {
+        "mean": 1.71043925,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_sleeping_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_tex_throttle_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_wait_per_issue_active.ratio": {
+        "mean": 1.87210925,
+        "unit": "inst"
+      }
+    },
+    "base-half1": {
+      "duration": {
+        "mean": 76.624,
+        "unit": "us"
+      },
+      "sm_throughput": {
+        "mean": 63.8162995,
+        "unit": "%"
+      },
+      "dram_throughput": {
+        "mean": 17.2305565,
+        "unit": "%"
+      },
+      "dram_bandwidth": {
+        "mean": 1.3210870000000001,
+        "unit": "Tbyte/s"
+      },
+      "achieved_occupancy": {
+        "mean": 56.04999,
+        "unit": "%"
+      },
+      "waves_per_sm": {
+        "mean": 3.81,
+        "unit": ""
+      },
+      "registers_per_thread": {
+        "mean": 42.0,
+        "unit": "register/thread"
+      },
+      "shared_memory_per_block": {
+        "mean": 11.264,
+        "unit": "Kbyte/block"
+      },
+      "launch__registers_per_thread_allocated": {
+        "mean": 48.0,
+        "unit": "register/thread"
+      },
+      "launch__occupancy_limit_registers": {
+        "mean": 10.0,
+        "unit": "block"
+      },
+      "launch__occupancy_limit_shared_mem": {
+        "mean": 12.0,
+        "unit": "block"
+      },
+      "derived__local_spilling_requests": {
+        "mean": 0.0,
+        "unit": ""
+      },
+      "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 57.9384825,
+        "unit": "%"
+      },
+      "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 52.75217325,
+        "unit": "%"
+      },
+      "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 63.8162995,
+        "unit": "%"
+      },
+      "inst_executed": {
+        "mean": 52850688.0,
+        "unit": "inst"
+      },
+      "smsp__warps_active.avg.per_cycle_active": {
+        "mean": 8.98574,
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "mean": 2.49241725,
+        "unit": "warp"
+      },
+      "smsp__average_warps_issue_stalled_barrier_per_issue_active.ratio": {
+        "mean": 0.6994437499999999,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_branch_resolving_per_issue_active.ratio": {
+        "mean": 0.012275,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_dispatch_stall_per_issue_active.ratio": {
+        "mean": 1.47494475,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_drain_per_issue_active.ratio": {
+        "mean": 0.03461675,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_lg_throttle_per_issue_active.ratio": {
+        "mean": 0.1364375,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": {
+        "mean": 1.78096825,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_math_pipe_throttle_per_issue_active.ratio": {
+        "mean": 3.11339175,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_membar_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_mio_throttle_per_issue_active.ratio": {
+        "mean": 0.20454250000000002,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_misc_per_issue_active.ratio": {
+        "mean": 2.225e-05,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_no_instruction_per_issue_active.ratio": {
+        "mean": 0.088065,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_not_selected_per_issue_active.ratio": {
+        "mean": 2.9888577499999998,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_selected_per_issue_active.ratio": {
+        "mean": 1.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": {
+        "mean": 1.06959725,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_sleeping_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_tex_throttle_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_wait_per_issue_active.ratio": {
+        "mean": 1.74828675,
+        "unit": "inst"
+      }
+    },
+    "ntt-half0": {
+      "duration": {
+        "mean": 113.792,
+        "unit": "us"
+      },
+      "sm_throughput": {
+        "mean": 65.51636625,
+        "unit": "%"
+      },
+      "dram_throughput": {
+        "mean": 0.3237865,
+        "unit": "%"
+      },
+      "dram_bandwidth": {
+        "mean": 24.834020250000002,
+        "unit": "Gbyte/s"
+      },
+      "achieved_occupancy": {
+        "mean": 56.945398,
+        "unit": "%"
+      },
+      "waves_per_sm": {
+        "mean": 3.81,
+        "unit": ""
+      },
+      "registers_per_thread": {
+        "mean": 44.0,
+        "unit": "register/thread"
+      },
+      "shared_memory_per_block": {
+        "mean": 21.504,
+        "unit": "Kbyte/block"
+      },
+      "launch__registers_per_thread_allocated": {
+        "mean": 48.0,
+        "unit": "register/thread"
+      },
+      "launch__occupancy_limit_registers": {
+        "mean": 5.0,
+        "unit": "block"
+      },
+      "launch__occupancy_limit_shared_mem": {
+        "mean": 6.0,
+        "unit": "block"
+      },
+      "derived__local_spilling_requests": {
+        "mean": 0.0,
+        "unit": ""
+      },
+      "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 57.2691,
+        "unit": "%"
+      },
+      "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 45.894439500000004,
+        "unit": "%"
+      },
+      "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 65.51636625,
+        "unit": "%"
+      },
+      "inst_executed": {
+        "mean": 78231552.0,
+        "unit": "inst"
+      },
+      "smsp__warps_active.avg.per_cycle_active": {
+        "mean": 9.11631525,
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "mean": 2.6289885,
+        "unit": "warp"
+      },
+      "smsp__average_warps_issue_stalled_barrier_per_issue_active.ratio": {
+        "mean": 0.57579575,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_branch_resolving_per_issue_active.ratio": {
+        "mean": 0.1312105,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_dispatch_stall_per_issue_active.ratio": {
+        "mean": 1.17533025,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_drain_per_issue_active.ratio": {
+        "mean": 0.0187645,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_lg_throttle_per_issue_active.ratio": {
+        "mean": 0.047726500000000005,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": {
+        "mean": 0.667957,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_math_pipe_throttle_per_issue_active.ratio": {
+        "mean": 3.4933752499999997,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_membar_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_mio_throttle_per_issue_active.ratio": {
+        "mean": 0.2791075,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_misc_per_issue_active.ratio": {
+        "mean": 1.1e-05,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_no_instruction_per_issue_active.ratio": {
+        "mean": 0.18363625,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_not_selected_per_issue_active.ratio": {
+        "mean": 3.25294025,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_selected_per_issue_active.ratio": {
+        "mean": 1.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": {
+        "mean": 1.91688175,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_sleeping_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_tex_throttle_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_wait_per_issue_active.ratio": {
+        "mean": 2.0123525,
+        "unit": "inst"
+      }
+    },
+    "ntt-half1": {
+      "duration": {
+        "mean": 78.264,
+        "unit": "us"
+      },
+      "sm_throughput": {
+        "mean": 64.91395324999999,
+        "unit": "%"
+      },
+      "dram_throughput": {
+        "mean": 16.86996825,
+        "unit": "%"
+      },
+      "dram_bandwidth": {
+        "mean": 1.2935302499999999,
+        "unit": "Tbyte/s"
+      },
+      "achieved_occupancy": {
+        "mean": 56.05924875,
+        "unit": "%"
+      },
+      "waves_per_sm": {
+        "mean": 3.81,
+        "unit": ""
+      },
+      "registers_per_thread": {
+        "mean": 44.0,
+        "unit": "register/thread"
+      },
+      "shared_memory_per_block": {
+        "mean": 11.264,
+        "unit": "Kbyte/block"
+      },
+      "launch__registers_per_thread_allocated": {
+        "mean": 48.0,
+        "unit": "register/thread"
+      },
+      "launch__occupancy_limit_registers": {
+        "mean": 10.0,
+        "unit": "block"
+      },
+      "launch__occupancy_limit_shared_mem": {
+        "mean": 12.0,
+        "unit": "block"
+      },
+      "derived__local_spilling_requests": {
+        "mean": 0.0,
+        "unit": ""
+      },
+      "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 56.878136749999996,
+        "unit": "%"
+      },
+      "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 45.512162000000004,
+        "unit": "%"
+      },
+      "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+        "mean": 64.91395324999999,
+        "unit": "%"
+      },
+      "inst_executed": {
+        "mean": 53098496.0,
+        "unit": "inst"
+      },
+      "smsp__warps_active.avg.per_cycle_active": {
+        "mean": 8.9811725,
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "mean": 2.41829175,
+        "unit": "warp"
+      },
+      "smsp__average_warps_issue_stalled_barrier_per_issue_active.ratio": {
+        "mean": 0.83086975,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_branch_resolving_per_issue_active.ratio": {
+        "mean": 0.04807325,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_dispatch_stall_per_issue_active.ratio": {
+        "mean": 1.25986975,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_drain_per_issue_active.ratio": {
+        "mean": 0.035271750000000004,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_lg_throttle_per_issue_active.ratio": {
+        "mean": 0.09881475,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": {
+        "mean": 1.8612030000000002,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_math_pipe_throttle_per_issue_active.ratio": {
+        "mean": 3.10936325,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_membar_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_mio_throttle_per_issue_active.ratio": {
+        "mean": 0.2506795,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_misc_per_issue_active.ratio": {
+        "mean": 2.375e-05,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_no_instruction_per_issue_active.ratio": {
+        "mean": 0.16959325,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_not_selected_per_issue_active.ratio": {
+        "mean": 2.93654825,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_selected_per_issue_active.ratio": {
+        "mean": 1.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": {
+        "mean": 1.29371675,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_sleeping_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_tex_throttle_per_issue_active.ratio": {
+        "mean": 0.0,
+        "unit": "inst"
+      },
+      "smsp__average_warps_issue_stalled_wait_per_issue_active.ratio": {
+        "mean": 1.75207,
+        "unit": "inst"
+      }
+    }
+  }
+}

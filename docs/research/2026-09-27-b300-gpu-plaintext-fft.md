@@ -108,7 +108,7 @@ The [qualification guide](../../experiments/openfhe_ifft/README.md#gpu-coefficie
 provides build and probe commands. Use the recorded control arguments, adding
 only `--gpu-plaintext-fft` for the candidate. Build with `FHE_STAGE0_GPU_RNS=ON`;
 the option requires `--gpu-plaintext-rns` and rejects batched/fused RNS modes.
-`experiments/run_packed_probe.py` forwards the option and rejects results that
+`src/fhemamba/benchmarks/packed.py` forwards the option and rejects results that
 do not prove the GPU path was used.
 
 The [curated evidence](../../results/b300/2026-09-27/gpu-plaintext-fft/README.md)

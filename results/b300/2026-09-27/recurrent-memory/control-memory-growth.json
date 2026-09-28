@@ -1,0 +1,56 @@
+{
+  "tiled": {
+    "first_sample_at_final_cache_size": {
+      "completed_nodes": 3050,
+      "total_nodes": 9160,
+      "seconds": 139.698,
+      "bootstraps": 0,
+      "live_values": 42,
+      "peak_live_values": 45,
+      "cache_entries": 1062,
+      "device_used_bytes": 114256707584,
+      "sampled_peak_device_bytes": 114256707584
+    },
+    "last_completed_sample": {
+      "completed_nodes": 6660,
+      "total_nodes": 9160,
+      "seconds": 361.41,
+      "bootstraps": 0,
+      "live_values": 772,
+      "peak_live_values": 772,
+      "cache_entries": 1062,
+      "device_used_bytes": 287133335552,
+      "sampled_peak_device_bytes": 287133335552
+    },
+    "device_growth_gib": 161.00390625,
+    "live_value_growth": 730,
+    "scope": "cache entry count is fixed over this interval; device allocation ownership is not directly measured"
+  },
+  "factored": {
+    "first_sample_at_final_cache_size": {
+      "completed_nodes": 4450,
+      "total_nodes": 15005,
+      "seconds": 230.667,
+      "bootstraps": 0,
+      "live_values": 143,
+      "peak_live_values": 144,
+      "cache_entries": 816,
+      "device_used_bytes": 131447062528,
+      "sampled_peak_device_bytes": 131447062528
+    },
+    "last_completed_sample": {
+      "completed_nodes": 7700,
+      "total_nodes": 15005,
+      "seconds": 368.319,
+      "bootstraps": 0,
+      "live_values": 796,
+      "peak_live_values": 797,
+      "cache_entries": 816,
+      "device_used_bytes": 287141724160,
+      "sampled_peak_device_bytes": 287141724160
+    },
+    "device_growth_gib": 145.001953125,
+    "live_value_growth": 653,
+    "scope": "cache entry count is fixed over this interval; device allocation ownership is not directly measured"
+  }
+}

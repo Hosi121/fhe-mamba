@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/build-operation-replay",
+  "state": "failed",
+  "exit_code": 2,
+  "at_unix": 1790552791.8600852
+}

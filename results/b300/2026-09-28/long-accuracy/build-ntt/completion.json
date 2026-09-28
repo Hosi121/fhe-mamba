@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/build-ntt",
+  "state": "failed",
+  "exit_code": 127,
+  "at_unix": 1790548134.7881985
+}

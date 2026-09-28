@@ -434,7 +434,7 @@ Direct Bernstein approximation may converge too slowly; constrained fitting
 and conversion to a depth-efficient evaluation basis should be compared.
 No nonconstant polynomial can be bounded on the entire real line.
 
-An implemented [composition screen](../../experiments/probe_decay_composition.py)
+An implemented [composition screen](../../experiments/algebra/probe_decay_composition.py)
 fits every layer/head on its exported softplus domain and evaluates on 4,097
 independent uniform points. Among 529 existing active heads, degree 64 reaches
 worst sampled error `1.100e-4`, but 126 heads leave `[0,1]` by more than
@@ -1130,14 +1130,14 @@ correctness against a malicious server are distinct properties. The current
 Reproduce the implemented algebra probe:
 
 ```bash
-.venv/bin/python experiments/probe_ssm_algebra.py \
+.venv/bin/python experiments/algebra/probe_ssm_algebra.py \
   --checkpoint checkpoints/mamba2-130m-hf --tokens 64 \
   --output runs/ssm-algebra.json
 .venv/bin/pytest tests/test_ssm_algebra.py
-.venv/bin/python experiments/probe_decay_composition.py \
+.venv/bin/python experiments/algebra/probe_decay_composition.py \
   --payload results/m2_chain_payload_headclip \
   --output runs/decay-composition.json
-.venv/bin/python experiments/probe_phase_schedules.py \
+.venv/bin/python experiments/algebra/probe_phase_schedules.py \
   --output runs/phase-schedules.json
 ```
 

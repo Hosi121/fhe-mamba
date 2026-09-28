@@ -4,11 +4,11 @@
 [`fhemamba.benchmarks` job runner](../../docs/experiments.md). They separate
 reusable commands from machine-local variables in ignored `config/local/`.
 
-The other JSON files configure [`run_dgx_campaign.py`](../run_dgx_campaign.py).
+The other JSON files configure [`run_dgx_campaign.py`](../execution/run_dgx_campaign.py).
 Paths passed on the command line are relative to the repository root. Keep
 numerical parameters and acceptance gates explicit when adapting a manifest.
 
-The full reproduction path uses [`run_dgx_generation.py`](../run_dgx_generation.py),
+The full reproduction path uses [`run_dgx_generation.py`](../execution/run_dgx_generation.py),
 which prepares a fresh prompt payload and derives its campaign from
 [`dgx_spark_stabilized_generation.json`](dgx_spark_stabilized_generation.json).
 Enable both encoder flags as shown in the [reproduction guide](../../docs/reproducing.md).

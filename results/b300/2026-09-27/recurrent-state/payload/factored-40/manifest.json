@@ -1,0 +1,1007 @@
+{
+  "schema": "fhemamba-recurrence-probe-v1",
+  "architecture": "mamba3",
+  "representation": "factored",
+  "tokens": 40,
+  "layer": 0,
+  "geometry": {
+    "heads": 24,
+    "channels": 64,
+    "state_size": 128
+  },
+  "trace_sha256": "f37ba105366b2002d39f9e69ef0ddfafe17017c8c9743dc483690bfd6f333b7d",
+  "trace_manifest": {
+    "schema": "fhemamba-recurrence-trace-v1",
+    "checkpoint": {
+      "repo_id": "state-spaces/mamba3-siso-187m",
+      "revision": "6792c27c00f3bb41506db1066dcd1c51bb0f4b02",
+      "files_sha256": {
+        "config.json": "642a36b583d7625f456623555c4974758ab132687bdeee97a362e44e5efff545",
+        "pytorch_model.bin": "b462d55e9f8ab9746be641d4de550b51bf65e55ab662e66835588b5a458c95ec",
+        "README.md": "327168ddad6fd3c6469206ee8e6312d7fc5b6c65d51805e37267204cdf1b4908"
+      }
+    },
+    "tokenizer": {
+      "repo_id": "nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
+      "revision": "031d4042f36adc1a52cca51b331d25cbe3cf1022",
+      "files_sha256": {
+        "special_tokens_map.json": "6f38c73729248f6c127296386e3cdde96e254636cc58b4169d3fd32328d9a8ec",
+        "tokenizer.json": "79e3e522635f3171300913bb421464a87de6222182a0570b9b2ccba2a964b2b4",
+        "tokenizer_config.json": "7d9e72de122ffa940711710f4e31d70b680d4015409c744856086bed53c43779"
+      },
+      "note": "Public Llama-3.1 tokenizer from NVIDIA; no chat template, add_special_tokens=False. Official Meta repository requires gated access."
+    },
+    "layer": 0,
+    "steps": 64,
+    "prompt": "The capital",
+    "prompt_token_ids": [
+      791,
+      6864
+    ],
+    "consumed_token_ids": [
+      791,
+      6864,
+      315,
+      279,
+      1614,
+      315,
+      1561,
+      4356,
+      374,
+      1561,
+      4356,
+      4409,
+      13,
+      578,
+      3363,
+      374,
+      279,
+      7928,
+      3363,
+      304,
+      279,
+      3723,
+      4273,
+      323,
+      279,
+      220,
+      19,
+      339,
+      1455,
+      95551,
+      3363,
+      304,
+      279,
+      3723,
+      4273,
+      13,
+      578,
+      3363,
+      374,
+      7559,
+      304,
+      279,
+      87244,
+      961,
+      315,
+      279,
+      3723,
+      4273,
+      11,
+      3973,
+      287,
+      279,
+      23179,
+      22302,
+      311,
+      279,
+      10411,
+      11,
+      279,
+      39253,
+      11188,
+      311,
+      279,
+      11226
+    ],
+    "plaintext_generated_token_ids": [
+      315,
+      279,
+      1614,
+      315,
+      1561,
+      4356,
+      374,
+      1561,
+      4356,
+      4409,
+      13,
+      578,
+      3363,
+      374,
+      279,
+      7928,
+      3363,
+      304,
+      279,
+      3723,
+      4273,
+      323,
+      279,
+      220,
+      19,
+      339,
+      1455,
+      95551,
+      3363,
+      304,
+      279,
+      3723,
+      4273,
+      13,
+      578,
+      3363,
+      374,
+      7559,
+      304,
+      279,
+      87244,
+      961,
+      315,
+      279,
+      3723,
+      4273,
+      11,
+      3973,
+      287,
+      279,
+      23179,
+      22302,
+      311,
+      279,
+      10411,
+      11,
+      279,
+      39253,
+      11188,
+      311,
+      279,
+      11226,
+      11
+    ],
+    "heads": 24,
+    "channels": 64,
+    "state_size": 128,
+    "trace_sha256": "f37ba105366b2002d39f9e69ef0ddfafe17017c8c9743dc483690bfd6f333b7d",
+    "scope": "plaintext autoregressive trace; exact nonlinearities; one recurrence boundary"
+  },
+  "program": {
+    "format": "fhemamba-packed-v2",
+    "slots": 32768,
+    "public_refresh_bound": 100000000.0,
+    "nodes": 6020,
+    "operations": {
+      "public": 1,
+      "input": 240,
+      "mulp": 40,
+      "mul": 3240,
+      "sum": 820,
+      "repeat": 820,
+      "add": 859
+    },
+    "outputs": 40,
+    "encrypted_benchmark": false
+  },
+  "output_names": [
+    {
+      "name": "step1.readout",
+      "step": 1,
+      "node": 13
+    },
+    {
+      "name": "step2.readout",
+      "step": 2,
+      "node": 34
+    },
+    {
+      "name": "step3.readout",
+      "step": 3,
+      "node": 62
+    },
+    {
+      "name": "step4.readout",
+      "step": 4,
+      "node": 97
+    },
+    {
+      "name": "step5.readout",
+      "step": 5,
+      "node": 139
+    },
+    {
+      "name": "step6.readout",
+      "step": 6,
+      "node": 188
+    },
+    {
+      "name": "step7.readout",
+      "step": 7,
+      "node": 244
+    },
+    {
+      "name": "step8.readout",
+      "step": 8,
+      "node": 307
+    },
+    {
+      "name": "step9.readout",
+      "step": 9,
+      "node": 377
+    },
+    {
+      "name": "step10.readout",
+      "step": 10,
+      "node": 454
+    },
+    {
+      "name": "step11.readout",
+      "step": 11,
+      "node": 538
+    },
+    {
+      "name": "step12.readout",
+      "step": 12,
+      "node": 629
+    },
+    {
+      "name": "step13.readout",
+      "step": 13,
+      "node": 727
+    },
+    {
+      "name": "step14.readout",
+      "step": 14,
+      "node": 832
+    },
+    {
+      "name": "step15.readout",
+      "step": 15,
+      "node": 944
+    },
+    {
+      "name": "step16.readout",
+      "step": 16,
+      "node": 1063
+    },
+    {
+      "name": "step17.readout",
+      "step": 17,
+      "node": 1189
+    },
+    {
+      "name": "step18.readout",
+      "step": 18,
+      "node": 1322
+    },
+    {
+      "name": "step19.readout",
+      "step": 19,
+      "node": 1462
+    },
+    {
+      "name": "step20.readout",
+      "step": 20,
+      "node": 1609
+    },
+    {
+      "name": "step21.readout",
+      "step": 21,
+      "node": 1763
+    },
+    {
+      "name": "step22.readout",
+      "step": 22,
+      "node": 1924
+    },
+    {
+      "name": "step23.readout",
+      "step": 23,
+      "node": 2092
+    },
+    {
+      "name": "step24.readout",
+      "step": 24,
+      "node": 2267
+    },
+    {
+      "name": "step25.readout",
+      "step": 25,
+      "node": 2449
+    },
+    {
+      "name": "step26.readout",
+      "step": 26,
+      "node": 2638
+    },
+    {
+      "name": "step27.readout",
+      "step": 27,
+      "node": 2834
+    },
+    {
+      "name": "step28.readout",
+      "step": 28,
+      "node": 3037
+    },
+    {
+      "name": "step29.readout",
+      "step": 29,
+      "node": 3247
+    },
+    {
+      "name": "step30.readout",
+      "step": 30,
+      "node": 3464
+    },
+    {
+      "name": "step31.readout",
+      "step": 31,
+      "node": 3688
+    },
+    {
+      "name": "step32.readout",
+      "step": 32,
+      "node": 3919
+    },
+    {
+      "name": "step33.readout",
+      "step": 33,
+      "node": 4157
+    },
+    {
+      "name": "step34.readout",
+      "step": 34,
+      "node": 4402
+    },
+    {
+      "name": "step35.readout",
+      "step": 35,
+      "node": 4654
+    },
+    {
+      "name": "step36.readout",
+      "step": 36,
+      "node": 4913
+    },
+    {
+      "name": "step37.readout",
+      "step": 37,
+      "node": 5179
+    },
+    {
+      "name": "step38.readout",
+      "step": 38,
+      "node": 5452
+    },
+    {
+      "name": "step39.readout",
+      "step": 39,
+      "node": 5732
+    },
+    {
+      "name": "step40.readout",
+      "step": 40,
+      "node": 6019
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "start": 1,
+      "stop": 14,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 3,
+        "sum": 1,
+        "repeat": 1,
+        "add": 1
+      },
+      "carried_ciphertexts": 3,
+      "carried_coordinates": 4632
+    },
+    {
+      "step": 2,
+      "start": 14,
+      "stop": 35,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 7,
+        "add": 3,
+        "sum": 2,
+        "repeat": 2
+      },
+      "carried_ciphertexts": 6,
+      "carried_coordinates": 9264
+    },
+    {
+      "step": 3,
+      "start": 35,
+      "stop": 63,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 11,
+        "add": 4,
+        "sum": 3,
+        "repeat": 3
+      },
+      "carried_ciphertexts": 9,
+      "carried_coordinates": 13896
+    },
+    {
+      "step": 4,
+      "start": 63,
+      "stop": 98,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 15,
+        "add": 5,
+        "sum": 4,
+        "repeat": 4
+      },
+      "carried_ciphertexts": 12,
+      "carried_coordinates": 18528
+    },
+    {
+      "step": 5,
+      "start": 98,
+      "stop": 140,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 19,
+        "add": 6,
+        "sum": 5,
+        "repeat": 5
+      },
+      "carried_ciphertexts": 15,
+      "carried_coordinates": 23160
+    },
+    {
+      "step": 6,
+      "start": 140,
+      "stop": 189,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 23,
+        "add": 7,
+        "sum": 6,
+        "repeat": 6
+      },
+      "carried_ciphertexts": 18,
+      "carried_coordinates": 27792
+    },
+    {
+      "step": 7,
+      "start": 189,
+      "stop": 245,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 27,
+        "add": 8,
+        "sum": 7,
+        "repeat": 7
+      },
+      "carried_ciphertexts": 21,
+      "carried_coordinates": 32424
+    },
+    {
+      "step": 8,
+      "start": 245,
+      "stop": 308,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 31,
+        "add": 9,
+        "sum": 8,
+        "repeat": 8
+      },
+      "carried_ciphertexts": 24,
+      "carried_coordinates": 37056
+    },
+    {
+      "step": 9,
+      "start": 308,
+      "stop": 378,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 35,
+        "add": 10,
+        "sum": 9,
+        "repeat": 9
+      },
+      "carried_ciphertexts": 27,
+      "carried_coordinates": 41688
+    },
+    {
+      "step": 10,
+      "start": 378,
+      "stop": 455,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 39,
+        "add": 11,
+        "sum": 10,
+        "repeat": 10
+      },
+      "carried_ciphertexts": 30,
+      "carried_coordinates": 46320
+    },
+    {
+      "step": 11,
+      "start": 455,
+      "stop": 539,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 43,
+        "add": 12,
+        "sum": 11,
+        "repeat": 11
+      },
+      "carried_ciphertexts": 33,
+      "carried_coordinates": 50952
+    },
+    {
+      "step": 12,
+      "start": 539,
+      "stop": 630,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 47,
+        "add": 13,
+        "sum": 12,
+        "repeat": 12
+      },
+      "carried_ciphertexts": 36,
+      "carried_coordinates": 55584
+    },
+    {
+      "step": 13,
+      "start": 630,
+      "stop": 728,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 51,
+        "add": 14,
+        "sum": 13,
+        "repeat": 13
+      },
+      "carried_ciphertexts": 39,
+      "carried_coordinates": 60216
+    },
+    {
+      "step": 14,
+      "start": 728,
+      "stop": 833,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 55,
+        "add": 15,
+        "sum": 14,
+        "repeat": 14
+      },
+      "carried_ciphertexts": 42,
+      "carried_coordinates": 64848
+    },
+    {
+      "step": 15,
+      "start": 833,
+      "stop": 945,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 59,
+        "add": 16,
+        "sum": 15,
+        "repeat": 15
+      },
+      "carried_ciphertexts": 45,
+      "carried_coordinates": 69480
+    },
+    {
+      "step": 16,
+      "start": 945,
+      "stop": 1064,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 63,
+        "add": 17,
+        "sum": 16,
+        "repeat": 16
+      },
+      "carried_ciphertexts": 48,
+      "carried_coordinates": 74112
+    },
+    {
+      "step": 17,
+      "start": 1064,
+      "stop": 1190,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 67,
+        "add": 18,
+        "sum": 17,
+        "repeat": 17
+      },
+      "carried_ciphertexts": 51,
+      "carried_coordinates": 78744
+    },
+    {
+      "step": 18,
+      "start": 1190,
+      "stop": 1323,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 71,
+        "add": 19,
+        "sum": 18,
+        "repeat": 18
+      },
+      "carried_ciphertexts": 54,
+      "carried_coordinates": 83376
+    },
+    {
+      "step": 19,
+      "start": 1323,
+      "stop": 1463,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 75,
+        "add": 20,
+        "sum": 19,
+        "repeat": 19
+      },
+      "carried_ciphertexts": 57,
+      "carried_coordinates": 88008
+    },
+    {
+      "step": 20,
+      "start": 1463,
+      "stop": 1610,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 79,
+        "add": 21,
+        "sum": 20,
+        "repeat": 20
+      },
+      "carried_ciphertexts": 60,
+      "carried_coordinates": 92640
+    },
+    {
+      "step": 21,
+      "start": 1610,
+      "stop": 1764,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 83,
+        "add": 22,
+        "sum": 21,
+        "repeat": 21
+      },
+      "carried_ciphertexts": 63,
+      "carried_coordinates": 97272
+    },
+    {
+      "step": 22,
+      "start": 1764,
+      "stop": 1925,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 87,
+        "add": 23,
+        "sum": 22,
+        "repeat": 22
+      },
+      "carried_ciphertexts": 66,
+      "carried_coordinates": 101904
+    },
+    {
+      "step": 23,
+      "start": 1925,
+      "stop": 2093,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 91,
+        "add": 24,
+        "sum": 23,
+        "repeat": 23
+      },
+      "carried_ciphertexts": 69,
+      "carried_coordinates": 106536
+    },
+    {
+      "step": 24,
+      "start": 2093,
+      "stop": 2268,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 95,
+        "add": 25,
+        "sum": 24,
+        "repeat": 24
+      },
+      "carried_ciphertexts": 72,
+      "carried_coordinates": 111168
+    },
+    {
+      "step": 25,
+      "start": 2268,
+      "stop": 2450,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 99,
+        "add": 26,
+        "sum": 25,
+        "repeat": 25
+      },
+      "carried_ciphertexts": 75,
+      "carried_coordinates": 115800
+    },
+    {
+      "step": 26,
+      "start": 2450,
+      "stop": 2639,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 103,
+        "add": 27,
+        "sum": 26,
+        "repeat": 26
+      },
+      "carried_ciphertexts": 78,
+      "carried_coordinates": 120432
+    },
+    {
+      "step": 27,
+      "start": 2639,
+      "stop": 2835,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 107,
+        "add": 28,
+        "sum": 27,
+        "repeat": 27
+      },
+      "carried_ciphertexts": 81,
+      "carried_coordinates": 125064
+    },
+    {
+      "step": 28,
+      "start": 2835,
+      "stop": 3038,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 111,
+        "add": 29,
+        "sum": 28,
+        "repeat": 28
+      },
+      "carried_ciphertexts": 84,
+      "carried_coordinates": 129696
+    },
+    {
+      "step": 29,
+      "start": 3038,
+      "stop": 3248,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 115,
+        "add": 30,
+        "sum": 29,
+        "repeat": 29
+      },
+      "carried_ciphertexts": 87,
+      "carried_coordinates": 134328
+    },
+    {
+      "step": 30,
+      "start": 3248,
+      "stop": 3465,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 119,
+        "add": 31,
+        "sum": 30,
+        "repeat": 30
+      },
+      "carried_ciphertexts": 90,
+      "carried_coordinates": 138960
+    },
+    {
+      "step": 31,
+      "start": 3465,
+      "stop": 3689,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 123,
+        "add": 32,
+        "sum": 31,
+        "repeat": 31
+      },
+      "carried_ciphertexts": 93,
+      "carried_coordinates": 143592
+    },
+    {
+      "step": 32,
+      "start": 3689,
+      "stop": 3920,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 127,
+        "add": 33,
+        "sum": 32,
+        "repeat": 32
+      },
+      "carried_ciphertexts": 96,
+      "carried_coordinates": 148224
+    },
+    {
+      "step": 33,
+      "start": 3920,
+      "stop": 4158,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 131,
+        "add": 34,
+        "sum": 33,
+        "repeat": 33
+      },
+      "carried_ciphertexts": 99,
+      "carried_coordinates": 152856
+    },
+    {
+      "step": 34,
+      "start": 4158,
+      "stop": 4403,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 135,
+        "add": 35,
+        "sum": 34,
+        "repeat": 34
+      },
+      "carried_ciphertexts": 102,
+      "carried_coordinates": 157488
+    },
+    {
+      "step": 35,
+      "start": 4403,
+      "stop": 4655,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 139,
+        "add": 36,
+        "sum": 35,
+        "repeat": 35
+      },
+      "carried_ciphertexts": 105,
+      "carried_coordinates": 162120
+    },
+    {
+      "step": 36,
+      "start": 4655,
+      "stop": 4914,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 143,
+        "add": 37,
+        "sum": 36,
+        "repeat": 36
+      },
+      "carried_ciphertexts": 108,
+      "carried_coordinates": 166752
+    },
+    {
+      "step": 37,
+      "start": 4914,
+      "stop": 5180,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 147,
+        "add": 38,
+        "sum": 37,
+        "repeat": 37
+      },
+      "carried_ciphertexts": 111,
+      "carried_coordinates": 171384
+    },
+    {
+      "step": 38,
+      "start": 5180,
+      "stop": 5453,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 151,
+        "add": 39,
+        "sum": 38,
+        "repeat": 38
+      },
+      "carried_ciphertexts": 114,
+      "carried_coordinates": 176016
+    },
+    {
+      "step": 39,
+      "start": 5453,
+      "stop": 5733,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 155,
+        "add": 40,
+        "sum": 39,
+        "repeat": 39
+      },
+      "carried_ciphertexts": 117,
+      "carried_coordinates": 180648
+    },
+    {
+      "step": 40,
+      "start": 5733,
+      "stop": 6020,
+      "operations": {
+        "input": 6,
+        "mulp": 1,
+        "mul": 159,
+        "add": 41,
+        "sum": 40,
+        "repeat": 40
+      },
+      "carried_ciphertexts": 120,
+      "carried_coordinates": 185280
+    }
+  ],
+  "max_plaintext_error_vs_dense": 1.0658141036401503e-14,
+  "refresh_bounds": "trace maximum times eight, minimum one; not certified",
+  "scope": "recurrence only; precomputed boundary inputs; no encrypted token feedback",
+  "memory_scope": "carried state excludes validation outputs, keys and the unrolled DAG",
+  "files_sha256": {
+    "program.txt": "b400b4b99b51b3b55ee67b264244b52f972252ba8f594c60f40b0df033316142",
+    "fixture.npz": "2092f756223fd9e12923b2f0b87dfa3cc7960c4886b402f4c43dcce07e8c7ff1"
+  }
+}

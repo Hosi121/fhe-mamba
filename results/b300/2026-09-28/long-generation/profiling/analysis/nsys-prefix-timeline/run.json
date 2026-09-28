@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790528227.4643476,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "python3",
+      "${STUDY}/analysis-tools/profiling/nsys_summary.py",
+      "${STUDY}/nsys-prefix/trace.sqlite",
+      "--output",
+      "${STUDY}/nsys-prefix/summary-timeline.json"
+    ],
+    "cwd": "${STUDY}",
+    "inputs": {
+      "analyzer": "${STUDY}/analysis-tools/profiling/nsys_summary.py",
+      "sqlite": "${STUDY}/nsys-prefix/trace.sqlite"
+    },
+    "timeout_seconds": 900
+  },
+  "inputs": {
+    "analyzer": {
+      "bytes": 10611,
+      "sha256": "474ce39ab0c7e611d025d531549afc5c91ae66ca6b29c435052c1cd3c00a052a"
+    },
+    "sqlite": {
+      "bytes": 2173644800,
+      "sha256": "63b22631e26dddf8bb84ae4255a4c5cf7011b285c6bf72f7e71cee096163151f"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.000353299081325531,
+  "wall_seconds": 87.11721938615665
+}

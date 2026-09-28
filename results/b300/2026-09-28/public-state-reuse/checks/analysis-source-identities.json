@@ -1,0 +1,22 @@
+{
+  "experiments/profiling/ncu_summary.py": {
+    "sha256": "1dfb396fe4a9a5bc978df3ad6dad92568b614d3c82738cfebe41267bc4eee3fe",
+    "bytes": 3099
+  },
+  "experiments/profiling/README.md": {
+    "sha256": "e42dbd05349de8abed5ac2dc001d9b151c111b5f67f6d1b93602071fc5e4c7cd",
+    "bytes": 3035
+  },
+  "tests/test_ncu_summary.py": {
+    "sha256": "4e81a67138d8a1443004f5efad535ceeed1cd149a4bfefbf298df56412176ac8",
+    "bytes": 1823
+  },
+  "tests/test_nsys_summary.py": {
+    "sha256": "c1d0e5010acaa54c06a8849bdada97e2a9649cf19cfda64866606765591ab5db",
+    "bytes": 3426
+  },
+  "tests/test_packed_probe_runner.py": {
+    "sha256": "17cbfeef02b0d5569f85f886a6a2eb6075770513cdb96fcc11ebacfeeb7a2b70",
+    "bytes": 19540
+  }
+}

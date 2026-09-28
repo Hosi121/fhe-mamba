@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "baseline_sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad",
+  "candidate_sha256": "187bcba79d6fb35b1106e2d303086a024a186c5e63df97dcfd5f4b8f5198dfb2",
+  "verifier_sha256": "6e2cd0d9ba17a2fdc7ca39b06a55d09175f3169c0d0d239144d68d9e40c27784",
+  "members": 39,
+  "changed_members": [
+    "NTT.cu.o",
+    "cmake_device_link.o"
+  ],
+  "checks_duplicate_members": true
+}

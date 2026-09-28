@@ -1,0 +1,1582 @@
+{
+  "schema": "fhemamba-recurrence-domain-audit-v1",
+  "steps": 64,
+  "trace_manifest_sha256": "7d2a76119dc191e2e5d5d1e6c73ea8b07cb9e812f517844fa94bfdd0c4a4d2ea",
+  "polynomial_manifest_sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7",
+  "sites": {
+    "0:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.03671307519398522,
+      "frozen_hi": 0.31475735113115455,
+      "observed_lo": 0.07342615038797044,
+      "observed_hi": 0.2882532793271666,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:dt_softplus": {
+      "kind": "softplus",
+      "degree": 31,
+      "frozen_lo": -12.49126587632823,
+      "frozen_hi": 3.3145224010944476,
+      "observed_lo": -10.08657742973799,
+      "observed_hi": 1.1914697020246665,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 511,
+      "frozen_lo": -5.820935891846244,
+      "frozen_hi": 12.45967855403855,
+      "observed_lo": -4.447181277865043,
+      "observed_hi": 10.082899379483777,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -2.8933397215231693,
+      "frozen_hi": 0.48221015525318317,
+      "observed_lo": -2.8439951382948996,
+      "observed_hi": -7.64318218708655e-06,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -5.7425126756029305,
+      "frozen_hi": 2.617446913627907,
+      "observed_lo": -4.94743752336526,
+      "observed_hi": 2.1372025533595282,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 63,
+      "frozen_lo": -3.17437041925768,
+      "frozen_hi": 4.1384704490529725,
+      "observed_lo": -2.109586870687497,
+      "observed_hi": 3.093778896437165,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:m3_cos": {
+      "kind": "cos",
+      "degree": 63,
+      "frozen_lo": -22.833256884233606,
+      "frozen_hi": 23.531143555666006,
+      "observed_lo": -153.88660613846216,
+      "observed_hi": 172.77417320010665,
+      "first_outside_step": 9,
+      "outside_steps": 56
+    },
+    "0:m3_sin": {
+      "kind": "sin",
+      "degree": 63,
+      "frozen_lo": -22.833256884233606,
+      "frozen_hi": 23.531143555666006,
+      "observed_lo": -153.88660613846216,
+      "observed_hi": 172.77417320010665,
+      "first_outside_step": 9,
+      "outside_steps": 56
+    },
+    "0:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.05913094015198523,
+      "frozen_hi": 2.034078818301878,
+      "observed_lo": 0.07937979085068064,
+      "observed_hi": 1.7147759953022268,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.03668411696336364,
+      "frozen_hi": 1.743984128548303,
+      "observed_lo": 0.054510582397444725,
+      "observed_hi": 1.5241253148866623,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -3.5713690503019664,
+      "frozen_hi": 2.884335367065889,
+      "observed_lo": -2.6491255621065584,
+      "observed_hi": 1.9959114635129875,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "0:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.1768653533032426,
+      "frozen_hi": 8.29126672231589,
+      "observed_lo": 0.3537307066064852,
+      "observed_hi": 16.637233104306095,
+      "first_outside_step": 22,
+      "outside_steps": 8
+    },
+    "0:mlp_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -5.157623198759943,
+      "frozen_hi": 5.0819915221714025,
+      "observed_lo": -4.517438545314519,
+      "observed_hi": 4.719987685476884,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "1:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.4322046061682554,
+      "frozen_hi": 15.225484678142248,
+      "observed_lo": 0.815206125379683,
+      "observed_hi": 15.98131316626543,
+      "first_outside_step": 43,
+      "outside_steps": 2
+    },
+    "1:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -6.349430940398396,
+      "frozen_hi": 1.2460491393462334,
+      "observed_lo": -6.002351122704851,
+      "observed_hi": 0.19007696122893225,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "1:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 255,
+      "frozen_lo": -3.7695577753056395,
+      "frozen_hi": 5.256559968347622,
+      "observed_lo": -3.7865004255686197,
+      "observed_hi": 4.043613451494976,
+      "first_outside_step": 28,
+      "outside_steps": 1
+    },
+    "1:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -2.7209969657552717,
+      "frozen_hi": 0.44971138282714884,
+      "observed_lo": -2.210523011240733,
+      "observed_hi": -0.0011727492818708676,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "1:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -4.7240445729715965,
+      "frozen_hi": 2.9728073310213667,
+      "observed_lo": -3.6323435071204493,
+      "observed_hi": 1.9821214560784715,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "1:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 31,
+      "frozen_lo": -2.3022513875925785,
+      "frozen_hi": 4.7320511276983614,
+      "observed_lo": -1.4865555009016813,
+      "observed_hi": 3.690473860117497,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "1:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -11.20786041080541,
+      "frozen_hi": 15.802338682720658,
+      "observed_lo": -65.05764994008504,
+      "observed_hi": 109.55237433592757,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "1:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -11.20786041080541,
+      "frozen_hi": 15.802338682720658,
+      "observed_lo": -65.05764994008504,
+      "observed_hi": 109.55237433592757,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "1:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.02700401426554962,
+      "frozen_hi": 1.3352320018209451,
+      "observed_lo": 0.056638489531120724,
+      "observed_hi": 1.5908404488460008,
+      "first_outside_step": 12,
+      "outside_steps": 2
+    },
+    "1:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.10702041106349008,
+      "frozen_hi": 0.7174003077150007,
+      "observed_lo": 0.19662180925487255,
+      "observed_hi": 0.8991778580581486,
+      "first_outside_step": 12,
+      "outside_steps": 3
+    },
+    "1:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -5.3528127339075855,
+      "frozen_hi": 4.648438215874705,
+      "observed_lo": -3.7558728967051556,
+      "observed_hi": 3.49259217904953,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "1:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.5994331834598204,
+      "frozen_hi": 16.997202332210865,
+      "observed_lo": 0.9705913201476392,
+      "observed_hi": 16.795103175117788,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "1:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -7.222615964229179,
+      "frozen_hi": 7.208323997019113,
+      "observed_lo": -6.163798952213417,
+      "observed_hi": 4.93776354753711,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "2:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.8731982437325686,
+      "frozen_hi": 16.913449835857655,
+      "observed_lo": 1.4182081854017,
+      "observed_hi": 17.599962775289683,
+      "first_outside_step": 43,
+      "outside_steps": 1
+    },
+    "2:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -6.410560936854671,
+      "frozen_hi": 1.4576159868379206,
+      "observed_lo": -6.484755826750658,
+      "observed_hi": 0.016208152898919304,
+      "first_outside_step": 56,
+      "outside_steps": 3
+    },
+    "2:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 511,
+      "frozen_lo": -10.458064763547066,
+      "frozen_hi": 8.89436518936067,
+      "observed_lo": -10.782473612664985,
+      "observed_hi": 7.003978843579539,
+      "first_outside_step": 28,
+      "outside_steps": 1
+    },
+    "2:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -3.713600451287547,
+      "frozen_hi": 0.6178118453219565,
+      "observed_lo": -3.08316453164011,
+      "observed_hi": -0.0002068560640470022,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "2:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -5.5499738368837725,
+      "frozen_hi": 4.223488677280633,
+      "observed_lo": -4.171263080598512,
+      "observed_hi": 2.7324386985854723,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "2:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 31,
+      "frozen_lo": -2.5279218713638083,
+      "frozen_hi": 3.6757789894986925,
+      "observed_lo": -1.4383796743399153,
+      "observed_hi": 2.92365237063914,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "2:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -10.928705814040509,
+      "frozen_hi": 12.731317037166674,
+      "observed_lo": -46.559977302924416,
+      "observed_hi": 68.31009622142898,
+      "first_outside_step": 12,
+      "outside_steps": 53
+    },
+    "2:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -10.928705814040509,
+      "frozen_hi": 12.731317037166674,
+      "observed_lo": -46.559977302924416,
+      "observed_hi": 68.31009622142898,
+      "first_outside_step": 12,
+      "outside_steps": 53
+    },
+    "2:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.04771365419884851,
+      "frozen_hi": 0.7944654774125478,
+      "observed_lo": 0.09758132988773896,
+      "observed_hi": 1.5071604348054004,
+      "first_outside_step": 11,
+      "outside_steps": 8
+    },
+    "2:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.1316838571967116,
+      "frozen_hi": 0.8382510350284884,
+      "observed_lo": 0.21798585711864177,
+      "observed_hi": 0.9898219147282218,
+      "first_outside_step": 19,
+      "outside_steps": 3
+    },
+    "2:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -4.373052461365789,
+      "frozen_hi": 4.057247605741444,
+      "observed_lo": -3.608619444694469,
+      "observed_hi": 2.974321591498616,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "2:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 1.056631563501037,
+      "frozen_hi": 20.069780889368033,
+      "observed_lo": 1.803850051254171,
+      "observed_hi": 21.357973184846813,
+      "first_outside_step": 8,
+      "outside_steps": 1
+    },
+    "2:mlp_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -5.4988991091418535,
+      "frozen_hi": 6.181585957905684,
+      "observed_lo": -4.810680103307425,
+      "observed_hi": 9.499879650887639,
+      "first_outside_step": 11,
+      "outside_steps": 2
+    },
+    "3:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 1.5081999817931135,
+      "frozen_hi": 25.09964113708935,
+      "observed_lo": 2.4145994615278217,
+      "observed_hi": 26.37706677402295,
+      "first_outside_step": 8,
+      "outside_steps": 2
+    },
+    "3:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -5.610705929211858,
+      "frozen_hi": 0.8198575925766692,
+      "observed_lo": -5.762895810751284,
+      "observed_hi": -0.08675377428907227,
+      "first_outside_step": 42,
+      "outside_steps": 3
+    },
+    "3:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 255,
+      "frozen_lo": -3.624988150318173,
+      "frozen_hi": 4.864141383862232,
+      "observed_lo": -3.3725095401590655,
+      "observed_hi": 2.9218399070032857,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "3:decay_exp": {
+      "kind": "exp",
+      "degree": 7,
+      "frozen_lo": -2.2396920616989306,
+      "frozen_hi": 0.36915681615484625,
+      "observed_lo": -1.997178004707731,
+      "observed_hi": -0.0009767988754181291,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "3:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -6.167978402549894,
+      "frozen_hi": 5.141809048894706,
+      "observed_lo": -4.931051417194927,
+      "observed_hi": 3.010587416133194,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "3:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 31,
+      "frozen_lo": -3.5354732184420152,
+      "frozen_hi": 2.293087210152053,
+      "observed_lo": -3.3172962896852236,
+      "observed_hi": 1.5376737019817692,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "3:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -11.131166196179365,
+      "frozen_hi": 10.157317908093255,
+      "observed_lo": -71.4774174563595,
+      "observed_hi": 54.53682742524046,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "3:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -11.131166196179365,
+      "frozen_hi": 10.157317908093255,
+      "observed_lo": -71.4774174563595,
+      "observed_hi": 54.53682742524046,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "3:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.08907580532200901,
+      "frozen_hi": 1.4058954380893347,
+      "observed_lo": 0.14529852286087694,
+      "observed_hi": 0.9778597866754785,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "3:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 0.14902354394553702,
+      "frozen_hi": 0.7642182451301303,
+      "observed_lo": 0.2426918584773594,
+      "observed_hi": 0.6761889915244549,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "3:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -4.66266013167872,
+      "frozen_hi": 4.273947355300054,
+      "observed_lo": -3.636601200312087,
+      "observed_hi": 3.2117963970903003,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "3:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 1.9770947578276876,
+      "frozen_hi": 29.466507749060945,
+      "observed_lo": 3.61631680718077,
+      "observed_hi": 31.82776506828804,
+      "first_outside_step": 8,
+      "outside_steps": 2
+    },
+    "3:mlp_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -6.027579989895982,
+      "frozen_hi": 5.737350921373162,
+      "observed_lo": -4.928945700328589,
+      "observed_hi": 4.7122107023562485,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "4:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 2.509314983879767,
+      "frozen_hi": 35.84266870368331,
+      "observed_lo": 4.542394027555156,
+      "observed_hi": 37.93085064434254,
+      "first_outside_step": 8,
+      "outside_steps": 1
+    },
+    "4:dt_softplus": {
+      "kind": "softplus",
+      "degree": 31,
+      "frozen_lo": -9.445993963354326,
+      "frozen_hi": 1.4653337891928926,
+      "observed_lo": -9.34203761074394,
+      "observed_hi": 0.0746882178600432,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "4:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 511,
+      "frozen_lo": -6.100307324718791,
+      "frozen_hi": 13.282963891051917,
+      "observed_lo": -4.488950031843805,
+      "observed_hi": 15.155705845568619,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "4:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -3.7633813413853274,
+      "frozen_hi": 0.6269236408769857,
+      "observed_lo": -4.198612321801737,
+      "observed_hi": -3.2583263956172806e-05,
+      "first_outside_step": 13,
+      "outside_steps": 2
+    },
+    "4:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 63,
+      "frozen_lo": -9.892927089695858,
+      "frozen_hi": 6.683252526491765,
+      "observed_lo": -8.300276857947473,
+      "observed_hi": 5.28269899668721,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "4:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 31,
+      "frozen_lo": -1.3587805162344488,
+      "frozen_hi": 3.6691542480201975,
+      "observed_lo": -0.6833102030386173,
+      "observed_hi": 3.2490659325098963,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "4:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -4.4130440070476205,
+      "frozen_hi": 10.67802658662285,
+      "observed_lo": -11.235717169812725,
+      "observed_hi": 60.89293843157775,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "4:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -4.4130440070476205,
+      "frozen_hi": 10.67802658662285,
+      "observed_lo": -11.235717169812725,
+      "observed_hi": 60.89293843157775,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "4:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.038687852367093545,
+      "frozen_hi": 1.3739064522747775,
+      "observed_lo": 0.08221071804812476,
+      "observed_hi": 1.168719245246259,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "4:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.19753237160794074,
+      "frozen_hi": 1.7093390491502016,
+      "observed_lo": 0.34522075235912913,
+      "observed_hi": 1.6954327833736254,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "4:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -5.863573474121558,
+      "frozen_hi": 5.632936056518684,
+      "observed_lo": -3.954801383527007,
+      "observed_hi": 3.5918071224558625,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "4:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 3.478500975502821,
+      "frozen_hi": 38.95113068805258,
+      "observed_lo": 6.46626013923496,
+      "observed_hi": 43.14804353159182,
+      "first_outside_step": 8,
+      "outside_steps": 1
+    },
+    "4:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -8.63223595550121,
+      "frozen_hi": 7.975310847008659,
+      "observed_lo": -6.007148957342052,
+      "observed_hi": 5.039223191132905,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 4.084125909216886,
+      "frozen_hi": 55.640952882596466,
+      "observed_lo": 7.4711675926888095,
+      "observed_hi": 55.60511432881944,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -6.857246631591995,
+      "frozen_hi": 1.120151131076041,
+      "observed_lo": -6.197037955317526,
+      "observed_hi": -0.039495803217088454,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 255,
+      "frozen_lo": -3.894169950036967,
+      "frozen_hi": 5.008079897890055,
+      "observed_lo": -3.2094743694171717,
+      "observed_hi": 3.521480539332105,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:decay_exp": {
+      "kind": "exp",
+      "degree": 7,
+      "frozen_lo": -2.3115303402213043,
+      "frozen_hi": 0.38355718017548973,
+      "observed_lo": -2.0959818312691554,
+      "observed_hi": -0.0006126846284983523,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -5.884911322254132,
+      "frozen_hi": 4.717438604734728,
+      "observed_lo": -4.5516409681703776,
+      "observed_hi": 6.265452158953023,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "5:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 31,
+      "frozen_lo": -4.001008716588936,
+      "frozen_hi": 2.575893472884213,
+      "observed_lo": -3.6314102432175037,
+      "observed_hi": 1.9612321977506904,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -12.249036641227974,
+      "frozen_hi": 10.710514024676467,
+      "observed_lo": -70.81349082000709,
+      "observed_hi": 52.31625449556796,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "5:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -12.249036641227974,
+      "frozen_hi": 10.710514024676467,
+      "observed_lo": -70.81349082000709,
+      "observed_hi": 52.31625449556796,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "5:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.058566767898046976,
+      "frozen_hi": 1.1230830823921034,
+      "observed_lo": 0.12936759434118908,
+      "observed_hi": 0.9474445964539332,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.14541902886458366,
+      "frozen_hi": 1.1618909691141273,
+      "observed_lo": 0.23610814797662968,
+      "observed_hi": 1.1364388924301418,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -4.4202370508221405,
+      "frozen_hi": 3.7436280610311585,
+      "observed_lo": -3.743264204929972,
+      "observed_hi": 3.3206483473359683,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "5:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 4.6628017733051745,
+      "frozen_hi": 59.181450957718226,
+      "observed_lo": 9.799951036718273,
+      "observed_hi": 60.74500474524754,
+      "first_outside_step": 8,
+      "outside_steps": 1
+    },
+    "5:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -6.905130805637933,
+      "frozen_hi": 7.307113728417565,
+      "observed_lo": -6.3818374334550505,
+      "observed_hi": 7.91880155083572,
+      "first_outside_step": 19,
+      "outside_steps": 2
+    },
+    "6:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 7.530584729421317,
+      "frozen_hi": 68.15823566978074,
+      "observed_lo": 14.198047603374164,
+      "observed_hi": 68.80739646191819,
+      "first_outside_step": 8,
+      "outside_steps": 1
+    },
+    "6:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -6.703023936994739,
+      "frozen_hi": 1.2249740887362583,
+      "observed_lo": -7.461349510862462,
+      "observed_hi": 0.14164215724323292,
+      "first_outside_step": 33,
+      "outside_steps": 2
+    },
+    "6:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 255,
+      "frozen_lo": -3.535417310682438,
+      "frozen_hi": 4.29349475751273,
+      "observed_lo": -3.2084323311673275,
+      "observed_hi": 3.725866103913175,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "6:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -3.237439752206746,
+      "frozen_hi": 0.5375924641358474,
+      "observed_lo": -2.9753427447115213,
+      "observed_hi": -0.00018130255560544085,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "6:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -3.825513104730181,
+      "frozen_hi": 4.420039731746828,
+      "observed_lo": -3.8323028994377855,
+      "observed_hi": 4.359750760599235,
+      "first_outside_step": 10,
+      "outside_steps": 1
+    },
+    "6:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 63,
+      "frozen_lo": -3.2175193182198,
+      "frozen_hi": 3.8481838391031262,
+      "observed_lo": -2.150452361229612,
+      "observed_hi": 3.8317299129627482,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "6:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -11.568660816899289,
+      "frozen_hi": 12.556197942697267,
+      "observed_lo": -56.836247663637394,
+      "observed_hi": 67.01376732893937,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "6:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -11.568660816899289,
+      "frozen_hi": 12.556197942697267,
+      "observed_lo": -56.836247663637394,
+      "observed_hi": 67.01376732893937,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "6:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.05845070559890756,
+      "frozen_hi": 0.8442167534692204,
+      "observed_lo": 0.13067285408755563,
+      "observed_hi": 1.2846309866107242,
+      "first_outside_step": 13,
+      "outside_steps": 2
+    },
+    "6:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 0.14382943569798548,
+      "frozen_hi": 0.8564566765372669,
+      "observed_lo": 0.3084408935717258,
+      "observed_hi": 0.8934804068831831,
+      "first_outside_step": 11,
+      "outside_steps": 1
+    },
+    "6:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -4.273259915087509,
+      "frozen_hi": 3.9797988088817307,
+      "observed_lo": -3.0256962028248506,
+      "observed_hi": 3.3318047002642723,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "6:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 9.759484588921334,
+      "frozen_hi": 81.87100464459434,
+      "observed_lo": 19.518969177842674,
+      "observed_hi": 82.2981392916102,
+      "first_outside_step": 8,
+      "outside_steps": 1
+    },
+    "6:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -7.627174458106316,
+      "frozen_hi": 11.134519253275737,
+      "observed_lo": -6.437696214526035,
+      "observed_hi": 6.249412595820821,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "7:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 13.380732685465867,
+      "frozen_hi": 97.3526502442926,
+      "observed_lo": 26.217462004450876,
+      "observed_hi": 98.4626003268819,
+      "first_outside_step": 8,
+      "outside_steps": 1
+    },
+    "7:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -7.431149340395491,
+      "frozen_hi": 0.6427546239292425,
+      "observed_lo": -7.939261341991234,
+      "observed_hi": -0.8490226511343835,
+      "first_outside_step": 33,
+      "outside_steps": 4
+    },
+    "7:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 511,
+      "frozen_lo": -5.853367296273965,
+      "frozen_hi": 7.224090615085639,
+      "observed_lo": -4.580352901849711,
+      "observed_hi": 7.834840384107615,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "7:decay_exp": {
+      "kind": "exp",
+      "degree": 7,
+      "frozen_lo": -2.25702776819546,
+      "frozen_hi": 0.3757304805317108,
+      "observed_lo": -2.3106307177833543,
+      "observed_hi": -7.95607549095444e-05,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "7:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -6.033617480328692,
+      "frozen_hi": 7.793353144384914,
+      "observed_lo": -5.723599998955098,
+      "observed_hi": 6.317066484220454,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "7:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 63,
+      "frozen_lo": -5.4558131562376815,
+      "frozen_hi": 2.1669689197752935,
+      "observed_lo": -4.415821305153936,
+      "observed_hi": 1.3999424517910761,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "7:m3_cos": {
+      "kind": "cos",
+      "degree": 15,
+      "frozen_lo": -4.7994690070759995,
+      "frozen_hi": 3.5308364882768988,
+      "observed_lo": -25.79902951728038,
+      "observed_hi": 12.32557945642071,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "7:m3_sin": {
+      "kind": "sin",
+      "degree": 15,
+      "frozen_lo": -4.7994690070759995,
+      "frozen_hi": 3.5308364882768988,
+      "observed_lo": -25.79902951728038,
+      "observed_hi": 12.32557945642071,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "7:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.054145501099506645,
+      "frozen_hi": 0.7738880616504127,
+      "observed_lo": 0.13475434837815384,
+      "observed_hi": 0.9908216206020113,
+      "first_outside_step": 24,
+      "outside_steps": 13
+    },
+    "7:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.2236902730203853,
+      "frozen_hi": 1.68852890441607,
+      "observed_lo": 0.46195239582262526,
+      "observed_hi": 1.1172172766249797,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "7:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -4.59116080499014,
+      "frozen_hi": 3.9971613826508645,
+      "observed_lo": -3.807159947001521,
+      "observed_hi": 4.6510408819245885,
+      "first_outside_step": 52,
+      "outside_steps": 3
+    },
+    "7:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 14.0532854352276,
+      "frozen_hi": 106.05546490433208,
+      "observed_lo": 29.851472277148904,
+      "observed_hi": 111.42488872643406,
+      "first_outside_step": 8,
+      "outside_steps": 2
+    },
+    "7:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -8.167622830958031,
+      "frozen_hi": 8.946848914884281,
+      "observed_lo": -6.162847451683932,
+      "observed_hi": 6.9704145788982865,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "8:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 22.794020803519807,
+      "frozen_hi": 134.92636174670253,
+      "observed_lo": 50.659915864778355,
+      "observed_hi": 138.46388537643068,
+      "first_outside_step": 51,
+      "outside_steps": 1
+    },
+    "8:dt_softplus": {
+      "kind": "softplus",
+      "degree": 31,
+      "frozen_lo": -7.400083765746218,
+      "frozen_hi": 1.3064641863115216,
+      "observed_lo": -6.506916977461818,
+      "observed_hi": 0.150229769417479,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "8:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 511,
+      "frozen_lo": -4.54649441732734,
+      "frozen_hi": 8.385633232970694,
+      "observed_lo": -3.7059940350286373,
+      "observed_hi": 6.00218779090206,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "8:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -3.196953520961328,
+      "frozen_hi": 0.5307519125544291,
+      "observed_lo": -3.55491343983138,
+      "observed_hi": -0.0006414404337680019,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "8:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -5.291873824531182,
+      "frozen_hi": 5.879319329295432,
+      "observed_lo": -3.7048243856512055,
+      "observed_hi": 4.9691339428313235,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "8:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 31,
+      "frozen_lo": -2.9224112785768765,
+      "frozen_hi": 2.658114705986335,
+      "observed_lo": -2.75180659979399,
+      "observed_hi": 2.3473260335232258,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "8:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -12.37366183383513,
+      "frozen_hi": 12.019709706581146,
+      "observed_lo": -83.1816094545889,
+      "observed_hi": 73.25933916549252,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "8:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -12.37366183383513,
+      "frozen_hi": 12.019709706581146,
+      "observed_lo": -83.1816094545889,
+      "observed_hi": 73.25933916549252,
+      "first_outside_step": 10,
+      "outside_steps": 55
+    },
+    "8:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.07435668768974327,
+      "frozen_hi": 1.3150001518499193,
+      "observed_lo": 0.18026506924145844,
+      "observed_hi": 1.4308137261386864,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "8:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 0.21524316510605912,
+      "frozen_hi": 1.0573642137032122,
+      "observed_lo": 0.3084347455386122,
+      "observed_hi": 0.8979109708882574,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "8:gate_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -7.283832301382939,
+      "frozen_hi": 6.09494406572413,
+      "observed_lo": -4.882220335854679,
+      "observed_hi": 4.5864141379561305,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "8:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 32.60400033392263,
+      "frozen_hi": 192.64616806735032,
+      "observed_lo": 75.60879508201707,
+      "observed_hi": 224.01903516192266,
+      "first_outside_step": 28,
+      "outside_steps": 2
+    },
+    "8:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -10.87810820217655,
+      "frozen_hi": 16.58427329141366,
+      "observed_lo": -7.620181946744749,
+      "observed_hi": 10.861311199395468,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "9:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 45.22476710304916,
+      "frozen_hi": 759.861714084706,
+      "observed_lo": 89.68059428462232,
+      "observed_hi": 530.7008220432585,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "9:dt_softplus": {
+      "kind": "softplus",
+      "degree": 31,
+      "frozen_lo": -7.703089656351159,
+      "frozen_hi": 1.218513528057846,
+      "observed_lo": -8.246722946366575,
+      "observed_hi": -0.13475851022961827,
+      "first_outside_step": 33,
+      "outside_steps": 8
+    },
+    "9:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 1023,
+      "frozen_lo": -11.471378167458036,
+      "frozen_hi": 17.253704437525514,
+      "observed_lo": -9.168417847421571,
+      "observed_hi": 11.261596955862844,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "9:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -5.737771684040667,
+      "frozen_hi": 0.955855776555875,
+      "observed_lo": -6.045088169598713,
+      "observed_hi": -2.8180473459698765e-05,
+      "first_outside_step": 13,
+      "outside_steps": 2
+    },
+    "9:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -5.363518610292722,
+      "frozen_hi": 7.078874160595232,
+      "observed_lo": -4.662204876791272,
+      "observed_hi": 6.225001784100431,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "9:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 63,
+      "frozen_lo": -5.780939514465453,
+      "frozen_hi": 2.922731711052535,
+      "observed_lo": -5.827518558568282,
+      "observed_hi": 1.982757305782595,
+      "first_outside_step": 13,
+      "outside_steps": 2
+    },
+    "9:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -9.04397451633027,
+      "frozen_hi": 8.069970307465981,
+      "observed_lo": -41.504629724854986,
+      "observed_hi": 33.784665212476504,
+      "first_outside_step": 12,
+      "outside_steps": 53
+    },
+    "9:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -9.04397451633027,
+      "frozen_hi": 8.069970307465981,
+      "observed_lo": -41.504629724854986,
+      "observed_hi": 33.784665212476504,
+      "first_outside_step": 12,
+      "outside_steps": 53
+    },
+    "9:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.15503155667766916,
+      "frozen_hi": 4.049242848195936,
+      "observed_lo": 0.18162780657030914,
+      "observed_hi": 2.7074219350064976,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "9:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 63,
+      "frozen_lo": 0.16774919945062408,
+      "frozen_hi": 4.433273492707015,
+      "observed_lo": 0.37642136698374623,
+      "observed_hi": 4.155447240212902,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "9:gate_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -6.986283381357719,
+      "frozen_hi": 6.854197374609713,
+      "observed_lo": -5.6450189203447305,
+      "observed_hi": 5.29638001874985,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "9:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 56.57408479856831,
+      "frozen_hi": 604.7098480561403,
+      "observed_lo": 116.54806044168669,
+      "observed_hi": 631.399317355636,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "9:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -9.770459411904643,
+      "frozen_hi": 11.583748102906625,
+      "observed_lo": -8.812118940880689,
+      "observed_hi": 9.534707828889315,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "10:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 82.44896250677564,
+      "frozen_hi": 916.0744269022548,
+      "observed_lo": 147.40835145488236,
+      "observed_hi": 952.5475045225925,
+      "first_outside_step": 36,
+      "outside_steps": 1
+    },
+    "10:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -3.924183405176839,
+      "frozen_hi": 1.2949927721022216,
+      "observed_lo": -5.103461877352783,
+      "observed_hi": 0.4764850001697485,
+      "first_outside_step": 22,
+      "outside_steps": 11
+    },
+    "10:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 255,
+      "frozen_lo": -2.0351175151259677,
+      "frozen_hi": 3.6885656749592703,
+      "observed_lo": -1.920070216857145,
+      "observed_hi": 3.065253411900204,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "10:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -3.3986774285262684,
+      "frozen_hi": 0.5427870302944833,
+      "observed_lo": -2.8356110772661616,
+      "observed_hi": -0.0020743659958052892,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "10:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -2.7439007722469357,
+      "frozen_hi": 4.213998132923713,
+      "observed_lo": -1.9636628419990367,
+      "observed_hi": 3.2229679366589337,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "10:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 63,
+      "frozen_lo": -5.190248448680485,
+      "frozen_hi": 3.3150988401065176,
+      "observed_lo": -4.495206537157962,
+      "observed_hi": 2.399366115858696,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "10:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -16.99834669260894,
+      "frozen_hi": 15.519677802271648,
+      "observed_lo": -84.78537778814231,
+      "observed_hi": 75.13894990751865,
+      "first_outside_step": 11,
+      "outside_steps": 54
+    },
+    "10:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -16.99834669260894,
+      "frozen_hi": 15.519677802271648,
+      "observed_lo": -84.78537778814231,
+      "observed_hi": 75.13894990751865,
+      "first_outside_step": 11,
+      "outside_steps": 54
+    },
+    "10:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.11449684800991561,
+      "frozen_hi": 1.4575983201595721,
+      "observed_lo": 0.23420042446155542,
+      "observed_hi": 1.1353648148897129,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "10:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 0.16194582290449558,
+      "frozen_hi": 0.9686630708235007,
+      "observed_lo": 0.3906339465147062,
+      "observed_hi": 1.1798394417608549,
+      "first_outside_step": 10,
+      "outside_steps": 2
+    },
+    "10:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -5.18970218555076,
+      "frozen_hi": 4.000970374560863,
+      "observed_lo": -6.001710169897493,
+      "observed_hi": 3.701367682444061,
+      "first_outside_step": 44,
+      "outside_steps": 1
+    },
+    "10:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 130.11294974678935,
+      "frozen_hi": 1584.2446290930632,
+      "observed_lo": 310.96200239696094,
+      "observed_hi": 1453.5378240256139,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "10:mlp_silu": {
+      "kind": "silu",
+      "degree": 63,
+      "frozen_lo": -10.436560899699085,
+      "frozen_hi": 13.33269554325329,
+      "observed_lo": -7.8517299597113634,
+      "observed_hi": 11.395848255100589,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:block_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 166.84270906953572,
+      "frozen_hi": 2245.977057785017,
+      "observed_lo": 421.26410777912326,
+      "observed_hi": 1891.8779338561233,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:dt_softplus": {
+      "kind": "softplus",
+      "degree": 15,
+      "frozen_lo": -2.414707105060778,
+      "frozen_hi": 0.7252576178213788,
+      "observed_lo": -1.952598129382545,
+      "observed_hi": 0.739909603878822,
+      "first_outside_step": 11,
+      "outside_steps": 1
+    },
+    "11:m3_negative_a": {
+      "kind": "negative_a",
+      "degree": 255,
+      "frozen_lo": -1.536485787224966,
+      "frozen_hi": 5.656734130439331,
+      "observed_lo": -2.074058747451868,
+      "observed_hi": 4.6059927531872535,
+      "first_outside_step": 26,
+      "outside_steps": 1
+    },
+    "11:decay_exp": {
+      "kind": "exp",
+      "degree": 15,
+      "frozen_lo": -3.687401604720797,
+      "frozen_hi": 0.40730935347868613,
+      "observed_lo": -3.129876096233742,
+      "observed_hi": -0.10572431708246063,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:m3_mixing": {
+      "kind": "sigmoid",
+      "degree": 31,
+      "frozen_lo": -2.0206588584720215,
+      "frozen_hi": 5.164108175386606,
+      "observed_lo": -1.4698156710159567,
+      "observed_hi": 4.032440209174136,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:m3_angle_tanh": {
+      "kind": "tanh",
+      "degree": 31,
+      "frozen_lo": -2.755486787080997,
+      "frozen_hi": 3.0734902950688947,
+      "observed_lo": -1.8210866670491102,
+      "observed_hi": 2.274703410791118,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:m3_cos": {
+      "kind": "cos",
+      "degree": 31,
+      "frozen_lo": -15.968752809403183,
+      "frozen_hi": 16.95637163765697,
+      "observed_lo": -111.98630761227852,
+      "observed_hi": 120.41695967608035,
+      "first_outside_step": 9,
+      "outside_steps": 56
+    },
+    "11:m3_sin": {
+      "kind": "sin",
+      "degree": 31,
+      "frozen_lo": -15.968752809403183,
+      "frozen_hi": 16.95637163765697,
+      "observed_lo": -111.98630761227852,
+      "observed_hi": 120.41695967608035,
+      "first_outside_step": 9,
+      "outside_steps": 56
+    },
+    "11:m3_b_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 0.15526002809662928,
+      "frozen_hi": 2.7344737795048406,
+      "observed_lo": 0.269311387619785,
+      "observed_hi": 1.8998980239948888,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:m3_c_rms": {
+      "kind": "inv_sqrt",
+      "degree": 15,
+      "frozen_lo": 0.1260085783296646,
+      "frozen_hi": 0.5781971865859616,
+      "observed_lo": 0.2664777301252605,
+      "observed_hi": 0.7294805719389917,
+      "first_outside_step": 10,
+      "outside_steps": 10
+    },
+    "11:gate_silu": {
+      "kind": "silu",
+      "degree": 31,
+      "frozen_lo": -6.329084376989887,
+      "frozen_hi": 5.291963465906477,
+      "observed_lo": -4.541514734903824,
+      "observed_hi": 3.285149148022268,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:mlp_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 261.6228624478209,
+      "frozen_hi": 3034.1145536656963,
+      "observed_lo": 647.0952600909085,
+      "observed_hi": 2615.000352195614,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "11:mlp_silu": {
+      "kind": "silu",
+      "degree": 127,
+      "frozen_lo": -13.494459671796877,
+      "frozen_hi": 37.63783740625227,
+      "observed_lo": -11.698323392895498,
+      "observed_hi": 29.875391571722908,
+      "first_outside_step": null,
+      "outside_steps": 0
+    },
+    "-1:final_rms": {
+      "kind": "inv_sqrt",
+      "degree": 31,
+      "frozen_lo": 224.2856280613131,
+      "frozen_hi": 7658.618932211874,
+      "observed_lo": 525.8608440514641,
+      "observed_hi": 5138.156735111054,
+      "first_outside_step": null,
+      "outside_steps": 0
+    }
+  },
+  "sites_outside": 74,
+  "first_outside_step": 8,
+  "all_observed_inputs_within_domains": false,
+  "scope": "exact plaintext replay; necessary domain screen; not an FHE accuracy result"
+}

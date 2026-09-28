@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "metric": "eval_seconds",
+  "baseline": {
+    "samples": [
+      1160.4105174
+    ],
+    "mean": 1160.4105174
+  },
+  "candidate": {
+    "samples": [
+      1078.94918171
+    ],
+    "mean": 1078.94918171
+  },
+  "reduction": 0.0702004458495612,
+  "contract": {
+    "schema_version": 1,
+    "metric": "eval_seconds",
+    "equal": [
+      "security_audit",
+      "security",
+      "slots",
+      "payload_slots",
+      "ring_dimension",
+      "refresh_ring_dimension",
+      "depth",
+      "scale_bits",
+      "nodes",
+      "evaluated_nodes",
+      "ct_ct_mul",
+      "ct_pt_mul",
+      "rotations",
+      "refresh_rotations",
+      "bootstraps",
+      "logical_refreshes",
+      "refresh_batches",
+      "largest_refresh_batch",
+      "rotation_batch_preparations",
+      "shared_basis_hits",
+      "frontier_deferrals",
+      "frontier_limit_selections",
+      "maximum_live_dag_values",
+      "plaintext_cache_hits",
+      "plaintext_cache_misses",
+      "host_encodes",
+      "bootstrap_passes",
+      "merge_refresh_correction",
+      "gpu_dual_ring",
+      "exact_tolerance",
+      "polynomial_tolerance",
+      "generated_token_ids"
+    ],
+    "require": {
+      "passed": true,
+      "encrypted": true,
+      "security": "128-classic",
+      "evaluation_decryptions": 0,
+      "non_finite": 0
+    },
+    "maximum": {
+      "max_abs_error_vs_polynomial": 0.001,
+      "max_abs_error_vs_exact": 0.001
+    },
+    "minimum_reduction": 0
+  },
+  "inputs": [
+    {
+      "path": ".local/public-state-20260928/public-input/measurements/full-a1/native.json",
+      "bytes": 210690,
+      "sha256": "f453245f415308c94e05fb0911994ffd7fdf7f954fc5784386ecd264435041dc"
+    },
+    {
+      "path": ".local/public-state-20260928/public-input/measurements/full-b2/native.json",
+      "bytes": 210641,
+      "sha256": "2f12cbea55f3aed1ab6053381c84d65f0f10a76e6090766b5ec8fa98b586d55f"
+    }
+  ],
+  "scope": "Descriptive matched comparison; no statistical significance claim."
+}

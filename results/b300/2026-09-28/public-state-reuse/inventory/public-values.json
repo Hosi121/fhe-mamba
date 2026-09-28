@@ -1,0 +1,15 @@
+{
+  "nodes": 51698,
+  "live_public_nodes": 120,
+  "unique_padded_public_values": 2,
+  "groups": [
+    {
+      "nonzero_tail_length": 768,
+      "occurrences": 12
+    },
+    {
+      "nonzero_tail_length": 0,
+      "occurrences": 108
+    }
+  ]
+}

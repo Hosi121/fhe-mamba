@@ -1,0 +1,33 @@
+{
+  "replay-refresh": {
+    "input_origin": "Fresh encryption of the two observed before-refresh vectors",
+    "retains_original_ciphertext_history": false,
+    "interpretation": "Negative isolation: logical inputs, packing, bounds, level and degree alone did not reproduce the full-run fault"
+  },
+  "replay-controls-smoke": {
+    "input_origin": "Fresh encryption, then exact clones made within the probe context",
+    "retains_original_ciphertext_history": false,
+    "interpretation": "The nested report fresh_ciphertexts=false describes how the controls clone their inputs; this smoke process still starts from fresh encryption, as its enclosing native.json states"
+  },
+  "diagnostic-replay": {
+    "input_origin": "Original full frozen graph, then exact clones of the selected input ciphertexts in the same context",
+    "retains_original_ciphertext_history": true,
+    "status": "aborted: first target intermediate decoder rejected; no refresh controls executed",
+    "observed_rows": 0
+  },
+  "qualification": "Every entry is diagnostic-only and excluded from generation/performance qualification",
+  "diagnostic-replay-r5": {
+    "input_origin": "Original frozen full graph, same fine-reference observation set as the completed operator trace; exact target ciphertext clones with decoder rejection recorded as missing data",
+    "retains_original_ciphertext_history": true,
+    "status": "completed controls; original generation fails selection 24",
+    "observed_rows": 684,
+    "decode_rejections": 0,
+    "comparison": "refresh-replay-comparison.json"
+  },
+  "replay-controls-smoke-r5": {
+    "input_origin": "Fresh probe inputs, followed by exact clones in the same process",
+    "retains_original_ciphertext_history": false,
+    "status": "all four controls pass below 1e-5",
+    "exact_clone_words": 5242880
+  }
+}

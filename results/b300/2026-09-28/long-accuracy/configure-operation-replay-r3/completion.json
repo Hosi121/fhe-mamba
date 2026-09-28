@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/configure-operation-replay-r3",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790553447.545696
+}

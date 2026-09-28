@@ -1,0 +1,14 @@
+{
+  "objective": "Measure reuse of identical public source ciphertexts within one request under unchanged classical-128 and 0.001 gates.",
+  "candidate": "--reuse-public-ciphertexts",
+  "baseline": "same new binary with the flag off",
+  "short_gate": "Both frozen two-token requests must pass.",
+  "full_design": "Two paired 16-token comparisons: GPU 5 A then B; GPU 6 B then A. Placements fixed within pairs; concurrent jobs on separate CPU/NUMA/GPU resources.",
+  "adoption_screen": "All token/numerical/security/circuit gates pass, both within-device pairs improve, pooled evaluation reduction at least 2%.",
+  "maximum_candidate_implementations": 1,
+  "not_claimed": [
+    "steady-state per-token improvement",
+    "64-token qualification",
+    "statistical significance"
+  ]
+}

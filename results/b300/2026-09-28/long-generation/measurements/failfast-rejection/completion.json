@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/failfast-rejection",
+  "state": "failed",
+  "exit_code": 2,
+  "at_unix": 1790528909.5032794
+}

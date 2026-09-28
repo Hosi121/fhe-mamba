@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/r2/tiled-64",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790515522.3846822
+}

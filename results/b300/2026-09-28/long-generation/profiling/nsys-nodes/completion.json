@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/nsys-nodes",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790527111.2197528
+}

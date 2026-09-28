@@ -1,0 +1,19 @@
+{
+  "native/fideslib_stage0/src/packed_fideslib.cpp": {
+    "measured_sha256": "11944d37f199116c0d3bc74f695ab47b91894e0900571a8c67300a3873d6fa5a",
+    "current_sha256": "0b870b8f6523e7828c515226dd389245c1999ee98395c9ea7c2ecd3be41f6261",
+    "identical": false,
+    "difference": "Post-measurement diagnostics: exact-clone refresh controls, evaluator-only compile guard, explicit missing observations on intermediate decoder rejection. Generation gates and ordinary arithmetic remain unchanged; timings bind to optimization-source.tar.gz."
+  },
+  "native/fideslib_stage0/include/plaintext_cache.hpp": {
+    "measured_sha256": "1008e30f31a7da9cabdb4878176e4e6a626d41286e041acff27225e3c9510ad3",
+    "current_sha256": "1008e30f31a7da9cabdb4878176e4e6a626d41286e041acff27225e3c9510ad3",
+    "identical": true
+  },
+  "native/fideslib_stage0/include/packed_diagnostics.hpp": {
+    "measured_sha256": "5076741f7c6af66835289c4598564e9b847b1eec371bb8bc3bf180c588147f43",
+    "current_sha256": "4e010980811ce88b860f0c707aaf34a4b69bba6f43b7a89ff2e156f23ce8bca8",
+    "identical": false,
+    "difference": "Post-measurement diagnostics: exact-clone refresh controls, evaluator-only compile guard, explicit missing observations on intermediate decoder rejection. Generation gates and ordinary arithmetic remain unchanged; timings bind to optimization-source.tar.gz."
+  }
+}

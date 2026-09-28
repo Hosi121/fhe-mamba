@@ -34,10 +34,10 @@ inequalities directly, including rejection of nonzero writing at unit decay.
 coverage, and update/readout parity after regularization.
 
 ```bash
-.venv/bin/python experiments/probe_bounded_selective_gates.py \
+.venv/bin/python experiments/algebra/probe_bounded_selective_gates.py \
   --payload results/m2_chain_payload_rows \
   --degrees 32 64 128 --output runs/bounded-selective-gates.json
-.venv/bin/python experiments/regularize_payload_state.py \
+.venv/bin/python experiments/calibration/regularize_payload_state.py \
   --payload results/m2_chain_payload_rows --group-scale-floor 0.125 \
   --output-chain runs/payload-row-floor --output runs/row-floor.json
 ```
@@ -58,7 +58,7 @@ To fit and certify the new gates without reading text:
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 \
-  .venv/bin/python experiments/fit_dissipative_gates.py \
+  .venv/bin/python experiments/calibration/fit_dissipative_gates.py \
   --payload results/m2_chain_payload_headclip \
   --bundle runs/dissipative-gates.npz --output runs/dissipative-gates.json
 ```
@@ -75,18 +75,18 @@ checkpoint tokenizer and record the data split. The current dataset is
 configuration `wikitext-2-raw-v1`, joined with two newlines between rows.
 
 ```bash
-.venv/bin/python experiments/run_payload_quality.py \
+.venv/bin/python experiments/quality/run_payload_quality.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --payload results/m2_chain_payload_headclip \
   --tokens-pt /path/to/wikitext2.test.pt \
   --data-description 'WikiText-2 raw test; two-newline join' \
   --windows 1024 4096 --max-windows 2 --output runs/payload-quality.json
-.venv/bin/python experiments/diagnose_payload_domain.py \
+.venv/bin/python -m fhemamba diagnose domain \
   --checkpoint checkpoints/mamba2-130m-hf \
   --payload results/m2_chain_payload_headclip \
   --tokens-pt /path/to/wikitext2.test.pt --tokens 1024 \
   --output runs/payload-domain.json
-.venv/bin/python experiments/diagnose_payload_domain.py \
+.venv/bin/python -m fhemamba diagnose domain \
   --checkpoint checkpoints/mamba2-130m-hf \
   --payload results/m2_chain_payload_headclip \
   --tokens-pt /path/to/wikitext2.test.pt --tokens 4096 --offset 65536 \
@@ -104,7 +104,7 @@ the control and candidate; coefficient hashes must match for other overrides:
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 \
-  .venv/bin/python experiments/diagnose_payload_domain.py \
+  .venv/bin/python -m fhemamba diagnose domain \
   --checkpoint checkpoints/mamba2-130m-hf \
   --payload results/m2_chain_payload_headclip \
   --tokens-pt /path/to/wikitext2.test.pt --tokens 4096 --offset 65536 \
@@ -129,12 +129,12 @@ certificates first, then evaluate it without changing other coefficients:
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 \
-  .venv/bin/python experiments/plan_normalization_schedules.py \
+  .venv/bin/python experiments/calibration/plan_normalization_schedules.py \
   --payload results/m2_chain_payload_headclip \
   --bundle runs/normalization-schedules.json \
   --output runs/normalization-certificates.json
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 \
-  .venv/bin/python experiments/diagnose_payload_domain.py \
+  .venv/bin/python -m fhemamba diagnose domain \
   --checkpoint checkpoints/mamba2-130m-hf \
   --payload results/m2_chain_payload_headclip \
   --tokens-pt /path/to/wikitext2.test.pt --tokens 4096 --offset 131072 \
@@ -180,7 +180,7 @@ Stop any probe using that build directory before rebuilding it.
 First export the certified recipes locally:
 
 ```bash
-.venv/bin/python experiments/export_normalization_probe.py \
+.venv/bin/python experiments/export/export_normalization_probe.py \
   --bundle runs/norm-study-20260921/normalization-schedules.json \
   --output-dir runs/normalization-probe-recipes
 rsync -az runs/normalization-probe-recipes/ \
@@ -190,11 +190,11 @@ rsync -az runs/normalization-probe-recipes/ \
 On Spark, after provisioning the dependencies described in the runbook:
 
 ```bash
-python3 experiments/build_normalization_probe.py \
+python3 experiments/normalization/build_normalization_probe.py \
   --build-dir "$HOME/fhemamba/spark/normalization-probe" \
   --fideslib-prefix "$HOME/fhemamba/spark/install-2a70798e869944af" \
   --openfhe-prefix "$HOME/fhe-deps/openfhe-fides"
-python3 experiments/run_normalization_campaign.py \
+python3 experiments/normalization/run_normalization_campaign.py \
   --binary "$HOME/fhemamba/spark/normalization-probe/stage1_normalization_probe" \
   --recipes runs/normalization-probe-recipes \
   --output-dir runs/normalization-core-all-sites
@@ -223,7 +223,7 @@ The packed vector follow-up exports actual checkpoint inputs and learned gamma
 locally, without changing the frozen inverse-square-root recipes:
 
 ```bash
-.venv/bin/python experiments/export_vector_rms_probe.py \
+.venv/bin/python experiments/export/export_vector_rms_probe.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --token-file runs/state-study-20260921/wikitext2.test.pt \
   --recipes runs/norm-native-20260921/recipes-weighted \
@@ -262,7 +262,7 @@ for the same scheduled circuit, including a dedicated final RMSNorm:
 
 ```bash
 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 .venv/bin/python \
-  experiments/export_m1_payload.py \
+  experiments/export/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --normalization-bundle config/mamba2-130m-normalization-20260921.json \
   --output runs/scheduled-norm-payload --tokens 2 --cal-tokens 128 --device cpu
@@ -280,13 +280,13 @@ Build the updated kernel and transfer this payload using the
 payload at the path below:
 
 ```bash
-python3 experiments/run_dgx_campaign.py \
+python3 experiments/execution/run_dgx_campaign.py \
   --manifest experiments/manifests/dgx_spark_scheduled_norm_smoke.json \
   --runner scripts/run_dgx_spark.sh \
   --env INPUT_CHAIN="$HOME/fhemamba/payloads/scheduled-norm" \
   --output-json "$HOME/fhemamba/results/scheduled-norm-smoke.json"
 
-python3 experiments/run_dgx_campaign.py \
+python3 experiments/execution/run_dgx_campaign.py \
   --manifest experiments/manifests/dgx_spark_scheduled_norm_chain.json \
   --runner scripts/run_dgx_spark.sh \
   --env INPUT_CHAIN="$HOME/fhemamba/payloads/scheduled-norm" \
@@ -305,7 +305,7 @@ plaintext quality screen separately:
 
 ```bash
 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 .venv/bin/python \
-  experiments/run_payload_quality.py \
+  experiments/quality/run_payload_quality.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --payload runs/scheduled-norm-payload \
   --tokens-pt runs/state-study-20260921/wikitext2.test.pt \
@@ -389,7 +389,7 @@ cold setup, first/warm token, total evaluation, CPU utilization, and peak RSS.
 The current five-step Spark candidate campaign is:
 
 ```bash
-python experiments/run_dgx_campaign.py \
+python experiments/execution/run_dgx_campaign.py \
   --manifest experiments/manifests/dgx_spark_autoregressive.json \
   --runner scripts/run_dgx_spark.sh \
   --env BINARY="$HOME/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib" \
@@ -417,7 +417,7 @@ diagnostic decrypt.
 ## Prompt-to-text generation
 
 The stabilized prompt-to-text runner is
-`experiments/run_dgx_generation.py`; see the
+`experiments/execution/run_dgx_generation.py`; see the
 [complete command](dgx-spark.md#complete-prompt-to-text-generation).
 Its local tests check whole-prompt consumption, unchanged source payloads,
 checkpoint identity and finite-but-out-of-domain final normalization. Report

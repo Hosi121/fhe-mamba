@@ -1,0 +1,9467 @@
+{
+  "schema": "fhemamba-packed-diagnostic-v1",
+  "diagnostic_only": true,
+  "manifest_sha256": "1bdd8d0fc024e7e377d2d0b3ed1e0b7934bff68473d65c47b59617f6576e6d42",
+  "program_sha256": "464380aef53bfaefe2b4f137a2777299f62e4eb660101bea4b3886ed790ad24e",
+  "references_sha256": "a24cbfd4ffc00c41199fe1722cc863f9e7bc699b9ddac0a78af668adce5078c6",
+  "node_prefix_sha256": "befed77cec5d3a6a5d9c8d87a27a0de8d34eafee6ec58681fb632ebdc30f9417",
+  "node_count": 75970,
+  "steps": [
+    22,
+    23,
+    24
+  ],
+  "all_nodes": false,
+  "output_nodes": [
+    3153,
+    6187,
+    9221,
+    12255,
+    15289,
+    18323,
+    21357,
+    24391,
+    27425,
+    30459,
+    33493,
+    36527,
+    39561,
+    42595,
+    45629,
+    48663,
+    51697,
+    54731,
+    57765,
+    60799,
+    63833,
+    66867,
+    69901,
+    72935,
+    75969
+  ],
+  "references": {
+    "66873": {
+      "step": 22,
+      "names": [
+        "0:block_rms.input"
+      ],
+      "size": 1
+    },
+    "66874": {
+      "step": 22,
+      "names": [
+        "0:block_rms.output"
+      ],
+      "size": 1
+    },
+    "66887": {
+      "step": 22,
+      "names": [
+        "0:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "66888": {
+      "step": 22,
+      "names": [
+        "0:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "66884": {
+      "step": 22,
+      "names": [
+        "0:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "66889": {
+      "step": 22,
+      "names": [
+        "0:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "66890": {
+      "step": 22,
+      "names": [
+        "0:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "66891": {
+      "step": 22,
+      "names": [
+        "0:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "66885": {
+      "step": 22,
+      "names": [
+        "0:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "66892": {
+      "step": 22,
+      "names": [
+        "0:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "66886": {
+      "step": 22,
+      "names": [
+        "0:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "66893": {
+      "step": 22,
+      "names": [
+        "0:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "66897": {
+      "step": 22,
+      "names": [
+        "0:m3_delta_cos.input",
+        "0:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "66898": {
+      "step": 22,
+      "names": [
+        "0:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "66899": {
+      "step": 22,
+      "names": [
+        "0:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "66910": {
+      "step": 22,
+      "names": [
+        "0:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "66911": {
+      "step": 22,
+      "names": [
+        "0:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "66918": {
+      "step": 22,
+      "names": [
+        "0:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "66919": {
+      "step": 22,
+      "names": [
+        "0:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "66879": {
+      "step": 22,
+      "names": [
+        "0:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "67101": {
+      "step": 22,
+      "names": [
+        "0:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "67104": {
+      "step": 22,
+      "names": [
+        "0:mixer_residual"
+      ],
+      "size": 768
+    },
+    "67109": {
+      "step": 22,
+      "names": [
+        "0:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "67110": {
+      "step": 22,
+      "names": [
+        "0:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "67116": {
+      "step": 22,
+      "names": [
+        "0:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "67117": {
+      "step": 22,
+      "names": [
+        "0:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "67120": {
+      "step": 22,
+      "names": [
+        "0:layer_output"
+      ],
+      "size": 768
+    },
+    "67125": {
+      "step": 22,
+      "names": [
+        "1:block_rms.input"
+      ],
+      "size": 1
+    },
+    "67126": {
+      "step": 22,
+      "names": [
+        "1:block_rms.output"
+      ],
+      "size": 1
+    },
+    "67139": {
+      "step": 22,
+      "names": [
+        "1:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "67140": {
+      "step": 22,
+      "names": [
+        "1:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "67136": {
+      "step": 22,
+      "names": [
+        "1:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "67141": {
+      "step": 22,
+      "names": [
+        "1:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "67142": {
+      "step": 22,
+      "names": [
+        "1:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "67143": {
+      "step": 22,
+      "names": [
+        "1:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "67137": {
+      "step": 22,
+      "names": [
+        "1:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "67144": {
+      "step": 22,
+      "names": [
+        "1:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "67138": {
+      "step": 22,
+      "names": [
+        "1:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "67145": {
+      "step": 22,
+      "names": [
+        "1:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "67149": {
+      "step": 22,
+      "names": [
+        "1:m3_delta_cos.input",
+        "1:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "67150": {
+      "step": 22,
+      "names": [
+        "1:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "67151": {
+      "step": 22,
+      "names": [
+        "1:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "67162": {
+      "step": 22,
+      "names": [
+        "1:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "67163": {
+      "step": 22,
+      "names": [
+        "1:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "67170": {
+      "step": 22,
+      "names": [
+        "1:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "67171": {
+      "step": 22,
+      "names": [
+        "1:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "67131": {
+      "step": 22,
+      "names": [
+        "1:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "67353": {
+      "step": 22,
+      "names": [
+        "1:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "67356": {
+      "step": 22,
+      "names": [
+        "1:mixer_residual"
+      ],
+      "size": 768
+    },
+    "67361": {
+      "step": 22,
+      "names": [
+        "1:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "67362": {
+      "step": 22,
+      "names": [
+        "1:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "67368": {
+      "step": 22,
+      "names": [
+        "1:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "67369": {
+      "step": 22,
+      "names": [
+        "1:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "67372": {
+      "step": 22,
+      "names": [
+        "1:layer_output"
+      ],
+      "size": 768
+    },
+    "67377": {
+      "step": 22,
+      "names": [
+        "2:block_rms.input"
+      ],
+      "size": 1
+    },
+    "67378": {
+      "step": 22,
+      "names": [
+        "2:block_rms.output"
+      ],
+      "size": 1
+    },
+    "67391": {
+      "step": 22,
+      "names": [
+        "2:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "67392": {
+      "step": 22,
+      "names": [
+        "2:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "67388": {
+      "step": 22,
+      "names": [
+        "2:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "67393": {
+      "step": 22,
+      "names": [
+        "2:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "67394": {
+      "step": 22,
+      "names": [
+        "2:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "67395": {
+      "step": 22,
+      "names": [
+        "2:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "67389": {
+      "step": 22,
+      "names": [
+        "2:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "67396": {
+      "step": 22,
+      "names": [
+        "2:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "67390": {
+      "step": 22,
+      "names": [
+        "2:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "67397": {
+      "step": 22,
+      "names": [
+        "2:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "67401": {
+      "step": 22,
+      "names": [
+        "2:m3_delta_cos.input",
+        "2:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "67402": {
+      "step": 22,
+      "names": [
+        "2:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "67403": {
+      "step": 22,
+      "names": [
+        "2:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "67414": {
+      "step": 22,
+      "names": [
+        "2:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "67415": {
+      "step": 22,
+      "names": [
+        "2:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "67422": {
+      "step": 22,
+      "names": [
+        "2:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "67423": {
+      "step": 22,
+      "names": [
+        "2:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "67383": {
+      "step": 22,
+      "names": [
+        "2:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "67605": {
+      "step": 22,
+      "names": [
+        "2:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "67608": {
+      "step": 22,
+      "names": [
+        "2:mixer_residual"
+      ],
+      "size": 768
+    },
+    "67613": {
+      "step": 22,
+      "names": [
+        "2:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "67614": {
+      "step": 22,
+      "names": [
+        "2:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "67620": {
+      "step": 22,
+      "names": [
+        "2:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "67621": {
+      "step": 22,
+      "names": [
+        "2:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "67624": {
+      "step": 22,
+      "names": [
+        "2:layer_output"
+      ],
+      "size": 768
+    },
+    "67629": {
+      "step": 22,
+      "names": [
+        "3:block_rms.input"
+      ],
+      "size": 1
+    },
+    "67630": {
+      "step": 22,
+      "names": [
+        "3:block_rms.output"
+      ],
+      "size": 1
+    },
+    "67643": {
+      "step": 22,
+      "names": [
+        "3:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "67644": {
+      "step": 22,
+      "names": [
+        "3:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "67640": {
+      "step": 22,
+      "names": [
+        "3:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "67645": {
+      "step": 22,
+      "names": [
+        "3:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "67646": {
+      "step": 22,
+      "names": [
+        "3:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "67647": {
+      "step": 22,
+      "names": [
+        "3:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "67641": {
+      "step": 22,
+      "names": [
+        "3:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "67648": {
+      "step": 22,
+      "names": [
+        "3:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "67642": {
+      "step": 22,
+      "names": [
+        "3:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "67649": {
+      "step": 22,
+      "names": [
+        "3:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "67653": {
+      "step": 22,
+      "names": [
+        "3:m3_delta_cos.input",
+        "3:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "67654": {
+      "step": 22,
+      "names": [
+        "3:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "67655": {
+      "step": 22,
+      "names": [
+        "3:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "67666": {
+      "step": 22,
+      "names": [
+        "3:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "67667": {
+      "step": 22,
+      "names": [
+        "3:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "67674": {
+      "step": 22,
+      "names": [
+        "3:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "67675": {
+      "step": 22,
+      "names": [
+        "3:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "67635": {
+      "step": 22,
+      "names": [
+        "3:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "67857": {
+      "step": 22,
+      "names": [
+        "3:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "67860": {
+      "step": 22,
+      "names": [
+        "3:mixer_residual"
+      ],
+      "size": 768
+    },
+    "67865": {
+      "step": 22,
+      "names": [
+        "3:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "67866": {
+      "step": 22,
+      "names": [
+        "3:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "67872": {
+      "step": 22,
+      "names": [
+        "3:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "67873": {
+      "step": 22,
+      "names": [
+        "3:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "67876": {
+      "step": 22,
+      "names": [
+        "3:layer_output"
+      ],
+      "size": 768
+    },
+    "67881": {
+      "step": 22,
+      "names": [
+        "4:block_rms.input"
+      ],
+      "size": 1
+    },
+    "67882": {
+      "step": 22,
+      "names": [
+        "4:block_rms.output"
+      ],
+      "size": 1
+    },
+    "67895": {
+      "step": 22,
+      "names": [
+        "4:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "67896": {
+      "step": 22,
+      "names": [
+        "4:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "67892": {
+      "step": 22,
+      "names": [
+        "4:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "67897": {
+      "step": 22,
+      "names": [
+        "4:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "67898": {
+      "step": 22,
+      "names": [
+        "4:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "67899": {
+      "step": 22,
+      "names": [
+        "4:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "67893": {
+      "step": 22,
+      "names": [
+        "4:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "67900": {
+      "step": 22,
+      "names": [
+        "4:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "67894": {
+      "step": 22,
+      "names": [
+        "4:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "67901": {
+      "step": 22,
+      "names": [
+        "4:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "67905": {
+      "step": 22,
+      "names": [
+        "4:m3_delta_cos.input",
+        "4:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "67906": {
+      "step": 22,
+      "names": [
+        "4:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "67907": {
+      "step": 22,
+      "names": [
+        "4:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "67918": {
+      "step": 22,
+      "names": [
+        "4:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "67919": {
+      "step": 22,
+      "names": [
+        "4:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "67926": {
+      "step": 22,
+      "names": [
+        "4:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "67927": {
+      "step": 22,
+      "names": [
+        "4:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "67887": {
+      "step": 22,
+      "names": [
+        "4:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "68109": {
+      "step": 22,
+      "names": [
+        "4:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "68112": {
+      "step": 22,
+      "names": [
+        "4:mixer_residual"
+      ],
+      "size": 768
+    },
+    "68117": {
+      "step": 22,
+      "names": [
+        "4:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "68118": {
+      "step": 22,
+      "names": [
+        "4:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "68124": {
+      "step": 22,
+      "names": [
+        "4:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "68125": {
+      "step": 22,
+      "names": [
+        "4:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "68128": {
+      "step": 22,
+      "names": [
+        "4:layer_output"
+      ],
+      "size": 768
+    },
+    "68133": {
+      "step": 22,
+      "names": [
+        "5:block_rms.input"
+      ],
+      "size": 1
+    },
+    "68134": {
+      "step": 22,
+      "names": [
+        "5:block_rms.output"
+      ],
+      "size": 1
+    },
+    "68147": {
+      "step": 22,
+      "names": [
+        "5:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "68148": {
+      "step": 22,
+      "names": [
+        "5:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "68144": {
+      "step": 22,
+      "names": [
+        "5:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "68149": {
+      "step": 22,
+      "names": [
+        "5:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "68150": {
+      "step": 22,
+      "names": [
+        "5:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "68151": {
+      "step": 22,
+      "names": [
+        "5:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "68145": {
+      "step": 22,
+      "names": [
+        "5:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "68152": {
+      "step": 22,
+      "names": [
+        "5:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "68146": {
+      "step": 22,
+      "names": [
+        "5:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "68153": {
+      "step": 22,
+      "names": [
+        "5:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "68157": {
+      "step": 22,
+      "names": [
+        "5:m3_delta_cos.input",
+        "5:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "68158": {
+      "step": 22,
+      "names": [
+        "5:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "68159": {
+      "step": 22,
+      "names": [
+        "5:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "68170": {
+      "step": 22,
+      "names": [
+        "5:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "68171": {
+      "step": 22,
+      "names": [
+        "5:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "68178": {
+      "step": 22,
+      "names": [
+        "5:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "68179": {
+      "step": 22,
+      "names": [
+        "5:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "68139": {
+      "step": 22,
+      "names": [
+        "5:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "68361": {
+      "step": 22,
+      "names": [
+        "5:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "68364": {
+      "step": 22,
+      "names": [
+        "5:mixer_residual"
+      ],
+      "size": 768
+    },
+    "68369": {
+      "step": 22,
+      "names": [
+        "5:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "68370": {
+      "step": 22,
+      "names": [
+        "5:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "68376": {
+      "step": 22,
+      "names": [
+        "5:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "68377": {
+      "step": 22,
+      "names": [
+        "5:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "68380": {
+      "step": 22,
+      "names": [
+        "5:layer_output"
+      ],
+      "size": 768
+    },
+    "68385": {
+      "step": 22,
+      "names": [
+        "6:block_rms.input"
+      ],
+      "size": 1
+    },
+    "68386": {
+      "step": 22,
+      "names": [
+        "6:block_rms.output"
+      ],
+      "size": 1
+    },
+    "68399": {
+      "step": 22,
+      "names": [
+        "6:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "68400": {
+      "step": 22,
+      "names": [
+        "6:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "68396": {
+      "step": 22,
+      "names": [
+        "6:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "68401": {
+      "step": 22,
+      "names": [
+        "6:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "68402": {
+      "step": 22,
+      "names": [
+        "6:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "68403": {
+      "step": 22,
+      "names": [
+        "6:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "68397": {
+      "step": 22,
+      "names": [
+        "6:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "68404": {
+      "step": 22,
+      "names": [
+        "6:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "68398": {
+      "step": 22,
+      "names": [
+        "6:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "68405": {
+      "step": 22,
+      "names": [
+        "6:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "68409": {
+      "step": 22,
+      "names": [
+        "6:m3_delta_cos.input",
+        "6:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "68410": {
+      "step": 22,
+      "names": [
+        "6:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "68411": {
+      "step": 22,
+      "names": [
+        "6:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "68422": {
+      "step": 22,
+      "names": [
+        "6:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "68423": {
+      "step": 22,
+      "names": [
+        "6:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "68430": {
+      "step": 22,
+      "names": [
+        "6:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "68431": {
+      "step": 22,
+      "names": [
+        "6:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "68391": {
+      "step": 22,
+      "names": [
+        "6:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "68613": {
+      "step": 22,
+      "names": [
+        "6:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "68616": {
+      "step": 22,
+      "names": [
+        "6:mixer_residual"
+      ],
+      "size": 768
+    },
+    "68621": {
+      "step": 22,
+      "names": [
+        "6:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "68622": {
+      "step": 22,
+      "names": [
+        "6:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "68628": {
+      "step": 22,
+      "names": [
+        "6:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "68629": {
+      "step": 22,
+      "names": [
+        "6:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "68632": {
+      "step": 22,
+      "names": [
+        "6:layer_output"
+      ],
+      "size": 768
+    },
+    "68637": {
+      "step": 22,
+      "names": [
+        "7:block_rms.input"
+      ],
+      "size": 1
+    },
+    "68638": {
+      "step": 22,
+      "names": [
+        "7:block_rms.output"
+      ],
+      "size": 1
+    },
+    "68651": {
+      "step": 22,
+      "names": [
+        "7:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "68652": {
+      "step": 22,
+      "names": [
+        "7:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "68648": {
+      "step": 22,
+      "names": [
+        "7:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "68653": {
+      "step": 22,
+      "names": [
+        "7:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "68654": {
+      "step": 22,
+      "names": [
+        "7:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "68655": {
+      "step": 22,
+      "names": [
+        "7:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "68649": {
+      "step": 22,
+      "names": [
+        "7:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "68656": {
+      "step": 22,
+      "names": [
+        "7:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "68650": {
+      "step": 22,
+      "names": [
+        "7:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "68657": {
+      "step": 22,
+      "names": [
+        "7:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "68661": {
+      "step": 22,
+      "names": [
+        "7:m3_delta_cos.input",
+        "7:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "68662": {
+      "step": 22,
+      "names": [
+        "7:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "68663": {
+      "step": 22,
+      "names": [
+        "7:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "68674": {
+      "step": 22,
+      "names": [
+        "7:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "68675": {
+      "step": 22,
+      "names": [
+        "7:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "68682": {
+      "step": 22,
+      "names": [
+        "7:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "68683": {
+      "step": 22,
+      "names": [
+        "7:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "68643": {
+      "step": 22,
+      "names": [
+        "7:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "68865": {
+      "step": 22,
+      "names": [
+        "7:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "68868": {
+      "step": 22,
+      "names": [
+        "7:mixer_residual"
+      ],
+      "size": 768
+    },
+    "68873": {
+      "step": 22,
+      "names": [
+        "7:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "68874": {
+      "step": 22,
+      "names": [
+        "7:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "68880": {
+      "step": 22,
+      "names": [
+        "7:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "68881": {
+      "step": 22,
+      "names": [
+        "7:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "68884": {
+      "step": 22,
+      "names": [
+        "7:layer_output"
+      ],
+      "size": 768
+    },
+    "68889": {
+      "step": 22,
+      "names": [
+        "8:block_rms.input"
+      ],
+      "size": 1
+    },
+    "68890": {
+      "step": 22,
+      "names": [
+        "8:block_rms.output"
+      ],
+      "size": 1
+    },
+    "68903": {
+      "step": 22,
+      "names": [
+        "8:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "68904": {
+      "step": 22,
+      "names": [
+        "8:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "68900": {
+      "step": 22,
+      "names": [
+        "8:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "68905": {
+      "step": 22,
+      "names": [
+        "8:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "68906": {
+      "step": 22,
+      "names": [
+        "8:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "68907": {
+      "step": 22,
+      "names": [
+        "8:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "68901": {
+      "step": 22,
+      "names": [
+        "8:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "68908": {
+      "step": 22,
+      "names": [
+        "8:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "68902": {
+      "step": 22,
+      "names": [
+        "8:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "68909": {
+      "step": 22,
+      "names": [
+        "8:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "68913": {
+      "step": 22,
+      "names": [
+        "8:m3_delta_cos.input",
+        "8:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "68914": {
+      "step": 22,
+      "names": [
+        "8:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "68915": {
+      "step": 22,
+      "names": [
+        "8:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "68926": {
+      "step": 22,
+      "names": [
+        "8:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "68927": {
+      "step": 22,
+      "names": [
+        "8:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "68934": {
+      "step": 22,
+      "names": [
+        "8:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "68935": {
+      "step": 22,
+      "names": [
+        "8:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "68895": {
+      "step": 22,
+      "names": [
+        "8:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "69117": {
+      "step": 22,
+      "names": [
+        "8:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "69120": {
+      "step": 22,
+      "names": [
+        "8:mixer_residual"
+      ],
+      "size": 768
+    },
+    "69125": {
+      "step": 22,
+      "names": [
+        "8:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "69126": {
+      "step": 22,
+      "names": [
+        "8:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "69132": {
+      "step": 22,
+      "names": [
+        "8:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "69133": {
+      "step": 22,
+      "names": [
+        "8:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "69136": {
+      "step": 22,
+      "names": [
+        "8:layer_output"
+      ],
+      "size": 768
+    },
+    "69141": {
+      "step": 22,
+      "names": [
+        "9:block_rms.input"
+      ],
+      "size": 1
+    },
+    "69142": {
+      "step": 22,
+      "names": [
+        "9:block_rms.output"
+      ],
+      "size": 1
+    },
+    "69155": {
+      "step": 22,
+      "names": [
+        "9:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "69156": {
+      "step": 22,
+      "names": [
+        "9:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "69152": {
+      "step": 22,
+      "names": [
+        "9:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "69157": {
+      "step": 22,
+      "names": [
+        "9:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "69158": {
+      "step": 22,
+      "names": [
+        "9:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "69159": {
+      "step": 22,
+      "names": [
+        "9:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "69153": {
+      "step": 22,
+      "names": [
+        "9:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "69160": {
+      "step": 22,
+      "names": [
+        "9:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "69154": {
+      "step": 22,
+      "names": [
+        "9:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "69161": {
+      "step": 22,
+      "names": [
+        "9:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "69165": {
+      "step": 22,
+      "names": [
+        "9:m3_delta_cos.input",
+        "9:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "69166": {
+      "step": 22,
+      "names": [
+        "9:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "69167": {
+      "step": 22,
+      "names": [
+        "9:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "69178": {
+      "step": 22,
+      "names": [
+        "9:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "69179": {
+      "step": 22,
+      "names": [
+        "9:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "69186": {
+      "step": 22,
+      "names": [
+        "9:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "69187": {
+      "step": 22,
+      "names": [
+        "9:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "69147": {
+      "step": 22,
+      "names": [
+        "9:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "69369": {
+      "step": 22,
+      "names": [
+        "9:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "69372": {
+      "step": 22,
+      "names": [
+        "9:mixer_residual"
+      ],
+      "size": 768
+    },
+    "69377": {
+      "step": 22,
+      "names": [
+        "9:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "69378": {
+      "step": 22,
+      "names": [
+        "9:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "69384": {
+      "step": 22,
+      "names": [
+        "9:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "69385": {
+      "step": 22,
+      "names": [
+        "9:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "69388": {
+      "step": 22,
+      "names": [
+        "9:layer_output"
+      ],
+      "size": 768
+    },
+    "69393": {
+      "step": 22,
+      "names": [
+        "10:block_rms.input"
+      ],
+      "size": 1
+    },
+    "69394": {
+      "step": 22,
+      "names": [
+        "10:block_rms.output"
+      ],
+      "size": 1
+    },
+    "69407": {
+      "step": 22,
+      "names": [
+        "10:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "69408": {
+      "step": 22,
+      "names": [
+        "10:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "69404": {
+      "step": 22,
+      "names": [
+        "10:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "69409": {
+      "step": 22,
+      "names": [
+        "10:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "69410": {
+      "step": 22,
+      "names": [
+        "10:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "69411": {
+      "step": 22,
+      "names": [
+        "10:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "69405": {
+      "step": 22,
+      "names": [
+        "10:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "69412": {
+      "step": 22,
+      "names": [
+        "10:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "69406": {
+      "step": 22,
+      "names": [
+        "10:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "69413": {
+      "step": 22,
+      "names": [
+        "10:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "69417": {
+      "step": 22,
+      "names": [
+        "10:m3_delta_cos.input",
+        "10:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "69418": {
+      "step": 22,
+      "names": [
+        "10:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "69419": {
+      "step": 22,
+      "names": [
+        "10:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "69430": {
+      "step": 22,
+      "names": [
+        "10:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "69431": {
+      "step": 22,
+      "names": [
+        "10:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "69438": {
+      "step": 22,
+      "names": [
+        "10:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "69439": {
+      "step": 22,
+      "names": [
+        "10:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "69399": {
+      "step": 22,
+      "names": [
+        "10:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "69621": {
+      "step": 22,
+      "names": [
+        "10:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "69624": {
+      "step": 22,
+      "names": [
+        "10:mixer_residual"
+      ],
+      "size": 768
+    },
+    "69629": {
+      "step": 22,
+      "names": [
+        "10:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "69630": {
+      "step": 22,
+      "names": [
+        "10:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "69636": {
+      "step": 22,
+      "names": [
+        "10:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "69637": {
+      "step": 22,
+      "names": [
+        "10:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "69640": {
+      "step": 22,
+      "names": [
+        "10:layer_output"
+      ],
+      "size": 768
+    },
+    "69645": {
+      "step": 22,
+      "names": [
+        "11:block_rms.input"
+      ],
+      "size": 1
+    },
+    "69646": {
+      "step": 22,
+      "names": [
+        "11:block_rms.output"
+      ],
+      "size": 1
+    },
+    "69659": {
+      "step": 22,
+      "names": [
+        "11:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "69660": {
+      "step": 22,
+      "names": [
+        "11:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "69656": {
+      "step": 22,
+      "names": [
+        "11:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "69661": {
+      "step": 22,
+      "names": [
+        "11:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "69662": {
+      "step": 22,
+      "names": [
+        "11:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "69663": {
+      "step": 22,
+      "names": [
+        "11:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "69657": {
+      "step": 22,
+      "names": [
+        "11:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "69664": {
+      "step": 22,
+      "names": [
+        "11:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "69658": {
+      "step": 22,
+      "names": [
+        "11:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "69665": {
+      "step": 22,
+      "names": [
+        "11:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "69669": {
+      "step": 22,
+      "names": [
+        "11:m3_delta_cos.input",
+        "11:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "69670": {
+      "step": 22,
+      "names": [
+        "11:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "69671": {
+      "step": 22,
+      "names": [
+        "11:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "69682": {
+      "step": 22,
+      "names": [
+        "11:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "69683": {
+      "step": 22,
+      "names": [
+        "11:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "69690": {
+      "step": 22,
+      "names": [
+        "11:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "69691": {
+      "step": 22,
+      "names": [
+        "11:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "69651": {
+      "step": 22,
+      "names": [
+        "11:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "69873": {
+      "step": 22,
+      "names": [
+        "11:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "69876": {
+      "step": 22,
+      "names": [
+        "11:mixer_residual"
+      ],
+      "size": 768
+    },
+    "69881": {
+      "step": 22,
+      "names": [
+        "11:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "69882": {
+      "step": 22,
+      "names": [
+        "11:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "69888": {
+      "step": 22,
+      "names": [
+        "11:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "69889": {
+      "step": 22,
+      "names": [
+        "11:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "69892": {
+      "step": 22,
+      "names": [
+        "11:layer_output"
+      ],
+      "size": 768
+    },
+    "69897": {
+      "step": 22,
+      "names": [
+        "-1:final_rms.input"
+      ],
+      "size": 1
+    },
+    "69898": {
+      "step": 22,
+      "names": [
+        "-1:final_rms.output"
+      ],
+      "size": 1
+    },
+    "69901": {
+      "step": 22,
+      "names": [
+        "final_hidden"
+      ],
+      "size": 768
+    },
+    "66903": {
+      "step": 22,
+      "names": [
+        "0:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "66906": {
+      "step": 22,
+      "names": [
+        "0:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "66942": {
+      "step": 22,
+      "names": [
+        "0:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "66880": {
+      "step": 22,
+      "names": [
+        "0:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "66985": {
+      "step": 22,
+      "names": [
+        "0:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "67005": {
+      "step": 22,
+      "names": [
+        "0:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "67025": {
+      "step": 22,
+      "names": [
+        "0:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "67045": {
+      "step": 22,
+      "names": [
+        "0:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "67065": {
+      "step": 22,
+      "names": [
+        "0:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "67085": {
+      "step": 22,
+      "names": [
+        "0:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "67155": {
+      "step": 22,
+      "names": [
+        "1:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "67158": {
+      "step": 22,
+      "names": [
+        "1:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "67194": {
+      "step": 22,
+      "names": [
+        "1:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "67132": {
+      "step": 22,
+      "names": [
+        "1:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "67237": {
+      "step": 22,
+      "names": [
+        "1:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "67257": {
+      "step": 22,
+      "names": [
+        "1:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "67277": {
+      "step": 22,
+      "names": [
+        "1:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "67297": {
+      "step": 22,
+      "names": [
+        "1:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "67317": {
+      "step": 22,
+      "names": [
+        "1:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "67337": {
+      "step": 22,
+      "names": [
+        "1:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "67407": {
+      "step": 22,
+      "names": [
+        "2:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "67410": {
+      "step": 22,
+      "names": [
+        "2:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "67446": {
+      "step": 22,
+      "names": [
+        "2:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "67384": {
+      "step": 22,
+      "names": [
+        "2:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "67489": {
+      "step": 22,
+      "names": [
+        "2:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "67509": {
+      "step": 22,
+      "names": [
+        "2:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "67529": {
+      "step": 22,
+      "names": [
+        "2:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "67549": {
+      "step": 22,
+      "names": [
+        "2:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "67569": {
+      "step": 22,
+      "names": [
+        "2:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "67589": {
+      "step": 22,
+      "names": [
+        "2:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "67659": {
+      "step": 22,
+      "names": [
+        "3:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "67662": {
+      "step": 22,
+      "names": [
+        "3:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "67698": {
+      "step": 22,
+      "names": [
+        "3:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "67636": {
+      "step": 22,
+      "names": [
+        "3:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "67741": {
+      "step": 22,
+      "names": [
+        "3:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "67761": {
+      "step": 22,
+      "names": [
+        "3:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "67781": {
+      "step": 22,
+      "names": [
+        "3:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "67801": {
+      "step": 22,
+      "names": [
+        "3:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "67821": {
+      "step": 22,
+      "names": [
+        "3:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "67841": {
+      "step": 22,
+      "names": [
+        "3:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "67911": {
+      "step": 22,
+      "names": [
+        "4:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "67914": {
+      "step": 22,
+      "names": [
+        "4:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "67950": {
+      "step": 22,
+      "names": [
+        "4:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "67888": {
+      "step": 22,
+      "names": [
+        "4:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "67993": {
+      "step": 22,
+      "names": [
+        "4:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "68013": {
+      "step": 22,
+      "names": [
+        "4:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "68033": {
+      "step": 22,
+      "names": [
+        "4:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "68053": {
+      "step": 22,
+      "names": [
+        "4:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "68073": {
+      "step": 22,
+      "names": [
+        "4:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "68093": {
+      "step": 22,
+      "names": [
+        "4:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "68163": {
+      "step": 22,
+      "names": [
+        "5:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "68166": {
+      "step": 22,
+      "names": [
+        "5:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "68202": {
+      "step": 22,
+      "names": [
+        "5:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "68140": {
+      "step": 22,
+      "names": [
+        "5:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "68245": {
+      "step": 22,
+      "names": [
+        "5:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "68265": {
+      "step": 22,
+      "names": [
+        "5:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "68285": {
+      "step": 22,
+      "names": [
+        "5:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "68305": {
+      "step": 22,
+      "names": [
+        "5:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "68325": {
+      "step": 22,
+      "names": [
+        "5:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "68345": {
+      "step": 22,
+      "names": [
+        "5:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "68415": {
+      "step": 22,
+      "names": [
+        "6:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "68418": {
+      "step": 22,
+      "names": [
+        "6:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "68454": {
+      "step": 22,
+      "names": [
+        "6:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "68392": {
+      "step": 22,
+      "names": [
+        "6:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "68497": {
+      "step": 22,
+      "names": [
+        "6:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "68517": {
+      "step": 22,
+      "names": [
+        "6:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "68537": {
+      "step": 22,
+      "names": [
+        "6:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "68557": {
+      "step": 22,
+      "names": [
+        "6:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "68577": {
+      "step": 22,
+      "names": [
+        "6:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "68597": {
+      "step": 22,
+      "names": [
+        "6:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "68667": {
+      "step": 22,
+      "names": [
+        "7:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "68670": {
+      "step": 22,
+      "names": [
+        "7:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "68706": {
+      "step": 22,
+      "names": [
+        "7:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "68644": {
+      "step": 22,
+      "names": [
+        "7:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "68749": {
+      "step": 22,
+      "names": [
+        "7:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "68769": {
+      "step": 22,
+      "names": [
+        "7:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "68789": {
+      "step": 22,
+      "names": [
+        "7:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "68809": {
+      "step": 22,
+      "names": [
+        "7:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "68829": {
+      "step": 22,
+      "names": [
+        "7:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "68849": {
+      "step": 22,
+      "names": [
+        "7:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "68919": {
+      "step": 22,
+      "names": [
+        "8:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "68922": {
+      "step": 22,
+      "names": [
+        "8:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "68958": {
+      "step": 22,
+      "names": [
+        "8:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "68896": {
+      "step": 22,
+      "names": [
+        "8:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "69001": {
+      "step": 22,
+      "names": [
+        "8:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "69021": {
+      "step": 22,
+      "names": [
+        "8:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "69041": {
+      "step": 22,
+      "names": [
+        "8:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "69061": {
+      "step": 22,
+      "names": [
+        "8:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "69081": {
+      "step": 22,
+      "names": [
+        "8:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "69101": {
+      "step": 22,
+      "names": [
+        "8:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "69171": {
+      "step": 22,
+      "names": [
+        "9:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "69174": {
+      "step": 22,
+      "names": [
+        "9:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "69210": {
+      "step": 22,
+      "names": [
+        "9:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "69148": {
+      "step": 22,
+      "names": [
+        "9:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "69253": {
+      "step": 22,
+      "names": [
+        "9:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "69273": {
+      "step": 22,
+      "names": [
+        "9:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "69293": {
+      "step": 22,
+      "names": [
+        "9:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "69313": {
+      "step": 22,
+      "names": [
+        "9:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "69333": {
+      "step": 22,
+      "names": [
+        "9:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "69353": {
+      "step": 22,
+      "names": [
+        "9:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "69423": {
+      "step": 22,
+      "names": [
+        "10:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "69426": {
+      "step": 22,
+      "names": [
+        "10:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "69462": {
+      "step": 22,
+      "names": [
+        "10:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "69400": {
+      "step": 22,
+      "names": [
+        "10:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "69505": {
+      "step": 22,
+      "names": [
+        "10:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "69525": {
+      "step": 22,
+      "names": [
+        "10:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "69545": {
+      "step": 22,
+      "names": [
+        "10:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "69565": {
+      "step": 22,
+      "names": [
+        "10:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "69585": {
+      "step": 22,
+      "names": [
+        "10:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "69605": {
+      "step": 22,
+      "names": [
+        "10:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "69675": {
+      "step": 22,
+      "names": [
+        "11:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "69678": {
+      "step": 22,
+      "names": [
+        "11:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "69714": {
+      "step": 22,
+      "names": [
+        "11:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "69652": {
+      "step": 22,
+      "names": [
+        "11:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "69757": {
+      "step": 22,
+      "names": [
+        "11:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "69777": {
+      "step": 22,
+      "names": [
+        "11:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "69797": {
+      "step": 22,
+      "names": [
+        "11:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "69817": {
+      "step": 22,
+      "names": [
+        "11:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "69837": {
+      "step": 22,
+      "names": [
+        "11:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "69857": {
+      "step": 22,
+      "names": [
+        "11:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "69907": {
+      "step": 23,
+      "names": [
+        "0:block_rms.input"
+      ],
+      "size": 1
+    },
+    "69908": {
+      "step": 23,
+      "names": [
+        "0:block_rms.output"
+      ],
+      "size": 1
+    },
+    "69921": {
+      "step": 23,
+      "names": [
+        "0:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "69922": {
+      "step": 23,
+      "names": [
+        "0:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "69918": {
+      "step": 23,
+      "names": [
+        "0:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "69923": {
+      "step": 23,
+      "names": [
+        "0:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "69924": {
+      "step": 23,
+      "names": [
+        "0:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "69925": {
+      "step": 23,
+      "names": [
+        "0:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "69919": {
+      "step": 23,
+      "names": [
+        "0:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "69926": {
+      "step": 23,
+      "names": [
+        "0:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "69920": {
+      "step": 23,
+      "names": [
+        "0:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "69927": {
+      "step": 23,
+      "names": [
+        "0:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "69931": {
+      "step": 23,
+      "names": [
+        "0:m3_delta_cos.input",
+        "0:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "69932": {
+      "step": 23,
+      "names": [
+        "0:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "69933": {
+      "step": 23,
+      "names": [
+        "0:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "69944": {
+      "step": 23,
+      "names": [
+        "0:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "69945": {
+      "step": 23,
+      "names": [
+        "0:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "69952": {
+      "step": 23,
+      "names": [
+        "0:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "69953": {
+      "step": 23,
+      "names": [
+        "0:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "69913": {
+      "step": 23,
+      "names": [
+        "0:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "70135": {
+      "step": 23,
+      "names": [
+        "0:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "70138": {
+      "step": 23,
+      "names": [
+        "0:mixer_residual"
+      ],
+      "size": 768
+    },
+    "70143": {
+      "step": 23,
+      "names": [
+        "0:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "70144": {
+      "step": 23,
+      "names": [
+        "0:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "70150": {
+      "step": 23,
+      "names": [
+        "0:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "70151": {
+      "step": 23,
+      "names": [
+        "0:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "70154": {
+      "step": 23,
+      "names": [
+        "0:layer_output"
+      ],
+      "size": 768
+    },
+    "70159": {
+      "step": 23,
+      "names": [
+        "1:block_rms.input"
+      ],
+      "size": 1
+    },
+    "70160": {
+      "step": 23,
+      "names": [
+        "1:block_rms.output"
+      ],
+      "size": 1
+    },
+    "70173": {
+      "step": 23,
+      "names": [
+        "1:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "70174": {
+      "step": 23,
+      "names": [
+        "1:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "70170": {
+      "step": 23,
+      "names": [
+        "1:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "70175": {
+      "step": 23,
+      "names": [
+        "1:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "70176": {
+      "step": 23,
+      "names": [
+        "1:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "70177": {
+      "step": 23,
+      "names": [
+        "1:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "70171": {
+      "step": 23,
+      "names": [
+        "1:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "70178": {
+      "step": 23,
+      "names": [
+        "1:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "70172": {
+      "step": 23,
+      "names": [
+        "1:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "70179": {
+      "step": 23,
+      "names": [
+        "1:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "70183": {
+      "step": 23,
+      "names": [
+        "1:m3_delta_cos.input",
+        "1:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "70184": {
+      "step": 23,
+      "names": [
+        "1:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "70185": {
+      "step": 23,
+      "names": [
+        "1:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "70196": {
+      "step": 23,
+      "names": [
+        "1:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "70197": {
+      "step": 23,
+      "names": [
+        "1:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "70204": {
+      "step": 23,
+      "names": [
+        "1:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "70205": {
+      "step": 23,
+      "names": [
+        "1:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "70165": {
+      "step": 23,
+      "names": [
+        "1:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "70387": {
+      "step": 23,
+      "names": [
+        "1:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "70390": {
+      "step": 23,
+      "names": [
+        "1:mixer_residual"
+      ],
+      "size": 768
+    },
+    "70395": {
+      "step": 23,
+      "names": [
+        "1:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "70396": {
+      "step": 23,
+      "names": [
+        "1:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "70402": {
+      "step": 23,
+      "names": [
+        "1:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "70403": {
+      "step": 23,
+      "names": [
+        "1:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "70406": {
+      "step": 23,
+      "names": [
+        "1:layer_output"
+      ],
+      "size": 768
+    },
+    "70411": {
+      "step": 23,
+      "names": [
+        "2:block_rms.input"
+      ],
+      "size": 1
+    },
+    "70412": {
+      "step": 23,
+      "names": [
+        "2:block_rms.output"
+      ],
+      "size": 1
+    },
+    "70425": {
+      "step": 23,
+      "names": [
+        "2:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "70426": {
+      "step": 23,
+      "names": [
+        "2:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "70422": {
+      "step": 23,
+      "names": [
+        "2:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "70427": {
+      "step": 23,
+      "names": [
+        "2:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "70428": {
+      "step": 23,
+      "names": [
+        "2:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "70429": {
+      "step": 23,
+      "names": [
+        "2:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "70423": {
+      "step": 23,
+      "names": [
+        "2:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "70430": {
+      "step": 23,
+      "names": [
+        "2:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "70424": {
+      "step": 23,
+      "names": [
+        "2:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "70431": {
+      "step": 23,
+      "names": [
+        "2:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "70435": {
+      "step": 23,
+      "names": [
+        "2:m3_delta_cos.input",
+        "2:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "70436": {
+      "step": 23,
+      "names": [
+        "2:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "70437": {
+      "step": 23,
+      "names": [
+        "2:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "70448": {
+      "step": 23,
+      "names": [
+        "2:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "70449": {
+      "step": 23,
+      "names": [
+        "2:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "70456": {
+      "step": 23,
+      "names": [
+        "2:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "70457": {
+      "step": 23,
+      "names": [
+        "2:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "70417": {
+      "step": 23,
+      "names": [
+        "2:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "70639": {
+      "step": 23,
+      "names": [
+        "2:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "70642": {
+      "step": 23,
+      "names": [
+        "2:mixer_residual"
+      ],
+      "size": 768
+    },
+    "70647": {
+      "step": 23,
+      "names": [
+        "2:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "70648": {
+      "step": 23,
+      "names": [
+        "2:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "70654": {
+      "step": 23,
+      "names": [
+        "2:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "70655": {
+      "step": 23,
+      "names": [
+        "2:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "70658": {
+      "step": 23,
+      "names": [
+        "2:layer_output"
+      ],
+      "size": 768
+    },
+    "70663": {
+      "step": 23,
+      "names": [
+        "3:block_rms.input"
+      ],
+      "size": 1
+    },
+    "70664": {
+      "step": 23,
+      "names": [
+        "3:block_rms.output"
+      ],
+      "size": 1
+    },
+    "70677": {
+      "step": 23,
+      "names": [
+        "3:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "70678": {
+      "step": 23,
+      "names": [
+        "3:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "70674": {
+      "step": 23,
+      "names": [
+        "3:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "70679": {
+      "step": 23,
+      "names": [
+        "3:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "70680": {
+      "step": 23,
+      "names": [
+        "3:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "70681": {
+      "step": 23,
+      "names": [
+        "3:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "70675": {
+      "step": 23,
+      "names": [
+        "3:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "70682": {
+      "step": 23,
+      "names": [
+        "3:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "70676": {
+      "step": 23,
+      "names": [
+        "3:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "70683": {
+      "step": 23,
+      "names": [
+        "3:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "70687": {
+      "step": 23,
+      "names": [
+        "3:m3_delta_cos.input",
+        "3:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "70688": {
+      "step": 23,
+      "names": [
+        "3:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "70689": {
+      "step": 23,
+      "names": [
+        "3:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "70700": {
+      "step": 23,
+      "names": [
+        "3:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "70701": {
+      "step": 23,
+      "names": [
+        "3:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "70708": {
+      "step": 23,
+      "names": [
+        "3:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "70709": {
+      "step": 23,
+      "names": [
+        "3:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "70669": {
+      "step": 23,
+      "names": [
+        "3:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "70891": {
+      "step": 23,
+      "names": [
+        "3:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "70894": {
+      "step": 23,
+      "names": [
+        "3:mixer_residual"
+      ],
+      "size": 768
+    },
+    "70899": {
+      "step": 23,
+      "names": [
+        "3:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "70900": {
+      "step": 23,
+      "names": [
+        "3:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "70906": {
+      "step": 23,
+      "names": [
+        "3:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "70907": {
+      "step": 23,
+      "names": [
+        "3:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "70910": {
+      "step": 23,
+      "names": [
+        "3:layer_output"
+      ],
+      "size": 768
+    },
+    "70915": {
+      "step": 23,
+      "names": [
+        "4:block_rms.input"
+      ],
+      "size": 1
+    },
+    "70916": {
+      "step": 23,
+      "names": [
+        "4:block_rms.output"
+      ],
+      "size": 1
+    },
+    "70929": {
+      "step": 23,
+      "names": [
+        "4:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "70930": {
+      "step": 23,
+      "names": [
+        "4:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "70926": {
+      "step": 23,
+      "names": [
+        "4:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "70931": {
+      "step": 23,
+      "names": [
+        "4:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "70932": {
+      "step": 23,
+      "names": [
+        "4:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "70933": {
+      "step": 23,
+      "names": [
+        "4:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "70927": {
+      "step": 23,
+      "names": [
+        "4:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "70934": {
+      "step": 23,
+      "names": [
+        "4:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "70928": {
+      "step": 23,
+      "names": [
+        "4:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "70935": {
+      "step": 23,
+      "names": [
+        "4:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "70939": {
+      "step": 23,
+      "names": [
+        "4:m3_delta_cos.input",
+        "4:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "70940": {
+      "step": 23,
+      "names": [
+        "4:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "70941": {
+      "step": 23,
+      "names": [
+        "4:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "70952": {
+      "step": 23,
+      "names": [
+        "4:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "70953": {
+      "step": 23,
+      "names": [
+        "4:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "70960": {
+      "step": 23,
+      "names": [
+        "4:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "70961": {
+      "step": 23,
+      "names": [
+        "4:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "70921": {
+      "step": 23,
+      "names": [
+        "4:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "71143": {
+      "step": 23,
+      "names": [
+        "4:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "71146": {
+      "step": 23,
+      "names": [
+        "4:mixer_residual"
+      ],
+      "size": 768
+    },
+    "71151": {
+      "step": 23,
+      "names": [
+        "4:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "71152": {
+      "step": 23,
+      "names": [
+        "4:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "71158": {
+      "step": 23,
+      "names": [
+        "4:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "71159": {
+      "step": 23,
+      "names": [
+        "4:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "71162": {
+      "step": 23,
+      "names": [
+        "4:layer_output"
+      ],
+      "size": 768
+    },
+    "71167": {
+      "step": 23,
+      "names": [
+        "5:block_rms.input"
+      ],
+      "size": 1
+    },
+    "71168": {
+      "step": 23,
+      "names": [
+        "5:block_rms.output"
+      ],
+      "size": 1
+    },
+    "71181": {
+      "step": 23,
+      "names": [
+        "5:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "71182": {
+      "step": 23,
+      "names": [
+        "5:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "71178": {
+      "step": 23,
+      "names": [
+        "5:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "71183": {
+      "step": 23,
+      "names": [
+        "5:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "71184": {
+      "step": 23,
+      "names": [
+        "5:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "71185": {
+      "step": 23,
+      "names": [
+        "5:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "71179": {
+      "step": 23,
+      "names": [
+        "5:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "71186": {
+      "step": 23,
+      "names": [
+        "5:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "71180": {
+      "step": 23,
+      "names": [
+        "5:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "71187": {
+      "step": 23,
+      "names": [
+        "5:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "71191": {
+      "step": 23,
+      "names": [
+        "5:m3_delta_cos.input",
+        "5:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "71192": {
+      "step": 23,
+      "names": [
+        "5:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "71193": {
+      "step": 23,
+      "names": [
+        "5:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "71204": {
+      "step": 23,
+      "names": [
+        "5:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "71205": {
+      "step": 23,
+      "names": [
+        "5:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "71212": {
+      "step": 23,
+      "names": [
+        "5:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "71213": {
+      "step": 23,
+      "names": [
+        "5:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "71173": {
+      "step": 23,
+      "names": [
+        "5:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "71395": {
+      "step": 23,
+      "names": [
+        "5:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "71398": {
+      "step": 23,
+      "names": [
+        "5:mixer_residual"
+      ],
+      "size": 768
+    },
+    "71403": {
+      "step": 23,
+      "names": [
+        "5:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "71404": {
+      "step": 23,
+      "names": [
+        "5:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "71410": {
+      "step": 23,
+      "names": [
+        "5:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "71411": {
+      "step": 23,
+      "names": [
+        "5:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "71414": {
+      "step": 23,
+      "names": [
+        "5:layer_output"
+      ],
+      "size": 768
+    },
+    "71419": {
+      "step": 23,
+      "names": [
+        "6:block_rms.input"
+      ],
+      "size": 1
+    },
+    "71420": {
+      "step": 23,
+      "names": [
+        "6:block_rms.output"
+      ],
+      "size": 1
+    },
+    "71433": {
+      "step": 23,
+      "names": [
+        "6:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "71434": {
+      "step": 23,
+      "names": [
+        "6:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "71430": {
+      "step": 23,
+      "names": [
+        "6:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "71435": {
+      "step": 23,
+      "names": [
+        "6:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "71436": {
+      "step": 23,
+      "names": [
+        "6:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "71437": {
+      "step": 23,
+      "names": [
+        "6:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "71431": {
+      "step": 23,
+      "names": [
+        "6:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "71438": {
+      "step": 23,
+      "names": [
+        "6:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "71432": {
+      "step": 23,
+      "names": [
+        "6:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "71439": {
+      "step": 23,
+      "names": [
+        "6:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "71443": {
+      "step": 23,
+      "names": [
+        "6:m3_delta_cos.input",
+        "6:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "71444": {
+      "step": 23,
+      "names": [
+        "6:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "71445": {
+      "step": 23,
+      "names": [
+        "6:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "71456": {
+      "step": 23,
+      "names": [
+        "6:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "71457": {
+      "step": 23,
+      "names": [
+        "6:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "71464": {
+      "step": 23,
+      "names": [
+        "6:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "71465": {
+      "step": 23,
+      "names": [
+        "6:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "71425": {
+      "step": 23,
+      "names": [
+        "6:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "71647": {
+      "step": 23,
+      "names": [
+        "6:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "71650": {
+      "step": 23,
+      "names": [
+        "6:mixer_residual"
+      ],
+      "size": 768
+    },
+    "71655": {
+      "step": 23,
+      "names": [
+        "6:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "71656": {
+      "step": 23,
+      "names": [
+        "6:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "71662": {
+      "step": 23,
+      "names": [
+        "6:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "71663": {
+      "step": 23,
+      "names": [
+        "6:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "71666": {
+      "step": 23,
+      "names": [
+        "6:layer_output"
+      ],
+      "size": 768
+    },
+    "71671": {
+      "step": 23,
+      "names": [
+        "7:block_rms.input"
+      ],
+      "size": 1
+    },
+    "71672": {
+      "step": 23,
+      "names": [
+        "7:block_rms.output"
+      ],
+      "size": 1
+    },
+    "71685": {
+      "step": 23,
+      "names": [
+        "7:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "71686": {
+      "step": 23,
+      "names": [
+        "7:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "71682": {
+      "step": 23,
+      "names": [
+        "7:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "71687": {
+      "step": 23,
+      "names": [
+        "7:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "71688": {
+      "step": 23,
+      "names": [
+        "7:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "71689": {
+      "step": 23,
+      "names": [
+        "7:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "71683": {
+      "step": 23,
+      "names": [
+        "7:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "71690": {
+      "step": 23,
+      "names": [
+        "7:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "71684": {
+      "step": 23,
+      "names": [
+        "7:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "71691": {
+      "step": 23,
+      "names": [
+        "7:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "71695": {
+      "step": 23,
+      "names": [
+        "7:m3_delta_cos.input",
+        "7:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "71696": {
+      "step": 23,
+      "names": [
+        "7:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "71697": {
+      "step": 23,
+      "names": [
+        "7:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "71708": {
+      "step": 23,
+      "names": [
+        "7:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "71709": {
+      "step": 23,
+      "names": [
+        "7:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "71716": {
+      "step": 23,
+      "names": [
+        "7:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "71717": {
+      "step": 23,
+      "names": [
+        "7:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "71677": {
+      "step": 23,
+      "names": [
+        "7:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "71899": {
+      "step": 23,
+      "names": [
+        "7:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "71902": {
+      "step": 23,
+      "names": [
+        "7:mixer_residual"
+      ],
+      "size": 768
+    },
+    "71907": {
+      "step": 23,
+      "names": [
+        "7:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "71908": {
+      "step": 23,
+      "names": [
+        "7:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "71914": {
+      "step": 23,
+      "names": [
+        "7:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "71915": {
+      "step": 23,
+      "names": [
+        "7:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "71918": {
+      "step": 23,
+      "names": [
+        "7:layer_output"
+      ],
+      "size": 768
+    },
+    "71923": {
+      "step": 23,
+      "names": [
+        "8:block_rms.input"
+      ],
+      "size": 1
+    },
+    "71924": {
+      "step": 23,
+      "names": [
+        "8:block_rms.output"
+      ],
+      "size": 1
+    },
+    "71937": {
+      "step": 23,
+      "names": [
+        "8:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "71938": {
+      "step": 23,
+      "names": [
+        "8:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "71934": {
+      "step": 23,
+      "names": [
+        "8:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "71939": {
+      "step": 23,
+      "names": [
+        "8:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "71940": {
+      "step": 23,
+      "names": [
+        "8:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "71941": {
+      "step": 23,
+      "names": [
+        "8:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "71935": {
+      "step": 23,
+      "names": [
+        "8:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "71942": {
+      "step": 23,
+      "names": [
+        "8:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "71936": {
+      "step": 23,
+      "names": [
+        "8:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "71943": {
+      "step": 23,
+      "names": [
+        "8:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "71947": {
+      "step": 23,
+      "names": [
+        "8:m3_delta_cos.input",
+        "8:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "71948": {
+      "step": 23,
+      "names": [
+        "8:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "71949": {
+      "step": 23,
+      "names": [
+        "8:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "71960": {
+      "step": 23,
+      "names": [
+        "8:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "71961": {
+      "step": 23,
+      "names": [
+        "8:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "71968": {
+      "step": 23,
+      "names": [
+        "8:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "71969": {
+      "step": 23,
+      "names": [
+        "8:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "71929": {
+      "step": 23,
+      "names": [
+        "8:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "72151": {
+      "step": 23,
+      "names": [
+        "8:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "72154": {
+      "step": 23,
+      "names": [
+        "8:mixer_residual"
+      ],
+      "size": 768
+    },
+    "72159": {
+      "step": 23,
+      "names": [
+        "8:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "72160": {
+      "step": 23,
+      "names": [
+        "8:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "72166": {
+      "step": 23,
+      "names": [
+        "8:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "72167": {
+      "step": 23,
+      "names": [
+        "8:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "72170": {
+      "step": 23,
+      "names": [
+        "8:layer_output"
+      ],
+      "size": 768
+    },
+    "72175": {
+      "step": 23,
+      "names": [
+        "9:block_rms.input"
+      ],
+      "size": 1
+    },
+    "72176": {
+      "step": 23,
+      "names": [
+        "9:block_rms.output"
+      ],
+      "size": 1
+    },
+    "72189": {
+      "step": 23,
+      "names": [
+        "9:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "72190": {
+      "step": 23,
+      "names": [
+        "9:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "72186": {
+      "step": 23,
+      "names": [
+        "9:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "72191": {
+      "step": 23,
+      "names": [
+        "9:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "72192": {
+      "step": 23,
+      "names": [
+        "9:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "72193": {
+      "step": 23,
+      "names": [
+        "9:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "72187": {
+      "step": 23,
+      "names": [
+        "9:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "72194": {
+      "step": 23,
+      "names": [
+        "9:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "72188": {
+      "step": 23,
+      "names": [
+        "9:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "72195": {
+      "step": 23,
+      "names": [
+        "9:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "72199": {
+      "step": 23,
+      "names": [
+        "9:m3_delta_cos.input",
+        "9:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "72200": {
+      "step": 23,
+      "names": [
+        "9:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "72201": {
+      "step": 23,
+      "names": [
+        "9:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "72212": {
+      "step": 23,
+      "names": [
+        "9:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "72213": {
+      "step": 23,
+      "names": [
+        "9:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "72220": {
+      "step": 23,
+      "names": [
+        "9:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "72221": {
+      "step": 23,
+      "names": [
+        "9:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "72181": {
+      "step": 23,
+      "names": [
+        "9:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "72403": {
+      "step": 23,
+      "names": [
+        "9:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "72406": {
+      "step": 23,
+      "names": [
+        "9:mixer_residual"
+      ],
+      "size": 768
+    },
+    "72411": {
+      "step": 23,
+      "names": [
+        "9:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "72412": {
+      "step": 23,
+      "names": [
+        "9:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "72418": {
+      "step": 23,
+      "names": [
+        "9:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "72419": {
+      "step": 23,
+      "names": [
+        "9:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "72422": {
+      "step": 23,
+      "names": [
+        "9:layer_output"
+      ],
+      "size": 768
+    },
+    "72427": {
+      "step": 23,
+      "names": [
+        "10:block_rms.input"
+      ],
+      "size": 1
+    },
+    "72428": {
+      "step": 23,
+      "names": [
+        "10:block_rms.output"
+      ],
+      "size": 1
+    },
+    "72441": {
+      "step": 23,
+      "names": [
+        "10:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "72442": {
+      "step": 23,
+      "names": [
+        "10:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "72438": {
+      "step": 23,
+      "names": [
+        "10:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "72443": {
+      "step": 23,
+      "names": [
+        "10:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "72444": {
+      "step": 23,
+      "names": [
+        "10:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "72445": {
+      "step": 23,
+      "names": [
+        "10:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "72439": {
+      "step": 23,
+      "names": [
+        "10:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "72446": {
+      "step": 23,
+      "names": [
+        "10:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "72440": {
+      "step": 23,
+      "names": [
+        "10:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "72447": {
+      "step": 23,
+      "names": [
+        "10:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "72451": {
+      "step": 23,
+      "names": [
+        "10:m3_delta_cos.input",
+        "10:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "72452": {
+      "step": 23,
+      "names": [
+        "10:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "72453": {
+      "step": 23,
+      "names": [
+        "10:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "72464": {
+      "step": 23,
+      "names": [
+        "10:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "72465": {
+      "step": 23,
+      "names": [
+        "10:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "72472": {
+      "step": 23,
+      "names": [
+        "10:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "72473": {
+      "step": 23,
+      "names": [
+        "10:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "72433": {
+      "step": 23,
+      "names": [
+        "10:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "72655": {
+      "step": 23,
+      "names": [
+        "10:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "72658": {
+      "step": 23,
+      "names": [
+        "10:mixer_residual"
+      ],
+      "size": 768
+    },
+    "72663": {
+      "step": 23,
+      "names": [
+        "10:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "72664": {
+      "step": 23,
+      "names": [
+        "10:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "72670": {
+      "step": 23,
+      "names": [
+        "10:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "72671": {
+      "step": 23,
+      "names": [
+        "10:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "72674": {
+      "step": 23,
+      "names": [
+        "10:layer_output"
+      ],
+      "size": 768
+    },
+    "72679": {
+      "step": 23,
+      "names": [
+        "11:block_rms.input"
+      ],
+      "size": 1
+    },
+    "72680": {
+      "step": 23,
+      "names": [
+        "11:block_rms.output"
+      ],
+      "size": 1
+    },
+    "72693": {
+      "step": 23,
+      "names": [
+        "11:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "72694": {
+      "step": 23,
+      "names": [
+        "11:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "72690": {
+      "step": 23,
+      "names": [
+        "11:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "72695": {
+      "step": 23,
+      "names": [
+        "11:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "72696": {
+      "step": 23,
+      "names": [
+        "11:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "72697": {
+      "step": 23,
+      "names": [
+        "11:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "72691": {
+      "step": 23,
+      "names": [
+        "11:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "72698": {
+      "step": 23,
+      "names": [
+        "11:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "72692": {
+      "step": 23,
+      "names": [
+        "11:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "72699": {
+      "step": 23,
+      "names": [
+        "11:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "72703": {
+      "step": 23,
+      "names": [
+        "11:m3_delta_cos.input",
+        "11:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "72704": {
+      "step": 23,
+      "names": [
+        "11:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "72705": {
+      "step": 23,
+      "names": [
+        "11:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "72716": {
+      "step": 23,
+      "names": [
+        "11:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "72717": {
+      "step": 23,
+      "names": [
+        "11:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "72724": {
+      "step": 23,
+      "names": [
+        "11:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "72725": {
+      "step": 23,
+      "names": [
+        "11:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "72685": {
+      "step": 23,
+      "names": [
+        "11:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "72907": {
+      "step": 23,
+      "names": [
+        "11:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "72910": {
+      "step": 23,
+      "names": [
+        "11:mixer_residual"
+      ],
+      "size": 768
+    },
+    "72915": {
+      "step": 23,
+      "names": [
+        "11:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "72916": {
+      "step": 23,
+      "names": [
+        "11:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "72922": {
+      "step": 23,
+      "names": [
+        "11:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "72923": {
+      "step": 23,
+      "names": [
+        "11:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "72926": {
+      "step": 23,
+      "names": [
+        "11:layer_output"
+      ],
+      "size": 768
+    },
+    "72931": {
+      "step": 23,
+      "names": [
+        "-1:final_rms.input"
+      ],
+      "size": 1
+    },
+    "72932": {
+      "step": 23,
+      "names": [
+        "-1:final_rms.output"
+      ],
+      "size": 1
+    },
+    "72935": {
+      "step": 23,
+      "names": [
+        "final_hidden"
+      ],
+      "size": 768
+    },
+    "69937": {
+      "step": 23,
+      "names": [
+        "0:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "69940": {
+      "step": 23,
+      "names": [
+        "0:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "69976": {
+      "step": 23,
+      "names": [
+        "0:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "69914": {
+      "step": 23,
+      "names": [
+        "0:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "70019": {
+      "step": 23,
+      "names": [
+        "0:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "70039": {
+      "step": 23,
+      "names": [
+        "0:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "70059": {
+      "step": 23,
+      "names": [
+        "0:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "70079": {
+      "step": 23,
+      "names": [
+        "0:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "70099": {
+      "step": 23,
+      "names": [
+        "0:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "70119": {
+      "step": 23,
+      "names": [
+        "0:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "70189": {
+      "step": 23,
+      "names": [
+        "1:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "70192": {
+      "step": 23,
+      "names": [
+        "1:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "70228": {
+      "step": 23,
+      "names": [
+        "1:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "70166": {
+      "step": 23,
+      "names": [
+        "1:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "70271": {
+      "step": 23,
+      "names": [
+        "1:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "70291": {
+      "step": 23,
+      "names": [
+        "1:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "70311": {
+      "step": 23,
+      "names": [
+        "1:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "70331": {
+      "step": 23,
+      "names": [
+        "1:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "70351": {
+      "step": 23,
+      "names": [
+        "1:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "70371": {
+      "step": 23,
+      "names": [
+        "1:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "70441": {
+      "step": 23,
+      "names": [
+        "2:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "70444": {
+      "step": 23,
+      "names": [
+        "2:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "70480": {
+      "step": 23,
+      "names": [
+        "2:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "70418": {
+      "step": 23,
+      "names": [
+        "2:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "70523": {
+      "step": 23,
+      "names": [
+        "2:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "70543": {
+      "step": 23,
+      "names": [
+        "2:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "70563": {
+      "step": 23,
+      "names": [
+        "2:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "70583": {
+      "step": 23,
+      "names": [
+        "2:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "70603": {
+      "step": 23,
+      "names": [
+        "2:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "70623": {
+      "step": 23,
+      "names": [
+        "2:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "70693": {
+      "step": 23,
+      "names": [
+        "3:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "70696": {
+      "step": 23,
+      "names": [
+        "3:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "70732": {
+      "step": 23,
+      "names": [
+        "3:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "70670": {
+      "step": 23,
+      "names": [
+        "3:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "70775": {
+      "step": 23,
+      "names": [
+        "3:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "70795": {
+      "step": 23,
+      "names": [
+        "3:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "70815": {
+      "step": 23,
+      "names": [
+        "3:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "70835": {
+      "step": 23,
+      "names": [
+        "3:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "70855": {
+      "step": 23,
+      "names": [
+        "3:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "70875": {
+      "step": 23,
+      "names": [
+        "3:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "70945": {
+      "step": 23,
+      "names": [
+        "4:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "70948": {
+      "step": 23,
+      "names": [
+        "4:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "70984": {
+      "step": 23,
+      "names": [
+        "4:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "70922": {
+      "step": 23,
+      "names": [
+        "4:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "71027": {
+      "step": 23,
+      "names": [
+        "4:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "71047": {
+      "step": 23,
+      "names": [
+        "4:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "71067": {
+      "step": 23,
+      "names": [
+        "4:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "71087": {
+      "step": 23,
+      "names": [
+        "4:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "71107": {
+      "step": 23,
+      "names": [
+        "4:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "71127": {
+      "step": 23,
+      "names": [
+        "4:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "71197": {
+      "step": 23,
+      "names": [
+        "5:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "71200": {
+      "step": 23,
+      "names": [
+        "5:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "71236": {
+      "step": 23,
+      "names": [
+        "5:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "71174": {
+      "step": 23,
+      "names": [
+        "5:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "71279": {
+      "step": 23,
+      "names": [
+        "5:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "71299": {
+      "step": 23,
+      "names": [
+        "5:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "71319": {
+      "step": 23,
+      "names": [
+        "5:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "71339": {
+      "step": 23,
+      "names": [
+        "5:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "71359": {
+      "step": 23,
+      "names": [
+        "5:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "71379": {
+      "step": 23,
+      "names": [
+        "5:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "71449": {
+      "step": 23,
+      "names": [
+        "6:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "71452": {
+      "step": 23,
+      "names": [
+        "6:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "71488": {
+      "step": 23,
+      "names": [
+        "6:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "71426": {
+      "step": 23,
+      "names": [
+        "6:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "71531": {
+      "step": 23,
+      "names": [
+        "6:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "71551": {
+      "step": 23,
+      "names": [
+        "6:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "71571": {
+      "step": 23,
+      "names": [
+        "6:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "71591": {
+      "step": 23,
+      "names": [
+        "6:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "71611": {
+      "step": 23,
+      "names": [
+        "6:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "71631": {
+      "step": 23,
+      "names": [
+        "6:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "71701": {
+      "step": 23,
+      "names": [
+        "7:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "71704": {
+      "step": 23,
+      "names": [
+        "7:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "71740": {
+      "step": 23,
+      "names": [
+        "7:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "71678": {
+      "step": 23,
+      "names": [
+        "7:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "71783": {
+      "step": 23,
+      "names": [
+        "7:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "71803": {
+      "step": 23,
+      "names": [
+        "7:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "71823": {
+      "step": 23,
+      "names": [
+        "7:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "71843": {
+      "step": 23,
+      "names": [
+        "7:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "71863": {
+      "step": 23,
+      "names": [
+        "7:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "71883": {
+      "step": 23,
+      "names": [
+        "7:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "71953": {
+      "step": 23,
+      "names": [
+        "8:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "71956": {
+      "step": 23,
+      "names": [
+        "8:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "71992": {
+      "step": 23,
+      "names": [
+        "8:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "71930": {
+      "step": 23,
+      "names": [
+        "8:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "72035": {
+      "step": 23,
+      "names": [
+        "8:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "72055": {
+      "step": 23,
+      "names": [
+        "8:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "72075": {
+      "step": 23,
+      "names": [
+        "8:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "72095": {
+      "step": 23,
+      "names": [
+        "8:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "72115": {
+      "step": 23,
+      "names": [
+        "8:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "72135": {
+      "step": 23,
+      "names": [
+        "8:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "72205": {
+      "step": 23,
+      "names": [
+        "9:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "72208": {
+      "step": 23,
+      "names": [
+        "9:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "72244": {
+      "step": 23,
+      "names": [
+        "9:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "72182": {
+      "step": 23,
+      "names": [
+        "9:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "72287": {
+      "step": 23,
+      "names": [
+        "9:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "72307": {
+      "step": 23,
+      "names": [
+        "9:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "72327": {
+      "step": 23,
+      "names": [
+        "9:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "72347": {
+      "step": 23,
+      "names": [
+        "9:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "72367": {
+      "step": 23,
+      "names": [
+        "9:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "72387": {
+      "step": 23,
+      "names": [
+        "9:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "72457": {
+      "step": 23,
+      "names": [
+        "10:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "72460": {
+      "step": 23,
+      "names": [
+        "10:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "72496": {
+      "step": 23,
+      "names": [
+        "10:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "72434": {
+      "step": 23,
+      "names": [
+        "10:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "72539": {
+      "step": 23,
+      "names": [
+        "10:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "72559": {
+      "step": 23,
+      "names": [
+        "10:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "72579": {
+      "step": 23,
+      "names": [
+        "10:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "72599": {
+      "step": 23,
+      "names": [
+        "10:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "72619": {
+      "step": 23,
+      "names": [
+        "10:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "72639": {
+      "step": 23,
+      "names": [
+        "10:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "72709": {
+      "step": 23,
+      "names": [
+        "11:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "72712": {
+      "step": 23,
+      "names": [
+        "11:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "72748": {
+      "step": 23,
+      "names": [
+        "11:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "72686": {
+      "step": 23,
+      "names": [
+        "11:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "72791": {
+      "step": 23,
+      "names": [
+        "11:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "72811": {
+      "step": 23,
+      "names": [
+        "11:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "72831": {
+      "step": 23,
+      "names": [
+        "11:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "72851": {
+      "step": 23,
+      "names": [
+        "11:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "72871": {
+      "step": 23,
+      "names": [
+        "11:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "72891": {
+      "step": 23,
+      "names": [
+        "11:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "72941": {
+      "step": 24,
+      "names": [
+        "0:block_rms.input"
+      ],
+      "size": 1
+    },
+    "72942": {
+      "step": 24,
+      "names": [
+        "0:block_rms.output"
+      ],
+      "size": 1
+    },
+    "72955": {
+      "step": 24,
+      "names": [
+        "0:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "72956": {
+      "step": 24,
+      "names": [
+        "0:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "72952": {
+      "step": 24,
+      "names": [
+        "0:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "72957": {
+      "step": 24,
+      "names": [
+        "0:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "72958": {
+      "step": 24,
+      "names": [
+        "0:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "72959": {
+      "step": 24,
+      "names": [
+        "0:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "72953": {
+      "step": 24,
+      "names": [
+        "0:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "72960": {
+      "step": 24,
+      "names": [
+        "0:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "72954": {
+      "step": 24,
+      "names": [
+        "0:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "72961": {
+      "step": 24,
+      "names": [
+        "0:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "72965": {
+      "step": 24,
+      "names": [
+        "0:m3_delta_cos.input",
+        "0:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "72966": {
+      "step": 24,
+      "names": [
+        "0:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "72967": {
+      "step": 24,
+      "names": [
+        "0:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "72978": {
+      "step": 24,
+      "names": [
+        "0:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "72979": {
+      "step": 24,
+      "names": [
+        "0:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "72986": {
+      "step": 24,
+      "names": [
+        "0:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "72987": {
+      "step": 24,
+      "names": [
+        "0:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "72947": {
+      "step": 24,
+      "names": [
+        "0:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "73169": {
+      "step": 24,
+      "names": [
+        "0:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "73172": {
+      "step": 24,
+      "names": [
+        "0:mixer_residual"
+      ],
+      "size": 768
+    },
+    "73177": {
+      "step": 24,
+      "names": [
+        "0:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "73178": {
+      "step": 24,
+      "names": [
+        "0:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "73184": {
+      "step": 24,
+      "names": [
+        "0:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "73185": {
+      "step": 24,
+      "names": [
+        "0:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "73188": {
+      "step": 24,
+      "names": [
+        "0:layer_output"
+      ],
+      "size": 768
+    },
+    "73193": {
+      "step": 24,
+      "names": [
+        "1:block_rms.input"
+      ],
+      "size": 1
+    },
+    "73194": {
+      "step": 24,
+      "names": [
+        "1:block_rms.output"
+      ],
+      "size": 1
+    },
+    "73207": {
+      "step": 24,
+      "names": [
+        "1:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "73208": {
+      "step": 24,
+      "names": [
+        "1:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "73204": {
+      "step": 24,
+      "names": [
+        "1:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "73209": {
+      "step": 24,
+      "names": [
+        "1:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "73210": {
+      "step": 24,
+      "names": [
+        "1:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "73211": {
+      "step": 24,
+      "names": [
+        "1:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "73205": {
+      "step": 24,
+      "names": [
+        "1:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "73212": {
+      "step": 24,
+      "names": [
+        "1:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "73206": {
+      "step": 24,
+      "names": [
+        "1:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "73213": {
+      "step": 24,
+      "names": [
+        "1:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "73217": {
+      "step": 24,
+      "names": [
+        "1:m3_delta_cos.input",
+        "1:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "73218": {
+      "step": 24,
+      "names": [
+        "1:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "73219": {
+      "step": 24,
+      "names": [
+        "1:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "73230": {
+      "step": 24,
+      "names": [
+        "1:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "73231": {
+      "step": 24,
+      "names": [
+        "1:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "73238": {
+      "step": 24,
+      "names": [
+        "1:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "73239": {
+      "step": 24,
+      "names": [
+        "1:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "73199": {
+      "step": 24,
+      "names": [
+        "1:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "73421": {
+      "step": 24,
+      "names": [
+        "1:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "73424": {
+      "step": 24,
+      "names": [
+        "1:mixer_residual"
+      ],
+      "size": 768
+    },
+    "73429": {
+      "step": 24,
+      "names": [
+        "1:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "73430": {
+      "step": 24,
+      "names": [
+        "1:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "73436": {
+      "step": 24,
+      "names": [
+        "1:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "73437": {
+      "step": 24,
+      "names": [
+        "1:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "73440": {
+      "step": 24,
+      "names": [
+        "1:layer_output"
+      ],
+      "size": 768
+    },
+    "73445": {
+      "step": 24,
+      "names": [
+        "2:block_rms.input"
+      ],
+      "size": 1
+    },
+    "73446": {
+      "step": 24,
+      "names": [
+        "2:block_rms.output"
+      ],
+      "size": 1
+    },
+    "73459": {
+      "step": 24,
+      "names": [
+        "2:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "73460": {
+      "step": 24,
+      "names": [
+        "2:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "73456": {
+      "step": 24,
+      "names": [
+        "2:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "73461": {
+      "step": 24,
+      "names": [
+        "2:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "73462": {
+      "step": 24,
+      "names": [
+        "2:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "73463": {
+      "step": 24,
+      "names": [
+        "2:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "73457": {
+      "step": 24,
+      "names": [
+        "2:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "73464": {
+      "step": 24,
+      "names": [
+        "2:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "73458": {
+      "step": 24,
+      "names": [
+        "2:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "73465": {
+      "step": 24,
+      "names": [
+        "2:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "73469": {
+      "step": 24,
+      "names": [
+        "2:m3_delta_cos.input",
+        "2:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "73470": {
+      "step": 24,
+      "names": [
+        "2:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "73471": {
+      "step": 24,
+      "names": [
+        "2:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "73482": {
+      "step": 24,
+      "names": [
+        "2:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "73483": {
+      "step": 24,
+      "names": [
+        "2:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "73490": {
+      "step": 24,
+      "names": [
+        "2:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "73491": {
+      "step": 24,
+      "names": [
+        "2:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "73451": {
+      "step": 24,
+      "names": [
+        "2:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "73673": {
+      "step": 24,
+      "names": [
+        "2:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "73676": {
+      "step": 24,
+      "names": [
+        "2:mixer_residual"
+      ],
+      "size": 768
+    },
+    "73681": {
+      "step": 24,
+      "names": [
+        "2:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "73682": {
+      "step": 24,
+      "names": [
+        "2:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "73688": {
+      "step": 24,
+      "names": [
+        "2:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "73689": {
+      "step": 24,
+      "names": [
+        "2:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "73692": {
+      "step": 24,
+      "names": [
+        "2:layer_output"
+      ],
+      "size": 768
+    },
+    "73697": {
+      "step": 24,
+      "names": [
+        "3:block_rms.input"
+      ],
+      "size": 1
+    },
+    "73698": {
+      "step": 24,
+      "names": [
+        "3:block_rms.output"
+      ],
+      "size": 1
+    },
+    "73711": {
+      "step": 24,
+      "names": [
+        "3:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "73712": {
+      "step": 24,
+      "names": [
+        "3:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "73708": {
+      "step": 24,
+      "names": [
+        "3:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "73713": {
+      "step": 24,
+      "names": [
+        "3:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "73714": {
+      "step": 24,
+      "names": [
+        "3:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "73715": {
+      "step": 24,
+      "names": [
+        "3:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "73709": {
+      "step": 24,
+      "names": [
+        "3:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "73716": {
+      "step": 24,
+      "names": [
+        "3:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "73710": {
+      "step": 24,
+      "names": [
+        "3:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "73717": {
+      "step": 24,
+      "names": [
+        "3:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "73721": {
+      "step": 24,
+      "names": [
+        "3:m3_delta_cos.input",
+        "3:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "73722": {
+      "step": 24,
+      "names": [
+        "3:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "73723": {
+      "step": 24,
+      "names": [
+        "3:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "73734": {
+      "step": 24,
+      "names": [
+        "3:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "73735": {
+      "step": 24,
+      "names": [
+        "3:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "73742": {
+      "step": 24,
+      "names": [
+        "3:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "73743": {
+      "step": 24,
+      "names": [
+        "3:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "73703": {
+      "step": 24,
+      "names": [
+        "3:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "73925": {
+      "step": 24,
+      "names": [
+        "3:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "73928": {
+      "step": 24,
+      "names": [
+        "3:mixer_residual"
+      ],
+      "size": 768
+    },
+    "73933": {
+      "step": 24,
+      "names": [
+        "3:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "73934": {
+      "step": 24,
+      "names": [
+        "3:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "73940": {
+      "step": 24,
+      "names": [
+        "3:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "73941": {
+      "step": 24,
+      "names": [
+        "3:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "73944": {
+      "step": 24,
+      "names": [
+        "3:layer_output"
+      ],
+      "size": 768
+    },
+    "73949": {
+      "step": 24,
+      "names": [
+        "4:block_rms.input"
+      ],
+      "size": 1
+    },
+    "73950": {
+      "step": 24,
+      "names": [
+        "4:block_rms.output"
+      ],
+      "size": 1
+    },
+    "73963": {
+      "step": 24,
+      "names": [
+        "4:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "73964": {
+      "step": 24,
+      "names": [
+        "4:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "73960": {
+      "step": 24,
+      "names": [
+        "4:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "73965": {
+      "step": 24,
+      "names": [
+        "4:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "73966": {
+      "step": 24,
+      "names": [
+        "4:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "73967": {
+      "step": 24,
+      "names": [
+        "4:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "73961": {
+      "step": 24,
+      "names": [
+        "4:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "73968": {
+      "step": 24,
+      "names": [
+        "4:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "73962": {
+      "step": 24,
+      "names": [
+        "4:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "73969": {
+      "step": 24,
+      "names": [
+        "4:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "73973": {
+      "step": 24,
+      "names": [
+        "4:m3_delta_cos.input",
+        "4:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "73974": {
+      "step": 24,
+      "names": [
+        "4:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "73975": {
+      "step": 24,
+      "names": [
+        "4:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "73986": {
+      "step": 24,
+      "names": [
+        "4:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "73987": {
+      "step": 24,
+      "names": [
+        "4:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "73994": {
+      "step": 24,
+      "names": [
+        "4:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "73995": {
+      "step": 24,
+      "names": [
+        "4:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "73955": {
+      "step": 24,
+      "names": [
+        "4:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "74177": {
+      "step": 24,
+      "names": [
+        "4:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "74180": {
+      "step": 24,
+      "names": [
+        "4:mixer_residual"
+      ],
+      "size": 768
+    },
+    "74185": {
+      "step": 24,
+      "names": [
+        "4:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "74186": {
+      "step": 24,
+      "names": [
+        "4:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "74192": {
+      "step": 24,
+      "names": [
+        "4:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "74193": {
+      "step": 24,
+      "names": [
+        "4:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "74196": {
+      "step": 24,
+      "names": [
+        "4:layer_output"
+      ],
+      "size": 768
+    },
+    "74201": {
+      "step": 24,
+      "names": [
+        "5:block_rms.input"
+      ],
+      "size": 1
+    },
+    "74202": {
+      "step": 24,
+      "names": [
+        "5:block_rms.output"
+      ],
+      "size": 1
+    },
+    "74215": {
+      "step": 24,
+      "names": [
+        "5:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "74216": {
+      "step": 24,
+      "names": [
+        "5:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "74212": {
+      "step": 24,
+      "names": [
+        "5:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "74217": {
+      "step": 24,
+      "names": [
+        "5:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "74218": {
+      "step": 24,
+      "names": [
+        "5:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "74219": {
+      "step": 24,
+      "names": [
+        "5:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "74213": {
+      "step": 24,
+      "names": [
+        "5:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "74220": {
+      "step": 24,
+      "names": [
+        "5:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "74214": {
+      "step": 24,
+      "names": [
+        "5:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "74221": {
+      "step": 24,
+      "names": [
+        "5:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "74225": {
+      "step": 24,
+      "names": [
+        "5:m3_delta_cos.input",
+        "5:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "74226": {
+      "step": 24,
+      "names": [
+        "5:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "74227": {
+      "step": 24,
+      "names": [
+        "5:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "74238": {
+      "step": 24,
+      "names": [
+        "5:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "74239": {
+      "step": 24,
+      "names": [
+        "5:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "74246": {
+      "step": 24,
+      "names": [
+        "5:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "74247": {
+      "step": 24,
+      "names": [
+        "5:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "74207": {
+      "step": 24,
+      "names": [
+        "5:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "74429": {
+      "step": 24,
+      "names": [
+        "5:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "74432": {
+      "step": 24,
+      "names": [
+        "5:mixer_residual"
+      ],
+      "size": 768
+    },
+    "74437": {
+      "step": 24,
+      "names": [
+        "5:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "74438": {
+      "step": 24,
+      "names": [
+        "5:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "74444": {
+      "step": 24,
+      "names": [
+        "5:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "74445": {
+      "step": 24,
+      "names": [
+        "5:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "74448": {
+      "step": 24,
+      "names": [
+        "5:layer_output"
+      ],
+      "size": 768
+    },
+    "74453": {
+      "step": 24,
+      "names": [
+        "6:block_rms.input"
+      ],
+      "size": 1
+    },
+    "74454": {
+      "step": 24,
+      "names": [
+        "6:block_rms.output"
+      ],
+      "size": 1
+    },
+    "74467": {
+      "step": 24,
+      "names": [
+        "6:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "74468": {
+      "step": 24,
+      "names": [
+        "6:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "74464": {
+      "step": 24,
+      "names": [
+        "6:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "74469": {
+      "step": 24,
+      "names": [
+        "6:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "74470": {
+      "step": 24,
+      "names": [
+        "6:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "74471": {
+      "step": 24,
+      "names": [
+        "6:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "74465": {
+      "step": 24,
+      "names": [
+        "6:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "74472": {
+      "step": 24,
+      "names": [
+        "6:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "74466": {
+      "step": 24,
+      "names": [
+        "6:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "74473": {
+      "step": 24,
+      "names": [
+        "6:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "74477": {
+      "step": 24,
+      "names": [
+        "6:m3_delta_cos.input",
+        "6:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "74478": {
+      "step": 24,
+      "names": [
+        "6:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "74479": {
+      "step": 24,
+      "names": [
+        "6:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "74490": {
+      "step": 24,
+      "names": [
+        "6:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "74491": {
+      "step": 24,
+      "names": [
+        "6:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "74498": {
+      "step": 24,
+      "names": [
+        "6:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "74499": {
+      "step": 24,
+      "names": [
+        "6:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "74459": {
+      "step": 24,
+      "names": [
+        "6:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "74681": {
+      "step": 24,
+      "names": [
+        "6:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "74684": {
+      "step": 24,
+      "names": [
+        "6:mixer_residual"
+      ],
+      "size": 768
+    },
+    "74689": {
+      "step": 24,
+      "names": [
+        "6:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "74690": {
+      "step": 24,
+      "names": [
+        "6:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "74696": {
+      "step": 24,
+      "names": [
+        "6:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "74697": {
+      "step": 24,
+      "names": [
+        "6:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "74700": {
+      "step": 24,
+      "names": [
+        "6:layer_output"
+      ],
+      "size": 768
+    },
+    "74705": {
+      "step": 24,
+      "names": [
+        "7:block_rms.input"
+      ],
+      "size": 1
+    },
+    "74706": {
+      "step": 24,
+      "names": [
+        "7:block_rms.output"
+      ],
+      "size": 1
+    },
+    "74719": {
+      "step": 24,
+      "names": [
+        "7:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "74720": {
+      "step": 24,
+      "names": [
+        "7:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "74716": {
+      "step": 24,
+      "names": [
+        "7:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "74721": {
+      "step": 24,
+      "names": [
+        "7:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "74722": {
+      "step": 24,
+      "names": [
+        "7:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "74723": {
+      "step": 24,
+      "names": [
+        "7:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "74717": {
+      "step": 24,
+      "names": [
+        "7:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "74724": {
+      "step": 24,
+      "names": [
+        "7:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "74718": {
+      "step": 24,
+      "names": [
+        "7:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "74725": {
+      "step": 24,
+      "names": [
+        "7:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "74729": {
+      "step": 24,
+      "names": [
+        "7:m3_delta_cos.input",
+        "7:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "74730": {
+      "step": 24,
+      "names": [
+        "7:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "74731": {
+      "step": 24,
+      "names": [
+        "7:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "74742": {
+      "step": 24,
+      "names": [
+        "7:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "74743": {
+      "step": 24,
+      "names": [
+        "7:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "74750": {
+      "step": 24,
+      "names": [
+        "7:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "74751": {
+      "step": 24,
+      "names": [
+        "7:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "74711": {
+      "step": 24,
+      "names": [
+        "7:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "74933": {
+      "step": 24,
+      "names": [
+        "7:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "74936": {
+      "step": 24,
+      "names": [
+        "7:mixer_residual"
+      ],
+      "size": 768
+    },
+    "74941": {
+      "step": 24,
+      "names": [
+        "7:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "74942": {
+      "step": 24,
+      "names": [
+        "7:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "74948": {
+      "step": 24,
+      "names": [
+        "7:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "74949": {
+      "step": 24,
+      "names": [
+        "7:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "74952": {
+      "step": 24,
+      "names": [
+        "7:layer_output"
+      ],
+      "size": 768
+    },
+    "74957": {
+      "step": 24,
+      "names": [
+        "8:block_rms.input"
+      ],
+      "size": 1
+    },
+    "74958": {
+      "step": 24,
+      "names": [
+        "8:block_rms.output"
+      ],
+      "size": 1
+    },
+    "74971": {
+      "step": 24,
+      "names": [
+        "8:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "74972": {
+      "step": 24,
+      "names": [
+        "8:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "74968": {
+      "step": 24,
+      "names": [
+        "8:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "74973": {
+      "step": 24,
+      "names": [
+        "8:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "74974": {
+      "step": 24,
+      "names": [
+        "8:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "74975": {
+      "step": 24,
+      "names": [
+        "8:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "74969": {
+      "step": 24,
+      "names": [
+        "8:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "74976": {
+      "step": 24,
+      "names": [
+        "8:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "74970": {
+      "step": 24,
+      "names": [
+        "8:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "74977": {
+      "step": 24,
+      "names": [
+        "8:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "74981": {
+      "step": 24,
+      "names": [
+        "8:m3_delta_cos.input",
+        "8:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "74982": {
+      "step": 24,
+      "names": [
+        "8:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "74983": {
+      "step": 24,
+      "names": [
+        "8:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "74994": {
+      "step": 24,
+      "names": [
+        "8:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "74995": {
+      "step": 24,
+      "names": [
+        "8:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "75002": {
+      "step": 24,
+      "names": [
+        "8:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "75003": {
+      "step": 24,
+      "names": [
+        "8:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "74963": {
+      "step": 24,
+      "names": [
+        "8:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "75185": {
+      "step": 24,
+      "names": [
+        "8:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "75188": {
+      "step": 24,
+      "names": [
+        "8:mixer_residual"
+      ],
+      "size": 768
+    },
+    "75193": {
+      "step": 24,
+      "names": [
+        "8:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "75194": {
+      "step": 24,
+      "names": [
+        "8:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "75200": {
+      "step": 24,
+      "names": [
+        "8:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "75201": {
+      "step": 24,
+      "names": [
+        "8:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "75204": {
+      "step": 24,
+      "names": [
+        "8:layer_output"
+      ],
+      "size": 768
+    },
+    "75209": {
+      "step": 24,
+      "names": [
+        "9:block_rms.input"
+      ],
+      "size": 1
+    },
+    "75210": {
+      "step": 24,
+      "names": [
+        "9:block_rms.output"
+      ],
+      "size": 1
+    },
+    "75223": {
+      "step": 24,
+      "names": [
+        "9:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "75224": {
+      "step": 24,
+      "names": [
+        "9:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "75220": {
+      "step": 24,
+      "names": [
+        "9:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "75225": {
+      "step": 24,
+      "names": [
+        "9:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "75226": {
+      "step": 24,
+      "names": [
+        "9:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "75227": {
+      "step": 24,
+      "names": [
+        "9:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "75221": {
+      "step": 24,
+      "names": [
+        "9:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "75228": {
+      "step": 24,
+      "names": [
+        "9:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "75222": {
+      "step": 24,
+      "names": [
+        "9:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "75229": {
+      "step": 24,
+      "names": [
+        "9:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "75233": {
+      "step": 24,
+      "names": [
+        "9:m3_delta_cos.input",
+        "9:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "75234": {
+      "step": 24,
+      "names": [
+        "9:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "75235": {
+      "step": 24,
+      "names": [
+        "9:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "75246": {
+      "step": 24,
+      "names": [
+        "9:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "75247": {
+      "step": 24,
+      "names": [
+        "9:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "75254": {
+      "step": 24,
+      "names": [
+        "9:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "75255": {
+      "step": 24,
+      "names": [
+        "9:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "75215": {
+      "step": 24,
+      "names": [
+        "9:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "75437": {
+      "step": 24,
+      "names": [
+        "9:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "75440": {
+      "step": 24,
+      "names": [
+        "9:mixer_residual"
+      ],
+      "size": 768
+    },
+    "75445": {
+      "step": 24,
+      "names": [
+        "9:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "75446": {
+      "step": 24,
+      "names": [
+        "9:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "75452": {
+      "step": 24,
+      "names": [
+        "9:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "75453": {
+      "step": 24,
+      "names": [
+        "9:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "75456": {
+      "step": 24,
+      "names": [
+        "9:layer_output"
+      ],
+      "size": 768
+    },
+    "75461": {
+      "step": 24,
+      "names": [
+        "10:block_rms.input"
+      ],
+      "size": 1
+    },
+    "75462": {
+      "step": 24,
+      "names": [
+        "10:block_rms.output"
+      ],
+      "size": 1
+    },
+    "75475": {
+      "step": 24,
+      "names": [
+        "10:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "75476": {
+      "step": 24,
+      "names": [
+        "10:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "75472": {
+      "step": 24,
+      "names": [
+        "10:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "75477": {
+      "step": 24,
+      "names": [
+        "10:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "75478": {
+      "step": 24,
+      "names": [
+        "10:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "75479": {
+      "step": 24,
+      "names": [
+        "10:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "75473": {
+      "step": 24,
+      "names": [
+        "10:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "75480": {
+      "step": 24,
+      "names": [
+        "10:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "75474": {
+      "step": 24,
+      "names": [
+        "10:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "75481": {
+      "step": 24,
+      "names": [
+        "10:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "75485": {
+      "step": 24,
+      "names": [
+        "10:m3_delta_cos.input",
+        "10:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "75486": {
+      "step": 24,
+      "names": [
+        "10:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "75487": {
+      "step": 24,
+      "names": [
+        "10:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "75498": {
+      "step": 24,
+      "names": [
+        "10:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "75499": {
+      "step": 24,
+      "names": [
+        "10:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "75506": {
+      "step": 24,
+      "names": [
+        "10:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "75507": {
+      "step": 24,
+      "names": [
+        "10:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "75467": {
+      "step": 24,
+      "names": [
+        "10:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "75689": {
+      "step": 24,
+      "names": [
+        "10:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "75692": {
+      "step": 24,
+      "names": [
+        "10:mixer_residual"
+      ],
+      "size": 768
+    },
+    "75697": {
+      "step": 24,
+      "names": [
+        "10:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "75698": {
+      "step": 24,
+      "names": [
+        "10:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "75704": {
+      "step": 24,
+      "names": [
+        "10:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "75705": {
+      "step": 24,
+      "names": [
+        "10:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "75708": {
+      "step": 24,
+      "names": [
+        "10:layer_output"
+      ],
+      "size": 768
+    },
+    "75713": {
+      "step": 24,
+      "names": [
+        "11:block_rms.input"
+      ],
+      "size": 1
+    },
+    "75714": {
+      "step": 24,
+      "names": [
+        "11:block_rms.output"
+      ],
+      "size": 1
+    },
+    "75727": {
+      "step": 24,
+      "names": [
+        "11:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "75728": {
+      "step": 24,
+      "names": [
+        "11:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "75724": {
+      "step": 24,
+      "names": [
+        "11:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "75729": {
+      "step": 24,
+      "names": [
+        "11:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "75730": {
+      "step": 24,
+      "names": [
+        "11:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "75731": {
+      "step": 24,
+      "names": [
+        "11:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "75725": {
+      "step": 24,
+      "names": [
+        "11:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "75732": {
+      "step": 24,
+      "names": [
+        "11:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "75726": {
+      "step": 24,
+      "names": [
+        "11:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "75733": {
+      "step": 24,
+      "names": [
+        "11:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "75737": {
+      "step": 24,
+      "names": [
+        "11:m3_delta_cos.input",
+        "11:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "75738": {
+      "step": 24,
+      "names": [
+        "11:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "75739": {
+      "step": 24,
+      "names": [
+        "11:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "75750": {
+      "step": 24,
+      "names": [
+        "11:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "75751": {
+      "step": 24,
+      "names": [
+        "11:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "75758": {
+      "step": 24,
+      "names": [
+        "11:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "75759": {
+      "step": 24,
+      "names": [
+        "11:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "75719": {
+      "step": 24,
+      "names": [
+        "11:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "75941": {
+      "step": 24,
+      "names": [
+        "11:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "75944": {
+      "step": 24,
+      "names": [
+        "11:mixer_residual"
+      ],
+      "size": 768
+    },
+    "75949": {
+      "step": 24,
+      "names": [
+        "11:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "75950": {
+      "step": 24,
+      "names": [
+        "11:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "75956": {
+      "step": 24,
+      "names": [
+        "11:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "75957": {
+      "step": 24,
+      "names": [
+        "11:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "75960": {
+      "step": 24,
+      "names": [
+        "11:layer_output"
+      ],
+      "size": 768
+    },
+    "75965": {
+      "step": 24,
+      "names": [
+        "-1:final_rms.input"
+      ],
+      "size": 1
+    },
+    "75966": {
+      "step": 24,
+      "names": [
+        "-1:final_rms.output"
+      ],
+      "size": 1
+    },
+    "75969": {
+      "step": 24,
+      "names": [
+        "final_hidden"
+      ],
+      "size": 768
+    },
+    "72971": {
+      "step": 24,
+      "names": [
+        "0:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "72974": {
+      "step": 24,
+      "names": [
+        "0:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "73010": {
+      "step": 24,
+      "names": [
+        "0:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "72948": {
+      "step": 24,
+      "names": [
+        "0:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "73053": {
+      "step": 24,
+      "names": [
+        "0:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "73073": {
+      "step": 24,
+      "names": [
+        "0:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "73093": {
+      "step": 24,
+      "names": [
+        "0:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "73113": {
+      "step": 24,
+      "names": [
+        "0:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "73133": {
+      "step": 24,
+      "names": [
+        "0:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "73153": {
+      "step": 24,
+      "names": [
+        "0:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "73223": {
+      "step": 24,
+      "names": [
+        "1:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "73226": {
+      "step": 24,
+      "names": [
+        "1:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "73262": {
+      "step": 24,
+      "names": [
+        "1:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "73200": {
+      "step": 24,
+      "names": [
+        "1:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "73305": {
+      "step": 24,
+      "names": [
+        "1:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "73325": {
+      "step": 24,
+      "names": [
+        "1:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "73345": {
+      "step": 24,
+      "names": [
+        "1:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "73365": {
+      "step": 24,
+      "names": [
+        "1:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "73385": {
+      "step": 24,
+      "names": [
+        "1:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "73405": {
+      "step": 24,
+      "names": [
+        "1:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "73475": {
+      "step": 24,
+      "names": [
+        "2:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "73478": {
+      "step": 24,
+      "names": [
+        "2:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "73514": {
+      "step": 24,
+      "names": [
+        "2:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "73452": {
+      "step": 24,
+      "names": [
+        "2:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "73557": {
+      "step": 24,
+      "names": [
+        "2:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "73577": {
+      "step": 24,
+      "names": [
+        "2:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "73597": {
+      "step": 24,
+      "names": [
+        "2:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "73617": {
+      "step": 24,
+      "names": [
+        "2:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "73637": {
+      "step": 24,
+      "names": [
+        "2:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "73657": {
+      "step": 24,
+      "names": [
+        "2:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "73727": {
+      "step": 24,
+      "names": [
+        "3:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "73730": {
+      "step": 24,
+      "names": [
+        "3:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "73766": {
+      "step": 24,
+      "names": [
+        "3:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "73704": {
+      "step": 24,
+      "names": [
+        "3:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "73809": {
+      "step": 24,
+      "names": [
+        "3:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "73829": {
+      "step": 24,
+      "names": [
+        "3:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "73849": {
+      "step": 24,
+      "names": [
+        "3:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "73869": {
+      "step": 24,
+      "names": [
+        "3:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "73889": {
+      "step": 24,
+      "names": [
+        "3:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "73909": {
+      "step": 24,
+      "names": [
+        "3:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "73979": {
+      "step": 24,
+      "names": [
+        "4:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "73982": {
+      "step": 24,
+      "names": [
+        "4:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "74018": {
+      "step": 24,
+      "names": [
+        "4:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "73956": {
+      "step": 24,
+      "names": [
+        "4:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "74061": {
+      "step": 24,
+      "names": [
+        "4:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "74081": {
+      "step": 24,
+      "names": [
+        "4:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "74101": {
+      "step": 24,
+      "names": [
+        "4:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "74121": {
+      "step": 24,
+      "names": [
+        "4:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "74141": {
+      "step": 24,
+      "names": [
+        "4:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "74161": {
+      "step": 24,
+      "names": [
+        "4:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "74231": {
+      "step": 24,
+      "names": [
+        "5:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "74234": {
+      "step": 24,
+      "names": [
+        "5:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "74270": {
+      "step": 24,
+      "names": [
+        "5:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "74208": {
+      "step": 24,
+      "names": [
+        "5:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "74313": {
+      "step": 24,
+      "names": [
+        "5:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "74333": {
+      "step": 24,
+      "names": [
+        "5:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "74353": {
+      "step": 24,
+      "names": [
+        "5:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "74373": {
+      "step": 24,
+      "names": [
+        "5:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "74393": {
+      "step": 24,
+      "names": [
+        "5:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "74413": {
+      "step": 24,
+      "names": [
+        "5:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "74483": {
+      "step": 24,
+      "names": [
+        "6:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "74486": {
+      "step": 24,
+      "names": [
+        "6:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "74522": {
+      "step": 24,
+      "names": [
+        "6:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "74460": {
+      "step": 24,
+      "names": [
+        "6:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "74565": {
+      "step": 24,
+      "names": [
+        "6:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "74585": {
+      "step": 24,
+      "names": [
+        "6:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "74605": {
+      "step": 24,
+      "names": [
+        "6:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "74625": {
+      "step": 24,
+      "names": [
+        "6:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "74645": {
+      "step": 24,
+      "names": [
+        "6:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "74665": {
+      "step": 24,
+      "names": [
+        "6:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "74735": {
+      "step": 24,
+      "names": [
+        "7:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "74738": {
+      "step": 24,
+      "names": [
+        "7:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "74774": {
+      "step": 24,
+      "names": [
+        "7:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "74712": {
+      "step": 24,
+      "names": [
+        "7:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "74817": {
+      "step": 24,
+      "names": [
+        "7:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "74837": {
+      "step": 24,
+      "names": [
+        "7:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "74857": {
+      "step": 24,
+      "names": [
+        "7:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "74877": {
+      "step": 24,
+      "names": [
+        "7:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "74897": {
+      "step": 24,
+      "names": [
+        "7:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "74917": {
+      "step": 24,
+      "names": [
+        "7:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "74987": {
+      "step": 24,
+      "names": [
+        "8:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "74990": {
+      "step": 24,
+      "names": [
+        "8:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "75026": {
+      "step": 24,
+      "names": [
+        "8:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "74964": {
+      "step": 24,
+      "names": [
+        "8:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "75069": {
+      "step": 24,
+      "names": [
+        "8:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "75089": {
+      "step": 24,
+      "names": [
+        "8:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "75109": {
+      "step": 24,
+      "names": [
+        "8:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "75129": {
+      "step": 24,
+      "names": [
+        "8:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "75149": {
+      "step": 24,
+      "names": [
+        "8:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "75169": {
+      "step": 24,
+      "names": [
+        "8:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "75239": {
+      "step": 24,
+      "names": [
+        "9:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "75242": {
+      "step": 24,
+      "names": [
+        "9:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "75278": {
+      "step": 24,
+      "names": [
+        "9:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "75216": {
+      "step": 24,
+      "names": [
+        "9:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "75321": {
+      "step": 24,
+      "names": [
+        "9:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "75341": {
+      "step": 24,
+      "names": [
+        "9:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "75361": {
+      "step": 24,
+      "names": [
+        "9:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "75381": {
+      "step": 24,
+      "names": [
+        "9:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "75401": {
+      "step": 24,
+      "names": [
+        "9:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "75421": {
+      "step": 24,
+      "names": [
+        "9:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "75491": {
+      "step": 24,
+      "names": [
+        "10:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "75494": {
+      "step": 24,
+      "names": [
+        "10:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "75530": {
+      "step": 24,
+      "names": [
+        "10:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "75468": {
+      "step": 24,
+      "names": [
+        "10:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "75573": {
+      "step": 24,
+      "names": [
+        "10:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "75593": {
+      "step": 24,
+      "names": [
+        "10:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "75613": {
+      "step": 24,
+      "names": [
+        "10:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "75633": {
+      "step": 24,
+      "names": [
+        "10:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "75653": {
+      "step": 24,
+      "names": [
+        "10:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "75673": {
+      "step": 24,
+      "names": [
+        "10:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "75743": {
+      "step": 24,
+      "names": [
+        "11:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "75746": {
+      "step": 24,
+      "names": [
+        "11:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "75782": {
+      "step": 24,
+      "names": [
+        "11:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "75720": {
+      "step": 24,
+      "names": [
+        "11:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "75825": {
+      "step": 24,
+      "names": [
+        "11:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "75845": {
+      "step": 24,
+      "names": [
+        "11:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "75865": {
+      "step": 24,
+      "names": [
+        "11:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "75885": {
+      "step": 24,
+      "names": [
+        "11:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "75905": {
+      "step": 24,
+      "names": [
+        "11:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "75925": {
+      "step": 24,
+      "names": [
+        "11:carry.ssm.5"
+      ],
+      "size": 32768
+    }
+  }
+}

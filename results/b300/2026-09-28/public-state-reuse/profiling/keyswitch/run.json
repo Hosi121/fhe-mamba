@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790534717.5482907,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "${REPO}/.venv/bin/python",
+      "${REPO}/experiments/profiling/ncu_summary.py",
+      "${REPO}/results/b300/2026-09-28/long-generation/profiling/ncu-keyswitch/metrics.csv",
+      "--output",
+      "${LOCAL_STUDY}/pipeline-keyswitch/counters.json",
+      "--metric",
+      "sm__issue_active.avg.pct_of_peak_sustained_elapsed",
+      "--metric",
+      "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "--metric",
+      "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed",
+      "--metric",
+      "lts__throughput.avg.pct_of_peak_sustained_elapsed"
+    ],
+    "cwd": "${REPO}",
+    "inputs": {
+      "metrics": "${REPO}/results/b300/2026-09-28/long-generation/profiling/ncu-keyswitch/metrics.csv",
+      "analyzer": "${REPO}/experiments/profiling/ncu_summary.py"
+    },
+    "timeout_seconds": 30
+  },
+  "inputs": {
+    "metrics": {
+      "bytes": 52576,
+      "sha256": "7ed67a2f19ca66189645a7097d89fb7db7413bcf0bc21ed1eb66a34bf4c230c3"
+    },
+    "analyzer": {
+      "bytes": 3099,
+      "sha256": "1dfb396fe4a9a5bc978df3ad6dad92568b614d3c82738cfebe41267bc4eee3fe"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.00012881902512162924,
+  "wall_seconds": 0.03371560899540782
+}

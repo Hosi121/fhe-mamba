@@ -1,0 +1,32 @@
+{
+  "diagnostic_only": true,
+  "original_program_sha256": "464380aef53bfaefe2b4f137a2777299f62e4eb660101bea4b3886ed790ad24e",
+  "observation_prefix_sha256": "4f71d12263c3a4e4b714f8d38226ad4b961947ccaf1330ddd7dbeb74838617c0",
+  "observation_order": 625,
+  "operation": "refresh_group",
+  "parent_nodes": [
+    75898,
+    75904
+  ],
+  "inputs": [
+    {
+      "node": 75898,
+      "event": "before_refresh",
+      "level": 35,
+      "degree": 2,
+      "size": 32768,
+      "bound": 2.233438514170856
+    },
+    {
+      "node": 75904,
+      "event": "before_refresh",
+      "level": 35,
+      "degree": 2,
+      "size": 32768,
+      "bound": 10.843675913988504
+    }
+  ],
+  "original_local_error": 0.053978301484042215,
+  "case_sha256": "44b5936b3e9340e65cd71bbefe5f823f37b7c240b4c85aaa0482974045531638",
+  "scope": "Both full-packing companions retained; original RNS noise and keys not retained"
+}

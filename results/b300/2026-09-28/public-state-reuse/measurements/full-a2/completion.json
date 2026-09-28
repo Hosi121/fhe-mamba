@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/full-a2",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790537169.318021
+}

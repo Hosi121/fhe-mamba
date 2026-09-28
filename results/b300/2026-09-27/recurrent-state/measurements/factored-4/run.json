@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790513376.6768286,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--name",
+      "cipher-recurrent-factored-4-r2",
+      "--user",
+      "${UID}:${GID}",
+      "--cpuset-cpus",
+      "64-68",
+      "--cpuset-mems",
+      "2",
+      "--shm-size",
+      "1g",
+      "--volume",
+      "${BENCH_ROOT}:/workspace:ro",
+      "--volume",
+      "${BENCH_ROOT}/b300-mamba3-20260926:/work:ro",
+      "--volume",
+      "${STUDY}/r2:/study",
+      "--volume",
+      "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a:/workspace/install/openfhe-fides/lib/libOPENFHEcore_static.a:ro",
+      "--volume",
+      "${BASELINE}/dependencies/lib/fideslib.a:/work/install/fideslib/lib/fideslib.a:ro",
+      "--volume",
+      "${BASELINE}:/baseline:ro",
+      "--workdir",
+      "/study",
+      "--env",
+      "OMP_NUM_THREADS=4",
+      "--env",
+      "OMP_PROC_BIND=true",
+      "--env",
+      "OMP_PLACES={64},{66},{67},{68}",
+      "--env",
+      "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+      "--gpus",
+      "device=4",
+      "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+      "/baseline/build/native-r3/packed_fideslib",
+      "/study/payload/factored-4/program.txt",
+      "/study/factored-4/native.json",
+      ".001",
+      ".001",
+      "--planned-refresh",
+      "--batch-refresh",
+      "--inplace-ops",
+      "--gpu-plaintext-ntt",
+      "--profile-evaluation",
+      "--naf-rotations",
+      "--reuse-dead-inputs",
+      "--direct-plaintext-upload",
+      "--compact-weights",
+      "--move-plaintext-coefficients",
+      "--borrow-plaintext-upload",
+      "--bsgs-routing-stages",
+      "--cache-plaintexts",
+      "--frontier-refresh",
+      "--s2c-first",
+      "--gpu-plaintext-rns",
+      "--hoist-rotations",
+      "--share-chebyshev",
+      "--prefetch-plaintexts",
+      "--prefetch-workers",
+      "2",
+      "--security",
+      "128-classic",
+      "--security-digits",
+      "4",
+      "--gpu-addend-rns",
+      "--plaintext-cache-capacity",
+      "2048",
+      "--merge-refresh-correction",
+      "--gpu-plaintext-fft"
+    ],
+    "cwd": "${STUDY}/r2",
+    "inputs": {
+      "source": "${STUDY}/r2/source.tar.gz",
+      "native_source": "${BASELINE}/source-r3.tar.gz",
+      "openfhe_core": "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "fideslib": "${BASELINE}/dependencies/lib/fideslib.a",
+      "binary": "${BASELINE}/build/native-r3/packed_fideslib",
+      "program": "${STUDY}/r2/payload/factored-4/program.txt",
+      "fixture": "${STUDY}/r2/payload/factored-4/fixture.npz",
+      "manifest": "${STUDY}/r2/payload/factored-4/manifest.json",
+      "trace": "${STUDY}/r2/payload/trace/trace.npz"
+    },
+    "timeout_seconds": 1800
+  },
+  "inputs": {
+    "source": {
+      "bytes": 93068,
+      "sha256": "0eabceefa1f3026f903a4c7b4c3c6d97d355cdb0fb13dbe95103957c9708139e"
+    },
+    "native_source": {
+      "bytes": 313139,
+      "sha256": "77594f3245eae6e834eec57f222c92df1fc47d77f9a69a6556e542f7c2b12dd7"
+    },
+    "openfhe_core": {
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    "fideslib": {
+      "bytes": 42313230,
+      "sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad"
+    },
+    "binary": {
+      "bytes": 17441856,
+      "sha256": "26c81431ae9495e04e520830a67b454c3ebc33bc67ae9e331aca7ba3acff3f78"
+    },
+    "program": {
+      "bytes": 969645,
+      "sha256": "0a1b49c5f0f482d0ebf01b5da189da5b4c64f49827ec034fb28a99b0b4c07bcc"
+    },
+    "fixture": {
+      "bytes": 47476,
+      "sha256": "22625c37ed750c457a778253cc5df2406468a411288b147152c1fd248d6833f1"
+    },
+    "manifest": {
+      "bytes": 5659,
+      "sha256": "dd62f0e10f793502b73de6fabead48095671ea3fc598030d8203b7d624ff4704"
+    },
+    "trace": {
+      "bytes": 3946985,
+      "sha256": "f37ba105366b2002d39f9e69ef0ddfafe17017c8c9743dc483690bfd6f333b7d"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.0004057630430907011,
+  "wall_seconds": 163.9228526491206
+}

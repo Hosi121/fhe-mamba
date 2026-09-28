@@ -1,0 +1,3807 @@
+{
+  "schema": "fhemamba-packed-diagnostic-v1",
+  "diagnostic_only": true,
+  "manifest_sha256": "1bdd8d0fc024e7e377d2d0b3ed1e0b7934bff68473d65c47b59617f6576e6d42",
+  "program_sha256": "464380aef53bfaefe2b4f137a2777299f62e4eb660101bea4b3886ed790ad24e",
+  "references_sha256": "e21c563f77e6afb13f58f80e31574425a25647e144ee2552842711f7db2a97b9",
+  "node_prefix_sha256": "befed77cec5d3a6a5d9c8d87a27a0de8d34eafee6ec58681fb632ebdc30f9417",
+  "node_count": 75970,
+  "steps": [
+    23,
+    24
+  ],
+  "all_nodes": true,
+  "node_ranges": [
+    [
+      72674,
+      72936
+    ],
+    [
+      75708,
+      75970
+    ]
+  ],
+  "bound_rebindings": 46270,
+  "max_relative_bound_drift": 1.3532387867877422e-14,
+  "output_nodes": [
+    3153,
+    6187,
+    9221,
+    12255,
+    15289,
+    18323,
+    21357,
+    24391,
+    27425,
+    30459,
+    33493,
+    36527,
+    39561,
+    42595,
+    45629,
+    48663,
+    51697,
+    54731,
+    57765,
+    60799,
+    63833,
+    66867,
+    69901,
+    72935,
+    75969
+  ],
+  "references": {
+    "72674": {
+      "step": 23,
+      "names": [
+        "add",
+        "10:layer_output"
+      ],
+      "size": 768
+    },
+    "72675": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72676": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1024
+    },
+    "72677": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "72678": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "72679": {
+      "step": 23,
+      "names": [
+        "addp",
+        "11:block_rms.input"
+      ],
+      "size": 1
+    },
+    "72680": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:block_rms.output"
+      ],
+      "size": 1
+    },
+    "72681": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "72682": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72683": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "72684": {
+      "step": 23,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 3432
+    },
+    "72685": {
+      "step": 23,
+      "names": [
+        "gather",
+        "11:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "72686": {
+      "step": 23,
+      "names": [
+        "gather",
+        "11:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "72687": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 128
+    },
+    "72688": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 128
+    },
+    "72689": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 24
+    },
+    "72690": {
+      "step": 23,
+      "names": [
+        "gather",
+        "11:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "72691": {
+      "step": 23,
+      "names": [
+        "gather",
+        "11:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "72692": {
+      "step": 23,
+      "names": [
+        "gather",
+        "11:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "72693": {
+      "step": 23,
+      "names": [
+        "addp",
+        "11:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "72694": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "72695": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "72696": {
+      "step": 23,
+      "names": [
+        "mul",
+        "11:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "72697": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "72698": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "72699": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "72700": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "72701": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "72702": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72703": {
+      "step": 23,
+      "names": [
+        "mulp",
+        "11:m3_delta_cos.input",
+        "11:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "72704": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "72705": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "72706": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72707": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72708": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "72709": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "72710": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72711": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72712": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "72713": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "72714": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "72715": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "72716": {
+      "step": 23,
+      "names": [
+        "addp",
+        "11:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "72717": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "72718": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 128
+    },
+    "72719": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "72720": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 128
+    },
+    "72721": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "72722": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "72723": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "72724": {
+      "step": 23,
+      "names": [
+        "addp",
+        "11:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "72725": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "72726": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 128
+    },
+    "72727": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "72728": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 128
+    },
+    "72729": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 3072
+    },
+    "72730": {
+      "step": 23,
+      "names": [
+        "addp"
+      ],
+      "size": 3072
+    },
+    "72731": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 3072
+    },
+    "72732": {
+      "step": 23,
+      "names": [
+        "addp"
+      ],
+      "size": 3072
+    },
+    "72733": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "72734": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "72735": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72736": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72737": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "72738": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "72739": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72740": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72741": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "72742": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72743": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72744": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72745": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 1536
+    },
+    "72746": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "72747": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "72748": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "72749": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "72750": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "72751": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72752": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72753": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "72754": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "72755": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72756": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72757": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "72758": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72759": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72760": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72761": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 1536
+    },
+    "72762": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "72763": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "72764": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 3072
+    },
+    "72765": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 24
+    },
+    "72766": {
+      "step": 23,
+      "names": [
+        "addp"
+      ],
+      "size": 24
+    },
+    "72767": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 24
+    },
+    "72768": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 24
+    },
+    "72769": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 24
+    },
+    "72770": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 1536
+    },
+    "72771": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 1536
+    },
+    "72772": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "72773": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 1536
+    },
+    "72774": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "72775": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "72776": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72777": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72778": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72779": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72780": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72781": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "72782": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72783": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72784": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72785": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72786": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72787": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "72788": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72789": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72790": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72791": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "72792": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72793": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72794": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "72795": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "72796": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72797": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72798": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72799": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72800": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72801": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "72802": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72803": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72804": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72805": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72806": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72807": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "72808": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72809": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72810": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72811": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "72812": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72813": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72814": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "72815": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "72816": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72817": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72818": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72819": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72820": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72821": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "72822": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72823": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72824": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72825": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72826": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72827": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "72828": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72829": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72830": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72831": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "72832": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72833": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72834": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "72835": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "72836": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72837": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72838": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72839": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72840": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72841": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "72842": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72843": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72844": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72845": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72846": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72847": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "72848": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72849": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72850": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72851": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "72852": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72853": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72854": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "72855": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "72856": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72857": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72858": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72859": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72860": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72861": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "72862": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72863": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72864": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72865": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72866": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72867": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "72868": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72869": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72870": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72871": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "72872": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72873": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72874": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "72875": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "72876": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72877": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72878": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72879": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "72880": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "72881": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "72882": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72883": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72884": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72885": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72886": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72887": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "72888": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72889": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72890": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72891": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "72892": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "72893": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "72894": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "72895": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72896": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72897": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72898": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72899": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72900": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72901": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72902": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72903": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72904": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "72905": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72906": {
+      "step": 23,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "72907": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "72908": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "72909": {
+      "step": 23,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 768
+    },
+    "72910": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:mixer_residual"
+      ],
+      "size": 768
+    },
+    "72911": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72912": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1024
+    },
+    "72913": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "72914": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "72915": {
+      "step": 23,
+      "names": [
+        "addp",
+        "11:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "72916": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "72917": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "72918": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72919": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "72920": {
+      "step": 23,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 3072
+    },
+    "72921": {
+      "step": 23,
+      "names": [
+        "gather"
+      ],
+      "size": 1536
+    },
+    "72922": {
+      "step": 23,
+      "names": [
+        "gather",
+        "11:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "72923": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "11:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "72924": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "72925": {
+      "step": 23,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 768
+    },
+    "72926": {
+      "step": 23,
+      "names": [
+        "add",
+        "11:layer_output"
+      ],
+      "size": 768
+    },
+    "72927": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72928": {
+      "step": 23,
+      "names": [
+        "scatter"
+      ],
+      "size": 1024
+    },
+    "72929": {
+      "step": 23,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "72930": {
+      "step": 23,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "72931": {
+      "step": 23,
+      "names": [
+        "addp",
+        "-1:final_rms.input"
+      ],
+      "size": 1
+    },
+    "72932": {
+      "step": 23,
+      "names": [
+        "cheb",
+        "-1:final_rms.output"
+      ],
+      "size": 1
+    },
+    "72933": {
+      "step": 23,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "72934": {
+      "step": 23,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "72935": {
+      "step": 23,
+      "names": [
+        "mulp",
+        "final_hidden"
+      ],
+      "size": 768
+    },
+    "75708": {
+      "step": 24,
+      "names": [
+        "add",
+        "10:layer_output"
+      ],
+      "size": 768
+    },
+    "75709": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75710": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1024
+    },
+    "75711": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "75712": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "75713": {
+      "step": 24,
+      "names": [
+        "addp",
+        "11:block_rms.input"
+      ],
+      "size": 1
+    },
+    "75714": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:block_rms.output"
+      ],
+      "size": 1
+    },
+    "75715": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "75716": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75717": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "75718": {
+      "step": 24,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 3432
+    },
+    "75719": {
+      "step": 24,
+      "names": [
+        "gather",
+        "11:gate_silu.input"
+      ],
+      "size": 1536
+    },
+    "75720": {
+      "step": 24,
+      "names": [
+        "gather",
+        "11:carry.previous_value"
+      ],
+      "size": 1536
+    },
+    "75721": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 128
+    },
+    "75722": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 128
+    },
+    "75723": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 24
+    },
+    "75724": {
+      "step": 24,
+      "names": [
+        "gather",
+        "11:m3_negative_a.input"
+      ],
+      "size": 24
+    },
+    "75725": {
+      "step": 24,
+      "names": [
+        "gather",
+        "11:m3_mixing.input"
+      ],
+      "size": 24
+    },
+    "75726": {
+      "step": 24,
+      "names": [
+        "gather",
+        "11:m3_angle_tanh.input"
+      ],
+      "size": 32
+    },
+    "75727": {
+      "step": 24,
+      "names": [
+        "addp",
+        "11:dt_softplus.input"
+      ],
+      "size": 24
+    },
+    "75728": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:dt_softplus.output"
+      ],
+      "size": 24
+    },
+    "75729": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:m3_negative_a.output"
+      ],
+      "size": 24
+    },
+    "75730": {
+      "step": 24,
+      "names": [
+        "mul",
+        "11:decay_exp.input"
+      ],
+      "size": 24
+    },
+    "75731": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:decay_exp.output"
+      ],
+      "size": 24
+    },
+    "75732": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:m3_mixing.output"
+      ],
+      "size": 24
+    },
+    "75733": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:m3_angle_tanh.output"
+      ],
+      "size": 32
+    },
+    "75734": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "75735": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "75736": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75737": {
+      "step": 24,
+      "names": [
+        "mulp",
+        "11:m3_delta_cos.input",
+        "11:m3_delta_sin.input"
+      ],
+      "size": 768
+    },
+    "75738": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:m3_delta_cos.output"
+      ],
+      "size": 768
+    },
+    "75739": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:m3_delta_sin.output"
+      ],
+      "size": 768
+    },
+    "75740": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75741": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75742": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "75743": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.phase_cos"
+      ],
+      "size": 768
+    },
+    "75744": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75745": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75746": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.phase_sin"
+      ],
+      "size": 768
+    },
+    "75747": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "75748": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "75749": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "75750": {
+      "step": 24,
+      "names": [
+        "addp",
+        "11:m3_b_rms.input"
+      ],
+      "size": 1
+    },
+    "75751": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:m3_b_rms.output"
+      ],
+      "size": 1
+    },
+    "75752": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 128
+    },
+    "75753": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "75754": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 128
+    },
+    "75755": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "75756": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "75757": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "75758": {
+      "step": 24,
+      "names": [
+        "addp",
+        "11:m3_c_rms.input"
+      ],
+      "size": 1
+    },
+    "75759": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:m3_c_rms.output"
+      ],
+      "size": 1
+    },
+    "75760": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 128
+    },
+    "75761": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 128
+    },
+    "75762": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 128
+    },
+    "75763": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 3072
+    },
+    "75764": {
+      "step": 24,
+      "names": [
+        "addp"
+      ],
+      "size": 3072
+    },
+    "75765": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 3072
+    },
+    "75766": {
+      "step": 24,
+      "names": [
+        "addp"
+      ],
+      "size": 3072
+    },
+    "75767": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "75768": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "75769": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75770": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75771": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "75772": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "75773": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75774": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75775": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "75776": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75777": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75778": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75779": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 1536
+    },
+    "75780": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "75781": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "75782": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.previous_key"
+      ],
+      "size": 3072
+    },
+    "75783": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "75784": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 768
+    },
+    "75785": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75786": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75787": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "75788": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "75789": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75790": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75791": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 768
+    },
+    "75792": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75793": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75794": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75795": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 1536
+    },
+    "75796": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "75797": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 3072
+    },
+    "75798": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 3072
+    },
+    "75799": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 24
+    },
+    "75800": {
+      "step": 24,
+      "names": [
+        "addp"
+      ],
+      "size": 24
+    },
+    "75801": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 24
+    },
+    "75802": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 24
+    },
+    "75803": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 24
+    },
+    "75804": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 1536
+    },
+    "75805": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 1536
+    },
+    "75806": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "75807": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 1536
+    },
+    "75808": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "75809": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "75810": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75811": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75812": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75813": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75814": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75815": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "75816": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75817": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75818": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75819": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75820": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75821": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "75822": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75823": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75824": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75825": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.ssm.0"
+      ],
+      "size": 32768
+    },
+    "75826": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75827": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75828": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "75829": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "75830": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75831": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75832": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75833": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75834": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75835": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "75836": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75837": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75838": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75839": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75840": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75841": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "75842": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75843": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75844": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75845": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.ssm.1"
+      ],
+      "size": 32768
+    },
+    "75846": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75847": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75848": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "75849": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "75850": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75851": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75852": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75853": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75854": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75855": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "75856": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75857": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75858": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75859": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75860": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75861": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "75862": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75863": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75864": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75865": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.ssm.2"
+      ],
+      "size": 32768
+    },
+    "75866": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75867": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75868": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "75869": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "75870": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75871": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75872": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75873": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75874": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75875": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "75876": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75877": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75878": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75879": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75880": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75881": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "75882": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75883": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75884": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75885": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.ssm.3"
+      ],
+      "size": 32768
+    },
+    "75886": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75887": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75888": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "75889": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "75890": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75891": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75892": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75893": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75894": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75895": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "75896": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75897": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75898": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75899": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75900": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75901": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "75902": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75903": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75904": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75905": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.ssm.4"
+      ],
+      "size": 32768
+    },
+    "75906": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75907": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75908": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "75909": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 4
+    },
+    "75910": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75911": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75912": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75913": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 256
+    },
+    "75914": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 512
+    },
+    "75915": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 512
+    },
+    "75916": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75917": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75918": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75919": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75920": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75921": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 32768
+    },
+    "75922": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75923": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75924": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75925": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.ssm.5"
+      ],
+      "size": 32768
+    },
+    "75926": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75927": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    },
+    "75928": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 256
+    },
+    "75929": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75930": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75931": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75932": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75933": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75934": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75935": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75936": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75937": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75938": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1536
+    },
+    "75939": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75940": {
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "size": 1536
+    },
+    "75941": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:gate_silu.output"
+      ],
+      "size": 1536
+    },
+    "75942": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "75943": {
+      "step": 24,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 768
+    },
+    "75944": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:mixer_residual"
+      ],
+      "size": 768
+    },
+    "75945": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75946": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1024
+    },
+    "75947": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "75948": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "75949": {
+      "step": 24,
+      "names": [
+        "addp",
+        "11:mlp_rms.input"
+      ],
+      "size": 1
+    },
+    "75950": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:mlp_rms.output"
+      ],
+      "size": 1
+    },
+    "75951": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "75952": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75953": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 768
+    },
+    "75954": {
+      "step": 24,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 3072
+    },
+    "75955": {
+      "step": 24,
+      "names": [
+        "gather"
+      ],
+      "size": 1536
+    },
+    "75956": {
+      "step": 24,
+      "names": [
+        "gather",
+        "11:mlp_silu.input"
+      ],
+      "size": 1536
+    },
+    "75957": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "11:mlp_silu.output"
+      ],
+      "size": 1536
+    },
+    "75958": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 1536
+    },
+    "75959": {
+      "step": 24,
+      "names": [
+        "linear_ref"
+      ],
+      "size": 768
+    },
+    "75960": {
+      "step": 24,
+      "names": [
+        "add",
+        "11:layer_output"
+      ],
+      "size": 768
+    },
+    "75961": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75962": {
+      "step": 24,
+      "names": [
+        "scatter"
+      ],
+      "size": 1024
+    },
+    "75963": {
+      "step": 24,
+      "names": [
+        "sum"
+      ],
+      "size": 1
+    },
+    "75964": {
+      "step": 24,
+      "names": [
+        "mulp"
+      ],
+      "size": 1
+    },
+    "75965": {
+      "step": 24,
+      "names": [
+        "addp",
+        "-1:final_rms.input"
+      ],
+      "size": 1
+    },
+    "75966": {
+      "step": 24,
+      "names": [
+        "cheb",
+        "-1:final_rms.output"
+      ],
+      "size": 1
+    },
+    "75967": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 768
+    },
+    "75968": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 768
+    },
+    "75969": {
+      "step": 24,
+      "names": [
+        "mulp",
+        "final_hidden"
+      ],
+      "size": 768
+    }
+  }
+}

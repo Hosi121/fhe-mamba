@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790525612.3054614,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--name",
+      "cipher-long-generation-configure-r2",
+      "--user",
+      "${UID}:${GID}",
+      "--cpuset-cpus",
+      "64-68",
+      "--cpuset-mems",
+      "2",
+      "--shm-size",
+      "1g",
+      "--volume",
+      "${BENCH_ROOT}:/workspace:ro",
+      "--volume",
+      "${BENCH_ROOT}/b300-mamba3-20260926:/work:ro",
+      "--volume",
+      "${STUDY}:/study",
+      "--volume",
+      "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a:/workspace/install/openfhe-fides/lib/libOPENFHEcore_static.a:ro",
+      "--volume",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a:/work/install/fideslib/lib/fideslib.a:ro",
+      "--workdir",
+      "/study",
+      "--env",
+      "OMP_NUM_THREADS=4",
+      "--env",
+      "OMP_PROC_BIND=true",
+      "--env",
+      "OMP_PLACES={64},{66},{67},{68}",
+      "--env",
+      "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+      "--gpus",
+      "device=4",
+      "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+      "cmake",
+      "-S",
+      "/study/repo-r2/native/fideslib_stage0",
+      "-B",
+      "/study/build/native-r2",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DFHE_STAGE0_GPU_RNS=ON",
+      "-DFHE_STAGE0_GPU_DUAL_RING=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=103-real",
+      "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+      "-DCMAKE_PREFIX_PATH=/work/install/fideslib;/workspace/install/openfhe-fides",
+      "-DCMAKE_CXX_FLAGS=-I/workspace/b300-nsight-20260926/include"
+    ],
+    "cwd": "${STUDY}",
+    "inputs": {
+      "source": "${STUDY}/source-r2.tar.gz",
+      "openfhe_core": "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "fideslib": "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a"
+    },
+    "timeout_seconds": 1800
+  },
+  "inputs": {
+    "source": {
+      "bytes": 322761,
+      "sha256": "188739de46f7dc9f7a7c799f2b34394524235af253a1f5c3fa76f3c559b89440"
+    },
+    "openfhe_core": {
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    "fideslib": {
+      "bytes": 42313230,
+      "sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.00033291918225586414,
+  "wall_seconds": 4.383085699984804
+}

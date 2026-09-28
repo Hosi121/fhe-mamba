@@ -138,7 +138,7 @@ nodes use degrees 15, 31 and 63 (50, 150 and 45 nodes respectively). The
 maximum degree 1,023 belongs to `negative_a`, not RMSNorm. There are 761 live
 polynomial nodes in total. These counts are obtained by joining the exact
 coefficients to the export manifest with
-[`polynomials.py`](../../experiments/level_schedule/polynomials.py).
+[`polynomials.py`](../../src/fhemamba/diagnostics/polynomials.py).
 
 An inverse square root over [a,b] depends on the ratio b/a as well as its
 required error. Multiplying all inputs by a public constant reduces their

@@ -75,7 +75,7 @@ needed for the native Spark runner. Calibration text and evaluation prompt
 must be separate. Use held-out data representative of the intended workload.
 
 ```bash
-.venv/bin/python experiments/export_m1_payload.py \
+.venv/bin/python experiments/export/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --output runs/spark-payload --tokens 8 \
   --cal-text-file /path/to/calibration.txt --cal-tokens 512 \
@@ -113,7 +113,7 @@ For the fixed two-token integration payload:
 
 ```bash
 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 .venv/bin/python \
-  experiments/export_m1_payload.py \
+  experiments/export/export_m1_payload.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --normalization-bundle config/mamba2-130m-normalization-20260921.json \
   --output runs/scheduled-norm-payload --tokens 2 --cal-tokens 128 --device cpu
@@ -169,7 +169,7 @@ from independent calibration text. This retains the frozen polynomials and
 evaluation references, and replaces only state bounds:
 
 ```bash
-.venv/bin/python experiments/calibrate_state_coordinates.py \
+.venv/bin/python experiments/calibration/calibrate_state_coordinates.py \
   --checkpoint checkpoints/mamba2-130m-hf \
   --payload results/m2_chain_payload_headclip \
   --calibration-text /path/to/train-calibration.txt \
@@ -195,7 +195,7 @@ runs the encrypted recurrence and decodes the actual selected token IDs:
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 .venv/bin/python \
-  experiments/run_dgx_generation.py \
+  experiments/execution/run_dgx_generation.py \
   --base-chain runs/stabilized-payload \
   --output-dir runs/generation-001 \
   --prompt 'The capital' --generate-tokens 4 \
@@ -270,7 +270,7 @@ remain evidence for their original modes.
 From the Spark checkout:
 
 ```bash
-python3 experiments/run_dgx_campaign.py \
+python3 experiments/execution/run_dgx_campaign.py \
   --manifest experiments/manifests/dgx_spark_replication_ab.json \
   --runner scripts/run_dgx_spark.sh \
   --env BINARY="$HOME/fhemamba/spark/kernel/stage1_mamba2_decode_fideslib" \

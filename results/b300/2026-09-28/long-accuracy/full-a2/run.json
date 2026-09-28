@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790550964.431309,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--name",
+      "cipher-long-accuracy-full-a2",
+      "--user",
+      "${UID}:${GID}",
+      "--cpuset-cpus",
+      "112-116",
+      "--cpuset-mems",
+      "3",
+      "--shm-size",
+      "1g",
+      "--volume",
+      "${BENCH_ROOT}:/workspace:ro",
+      "--volume",
+      "${BENCH_ROOT}/b300-mamba3-20260926:/work:ro",
+      "--volume",
+      "${STUDY}:/study",
+      "--volume",
+      "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a:/workspace/install/openfhe-fides/lib/libOPENFHEcore_static.a:ro",
+      "--volume",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a:/work/install/fideslib/lib/fideslib.a:ro",
+      "--volume",
+      "${BASELINE}:/baseline:ro",
+      "--workdir",
+      "/study",
+      "--env",
+      "OMP_NUM_THREADS=4",
+      "--env",
+      "OMP_PROC_BIND=true",
+      "--env",
+      "OMP_PLACES={112},{114},{115},{116}",
+      "--env",
+      "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+      "--gpus",
+      "device=7",
+      "--volume",
+      "${PAYLOAD_STUDY}:/payloads:ro",
+      "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+      "/study/build/native-base/packed_fideslib",
+      "/payloads/payload/tiled16/program.txt",
+      "/study/full-a2/native.json",
+      ".001",
+      ".001",
+      "--planned-refresh",
+      "--batch-refresh",
+      "--inplace-ops",
+      "--gpu-plaintext-ntt",
+      "--profile-evaluation",
+      "--naf-rotations",
+      "--reuse-dead-inputs",
+      "--direct-plaintext-upload",
+      "--compact-weights",
+      "--move-plaintext-coefficients",
+      "--borrow-plaintext-upload",
+      "--bsgs-routing-stages",
+      "--cache-plaintexts",
+      "--frontier-refresh",
+      "--s2c-first",
+      "--gpu-plaintext-rns",
+      "--hoist-rotations",
+      "--share-chebyshev",
+      "--prefetch-plaintexts",
+      "--prefetch-workers",
+      "2",
+      "--security",
+      "128-classic",
+      "--security-digits",
+      "4",
+      "--gpu-addend-rns",
+      "--plaintext-cache-capacity",
+      "2048",
+      "--merge-refresh-correction",
+      "--gpu-plaintext-fft",
+      "--frontier-live-limit",
+      "256",
+      "--client-head",
+      "/payloads/payload/tiled16/client_head.f32",
+      "--reuse-public-ciphertexts"
+    ],
+    "cwd": "${STUDY}",
+    "inputs": {
+      "source": "${STUDY}/optimization-source.tar.gz",
+      "native_source": "${STUDY}/optimization-source.tar.gz",
+      "binary": "${STUDY}/build/native-base/packed_fideslib",
+      "openfhe_core": "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "fideslib": "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "program": "${PAYLOAD_STUDY}/payload/tiled16/program.txt",
+      "manifest": "${PAYLOAD_STUDY}/payload/tiled16/manifest.json",
+      "fixture": "${PAYLOAD_STUDY}/payload/tiled16/fixture.npz",
+      "client_head": "${PAYLOAD_STUDY}/payload/tiled16/client_head.f32"
+    },
+    "timeout_seconds": 2400
+  },
+  "inputs": {
+    "source": {
+      "bytes": 639768,
+      "sha256": "dd5997103977ca813842c30979c02d5224e76cd4d968ed2a528d2e0833b4a979"
+    },
+    "native_source": {
+      "bytes": 639768,
+      "sha256": "dd5997103977ca813842c30979c02d5224e76cd4d968ed2a528d2e0833b4a979"
+    },
+    "binary": {
+      "bytes": 17476584,
+      "sha256": "3b37e2f2a4508e9b6ed4073eb2bd7cbdaac91ab8a153e3066a70288ede73ffb0"
+    },
+    "openfhe_core": {
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    "fideslib": {
+      "bytes": 42313230,
+      "sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad"
+    },
+    "program": {
+      "bytes": 1311955328,
+      "sha256": "c666800a73bf18a6fa61968deb606a19a7f7e31cb8fe46bc4c28b1c302c3db95"
+    },
+    "manifest": {
+      "bytes": 496118,
+      "sha256": "c478d07270b87f1fd9b8b1dfc3c433c7330367a2556ff0f9be3a67d895922bfb"
+    },
+    "fixture": {
+      "bytes": 210498,
+      "sha256": "1ec19c5695c9cb8fa683ecd3f053f98189e26b0cd1cd3c5e64f497ca370907af"
+    },
+    "client_head": {
+      "bytes": 394002440,
+      "sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.00046573998406529427,
+  "wall_seconds": 1237.0721163689159
+}

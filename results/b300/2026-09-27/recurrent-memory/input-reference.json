@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "study": "results/b300/2026-09-27/recurrent-state",
+  "trace_sha256": "f37ba105366b2002d39f9e69ef0ddfafe17017c8c9743dc483690bfd6f333b7d",
+  "description": "All inputs and payloads are unchanged from the all-readout recurrence study. Manifests are repeated here for self-contained result validation; the captured numerical trace and probe source are shared with that study.",
+  "source_commit": "bd1b1cd2bbf9cc40b7f5aad83473562be946b81d",
+  "working_tree_note": "Changes are represented by the measured source archive; the base commit alone does not identify the measured implementation."
+}

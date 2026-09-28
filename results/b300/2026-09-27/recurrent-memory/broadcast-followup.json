@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "program_sha256": "7f99eac1c33d2f439df34da22483d09fa3ca21df2b8af2e89acbd8ea1a85742a",
+  "repeat_nodes": 2816,
+  "adjacent_repeat_chains": [
+    {
+      "outer": 4,
+      "inner": 1,
+      "first_repeat": 128,
+      "second_repeat": 64,
+      "occurrences": 384,
+      "combined_repeat": 8192
+    }
+  ],
+  "scope": "static pattern inventory only; no lowering change, FHE evaluation or speed claim",
+  "interpretation": "Consecutive expansion of adjacent singleton axes can combine their replication factors. Logical rotation-sum depth need not decrease; one routing/masking stage may be removed."
+}

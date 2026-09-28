@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "metric": "eval_seconds",
+  "baseline": {
+    "samples": [
+      1076.02696318
+    ],
+    "mean": 1076.02696318
+  },
+  "candidate": {
+    "samples": [
+      1052.33205939
+    ],
+    "mean": 1052.33205939
+  },
+  "reduction": 0.022020734238828,
+  "contract": {
+    "schema_version": 1,
+    "metric": "eval_seconds",
+    "equal": [
+      "security_audit",
+      "security",
+      "slots",
+      "payload_slots",
+      "ring_dimension",
+      "refresh_ring_dimension",
+      "depth",
+      "scale_bits",
+      "nodes",
+      "evaluated_nodes",
+      "ct_ct_mul",
+      "ct_pt_mul",
+      "rotations",
+      "refresh_rotations",
+      "bootstraps",
+      "logical_refreshes",
+      "refresh_batches",
+      "largest_refresh_batch",
+      "rotation_batch_preparations",
+      "shared_basis_hits",
+      "frontier_deferrals",
+      "frontier_limit_selections",
+      "maximum_live_dag_values",
+      "plaintext_cache_hits",
+      "plaintext_cache_misses",
+      "host_encodes",
+      "bootstrap_passes",
+      "merge_refresh_correction",
+      "gpu_dual_ring",
+      "exact_tolerance",
+      "polynomial_tolerance",
+      "generated_token_ids",
+      "public_encryptions",
+      "public_encryption_reuses",
+      "plaintext_cache_bypasses",
+      "plaintext_cache_evictions",
+      "reuse_public_ciphertexts",
+      "frontier_live_limit",
+      "diagnostic_only"
+    ],
+    "require": {
+      "passed": true,
+      "encrypted": true,
+      "security": "128-classic",
+      "evaluation_decryptions": 0,
+      "non_finite": 0,
+      "diagnostic_only": false,
+      "reuse_public_ciphertexts": true
+    },
+    "maximum": {
+      "max_abs_error_vs_polynomial": 0.001,
+      "max_abs_error_vs_exact": 0.001
+    },
+    "minimum_reduction": 0
+  },
+  "inputs": [
+    {
+      "path": "${STUDY}/full-a1/native.json",
+      "bytes": 210693,
+      "sha256": "bdd09eefde7f3b893ec0f326769c915f0c5303b6b672ce64c788c5178f0ea9a7"
+    },
+    {
+      "path": "${STUDY}/full-b2/native.json",
+      "bytes": 210696,
+      "sha256": "cf0831ef4197f760b631b86bf50820f1054b534a8a722bcd36cac9fee775ad7e"
+    }
+  ],
+  "scope": "Descriptive matched comparison; no statistical significance claim.",
+  "interpretation": "Descriptive passing pair only. Candidate full-b1 failed numerical qualification; no pooled/ABBA adoption claim."
+}

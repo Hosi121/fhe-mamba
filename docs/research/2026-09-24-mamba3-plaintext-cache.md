@@ -97,7 +97,7 @@ inline-client limitations remain unchanged (`security=not-set`).
 ## Reproduction
 
 Build the packed target and add `--cache-plaintexts` to the existing
-`experiments/run_packed_probe.py` command. Native JSON records the enabled flag,
+`src/fhemamba/benchmarks/packed.py` command. Native JSON records the enabled flag,
 capacity, retained entries, hits, misses, bypasses and evictions.
 The measured arguments are recorded with the results. Use the
 [shared workflow](../experiments.md) with local machine settings for new runs,

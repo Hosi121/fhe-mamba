@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/ncu-ntt-r4-ntt-half1/analyze-job",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790550697.9383068
+}

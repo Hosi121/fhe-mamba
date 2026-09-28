@@ -1,0 +1,20 @@
+{
+  "removed": [
+    {
+      "path": "replay-r5-controller.py",
+      "bytes": 1782,
+      "sha256": "df884bde0eb0dff15ab3e8e0c779035d82f2d62521d00bf67107d15033fb5652"
+    },
+    {
+      "path": "completion-operations.py",
+      "bytes": 1594,
+      "sha256": "401b13f8a8ec66d653c54ea565d8806df434d0550039f9879c65404d9c3458d7"
+    },
+    {
+      "path": "public-preview",
+      "files": 185,
+      "bytes": 9458518
+    }
+  ],
+  "scope": "Own idle disposable controllers and stale publication preview; current evidence, reusable sources and final publication retained"
+}

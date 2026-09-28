@@ -11,7 +11,7 @@ backend. Numerical implementations and shared experiment utilities live in
 | `tests/` | Python unit tests and repository/native integration tests |
 | `examples/` | Small runnable examples for new users |
 | `config/` | Public platform pins, checkpoint hashes, coefficient bundles and configuration templates |
-| `experiments/` | Research runners and shared runner helpers |
+| `experiments/` | Specialized research workflows grouped by purpose; common code is in the package |
 | `experiments/manifests/` | Declarative campaign configurations |
 | `experiments/slurm/` | Historical cluster launchers for the active model code |
 | `scripts/` | Local checks, checkpoint setup and platform build/run helpers |
@@ -21,6 +21,9 @@ backend. Numerical implementations and shared experiment utilities live in
 | `docs/archive/` | Historical plans and ledgers |
 | `docker/` | Historical B300 build image |
 | `src/fhemamba/benchmarks/` | Shared job execution, completion events, publication and verification |
+| `src/fhemamba/diagnostics/`, `profiling/` | Frozen-circuit diagnostics and offline Nsight analysis |
+| `src/fhemamba/recurrent/`, `workloads/` | Reusable fixtures, recurrence analysis and upstream parity |
+| `src/fhemamba/ckks_probes.py` | Shared optional CPU CKKS probe arithmetic and context construction |
 | `config/local/`, `.local/`, `runs/` | Ignored machine settings, private notes, original evidence and working output |
 
 ## Generated files
@@ -38,6 +41,13 @@ private/evaluation keys, large exported payloads and build products are not
 repository content. Public numerical coefficient bundles belong in `config/`.
 
 ## Previous layout
+
+The current Python tools are listed by `python -m fhemamba --help`.
+Standalone packed/diagnostic/profiling/recurrent/Mamba-3 scripts have been
+removed in favor of these installed commands. Their numerical options remain
+unchanged. Other scripts moved into purpose-specific experiment directories;
+[the experiment index](../experiments/README.md) is the current entry point.
+Source snapshots in published evidence retain the original measured paths.
 
 The file cleanup follows the immutable
 [`research-2026-09-22` snapshot](https://github.com/Hosi121/fhe-mamba/tree/research-2026-09-22).

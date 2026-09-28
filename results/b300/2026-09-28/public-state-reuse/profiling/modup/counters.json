@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "kernels": [
+    {
+      "id": 0,
+      "name": "void DecompAndModUpConv<3>(void **, int, void **, int, const Globals *)",
+      "device": "0",
+      "block_size": "(64, 2, 1)",
+      "grid_size": "(2048, 1, 1)",
+      "metrics": {
+        "duration": {
+          "value": 127.744,
+          "unit": "us",
+          "counter": "gpu__time_duration.sum"
+        },
+        "sm_throughput": {
+          "value": 64.208716,
+          "unit": "%",
+          "counter": "sm__throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_throughput": {
+          "value": 1.335492,
+          "unit": "%",
+          "counter": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_bandwidth": {
+          "value": 102.422846,
+          "unit": "Gbyte/s",
+          "counter": "dram__bytes.sum.per_second"
+        },
+        "achieved_occupancy": {
+          "value": 59.321183,
+          "unit": "%",
+          "counter": "sm__warps_active.avg.pct_of_peak_sustained_active"
+        },
+        "waves_per_sm": {
+          "value": 0.86,
+          "unit": "",
+          "counter": "launch__waves_per_multiprocessor"
+        },
+        "registers_per_thread": {
+          "value": 32.0,
+          "unit": "register/thread",
+          "counter": "launch__registers_per_thread"
+        },
+        "shared_memory_per_block": {
+          "value": 7.168,
+          "unit": "Kbyte/block",
+          "counter": "launch__shared_mem_per_block"
+        },
+        "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 58.596465,
+          "unit": "%",
+          "counter": "sm__issue_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 48.287902,
+          "unit": "%",
+          "counter": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 64.208716,
+          "unit": "%",
+          "counter": "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "lts__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 3.507791,
+          "unit": "%",
+          "counter": "lts__throughput.avg.pct_of_peak_sustained_elapsed"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "name": "void DecompAndModUpConv<3>(void **, int, void **, int, const Globals *)",
+      "device": "0",
+      "block_size": "(64, 2, 1)",
+      "grid_size": "(2048, 1, 1)",
+      "metrics": {
+        "duration": {
+          "value": 127.648,
+          "unit": "us",
+          "counter": "gpu__time_duration.sum"
+        },
+        "sm_throughput": {
+          "value": 64.290082,
+          "unit": "%",
+          "counter": "sm__throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_throughput": {
+          "value": 1.334803,
+          "unit": "%",
+          "counter": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_bandwidth": {
+          "value": 102.339433,
+          "unit": "Gbyte/s",
+          "counter": "dram__bytes.sum.per_second"
+        },
+        "achieved_occupancy": {
+          "value": 59.722539,
+          "unit": "%",
+          "counter": "sm__warps_active.avg.pct_of_peak_sustained_active"
+        },
+        "waves_per_sm": {
+          "value": 0.86,
+          "unit": "",
+          "counter": "launch__waves_per_multiprocessor"
+        },
+        "registers_per_thread": {
+          "value": 32.0,
+          "unit": "register/thread",
+          "counter": "launch__registers_per_thread"
+        },
+        "shared_memory_per_block": {
+          "value": 7.168,
+          "unit": "Kbyte/block",
+          "counter": "launch__shared_mem_per_block"
+        },
+        "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 58.670704,
+          "unit": "%",
+          "counter": "sm__issue_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 48.34908,
+          "unit": "%",
+          "counter": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 64.290082,
+          "unit": "%",
+          "counter": "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "lts__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 3.524916,
+          "unit": "%",
+          "counter": "lts__throughput.avg.pct_of_peak_sustained_elapsed"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "void DecompAndModUpConv<3>(void **, int, void **, int, const Globals *)",
+      "device": "0",
+      "block_size": "(64, 2, 1)",
+      "grid_size": "(2048, 1, 1)",
+      "metrics": {
+        "duration": {
+          "value": 127.36,
+          "unit": "us",
+          "counter": "gpu__time_duration.sum"
+        },
+        "sm_throughput": {
+          "value": 64.181139,
+          "unit": "%",
+          "counter": "sm__throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_throughput": {
+          "value": 1.317224,
+          "unit": "%",
+          "counter": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_bandwidth": {
+          "value": 101.015075,
+          "unit": "Gbyte/s",
+          "counter": "dram__bytes.sum.per_second"
+        },
+        "achieved_occupancy": {
+          "value": 59.418079,
+          "unit": "%",
+          "counter": "sm__warps_active.avg.pct_of_peak_sustained_active"
+        },
+        "waves_per_sm": {
+          "value": 0.86,
+          "unit": "",
+          "counter": "launch__waves_per_multiprocessor"
+        },
+        "registers_per_thread": {
+          "value": 32.0,
+          "unit": "register/thread",
+          "counter": "launch__registers_per_thread"
+        },
+        "shared_memory_per_block": {
+          "value": 7.168,
+          "unit": "Kbyte/block",
+          "counter": "launch__shared_mem_per_block"
+        },
+        "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 58.571394,
+          "unit": "%",
+          "counter": "sm__issue_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 48.267241,
+          "unit": "%",
+          "counter": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 64.181139,
+          "unit": "%",
+          "counter": "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "lts__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 3.520157,
+          "unit": "%",
+          "counter": "lts__throughput.avg.pct_of_peak_sustained_elapsed"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "void DecompAndModUpConv<3>(void **, int, void **, int, const Globals *)",
+      "device": "0",
+      "block_size": "(64, 2, 1)",
+      "grid_size": "(2048, 1, 1)",
+      "metrics": {
+        "duration": {
+          "value": 119.968,
+          "unit": "us",
+          "counter": "gpu__time_duration.sum"
+        },
+        "sm_throughput": {
+          "value": 60.496904,
+          "unit": "%",
+          "counter": "sm__throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_throughput": {
+          "value": 1.072883,
+          "unit": "%",
+          "counter": "gpu__dram_throughput.avg.pct_of_peak_sustained_elapsed"
+        },
+        "dram_bandwidth": {
+          "value": 82.287543,
+          "unit": "Gbyte/s",
+          "counter": "dram__bytes.sum.per_second"
+        },
+        "achieved_occupancy": {
+          "value": 59.380279,
+          "unit": "%",
+          "counter": "sm__warps_active.avg.pct_of_peak_sustained_active"
+        },
+        "waves_per_sm": {
+          "value": 0.86,
+          "unit": "",
+          "counter": "launch__waves_per_multiprocessor"
+        },
+        "registers_per_thread": {
+          "value": 32.0,
+          "unit": "register/thread",
+          "counter": "launch__registers_per_thread"
+        },
+        "shared_memory_per_block": {
+          "value": 5.632,
+          "unit": "Kbyte/block",
+          "counter": "launch__shared_mem_per_block"
+        },
+        "sm__issue_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 59.770143,
+          "unit": "%",
+          "counter": "sm__issue_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 50.494283,
+          "unit": "%",
+          "counter": "sm__pipe_alu_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed": {
+          "value": 60.496904,
+          "unit": "%",
+          "counter": "sm__pipe_fmaheavy_cycles_active.avg.pct_of_peak_sustained_elapsed"
+        },
+        "lts__throughput.avg.pct_of_peak_sustained_elapsed": {
+          "value": 3.918797,
+          "unit": "%",
+          "counter": "lts__throughput.avg.pct_of_peak_sustained_elapsed"
+        }
+      }
+    }
+  ],
+  "interpretation": "Selected launches under profiler replay and its cache policy; these are not full-model averages or unprofiled kernel durations. Keep units and launch filters.",
+  "input": {
+    "sha256": "58f09cb1658875696e7f913659c8efe1d0390acbc30303aae5f6fd3be598a7f7",
+    "bytes": 52092
+  },
+  "analyzer_sha256": "1dfb396fe4a9a5bc978df3ad6dad92568b614d3c82738cfebe41267bc4eee3fe"
+}

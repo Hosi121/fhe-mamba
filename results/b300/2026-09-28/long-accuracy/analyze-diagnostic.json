@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "command": [
+    "python3",
+    "${study}/analyze-observations.py",
+    "--metadata",
+    "${study}/references/references.json",
+    "--manifest",
+    "${payload_study}/payload/tiled64/manifest.json",
+    "--observations",
+    "${study}/diagnostic/observations.jsonl",
+    "--output",
+    "${study}/analyze-diagnostic/analysis.json"
+  ],
+  "cwd": "${study}",
+  "inputs": {
+    "analyzer": "${study}/analyze-observations.py",
+    "metadata": "${study}/references/references.json",
+    "manifest": "${payload_study}/payload/tiled64/manifest.json",
+    "observations": "${study}/diagnostic/observations.jsonl"
+  },
+  "timeout_seconds": 300
+}

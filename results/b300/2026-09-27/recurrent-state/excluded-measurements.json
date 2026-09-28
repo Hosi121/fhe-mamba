@@ -1,0 +1,10 @@
+{
+  "schema": "fhemamba-recurrence-excluded-v1",
+  "reason": "The first export retained only selected readouts; dead-node elimination removed intermediate readout work.",
+  "measurements": {
+    "factored-4": "completed; excluded from performance comparison",
+    "tiled-4": "cancelled after instrumentation defect was identified"
+  },
+  "resolution": "r2 retains every readout and validates executed sum-node counts against the payload manifest.",
+  "numerical_failure": false
+}

@@ -1,0 +1,174 @@
+{
+  "source_sha256": "88e22ec78d58180cf72744fc08fcbc04d9a90abdc4445b762f2ac6974340f85a",
+  "diagnostic_only": true,
+  "normalized_max_error": 0.004977948797058159,
+  "normalized_rms_error": 0.0035294833400392814,
+  "best_relative_scale_error": -0.0012904615386181068,
+  "remaining_rms_after_scale_fit": 0.0035294441994278758,
+  "top_dft_bins": [
+    {
+      "bin": 42887,
+      "energy_fraction": 0.0001625118772241005
+    },
+    {
+      "bin": 22649,
+      "energy_fraction": 0.0001625118772241004
+    },
+    {
+      "bin": 21759,
+      "energy_fraction": 0.00015073590299520616
+    },
+    {
+      "bin": 43777,
+      "energy_fraction": 0.00015073590299520616
+    },
+    {
+      "bin": 29717,
+      "energy_fraction": 0.00014921189265849254
+    },
+    {
+      "bin": 35819,
+      "energy_fraction": 0.0001492118926584925
+    },
+    {
+      "bin": 38606,
+      "energy_fraction": 0.00014074085728230085
+    },
+    {
+      "bin": 26930,
+      "energy_fraction": 0.00014074085728230085
+    },
+    {
+      "bin": 3507,
+      "energy_fraction": 0.00014036905783948258
+    },
+    {
+      "bin": 62029,
+      "energy_fraction": 0.00014036905783948258
+    },
+    {
+      "bin": 1147,
+      "energy_fraction": 0.00013473489351202954
+    },
+    {
+      "bin": 64389,
+      "energy_fraction": 0.0001347348935120295
+    }
+  ],
+  "top_pair_energy_fraction": 0.0003250237544482009,
+  "note": "Ordinary 65536-point DFT of logical packed-slot errors, not the CKKS canonical embedding or proof of a modular-reduction root cause.",
+  "ckks_embedding": {
+    "ring_dimension": 131072,
+    "rotation_generator": 5,
+    "roundtrip_max_error": 5.4835587784704834e-18,
+    "top_coefficients": [
+      {
+        "coefficient": 24437,
+        "amplitude": -4.532909287516132e-05,
+        "energy_fraction": 0.00016494220025941385
+      },
+      {
+        "coefficient": 106635,
+        "amplitude": 4.532909287516131e-05,
+        "energy_fraction": 0.00016494220025941374
+      },
+      {
+        "coefficient": 106362,
+        "amplitude": -4.320390273804158e-05,
+        "energy_fraction": 0.0001498385931953901
+      },
+      {
+        "coefficient": 24710,
+        "amplitude": 4.320390273804156e-05,
+        "energy_fraction": 0.00014983859319538993
+      },
+      {
+        "coefficient": 115451,
+        "amplitude": 4.118504838858587e-05,
+        "energy_fraction": 0.00013616230309778038
+      },
+      {
+        "coefficient": 15621,
+        "amplitude": -4.118504838858586e-05,
+        "energy_fraction": 0.00013616230309778033
+      },
+      {
+        "coefficient": 2790,
+        "amplitude": 4.080224445776964e-05,
+        "energy_fraction": 0.0001336428825749434
+      },
+      {
+        "coefficient": 128282,
+        "amplitude": -4.080224445776963e-05,
+        "energy_fraction": 0.00013364288257494334
+      },
+      {
+        "coefficient": 32444,
+        "amplitude": -4.00341544740724e-05,
+        "energy_fraction": 0.0001286586673475521
+      },
+      {
+        "coefficient": 98628,
+        "amplitude": 4.003415447407239e-05,
+        "energy_fraction": 0.00012865866734755208
+      }
+    ],
+    "note": "Assumes the usual CKKS powers-of-five slot order; verify against the measured encoder before attributing a backend stage."
+  },
+  "special_inverse_fft": {
+    "implementation": "same decimation, powers-of-five twiddles and bit reversal as native/fideslib_stage0/src/gpu_special_fft.cu, evaluated in NumPy",
+    "top_coefficients": [
+      {
+        "coefficient": 24437,
+        "amplitude": -4.532909287516131e-05,
+        "energy_fraction": 0.0001649422002594138
+      },
+      {
+        "coefficient": 106635,
+        "amplitude": 4.532909287516131e-05,
+        "energy_fraction": 0.0001649422002594138
+      },
+      {
+        "coefficient": 106362,
+        "amplitude": -4.320390273804159e-05,
+        "energy_fraction": 0.00014983859319539023
+      },
+      {
+        "coefficient": 24710,
+        "amplitude": 4.320390273804153e-05,
+        "energy_fraction": 0.0001498385931953898
+      },
+      {
+        "coefficient": 15621,
+        "amplitude": -4.118504838858587e-05,
+        "energy_fraction": 0.0001361623030977804
+      },
+      {
+        "coefficient": 115451,
+        "amplitude": 4.118504838858584e-05,
+        "energy_fraction": 0.00013616230309778022
+      },
+      {
+        "coefficient": 2790,
+        "amplitude": 4.080224445776964e-05,
+        "energy_fraction": 0.00013364288257494342
+      },
+      {
+        "coefficient": 128282,
+        "amplitude": -4.08022444577696e-05,
+        "energy_fraction": 0.00013364288257494317
+      },
+      {
+        "coefficient": 98628,
+        "amplitude": 4.0034154474072405e-05,
+        "energy_fraction": 0.0001286586673475522
+      },
+      {
+        "coefficient": 32444,
+        "amplitude": -4.0034154474072385e-05,
+        "energy_fraction": 0.00012865866734755206
+      }
+    ],
+    "note": "Diagnostic localization only; not exact integer/RNS or backend-stage evidence."
+  }
+}

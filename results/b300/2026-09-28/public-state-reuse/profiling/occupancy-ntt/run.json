@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790536063.297052,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "${REPO}/.venv/bin/python",
+      "${REPO}/experiments/profiling/ncu_summary.py",
+      "${REPO}/results/b300/2026-09-28/long-generation/profiling/ncu-ntt/metrics.csv",
+      "--output",
+      "${LOCAL_STUDY}/occupancy-ntt/counters.json",
+      "--metric",
+      "launch__registers_per_thread_allocated",
+      "--metric",
+      "launch__occupancy_limit_registers",
+      "--metric",
+      "launch__occupancy_limit_shared_mem",
+      "--metric",
+      "launch__occupancy_limit_warps",
+      "--metric",
+      "launch__waves_per_multiprocessor",
+      "--metric",
+      "sm__warps_active.avg.per_cycle_active"
+    ],
+    "cwd": "${REPO}",
+    "inputs": {
+      "metrics": "${REPO}/results/b300/2026-09-28/long-generation/profiling/ncu-ntt/metrics.csv",
+      "analyzer": "${REPO}/experiments/profiling/ncu_summary.py"
+    },
+    "timeout_seconds": 30
+  },
+  "inputs": {
+    "metrics": {
+      "bytes": 52258,
+      "sha256": "af542585f3bc0eb96c9882495d4d5dd2e1aab320d2e0f7c344d57a35111fee87"
+    },
+    "analyzer": {
+      "bytes": 3099,
+      "sha256": "1dfb396fe4a9a5bc978df3ad6dad92568b614d3c82738cfebe41267bc4eee3fe"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.00030195695580914617,
+  "wall_seconds": 0.0334029839723371
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/nsys-prefix-timeline",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790528314.584279
+}

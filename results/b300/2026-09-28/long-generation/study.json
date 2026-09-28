@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "objective": "Validate actual full-model autoregressive generation at 16 and then 64 tokens under the frozen classical-128 and 0.001 error gates; diagnose the GPU execution with Nsight.",
+  "generated_tokens_qualified": 16,
+  "candidate_64_qualified": false,
+  "speedup_claim": false,
+  "scope": "Trained Mamba-3 SISO 187M, all 12 layers, prompt The capital, public weights, inline client-selected feedback.",
+  "representation": "Complete head-tiled SSM and cosine/sine phase; no truncated state or removed normalization.",
+  "numerical_gates": {
+    "exact": 0.001,
+    "polynomial": 0.001,
+    "all_generated_ids_match": true
+  },
+  "security": "128-classic: N=131072, QP=3376 <= 3523, uniform ternary, HYBRID 4, two-pass single-ring S2C-first refresh",
+  "decision": "Retain opt-in long-session exporter and the qualified 16-token result; reject the current 64-token encrypted candidate. Preserve failed schedules and exact-history OOM as failures, not speed baselines.",
+  "remaining": [
+    "64-token FHE error jump at client selection 24; root cause unresolved",
+    "fitted domains do not cover arbitrary prompts",
+    "finite unrolled DAG and retained validation outputs grow with session length",
+    "inline client is not a process-separated deployment"
+  ],
+  "validation": {
+    "python_tests_passed": 424,
+    "native_tests_passed": 22,
+    "original_tolerance_prefix_passed": true,
+    "deliberately_strict_tolerance_rejected_before_first_token": true,
+    "negative_test_is_generation_qualification": false
+  }
+}

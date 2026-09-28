@@ -1,0 +1,21 @@
+{
+  "diagnostic_only": true,
+  "program_sha256": "464380aef53bfaefe2b4f137a2777299f62e4eb660101bea4b3886ed790ad24e",
+  "injected_nodes": [
+    75898,
+    75904
+  ],
+  "target_node": 75969,
+  "affected_node_count": 39,
+  "control_max_abs_error": 9.313225746154785e-10,
+  "target_max_abs_error_vs_reference": 0.03442042899863573,
+  "scope": "CPU propagation of only the injected errors; other inputs use frozen references and subsequent encrypted-operation/refresh errors are excluded",
+  "observations_sha256": "5f31019a699e0464a5f852cb539c46b354ce56b611fed96dfea7c4c221874676",
+  "references_sha256": "e21c563f77e6afb13f58f80e31574425a25647e144ee2552842711f7db2a97b9",
+  "injection_orders": [
+    2,
+    3
+  ],
+  "target_max_abs_error_vs_observed": 7.296155593861098e-07,
+  "observed_target_max_abs_error_vs_reference": 0.03441998170608562
+}

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "complete_backbone": true,
+  "layers": 12,
+  "prompt": "The capital",
+  "generated_token_ids": [
+    315,
+    279
+  ],
+  "generated_tokens": 2,
+  "server_evaluations": 3,
+  "eval_seconds": 522.269372523,
+  "seconds_per_generated_token": 261.1346862615,
+  "max_abs_error_vs_polynomial": 5.08803562019e-06,
+  "max_abs_error_vs_exact": 3.60218694837e-05,
+  "security": "128-classic",
+  "client_protocol": "tied vocabulary head and greedy selection from actual decrypted final hidden; fresh encrypted embedding feedback",
+  "manifest_sha256": "289c0c375877fd49b89e5cb6f8e5f3c5e9293580d32b53fdc207b3e0ecc8fcb8",
+  "native_sha256": "de95c3cd370b7861b007d63cbd67f75ba7c1656fe9e7b236f7aedb94bd1d77f5",
+  "timing_scope": "evaluation including prompt and inline client feedback; excludes setup"
+}

@@ -1,0 +1,115 @@
+{
+  "adopted": true,
+  "mode": "opt-in; disabled by default",
+  "mechanism": "Request-local reuse of identical padded public source ciphertexts. Private inputs and client feedback still use fresh encryption.",
+  "generated_tokens": 16,
+  "server_evaluations": 17,
+  "baseline_mean_seconds": 1157.988960645,
+  "candidate_mean_seconds": 1078.4821027399998,
+  "reduction": 0.06865942647736012,
+  "candidate_seconds_per_generated_token": 67.40513142124999,
+  "pairs": [
+    {
+      "gpu_index": 5,
+      "baseline": "full-a1",
+      "candidate": "full-b2",
+      "reduction": 0.0702004458495612,
+      "command_and_settings_match": true,
+      "sequential_order_verified": [
+        "full-a1",
+        "full-b2"
+      ]
+    },
+    {
+      "gpu_index": 6,
+      "baseline": "full-a2",
+      "candidate": "full-b1",
+      "reduction": 0.06711194851891333,
+      "command_and_settings_match": true,
+      "sequential_order_verified": [
+        "full-b1",
+        "full-a2"
+      ]
+    }
+  ],
+  "metrics": {
+    "eval_seconds": {
+      "baseline": 1157.988960645,
+      "candidate": 1078.4821027399998
+    },
+    "public_source_seconds": {
+      "baseline": 82.20686455250001,
+      "candidate": 1.3621505635000002
+    },
+    "remaining_eval_seconds": {
+      "baseline": 1075.7820960924998,
+      "candidate": 1077.1199521765
+    },
+    "refresh_seconds": {
+      "baseline": 429.806816769,
+      "candidate": 430.071128834
+    },
+    "process_wall_seconds": {
+      "baseline": 1324.3780667890096,
+      "candidate": 1244.4724028303754
+    },
+    "peak_host_rss_gib": {
+      "baseline": 66.4053707123,
+      "candidate": 58.171411514300004
+    },
+    "sampled_peak_device_gib": {
+      "baseline": 179.41180419921875,
+      "candidate": 179.41180419921875
+    }
+  },
+  "max_abs_error_vs_polynomial": 1.42691356375e-05,
+  "max_abs_error_vs_exact": 6.93591234566e-05,
+  "same_source_binary_libraries_and_payload": true,
+  "source_identities": {
+    "source": {
+      "bytes": 496270,
+      "sha256": "3113a3cae9f03003a5581cd4a26d31b49757c17962b8c37660f78d6c2f5a8cb3"
+    },
+    "native_source": {
+      "bytes": 496270,
+      "sha256": "3113a3cae9f03003a5581cd4a26d31b49757c17962b8c37660f78d6c2f5a8cb3"
+    },
+    "binary": {
+      "bytes": 17460032,
+      "sha256": "898b97399c8feb9a7c083d8910e3c64fd72d620bb474018c2111c632ec0e4c20"
+    },
+    "openfhe_core": {
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    "fideslib": {
+      "bytes": 42313230,
+      "sha256": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad"
+    },
+    "program": {
+      "bytes": 1311955328,
+      "sha256": "c666800a73bf18a6fa61968deb606a19a7f7e31cb8fe46bc4c28b1c302c3db95"
+    },
+    "manifest": {
+      "bytes": 496118,
+      "sha256": "c478d07270b87f1fd9b8b1dfc3c433c7330367a2556ff0f9be3a67d895922bfb"
+    },
+    "fixture": {
+      "bytes": 210498,
+      "sha256": "1ec19c5695c9cb8fa683ecd3f053f98189e26b0cd1cd3c5e64f497ca370907af"
+    },
+    "client_head": {
+      "bytes": 394002440,
+      "sha256": "5a509042367ccbac3d2e41f5a04893dbd18497e9cf413edf54a762ddf047d412"
+    }
+  },
+  "precision_security_circuit_token_gates_passed": true,
+  "timing_scope": "evaluation including prompt and inline feedback; excludes setup, final client token selection, output validation, teardown and external transport",
+  "limitations": [
+    "Fixed prompt and frozen 16-token tiled-state payload",
+    "Two opposite-order pairs on two concurrent placements; no statistical significance claim",
+    "Savings remove request initialization, not steady-state arithmetic",
+    "64-token request remains unqualified",
+    "No Mamba-2 full-model or process-separated deployment qualification"
+  ]
+}

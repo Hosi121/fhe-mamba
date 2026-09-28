@@ -1,0 +1,213 @@
+{
+  "schema": "fhemamba-recurrence-static-memory-v1",
+  "inventory_binary": {
+    "bytes": 102792,
+    "sha256": "6cf76767c485e4ae25436f0989ad791063ddcd65d1af998a5def8406e32d3e54"
+  },
+  "cases": [
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 1170,
+      "naf_rotations": 570,
+      "arithmetic_nodes": 49,
+      "arithmetic_with_final_input": 46,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 20,
+      "slots_at_peak_handles": 27816,
+      "peak_logical_slots": 30816,
+      "ciphertext_slots": 32768,
+      "case": "factored-4",
+      "program": {
+        "bytes": 969645,
+        "sha256": "0a1b49c5f0f482d0ebf01b5da189da5b4c64f49827ec034fb28a99b0b4c07bcc"
+      }
+    },
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 5092,
+      "naf_rotations": 3876,
+      "arithmetic_nodes": 176,
+      "arithmetic_with_final_input": 176,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 27,
+      "slots_at_peak_handles": 218652,
+      "peak_logical_slots": 315672,
+      "ciphertext_slots": 32768,
+      "case": "tiled-4",
+      "program": {
+        "bytes": 10206127,
+        "sha256": "29e1a7576a70635bda24d14878c4b3d9ef8269e72e4679236b97cb5b9954bf74"
+      }
+    },
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 15912,
+      "naf_rotations": 7752,
+      "arithmetic_nodes": 679,
+      "arithmetic_with_final_input": 574,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 68,
+      "slots_at_peak_handles": 101832,
+      "peak_logical_slots": 104832,
+      "ciphertext_slots": 32768,
+      "case": "factored-16",
+      "program": {
+        "bytes": 3883376,
+        "sha256": "603aac96a7794a522dced0aed4f4bcfcc6fd5520ad5c99b9999b96ffde527452"
+      }
+    },
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 20368,
+      "naf_rotations": 15504,
+      "arithmetic_nodes": 704,
+      "arithmetic_with_final_input": 704,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 39,
+      "slots_at_peak_handles": 237084,
+      "peak_logical_slots": 334104,
+      "ciphertext_slots": 32768,
+      "case": "tiled-16",
+      "program": {
+        "bytes": 13873336,
+        "sha256": "5a742438060fd958873af349519ebe696f6abd543c6fe7ea4fa68053085d71ee"
+      }
+    },
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 95940,
+      "naf_rotations": 46740,
+      "arithmetic_nodes": 4099,
+      "arithmetic_with_final_input": 3358,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 164,
+      "slots_at_peak_handles": 249864,
+      "peak_logical_slots": 252864,
+      "ciphertext_slots": 32768,
+      "case": "factored-40",
+      "program": {
+        "bytes": 9836762,
+        "sha256": "b400b4b99b51b3b55ee67b264244b52f972252ba8f594c60f40b0df033316142"
+      }
+    },
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 50920,
+      "naf_rotations": 38760,
+      "arithmetic_nodes": 1760,
+      "arithmetic_with_final_input": 1760,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 63,
+      "slots_at_peak_handles": 273948,
+      "peak_logical_slots": 370968,
+      "ciphertext_slots": 32768,
+      "case": "tiled-40",
+      "program": {
+        "bytes": 21265916,
+        "sha256": "6b4e4b76ae064a20d37cde1a6e76a10c63b9bcd0c0c840d90857bc68b2065fd5"
+      }
+    },
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 243360,
+      "naf_rotations": 118560,
+      "arithmetic_nodes": 10399,
+      "arithmetic_with_final_input": 8446,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 260,
+      "slots_at_peak_handles": 397896,
+      "peak_logical_slots": 400896,
+      "ciphertext_slots": 32768,
+      "case": "factored-64",
+      "program": {
+        "bytes": 15925017,
+        "sha256": "e41adec34a9040bc8161007addd62226227a4a9400e261dadfb7cd135c7a9331"
+      }
+    },
+    {
+      "schema": "fhemamba-packed-resource-inventory-v1",
+      "encrypted": false,
+      "scope": "planned refresh, replicated linear, radix8; runtime refresh rotations excluded",
+      "bsgs_routing_stages": true,
+      "binary_rotations": 81472,
+      "naf_rotations": 62016,
+      "arithmetic_nodes": 2816,
+      "arithmetic_with_final_input": 2816,
+      "public_weights": 0,
+      "double_weight_bytes": 0,
+      "compact_weight_bytes": 0,
+      "bf16_weights": 0,
+      "peak_live_dag_handles": 87,
+      "slots_at_peak_handles": 310812,
+      "peak_logical_slots": 407832,
+      "ciphertext_slots": 32768,
+      "case": "tiled-64",
+      "program": {
+        "bytes": 28625289,
+        "sha256": "7f99eac1c33d2f439df34da22483d09fa3ca21df2b8af2e89acbd8ea1a85742a"
+      }
+    }
+  ],
+  "limitation": "Source-order liveness, not frontier-scheduled GPU peak; refresh scratch, key/cache memory, and ciphertext levels excluded.",
+  "source_archive": {
+    "bytes": 28932,
+    "sha256": "b8c06a2dcf9913dc1719bb0e99011bde927c9ec3c301f0524a1eb97bae5feb8d"
+  },
+  "compile_command": [
+    "g++",
+    "-std=c++20",
+    "-O2",
+    "-I",
+    "native/fideslib_stage0/include",
+    "native/fideslib_stage0/src/packed_resource_inventory.cpp",
+    "native/fideslib_stage0/src/stage1_mamba2_plan.cpp",
+    "-o",
+    "packed_resource_inventory"
+  ],
+  "run_arguments": [
+    "PROGRAM",
+    "--bsgs-routing-stages"
+  ]
+}

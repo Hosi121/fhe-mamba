@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "pairs": [
+    {
+      "baseline": "full-a1",
+      "candidate": "full-b2",
+      "matched_job_configuration": true,
+      "ignored_fields": [
+        "container name",
+        "result path"
+      ],
+      "only_candidate_option": "--reuse-public-ciphertexts",
+      "jobs": {
+        "full-a1": "fb61b82276eb3fd34237cd362b0a08a47ce8440dc26d2181266007023d92c026",
+        "full-b2": "c685a65c44f8e0655635ecb14e6a2336842d117823e8c997b546af11cc60c375"
+      }
+    },
+    {
+      "baseline": "full-a2",
+      "candidate": "full-b1",
+      "matched_job_configuration": true,
+      "ignored_fields": [
+        "container name",
+        "result path"
+      ],
+      "only_candidate_option": "--reuse-public-ciphertexts",
+      "jobs": {
+        "full-a2": "76acc738fc26bb8804dc93bd21113808fe61dc2ca7d14d7ea75aca7d11e3f312",
+        "full-b1": "1a91863eb8a1b8dab57f2bd136171bbe54f72edfebd6cf1e10044ffffcd3aaed"
+      }
+    }
+  ]
+}

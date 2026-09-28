@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/diagnostic-fine-r3",
+  "state": "failed",
+  "exit_code": 2,
+  "at_unix": 1790553237.028259
+}

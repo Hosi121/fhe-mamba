@@ -1,0 +1,32 @@
+{
+  "schema": "fhemamba-recurrence-decision-v1",
+  "decision": "retain head-tiled state as an opt-in prototype; keep the short-generation factored default",
+  "qualified_recurrence_lengths": [
+    4,
+    16,
+    40
+  ],
+  "failed_lengths": [
+    64
+  ],
+  "comparison": "comparison.json",
+  "first_measured_tiled_win": 40,
+  "state_arithmetic_reduction_fraction": 0.11998587212067624,
+  "evaluation_reduction_fraction": 0.04749472494043039,
+  "carried_ciphertexts": 8,
+  "device_count_per_process": 1,
+  "precision_tolerance": 0.001,
+  "classical_128_preserved": true,
+  "encrypted_long_generation_qualified": false,
+  "necessary_next_gates": [
+    "bounded executor working set through refresh",
+    "more efficient fixed-state broadcast/layout",
+    "long-horizon nonlinear domains and error/quality with real encrypted token feedback"
+  ],
+  "limitations": [
+    "one process per arm and length; no statistical confidence interval",
+    "no claim about full-model latency, encrypted autoregressive feedback or text quality",
+    "bounded carried state; executor DAG and retained validation outputs still grow",
+    "finite trace accuracy test, not a long-horizon numerical stability proof"
+  ]
+}

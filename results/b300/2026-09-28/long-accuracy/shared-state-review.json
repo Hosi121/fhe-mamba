@@ -1,0 +1,28 @@
+{
+  "scope": "Read-only review prompted by the intermediate decoder rejection; no new optimization or causal proof",
+  "findings": [
+    {
+      "path": "native/fideslib_stage0/src/packed_fideslib.cpp",
+      "observation": "With gpu_plaintext_fft enabled, prefetch producers construct public masks but skip encode_cpu; GPU encoding and cache lookup remain on the evaluator thread"
+    },
+    {
+      "path": "native/fideslib_stage0/include/bounded_prefetch.hpp",
+      "observation": "The assignment/consumption window, ring slots and cancellation are guarded by one mutex; consumption stays ordered"
+    },
+    {
+      "path": "native/fideslib_stage0/include/plaintext_cache.hpp",
+      "observation": "Cached entry eligibility is checked by level, width and complete coefficient-bit equality after hashing; cache index is opt-in"
+    },
+    {
+      "path": "native/fideslib_stage0/include/owned_arithmetic.hpp",
+      "observation": "Temporary arithmetic detaches aliased operands before mutation and synchronizes before releasing the right operand"
+    }
+  ],
+  "limitation": "This inspection cannot exclude backend state corruption, undefined behavior, numerical range issues or stochastic decryption/bootstrapping effects. No race or cache corruption is demonstrated.",
+  "source_sha256": {
+    "native/fideslib_stage0/src/packed_fideslib.cpp": "0b870b8f6523e7828c515226dd389245c1999ee98395c9ea7c2ecd3be41f6261",
+    "native/fideslib_stage0/include/bounded_prefetch.hpp": "bd8785a8341b8a436ee0637e9be8b1de11c6682b46830fa7221b1ff3cca3b00e",
+    "native/fideslib_stage0/include/plaintext_cache.hpp": "1008e30f31a7da9cabdb4878176e4e6a626d41286e041acff27225e3c9510ad3",
+    "native/fideslib_stage0/include/owned_arithmetic.hpp": "4b3d3ee116cb5000aea1da8eb3435ca57014e8983e5d4ea141550c792eb9657d"
+  }
+}

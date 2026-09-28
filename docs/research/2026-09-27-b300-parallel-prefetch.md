@@ -174,7 +174,7 @@ No Nsight Compute replay is needed because the GPU kernels are unchanged.
 
 Enable the shared executor's optional two-worker path with
 `--prefetch-plaintexts --prefetch-workers 2` and coefficient encoding, for
-example `--gpu-plaintext-rns`. The Python `experiments/run_packed_probe.py`
+example `--gpu-plaintext-rns`. The Python `src/fhemamba/benchmarks/packed.py`
 runner forwards the option in both budgeted and unbudgeted runs. The default
 worker count is one; two workers without plaintext prefetch are rejected.
 

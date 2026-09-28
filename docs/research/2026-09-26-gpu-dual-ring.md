@@ -191,7 +191,7 @@ For the frozen full generation payload produced by the
 documented OpenFHE/CUDA library path. Choose a fresh output directory:
 
 ```bash
-OMP_NUM_THREADS=4 taskset -c 15-19 python3 experiments/run_packed_probe.py \
+OMP_NUM_THREADS=4 taskset -c 15-19 python -m fhemamba benchmark packed \
   --binary "$HOME/fhemamba/spark/kernel/packed_fideslib" \
   --payload /path/to/mamba3-full-generation-payload \
   --output runs/mamba3-dual-ring-001 --timeout 2400 --tolerance 0.001 \

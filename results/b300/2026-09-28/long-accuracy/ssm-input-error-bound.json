@@ -1,0 +1,66 @@
+{
+  "scope": "Conservative input-drift estimate for ideal SSM products/additions, excluding errors introduced inside state-update arithmetic and refresh. Floating-point calculation, not a certified interval proof.",
+  "inputs": {
+    "state": {
+      "node": 72871,
+      "max_value": 3.7523011257935073,
+      "error": 1.1034598030867926e-05
+    },
+    "key_old": {
+      "node": 72748,
+      "max_value": 4.369918086851278,
+      "error": 4.151306756794426e-06
+    },
+    "value_old": {
+      "node": 72686,
+      "max_value": 4.233646902702098,
+      "error": 3.884001020137973e-06
+    },
+    "key": {
+      "node": 75782,
+      "max_value": 4.311846720622684,
+      "error": 5.046501446948071e-06
+    },
+    "value": {
+      "node": 75720,
+      "max_value": 3.0692976455166705,
+      "error": 3.836114438771077e-06
+    },
+    "decay": {
+      "node": 75731,
+      "max_value": 0.6803970876942675,
+      "error": 7.797489554040027e-08
+    },
+    "dt": {
+      "node": 75728,
+      "max_value": 0.671575194677664,
+      "error": 6.550815601080728e-08
+    },
+    "mix": {
+      "node": 75732,
+      "max_value": 0.908099539704011,
+      "error": 5.36623349089993e-08
+    }
+  },
+  "term_bounds": [
+    {
+      "max_value": 2.553054758141824,
+      "error": 7.800494512544276e-06
+    },
+    {
+      "max_value": 16.130433892579237,
+      "error": 3.3997422733023086e-05
+    },
+    {
+      "max_value": 8.071057148030102,
+      "error": 2.0797936207017642e-05
+    }
+  ],
+  "max_abs_output_drift_bound": 6.2595853452585e-05,
+  "observed_max_abs_state_error": 0.08171843112453663,
+  "inputs_sha256": {
+    "metadata": "0475fa93dce3f2f79504e57381a68c8471dbb1693b1c87ae4e39c4eb910b5e03",
+    "references": "a24cbfd4ffc00c41199fe1722cc863f9e7bc699b9ddac0a78af668adce5078c6",
+    "analysis": "9d95bbb969439a0a7f0fcd874b88f7e935d397f560a8e032f8e88df43d1b3ea0"
+  }
+}

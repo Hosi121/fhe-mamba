@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/replay-controls-smoke",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790554572.037969
+}

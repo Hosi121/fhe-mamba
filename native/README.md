@@ -39,6 +39,15 @@ sequential schedule. See the
 Polynomial-batching and deferred-layout prototypes are archived there; their
 experimental flags are not part of the current executable.
 
+`--frontier-live-limit N` optionally limits ready-node lookahead when N logical
+DAG values are retained. It then selects the oldest ready branch, including its
+normal refresh; zero preserves unlimited lookahead. This is a soft admission
+threshold: required work and pinned outputs can exceed it. The executor records
+peak live values and admission decisions. With `--profile-evaluation`, it also
+samples device memory every ten completed nodes. See the
+[recurrence memory qualification](../experiments/recurrent_state/README.md#qualify-scheduler-memory-admission)
+for measurement boundaries and matched comparisons.
+
 `--hoist-rotations` shares signed-digit prefixes and sibling key-switch
 preparation for the packed executor's BSGS baby rotations, using existing
 rotation keys. `--share-chebyshev` shares normalized arguments and basis terms

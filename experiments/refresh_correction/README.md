@@ -46,4 +46,4 @@ The existing S2C-first backend requires real packing. The complex variant
 therefore qualifies the shared integer primitive only; it does not claim a
 complex refresh or full Mamba-2 qualification. This option requires planned
 two-pass refresh, defaults off, and is also forwarded and validated by
-`experiments/run_packed_probe.py`.
+`src/fhemamba/benchmarks/packed.py`.

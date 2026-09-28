@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${REPO}/.local/recurrent-state-20260927/evidence/domain-audit",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790514372.8664129
+}

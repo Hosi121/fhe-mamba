@@ -1,0 +1,5 @@
+{
+  "issue": "The build result directory overlapped the CMake build directory before the compile command could start.",
+  "correction": "Use build-job for run metadata and build/native for compiled artifacts.",
+  "gpu_measurements_started": false
+}

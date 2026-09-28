@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790514368.229495,
+  "spec": {
+    "schema_version": 1,
+    "cwd": "${REPO}",
+    "timeout_seconds": 600,
+    "command": [
+      "${REPO}/.venv/bin/python",
+      "experiments/recurrent_state/probe.py",
+      "audit-domains",
+      "--checkpoint",
+      "checkpoints/mamba3-siso-187m",
+      "--trace",
+      "runs/recurrent-state-20260927/trace",
+      "--polynomial-manifest",
+      "runs/mamba3-lm-full-20260924/manifest.json",
+      "--output",
+      "${REPO}/.local/recurrent-state-20260927/evidence/domain-audit/audit.json"
+    ],
+    "inputs": {
+      "source": "${REPO}/.local/recurrent-state-20260927/audit-source.tar.gz",
+      "trace_manifest": "${REPO}/runs/recurrent-state-20260927/trace/manifest.json",
+      "polynomial_manifest": "${REPO}/runs/mamba3-lm-full-20260924/manifest.json"
+    }
+  },
+  "inputs": {
+    "source": {
+      "bytes": 88406,
+      "sha256": "ef39bffafeeb17d0e8886d3c56d66d56d350a60713b99bfb5e0f410d91194cf2"
+    },
+    "trace_manifest": {
+      "bytes": 2695,
+      "sha256": "7d2a76119dc191e2e5d5d1e6c73ea8b07cb9e812f517844fa94bfdd0c4a4d2ea"
+    },
+    "polynomial_manifest": {
+      "bytes": 375195,
+      "sha256": "6627d2fa2e0169f8d88bfc26dff711b06a0f511f25a9246e256270314c9843a7"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.0003593370201997459,
+  "wall_seconds": 4.636591385991778
+}

@@ -15,6 +15,11 @@ published hashes.
 
 | Study | Focus |
 | --- | --- |
+| [2026-09-28 — Long-session numerical diagnosis and two trials](2026-09-28-long-accuracy.md) | Frozen 64-token failure localization; delayed NTT reduction passes 373M exact words but is slower; indexed mask lookup has a passing 2.20% full pair and a separate numerical failure, so neither is promoted |
+| [2026-09-28 — Public initial-state reuse](2026-09-28-public-state-reuse.md) | Request-local sharing of identical public sources; two classical-128 full 16-token pairs, 1,157.99→1,078.48 s (6.87%); unchanged gates and circuit counts, further NTT counter analysis |
+| [2026-09-28 — Full-model long sessions and Nsight](2026-09-28-long-generation.md) | Phasor state and wider normalization calibration; 16 actual classical-128 tokens pass, 64-token candidate fails at selection 24; graph/node timelines, kernel counters and automatic client-error rejection |
+| [2026-09-27 — Recurrent execution memory](2026-09-27-recurrent-memory.md) | Shared lookahead admission; both classical-128 64-step recurrences complete, fixed-state sampled peak 138.416 GiB versus 267.414 GiB at control failure; soft threshold, no encrypted long-text claim |
+| [2026-09-27 — Fixed-size Mamba-3 state](2026-09-27-recurrent-state.md) | Shared tiled recurrence, matched classical-128 subcircuit comparisons, 64-step GPU memory failures and a full-model nonlinear-domain audit; no encrypted long-text claim |
 | [2026-09-27 — B300 GPU plaintext FFT](2026-09-27-b300-gpu-plaintext-fft.md) | Shared GPU FFT/rounding through RNS/NTT; exact primitive gates, classical-128 full pair 211.71→165.37 s (21.89%), 41.34 s/generated token; RMSNorm timing attribution |
 | [2026-09-27 — B300 refresh correction merging](2026-09-27-b300-refresh-correction.md) | Exact integer merge before extraction; classical-128 full pair 235.84→210.33 s (10.82%), unchanged 484 bootstraps and numerical/token gates |
 | [2026-09-27 — B300 classical-128 prototype](2026-09-27-b300-classical128.md) | Audited uniform-ternary QP=3,376 bits at N=131,072; full Mamba-3 numerical/token gates, exact GPU addend qualification and larger mask cache, secure full pair 327.51→235.75 s (28.02%) |

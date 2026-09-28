@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/analyze-diagnostic-fine-r3",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790553239.9917686
+}

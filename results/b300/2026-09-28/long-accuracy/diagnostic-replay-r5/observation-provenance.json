@@ -1,0 +1,12 @@
+{
+  "full_observations_sha256": "b0673c8447810a1bf1bf313ccd0131677ef36f2bdccf7a7ec2163536123f2b27",
+  "full_bytes": 143673279,
+  "selected_nodes": [
+    75898,
+    75904,
+    75905,
+    75969
+  ],
+  "selected_rows": 8,
+  "selected_gzip_sha256": "8358d7c48d7d15e69527ccdac7094f5bc64235b9f286d454532ec24be363f7c9"
+}

@@ -1,0 +1,68 @@
+{
+  "input": {
+    "path": "results/b300/2026-09-28/long-generation/profiling/nsys-nodes/summary-timeline-after90.json",
+    "sha256": "382f2594f7cce922f5fce91aaf669af582217ad09c22abbf317c77eaab21104e"
+  },
+  "window_start_seconds": 90.0,
+  "trace_window_seconds": 209.55299153,
+  "top_listed_ntt_intt_summed_seconds": 135.47359925,
+  "all_kernel_summed_seconds": 218.926093331,
+  "minimum_fraction_of_summed_kernel_seconds": 0.6188097416289888,
+  "listed_variants": [
+    {
+      "name": "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 392056,
+      "summed_seconds": 24.788066362,
+      "mean_microseconds": 63.225830906809236
+    },
+    {
+      "name": "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+      "instances": 755151,
+      "summed_seconds": 23.516535519,
+      "mean_microseconds": 31.1415008640656
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 392056,
+      "summed_seconds": 18.486395304,
+      "mean_microseconds": 47.15243563164446
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 307108,
+      "summed_seconds": 17.266659621,
+      "mean_microseconds": 56.22341202769058
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 307108,
+      "summed_seconds": 14.94591621,
+      "mean_microseconds": 48.66664564257525
+    },
+    {
+      "name": "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+      "instances": 755151,
+      "summed_seconds": 13.770146143,
+      "mean_microseconds": 18.23495717147961
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 195402,
+      "summed_seconds": 13.497579363,
+      "mean_microseconds": 69.07595297386925
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 195402,
+      "summed_seconds": 8.633620661,
+      "mean_microseconds": 44.18389095812735
+    },
+    {
+      "name": "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+      "instances": 55782,
+      "summed_seconds": 0.568680067,
+      "mean_microseconds": 10.194687659101502
+    }
+  ],
+  "scope": "Frozen two-token graph-node capture, after 90 seconds. Numerator includes only transform variants retained in the top-k summary, so it is a lower bound on their share of summed kernel durations. Durations overlap and this fraction is not a wall-time fraction or an end-to-end speedup prediction."
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/configure-in-context",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790554035.3009615
+}

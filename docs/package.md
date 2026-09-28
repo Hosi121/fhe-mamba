@@ -29,8 +29,9 @@ filename `m1_payload.py` also serves the active Mamba-2 export path.
 ## Running experiments
 
 The installed package provides model/layout utilities and `fhemamba --help`.
-Native builds, experiment runners and recorded results are used from a
-repository checkout; they are not bundled into the Python wheel.
+Native builds, specialized study scripts and recorded results are used from a
+repository checkout; they are not bundled into the Python wheel. The reusable
+commands described below are included in the wheel.
 
 - [Reproduction guide](reproducing.md): checkpoint, coefficients, parity and generation.
 - [Experiment index](../experiments/README.md): choose a runner or campaign.
@@ -39,3 +40,35 @@ repository checkout; they are not bundled into the Python wheel.
 
 For development, install with `uv sync --locked --extra dev`. Python code is
 loaded through the installed package; the root directory needs no import shim.
+
+## Research tools
+
+Use `python -m fhemamba --help` (or the installed `fhemamba` command).
+Subcommand help loads only the selected implementation. The job, build,
+publication, packed-runner and profiling tools use the standard library;
+model export and reference propagation additionally use NumPy/PyTorch.
+
+| Command group | Importable implementation | Responsibility |
+| --- | --- | --- |
+| `benchmark` | `fhemamba.benchmarks` | Jobs, completion events, comparisons, packed qualification, generation reports, build identity and evidence publication |
+| `diagnose` | `fhemamba.diagnostics` | Frozen references, prefix verification, observed-input analysis, replay cases, CPU error propagation and circuit summaries |
+| `profile` | `fhemamba.profiling` | Nsight Systems SQLite and Nsight Compute CSV analysis |
+| `recurrent` | `fhemamba.recurrent` | Capture/export/audit component fixtures and compare storage/scheduling results |
+| `workload` | `fhemamba.workloads` | Mamba-3 model/mixer payloads and upstream CPU parity |
+
+Call functions directly when composing work, for example
+`fhemamba.profiling.nsys.summarize(connection)` or
+`fhemamba.benchmarks.packed.run(binary, payload, output, security="128-classic")`.
+The packed runner has one option-forwarding path for ordinary and budgeted jobs.
+
+Use `fhemamba.benchmarks.io.file_sha256`, `payload_sha256`, `read_object` and
+`write_json` instead of copying file helpers. `repository_root` resolves an
+explicit source checkout from the working directory, not from `site-packages`.
+Repository-specific build/export commands should run from a checkout; the Spark
+build command also accepts `--repo`.
+
+`fhemamba.ckks_probes` shares the Chebyshev circuit and local CPU CKKS setup.
+OpenFHE is imported only when constructing that optional feasibility context;
+its small-ring `not-set` configuration is not a classical-128 claim.
+Specialized experiment configurations remain in the grouped
+[experiment directories](../experiments/README.md).

@@ -1,0 +1,68 @@
+{
+  "schema": "fhemamba-recurrence-qualification-v1",
+  "base_commit": "bd1b1cd2bbf9cc40b7f5aad83473562be946b81d",
+  "modified_sources": {
+    "src/fhemamba/tensor_ops.py": {
+      "bytes": 4107,
+      "sha256": "831e9c8e7d52fddbc3274ea93e7072ce5b540f65422c601142be481e4d48732e"
+    },
+    "src/fhemamba/mamba3.py": {
+      "bytes": 10815,
+      "sha256": "de45f35ee775261783ee23fb7ea21bd02d115082fbf3750233f9956384209025"
+    },
+    "src/fhemamba/packed_program.py": {
+      "bytes": 14242,
+      "sha256": "564b7289b62d55c42ff45050273be6e00b550a693c789c3431a48ecbc0a4b608"
+    },
+    "experiments/recurrent_state/probe.py": {
+      "bytes": 15267,
+      "sha256": "e9d360bb02b82ab2458bdcb5fcfca4a2d0a55a94d1fdb3d6c73f4b8d26d9d905"
+    },
+    "experiments/recurrent_state/analyze.py": {
+      "bytes": 10504,
+      "sha256": "dc60a6a60f64414d09628f17b75b1efa629f40633e7b893e6d140c9c38f5f831"
+    },
+    "tests/test_mamba3.py": {
+      "bytes": 9460,
+      "sha256": "951d537591516ae3eaa8f0f5c42d1681ff3e9756f6f3702dde79fe95edd99b1d"
+    },
+    "tests/test_recurrent_state_probe.py": {
+      "bytes": 9252,
+      "sha256": "08321a9dda2f22ab76a1700c40c92e47f27d3acceacad74ed746ff69ea27b63e"
+    }
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q"
+      ],
+      "exit_code": 0,
+      "passed_tests": 393,
+      "wall_seconds": 111.57
+    },
+    {
+      "command": [
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exit_code": 0,
+      "checked_files": 269
+    }
+  ],
+  "scope": "CPU tests and lint; native recurrence accuracy/timing is recorded separately."
+}

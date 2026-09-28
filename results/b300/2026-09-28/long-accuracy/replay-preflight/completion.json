@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/replay-preflight",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790553290.8622565
+}

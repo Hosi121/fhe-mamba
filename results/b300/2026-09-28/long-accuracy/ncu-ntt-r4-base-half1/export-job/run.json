@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790550338.7877908,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--user",
+      "${UID}:${GID}",
+      "--volume",
+      "${STUDY}:/study:ro",
+      "--entrypoint",
+      "/usr/local/cuda/bin/ncu",
+      "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+      "--import",
+      "/study/ncu-ntt-r4-base-half1/profile.ncu-rep",
+      "--page",
+      "raw",
+      "--csv"
+    ],
+    "cwd": "${STUDY}",
+    "inputs": {
+      "report": "${STUDY}/ncu-ntt-r4-base-half1/profile.ncu-rep"
+    },
+    "timeout_seconds": 180
+  },
+  "inputs": {
+    "report": {
+      "bytes": 9491379,
+      "sha256": "a612d18ea635513c9dc69dacd05d2537e750614fefcd6b043f0a49b60a54f373"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.0003190389834344387,
+  "wall_seconds": 1.3197378769982606
+}

@@ -1,221 +1,42 @@
 # Roadmap
 
-The active line is `fhemamba` 0.5.x on DGX Spark and B300. The objective and invariants
-are in [design.md](design.md); [backlog.md](backlog.md) records executable gates.
-Recovery of the historical B300 0.4.5 result is separate from the new
-[Mamba-3 dual-ring execution](../results/b300/2026-09-26/mamba3-dual-ring/).
+The goal is reproducible encrypted inference with explicit accuracy, security
+and protocol boundaries. [Current state](status.md) records what is qualified;
+[the backlog](backlog.md) records the next executable gates. Historical timing
+comparisons belong in [the evidence registry](evidence.md).
 
-The [classical-128 prototype](research/2026-09-27-b300-classical128.md) now
-passes the twelve-layer Mamba-3 request with the actual QP/secret/error
-assumptions audited before key generation. GPU additive-plaintext expansion and
-mask reuse first reduced evaluation from 327.51 to 235.75 seconds. Subsequent
-matched comparisons adopt [correction merging](research/2026-09-27-b300-refresh-correction.md)
-(235.84 → 210.33 s) and [GPU plaintext FFT](research/2026-09-27-b300-gpu-plaintext-fft.md)
-(211.71 → 165.37 s), reaching 41.34 s/generated token on the frozen request.
-The earlier 35.44 s/token timing remains a `security=not-set` result.
-The [Sylph/Cachemir review](research/2026-09-27-sylph-cachemir.md) identifies
-measured level placement and layout/refresh fusion as further design work;
-its static polynomial screen is not an encrypted performance result.
+## 1. Reliable long generation
 
-The [B300 Nsight study](research/2026-09-26-b300-nsight-ifft.md) adopts an
-optional shared OpenFHE inverse-FFT plan: full Mamba-3 ABBA **266.22 → 234.84 s
-(11.79%)**, with unchanged refresh, parameters, numerical gates and generated
-IDs. Exact coefficient checks cover real and complex configurations. The
-remaining measured preparation work includes integer residue conversion and
-scaling/rounding; full Mamba-2 performance remains a separate gate. The later
-inverse-FFT reuse trial below measures the transformed-weight boundary.
-Prefix timing variance and the fixed-prompt scope are retained
-in the study.
+Resolve the first-call refresh failure in the frozen Mamba-3 64-token request.
+Then extend prompts, keys and horizons without changing the classical-128 or
+0.001 final-hidden gates. Distinguish one-layer recurrent-state experiments,
+fixed-input evaluation and actual token generation.
 
-The subsequent [RNS/pipeline study](research/2026-09-26-b300-rns-pipeline.md)
-adopts bounded CPU preparation as an opt-in path: full Mamba-3 ABBA
-**234.84 → 202.33 s (13.84%)**, with unchanged operation counts and gates.
-RNS/NTT fusion is not adopted after its separate full comparison. Frequency
-and thread-placement variation require controlled follow-up before attributing
-that negative result to fusion itself. The pipeline's remaining 33.39 s of
-queue-pop time motivates separating producer work from scheduling and extending
-the preparation window; these are investigation targets, not measured gains.
+## 2. Measured whole-request performance
 
-The [ordered parallel preparation follow-up](research/2026-09-27-b300-parallel-prefetch.md)
-verifies producer placement after OpenMP initialization and tests two workers
-within the same two-item window. Its new matched full ABBA improves
-**173.16 → 148.80 s (14.07%)**, or **37.20 s/generated token**, with unchanged
-GPU kernels and numerical/security/refresh gates. Queue-pop wait falls
-39.84 → 17.95 s. The common CPU-affinity helper is a measurement control;
-the portable option remains opt-in. Remaining targets include exposed
-preparation waits and GPU submission, with fresh controls against this baseline.
+Profile the current qualified configuration before selecting a bounded set of
+candidates. Compare the same payload, device placement, security and precision.
+Count preparation, key/cache memory and evaluation separately. Retain rejected
+candidates and failed controls; kernel speed alone does not establish a model
+speedup. Avoid restarting older searches without new evidence.
 
-The [public-weight inverse-FFT cache](research/2026-09-27-b300-ifft-reuse.md)
-passes exact checks and reaches 80% reuse across changing levels. A cold full
-single pair improves **148.32 → 144.10 s (2.85%)**, below its predeclared 5%
-promotion criterion, with 2.502 GiB retained. The prototype is archived and
-active sources restored. Scale/range scanning and rounding remain unmeasured
-on the current GPU-RNS/two-worker baseline; the older CPU-only range-scan
-result does not establish their end-to-end benefit here.
+## 3. Protocol and output security
 
-The stabilized prompt-to-text baseline now passes: tokenize the whole prompt,
-carry encrypted state through every layer, select the next token at the client
-and feed back its encrypted embedding. Retain this end-to-end correctness gate
-while shortening its runtime. See the
-[five-evaluation result](research/2026-09-22-client-generation.md).
+Separate client and server processes, establish ownership and message formats,
+and document what the server and client observe. Parameter selection alone
+does not establish protocol security. The current client decrypts the final
+hidden vector to select the next token; encrypted selection is a separate gate.
 
+## 4. Architecture and prefill
 
-The shared Mamba-3 executor now passes complete SISO 187M generation and a
-matched [depth/batching comparison](research/2026-09-24-mamba3-depth-batching.md):
-46.20 → 24.95 min, all four tokens unchanged, exact hidden error 0.000155
-under the fixed 0.001 gate. The 12-layer model, frozen polynomials and CKKS
-parameters are unchanged. The [microkernel profile](research/2026-09-24-mamba3-microkernels.md)
-finds substantial host encoding and GPU copy/NTT costs in a short prefix. SIMD
-mask copies and optional GPU scratch reuse are measured locally; preserve the
-full-generation gate when extending these gains to the whole session.
-An optional [64-entry mask cache](research/2026-09-24-mamba3-plaintext-cache.md)
-reduces the matched prefix by 1.4%, avoiding 63 of 888 preparations; most
-encoding cost remains; full-generation cache validation is not yet measured.
-With additional GPU time authorized, the
-[GPU encoding path](research/2026-09-24-mamba3-gpu-encoding.md) now passes a
-same-binary full comparison: **21.87 → 18.59 minutes (−15.0%)**, all four tokens
-unchanged, exact error `8.83e-5`. It preserves OpenFHE rounding/scale and moves
-the integer NTT to the GPU; host preparation falls 378.84 → 218.56 seconds.
-The earlier 7200-second ledger stays immutable. This separate campaign uses
-3226.63 seconds across 18 attempts, including its failed allocation probe.
-Remaining candidates are coefficient construction and staging copies, followed
-by preparation/compute overlap with explicit buffer-lifetime guarantees.
-Repeated prompts/keys, longer horizons and certified domains remain open.
+Validate chunk-summary carry and native scan prefill before long-context
+speed claims. FHE-oriented training may change state structure, gates and
+normalization, with explicit held-out quality and encrypted cost comparisons.
+Keep pretrained checkpoint experiments reproducible while exploring new models.
 
-## 1. Reproducible Spark baseline
+## 5. Sustainable implementation
 
-Build pinned CUDA 13 / SM121 dependencies in an isolated prefix. Use calibrated
-payloads and a 5 GiB plaintext cache. Establish bootstrap, full-width layer,
-and 24-layer gates. Record source/binary/library identity, exact configuration,
-per-token errors, operation counts, cold/warm timings and peak memory.
-
-Bind surrogate-quality measurements to those exact payload coefficients and
-head masks. The historical PPL certificate does not identify the current
-payload, and largest-step head pruning is not a uniform memory-negligibility
-proof. Audit per-head domains and long-context behavior alongside circuit work.
-The legacy frozen payload fails 1,024- and 4,096-token plaintext screens;
-SiLU/normalization extrapolation is now a blocking quality issue. Exact rational
-normalization certificates and public-weight activation envelopes are the
-next implementation basis, with domain membership and CKKS slack explicit.
-
-Scheduled RMSNorm now passes an opt-in native **24-layer/two-fixed-token**
-gate, including all 49 sites, encrypted state carry and internal refresh.
-Maximum error against its polynomial reference is 0.007136 at
-`security=not-set`; this does not close the full-chain 128-bit gate. The same
-payload still fails a 1,024-token plaintext quality screen because it retains
-the legacy non-normalization fits. See the
-[integration evidence](research/2026-09-21-normalization-integration.md).
-
-The separate [complete-candidate payload](research/2026-09-21-stabilized-native.md)
-now includes joint gates and public-envelope activations, with all 121 frozen
-recipes preserved. Its matching 1,024/4,096-token plaintext prefixes are finite
-with no observed domain escapes. The native **24-layer/two-fixed-token** gate
-passes at error **0.003311**, with zero intermediate decryptions, **831**
-bootstraps, **1,192.95 s** evaluation and **36.09 GiB** peak RSS. This remains
-`security=not-set`. Joint-gate evaluation accounts for **552.24 s** in that
-fixed-input baseline and motivates the encoding optimization below. Longer
-encrypted horizons and 128-bit full-chain gates remain open.
-
-Compare the binary replication candidate against linear replication on the
-same build and payload. Promotion needs passing multi-token accuracy and a
-measured end-to-end benefit; fewer logical operations alone are insufficient.
-
-The first [joint-gate encoding optimization](research/2026-09-22-periodic-gate-coefficients.md)
-now passes the same 24×5 generation gate: period-32 coefficients and a masked
-basis reduce evaluation **3,038.12 -> 2,573.37 s (15.3%)**, with unchanged generated
-IDs, depth and 2187 bootstraps. Maximum polynomial-circuit error is **0.011767**,
-within the existing 0.05 limit. The interleaved one-layer comparison also passes.
-Keep this opt-in result bound to its frozen payload while investigating the
-remaining full-ring plaintext conversion and bootstrap costs.
-
-The [subring follow-up](research/2026-09-22-subring-gate-encoding.md) now replaces
-the full-ring coefficient NTT with a private 64-point transform and expansion.
-It passes exact plaintext parity, repeated smoke and complete generation:
-**2,573.37 -> 2,310.80 s (10.2%)**, maximum polynomial error **0.016255**,
-with all generated IDs, operation counts and levels unchanged. It stays opt-in.
-The later [shared plaintext preparation](research/2026-09-24-shared-plaintext-preparation.md)
-also passes the same workload, measuring **2318.10→2142.11 s (−7.59%)** in its
-own matched comparison. Mamba-2 and Mamba-3 now share encoding dispatch,
-additive scale repair and upload; the Mamba-3 full regression passes.
-The [normalization lower bounds](research/2026-09-22-normalization-bounds.md)
-identify the next experiment: preserve the public domain and precision while
-seeking one fewer internal refresh. The existing stage-11 refreshes cost
-227.28 seconds in the periodic baseline; removing them is not yet validated.
-
-## 2. Autoregressive horizon
-
-The stabilized prompt-2/generate-4 run now passes five sequential encrypted
-evaluations and reconstructs text from the measured selected IDs: `The capital`
-becomes `The capital of the Republic of`. Maximum polynomial-circuit error is
-0.009192, evaluation takes 3,038.12 s and peak RSS is 37.05 GiB. This remains a
-one-process client loop with `security=not-set`.
-`run_dgx_generation.py` prepares the full prompt without truncation, preserves
-the frozen operator recipes/bounds and collects the result from Spark.
-Next repeat keys/prompts and expand through 16, 64 and 256 steps on held-out
-prompts. Require successful decryption
-and polynomial-circuit error <= 0.05 at every step, matching generated IDs,
-and no intermediate diagnostic decrypts. Record where failure first appears.
-Row-normalized state now passes two fresh-key five-step runs with unchanged
-operation count; this does not close calibration coverage or new-prompt gates.
-
-Output fusion, paired normalized-state refresh and local bootstrap policy
-remain independently controlled candidates on Spark. Do not copy B300 memory
-settings or relax the numerical threshold to promote them.
-
-## 3. Separate client and server
-
-Measure the implemented fixed-vector `client-init -> server-eval ->
-client-decrypt` roles. The server must have no secret key or debug-decrypt path.
-Track ciphertext/key transfer size and setup amortization. Then add a persistent
-interactive session or explicit encrypted state serialization for generation.
-This protocol work can proceed alongside numerical horizon research.
-
-## 4. Full-chain security and output protocol
-
-The twelve-layer Mamba-3 profile now passes the shared classical-128 parameter
-audit and frozen generation gates. Extend coverage to all 24 Mamba-2 layers,
-with bounded key memory and the same numerical gate. Separately specify the output/decryption
-security construction and its compatibility with bootstrapping. Parameter
-selection alone is not a complete security proof.
-
-## 5. Long-context prefill and FHE-oriented training
-
-Implement an encrypted affine-scan prefill only after its slot layout, serial
-versus parallel chunk carry, live ciphertext memory and level schedule are
-validated. The existing analytic prefill model is not measured native execution.
-
-Maintain a separate training branch for bounded nonlinearities, smaller state
-and cheaper normalization. Compare held-out quality and encrypted cost against
-the checkpoint anchor. New architecture work need not wait for B300 or follow
-the newest Mamba variant; it must have a measurable accuracy/cost argument.
-
-The [algebra/cryptography survey](research/2026-09-21-ssm-cryptographic-design.md)
-adds concrete experiments: deferred rank-one writes with an immutable state
-checkpoint, compatible state-basis changes, constrained composite decay, and
-direct complex SISO versus a rotating frame. The first has real-checkpoint
-factor parity, and channel-row scaling has encrypted five-step precision
-evidence. Deferred state and complex dynamics still need native measurements.
-Joint decay/write inequalities can certify a length-independent state bound;
-bounded EMA or centered updates require a separate trained-model comparison.
-
-## 6. Autonomous encrypted generation
-
-Keep vocabulary projection, selection and embedding lookup encrypted between
-tokens, and deliver only final ciphertext output. Start with a small vocabulary
-and CKKS/FHEW comparison; measure switching costs and require a clear
-logit-error/margin contract. Public weights remain the initial model. Training
-for cheaper selection or discrete state is a separate quality/cost experiment.
-
-## Historical and version boundaries
-
-Recover the missing B300 three-token artifact if the original machine/data
-become available. Do not reconstruct it from prose or retag a failed artifact.
-B300 access is restored. Removing global synchronization still requires an
-event/lifetime proof; the current RNS/pipeline study retains those barriers.
-
-`0.5.0` names the compatibility-stack retirement, not completion of the protocol.
-A future `1.0.0` requires reproducible interactive encrypted generation, a
-secret-key-free server, full-chain validated security parameters, and an explicit
-output-security statement. That version is an interactive milestone; the
-autonomous encrypted loop remains the stronger research endpoint. Private
-model weights are an additional protocol goal.
+Maintain one common arithmetic backend for Mamba-2 and Mamba-3. Share experiment
+I/O, process lifecycle, qualification, diagnostics and profiling in the Python
+package. Add workload parameters to manifests instead of copying controllers.
+Keep operating settings local and publish reviewed, hash-bound evidence.

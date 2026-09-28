@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790556087.150474,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "python3",
+      "${STUDY}/analyze-operations.py",
+      "--metadata",
+      "${STUDY}/references-replay/references.json",
+      "--manifest",
+      "${PAYLOAD_STUDY}/payload/tiled64/manifest.json",
+      "--program",
+      "${PAYLOAD_STUDY}/payload/tiled64/program.txt",
+      "--observations",
+      "${STUDY}/diagnostic-replay/observations.jsonl",
+      "--output",
+      "${STUDY}/analyze-operations-diagnostic-replay/analysis.json"
+    ],
+    "cwd": "${STUDY}",
+    "inputs": {
+      "analyzer": "${STUDY}/analyze-operations.py",
+      "metadata": "${STUDY}/references-replay/references.json",
+      "manifest": "${PAYLOAD_STUDY}/payload/tiled64/manifest.json",
+      "program": "${PAYLOAD_STUDY}/payload/tiled64/program.txt",
+      "observations": "${STUDY}/diagnostic-replay/observations.jsonl"
+    },
+    "timeout_seconds": 300
+  },
+  "inputs": {
+    "analyzer": {
+      "bytes": 6859,
+      "sha256": "7875b1324495764b3d27adc6baa392d09aa5748400ed4236c8e5c3d6f6791e7f"
+    },
+    "metadata": {
+      "bytes": 1333,
+      "sha256": "6f355313ca2cac26e616b3f28fa6342aa83498bea3e3dd047ab748b82f26bd8c"
+    },
+    "manifest": {
+      "bytes": 498555,
+      "sha256": "1bdd8d0fc024e7e377d2d0b3ed1e0b7934bff68473d65c47b59617f6576e6d42"
+    },
+    "program": {
+      "bytes": 1508200133,
+      "sha256": "464380aef53bfaefe2b4f137a2777299f62e4eb660101bea4b3886ed790ad24e"
+    },
+    "observations": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.00036480394192039967,
+  "wall_seconds": 3.979601631872356
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "scope": "Two implementation trials, fixed classical-128 profile and 0.001 final-hidden gates",
+  "adopted_candidates": [],
+  "ntt_lazy": {
+    "decision": "reject",
+    "screen_eval_seconds": [
+      186.220316542,
+      188.673584283
+    ],
+    "relative_reduction": -0.013174006931981008,
+    "exact_rns_words": 373293056,
+    "reason": "Correct exact-RNS results, but all-layer two-token screen slower; register allocation reduces first-half residency."
+  },
+  "indexed_mask_cache": {
+    "decision": "not_qualified",
+    "screen_eval_seconds": [
+      184.558821479,
+      180.168464315
+    ],
+    "full_passing_pair": {
+      "control": "full-a1",
+      "candidate": "full-b2",
+      "eval_seconds": [
+        1076.02696318,
+        1052.33205939
+      ],
+      "relative_reduction": 0.022020734238828
+    },
+    "full_failed_run": {
+      "name": "full-b1",
+      "state": "failed",
+      "exit_code": 2,
+      "first_token_polynomial_error": 0.169579,
+      "first_token_exact_error": 0.169599
+    },
+    "additional_control": {
+      "name": "full-a2",
+      "state": "completed",
+      "purpose": "Control following the failed candidate; not a completed reverse-order performance pair"
+    },
+    "reason": "One candidate numerical failure invalidates the all-runs qualification gate. Passing pair is descriptive only; cause of isolated failure remains unresolved.",
+    "default_enabled": false
+  },
+  "integrated_comparison": "No candidate qualified, so no combined candidate or new performance record.",
+  "accuracy_work": "Localized the abrupt SSM fault to nodes 75898/75904 refresh; CPU propagation accounts for final error. Same-history clone replay is accurate, so repair remains a first-call state/ownership isolation proposal, not a qualified fix."
+}

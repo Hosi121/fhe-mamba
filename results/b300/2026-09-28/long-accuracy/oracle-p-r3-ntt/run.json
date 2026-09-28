@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790549992.8316867,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--name",
+      "cipher-long-accuracy-oracle-p-r3-ntt",
+      "--user",
+      "${UID}:${GID}",
+      "--cpuset-cpus",
+      "64-68",
+      "--cpuset-mems",
+      "2",
+      "--shm-size",
+      "1g",
+      "--volume",
+      "${BENCH_ROOT}:/workspace:ro",
+      "--volume",
+      "${BENCH_ROOT}/b300-mamba3-20260926:/work:ro",
+      "--volume",
+      "${STUDY}:/study",
+      "--volume",
+      "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a:/workspace/install/openfhe-fides/lib/libOPENFHEcore_static.a:ro",
+      "--volume",
+      "${STUDY}/ntt-backend/fideslib.a:/work/install/fideslib/lib/fideslib.a:ro",
+      "--workdir",
+      "/study",
+      "--env",
+      "OMP_NUM_THREADS=4",
+      "--env",
+      "OMP_PROC_BIND=true",
+      "--env",
+      "OMP_PLACES={64},{66},{67},{68}",
+      "--env",
+      "LD_LIBRARY_PATH=/workspace/install/openfhe-fides/lib:/usr/local/cuda/lib64",
+      "--gpus",
+      "device=4",
+      "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99",
+      "/study/build/oracle-p-r3-ntt/ntt_lazy_oracle",
+      "/study/oracle-p-r3-ntt/native.json",
+      "/study/ntt-p-r3-golden.bin",
+      "131072",
+      "--digits",
+      "4",
+      "--special-primes"
+    ],
+    "cwd": "${STUDY}",
+    "inputs": {
+      "source": "${STUDY}/oracle-p-r3-source.tar.gz",
+      "openfhe_core": "${BENCH_ROOT}/b300-nsight-20260926/lib/libOPENFHEcore_static.a",
+      "fideslib": "${STUDY}/ntt-backend/fideslib.a",
+      "binary": "${STUDY}/build/oracle-p-r3-ntt/ntt_lazy_oracle",
+      "golden": "${STUDY}/ntt-p-r3-golden.bin"
+    },
+    "timeout_seconds": 1800
+  },
+  "inputs": {
+    "source": {
+      "bytes": 10767,
+      "sha256": "a63f9f47b42194dc9332702c187c5272d5af0a91a9756178bf1280a67670b6d3"
+    },
+    "openfhe_core": {
+      "bytes": 5237444,
+      "sha256": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4"
+    },
+    "fideslib": {
+      "bytes": 42412918,
+      "sha256": "187bcba79d6fb35b1106e2d303086a024a186c5e63df97dcfd5f4b8f5198dfb2"
+    },
+    "binary": {
+      "bytes": 17003328,
+      "sha256": "41c7cf89d864c914e79c3f52906ff8691dd3d4eff14a8a2111ef6b41575d0e91"
+    },
+    "golden": {
+      "bytes": 2986344944,
+      "sha256": "b71cd72e313e6f0c7679d0882c91e19fff252eeb11230aad9df36f3e80a61e41"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.0002762340009212494,
+  "wall_seconds": 15.518427451141179
+}

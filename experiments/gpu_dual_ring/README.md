@@ -43,7 +43,7 @@ recorded `prefix-baseline-command.json` and `full-baseline-command.json` under
 ROOT; those commands must refer to the local frozen payload and binaries.
 The full stage additionally requires the small stage's successful status and
 an explicit `full-selection.json` eligibility decision. Ordinary users can
-run a model with `experiments/run_packed_probe.py --gpu-dual-ring` and its
+run a model with `src/fhemamba/benchmarks/packed.py --gpu-dual-ring` and its
 required S2C-first/planned/batch flags instead.
 
 See the [study](../../docs/research/2026-09-26-gpu-dual-ring.md) for comparison

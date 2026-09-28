@@ -76,7 +76,7 @@ Native event telemetry now reconciles all 84 logical refresh events with the
 
 ```bash
 PYTHONPATH=src .venv/bin/python \
-  experiments/build_bootstrap_telemetry_report.py INPUT.json \
+  experiments/analysis/build_bootstrap_telemetry_report.py INPUT.json \
   --output-json REPORT.json
 ```
 

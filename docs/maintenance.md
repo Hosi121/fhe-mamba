@@ -15,7 +15,7 @@ files and migration from older paths.
 | Mamba-2 reference and polynomial operators | `src/fhemamba/` | Active; new model math belongs here. |
 | Payload and client-reference export | `src/fhemamba/m1_payload.py` | Active; the historical filename is debt, not a second implementation. |
 | Encrypted GPU execution | `native/fideslib_stage0/` | Active; CPU-only units must remain buildable without FIDESlib. |
-| Current experiments | `experiments/` | Active only when backed by a manifest or documented command. |
+| Current experiments | Grouped `experiments/` directories | Active only when backed by a manifest or documented command; reusable code is imported from the package. |
 | Artifact schema validation | `src/fhemamba/artifacts.py` | Active shared provenance contract. |
 | Current Spark platform identity | `config/dgx-spark.env` | Versioned CUDA/SM/FIDESlib build with isolated dependencies and source/binary/library validation. |
 | Historical B300 build template | `config/b300-platform.env` | CUDA 12 / SM100 reproduction configuration; current B300 studies document CUDA 13 / SM103 separately. |
@@ -48,6 +48,10 @@ uv sync --locked --extra dev
   the metric is explicitly named as instrumented timing.
 - New Python entry points must be importable from the installed package. Do not
   add another `sys.path.insert` workaround.
+- Shared file identities, chain hashes, JSON I/O and checkout discovery live in
+  `fhemamba.benchmarks.io`. Common diagnostics and profiling are installed
+  modules, not sibling script imports. Keep command help lazy and usable without
+  native GPU libraries. See [the tool map](package.md#research-tools).
 - New native options require a parser test and an artifact field. Prefer a
   versioned manifest field over another shell environment variable.
 - Headline results require a published measurement and provenance manifest.

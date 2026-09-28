@@ -1,0 +1,6 @@
+{
+  "description": "Selected coarse diagnostic rows used for state tile and slot-error analysis; original order preserved",
+  "path": "selected-state-observations.jsonl.gz",
+  "sha256": "aa4db2e4e14d601b37bc34bf3c8cc4ac311cfee4944c0dfa3b0a1d5433c5b22a",
+  "uncompressed_sha256": "80679e9fbf7a255528ef615b968b4bc70948b108e593cef67e253ced61caf871"
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/diagnostic-cache",
+  "state": "timed_out",
+  "exit_code": null,
+  "at_unix": 1790552150.6768413
+}

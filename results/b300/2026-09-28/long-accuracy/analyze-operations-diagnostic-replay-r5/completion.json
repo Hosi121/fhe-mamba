@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/analyze-operations-diagnostic-replay-r5",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790558893.9714851
+}

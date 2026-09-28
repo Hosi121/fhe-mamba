@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/build-r3",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790528036.4267013
+}

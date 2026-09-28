@@ -1,0 +1,51 @@
+{
+  "binary_sha256": "26c81431ae9495e04e520830a67b454c3ebc33bc67ae9e331aca7ba3acff3f78",
+  "tool": "addr2line -f -C -e qualified-packed_fideslib <relative offsets from run.log>",
+  "cases": {
+    "factored-64": [
+      "FIDESlib::GPUmalloc(int, int, CUstream_st*, bool)",
+      "??:?",
+      "FIDESlib::VectorGPU<unsigned long>::VectorGPU(FIDESlib::Stream&, int, int, unsigned long const*)",
+      "??:?",
+      "FIDESlib::CKKS::Limb<unsigned long>::Limb(FIDESlib::CKKS::ContextData&, int, FIDESlib::Stream&, int, bool)",
+      "??:?",
+      "FIDESlib::CKKS::LimbPartition::generate(std::vector<FIDESlib::LimbRecord, std::allocator<FIDESlib::LimbRecord> >&, std::vector<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<unsigned long> >, std::allocator<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<unsigned long> > > >&, FIDESlib::VectorGPU<void*>&, int, FIDESlib::VectorGPU<void*>*, unsigned long*, unsigned long, unsigned long*, unsigned long, bool)",
+      "??:?",
+      "FIDESlib::CKKS::LimbPartition::generateLimbToLevel(int)",
+      "??:?",
+      "FIDESlib::CKKS::RNSPoly::grow(int, bool, bool) [clone .part.0]",
+      ":?",
+      "FIDESlib::CKKS::RNSPoly::copy(FIDESlib::CKKS::RNSPoly const&)",
+      "??:?",
+      "FIDESlib::CKKS::Plaintext::copy(FIDESlib::CKKS::Plaintext const&)",
+      "??:?",
+      "FIDESlib::CKKS::Plaintext::adjustPlaintextToCiphertext(FIDESlib::CKKS::Plaintext const&, FIDESlib::CKKS::Ciphertext const&)",
+      "??:?",
+      "FIDESlib::CKKS::Ciphertext::multPt(FIDESlib::CKKS::Plaintext const&, bool, bool)",
+      "??:?"
+    ],
+    "tiled-64": [
+      "FIDESlib::GPUmalloc(int, int, CUstream_st*, bool)",
+      "??:?",
+      "FIDESlib::VectorGPU<unsigned long>::VectorGPU(FIDESlib::Stream&, int, int, unsigned long const*)",
+      "??:?",
+      "FIDESlib::CKKS::Limb<unsigned long>::Limb(FIDESlib::CKKS::ContextData&, int, FIDESlib::Stream&, int, bool)",
+      "??:?",
+      "FIDESlib::CKKS::LimbPartition::generate(std::vector<FIDESlib::LimbRecord, std::allocator<FIDESlib::LimbRecord> >&, std::vector<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<unsigned long> >, std::allocator<std::variant<FIDESlib::CKKS::Limb<unsigned int>, FIDESlib::CKKS::Limb<unsigned long> > > >&, FIDESlib::VectorGPU<void*>&, int, FIDESlib::VectorGPU<void*>*, unsigned long*, unsigned long, unsigned long*, unsigned long, bool)",
+      "??:?",
+      "FIDESlib::CKKS::LimbPartition::generateLimbToLevel(int)",
+      "??:?",
+      "FIDESlib::CKKS::RNSPoly::grow(int, bool, bool) [clone .part.0]",
+      ":?",
+      "FIDESlib::CKKS::RNSPoly::copy(FIDESlib::CKKS::RNSPoly const&)",
+      "??:?",
+      "FIDESlib::CKKS::Plaintext::copy(FIDESlib::CKKS::Plaintext const&)",
+      "??:?",
+      "FIDESlib::CKKS::Plaintext::adjustPlaintextToCiphertext(FIDESlib::CKKS::Plaintext const&, FIDESlib::CKKS::Ciphertext const&)",
+      "??:?",
+      "FIDESlib::CKKS::Ciphertext::multPt(FIDESlib::CKKS::Plaintext const&, bool, bool)",
+      "??:?"
+    ]
+  },
+  "limitation": "Identifies the failed allocation stack, not the dominant retained memory."
+}

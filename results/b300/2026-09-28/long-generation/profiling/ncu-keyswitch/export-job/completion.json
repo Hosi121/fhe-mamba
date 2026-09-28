@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/ncu-keyswitch/export-job",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790528604.3878593
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/ncu-ntt-r3-base-half0",
+  "state": "failed",
+  "exit_code": 1,
+  "at_unix": 1790550026.729756
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/prefix-cache-control",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790549293.371469
+}

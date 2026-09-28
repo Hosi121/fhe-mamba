@@ -1,0 +1,19 @@
+{
+  "build-ntt": {
+    "cause": "Container image lacks Python; compiler invoked from host Python instead",
+    "resolved_by": "build-ntt-r2"
+  },
+  "oracle-p-base": {
+    "cause": "Probe attempted to access special-prime metadata before materialization; no candidate modular-arithmetic discrepancy established",
+    "resolved_by": "oracle-p-r3-base and oracle-p-r3-ntt, explicit specialPrime and specialMeta IDs"
+  },
+  "ncu-ntt-r3-base-half0": {
+    "cause": "Profiler hardware-counter permission failure; kernel oracle passed but counters were unavailable",
+    "resolved_by": "ncu-ntt-r4 jobs with profiler container capabilities; no host driver-policy change"
+  },
+  "build-operation-replay": {
+    "cause": "Missing OpenMP target link",
+    "resolved_by": "build-operation-replay-r2 and later"
+  },
+  "scope": "Setup/probe failures are separate from the full-b1 numerical qualification failure, which remains unresolved."
+}

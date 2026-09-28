@@ -1,0 +1,70 @@
+{
+  "schema": "fhemamba-packed-diagnostic-v1",
+  "diagnostic_only": true,
+  "manifest_sha256": "1bdd8d0fc024e7e377d2d0b3ed1e0b7934bff68473d65c47b59617f6576e6d42",
+  "program_sha256": "464380aef53bfaefe2b4f137a2777299f62e4eb660101bea4b3886ed790ad24e",
+  "references_sha256": "e21c563f77e6afb13f58f80e31574425a25647e144ee2552842711f7db2a97b9",
+  "node_prefix_sha256": "befed77cec5d3a6a5d9c8d87a27a0de8d34eafee6ec58681fb632ebdc30f9417",
+  "node_count": 75970,
+  "steps": [
+    23,
+    24
+  ],
+  "all_nodes": true,
+  "node_ranges": [
+    [
+      72674,
+      72936
+    ],
+    [
+      75708,
+      75970
+    ]
+  ],
+  "bound_rebindings": 46270,
+  "max_relative_bound_drift": 1.3532387867877422e-14,
+  "output_nodes": [
+    3153,
+    6187,
+    9221,
+    12255,
+    15289,
+    18323,
+    21357,
+    24391,
+    27425,
+    30459,
+    33493,
+    36527,
+    39561,
+    42595,
+    45629,
+    48663,
+    51697,
+    54731,
+    57765,
+    60799,
+    63833,
+    66867,
+    69901,
+    72935,
+    75969
+  ],
+  "references": {
+    "75898": {
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "size": 32768
+    },
+    "75904": {
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "size": 32768
+    }
+  },
+  "reference_scope": "Only the two inputs of the identified full-packing refresh; original executed graph unchanged"
+}

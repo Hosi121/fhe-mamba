@@ -1,0 +1,661 @@
+{
+  "schema_version": 1,
+  "device": 0,
+  "window_start_seconds": 0,
+  "trace_window_seconds": 299.943212913,
+  "gpu_activity_union_seconds": 154.975497217,
+  "gpu_activity_coverage": 0.516682793759202,
+  "cuda_api_union_seconds": 174.794897438,
+  "gpu_and_cuda_api_overlap_seconds": 144.188921615,
+  "gpu_idle_inside_cuda_api_seconds": 30.605975823,
+  "gpu_idle_outside_cuda_api_seconds": 114.361739873,
+  "longest_gpu_gap_seconds": 1.10044097,
+  "gpu_gaps_at_least_1ms": {
+    "count": 6980,
+    "seconds": 106.750222651
+  },
+  "activities": {
+    "kernel": {
+      "instances": 4318748,
+      "summed_seconds": 134.454006189
+    },
+    "copy": {
+      "instances": 530279,
+      "summed_seconds": 1.139666784
+    },
+    "memset": {
+      "instances": 147353,
+      "summed_seconds": 0.725911255
+    },
+    "graph": {
+      "instances": 99587,
+      "summed_seconds": 52.590322192
+    }
+  },
+  "cuda_api": [
+    {
+      "name": "cudaDeviceSynchronize_v3020",
+      "instances": 824308,
+      "summed_seconds": 140.088119654,
+      "mean_microseconds": 169.94633032070536
+    },
+    {
+      "name": "cudaLaunchKernel_v7000",
+      "instances": 4320112,
+      "summed_seconds": 19.002162471,
+      "mean_microseconds": 4.398534684054487
+    },
+    {
+      "name": "cudaStreamWaitEvent_v3020",
+      "instances": 5070485,
+      "summed_seconds": 3.646842517,
+      "mean_microseconds": 0.7192295247890488
+    },
+    {
+      "name": "cudaMemcpyAsync_v3020",
+      "instances": 507445,
+      "summed_seconds": 3.103566515,
+      "mean_microseconds": 6.116064824759333
+    },
+    {
+      "name": "cudaEventRecordWithFlags_v11010",
+      "instances": 3539269,
+      "summed_seconds": 2.58961645,
+      "mean_microseconds": 0.7316811607142605
+    },
+    {
+      "name": "cudaGraphLaunch_v10000",
+      "instances": 99587,
+      "summed_seconds": 1.941135345,
+      "mean_microseconds": 19.491854810366814
+    },
+    {
+      "name": "cudaMallocAsync_v11020",
+      "instances": 334621,
+      "summed_seconds": 1.630651234,
+      "mean_microseconds": 4.873128805424645
+    },
+    {
+      "name": "cudaMemcpy_v3020",
+      "instances": 22834,
+      "summed_seconds": 1.188940813,
+      "mean_microseconds": 52.06888031006394
+    },
+    {
+      "name": "cudaMemsetAsync_v3020",
+      "instances": 135936,
+      "summed_seconds": 0.533541183,
+      "mean_microseconds": 3.924943966278249
+    },
+    {
+      "name": "cudaFreeAsync_v11020",
+      "instances": 334450,
+      "summed_seconds": 0.37637426,
+      "mean_microseconds": 1.1253528479593362
+    },
+    {
+      "name": "cuKernelGetName",
+      "instances": 4320112,
+      "summed_seconds": 0.300508581,
+      "mean_microseconds": 0.06956036811082676
+    },
+    {
+      "name": "cudaMemGetInfo_v3020",
+      "instances": 923,
+      "summed_seconds": 0.120336095,
+      "mean_microseconds": 130.37496749729144
+    },
+    {
+      "name": "cudaEventCreateWithFlags_v3020",
+      "instances": 100617,
+      "summed_seconds": 0.099661206,
+      "mean_microseconds": 0.9905006708607889
+    },
+    {
+      "name": "cudaMemset_v3020",
+      "instances": 11417,
+      "summed_seconds": 0.08747614,
+      "mean_microseconds": 7.661919943943242
+    },
+    {
+      "name": "cudaEventDestroy_v3020",
+      "instances": 99587,
+      "summed_seconds": 0.066092968,
+      "mean_microseconds": 0.663670639742135
+    },
+    {
+      "name": "cudaGraphInstantiateWithFlags_v11040",
+      "instances": 65,
+      "summed_seconds": 0.018331063,
+      "mean_microseconds": 282.01635384615383
+    },
+    {
+      "name": "cudaStreamBeginCapture_v10000",
+      "instances": 65,
+      "summed_seconds": 0.00050761,
+      "mean_microseconds": 7.809384615384615
+    },
+    {
+      "name": "cudaStreamSynchronize_v3020",
+      "instances": 126,
+      "summed_seconds": 0.000374794,
+      "mean_microseconds": 2.974555555555556
+    },
+    {
+      "name": "cudaMalloc_v3020",
+      "instances": 1,
+      "summed_seconds": 0.000230706,
+      "mean_microseconds": 230.706
+    },
+    {
+      "name": "cuLibraryLoadData",
+      "instances": 2,
+      "summed_seconds": 0.000206305,
+      "mean_microseconds": 103.1525
+    }
+  ],
+  "kernels": [
+    {
+      "name": "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 396879,
+      "summed_seconds": 25.07547539,
+      "mean_microseconds": 63.181663403707425
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)1>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 396879,
+      "summed_seconds": 18.655243697,
+      "mean_microseconds": 47.004864699316414
+    },
+    {
+      "name": "FIDESlib::CKKS::hoistedRotateDotKSK_2_(void ***, void **, void ***, void ***, void ***, void ***, int, const int *, void ***, int, int, int, int, void **, bool)",
+      "instances": 76154,
+      "summed_seconds": 15.600259426,
+      "mean_microseconds": 204.85147761115635
+    },
+    {
+      "name": "void FIDESlib::INTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+      "instances": 491978,
+      "summed_seconds": 11.463070631,
+      "mean_microseconds": 23.299965915142547
+    },
+    {
+      "name": "void FIDESlib::CKKS::ModDown2<(FIDESlib::ALGO)3>(void **, int, void **, int, const FIDESlib::Global::Globals *)",
+      "instances": 149944,
+      "summed_seconds": 10.66292423,
+      "mean_microseconds": 71.11271027850397
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 149944,
+      "summed_seconds": 9.457300296,
+      "mean_microseconds": 63.07221560049085
+    },
+    {
+      "name": "FIDESlib::CKKS::copy_(void **, void **)",
+      "instances": 703275,
+      "summed_seconds": 9.075021776,
+      "mean_microseconds": 12.90394479542142
+    },
+    {
+      "name": "void FIDESlib::INTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, void **, void **, void **, void **, void **, void **)",
+      "instances": 491978,
+      "summed_seconds": 7.48157951,
+      "mean_microseconds": 15.207142412872122
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)1, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)3>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 149944,
+      "summed_seconds": 5.884239003,
+      "mean_microseconds": 39.24291070666382
+    },
+    {
+      "name": "FIDESlib::CKKS::dotProductLtBatchedPt2___(void ***, void ***, void ***, void ***, void ***, int, int, int, int)",
+      "instances": 11328,
+      "summed_seconds": 5.847407208,
+      "mean_microseconds": 516.1906080508475
+    },
+    {
+      "name": "FIDESlib::add_(void **, void **, int)",
+      "instances": 320509,
+      "summed_seconds": 4.800653334,
+      "mean_microseconds": 14.978216942425954
+    },
+    {
+      "name": "void FIDESlib::CKKS::Scalar_mult_<(FIDESlib::ALGO)4>(void **, const unsigned long *, int, const unsigned long *)",
+      "instances": 212453,
+      "summed_seconds": 3.491984937,
+      "mean_microseconds": 16.436505660075404
+    },
+    {
+      "name": "FIDESlib::CKKS::Mult_(void **, void **, void **, int)",
+      "instances": 115364,
+      "summed_seconds": 1.417234855,
+      "mean_microseconds": 12.284896978260116
+    },
+    {
+      "name": "FIDESlib::CKKS::eval_linear_w_sum_(int, void **, void ***, unsigned long *, int)",
+      "instances": 9912,
+      "summed_seconds": 0.801185553,
+      "mean_microseconds": 80.82985805084745
+    },
+    {
+      "name": "void FIDESlib::NTT_<(bool)0, (FIDESlib::ALGO)3, (FIDESlib::NTT_MODE)0>(const FIDESlib::Global::Globals *, void **, int, void **, void **, int, void **, void **)",
+      "instances": 20284,
+      "summed_seconds": 0.712308153,
+      "mean_microseconds": 35.116749802800236
+    },
+    {
+      "name": "void FIDESlib::INTT_<unsigned long, (bool)1, (FIDESlib::ALGO)3, (FIDESlib::INTT_MODE)0>(const FIDESlib::Global::Globals *, T1 *, int, T1 *, const T1 *, T1 *, T1 *, const T1 *, const T1 *, T1 *, const T1 *)",
+      "instances": 56261,
+      "summed_seconds": 0.573137101,
+      "mean_microseconds": 10.18711187145625
+    },
+    {
+      "name": "FIDESlib::CKKS::binomialMult_(int, void **, void **, void **, void **, void **)",
+      "instances": 11979,
+      "summed_seconds": 0.473235941,
+      "mean_microseconds": 39.5054629768762
+    },
+    {
+      "name": "fhemamba::<unnamed>::butterfly(double2 *, const double2 *, unsigned int, unsigned int)",
+      "instances": 182672,
+      "summed_seconds": 0.439275947,
+      "mean_microseconds": 2.4047251193395813
+    },
+    {
+      "name": "FIDESlib::CKKS::binomialSquare_(int, void **, void **, void **)",
+      "instances": 11454,
+      "summed_seconds": 0.40602521,
+      "mean_microseconds": 35.44833333333334
+    },
+    {
+      "name": "FIDESlib::scalar_add_(void **, unsigned long *, int)",
+      "instances": 20355,
+      "summed_seconds": 0.379456556,
+      "mean_microseconds": 18.641933480717267
+    }
+  ],
+  "time_bins": [
+    {
+      "offset_seconds": 0,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.0033113661
+    },
+    {
+      "offset_seconds": 10,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.0029005667
+    },
+    {
+      "offset_seconds": 20,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.0028884907
+    },
+    {
+      "offset_seconds": 30,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.00288196
+    },
+    {
+      "offset_seconds": 40,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.0028912584
+    },
+    {
+      "offset_seconds": 50,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.0029046689
+    },
+    {
+      "offset_seconds": 60,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.0028960504
+    },
+    {
+      "offset_seconds": 70,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.0027010731
+    },
+    {
+      "offset_seconds": 80,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.3239016433
+    },
+    {
+      "offset_seconds": 90,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.6498614675
+    },
+    {
+      "offset_seconds": 100,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7247464933
+    },
+    {
+      "offset_seconds": 110,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7218309821
+    },
+    {
+      "offset_seconds": 120,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7025160733
+    },
+    {
+      "offset_seconds": 130,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7240081442
+    },
+    {
+      "offset_seconds": 140,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7268568739
+    },
+    {
+      "offset_seconds": 150,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7026850527
+    },
+    {
+      "offset_seconds": 160,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7208336709
+    },
+    {
+      "offset_seconds": 170,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7443241885
+    },
+    {
+      "offset_seconds": 180,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7432614736
+    },
+    {
+      "offset_seconds": 190,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7263503005
+    },
+    {
+      "offset_seconds": 200,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7462910601
+    },
+    {
+      "offset_seconds": 210,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7377708565
+    },
+    {
+      "offset_seconds": 220,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.6408621746
+    },
+    {
+      "offset_seconds": 230,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7502697165
+    },
+    {
+      "offset_seconds": 240,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7221725267
+    },
+    {
+      "offset_seconds": 250,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7386136534
+    },
+    {
+      "offset_seconds": 260,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7397622695
+    },
+    {
+      "offset_seconds": 270,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7338768369
+    },
+    {
+      "offset_seconds": 280,
+      "duration_seconds": 10.0,
+      "gpu_activity_coverage": 0.7197722682
+    },
+    {
+      "offset_seconds": 290,
+      "duration_seconds": 9.943212913,
+      "gpu_activity_coverage": 0.7377962914189082
+    }
+  ],
+  "interpretation": [
+    "The window spans traced CUDA APIs and GPU activities, not process setup.",
+    "Activity coverage is a timeline union, not SM occupancy or HBM utilization.",
+    "Graph envelopes include internal gaps when graph-level tracing is enabled.",
+    "Summed API and kernel durations overlap; they are not a wall-time partition.",
+    "GPU-idle/API overlap locates gaps; it does not prove their cause or avoidable cost.",
+    "Profiling perturbs execution; use independent unprofiled runs for speed claims.",
+    "CPU leaf sample counts are not measured wall seconds."
+  ],
+  "os_runtime": [
+    {
+      "name": "poll",
+      "instances": 27032,
+      "summed_seconds": 545.446843737,
+      "mean_microseconds": 20177.82049929713
+    },
+    {
+      "name": "pthread_cond_timedwait",
+      "instances": 73,
+      "summed_seconds": 292.047242578,
+      "mean_microseconds": 4000647.1586027397
+    },
+    {
+      "name": "pthread_cond_wait",
+      "instances": 10534,
+      "summed_seconds": 19.439011829,
+      "mean_microseconds": 1845.359011676476
+    },
+    {
+      "name": "pthread_cond_broadcast",
+      "instances": 6427,
+      "summed_seconds": 3.042633434,
+      "mean_microseconds": 473.4142576629843
+    },
+    {
+      "name": "ioctl",
+      "instances": 9828,
+      "summed_seconds": 0.806425095,
+      "mean_microseconds": 82.05383547008547
+    },
+    {
+      "name": "pthread_create",
+      "instances": 288,
+      "summed_seconds": 0.496936578,
+      "mean_microseconds": 1725.4742291666666
+    },
+    {
+      "name": "pthread_join",
+      "instances": 91,
+      "summed_seconds": 0.053686574,
+      "mean_microseconds": 589.9623516483516
+    },
+    {
+      "name": "pthread_mutex_lock",
+      "instances": 37,
+      "summed_seconds": 0.024003349,
+      "mean_microseconds": 648.7391621621621
+    },
+    {
+      "name": "fflush",
+      "instances": 926,
+      "summed_seconds": 0.011320172,
+      "mean_microseconds": 12.224807775377968
+    },
+    {
+      "name": "fwrite",
+      "instances": 358,
+      "summed_seconds": 0.000511855,
+      "mean_microseconds": 1.4297625698324024
+    },
+    {
+      "name": "pthread_rwlock_wrlock",
+      "instances": 1,
+      "summed_seconds": 0.000504545,
+      "mean_microseconds": 504.545
+    },
+    {
+      "name": "pthread_rwlock_rdlock",
+      "instances": 5,
+      "summed_seconds": 0.000107205,
+      "mean_microseconds": 21.441
+    }
+  ],
+  "cpu_leaf_samples": [
+    {
+      "thread": 281476520214620,
+      "symbol": "intnat::ChineseRemainderTransformFTTNat<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >::ForwardTransformToBitReverseInPlace(intnat::NativeIntegerT<unsigned long> const&, unsigned int, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*)",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 14281
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b097066088e",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 6684
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > >::Times(lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > > const&) const",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 4495
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b0970660854",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 4240
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b0970660820",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 3391
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b097066085b",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 2874
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "std::shared_ptr<fideslib::PlaintextImpl> fhemamba::MaskPlaintextCache<std::shared_ptr<fideslib::PlaintextImpl>, fhemamba::MaskFingerprint>::get<PackedEvaluator::plain(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::vector<double, std::allocator<double> >, bool)::{lambda()#1}&>(std::vector<double, std::allocator<double> > const&, unsigned int, PackedEvaluator::plain(std::shared_ptr<fideslib::CiphertextImpl<unsigned int> > const&, std::vector<double, std::allocator<double> >, bool)::{lambda()#1}&)",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 2799
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "__pthread_mutex_unlock",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "unresolved": false,
+      "samples": 2516
+    },
+    {
+      "thread": 281476520214631,
+      "symbol": "intnat::ChineseRemainderTransformFTTNat<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >::ForwardTransformToBitReverseInPlace(intnat::NativeIntegerT<unsigned long> const&, unsigned int, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*)",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 2410
+    },
+    {
+      "thread": 281476520214632,
+      "symbol": "intnat::ChineseRemainderTransformFTTNat<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >::ForwardTransformToBitReverseInPlace(intnat::NativeIntegerT<unsigned long> const&, unsigned int, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*)",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 2410
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7ffe3639b768",
+      "module": "[vdso]",
+      "unresolved": true,
+      "samples": 2404
+    },
+    {
+      "thread": 281476520214630,
+      "symbol": "intnat::ChineseRemainderTransformFTTNat<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >::ForwardTransformToBitReverseInPlace(intnat::NativeIntegerT<unsigned long> const&, unsigned int, intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> >*)",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 2399
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b097042be19",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 2353
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b0970660833",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 2320
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b0970660888",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 1982
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "std::vector<lbcrypto::PolyImpl<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >, std::allocator<lbcrypto::PolyImpl<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > > > >::vector(std::vector<lbcrypto::PolyImpl<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > >, std::allocator<lbcrypto::PolyImpl<intnat::NativeVectorT<intnat::NativeIntegerT<unsigned long> > > > > const&)",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 1874
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b097066084b",
+      "module": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "unresolved": true,
+      "samples": 1751
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0xffffffff82400ba0",
+      "module": "[kernel.kallsyms]",
+      "unresolved": true,
+      "samples": 1723
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "std::vector<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > >, std::allocator<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > > > >::vector(std::initializer_list<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > > >, std::allocator<lbcrypto::DCRTPolyImpl<bigintdyn::mubintvec<bigintdyn::ubint<unsigned long> > > > const&)",
+      "module": "/study/build/native-r2/packed_fideslib",
+      "unresolved": false,
+      "samples": 1720
+    },
+    {
+      "thread": 281476520214620,
+      "symbol": "0x7b09649fbb7a",
+      "module": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "unresolved": true,
+      "samples": 1668
+    }
+  ],
+  "input": {
+    "sha256": "63b22631e26dddf8bb84ae4255a4c5cf7011b285c6bf72f7e71cee096163151f",
+    "bytes": 2173644800
+  },
+  "analyzer_sha256": "474ce39ab0c7e611d025d531549afc5c91ae66ca6b29c435052c1cd3c00a052a"
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "Complete local verification including decoder-rejection handling and frozen-reference CPU error propagation",
+  "checks": {
+    "command": "CHECK_JOBS=2 scripts/run_checks.sh",
+    "passed": true,
+    "python_tests": 437,
+    "native_cpp_tests": 24,
+    "coverage_percent": 85.73063716138878,
+    "log_sha256": "856c61106c43a00d8734ca67546537cf8a6479fce420baf5decbac2657192f70",
+    "post_check_changes": "Documentation and evidence only"
+  },
+  "gpu": {
+    "ntt_exact_words": 373293056,
+    "fresh_group_input_error": 4.057483515840232e-12,
+    "fresh_group_refresh_error": 3.3986614180261943e-06,
+    "clone_controls_smoke_exact_words": 5242880,
+    "in_context_original_history_status": "684 observations, no decoder rejections; original selection-24 failure and all four exact-clone controls collected; see refresh-replay-comparison.json",
+    "clone_controls_smoke_r5_max_error": 6.081731379893943e-06,
+    "full_history_clone_controls_max_error": 7.920870880050168e-06
+  },
+  "earlier_check_failure": {
+    "reason": "Generic analyze module import collided with existing level-schedule experiments in shared pytest workers",
+    "resolution": "Renamed the new shared module to packed_analysis; combined tests and complete suite pass"
+  },
+  "artifact_reconstruction": {
+    "passed": true,
+    "record": "isolation-refresh/reconstruction-check.json"
+  },
+  "publication_preview": {
+    "artifacts_verified": 234,
+    "text_members_reviewed": 1651,
+    "environment_identity_hits": 0,
+    "scope": "Preview before final in-context diagnostic results; final publication verified separately"
+  }
+}

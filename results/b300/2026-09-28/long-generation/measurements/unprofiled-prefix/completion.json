@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/unprofiled-prefix",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790527757.7079155
+}

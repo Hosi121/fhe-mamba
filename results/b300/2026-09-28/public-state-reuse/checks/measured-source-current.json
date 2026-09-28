@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "archive_sha256": "3113a3cae9f03003a5581cd4a26d31b49757c17962b8c37660f78d6c2f5a8cb3",
+  "files": [
+    {
+      "path": "native/fideslib_stage0/src/packed_fideslib.cpp",
+      "sha256": "48b707899e6140c0479b84809ef7b35ecf42aadab865d8607fcd561b17140099",
+      "matches_current": true
+    },
+    {
+      "path": "native/fideslib_stage0/src/packed_resource_inventory.cpp",
+      "sha256": "eb4d17bf4cc99ff76b29a63c7c5bcd44e5544f48183a9689f012837ac25e43d2",
+      "matches_current": true
+    },
+    {
+      "path": "native/fideslib_stage0/include/public_ciphertext_reuse.hpp",
+      "sha256": "6c7a2ba73cd8287f276d9590ffb75d7000aeee2ef76b701420acca7dc4d5f0ff",
+      "matches_current": true
+    },
+    {
+      "path": "native/fideslib_stage0/tests/test_public_ciphertext_reuse.cpp",
+      "sha256": "29f02d7ebb944715801ff894ebf3b7eaab791642f31d510e79ef22cc47df984a",
+      "matches_current": true
+    },
+    {
+      "path": "native/fideslib_stage0/CMakeLists.txt",
+      "sha256": "44fecf83b495d1f5d8992fcac8f1c29c728c0acc325a799ecdeb0d1ee5e47295",
+      "matches_current": true
+    },
+    {
+      "path": "experiments/run_packed_probe.py",
+      "sha256": "05da66ca1938550deeab71d0fe5558a2b6b0e33c0b2302d756c598ceba6fae0e",
+      "matches_current": true
+    }
+  ],
+  "scope": "Changed native sources and runner match the measured source snapshot. Later analysis sources and Python test files have a separate archive."
+}

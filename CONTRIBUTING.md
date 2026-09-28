@@ -38,6 +38,9 @@ historical evidence recovery remains separate from new measurements.
 
 ## Active code
 
+Read [current state](docs/status.md) when resuming work. It is the short handoff;
+dated reports supply evidence only for the question being investigated.
+
 - `src/fhemamba/` and `native/fideslib_stage0/` contain the active model paths
   and shared arithmetic backend for Mamba-2 and Mamba-3 SISO.
 - All Python tests live in `tests/`; see the [repository map](docs/repository.md)

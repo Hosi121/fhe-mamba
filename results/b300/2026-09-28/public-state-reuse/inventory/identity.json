@@ -1,0 +1,10 @@
+{
+  "program_sha256": "c666800a73bf18a6fa61968deb606a19a7f7e31cb8fe46bc4c28b1c302c3db95",
+  "inventory_binary_sha256": "245255af94b9921f4b86966e248b9a4ad8211165aeda388d3fa73ee0b2742238",
+  "inventory_sha256": "d7d62c101de15336c6cc87944a3901759ec3654880fee6b844d754da8cd64ad1",
+  "command": [
+    "packed_resource_inventory",
+    "PROGRAM",
+    "--bsgs-routing-stages"
+  ]
+}

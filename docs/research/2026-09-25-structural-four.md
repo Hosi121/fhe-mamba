@@ -257,7 +257,7 @@ separately. The baseline executable is the released `c90c54d` GPU-RNS candidate.
 
 After the normal [Spark build](../dgx-spark.md#build), add
 `--hoist-rotations --share-chebyshev` to the packed executable or
-`experiments/run_packed_probe.py`, alongside the flags in `full_controller.py`.
+`src/fhemamba/benchmarks/packed.py`, alongside the flags in `full_controller.py`.
 Both switches default off. The rotation mechanism needs no new keys, library
 patches or numerical parameters. The same-input basis mechanism retains the
 existing polynomial circuit and refresh planner.

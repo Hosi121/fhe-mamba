@@ -1,0 +1,24 @@
+{
+  "status": "unqualified repair proposal; no production change",
+  "evidence": [
+    "accuracy-localization.json",
+    "refresh-counterfactual.json",
+    "refresh-counterfactual-replay-r5.json",
+    "refresh-replay-comparison.json"
+  ],
+  "candidate": "Make target-refresh operand and scratch ownership explicit; prepare public masks before the call and prevent mutation of retained operands/cache entries.",
+  "why": "The long-run original refresh fails while identical grouping/bounds/two-pass/merged correction on retained-input clones is accurate. Execution-state or ownership differences merit isolation before changing the mathematical circuit.",
+  "validation_sequence": [
+    "Capture exact RNS and scale/level metadata before the original target call; check inputs and cached plaintexts again after use.",
+    "Compare packed input, first bootstrap, residual/correction bootstrap and extraction with the accurate clone replay.",
+    "Fix the first demonstrated ownership, initialization or metadata invariant violation; remove diagnostic-only work from the ordinary path.",
+    "Require accurate cold-first-call behavior, then a full ordinary frozen 64-token run with both final errors <= 0.001, identical tokens and no intermediate decryptions."
+  ],
+  "not_supported": [
+    "A proved specific cache/encoder/backend bug",
+    "A proved need to weaken security or alter model polynomials",
+    "Adoption of split groups, doubled bounds or unmerged correction: the identical control also passes",
+    "Blind repeat-until-pass execution"
+  ],
+  "limitation": "No minimal standalone failing case or qualified repair; first-call input immutability was not snapshotted in this run."
+}

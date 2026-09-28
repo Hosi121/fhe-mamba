@@ -1,0 +1,770 @@
+{
+  "schema": "fhemamba-recurrence-comparison-v1",
+  "passed": false,
+  "all_tiled_runs_qualified": false,
+  "failures": [
+    {
+      "case": "factored-64",
+      "process_state": "completed",
+      "process_exit_code": 0,
+      "process_wall_seconds": 523.0752127720043,
+      "native_result_exists": false,
+      "cuda_out_of_memory": true,
+      "reason": "missing native result or unsuccessful process; no timing comparison"
+    },
+    {
+      "case": "tiled-64",
+      "process_state": "completed",
+      "process_exit_code": 0,
+      "process_wall_seconds": 515.0742615170311,
+      "native_result_exists": false,
+      "cuda_out_of_memory": true,
+      "reason": "missing native result or unsuccessful process; no timing comparison"
+    }
+  ],
+  "identities": {
+    "binary": "26c81431ae9495e04e520830a67b454c3ebc33bc67ae9e331aca7ba3acff3f78",
+    "fideslib": "470739a86e70f40997e9d62853571986863513c6cba40294a06e10c31f2168ad",
+    "openfhe_core": "78f331146fa6f13de56ee7f30a406ccc30c3e42dbe416bce33d662a6c9d278f4",
+    "source": "0eabceefa1f3026f903a4c7b4c3c6d97d355cdb0fb13dbe95103957c9708139e",
+    "native_source": "77594f3245eae6e834eec57f222c92df1fc47d77f9a69a6556e542f7c2b12dd7",
+    "trace": "f37ba105366b2002d39f9e69ef0ddfafe17017c8c9743dc483690bfd6f333b7d"
+  },
+  "pairs": [
+    {
+      "steps": 4,
+      "complete_pair": true,
+      "arms": {
+        "factored": {
+          "eval_seconds": 14.892018713,
+          "setup_seconds": 142.575140033,
+          "bootstrap_seconds": 0,
+          "bootstraps": 0,
+          "ct_ct_mul": 36,
+          "ct_pt_mul": 484,
+          "rotations": 570,
+          "max_abs_error_vs_exact": 4.36890523758e-11,
+          "max_abs_error_vs_polynomial": 4.3689496465e-11,
+          "per_output_errors": [
+            {
+              "polynomial": 1.36595457167e-11,
+              "exact": 1.36595457167e-11
+            },
+            {
+              "polynomial": 4.3689496465e-11,
+              "exact": 4.36890523758e-11
+            },
+            {
+              "polynomial": 1.50350842887e-11,
+              "exact": 1.50350842887e-11
+            },
+            {
+              "polynomial": 1.30481181415e-11,
+              "exact": 1.30481181415e-11
+            }
+          ],
+          "peak_rss_gib": 56.3552780151,
+          "qualified": true,
+          "evaluation_seconds_per_step": 3.72300467825,
+          "state_arithmetic_seconds": 1.868284837,
+          "state_arithmetic_seconds_per_step": 0.46707120925,
+          "input_materialization_seconds": 13.023136026,
+          "process_wall_seconds": 163.9228526491206,
+          "carried_ciphertexts": 12,
+          "carried_coordinates": 18528
+        },
+        "tiled": {
+          "eval_seconds": 30.497130568,
+          "setup_seconds": 142.616075481,
+          "bootstrap_seconds": 0,
+          "bootstraps": 0,
+          "ct_ct_mul": 104,
+          "ct_pt_mul": 3720,
+          "rotations": 3948,
+          "max_abs_error_vs_exact": 8.93607143837e-09,
+          "max_abs_error_vs_polynomial": 8.93607143837e-09,
+          "per_output_errors": [
+            {
+              "polynomial": 1.85307769129e-09,
+              "exact": 1.85307769129e-09
+            },
+            {
+              "polynomial": 8.93607143837e-09,
+              "exact": 8.93607143837e-09
+            },
+            {
+              "polynomial": 3.53886087101e-09,
+              "exact": 3.53886109306e-09
+            },
+            {
+              "polynomial": 1.24902263532e-09,
+              "exact": 1.2490225243e-09
+            },
+            {
+              "polynomial": 1.65012536968e-09,
+              "exact": 1.65012525866e-09
+            },
+            {
+              "polynomial": 3.60667468113e-11,
+              "exact": 3.60667468113e-11
+            },
+            {
+              "polynomial": 1.58996815713e-10,
+              "exact": 1.58996815713e-10
+            },
+            {
+              "polynomial": 7.79813297269e-11,
+              "exact": 7.79813297269e-11
+            },
+            {
+              "polynomial": 2.93642665739e-10,
+              "exact": 2.93642665739e-10
+            },
+            {
+              "polynomial": 3.41884298649e-10,
+              "exact": 3.41884298649e-10
+            }
+          ],
+          "peak_rss_gib": 56.3600921631,
+          "qualified": true,
+          "evaluation_seconds_per_step": 7.624282642,
+          "state_arithmetic_seconds": 11.405265035,
+          "state_arithmetic_seconds_per_step": 2.85131625875,
+          "input_materialization_seconds": 19.087347783,
+          "process_wall_seconds": 181.24816998001188,
+          "carried_ciphertexts": 8,
+          "carried_coordinates": 201216
+        }
+      },
+      "tiled_evaluation_faster": false,
+      "reduction_fraction": -1.0478842496603566,
+      "speedup": 0.4883088485913453,
+      "state_arithmetic_speedup": 0.16380898043725295
+    },
+    {
+      "steps": 16,
+      "complete_pair": true,
+      "arms": {
+        "factored": {
+          "eval_seconds": 85.965641613,
+          "setup_seconds": 142.405692018,
+          "bootstrap_seconds": 0,
+          "bootstraps": 0,
+          "ct_ct_mul": 528,
+          "ct_pt_mul": 6544,
+          "rotations": 7752,
+          "max_abs_error_vs_exact": 1.22786225631e-10,
+          "max_abs_error_vs_polynomial": 1.2278711381e-10,
+          "per_output_errors": [
+            {
+              "polynomial": 1.59914304021e-11,
+              "exact": 1.59915414244e-11
+            },
+            {
+              "polynomial": 4.27040625084e-11,
+              "exact": 4.27045065976e-11
+            },
+            {
+              "polynomial": 4.44115855203e-11,
+              "exact": 4.44111414311e-11
+            },
+            {
+              "polynomial": 6.62918608896e-11,
+              "exact": 6.62918608896e-11
+            },
+            {
+              "polynomial": 8.08917932638e-11,
+              "exact": 8.08917932638e-11
+            },
+            {
+              "polynomial": 3.61865537535e-11,
+              "exact": 3.61862206866e-11
+            },
+            {
+              "polynomial": 1.2278711381e-10,
+              "exact": 1.22786225631e-10
+            },
+            {
+              "polynomial": 1.15291998171e-10,
+              "exact": 1.15292220215e-10
+            },
+            {
+              "polynomial": 6.71320776746e-11,
+              "exact": 6.7139183102e-11
+            },
+            {
+              "polynomial": 1.08046904757e-10,
+              "exact": 1.08046016578e-10
+            },
+            {
+              "polynomial": 9.45641343009e-11,
+              "exact": 9.45643563455e-11
+            },
+            {
+              "polynomial": 8.3851148247e-11,
+              "exact": 8.3851148247e-11
+            },
+            {
+              "polynomial": 9.86855042129e-11,
+              "exact": 9.86872805697e-11
+            },
+            {
+              "polynomial": 8.23632828606e-11,
+              "exact": 8.23632828606e-11
+            },
+            {
+              "polynomial": 6.16457995761e-11,
+              "exact": 6.16462436653e-11
+            },
+            {
+              "polynomial": 8.89306406293e-11,
+              "exact": 8.89301965401e-11
+            }
+          ],
+          "peak_rss_gib": 58.6976547241,
+          "qualified": true,
+          "evaluation_seconds_per_step": 5.3728526008125,
+          "state_arithmetic_seconds": 23.093412400000002,
+          "state_arithmetic_seconds_per_step": 1.4433382750000001,
+          "input_materialization_seconds": 62.86732626,
+          "process_wall_seconds": 239.9387253858149,
+          "carried_ciphertexts": 48,
+          "carried_coordinates": 74112
+        },
+        "tiled": {
+          "eval_seconds": 107.47710489,
+          "setup_seconds": 142.568836305,
+          "bootstrap_seconds": 0,
+          "bootstraps": 0,
+          "ct_ct_mul": 416,
+          "ct_pt_mul": 14880,
+          "rotations": 15792,
+          "max_abs_error_vs_exact": 1.82203487853e-08,
+          "max_abs_error_vs_polynomial": 1.82203478971e-08,
+          "per_output_errors": [
+            {
+              "polynomial": 1.49319123732e-09,
+              "exact": 1.49319123732e-09
+            },
+            {
+              "polynomial": 8.23686008289e-09,
+              "exact": 8.23686008289e-09
+            },
+            {
+              "polynomial": 3.00787084129e-09,
+              "exact": 3.00787061924e-09
+            },
+            {
+              "polynomial": 1.04653630206e-09,
+              "exact": 1.04653641309e-09
+            },
+            {
+              "polynomial": 7.18669701527e-09,
+              "exact": 7.18669701527e-09
+            },
+            {
+              "polynomial": 2.24860641218e-09,
+              "exact": 2.24860619014e-09
+            },
+            {
+              "polynomial": 7.75810349296e-09,
+              "exact": 7.75810260478e-09
+            },
+            {
+              "polynomial": 1.63693938404e-08,
+              "exact": 1.63693938404e-08
+            },
+            {
+              "polynomial": 1.54076540415e-09,
+              "exact": 1.54076518211e-09
+            },
+            {
+              "polynomial": 8.05332911469e-09,
+              "exact": 8.05332955878e-09
+            },
+            {
+              "polynomial": 1.70431420088e-08,
+              "exact": 1.70431420088e-08
+            },
+            {
+              "polynomial": 1.82203478971e-08,
+              "exact": 1.82203487853e-08
+            },
+            {
+              "polynomial": 1.11898956767e-09,
+              "exact": 1.11898912358e-09
+            },
+            {
+              "polynomial": 1.16876464062e-09,
+              "exact": 1.16876464062e-09
+            },
+            {
+              "polynomial": 8.64927329758e-09,
+              "exact": 8.6492724094e-09
+            },
+            {
+              "polynomial": 1.17112497477e-09,
+              "exact": 1.17112497477e-09
+            },
+            {
+              "polynomial": 1.85453907786e-09,
+              "exact": 1.85453907786e-09
+            },
+            {
+              "polynomial": 3.78526765488e-10,
+              "exact": 3.78526765488e-10
+            },
+            {
+              "polynomial": 1.58482782453e-10,
+              "exact": 1.58482893475e-10
+            },
+            {
+              "polynomial": 9.98074956016e-11,
+              "exact": 9.98074956016e-11
+            },
+            {
+              "polynomial": 4.24033252955e-10,
+              "exact": 4.24033252955e-10
+            },
+            {
+              "polynomial": 3.13828074638e-10,
+              "exact": 3.13828074638e-10
+            }
+          ],
+          "peak_rss_gib": 56.3646507263,
+          "qualified": true,
+          "evaluation_seconds_per_step": 6.717319055625,
+          "state_arithmetic_seconds": 43.755280825,
+          "state_arithmetic_seconds_per_step": 2.7347050515625,
+          "input_materialization_seconds": 63.705080422,
+          "process_wall_seconds": 260.5124590450432,
+          "carried_ciphertexts": 8,
+          "carried_coordinates": 201216
+        }
+      },
+      "tiled_evaluation_faster": false,
+      "reduction_fraction": -0.2502332661441682,
+      "speedup": 0.7998507375220386,
+      "state_arithmetic_speedup": 0.5277857201365591
+    },
+    {
+      "steps": 40,
+      "complete_pair": true,
+      "arms": {
+        "factored": {
+          "eval_seconds": 291.114149947,
+          "setup_seconds": 142.781238341,
+          "bootstrap_seconds": 0.838529151,
+          "bootstraps": 6,
+          "ct_ct_mul": 3240,
+          "ct_pt_mul": 39556,
+          "rotations": 47068,
+          "max_abs_error_vs_exact": 3.4209099109e-07,
+          "max_abs_error_vs_polynomial": 3.42090991978e-07,
+          "per_output_errors": [
+            {
+              "polynomial": 2.06773764777e-11,
+              "exact": 2.06773764777e-11
+            },
+            {
+              "polynomial": 3.01225711041e-11,
+              "exact": 3.01225711041e-11
+            },
+            {
+              "polynomial": 2.0385471089e-11,
+              "exact": 2.0385471089e-11
+            },
+            {
+              "polynomial": 1.91220234091e-11,
+              "exact": 1.91220372869e-11
+            },
+            {
+              "polynomial": 2.69027022881e-11,
+              "exact": 2.69024802435e-11
+            },
+            {
+              "polynomial": 2.62017074704e-11,
+              "exact": 2.62021515596e-11
+            },
+            {
+              "polynomial": 5.37729860639e-11,
+              "exact": 5.37738742423e-11
+            },
+            {
+              "polynomial": 7.00479674265e-11,
+              "exact": 7.00488556049e-11
+            },
+            {
+              "polynomial": 4.58106330647e-11,
+              "exact": 4.58106885759e-11
+            },
+            {
+              "polynomial": 6.25846041657e-11,
+              "exact": 6.25854923442e-11
+            },
+            {
+              "polynomial": 1.02159836146e-10,
+              "exact": 1.02159614102e-10
+            },
+            {
+              "polynomial": 9.42295130812e-11,
+              "exact": 9.42304012597e-11
+            },
+            {
+              "polynomial": 3.82378573249e-11,
+              "exact": 3.82414100386e-11
+            },
+            {
+              "polynomial": 2.19015916514e-11,
+              "exact": 2.19014806291e-11
+            },
+            {
+              "polynomial": 3.7385206042e-11,
+              "exact": 3.73843178636e-11
+            },
+            {
+              "polynomial": 3.01836888816e-11,
+              "exact": 3.01837999039e-11
+            },
+            {
+              "polynomial": 3.30366844992e-11,
+              "exact": 3.30402372128e-11
+            },
+            {
+              "polynomial": 5.26636512177e-11,
+              "exact": 5.26636512177e-11
+            },
+            {
+              "polynomial": 4.24007495781e-11,
+              "exact": 4.24007495781e-11
+            },
+            {
+              "polynomial": 7.44648787077e-11,
+              "exact": 7.44648787077e-11
+            },
+            {
+              "polynomial": 6.16431350409e-11,
+              "exact": 6.16466877545e-11
+            },
+            {
+              "polynomial": 1.64473767938e-10,
+              "exact": 1.64473545894e-10
+            },
+            {
+              "polynomial": 7.33907379313e-11,
+              "exact": 7.33907379313e-11
+            },
+            {
+              "polynomial": 6.64783783577e-11,
+              "exact": 6.64819310714e-11
+            },
+            {
+              "polynomial": 8.0710549355e-11,
+              "exact": 8.07141020687e-11
+            },
+            {
+              "polynomial": 6.46593889542e-11,
+              "exact": 6.46700470952e-11
+            },
+            {
+              "polynomial": 3.22240012451e-11,
+              "exact": 3.22240012451e-11
+            },
+            {
+              "polynomial": 4.21427337471e-11,
+              "exact": 4.21418455687e-11
+            },
+            {
+              "polynomial": 2.75255374049e-11,
+              "exact": 2.75255374049e-11
+            },
+            {
+              "polynomial": 1.94216198679e-10,
+              "exact": 1.94217975036e-10
+            },
+            {
+              "polynomial": 1.46261669443e-10,
+              "exact": 1.46262557621e-10
+            },
+            {
+              "polynomial": 1.23495880189e-10,
+              "exact": 1.23492327475e-10
+            },
+            {
+              "polynomial": 1.21570309375e-10,
+              "exact": 1.21573862089e-10
+            },
+            {
+              "polynomial": 3.40171224522e-10,
+              "exact": 3.40171224522e-10
+            },
+            {
+              "polynomial": 1.30636807594e-07,
+              "exact": 1.3063680715e-07
+            },
+            {
+              "polynomial": 1.10448548668e-07,
+              "exact": 1.10448548585e-07
+            },
+            {
+              "polynomial": 1.50895092005e-07,
+              "exact": 1.50895092033e-07
+            },
+            {
+              "polynomial": 3.42090991978e-07,
+              "exact": 3.4209099109e-07
+            },
+            {
+              "polynomial": 1.6865341073e-07,
+              "exact": 1.68653410675e-07
+            },
+            {
+              "polynomial": 1.37296161551e-07,
+              "exact": 1.37296161329e-07
+            }
+          ],
+          "peak_rss_gib": 65.5162849426,
+          "qualified": true,
+          "evaluation_seconds_per_step": 7.277853748675,
+          "state_arithmetic_seconds": 126.229297344,
+          "state_arithmetic_seconds_per_step": 3.1557324336,
+          "input_materialization_seconds": 164.849019739,
+          "process_wall_seconds": 451.7828642548993,
+          "carried_ciphertexts": 120,
+          "carried_coordinates": 185280
+        },
+        "tiled": {
+          "eval_seconds": 277.287763469,
+          "setup_seconds": 142.661236999,
+          "bootstrap_seconds": 4.205868993,
+          "bootstraps": 46,
+          "ct_ct_mul": 1040,
+          "ct_pt_mul": 37744,
+          "rotations": 39614,
+          "max_abs_error_vs_exact": 1.21713458614e-05,
+          "max_abs_error_vs_polynomial": 1.21713458614e-05,
+          "per_output_errors": [
+            {
+              "polynomial": 2.94430491099e-09,
+              "exact": 2.94430491099e-09
+            },
+            {
+              "polynomial": 1.47061460787e-08,
+              "exact": 1.47061460787e-08
+            },
+            {
+              "polynomial": 5.65588675894e-09,
+              "exact": 5.65588698098e-09
+            },
+            {
+              "polynomial": 1.96913327311e-09,
+              "exact": 1.96913316208e-09
+            },
+            {
+              "polynomial": 1.328753374e-08,
+              "exact": 1.32875341841e-08
+            },
+            {
+              "polynomial": 4.10792799777e-09,
+              "exact": 4.10792821981e-09
+            },
+            {
+              "polynomial": 1.3685537148e-08,
+              "exact": 1.36855375921e-08
+            },
+            {
+              "polynomial": 2.94402715539e-08,
+              "exact": 2.94402715539e-08
+            },
+            {
+              "polynomial": 2.56177562497e-09,
+              "exact": 2.56177584701e-09
+            },
+            {
+              "polynomial": 1.45795389095e-08,
+              "exact": 1.45795384654e-08
+            },
+            {
+              "polynomial": 3.09749967897e-08,
+              "exact": 3.09749967897e-08
+            },
+            {
+              "polynomial": 3.36793455347e-08,
+              "exact": 3.36793446465e-08
+            },
+            {
+              "polynomial": 1.94224719641e-09,
+              "exact": 1.94224725192e-09
+            },
+            {
+              "polynomial": 1.96445631984e-09,
+              "exact": 1.96445631984e-09
+            },
+            {
+              "polynomial": 1.57137498569e-08,
+              "exact": 1.5713750301e-08
+            },
+            {
+              "polynomial": 2.0781811827e-09,
+              "exact": 2.0781811827e-09
+            },
+            {
+              "polynomial": 1.96331106928e-09,
+              "exact": 1.96331106928e-09
+            },
+            {
+              "polynomial": 1.24869070639e-08,
+              "exact": 1.24869070639e-08
+            },
+            {
+              "polynomial": 1.78604939727e-08,
+              "exact": 1.78604939727e-08
+            },
+            {
+              "polynomial": 2.87075541117e-09,
+              "exact": 2.87075518912e-09
+            },
+            {
+              "polynomial": 2.75065681343e-09,
+              "exact": 2.75065703548e-09
+            },
+            {
+              "polynomial": 3.83035855123e-06,
+              "exact": 3.83035855123e-06
+            },
+            {
+              "polynomial": 9.13306930539e-06,
+              "exact": 9.13306930539e-06
+            },
+            {
+              "polynomial": 5.16312560911e-06,
+              "exact": 5.16312560911e-06
+            },
+            {
+              "polynomial": 4.59174351727e-06,
+              "exact": 4.59174351727e-06
+            },
+            {
+              "polynomial": 5.74767805683e-06,
+              "exact": 5.74767805706e-06
+            },
+            {
+              "polynomial": 6.65111214215e-06,
+              "exact": 6.65111214215e-06
+            },
+            {
+              "polynomial": 5.35355706599e-06,
+              "exact": 5.35355706599e-06
+            },
+            {
+              "polynomial": 2.95452041743e-06,
+              "exact": 2.95452041743e-06
+            },
+            {
+              "polynomial": 2.43198740346e-06,
+              "exact": 2.43198740346e-06
+            },
+            {
+              "polynomial": 1.44450279493e-06,
+              "exact": 1.44450279493e-06
+            },
+            {
+              "polynomial": 8.23954442127e-07,
+              "exact": 8.2395444212e-07
+            },
+            {
+              "polynomial": 6.55585376971e-07,
+              "exact": 6.55585377082e-07
+            },
+            {
+              "polynomial": 2.60908232219e-06,
+              "exact": 2.60908232219e-06
+            },
+            {
+              "polynomial": 2.10732916472e-06,
+              "exact": 2.10732916428e-06
+            },
+            {
+              "polynomial": 8.44955942582e-07,
+              "exact": 8.44955942582e-07
+            },
+            {
+              "polynomial": 1.02869935457e-06,
+              "exact": 1.02869935457e-06
+            },
+            {
+              "polynomial": 3.55920375439e-06,
+              "exact": 3.55920375394e-06
+            },
+            {
+              "polynomial": 1.10803196236e-06,
+              "exact": 1.10803196237e-06
+            },
+            {
+              "polynomial": 1.21713458614e-05,
+              "exact": 1.21713458614e-05
+            },
+            {
+              "polynomial": 3.58384744104e-09,
+              "exact": 3.58384744104e-09
+            },
+            {
+              "polynomial": 1.51294266742e-06,
+              "exact": 1.51294266743e-06
+            },
+            {
+              "polynomial": 5.78604164581e-10,
+              "exact": 5.78604164581e-10
+            },
+            {
+              "polynomial": 1.78476501633e-09,
+              "exact": 1.78476501633e-09
+            },
+            {
+              "polynomial": 8.00588262351e-10,
+              "exact": 8.00588262351e-10
+            },
+            {
+              "polynomial": 8.77110939435e-10,
+              "exact": 8.77110939435e-10
+            }
+          ],
+          "peak_rss_gib": 59.3479232788,
+          "qualified": true,
+          "evaluation_seconds_per_step": 6.9321940867250005,
+          "state_arithmetic_seconds": 111.083565015,
+          "state_arithmetic_seconds_per_step": 2.7770891253750003,
+          "input_materialization_seconds": 166.134539846,
+          "process_wall_seconds": 435.7117448828649,
+          "carried_ciphertexts": 8,
+          "carried_coordinates": 201216
+        }
+      },
+      "tiled_evaluation_faster": true,
+      "reduction_fraction": 0.04749472494043039,
+      "speedup": 1.0498629521368898,
+      "state_arithmetic_speedup": 1.1363453930107017
+    },
+    {
+      "steps": 64,
+      "complete_pair": false,
+      "arms": {
+        "factored": {
+          "qualified": false
+        },
+        "tiled": {
+          "qualified": false
+        }
+      }
+    }
+  ],
+  "first_measured_tiled_evaluation_win": 40,
+  "first_measured_tiled_arithmetic_win": 40,
+  "scope": "one recurrence layer; offline encrypted inputs; setup excluded from eval",
+  "limitations": [
+    "one process per arm and length; no statistical confidence interval",
+    "no claim about full-model latency, encrypted autoregressive feedback or text quality",
+    "bounded carried state; executor DAG and retained validation outputs still grow",
+    "finite trace accuracy test, not a long-horizon numerical stability proof"
+  ]
+}

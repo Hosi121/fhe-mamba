@@ -8,6 +8,10 @@ generation path remains available through its existing optimized native kernel.
 The trained **Mamba-3 SISO 187M** loader, all 12 blocks and client generation
 loop pass full CPU/reference parity and complete encrypted generation: five
 evaluations and four actual client-selected tokens.
+An opt-in [long-session configuration](research/2026-09-28-long-generation.md)
+also qualifies 16 generated tokens; its 64-token encrypted candidate fails the
+hidden-error gate. These use different calibration and state representations
+from the short-request performance studies below.
 The ready-node refresh implementation completes in **12.68 minutes**.
 The final-source comparison measures **941.95 → 761.00 seconds (19.21% reduction)**,
 with bootstrap calls falling from 726 to 476. All four generated IDs and both
@@ -121,6 +125,18 @@ right-input storage stays live through GPU completion. The
 [ownership comparison](research/2026-09-24-owned-arithmetic.md) records
 exact-RNS checks and a fresh full baseline/candidate pair.
 
+`--reuse-public-ciphertexts` optionally encrypts each distinct public source
+vector once per evaluation, then clones that ciphertext for subsequent equal
+sources. Equality includes every coefficient bit after positive-zero padding;
+negative zero remains distinct. Secret inputs and client feedback never use
+this reuse path. Each caller receives its own mutable handle, and the seed is
+released after its final public source. The cache does not cross requests or
+keys. Results record `public_encryptions`, `public_encryption_reuses` and
+`peak_public_seeds`. This reduces repeated initialization work, not the cost
+of each later token; encryption-error correlation still requires numerical
+qualification for the workload. The [16-token comparison](research/2026-09-28-public-state-reuse.md)
+passes all gates in two matched pairs and reduces mean evaluation by 6.87%.
+
 `--cache-plaintexts` is an optional, evaluator-local cache for multiplication
 masks containing zeros and one finite nonzero coefficient. It retains up to
 64 encoded plaintexts, including their GPU handles, and uses LRU eviction.
@@ -220,7 +236,7 @@ Compile all layers on the development host:
 
 ```bash
 OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 \
-  uv run --no-sync python experiments/export_mamba3_lm.py \
+  uv run --no-sync python -m fhemamba workload export-mamba3 \
     --output runs/mamba3-lm --prompt 'The capital' --new-tokens 4
 ```
 
@@ -236,7 +252,7 @@ Transfer that directory to the GPU host. Use the build and library environment
 shown below, then run with an explicit wall-time cap (seconds):
 
 ```bash
-OMP_NUM_THREADS=4 python3 experiments/run_packed_probe.py \
+OMP_NUM_THREADS=4 python -m fhemamba benchmark packed \
   --binary /path/to/packed_fideslib --payload /path/to/mamba3-lm \
   --output /path/to/mamba3-lm-run --planned-refresh --batch-refresh --frontier-refresh \
   --inplace-ops --gpu-plaintext-ntt \
@@ -265,7 +281,7 @@ or re-encrypted. Process isolation is not provided by this feasibility runner.
 Copy the run results back and decode the actual encrypted-client token IDs:
 
 ```bash
-uv run --no-sync python experiments/report_mamba3_generation.py \
+uv run --no-sync python -m fhemamba benchmark generation-report \
   --payload runs/mamba3-lm --run runs/mamba3-lm-run \
   --tokenizer checkpoints/mamba3-siso-187m/tokenizer \
   --output runs/mamba3-generation.json
@@ -273,8 +289,50 @@ uv run --no-sync python experiments/report_mamba3_generation.py \
 
 `--probe-layers 1` compiles only a component for debugging and cost measurement.
 Its `complete_backbone` flag is false and its text is not full-model generation.
-The exact-history implementation currently limits a session to 32 evaluations.
-Neither this limit nor successful short probes establish long-context accuracy.
+The exporter accepts up to 64 generated tokens and 128 total evaluations. These
+are resource limits, not a guarantee that a prompt stays inside fitted domains.
+The default still uses exact history and accumulated rotary angles.
+
+For longer sessions, an opt-in path retains the complete SSM state in fixed-size
+head tiles and carries each rotary phase as its cosine and sine:
+
+```bash
+OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 \
+  uv run --no-sync python -m fhemamba workload export-mamba3 \
+    --output runs/mamba3-long16 --prompt 'The capital' --new-tokens 16 \
+    --state-representation tiled --rotary phasor --calibration-tokens 65 \
+    --normalization-margin 1 --positive-lower-fraction 0.25
+```
+
+The phase update uses the sine/cosine addition identities, so the polynomials
+see one step's angular increment instead of the entire accumulated angle.
+It neither drops state coordinates nor wraps angles with a discontinuous
+encrypted modulo operation. The complete backbone still evaluates all original
+normalizations. Calibration spans six independent 65-token generations and
+widens their positive normalization domains; no evaluation-prompt values enter
+the fit. The compiler requires matching greedy IDs and a final-hidden maximum
+absolute error of at most `0.001` before writing a usable payload. Numerical
+drift, domain coverage and encrypted execution must still pass separately.
+
+Use the classical-128 flags and the qualified GPU preparation options when
+running this payload; the exact command is retained with each measurement.
+`fhemamba benchmark packed` forwards `--frontier-live-limit 256` when frontier
+refresh is enabled. This threshold passes the complete 16-token generation;
+128 fails client decoding on the full model despite passing the separate
+one-layer recurrence probe. It is a soft limit on speculative retained values,
+not a GPU allocation cap. The result reporter accepts either this runner's record or
+a generic benchmark job and supports `--validate-only --security 128-classic`
+as a completion hook without installing a tokenizer on the GPU host.
+
+The [fixed-state recurrence probe](../experiments/recurrent_state/README.md)
+uses the same mixer update with whole heads split across ciphertexts. It compares
+bounded state storage against exact history on identical captured inputs and
+audits the existing polynomial domains on longer plaintext traces. Component
+results alone do not qualify the complete generation path above.
+The [memory-admission qualification](research/2026-09-27-recurrent-memory.md)
+completes both recurrence representations at 64 steps with the classical-128
+profile and unchanged 0.001 gates. It limits speculative executor work, while
+leaving the default short-generation schedule unchanged.
 
 ## Reproduce the encrypted probe
 
@@ -282,7 +340,7 @@ Export on the Python development host:
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
-  uv run --no-sync python experiments/export_mamba3_probe.py \
+  uv run --no-sync python -m fhemamba workload export-mixer \
     --output runs/mamba3-probe --tokens 4
 ```
 
@@ -305,7 +363,7 @@ payload directory to the Spark host. From the repository checkout on that host:
 
 ```bash
 export LD_LIBRARY_PATH="$HOME/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-OMP_NUM_THREADS=4 python3 experiments/run_packed_probe.py \
+OMP_NUM_THREADS=4 python -m fhemamba benchmark packed \
   --binary "$HOME/fhemamba/spark/kernel/packed_fideslib" \
   --payload /path/to/mamba3-probe \
   --output runs/mamba3-encrypted-001 --timeout 600
@@ -333,7 +391,7 @@ both output-normalization settings, nontrivial B/C biases and carried states.
 ```bash
 git clone https://github.com/state-spaces/mamba.git /tmp/mamba-reference
 git -C /tmp/mamba-reference checkout e9594ce1c732d97440f0332fdc43170a2294dbfa
-uv run --no-sync python experiments/check_mamba3_upstream.py \
+uv run --no-sync python -m fhemamba workload check-mixer \
   --source /tmp/mamba-reference --output runs/mamba3-upstream-parity.json
 ```
 

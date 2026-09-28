@@ -52,8 +52,27 @@ and [Spark build instructions](docs/dgx-spark.md#build).
 | Python references | Mamba-2 and trained Mamba-3 SISO; shared polynomial and layout operators |
 | Encrypted execution | CKKS GPU backend with encrypted activations and recurrent state, using public model weights |
 | Classical-128 prototype | Audited single-ring Mamba-3 parameter profile; actual QP checked before and after evaluation |
-| Client generation | Five encrypted evaluations and four generated tokens on the recorded fixed prompts |
+| Client generation | 16 actual Mamba-3 tokens and four Mamba-2 tokens on the recorded fixed prompts |
 | Reusable experiments | Declarative jobs, deadlines, completion events, isolated local settings and verifiable public evidence |
+
+The [fixed-state recurrence study](docs/research/2026-09-27-recurrent-state.md)
+introduces tiled state storage for longer Mamba-3 sessions. Its one-layer
+recurrence now [completes 64 encrypted steps with memory admission](docs/research/2026-09-27-recurrent-memory.md)
+under the classical-128 profile. This is separate from full-model generation;
+streaming execution and long-horizon polynomial accuracy remain open gates.
+
+The [full-model long-session study](docs/research/2026-09-28-long-generation.md)
+now qualifies **16 actual generated tokens** with the classical-128 profile.
+Its 64-token candidate fails the unchanged hidden-error gate at token 24 despite
+matching token IDs through the observed prefix. The study includes fresh
+Nsight Systems/Compute diagnosis; it does not claim a new speedup.
+The subsequent [public-initial-state reuse study](docs/research/2026-09-28-public-state-reuse.md)
+reduces the same 16-token request from 1,157.99 to 1,078.48 seconds (6.87%)
+across two matched pairs. This removes repeated initialization work; it does
+not qualify the rejected 64-token request.
+The [subsequent numerical diagnosis and two optimization trials](docs/research/2026-09-28-long-accuracy.md)
+retain that configuration: delayed NTT reduction is slower, and indexed mask
+lookup does not pass every full-request numerical gate.
 
 The client decrypts the final hidden vector to choose each next token. The
 current inline client loop does not establish a process-separated private-chat
@@ -64,18 +83,24 @@ separate from numerical parity and the classical RLWE parameter audit.
 
 | Workload and platform | Native evaluation | Security profile | Evidence |
 | --- | ---: | --- | --- |
+| Mamba-3 SISO 187M, tiled 16-token state, B300 | 1,078.48 s / 67.41 s per generated token | Classical-128, N=131,072, QP=3,376 bits | [Public initial-state reuse](docs/research/2026-09-28-public-state-reuse.md) |
 | Mamba-3 SISO 187M, B300 | 165.37 s / 41.34 s per generated token | Classical-128, N=131,072, QP=3,376 bits | [GPU plaintext preparation](docs/research/2026-09-27-b300-gpu-plaintext-fft.md) |
 | Mamba-3 SISO 187M, B300 | 141.77 s / 35.44 s per generated token | Experimental `not-set`, dual ring | [Rotation stream chaining](docs/research/2026-09-27-b300-rotation-stream-chain.md) |
 | Mamba-2-130M, DGX Spark | 1,942.99 s / 485.75 s per generated token | Experimental `not-set` | [Shared ownership](docs/research/2026-09-24-owned-arithmetic.md) |
 
-These are separate studies with different models, hardware and security
-settings. Each request has five encrypted evaluations and four generated tokens;
-setup/key generation and final validation are excluded. The studies contain
+These are separate studies with different state layouts, generation lengths,
+models, hardware and security settings. The first row has 17 encrypted evaluations
+and 16 generated tokens; the remaining rows have five evaluations and four tokens.
+Setup/key generation and final validation are excluded. The studies contain
 matched baselines, sample counts, precision gates, memory requirements and failed
 controls. These rates do not establish steady-state latency or arbitrary-prompt
 performance. See the [evidence registry](docs/evidence.md) for the full record.
 
 ## Experiments and contributions
+
+For a development handoff, start with [current state](docs/status.md).
+Reusable research tools are available through `python -m fhemamba --help`;
+[the experiment index](experiments/README.md) maps the remaining specialized work.
 
 Use the [experiment workflow](docs/experiments.md) to run a versioned job with
 local settings and completion events, then publish reviewed measurements.

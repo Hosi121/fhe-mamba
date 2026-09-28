@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "name": "small-tiled-40-limit128",
+      "mode": "tiled",
+      "steps": 40,
+      "limit": 128
+    },
+    {
+      "name": "control-tiled-64",
+      "mode": "tiled",
+      "steps": 64,
+      "limit": 0
+    },
+    {
+      "name": "control-factored-64",
+      "mode": "factored",
+      "steps": 64,
+      "limit": 0
+    },
+    {
+      "name": "candidate-tiled-64",
+      "mode": "tiled",
+      "steps": 64,
+      "limit": 128
+    },
+    {
+      "name": "candidate-factored-64",
+      "mode": "factored",
+      "steps": 64,
+      "limit": 128
+    },
+    {
+      "name": "control-tiled-40",
+      "mode": "tiled",
+      "steps": 40,
+      "limit": 0
+    },
+    {
+      "name": "candidate-tiled-40",
+      "mode": "tiled",
+      "steps": 40,
+      "limit": 128
+    }
+  ],
+  "pairs": [
+    {
+      "baseline": "control-tiled-64",
+      "candidate": "candidate-tiled-64",
+      "compare_timing": false
+    },
+    {
+      "baseline": "control-factored-64",
+      "candidate": "candidate-factored-64",
+      "compare_timing": false
+    },
+    {
+      "baseline": "control-tiled-40",
+      "candidate": "candidate-tiled-40",
+      "compare_timing": true
+    }
+  ]
+}

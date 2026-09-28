@@ -1,0 +1,6 @@
+{
+  "root": "${BENCH_ROOT}",
+  "study": "${STUDY}",
+  "baseline": "${BASELINE}",
+  "image": "sha256:5a56a99e888714b17a2ee5508569958058f2e2964e2247179cc064b0ef1e2d99"
+}

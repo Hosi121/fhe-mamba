@@ -34,6 +34,9 @@ This validates a recorded artifact; it does not rerun encrypted inference.
 
 | Location | Contents |
 | --- | --- |
+| [`b300/2026-09-28/long-accuracy/`](b300/2026-09-28/long-accuracy/) | Frozen selection-24 operator diagnosis, refresh isolation and controls; lazy NTT rejected, indexed cache unqualified after a full-run numerical failure; exact oracle and Nsight counter evidence |
+| [`b300/2026-09-28/public-state-reuse/`](b300/2026-09-28/public-state-reuse/) | Identical public initial ciphertexts reused within one request; two full classical-128 16-token pairs, 6.87% reduction, unchanged accuracy/security/circuit gates; static inventory, source and Nsight counter analysis |
+| [`b300/2026-09-28/long-generation/`](b300/2026-09-28/long-generation/) | Full-model 16-token generation passes; 64-token request rejected at selection 24; CPU parity, complete generation gates and Nsight Systems/Compute diagnosis |
 | [`b300/2026-09-27/security128/`](b300/2026-09-27/security128/) | Classical-128 parameter audit and frozen full Mamba-3 qualification; GPU addends / larger public-mask cache, 327.51→235.75 s (28.02%); exact probes, parameter rejections, digit/cache screens and Nsight evidence |
 | [`cpu/2026-09-27/sylph-cachemir-screen/`](cpu/2026-09-27/sylph-cachemir-screen/) | Source-paper identities and reproducible frozen-program applicability screen; 785 polynomial nodes and a float64 parity decomposition check, with no encrypted performance claim |
 | [`b300/2026-09-27/rotation-stream-chain/`](b300/2026-09-27/rotation-stream-chain/) | Optional three-barrier rotation patch; exact rotation/refresh qualification, full ABBA 146.36→141.77 s (3.14%), fresh Nsight pair, source/archive audits and remaining bottleneck analysis |

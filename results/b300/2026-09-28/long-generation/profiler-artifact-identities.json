@@ -1,0 +1,37 @@
+[
+  {
+    "case": "ncu-keyswitch",
+    "report": {
+      "bytes": 9399816,
+      "sha256": "2edc9821646bcdd98eed70891e5e19fb46c07b9a3c3b5f24e8a90eafa406d8a8"
+    }
+  },
+  {
+    "case": "ncu-modup",
+    "report": {
+      "bytes": 9395886,
+      "sha256": "13ac4d360a9ccc12a7ad078b75129cec8087d2f71f584b122959b5e263ff6263"
+    }
+  },
+  {
+    "case": "ncu-ntt",
+    "report": {
+      "bytes": 9495706,
+      "sha256": "e4bb34b82e5f28578793526edac616c455801b62a03a6f93fb77f32a1b88faf3"
+    }
+  },
+  {
+    "case": "nsys-nodes",
+    "report": {
+      "bytes": 790294646,
+      "sha256": "de0ac0e726b18a3a82451bcdcc9b6aa347e06c4b6eb034594abf3f0e0ee82e71"
+    }
+  },
+  {
+    "case": "nsys-prefix",
+    "report": {
+      "bytes": 740271430,
+      "sha256": "2f566f94659b9124de00ce3bd5ab08c2af72a7ec29052eeb247a63591eabbe8c"
+    }
+  }
+]

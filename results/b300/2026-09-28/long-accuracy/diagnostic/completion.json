@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/diagnostic",
+  "state": "failed",
+  "exit_code": 2,
+  "at_unix": 1790550373.495546
+}

@@ -1,0 +1,376 @@
+[
+  {
+    "argv": [
+      "git",
+      "apply",
+      "--check",
+      "${STUDY}/ntt-source/experiments/ntt_lazy/fideslib-ntt-lazy.patch"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "git",
+      "apply",
+      "${STUDY}/ntt-source/experiments/ntt_lazy/fideslib-ntt-lazy.patch"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "/usr/local/cuda/bin/nvcc",
+      "-forward-unknown-to-host-compiler",
+      "-ccbin=g++",
+      "-DMULTI_GPU",
+      "-DNCCL",
+      "-DRCCL",
+      "--options-file",
+      "CMakeFiles/fideslib.dir/includes_CUDA.rsp",
+      "-Wno-deprecated-gpu-targets",
+      "-Wno-restrict",
+      "-Wall",
+      "-rdc=true",
+      "--diag-suppress=3133,611",
+      "-Xcompiler",
+      "-fopenmp",
+      "-Xcompiler",
+      "-O3",
+      "-Xcompiler",
+      "-DNCCL",
+      "-O3",
+      "-DNDEBUG",
+      "-std=c++20",
+      "--generate-code=arch=compute_103,code=[lto_103]",
+      "-Xcompiler=-fPIC",
+      "-x",
+      "cu",
+      "-rdc=true",
+      "-c",
+      "${STUDY}/ntt-backend/src/NTT.cu",
+      "-o",
+      "${STUDY}/ntt-backend/NTT.cu.o"
+    ],
+    "cwd": "/workspace/build/fideslib-sm103"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "AddSub.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "AccumulateBroadcast.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "ApproxModEval.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Bootstrap.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "CoeffsToSlots.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Context.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Conv.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "ElemenwiseBatchKernels.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "KeySwitchingKey.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Limb.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "LimbPartition.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "LimbPartitionBatch.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "LimbPartitionMGPU.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "LinearTransform.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Parameters.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Plaintext.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Rescale.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "ParameterSwitch.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "RawCiphertext.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "ConstantsGPU.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "CudaUtils.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Math.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "ModMult.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "PeerUtils.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "PolyApprox.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "Rotation.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "p",
+      "${BENCH_ROOT}/b300-gpu-ifft-20260927/dependencies/lib/fideslib.a",
+      "VectorGPU.cu.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "/usr/local/cuda/bin/nvcc",
+      "-forward-unknown-to-host-compiler",
+      "-ccbin=g++",
+      "-Wno-deprecated-gpu-targets",
+      "-Wno-restrict",
+      "-Wall",
+      "-rdc=true",
+      "--diag-suppress=3133,611",
+      "-Xcompiler",
+      "-fopenmp",
+      "-Xcompiler",
+      "-O3",
+      "-Xcompiler",
+      "-DNCCL",
+      "-O3",
+      "-DNDEBUG",
+      "--generate-code=arch=compute_103,code=[sm_103]",
+      "-dlto",
+      "-Xcompiler=-static-libstdc++",
+      "-Xcompiler=-static-libgcc",
+      "-Xcompiler=-fPIC",
+      "-Wno-deprecated-gpu-targets",
+      "-shared",
+      "-dlink",
+      "${STUDY}/ntt-backend/AddSub.cu.o",
+      "${STUDY}/ntt-backend/AccumulateBroadcast.cu.o",
+      "${STUDY}/ntt-backend/ApproxModEval.cu.o",
+      "${STUDY}/ntt-backend/Bootstrap.cu.o",
+      "${STUDY}/ntt-backend/CoeffsToSlots.cu.o",
+      "${STUDY}/ntt-backend/Context.cu.o",
+      "${STUDY}/ntt-backend/Conv.cu.o",
+      "${STUDY}/ntt-backend/ElemenwiseBatchKernels.cu.o",
+      "${STUDY}/ntt-backend/KeySwitchingKey.cu.o",
+      "${STUDY}/ntt-backend/Limb.cu.o",
+      "${STUDY}/ntt-backend/LimbPartition.cu.o",
+      "${STUDY}/ntt-backend/LimbPartitionBatch.cu.o",
+      "${STUDY}/ntt-backend/LimbPartitionMGPU.cu.o",
+      "${STUDY}/ntt-backend/LinearTransform.cu.o",
+      "${STUDY}/ntt-backend/Parameters.cu.o",
+      "${STUDY}/ntt-backend/Plaintext.cu.o",
+      "${STUDY}/ntt-backend/Rescale.cu.o",
+      "${STUDY}/ntt-backend/ParameterSwitch.cu.o",
+      "${STUDY}/ntt-backend/RawCiphertext.cu.o",
+      "${STUDY}/ntt-backend/ConstantsGPU.cu.o",
+      "${STUDY}/ntt-backend/CudaUtils.cu.o",
+      "${STUDY}/ntt-backend/Math.cu.o",
+      "${STUDY}/ntt-backend/ModMult.cu.o",
+      "${STUDY}/ntt-backend/NTT.cu.o",
+      "${STUDY}/ntt-backend/PeerUtils.cu.o",
+      "${STUDY}/ntt-backend/PolyApprox.cu.o",
+      "${STUDY}/ntt-backend/Rotation.cu.o",
+      "${STUDY}/ntt-backend/VectorGPU.cu.o",
+      "-o",
+      "${STUDY}/ntt-backend/cmake_device_link.o",
+      "--options-file",
+      "${BENCH_ROOT}/build/fideslib-sm103/CMakeFiles/fideslib.dir/deviceLinkLibs.rsp"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ar",
+      "r",
+      "${STUDY}/ntt-backend/fideslib.a",
+      "${STUDY}/ntt-backend/NTT.cu.o",
+      "${STUDY}/ntt-backend/cmake_device_link.o"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  },
+  {
+    "argv": [
+      "ranlib",
+      "${STUDY}/ntt-backend/fideslib.a"
+    ],
+    "cwd": "${STUDY}/ntt-backend"
+  }
+]

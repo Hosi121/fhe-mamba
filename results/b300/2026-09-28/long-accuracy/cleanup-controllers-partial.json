@@ -1,0 +1,104 @@
+{
+  "removed": [
+    {
+      "path": "analyze-observations.py",
+      "bytes": 3579,
+      "sha256": "750d93dbd15622896a2a2950f962e455f50eb06b6503f425dcf51aa3a0c35f4c"
+    },
+    {
+      "path": "build-ntt-controller.py",
+      "bytes": 1028,
+      "sha256": "58734dbc439bfa095fad89b270eb11aa101286dcdf9394374cb76f463bc8f121"
+    },
+    {
+      "path": "completion-analysis.py",
+      "bytes": 2056,
+      "sha256": "5e73d5a1ffd546c79b52683d6cafbf2a34ba293e3c2c24d633359cd25175444a"
+    },
+    {
+      "path": "diagnostic-pipeline.py",
+      "bytes": 847,
+      "sha256": "1a8f37b07ed1e1b76f4df9e63aef308c8bfc86e5758ebbbf3577aab88c386d25"
+    },
+    {
+      "path": "export-references-fine.py",
+      "bytes": 8590,
+      "sha256": "b489bb258f1a1d2df0f499f7a3a3588610d693ccc6a5ef2f8a7eb5c024e91cdc"
+    },
+    {
+      "path": "fine-pipeline.py",
+      "bytes": 1333,
+      "sha256": "4a365db9ecd97fb3b153cd61eaa1eb9f90efc8c5cc0c16ddeae849e33c10db0c"
+    },
+    {
+      "path": "fine-r3-pipeline.py",
+      "bytes": 1363,
+      "sha256": "42977f6a0a01f45a64ef60d4204753d03b094ee464ed2c5d7b33c053d30fa6f6"
+    },
+    {
+      "path": "full-cache-pipeline.py",
+      "bytes": 1335,
+      "sha256": "2ea13d2ffea37067413db329a1c37ddf1a82cff8abdcdaa754b4411989412230"
+    },
+    {
+      "path": "in-context-controller.py",
+      "bytes": 435,
+      "sha256": "cd90a84190e9d4453fbe99d9e2a46d88739b7a79ba4492bfa4719fa030dd73eb"
+    },
+    {
+      "path": "ncu-r4-pipeline.py",
+      "bytes": 480,
+      "sha256": "cca0e8ad5f6f0139461106c103f8f31e9ec4c6214b6d1834c1b6d505dbae2c00"
+    },
+    {
+      "path": "ncu_summary.py",
+      "bytes": 3099,
+      "sha256": "1dfb396fe4a9a5bc978df3ad6dad92568b614d3c82738cfebe41267bc4eee3fe"
+    },
+    {
+      "path": "optimization-pipeline.py",
+      "bytes": 1698,
+      "sha256": "cd59392db24a42bacc8800f5e0886f6cbd31acce338ba5913fc295d19f8002da"
+    },
+    {
+      "path": "oracle-p-pipeline.py",
+      "bytes": 609,
+      "sha256": "0fa05672133264ebf323fe455ede4fe6cd5959f3c8f767d6c1395cdf791c0f30"
+    },
+    {
+      "path": "oracle-p-r3-pipeline.py",
+      "bytes": 618,
+      "sha256": "9fa433d94fc9eb48ea831752904e5d434f750e482be59a733e2f7bfadae9b92e"
+    },
+    {
+      "path": "replay-build-controller.py",
+      "bytes": 396,
+      "sha256": "90eb94496c412cba2b0b18eafa48cf92b3daa2f4b31701797caeebea8d6703f3"
+    },
+    {
+      "path": "replay-build-r2-controller.py",
+      "bytes": 399,
+      "sha256": "7e65904b3401661b1a34bda768493a3f8be84ebe824f2e87ecc2d7ce3d14f44f"
+    },
+    {
+      "path": "replay-r3-controller.py",
+      "bytes": 604,
+      "sha256": "0a74ce5e5e0d8ae6bc4c111c69cc5cb213722972024aad376ea3f8aea5647f69"
+    },
+    {
+      "path": "replay-r4-controller.py",
+      "bytes": 618,
+      "sha256": "a8835c7b3516a73226ba58ca3e103f6e6397477121d212930e914112aae1b8f3"
+    },
+    {
+      "path": "verify-archive.py",
+      "bytes": 6781,
+      "sha256": "6e2cd0d9ba17a2fdc7ca39b06a55d09175f3169c0d0d239144d68d9e40c27784"
+    }
+  ],
+  "kept_for_active_job": [
+    "analyze-operations.py",
+    "completion-operations.py",
+    "export-references-fine-r3.py"
+  ]
+}

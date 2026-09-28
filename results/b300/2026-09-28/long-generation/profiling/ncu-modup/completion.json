@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/ncu-modup",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790528195.7429016
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/tiled-4",
+  "state": "failed",
+  "exit_code": 137,
+  "at_unix": 1790513137.9159842
+}

@@ -6,7 +6,7 @@ backwards through the observed DAG. Client feedback and refresh start new
 versions. It does not change the executor or its refresh placement.
 
 ```bash
-python experiments/level_schedule/analyze.py program.txt run.log --output slack.json
+python -m fhemamba diagnose levels program.txt run.log --output slack.json
 ```
 
 The input program must use the v2 line-oriented export. Large linear-weight
@@ -38,7 +38,7 @@ and calibration intervals, including upper/lower interval ratios for inverse
 square roots. It rejects a manifest whose program hash differs.
 
 ```bash
-python experiments/level_schedule/polynomials.py --program program.txt \
+python -m fhemamba diagnose polynomials --program program.txt \
   --manifest manifest.json --native native.json --output polynomial-profile.json
 ```
 

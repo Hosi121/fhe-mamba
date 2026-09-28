@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "state": "completed",
+  "started_at_unix": 1790552152.476191,
+  "spec": {
+    "schema_version": 1,
+    "command": [
+      "python3",
+      "${STUDY}/analyze-operations.py",
+      "--metadata",
+      "${STUDY}/references-cache/references.json",
+      "--manifest",
+      "${PAYLOAD_STUDY}/payload/tiled16/manifest.json",
+      "--program",
+      "${PAYLOAD_STUDY}/payload/tiled16/program.txt",
+      "--observations",
+      "${STUDY}/diagnostic-cache/observations.jsonl",
+      "--output",
+      "${STUDY}/analyze-operations-diagnostic-cache/analysis.json"
+    ],
+    "cwd": "${STUDY}",
+    "inputs": {
+      "analyzer": "${STUDY}/analyze-operations.py",
+      "metadata": "${STUDY}/references-cache/references.json",
+      "manifest": "${PAYLOAD_STUDY}/payload/tiled16/manifest.json",
+      "program": "${PAYLOAD_STUDY}/payload/tiled16/program.txt",
+      "observations": "${STUDY}/diagnostic-cache/observations.jsonl"
+    },
+    "timeout_seconds": 300
+  },
+  "inputs": {
+    "analyzer": {
+      "bytes": 6859,
+      "sha256": "7875b1324495764b3d27adc6baa392d09aa5748400ed4236c8e5c3d6f6791e7f"
+    },
+    "metadata": {
+      "bytes": 99886,
+      "sha256": "781d7950064691f5ffb4e25754c7ce6bae465c8de5c359f2471d433764cc1195"
+    },
+    "manifest": {
+      "bytes": 496118,
+      "sha256": "c478d07270b87f1fd9b8b1dfc3c433c7330367a2556ff0f9be3a67d895922bfb"
+    },
+    "program": {
+      "bytes": 1311955328,
+      "sha256": "c666800a73bf18a6fa61968deb606a19a7f7e31cb8fe46bc4c28b1c302c3db95"
+    },
+    "observations": {
+      "bytes": 152401074,
+      "sha256": "fdfedf1a0a94db0e1d1ba25f4e626efa5c25588742a1f354d291d6e7d7098eac"
+    }
+  },
+  "exit_code": 0,
+  "lock_wait_seconds": 0.00036238902248442173,
+  "wall_seconds": 6.338585045188665
+}

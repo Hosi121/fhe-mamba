@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "command": [
+    "python3",
+    "${study}/analysis-tools/profiling/nsys_summary.py",
+    "${study}/nsys-nodes/trace.sqlite",
+    "--start-seconds",
+    "90",
+    "--output",
+    "${study}/nsys-nodes/summary-timeline-after90.json"
+  ],
+  "cwd": "${study}",
+  "inputs": {
+    "analyzer": "${study}/analysis-tools/profiling/nsys_summary.py",
+    "sqlite": "${study}/nsys-nodes/trace.sqlite"
+  },
+  "timeout_seconds": 900
+}

@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${STUDY}/candidate-factored-64",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790520072.7379963
+}

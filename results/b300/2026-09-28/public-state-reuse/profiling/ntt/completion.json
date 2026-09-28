@@ -1,0 +1,7 @@
+{
+  "event": "job_finished",
+  "output": "${LOCAL_STUDY}/pipeline-ntt",
+  "state": "completed",
+  "exit_code": 0,
+  "at_unix": 1790534717.5117304
+}

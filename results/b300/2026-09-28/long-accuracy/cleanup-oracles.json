@@ -1,0 +1,22 @@
+{
+  "removed": [
+    {
+      "path": "ntt-golden.bin",
+      "bytes": 2885681536,
+      "sha256": "f75423a424c788339cd6499d90c5a36e6335896f58274450452d26c5cc965b90",
+      "reason": "Regenerable exact-oracle output; measured comparison and source provenance retained"
+    },
+    {
+      "path": "ntt-p-golden.bin",
+      "bytes": 2877292928,
+      "sha256": "4b120bbad732091e7cc957199f7f935f957e157d1d80637b69fba9fb6fb9fb5a",
+      "reason": "Regenerable exact-oracle output; measured comparison and source provenance retained"
+    },
+    {
+      "path": "ntt-p-r3-golden.bin",
+      "bytes": 2986344944,
+      "sha256": "b71cd72e313e6f0c7679d0882c91e19fff252eeb11230aad9df36f3e80a61e41",
+      "reason": "Regenerable exact-oracle output; measured comparison and source provenance retained"
+    }
+  ]
+}

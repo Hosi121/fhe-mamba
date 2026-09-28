@@ -1,0 +1,26 @@
+{
+  "scope": "Own completed-study disposable controllers and flat copies; measured source snapshots, manifests and diagnostic data retained",
+  "active_own_jobs": false,
+  "removed": [
+    {
+      "path": "replay-r5-controller.py",
+      "bytes": 1782,
+      "sha256": "df884bde0eb0dff15ab3e8e0c779035d82f2d62521d00bf67107d15033fb5652"
+    },
+    {
+      "path": "completion-operations.py",
+      "bytes": 1594,
+      "sha256": "401b13f8a8ec66d653c54ea565d8806df434d0550039f9879c65404d9c3458d7"
+    },
+    {
+      "path": "analyze-operations.py",
+      "bytes": 6859,
+      "sha256": "7875b1324495764b3d27adc6baa392d09aa5748400ed4236c8e5c3d6f6791e7f"
+    },
+    {
+      "path": "export-references-fine-r3.py",
+      "bytes": 10483,
+      "sha256": "d88c3f349dba318a29f74b725e67fef166f040506393802961575fe487928973"
+    }
+  ]
+}

@@ -74,7 +74,7 @@ Build the packed target using the pinned Spark dependencies. Export the full
 payload with the [Mamba-3 guide](../mamba3.md), then run:
 
 ```bash
-OMP_NUM_THREADS=4 python3 experiments/run_packed_probe.py \
+OMP_NUM_THREADS=4 python -m fhemamba benchmark packed \
   --binary /path/to/packed_fideslib --payload /path/to/mamba3-lm \
   --output /path/to/depth-batch-run --planned-refresh --batch-refresh \
   --timeout 2400 --budget-file /path/to/campaign.json --budget-seconds 7200

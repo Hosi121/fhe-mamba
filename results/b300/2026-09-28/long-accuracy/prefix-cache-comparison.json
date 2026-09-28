@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "metric": "eval_seconds",
+  "baseline": {
+    "samples": [
+      184.558821479
+    ],
+    "mean": 184.558821479
+  },
+  "candidate": {
+    "samples": [
+      180.168464315
+    ],
+    "mean": 180.168464315
+  },
+  "reduction": 0.02378838967878627,
+  "contract": {
+    "schema_version": 1,
+    "metric": "eval_seconds",
+    "equal": [
+      "security_audit",
+      "security",
+      "slots",
+      "payload_slots",
+      "ring_dimension",
+      "refresh_ring_dimension",
+      "depth",
+      "scale_bits",
+      "nodes",
+      "evaluated_nodes",
+      "ct_ct_mul",
+      "ct_pt_mul",
+      "rotations",
+      "refresh_rotations",
+      "bootstraps",
+      "logical_refreshes",
+      "refresh_batches",
+      "largest_refresh_batch",
+      "rotation_batch_preparations",
+      "shared_basis_hits",
+      "frontier_deferrals",
+      "frontier_limit_selections",
+      "maximum_live_dag_values",
+      "plaintext_cache_hits",
+      "plaintext_cache_misses",
+      "host_encodes",
+      "bootstrap_passes",
+      "merge_refresh_correction",
+      "gpu_dual_ring",
+      "exact_tolerance",
+      "polynomial_tolerance",
+      "generated_token_ids",
+      "public_encryptions",
+      "public_encryption_reuses",
+      "plaintext_cache_bypasses",
+      "plaintext_cache_evictions",
+      "reuse_public_ciphertexts",
+      "frontier_live_limit",
+      "diagnostic_only"
+    ],
+    "require": {
+      "passed": true,
+      "encrypted": true,
+      "security": "128-classic",
+      "evaluation_decryptions": 0,
+      "non_finite": 0,
+      "diagnostic_only": false,
+      "reuse_public_ciphertexts": true
+    },
+    "maximum": {
+      "max_abs_error_vs_polynomial": 0.001,
+      "max_abs_error_vs_exact": 0.001
+    },
+    "minimum_reduction": 0
+  },
+  "inputs": [
+    {
+      "path": ".local/long-accuracy-20260928/evidence/prefix-cache-control/native.json",
+      "bytes": 41062,
+      "sha256": "d49b802b4173786f9e5e086bc673a6dbd381a5734b10f9c2cbf991a0a27e1e67"
+    },
+    {
+      "path": ".local/long-accuracy-20260928/evidence/prefix-cache/native.json",
+      "bytes": 41054,
+      "sha256": "1e0e59f9e03a23ac53ab1e3ae9d84a0c2e450da2611ab269821e465e5b3503e1"
+    }
+  ],
+  "scope": "Descriptive matched comparison; no statistical significance claim."
+}

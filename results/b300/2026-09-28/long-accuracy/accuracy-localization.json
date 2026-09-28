@@ -1,0 +1,210 @@
+{
+  "diagnostic_only": true,
+  "analysis_sha256": "3055eccc56b18deac80f7c9f10ce9b602e8f7df1266808dc58af19665491cf0d",
+  "observation_count": 684,
+  "observed_node_count": 524,
+  "first_large_error_event": "Full-packing two-input refresh at nodes 75898 and 75904; local downstream add/mul errors stay below 1e-5",
+  "records": [
+    {
+      "node": 75898,
+      "event": "node_output",
+      "level": 35,
+      "degree": 2,
+      "max_abs_error": 5.433949565071539e-07,
+      "max_abs_value": 0.2791801181349163,
+      "non_finite": 0,
+      "worst_index": 12240,
+      "order": 565,
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "local_operation": {
+        "operation": "repeat",
+        "parent_nodes": [
+          75891
+        ],
+        "max_abs_error_on_observed_inputs": 5.264383400663264e-07
+      }
+    },
+    {
+      "node": 75904,
+      "event": "node_output",
+      "level": 35,
+      "degree": 2,
+      "max_abs_error": 1.4545524819609135e-06,
+      "max_abs_value": 1.355459168366036,
+      "non_finite": 0,
+      "worst_index": 1589,
+      "order": 567,
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "local_operation": {
+        "operation": "mul",
+        "parent_nodes": [
+          75902,
+          75903
+        ],
+        "max_abs_error_on_observed_inputs": 2.650896251461159e-06
+      }
+    },
+    {
+      "node": 75898,
+      "event": "before_refresh",
+      "level": 35,
+      "degree": 2,
+      "max_abs_error": 5.247796979468422e-07,
+      "max_abs_value": 0.27918002303546596,
+      "non_finite": 0,
+      "worst_index": 6145,
+      "order": 623,
+      "step": 24,
+      "names": [
+        "repeat"
+      ]
+    },
+    {
+      "node": 75904,
+      "event": "before_refresh",
+      "level": 35,
+      "degree": 2,
+      "max_abs_error": 1.6342028109073148e-06,
+      "max_abs_value": 1.355459665528604,
+      "non_finite": 0,
+      "worst_index": 1576,
+      "order": 624,
+      "step": 24,
+      "names": [
+        "mul"
+      ]
+    },
+    {
+      "node": 75898,
+      "event": "after_refresh",
+      "level": 18,
+      "degree": 2,
+      "max_abs_error": 0.01111814381506292,
+      "max_abs_value": 0.2902842255686189,
+      "non_finite": 0,
+      "worst_index": 12188,
+      "order": 625,
+      "step": 24,
+      "names": [
+        "repeat"
+      ],
+      "refresh_max_abs_change": 0.011117942564920175
+    },
+    {
+      "node": 75904,
+      "event": "after_refresh",
+      "level": 18,
+      "degree": 2,
+      "max_abs_error": 0.05397846865837667,
+      "max_abs_value": 1.3883375202322075,
+      "non_finite": 0,
+      "worst_index": 15641,
+      "order": 626,
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "refresh_max_abs_change": 0.053978301484042215
+    },
+    {
+      "node": 75900,
+      "event": "node_output",
+      "level": 26,
+      "degree": 2,
+      "max_abs_error": 0.028134734096627947,
+      "max_abs_value": 0.4940445736593343,
+      "non_finite": 0,
+      "worst_index": 23633,
+      "order": 627,
+      "step": 24,
+      "names": [
+        "mul"
+      ],
+      "local_operation": {
+        "operation": "mul",
+        "parent_nodes": [
+          75898,
+          75899
+        ],
+        "max_abs_error_on_observed_inputs": 1.6608180781751969e-06
+      }
+    },
+    {
+      "node": 75901,
+      "event": "node_output",
+      "level": 26,
+      "degree": 2,
+      "max_abs_error": 0.028136270442144756,
+      "max_abs_value": 2.194712749084239,
+      "non_finite": 0,
+      "worst_index": 23633,
+      "order": 628,
+      "step": 24,
+      "names": [
+        "add"
+      ],
+      "local_operation": {
+        "operation": "add",
+        "parent_nodes": [
+          75897,
+          75900
+        ],
+        "max_abs_error_on_observed_inputs": 7.477270831668598e-06
+      }
+    },
+    {
+      "node": 75905,
+      "event": "node_output",
+      "level": 26,
+      "degree": 2,
+      "max_abs_error": 0.08034198020046579,
+      "max_abs_value": 3.583045702341027,
+      "non_finite": 0,
+      "worst_index": 16977,
+      "order": 629,
+      "step": 24,
+      "names": [
+        "add",
+        "11:carry.ssm.4"
+      ],
+      "local_operation": {
+        "operation": "add",
+        "parent_nodes": [
+          75901,
+          75904
+        ],
+        "max_abs_error_on_observed_inputs": 9.025248038432854e-06
+      }
+    },
+    {
+      "node": 75969,
+      "event": "node_output",
+      "level": 28,
+      "degree": 2,
+      "max_abs_error": 0.03441998170608562,
+      "max_abs_value": 5.313378145403314,
+      "non_finite": 0,
+      "worst_index": 606,
+      "order": 683,
+      "step": 24,
+      "names": [
+        "mulp",
+        "final_hidden"
+      ],
+      "local_operation": {
+        "operation": "mulp",
+        "parent_nodes": [
+          75968
+        ],
+        "max_abs_error_on_observed_inputs": 2.4017922399810487e-06
+      }
+    }
+  ],
+  "scope": "First abrupt local SSM-update error at the identified final-layer selection-24 state tile; internal tensors have different scales and final-hidden tolerance is not a universal per-node criterion."
+}

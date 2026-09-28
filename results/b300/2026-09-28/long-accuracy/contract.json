@@ -1,0 +1,27 @@
+{
+  "scope": {
+    "accuracy": "Identify the first divergent layer/operator in the frozen failed 64-token request, minimal reproduction and evidence-backed repair proposal",
+    "optimization": "Implement and validate at most two approaches; integrate qualified approaches and report matched full-model comparison and adoption decisions"
+  },
+  "invariants": {
+    "security": "128-classic",
+    "ring_dimension": 131072,
+    "q_bits": 2656,
+    "p_bits": 720,
+    "hybrid_digits": 4,
+    "polynomial_tolerance": 0.001,
+    "exact_tolerance": 0.001,
+    "bootstrap_passes": 2,
+    "frontier_live_limit": 256,
+    "payload": "Frozen tiled64 phasor program, original weights, polynomial coefficients and bounds"
+  },
+  "performance_gate": {
+    "full_request_generated_tokens": 16,
+    "control": "public ciphertext reuse enabled, previous qualified evaluator",
+    "screen": "small all-layer prefix, exact RNS probe for modular arithmetic candidates",
+    "comparison": "two fixed placements, opposite orders (A then B, B then A)",
+    "adopt": "both pairs improve, mean evaluation reduction at least 2%, unchanged token and error gates",
+    "instrumented_timings": "diagnostic only; not performance claim"
+  },
+  "candidate_limit": 2
+}
