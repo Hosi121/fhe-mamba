@@ -25,7 +25,7 @@ precision, language-model quality or performance evidence.
 Bernstein subdivision, an unsafe Newton seed, and positive-series seed
 certificates. It also rejects a write gate that accumulates at unit decay,
 and accepts reset/perfect-memory cases satisfying the coupled state invariant.
-`certify_payload_ranges.py` proves the normalization basin on
+`fhemamba calibrate ranges` proves the normalization basin on
 the declared intervals; it does not establish private-input domain membership
 or CKKS rounding bounds.
 The Bernstein gate certificate checks the *shared-basis* coefficient
@@ -37,7 +37,7 @@ coverage, and update/readout parity after regularization.
 .venv/bin/python experiments/algebra/probe_bounded_selective_gates.py \
   --payload results/m2_chain_payload_rows \
   --degrees 32 64 128 --output runs/bounded-selective-gates.json
-.venv/bin/python experiments/calibration/regularize_payload_state.py \
+.venv/bin/python -m fhemamba calibrate state-regularize \
   --payload results/m2_chain_payload_rows --group-scale-floor 0.125 \
   --output-chain runs/payload-row-floor --output runs/row-floor.json
 ```
@@ -58,7 +58,7 @@ To fit and certify the new gates without reading text:
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 \
-  .venv/bin/python experiments/calibration/fit_dissipative_gates.py \
+  .venv/bin/python -m fhemamba calibrate gate-fit \
   --payload results/m2_chain_payload_headclip \
   --bundle runs/dissipative-gates.npz --output runs/dissipative-gates.json
 ```
@@ -129,7 +129,7 @@ certificates first, then evaluate it without changing other coefficients:
 
 ```bash
 OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 \
-  .venv/bin/python experiments/calibration/plan_normalization_schedules.py \
+  .venv/bin/python -m fhemamba calibrate normalization \
   --payload results/m2_chain_payload_headclip \
   --bundle runs/normalization-schedules.json \
   --output runs/normalization-certificates.json
@@ -160,7 +160,7 @@ change the candidate trajectory. Both remain plaintext tests; float64 workspace
 and final float32 casts are not CKKS error bounds. Offset 131,072 is now used
 evaluation data and must not be reused as a fresh holdout after further tuning.
 
-For independent multi-window calibration, `calibrate_state_coordinates.py`
+For independent multi-window calibration, `fhemamba calibrate state`
 accepts `--calibration-tokens-pt` and disjoint `--offsets`; non-finite states
 produce a failure report, nonzero exit status, and no output payload.
 
@@ -180,7 +180,7 @@ Stop any probe using that build directory before rebuilding it.
 First export the certified recipes locally:
 
 ```bash
-.venv/bin/python experiments/export/export_normalization_probe.py \
+.venv/bin/python -m fhemamba calibrate normalization-export \
   --bundle runs/norm-study-20260921/normalization-schedules.json \
   --output-dir runs/normalization-probe-recipes
 rsync -az runs/normalization-probe-recipes/ \
@@ -194,7 +194,7 @@ python3 experiments/normalization/build_normalization_probe.py \
   --build-dir "$HOME/fhemamba/spark/normalization-probe" \
   --fideslib-prefix "$HOME/fhemamba/spark/install-2a70798e869944af" \
   --openfhe-prefix "$HOME/fhe-deps/openfhe-fides"
-python3 experiments/normalization/run_normalization_campaign.py \
+python3 -m fhemamba benchmark normalization campaign \
   --binary "$HOME/fhemamba/spark/normalization-probe/stage1_normalization_probe" \
   --recipes runs/normalization-probe-recipes \
   --output-dir runs/normalization-core-all-sites
@@ -206,7 +206,7 @@ campaign. For a widest-domain ABBA comparison, add
 `--sites l23_rms_invsqrt.txt --modes balanced weighted weighted balanced` and
 use a new output directory. Each process generates a new key.
 
-`run_normalization_probe.py --input-mode normalize` encrypts x and computes
+`fhemamba benchmark normalization probe --input-mode normalize` encrypts x and computes
 `x*poly_invsqrt(x²+epsilon)`. Its gate is absolute normalized-output error.
 `--input-mode variance` instead encrypts the variance directly and gates
 relative inverse-square-root error. These are different tests; retain their
@@ -233,7 +233,7 @@ locally, without changing the frozen inverse-square-root recipes:
 Transfer the fixtures to Spark along with the recipes. Build with
 `build_normalization_probe.py --target stage1_vector_rms_probe`, using a new
 build directory and the same dependency arguments above. Then run
-`run_normalization_campaign.py` with that binary and
+`fhemamba benchmark normalization campaign` with that binary and
 `--fixtures runs/vector-rms-fixtures`. The default tests fresh ciphertexts
 without refresh; `--gamma-placement after` is the matched depth baseline.
 The two widths use separate lanes with zero-padded features. The host C++
@@ -241,7 +241,7 @@ contract checks exact sums and lane isolation. Native output comparisons use
 the true feature width as the mean divisor.
 
 For a single vector probe, pass `--input-mode vector --fixture <file>` to
-`run_normalization_probe.py`. `--refresh output` measures ordinary output
+`fhemamba benchmark normalization probe`. `--refresh output` measures ordinary output
 refresh, and `--refresh output-meta --meta-alpha 12` explicitly evaluates the
 two-bootstrap residual correction. The latter requires a live level for
 amplification; a failed refresh remains a failed gate. Existing scalar modes

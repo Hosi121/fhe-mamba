@@ -13,6 +13,11 @@ from fhemamba._commands import dispatch
 from fhemamba.artifacts import validate_artifact_file
 
 GROUPS = {
+    "calibrate": (
+        "fhemamba.calibration.__main__",
+        "main",
+        "frozen payload calibration and certificates",
+    ),
     "benchmark": ("fhemamba.benchmarks.__main__", "main", "jobs, qualification and evidence"),
     "diagnose": ("fhemamba.diagnostics.__main__", "main", "frozen-circuit error diagnosis"),
     "profile": ("fhemamba.profiling.__main__", "main", "Nsight CSV/SQLite analysis"),

@@ -101,6 +101,10 @@ performance. See the [evidence registry](docs/evidence.md) for the full record.
 For a development handoff, start with [current state](docs/status.md).
 Reusable research tools are available through `python -m fhemamba --help`;
 [the experiment index](experiments/README.md) maps the remaining specialized work.
+Use `fhemamba calibrate` for frozen gate/state calibration and normalization
+recipe export, and `fhemamba benchmark normalization` for isolated native probes
+and campaigns. Their [Python APIs](docs/package.md#research-tools) share the same
+payload, provenance and execution checks as the commands.
 
 Use the [experiment workflow](docs/experiments.md) to run a versioned job with
 local settings and completion events, then publish reviewed measurements.

@@ -8,16 +8,19 @@ new gate approximation from errors in convolution, activation and norm fits.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 from pathlib import Path
 
 import numpy as np
 import torch
 
-from fhemamba import __version__
-from fhemamba.artifacts import current_git_commit
-from fhemamba.benchmarks.io import repository_root
+from fhemamba.benchmarks.io import file_sha256, sha256, write_json
+from fhemamba.calibration.payload import (
+    report as make_report,
+)
+from fhemamba.calibration.payload import (
+    source_hashes,
+)
 from fhemamba.diagnostics import domain
 from fhemamba.ops import PolyOps
 from fhemamba.reference import model_forward
@@ -86,38 +89,29 @@ def main():
         "candidate_finite": True,
         "predicted_tokens": args.tokens - 1,
     }
-    sources = [Path(__file__), Path(domain.__file__)]
-    sources.extend(
-        repository_root() / "src/fhemamba" / name
-        for name in ("ops.py", "reference.py", "selective_gates.py")
-    )
-    report = {
-        "stage": "dissipative-gate-only-ablation",
-        "version": __version__,
-        "repo_commit": current_git_commit(),
-        "source_sha256": {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},
-        "bundle_sha256": hashlib.sha256(args.bundle.read_bytes()).hexdigest(),
-        "input_payload_sha256": manifest["input_payload_sha256"],
-        "token_ids_sha256": hashlib.sha256(ids.cpu().numpy().astype("<i8").tobytes()).hexdigest(),
-        "tokens": args.tokens,
-        "token_offset": args.offset,
-        "device": args.device,
-        "torch_version": torch.__version__,
-        "tf32_enabled": False,
-        "quality": quality,
-        "events": ops.events,
-        "measurement_scope": {
-            "artifact_level_report": True,
-            "full_model_correctness_claimed": False,
-            "encrypted_execution": False,
+    report = make_report(
+        "dissipative-gate-only-ablation",
+        source_hashes(
+            __file__, "diagnostics/domain.py", "ops.py", "reference.py", "selective_gates.py"
+        ),
+        bundle_sha256=file_sha256(args.bundle),
+        input_payload_sha256=manifest["input_payload_sha256"],
+        token_ids_sha256=sha256(ids.cpu().numpy().astype("<i8").tobytes()),
+        tokens=args.tokens,
+        token_offset=args.offset,
+        device=args.device,
+        torch_version=torch.__version__,
+        tf32_enabled=False,
+        quality=quality,
+        events=ops.events,
+        measurement_scope={
             "language_quality_measured": True,
             "fully_polynomial_model": False,
             "all_heads_retained": True,
             "claim": "Development ablation: only joint write/decay gates are approximated.",
         },
-    }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+    )
+    write_json(args.output, report)
     print(quality, flush=True)
 
 

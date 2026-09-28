@@ -70,6 +70,35 @@ uv sync --locked --extra dev
   scripts instead of archiving them. Reuse the installed benchmark utilities.
   Never add host access details, personal absolute paths or session diaries.
 
+## Research code retirement
+
+Keep one implementation of orchestration and provenance. Build identity fields
+are declared once for writing, CLI arguments and validation; campaigns and
+comparison contracts share dotted-field access. Mixer and complete-backbone
+parity share an adapter that loads the original upstream CPU functions. It
+does not call local model arithmetic to construct the expected output.
+
+| Retired code | Maintained path and reason |
+| --- | --- |
+| Dual-ring `campaign.py` / `run_probe.py` | [Job recipe](../experiments/gpu_dual_ring/probe-job.json), packed runner and explicit comparison contracts. The old controller hard-coded a completed study's checkout and machine layout. |
+| `analysis/run_budget.py`, `fhemamba.lowering`, `test_lowering.py` | The Phase 0 exact-value cost simulator had no caller beyond that retired estimator and its own tests. Use measured native telemetry, the Mamba-2 generation-cost analyzer or packed-program level analysis. The current model/reference and native execution paths are unchanged. |
+| Six `calibration/*.py` commands | `fhemamba calibrate`: `ranges`, `gate-screen`, `gate-fit`, `normalization`, `state`, `state-regularize`. Shared projection loading, provenance, report writing and derivative-payload updates replace script-local copies. |
+| `export/export_normalization_probe.py` | `fhemamba calibrate normalization-export`, alongside the schedule planner; coefficients and certificate gates are unchanged. |
+| `normalization/run_normalization_probe.py` / `run_normalization_campaign.py` | `fhemamba benchmark normalization probe|campaign`. Both use the same typed configuration and preflight/execution function, keeping native process and fresh-key isolation per sample. |
+
+The removed source remains identifiable at Git revision `5d1e520`. Historical
+measurements, including `results/decode_budget_mamba2.json`, are retained; the
+current tree has no new archive copies. Existing Mamba-2 campaign manifests
+remain supported with their resume, identity and acceptance gates.
+
+The PPL ladder now selects only the six supported nonlinear sites. Intermediate
+checkpoint observations such as `conv_silu_out` remain in calibration diagnostics
+but are not fitted as operators; previously they caused a `KeyError` before the
+ladder completed. Train/test separation, polynomial arithmetic and candidate gates
+are unchanged. The ladder and gated-norm sweep share `QualityStudy` recording,
+closed-loop fitting and evaluation; state coverage and gate ablations reuse the
+payload/provenance helpers as well.
+
 ## Native decomposition queue
 
 `stage1_mamba2_decode_fideslib.cpp` currently combines orchestration, cache

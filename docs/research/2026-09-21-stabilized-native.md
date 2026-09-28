@@ -72,7 +72,7 @@ the remaining logit errors preclude a uniform approximation-accuracy claim.
 
 ## Reproduction
 
-The gate bundle is the frozen output of `fit_dissipative_gates.py` documented
+The gate bundle is the frozen output of `fhemamba calibrate gate-fit` documented
 in [testing](../testing.md). A byte-identical copy is now included under
 `config/`; see [the reproduction guide](../reproducing.md). Export into a new directory:
 

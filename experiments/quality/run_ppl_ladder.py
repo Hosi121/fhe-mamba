@@ -14,6 +14,7 @@ from pathlib import Path
 
 from fhemamba._env import block_broken_torchvision
 from fhemamba.benchmarks.io import repository_root
+from fhemamba.calibration.quality import QualityStudy
 
 block_broken_torchvision()
 
@@ -22,14 +23,9 @@ import torch  # noqa: E402
 from fhemamba.ops import (  # noqa: E402
     DEFAULT_DEGREES,
     Exact,
-    PolyOps,
-    RangeRecorder,
-    RecordingPolyOps,
     pool_by_name,
-    union_ranges,
 )
 from fhemamba.ppl import load_wikitext2, perplexity  # noqa: E402
-from fhemamba.reference import model_forward  # noqa: E402
 
 
 def main() -> None:
@@ -116,12 +112,14 @@ def main() -> None:
 
     # --- calibration on train split (no test leakage) ---
     print(f"calibrating ranges on {args.cal_windows} train windows ...", flush=True)
-    recorder = RangeRecorder()
-    for w in range(args.cal_windows):
-        chunk = train_ids[:, w * args.window : (w + 1) * args.window].to(args.device)
-        model_forward(model, chunk, recorder, scan="chunked", output_logits=False)
+    study = QualityStudy(
+        model, train_ids, test_ids, args.window, args.cal_windows, args.max_windows, args.device
+    )
+    recorder = study.record()
     site_ranges = recorder.ranges
     ranges = pool_by_name(site_ranges)
+    # Checkpoint observations measure intermediate tensors, not substitutable operators.
+    active_sites = frozenset(ranges) & DEFAULT_DEGREES.keys()
     for name, (lo, hi) in sorted(ranges.items()):
         print(f"  {name:12s} [{lo:10.3f}, {hi:10.3f}]")
 
@@ -129,16 +127,6 @@ def main() -> None:
     results_dir.mkdir(parents=True, exist_ok=True)
     ckpt_name = Path(args.checkpoint).name
     recorder.save(results_dir / f"calibration_{ckpt_name}.json")
-
-    # --- ladder ---
-    def eval_ppl(ops) -> dict[str, float]:
-        return perplexity(
-            lambda ids: model_forward(model, ids, ops, scan="chunked")["logits"],
-            test_ids,
-            window=args.window,
-            max_windows=args.max_windows,
-            device=args.device,
-        )
 
     per_layer_names = frozenset(s for s in args.per_layer.split(",") if s)
 
@@ -173,31 +161,6 @@ def main() -> None:
             flush=True,
         )
 
-    def fit_ops(enabled, site_ranges, names_ranges):
-        return PolyOps.fit(
-            ranges_by_name=names_ranges,
-            enabled=enabled,
-            degrees=degrees,
-            margin=args.margin,
-            site_ranges=site_ranges,
-            per_layer=per_layer_names,
-            invsqrt_mode=args.invsqrt_mode,
-            decay_head_plans=decay_head_plans,
-        )
-
-    def closed_loop_fit(enabled):
-        """Fit on exact-model ranges, then widen with ranges observed under
-        the poly model itself (poly substitutions shift distributions)."""
-        ops = fit_ops(enabled, site_ranges, ranges)
-        if not args.recal:
-            return ops
-        probe = RecordingPolyOps(polys=ops.polys, enabled=ops.enabled, layer_polys=ops.layer_polys)
-        for w in range(args.cal_windows):
-            chunk = train_ids[:, w * args.window : (w + 1) * args.window].to(args.device)
-            model_forward(model, chunk, probe, scan="chunked", output_logits=False)
-        merged = union_ranges(site_ranges, probe.ranges)
-        return fit_ops(enabled, merged, pool_by_name(merged))
-
     rows = []
     if args.hf_baseline:
         with torch.no_grad():
@@ -211,20 +174,29 @@ def main() -> None:
         rows.append({"stage": "official-hf", **hf})
         print(f"official-hf            ppl={hf['ppl']:.3f}", flush=True)
 
-    exact = eval_ppl(Exact())
+    exact = study.evaluate(Exact())
     rows.append({"stage": "ref-exact", **exact})
     print(f"ref-exact              ppl={exact['ppl']:.3f}", flush=True)
 
     if args.stages == "all-only":
-        stages = [frozenset(ranges)]
+        stages = [active_sites]
     else:
-        stages = [frozenset({name}) for name in sorted(ranges)] + [frozenset(ranges)]
+        stages = [frozenset({name}) for name in sorted(active_sites)] + [active_sites]
     for enabled in stages:
         label = "+".join(sorted(enabled)) if len(enabled) > 1 else next(iter(enabled))
-        if len(enabled) == len(ranges):
+        if enabled == active_sites:
             label = "all"
-        ops = closed_loop_fit(enabled)
-        metrics = eval_ppl(ops)
+        ops = study.fit(
+            site_ranges,
+            recalibrate=bool(args.recal),
+            enabled=enabled,
+            degrees=degrees,
+            margin=args.margin,
+            per_layer=per_layer_names,
+            invsqrt_mode=args.invsqrt_mode,
+            decay_head_plans=decay_head_plans,
+        )
+        metrics = study.evaluate(ops)
         row = {
             "stage": label,
             **metrics,

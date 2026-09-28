@@ -24,6 +24,7 @@ backend. Numerical implementations and shared experiment utilities live in
 | `src/fhemamba/benchmarks/` | Shared job execution, completion events, publication and verification |
 | `src/fhemamba/diagnostics/`, `profiling/` | Frozen-circuit diagnostics and offline Nsight analysis |
 | `src/fhemamba/recurrent/`, `workloads/` | Reusable fixtures, recurrence analysis and upstream parity |
+| `src/fhemamba/calibration/` | Frozen payload calibration, normalization certificates/export and shared quality-study loops |
 | `src/fhemamba/ckks_probes.py` | Shared optional CPU CKKS probe arithmetic and context construction |
 | `config/local/`, `.local/`, `runs/` | Ignored machine settings, private notes, original evidence and working output |
 

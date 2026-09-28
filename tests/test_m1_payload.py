@@ -22,8 +22,8 @@ class _IdTokenizer:
         return R()
 
 
-def test_export_round_trip(tmp_path) -> None:
-    torch.manual_seed(19)
+def _tiny_model(seed=19, n_groups=1):
+    torch.manual_seed(seed)
     config = transformers.Mamba2Config(
         vocab_size=97,
         hidden_size=32,
@@ -31,12 +31,16 @@ def test_export_round_trip(tmp_path) -> None:
         num_heads=4,
         head_dim=16,
         state_size=8,
-        n_groups=1,
+        n_groups=n_groups,
         num_hidden_layers=2,
         conv_kernel=4,
         chunk_size=8,
     )
-    model = transformers.Mamba2ForCausalLM(config).float().eval()
+    return transformers.Mamba2ForCausalLM(config).float().eval()
+
+
+def test_export_round_trip(tmp_path) -> None:
+    model = _tiny_model()
     out = export_m1_payload(model, _IdTokenizer(), tmp_path / "payload", n_test_tokens=3)
 
     meta = json.loads((out / "meta.json").read_text())
@@ -85,20 +89,7 @@ def test_export_round_trip(tmp_path) -> None:
 
 
 def test_chain_export(tmp_path, monkeypatch) -> None:
-    torch.manual_seed(19)
-    config = transformers.Mamba2Config(
-        vocab_size=97,
-        hidden_size=32,
-        expand=2,
-        num_heads=4,
-        head_dim=16,
-        state_size=8,
-        n_groups=1,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        chunk_size=8,
-    )
-    model = transformers.Mamba2ForCausalLM(config).float().eval()
+    model = _tiny_model()
     import fhemamba.m1_payload as payload_module
 
     monkeypatch.setattr(
@@ -221,20 +212,7 @@ def test_chain_export(tmp_path, monkeypatch) -> None:
 
 
 def test_add_autoregressive_assets_to_existing_chain(tmp_path, monkeypatch) -> None:
-    torch.manual_seed(23)
-    config = transformers.Mamba2Config(
-        vocab_size=97,
-        hidden_size=32,
-        expand=2,
-        num_heads=4,
-        head_dim=16,
-        state_size=8,
-        n_groups=1,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        chunk_size=8,
-    )
-    model = transformers.Mamba2ForCausalLM(config).float().eval()
+    model = _tiny_model(seed=23)
     import fhemamba.m1_payload as payload_module
 
     monkeypatch.setattr(
@@ -294,41 +272,65 @@ def test_legacy_const_newton_payload_spec() -> None:
 
 
 def test_export_rejects_native_incompatible_groups(tmp_path) -> None:
-    torch.manual_seed(19)
-    config = transformers.Mamba2Config(
-        vocab_size=97,
-        hidden_size=32,
-        expand=2,
-        num_heads=4,
-        head_dim=16,
-        state_size=8,
-        n_groups=2,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        chunk_size=8,
-    )
-    model = transformers.Mamba2ForCausalLM(config).float().eval()
+    model = _tiny_model(n_groups=2)
     with pytest.raises(ValueError, match="n_groups == 1"):
         export_m1_payload(model, _IdTokenizer(), tmp_path / "payload")
 
 
 def test_carried_bounds_do_not_depend_on_evaluation_prompt(tmp_path) -> None:
-    torch.manual_seed(19)
-    config = transformers.Mamba2Config(
-        vocab_size=97,
-        hidden_size=32,
-        expand=2,
-        num_heads=4,
-        head_dim=16,
-        state_size=8,
-        n_groups=1,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        chunk_size=8,
-    )
-    model = transformers.Mamba2ForCausalLM(config).float().eval()
+    model = _tiny_model()
     first = export_m1_payload(model, _IdTokenizer(), tmp_path / "first", prompt="first")
     second = export_m1_payload(model, _IdTokenizer(), tmp_path / "second", prompt="second")
     first_meta = json.loads((first / "meta.json").read_text())
     second_meta = json.loads((second / "meta.json").read_text())
     assert first_meta["carried_bounds"] == second_meta["carried_bounds"]
+
+
+def test_ppl_ladder_excludes_checkpoint_observations(tmp_path, monkeypatch):
+    import runpy
+    import sys
+    from pathlib import Path
+
+    model = _tiny_model()
+    monkeypatch.setattr(transformers.AutoModelForCausalLM, "from_pretrained", lambda *_: model)
+    monkeypatch.setattr(transformers.AutoTokenizer, "from_pretrained", lambda *_: None)
+    monkeypatch.setattr("fhemamba.benchmarks.io.repository_root", lambda: tmp_path)
+    for split in ("train", "test"):
+        torch.save(torch.arange(16).reshape(1, -1), tmp_path / f"tokens.{split}.pt")
+    output = tmp_path / "quality.json"
+    script = Path(__file__).parents[1] / "experiments/quality/run_ppl_ladder.py"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            str(script),
+            "--checkpoint",
+            str(tmp_path / "unused"),
+            "--device",
+            "cpu",
+            "--tokens-pt",
+            str(tmp_path / "tokens"),
+            "--window",
+            "8",
+            "--cal-windows",
+            "1",
+            "--max-windows",
+            "1",
+            "--output",
+            str(output),
+        ],
+    )
+    runpy.run_path(str(script), run_name="__main__")
+    report = json.loads(output.read_text())
+    assert "conv_silu_out" in report["calibration_ranges"]
+    assert {row["stage"] for row in report["rows"]} == {
+        "ref-exact",
+        "all",
+        "conv_silu",
+        "gate_silu",
+        "dt_softplus",
+        "decay_exp",
+        "rms_invsqrt",
+        "gated_rms_invsqrt",
+    }
+    assert all(np.isfinite(row["ppl"]) for row in report["rows"])

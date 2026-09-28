@@ -11,6 +11,7 @@ These are installed modules with ordinary Python APIs and one command tree:
 ```bash
 python -m fhemamba --help
 python -m fhemamba benchmark --help
+python -m fhemamba calibrate --help
 python -m fhemamba diagnose --help
 python -m fhemamba profile --help
 python -m fhemamba recurrent --help
@@ -21,6 +22,8 @@ python -m fhemamba workload --help
 | --- | --- | --- |
 | GPU jobs, deadlines, completion events, comparisons, publication | `fhemamba benchmark` | [Workflow](../docs/experiments.md) |
 | Packed inference and qualification | `fhemamba benchmark packed` | [Mamba-3](../docs/mamba3.md) |
+| Gate/state calibration, certificates and normalization recipe export | `fhemamba calibrate` | [Conditional validation](../docs/validation.md) |
+| Isolated normalization probes and campaigns | `fhemamba benchmark normalization` | [Native probes](../docs/validation.md#isolated-encrypted-normalization) |
 | Actual generated-token qualification | `fhemamba benchmark generation-report` | [Model export](../docs/mamba3.md#trained-checkpoint-and-generation) |
 | Native build identity | `fhemamba benchmark spark-build` / `b300-build` | [Build scope](../docs/dgx-spark.md); B300 helper is historical |
 | Frozen references, operator errors and replay cases | `fhemamba diagnose` | [Diagnostics](packed_diagnostics/README.md) |
@@ -48,9 +51,8 @@ math and infrastructure are imported from `fhemamba`; they are not extra APIs.
 | --- | --- |
 | [analysis/](analysis/) | Cost bounds, state coverage, noise-flow and telemetry reports |
 | [quality/](quality/) | Checkpoint parity, PPL and polynomial-domain diagnostics |
-| [calibration/](calibration/) | Frozen gate fits, state coordinates and range certificates |
 | [export/](export/) | Mamba-2 payloads and normalization/debug fixtures |
-| [normalization/](normalization/) | Build, run and compare isolated normalization probes |
+| [normalization/](normalization/) | Native probe builds and plaintext candidate quality screens |
 | [algebra/](algebra/) | Phase, decay, selective-gate and recurrence experiments |
 | [execution/](execution/) | Existing manifest-driven Mamba-2 campaigns and remote generation |
 | [local_ckks/](local_ckks/README.md) | Declarative CPU feasibility recipes; separately installed OpenFHE bindings required |
@@ -60,6 +62,8 @@ Native candidates retain their probe/build assets in [ntt_lazy/](ntt_lazy/README
 [ntt_warp_tail/](ntt_warp_tail/README.md), [openfhe_ifft/](openfhe_ifft/README.md),
 [gpu_dual_ring/](gpu_dual_ring/README.md), [refresh_even_seed/](refresh_even_seed/README.md)
 and [rotation_stream_chain/](rotation_stream_chain/README.md).
+The dual-ring probe uses a JSON job with the shared runner; it has no separate
+Python launcher or historical campaign controller.
 [security128/](security128/README.md) and [level_schedule/](level_schedule/README.md)
 explain their parameter and circuit analyses. Historical shell launchers remain
 under `slurm/`; shared Mamba-2 native argument assembly is `dgx_mamba2_common.sh`.
@@ -69,3 +73,11 @@ private handoff notes to `.local/`. Publish reviewed evidence to `results/` usin
 the shared workflow. Delete superseded operational scripts instead of archiving
 them. Published source snapshots describe the measured code before this
 reorganization; recorded hashes and failures remain unchanged.
+
+The Phase 0 `run_budget.py` and its otherwise-unused `fhemamba.lowering` cost
+simulator were retired. They combined exact nonlinearities with estimated
+operation counts and old B200 timings, rather than executing the current
+encrypted circuit. For current cost analysis use
+[`analysis/analyze_generation_cost.py`](analysis/analyze_generation_cost.py)
+with a matching Mamba-2 native artifact/payload, or `fhemamba diagnose levels`
+for a frozen packed program. Historical estimates remain in the evidence ledger.

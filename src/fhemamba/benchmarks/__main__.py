@@ -15,6 +15,11 @@ from .io import read_object
 from .jobs import run_job
 
 TOOLS = {
+    "normalization": (
+        "fhemamba.benchmarks.normalization",
+        "main",
+        "isolated normalization probes and campaigns",
+    ),
     "packed": ("fhemamba.benchmarks.packed", "main", "run and qualify packed inference"),
     "generation-report": ("fhemamba.benchmarks.generation", "main", "qualify generated tokens"),
     "spark-build": ("fhemamba.benchmarks.builds", "main", "validate Spark build identity"),

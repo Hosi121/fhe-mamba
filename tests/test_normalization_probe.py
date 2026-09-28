@@ -38,7 +38,11 @@ def _run(binary, recipe, output, *extra):
     return subprocess.run(
         [
             sys.executable,
-            "experiments/normalization/run_normalization_probe.py",
+            "-m",
+            "fhemamba",
+            "benchmark",
+            "normalization",
+            "probe",
             "--binary",
             str(binary),
             "--recipe",
@@ -138,3 +142,42 @@ def test_input_pressure_rejects_exhausted_seed_budget(tmp_path):
     result = _run(binary, recipe, tmp_path / "result.json", "--input-level", "40")
     assert result.returncode == 2
     assert not (tmp_path / "result.log").exists()
+
+
+def test_campaign_runs_each_sample_and_preserves_failed_measurements(tmp_path):
+    from fhemamba.benchmarks.normalization import Campaign, campaign
+
+    binary, recipe = _probe_inputs(tmp_path)
+    binary.write_text(
+        f"#!{sys.executable}\nimport json, sys\n"
+        "passed = sys.argv[3] == 'balanced'\n"
+        "with open(sys.argv[1], 'w') as f:\n"
+        "    json.dump({'passed': passed, 'measurements': {'mode': sys.argv[3]}}, f)\n"
+    )
+    binary.with_suffix(".build.json").write_text(
+        json.dumps(
+            {"binary_sha256": hashlib.sha256(binary.read_bytes()).hexdigest(), "library_sha256": {}}
+        )
+    )
+    manifest = tmp_path / "manifest.json"
+    data = json.loads(manifest.read_text())
+    data["operators"][0]["weighted_certificate"] = {"certified": True}
+    manifest.write_text(json.dumps(data))
+    output = tmp_path / "campaign"
+    report = campaign(
+        Campaign(binary, recipe.parent, output, modes=("balanced", "weighted", "balanced"))
+    )
+    assert report["passed"] is False
+    assert report["expected_runs"] == 3
+    assert [entry["passed"] for entry in report["runs"]] == [True, False, True]
+    assert [entry["measurements"]["mode"] for entry in report["runs"]] == [
+        "balanced",
+        "weighted",
+        "balanced",
+    ]
+    for entry in report["runs"]:
+        result = output / entry["file"]
+        assert entry["sha256"] == hashlib.sha256(result.read_bytes()).hexdigest()
+        assert result.with_suffix(".raw.json").is_file()
+        assert result.with_suffix(".log").is_file()
+    assert json.loads((output / "campaign.json").read_text())["status"] == "failed"

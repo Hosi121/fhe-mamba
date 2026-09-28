@@ -10,22 +10,14 @@ from pathlib import Path
 
 from fhemamba import __version__
 from fhemamba._env import block_broken_torchvision
+from fhemamba.calibration.quality import QualityStudy
 
 block_broken_torchvision()
 
 import torch  # noqa: E402
 
 from fhemamba.gated_norm_sweep import DEFAULT_CANDIDATES, parse_candidate  # noqa: E402
-from fhemamba.ops import (  # noqa: E402
-    Exact,
-    PolyOps,
-    RangeRecorder,
-    RecordingPolyOps,
-    pool_by_name,
-    union_ranges,
-)
-from fhemamba.ppl import perplexity  # noqa: E402
-from fhemamba.reference import model_forward  # noqa: E402
+from fhemamba.ops import Exact  # noqa: E402
 
 
 def main() -> None:
@@ -53,23 +45,11 @@ def main() -> None:
     test_ids = torch.load(f"{args.tokens_prefix}.test.pt", weights_only=True)
     train_ids = torch.load(f"{args.tokens_prefix}.train.pt", weights_only=True)
 
-    recorder = RangeRecorder()
-    for window in range(args.cal_windows):
-        chunk = train_ids[:, window * args.window : (window + 1) * args.window].to(args.device)
-        model_forward(model, chunk, recorder, scan="chunked", output_logits=False)
-    exact_site_ranges = recorder.ranges
-    exact_pooled_ranges = pool_by_name(exact_site_ranges)
-
-    def evaluate(ops) -> dict[str, float]:
-        return perplexity(
-            lambda ids: model_forward(model, ids, ops, scan="chunked")["logits"],
-            test_ids,
-            window=args.window,
-            max_windows=args.max_windows,
-            device=args.device,
-        )
-
-    exact = evaluate(Exact())
+    study = QualityStudy(
+        model, train_ids, test_ids, args.window, args.cal_windows, args.max_windows, args.device
+    )
+    exact_site_ranges = study.record().ranges
+    exact = study.evaluate(Exact())
     rows = []
     for degree, iterations in candidates:
         fit_kwargs = {
@@ -79,26 +59,8 @@ def main() -> None:
             "per_layer": frozenset({"gated_rms_invsqrt"}),
             "invsqrt_mode": f"sq-poly-newton:{iterations}:0.02",
         }
-        initial = PolyOps.fit(
-            ranges_by_name=exact_pooled_ranges,
-            site_ranges=exact_site_ranges,
-            **fit_kwargs,
-        )
-        probe = RecordingPolyOps(
-            polys=initial.polys,
-            enabled=initial.enabled,
-            layer_polys=initial.layer_polys,
-        )
-        for window in range(args.cal_windows):
-            chunk = train_ids[:, window * args.window : (window + 1) * args.window].to(args.device)
-            model_forward(model, chunk, probe, scan="chunked", output_logits=False)
-        closed_loop_ranges = union_ranges(exact_site_ranges, probe.ranges)
-        ops = PolyOps.fit(
-            ranges_by_name=pool_by_name(closed_loop_ranges),
-            site_ranges=closed_loop_ranges,
-            **fit_kwargs,
-        )
-        raw_metrics = evaluate(ops)
+        ops = study.fit(exact_site_ranges, **fit_kwargs)
+        raw_metrics = study.evaluate(ops)
         finite = math.isfinite(raw_metrics["ppl"])
         metrics = {
             key: value if not isinstance(value, float) or math.isfinite(value) else None

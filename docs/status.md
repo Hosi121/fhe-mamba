@@ -63,7 +63,15 @@ Use [the Python tool map](package.md#research-tools) and
 profiling, recurrent probes, qualification and build identity are installed
 modules. CPU CKKS primitive and error-growth studies now use
 [JSON recipes and one shared command](../experiments/local_ckks/README.md).
+Dual-ring probes also use the shared job runner. The obsolete Phase 0 cost
+simulator and dated dual-ring controllers are retired; see the
+[maintenance boundary](maintenance.md#research-code-retirement).
 Remaining specialized scripts are grouped by purpose.
+Frozen gate/state calibration and normalization planning/export now use
+`fhemamba calibrate`; isolated native probes and campaigns share
+`fhemamba benchmark normalization`. Train-window calibration and PPL evaluation
+are shared by the quality ladder and gated-normalization sweep. These are
+maintenance changes, with small CPU before/after checks; they add no GPU claim.
 
 For local checks run `CHECK_JOBS=2 scripts/run_checks.sh`; GPU verification
 is a separate step. The maintenance reorganization did not rerun encrypted

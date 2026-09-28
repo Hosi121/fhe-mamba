@@ -11,7 +11,7 @@ Paths below are relative to `src/fhemamba/`.
 
 | Area | Modules | Responsibility |
 | --- | --- | --- |
-| Model and decode | `reference.py`, `ops.py`, `lowering.py` | Shared model formulas, exact/polynomial operations and decode schedules |
+| Model and decode | `reference.py`, `ops.py`, `tensor_ops.py`, `packed_program.py` | Model formulas, exact/polynomial operations and packed circuit export |
 | Architecture and Mamba-3 | `architectures.py`, `mamba3.py`, `mamba3_lm.py`, `tensor_ops.py`, `packed_program.py` | Architecture-specific state, trained SISO model, shared tensor operations and packed FHE programs |
 | Payload and generation | `m1_payload.py`, `generation.py`, `generate.py`, `ppl.py`, `payload_surrogate.py` | Checkpoint export, prompt preparation, text reports and plaintext quality |
 | Polynomial contracts | `normalization.py`, `selective_gates.py`, `polynomial_certificate.py`, `gated_norm_sweep.py` | Public schedules, joint gates and conditional interval certificates |
@@ -51,6 +51,7 @@ model export and reference propagation additionally use NumPy/PyTorch.
 | Command group | Importable implementation | Responsibility |
 | --- | --- | --- |
 | `benchmark` | `fhemamba.benchmarks` | Jobs, completion events, comparisons, packed qualification, generation reports, build identity and evidence publication |
+| `calibrate` | `fhemamba.calibration` | Frozen gate/state calibration, public-domain certificates, normalization schedules and native recipe export |
 | `diagnose` | `fhemamba.diagnostics` | Frozen references, prefix verification, observed-input analysis, replay cases, CPU error propagation and circuit summaries |
 | `profile` | `fhemamba.profiling` | Nsight Systems SQLite and Nsight Compute CSV analysis |
 | `recurrent` | `fhemamba.recurrent` | Capture/export/audit component fixtures and compare storage/scheduling results |
@@ -64,9 +65,25 @@ Generic jobs, packed runs and campaigns share subprocess execution and process-g
 cleanup in `fhemamba.benchmarks.process`; their acceptance criteria remain local
 to each workload.
 
-Use `fhemamba.benchmarks.io.file_sha256`, `payload_sha256`, `read_object` and
+Calibration operations return report dictionaries and can be composed directly,
+for example `fhemamba.calibration.gates.certify_ranges(payload)` and
+`fhemamba.calibration.schedules.plan_normalization(payload, bundle=destination)`.
+The CLI writes strict JSON reports; derivative payloads preserve their legacy
+metadata representation, including an unbounded `time_step_limit`. Weight and
+reference files are copied unchanged. New reports identify both the operation
+module and shared payload helpers in `source_sha256`; historical reports are intact.
+
+`fhemamba.calibration.quality.QualityStudy` shares train-window range recording,
+one closed-loop refit and held-out PPL evaluation between substitution ladders
+and gated-normalization sweeps. Candidate choice and quality gates stay in each
+study. `fhemamba benchmark normalization probe|campaign` shares one native
+preflight/execution API, `run(Probe(...))`. Each sample still launches a fresh
+native process and keys, with timeout cleanup and preserved failure artifacts.
+
+Use `fhemamba.benchmarks.io.file_sha256`, `payload_sha256`, `read_object`, `field` and
 `write_json` instead of copying file helpers. `repository_root` resolves an
 explicit source checkout from the working directory, not from `site-packages`.
+`field` rejects absent nested JSON fields unless a default is explicitly supplied.
 Repository-specific build/export commands should run from a checkout; the Spark
 build command also accepts `--repo`.
 

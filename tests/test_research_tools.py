@@ -10,12 +10,14 @@ import pytest
 from fhemamba import cli
 from fhemamba.benchmarks import __main__ as benchmark
 from fhemamba.benchmarks.io import repository_root
+from fhemamba.calibration import __main__ as calibration
 from fhemamba.diagnostics import __main__ as diagnostics
 from fhemamba.profiling import __main__ as profiling
 from fhemamba.recurrent import __main__ as recurrent
 from fhemamba.workloads import __main__ as workloads
 
 GROUPS = {
+    "calibrate": calibration.COMMANDS,
     "benchmark": benchmark.TOOLS,
     "diagnose": diagnostics.COMMANDS,
     "profile": profiling.COMMANDS,
@@ -39,7 +41,10 @@ def test_lightweight_tools_work_outside_checkout_without_loading_models(tmp_path
 import sys
 from fhemamba.cli import main
 for args in [['--help'], ['diagnose', 'verify', '--help'],
-             ['diagnose', 'ckks', '--help'], ['benchmark', 'packed', '--help']]:
+             ['diagnose', 'ckks', '--help'], ['benchmark', 'packed', '--help'],
+             ['calibrate', 'state', '--help'], ['calibrate', 'normalization', '--help'],
+             ['benchmark', 'normalization', 'probe', '--help'],
+             ['benchmark', 'normalization', 'campaign', '--help']]:
     try:
         main(args)
     except SystemExit as error:

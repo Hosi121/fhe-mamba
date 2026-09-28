@@ -8,15 +8,18 @@ encrypted noise. Evaluation references never change the calibration scales.
 from __future__ import annotations
 
 import argparse
-import hashlib
-import json
 from pathlib import Path
 
 import numpy as np
 
-from fhemamba import __version__
-from fhemamba.artifacts import current_git_commit
-from fhemamba.benchmarks.io import payload_sha256
+from fhemamba.benchmarks.io import payload_sha256, write_json
+from fhemamba.calibration.payload import (
+    layers,
+    source_hashes,
+)
+from fhemamba.calibration.payload import (
+    report as make_report,
+)
 
 
 def main():
@@ -29,8 +32,7 @@ def main():
     if args.group_heads < 1 or not np.isfinite(args.margin) or args.margin < 1:
         parser.error("positive group-heads and finite margin >= 1 are required")
     rows = []
-    for path in sorted(args.payload.glob("layer_*/meta.json")):
-        meta = json.loads(path.read_text())
+    for directory, meta in layers(args.payload):
         bounds = meta["carried_bounds"]
         heads, width = meta["dims"]["num_heads"], meta["dims"]["head_dim"]
         if heads % args.group_heads:
@@ -41,10 +43,10 @@ def main():
         for tensor in ("test_state_output_poly", "autoregressive_poly_state_output"):
             if tensor not in meta["tensors"]:
                 continue
-            values = np.fromfile(path.parent / f"{tensor}.bin", dtype="<f4")
+            values = np.fromfile(directory / f"{tensor}.bin", dtype="<f4")
             values = np.abs(values.reshape(meta["tensors"][tensor])).astype(np.float64)
             if not np.isfinite(values).all():
-                raise ValueError(f"non-finite reference: {path.parent.name}/{tensor}")
+                raise ValueError(f"non-finite reference: {directory.name}/{tensor}")
             for mode, scales in (("head-group", group_bounds), ("head-channel", row_bounds)):
                 ratios = values / scales[None, :, :, None]
                 rows.append(
@@ -59,25 +61,19 @@ def main():
                 )
     if not rows:
         parser.error("no compatible state references found")
-    report = {
-        "stage": "state-scale-coverage-audit",
-        "version": __version__,
-        "repo_commit": current_git_commit(),
-        "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        "input_payload_sha256": payload_sha256(args.payload),
-        "group_heads": args.group_heads,
-        "margin": args.margin,
-        "rows": rows,
-        "measurement_scope": {
-            "artifact_level_report": True,
-            "full_model_correctness_claimed": False,
-            "encrypted_execution": False,
+    report = make_report(
+        "state-scale-coverage-audit",
+        source_hashes(__file__),
+        input_payload_sha256=payload_sha256(args.payload),
+        group_heads=args.group_heads,
+        margin=args.margin,
+        rows=rows,
+        measurement_scope={
             "calibration_modified": False,
             "claim": "Reference-state coverage of declared calibration scales, without refitting.",
         },
-    }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(report, indent=2, allow_nan=False) + "\n")
+    )
+    write_json(args.output, report)
 
 
 if __name__ == "__main__":
