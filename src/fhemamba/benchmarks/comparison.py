@@ -7,16 +7,8 @@ import statistics
 from pathlib import Path
 from typing import Any
 
+from .io import field as _field
 from .io import file_identity, read_object
-
-
-def _field(report: dict[str, Any], name: str) -> Any:
-    value: Any = report
-    for part in name.split("."):
-        if not isinstance(value, dict) or part not in value:
-            raise ValueError(f"missing required field: {name}")
-        value = value[part]
-    return value
 
 
 def _number(value: Any, name: str) -> float:

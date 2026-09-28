@@ -182,8 +182,10 @@ patched FIDESlib. Unsupported program capacity is rejected before key setup.
 
 The standalone source is `experiments/gpu_dual_ring/`. It links the same
 `fideslib_dual_ring.hpp` and CUDA mapping kernel as the packed evaluator.
-The campaign controller records exact commands, binary/source identities,
-errors and timing, including failed runs. The CPU-only ring-switch study from
+The recorded campaign includes exact commands, binary/source identities,
+errors and timing, including failed runs. Its dated Python controller is
+retired; new standalone runs use the [shared job recipe](../../experiments/gpu_dual_ring/README.md).
+The CPU-only ring-switch study from
 September 25 remains historical evidence for a different backend.
 
 For the frozen full generation payload produced by the

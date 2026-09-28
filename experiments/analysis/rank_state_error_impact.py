@@ -4,21 +4,10 @@
 from __future__ import annotations
 
 import argparse
-import json
 from pathlib import Path
 
-from fhemamba.benchmarks.io import repository_root
-
-REPO_ROOT = repository_root()
-
-from fhemamba.noise_flow import rank_observed_state_impact  # noqa: E402
-
-
-def _read_object(path: Path) -> dict:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"expected a JSON object: {path}")
-    return value
+from fhemamba.benchmarks.io import read_object, write_json
+from fhemamba.noise_flow import rank_observed_state_impact
 
 
 def main() -> None:
@@ -32,8 +21,8 @@ def main() -> None:
 
     noise_path = Path(args.noise_flow)
     encrypted_path = Path(args.encrypted_artifact)
-    noise = _read_object(noise_path)
-    encrypted = _read_object(encrypted_path)
+    noise = read_object(noise_path)
+    encrypted = read_object(encrypted_path)
     ranking = rank_observed_state_impact(
         noise["group_amplification"],
         encrypted["layer_token_summary"],
@@ -48,11 +37,7 @@ def main() -> None:
         **ranking,
     }
     output = Path(args.output)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(
-        json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n",
-        encoding="utf-8",
-    )
+    write_json(output, result, sort_keys=True)
     print(f"wrote {output} ({len(ranking['records'])} groups)")
     for rank, record in enumerate(ranking["records"][: max(0, args.top)], start=1):
         print(

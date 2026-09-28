@@ -4,12 +4,12 @@
 from __future__ import annotations
 
 import argparse
-import json
-import subprocess
 import time
 from pathlib import Path
 
-from fhemamba.benchmarks.io import repository_root
+from fhemamba.artifacts import current_git_commit
+from fhemamba.benchmarks.io import read_object as _read_object
+from fhemamba.benchmarks.io import repository_root, write_json
 
 REPO_ROOT = repository_root()
 
@@ -30,13 +30,6 @@ def _repo_path(value: str) -> Path:
     return path if path.is_absolute() else REPO_ROOT / path
 
 
-def _read_object(path: Path) -> dict:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"expected a JSON object: {path}")
-    return payload
-
-
 def _parse_token_ids(value: str) -> list[int]:
     try:
         ids = [int(item.strip()) for item in value.split(",") if item.strip()]
@@ -45,17 +38,6 @@ def _parse_token_ids(value: str) -> list[int]:
     if len(ids) < 2 or any(token_id < 0 for token_id in ids):
         raise argparse.ArgumentTypeError("provide at least two non-negative token IDs")
     return ids
-
-
-def _git_commit() -> str:
-    completed = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=REPO_ROOT,
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    return completed.stdout.strip() or "working-tree"
 
 
 def _load_scale_rows(path: Path) -> list[list[float]]:
@@ -156,7 +138,7 @@ def main() -> None:
     )
     result = {
         "format": "fhemamba-noise-flow-v2",
-        "repo_commit": _git_commit(),
+        "repo_commit": current_git_commit(REPO_ROOT) or "working-tree",
         "checkpoint": str(checkpoint),
         "device": args.device,
         "input": {
@@ -171,13 +153,7 @@ def main() -> None:
         "group_amplification": group_amplification,
         "top_normalized_state_groups": ranked[: max(0, args.top)],
     }
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = output_path.with_suffix(output_path.suffix + ".tmp")
-    temporary.write_text(
-        json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n",
-        encoding="utf-8",
-    )
-    temporary.replace(output_path)
+    write_json(output_path, result, sort_keys=True)
     print(f"wrote {output_path} in {elapsed:.2f}s", flush=True)
     for rank, record in enumerate(ranked[: min(10, max(0, args.top))], start=1):
         print(

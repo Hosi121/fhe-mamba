@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "command": ["taskset", "-c", "${cpu_affinity}", "${binary}", "${output}/probe.json", "${mode}"],
+  "cwd": "${repo}",
+  "env": {"OMP_NUM_THREADS": "${threads}", "LD_LIBRARY_PATH": "${library_path}"},
+  "inputs": {
+    "binary": "${binary}",
+    "probe": "experiments/gpu_dual_ring/probe.cpp",
+    "build": "experiments/gpu_dual_ring/CMakeLists.txt",
+    "job": "experiments/gpu_dual_ring/probe-job.json",
+    "bridge": "native/fideslib_stage0/src/fideslib_dual_ring.hpp",
+    "kernel": "native/fideslib_stage0/src/fideslib_ring_map.cu",
+    "kernel_header": "native/fideslib_stage0/src/fideslib_ring_map.hpp"
+  },
+  "timeout_seconds": 1800
+}

@@ -18,10 +18,41 @@ from typing import Any
 
 from fhemamba import __version__
 from fhemamba.artifacts import validate_benchmark_artifact
+from fhemamba.benchmarks.io import field, repository_root, write_json
 from fhemamba.benchmarks.io import file_sha256 as _file_sha256
 from fhemamba.benchmarks.io import read_object as _read_object
-from fhemamba.benchmarks.io import repository_root, write_json
 from fhemamba.benchmarks.process import run_process
+
+_PLATFORM_FIELDS = {
+    "platform_config_version": ("B300_PLATFORM_VERSION", "platform_config_version"),
+    "platform_config_sha256": ("B300_PLATFORM_CONFIG_SHA256", "platform_config_sha256"),
+    "image": ("IMAGE", "image.reference"),
+    "cuda_version": ("B300_CUDA_VERSION", "cuda.configured_version"),
+    "fideslib_commit": ("B300_FIDESLIB_COMMIT", "fideslib.commit"),
+    "fideslib_arch": ("FIDESLIB_ARCH", "fideslib.arch"),
+    "fideslib_sm": ("FIDESLIB_SM", "fideslib.sm"),
+    "variant": ("FIDESLIB_VARIANT", "fideslib.variant"),
+}
+_ARTIFACT_FIELDS = {
+    "parameters": ("n_layers_loaded", "tokens", "fideslib_sync_profile"),
+    "measurements": (
+        "max_abs_error",
+        "per_token_max_abs_error",
+        "per_token_decrypt_ok",
+        "autoregressive_selected_ids",
+        "autoregressive_expected_ids",
+        "autoregressive_tokens_match",
+        "executed_bootstrap_count",
+        "peak_rss_gib",
+    ),
+    "timing": ("eval_seconds", "total_seconds"),
+    "measurement_scope": (
+        "zero_intermediate_decrypts",
+        "full_layer_chain",
+        "layers_loaded",
+        "tokens",
+    ),
+}
 
 
 class CampaignInterruptedError(Exception):
@@ -158,16 +189,7 @@ def _artifact_expectation(
         "tokens": tokens,
         "sync_profile": env.get("FIDESLIB_SYNC_PROFILE"),
         "input_payload_sha256": env.get("INPUT_CHAIN_SHA256"),
-        "platform": {
-            "platform_config_version": env.get("B300_PLATFORM_VERSION"),
-            "platform_config_sha256": env.get("B300_PLATFORM_CONFIG_SHA256"),
-            "image": env.get("IMAGE"),
-            "cuda_version": env.get("B300_CUDA_VERSION"),
-            "fideslib_commit": env.get("B300_FIDESLIB_COMMIT"),
-            "fideslib_arch": env.get("FIDESLIB_ARCH"),
-            "fideslib_sm": env.get("FIDESLIB_SM"),
-            "variant": env.get("FIDESLIB_VARIANT"),
-        }
+        "platform": {key: env.get(variable) for key, (variable, _) in _PLATFORM_FIELDS.items()}
         if env.get("B300_PLATFORM_VERSION")
         else None,
     }
@@ -244,28 +266,12 @@ def _validate_artifact_identity(
     expected_platform = expected.get("platform")
     if expected_platform:
         provenance = payload.get("build_provenance", {})
-        image = provenance.get("image", {}) if isinstance(provenance, dict) else {}
-        cuda = provenance.get("cuda", {}) if isinstance(provenance, dict) else {}
-        fideslib = provenance.get("fideslib", {}) if isinstance(provenance, dict) else {}
-        actual_platform = {
-            "platform_config_version": provenance.get("platform_config_version")
-            if isinstance(provenance, dict)
-            else None,
-            "platform_config_sha256": provenance.get("platform_config_sha256")
-            if isinstance(provenance, dict)
-            else None,
-            "image": image.get("reference") if isinstance(image, dict) else None,
-            "cuda_version": cuda.get("configured_version") if isinstance(cuda, dict) else None,
-            "fideslib_commit": fideslib.get("commit") if isinstance(fideslib, dict) else None,
-            "fideslib_arch": fideslib.get("arch") if isinstance(fideslib, dict) else None,
-            "fideslib_sm": fideslib.get("sm") if isinstance(fideslib, dict) else None,
-            "variant": fideslib.get("variant") if isinstance(fideslib, dict) else None,
-        }
         for key, expected_value in expected_platform.items():
-            if actual_platform.get(key) != expected_value:
+            actual = field(provenance, _PLATFORM_FIELDS[key][1], None)
+            if actual != expected_value:
                 issues.append(
                     f"artifact build provenance {key} mismatch for {path}: "
-                    f"expected {expected_value!r}, got {actual_platform.get(key)!r}"
+                    f"expected {expected_value!r}, got {actual!r}"
                 )
     return issues
 
@@ -307,10 +313,6 @@ def _load_artifacts(
                 require_binary_match=require_binary_match,
             )
         )
-        measurements = payload.get("measurements", {})
-        timing = payload.get("timing", {})
-        scope = payload.get("measurement_scope", {})
-        parameters = payload.get("parameters", {})
         artifacts.append(
             {
                 "path": str(path),
@@ -321,39 +323,13 @@ def _load_artifacts(
                 "stage": payload.get("stage"),
                 "status": payload["status"],
                 "passed": payload["passed"],
-                "parameters": {
-                    key: parameters.get(key)
-                    for key in ("n_layers_loaded", "tokens", "fideslib_sync_profile")
-                    if key in parameters
-                },
-                "measurements": {
-                    key: measurements.get(key)
-                    for key in (
-                        "max_abs_error",
-                        "per_token_max_abs_error",
-                        "per_token_decrypt_ok",
-                        "autoregressive_selected_ids",
-                        "autoregressive_expected_ids",
-                        "autoregressive_tokens_match",
-                        "executed_bootstrap_count",
-                        "peak_rss_gib",
-                    )
-                    if key in measurements
-                },
-                "timing": {
-                    key: timing.get(key)
-                    for key in ("eval_seconds", "total_seconds")
-                    if key in timing
-                },
-                "measurement_scope": {
-                    key: scope.get(key)
-                    for key in (
-                        "zero_intermediate_decrypts",
-                        "full_layer_chain",
-                        "layers_loaded",
-                        "tokens",
-                    )
-                    if key in scope
+                **{
+                    group: {
+                        key: payload.get(group, {})[key]
+                        for key in keys
+                        if key in payload.get(group, {})
+                    }
+                    for group, keys in _ARTIFACT_FIELDS.items()
                 },
                 "validation": validation.to_json_dict(),
             }
@@ -393,16 +369,6 @@ def _artifact_layers(artifact: dict[str, Any]) -> int | None:
     scope = artifact.get("measurement_scope", {})
     for source, key in ((parameters, "n_layers_loaded"), (scope, "layers_loaded")):
         value = source.get(key) if isinstance(source, dict) else None
-        if isinstance(value, int) and not isinstance(value, bool):
-            return value
-    return None
-
-
-def _artifact_tokens(artifact: dict[str, Any]) -> int | None:
-    parameters = artifact.get("parameters", {})
-    scope = artifact.get("measurement_scope", {})
-    for source in (parameters, scope):
-        value = source.get("tokens") if isinstance(source, dict) else None
         if isinstance(value, int) and not isinstance(value, bool):
             return value
     return None
@@ -482,31 +448,23 @@ def _evaluate_acceptance(
     ):
         issues.append("one or more candidate artifacts did not pass")
 
-    expected_layers = acceptance.get("layers")
-    if expected_layers is not None:
-        mismatches = [
-            artifact.get("path", "<unknown>")
-            for artifact in artifacts
-            if _artifact_layers(artifact) != expected_layers
-        ]
-        if mismatches:
-            issues.append(
-                f"artifacts do not report the required {expected_layers} layers: "
-                + ", ".join(mismatches)
-            )
-
     expected_tokens = acceptance.get("tokens")
-    if expected_tokens is not None:
-        mismatches = [
-            artifact.get("path", "<unknown>")
-            for artifact in artifacts
-            if _artifact_tokens(artifact) != expected_tokens
-        ]
-        if mismatches:
-            issues.append(
-                f"artifacts do not report the required {expected_tokens} tokens: "
-                + ", ".join(mismatches)
-            )
+    for key, read in (
+        ("layers", _artifact_layers),
+        ("tokens", lambda row: _artifact_int(row, "tokens")),
+    ):
+        expected = acceptance.get(key)
+        if expected is not None:
+            mismatches = [
+                artifact.get("path", "<unknown>")
+                for artifact in artifacts
+                if read(artifact) != expected
+            ]
+            if mismatches:
+                issues.append(
+                    f"artifacts do not report the required {expected} {key}: "
+                    + ", ".join(mismatches)
+                )
 
     threshold = acceptance.get("max_abs_error_lte")
     maximum_error = _max_error(artifacts)

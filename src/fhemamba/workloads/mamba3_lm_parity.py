@@ -4,20 +4,17 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
-import math
-import subprocess
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Optional
 
 import torch
 from torch.nn import functional as F  # noqa: N812
 
-from fhemamba.mamba3 import Mamba3State, init_mamba3_state
+from fhemamba.benchmarks.io import write_json
+from fhemamba.mamba3 import init_mamba3_state
 from fhemamba.mamba3_lm import Mamba3LM
-from fhemamba.workloads.mamba3_parity import reference
+from fhemamba.workloads.mamba3_parity import UpstreamMamba3
 
 
 class Norm:
@@ -30,66 +27,16 @@ class Norm:
 
 @torch.no_grad()
 def check(source, checkpoint):
-    from einops import rearrange
-
-    paths = {
-        name: source / path
-        for name, path in {
-            "module": "mamba_ssm/modules/mamba3.py",
-            "rotary": "mamba_ssm/ops/triton/mamba3/mamba3_mimo_rotary_step.py",
-            "step": "mamba_ssm/ops/cute/mamba3/mamba3_step_fn.py",
-            "block": "mamba_ssm/modules/block.py",
-            "mlp": "mamba_ssm/modules/mlp.py",
-        }.items()
-    }
-    namespace = {
-        "torch": torch,
-        "math": math,
-        "F": F,
-        "rearrange": rearrange,
-        "Optional": Optional,
-        "Tensor": torch.Tensor,
-    }
-    reference(paths["module"], "heavy_tail_activation", namespace)
-    preprocess = reference(paths["module"], "_preprocess", namespace, owner="Mamba3")
-    rotary = reference(paths["rotary"], "apply_rotary_qk_inference_reference", namespace)
-    recurrence = reference(paths["step"], "selective_state_update_fused_ref_v2", namespace)
-    block = reference(paths["block"], "forward", namespace, owner="Block")
-    mlp = reference(paths["mlp"], "forward", namespace, owner="GatedMLP")
+    upstream = UpstreamMamba3(source)
+    block = upstream.function("mamba_ssm/modules/block.py", "forward", owner="Block")
+    mlp = upstream.function("mamba_ssm/modules/mlp.py", "forward", owner="GatedMLP")
     model = Mamba3LM.from_pretrained(checkpoint)
     ours = model.initial_states()
     theirs = [init_mamba3_state(layer.mixer) for layer in model.backbone.layers]
 
     def mixer_step(index, mixer, input_states):
-        state = theirs[index]
-        h, p, n, a = mixer.nheads, mixer.headdim, mixer.d_state, mixer.num_rope_angles
-        z, x, b, c, dt, rate, trap, angle = mixer.in_proj(input_states).split(
-            [h * p, h * p, n, n, h, h, h, a], dim=-1
-        )
-        dt, b, c, x, z, trap, rate, angle = preprocess(mixer, rate, dt, b, c, x, z, trap, angle)
-        c, b, next_angle = rotary(
-            c, b, state.angle, angle, dt, mixer.C_bias.transpose(0, 1), mixer.B_bias.transpose(0, 1)
-        )
-        ones = torch.ones(1, h, p, dtype=torch.float64)
-        y, ssm = recurrence(
-            state.ssm,
-            rate,
-            b,
-            c,
-            ones,
-            x,
-            ones,
-            z,
-            dt,
-            state.k[:, None],
-            state.v,
-            trap,
-            mixer.D,
-            ones,
-            compute_dtype=torch.float64,
-        )
-        theirs[index] = Mamba3State(next_angle, ssm, b[:, 0], x)
-        return mixer.out_proj(y.reshape(1, h * p))
+        output, theirs[index] = upstream.step(mixer, input_states, theirs[index])
+        return output
 
     tokens = [791, 6864]  # Complete prompt: "The capital", no BOS.
     output_error, state_error = 0.0, 0.0
@@ -136,13 +83,7 @@ def check(source, checkpoint):
         "upstream_tokens": upstream_tokens,
         "layers": len(model.backbone.layers),
         "evaluations": 5,
-        "upstream_commit": subprocess.check_output(
-            ["git", "-C", str(source), "rev-parse", "HEAD"], text=True
-        ).strip(),
-        "source_sha256": {
-            str(path.relative_to(source)): hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in paths.values()
-        },
+        **upstream.identity(),
         "scope": (
             "original upstream CPU preprocessing, rotary, recurrence, residual block and MLP; "
             "no fused CUDA comparison"
@@ -162,7 +103,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     torch.set_num_threads(4)
     report = check(args.source, args.checkpoint)
-    args.output.write_text(json.dumps(report, indent=2) + "\n")
+    write_json(args.output, report)
     print(json.dumps(report, indent=2))
     raise SystemExit(0 if report["passed"] else 1)
 

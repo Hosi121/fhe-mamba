@@ -10,7 +10,6 @@ not encrypted inference or a guarantee on inputs outside these windows.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import math
 import time
@@ -27,7 +26,8 @@ from torch.nn import functional as F  # noqa: E402, N812
 
 from fhemamba import __version__  # noqa: E402
 from fhemamba.artifacts import current_git_commit  # noqa: E402
-from fhemamba.benchmarks.io import payload_sha256  # noqa: E402
+from fhemamba.benchmarks.io import file_sha256 as _sha  # noqa: E402
+from fhemamba.benchmarks.io import payload_sha256, sha256  # noqa: E402
 from fhemamba.m1_payload import _poly_ops_from_export  # noqa: E402
 from fhemamba.ops import Exact  # noqa: E402
 from fhemamba.reference import model_forward  # noqa: E402
@@ -48,11 +48,6 @@ class MaskedExactOps(Exact):
         if self.apply_mask:
             values = values * values.new_tensor(self.masks[layer])
         return values
-
-
-def _sha(path: Path) -> str:
-    with path.open("rb") as source:
-        return hashlib.file_digest(source, "sha256").hexdigest()
 
 
 @torch.no_grad()
@@ -213,9 +208,9 @@ def main() -> None:
                 "window": length,
                 "windows": count,
                 "predicted_tokens": tokens,
-                "evaluated_token_ids_sha256": hashlib.sha256(
+                "evaluated_token_ids_sha256": sha256(
                     ids[:, : count * length].numpy().astype("<i8").tobytes()
-                ).hexdigest(),
+                ),
                 "circuits": totals,
                 "poly_domain_violations": poly_ops.violations,
                 "pruned_head_observations_on_exact_path": observed,

@@ -7,6 +7,19 @@ import json
 from pathlib import Path
 from typing import Any
 
+_MISSING = object()
+
+
+def field(report: Any, name: str, default: Any = _MISSING) -> Any:
+    """Read a dotted JSON field, rejecting missing fields unless a default is explicit."""
+    for part in name.split("."):
+        if not isinstance(report, dict) or part not in report:
+            if default is _MISSING:
+                raise ValueError(f"missing required field: {name}")
+            return default
+        report = report[part]
+    return report
+
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()

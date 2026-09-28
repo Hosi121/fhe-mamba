@@ -16,16 +16,30 @@ cmake -S experiments/gpu_dual_ring -B build/gpu-dual-ring \
   -DCMAKE_CUDA_ARCHITECTURES=121-real \
   -DCMAKE_PREFIX_PATH="$FIDESLIB_PREFIX;$OPENFHE_PREFIX"
 cmake --build build/gpu-dual-ring -j 4
-LD_LIBRARY_PATH="$OPENFHE_PREFIX/lib:/usr/local/cuda-13.0/lib64" \
-  python3 experiments/gpu_dual_ring/run_probe.py \
-  --binary build/gpu-dual-ring/gpu_dual_ring \
-  --output runs/dual-ring-qualification --mode qualification \
-  --commit "$(git rev-parse HEAD)"
+python -m fhemamba benchmark run experiments/gpu_dual_ring/probe-job.json \
+  --settings config/local/dual-ring.json \
+  --output runs/dual-ring-qualification --events runs/completions.jsonl
 ```
 
-The wrapper pins CPU affinity 15–19 and four OpenMP threads, requires a fresh
-output directory and records executable/source hashes, command, exit code
-and process time. `probe.json` contains accuracy and component times;
+Before running, create the ignored `config/local/dual-ring.json`, replacing
+paths and choosing allocated CPUs on your host:
+
+```json
+{
+  "repo": "/path/to/fhe-mamba",
+  "binary": "/path/to/fhe-mamba/build/gpu-dual-ring/gpu_dual_ring",
+  "library_path": "/path/to/openfhe/lib:/usr/local/cuda-13.0/lib64",
+  "cpu_affinity": "15-19",
+  "threads": "4",
+  "mode": "qualification"
+}
+```
+
+The measured Spark configuration used affinity `15-19` and four threads.
+The shared runner requires a fresh output directory and
+records executable/source hashes, command, explicit environment, exit code
+and process time. Its deadline is 1,800 seconds; process cleanup and completion
+events also cover failures. `probe.json` contains accuracy and component times;
 `run.log` retains setup and failure diagnostics. The modes `abba` and `baab`
 compare large/small rings in alternating order. Negative iteration indices
 are warm-ups and must be excluded from timing aggregates.
@@ -38,13 +52,14 @@ preserves its logical values. The model returns the two bootstrap components
 separately to preserve its existing multiplicative depth; the small circuit
 combines them before returning. Their transfer counts therefore differ.
 
-`campaign.py ROOT small|full` is the dated study controller. It consumes the
-recorded `prefix-baseline-command.json` and `full-baseline-command.json` under
-ROOT; those commands must refer to the local frozen payload and binaries.
-The full stage additionally requires the small stage's successful status and
-an explicit `full-selection.json` eligibility decision. Ordinary users can
-run a model with `src/fhemamba/benchmarks/packed.py --gpu-dual-ring` and its
-required S2C-first/planned/batch flags instead.
+The dated `campaign.py` and `run_probe.py` were retired. Their frozen source is
+available in Git at `5d1e520`; the completed study's measured records remain
+unchanged. For new model comparisons use `fhemamba benchmark packed
+--gpu-dual-ring` with its required S2C-first/planned/batch flags and the shared
+[comparison workflow](../../docs/experiments.md#compare-without-a-study-specific-script).
+Run a small qualification before the full model, keeping the study's payload,
+token and error gates explicit. A process completion event alone is not model
+qualification.
 
 See the [study](../../docs/research/2026-09-26-gpu-dual-ring.md) for comparison
 conditions, measured scope and the adoption decision.

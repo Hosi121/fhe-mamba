@@ -6,7 +6,21 @@ import pytest
 from fhemamba.benchmarks import packed as runner
 
 
-def fixture_files(tmp_path, body):
+def native_result(error, **fields):
+    """Independent native-report fixture; each gate changes only its own evidence."""
+    return {
+        "schema": "fhemamba-packed-result-v1",
+        "encrypted": True,
+        "passed": True,
+        "max_abs_error_vs_polynomial": error,
+        "max_abs_error_vs_exact": error,
+        "per_output_errors": [{}],
+        "non_finite": 0,
+        **fields,
+    }
+
+
+def fixture_files(tmp_path, body="", *, native=None):
     payload = tmp_path / "payload"
     payload.mkdir()
     digests = {}
@@ -24,6 +38,9 @@ def fixture_files(tmp_path, body):
         )
     )
     binary = tmp_path / "native"
+    if native is not None:
+        body = "import sys\nfrom pathlib import Path\n" + body
+        body += f"Path(sys.argv[2]).write_text({json.dumps(native)!r})\n"
     binary.write_text("#!/usr/bin/env python3\n" + body)
     binary.chmod(0o755)
     return binary, payload
@@ -62,23 +79,12 @@ def test_frontier_live_limit_requires_frontier_schedule(tmp_path):
 
 @pytest.mark.parametrize("budgeted", [False, True])
 def test_frontier_live_limit_is_forwarded_and_verified(tmp_path, budgeted):
-    result = {
-        "schema": "fhemamba-packed-result-v1",
-        "encrypted": True,
-        "passed": True,
-        "max_abs_error_vs_polynomial": 1e-5,
-        "max_abs_error_vs_exact": 1e-5,
-        "per_output_errors": [{}],
-        "non_finite": 0,
-        "frontier_refresh": True,
-        "frontier_live_limit": 128,
-    }
-    body = (
-        "import sys\nfrom pathlib import Path\n"
-        "assert sys.argv[sys.argv.index('--frontier-live-limit')+1] == '128'\n"
-        f"Path(sys.argv[2]).write_text({json.dumps(result)!r})\n"
+    result = native_result(1e-5, frontier_refresh=True, frontier_live_limit=128)
+    binary, payload = fixture_files(
+        tmp_path,
+        "assert sys.argv[sys.argv.index('--frontier-live-limit')+1] == '128'\n",
+        native=result,
     )
-    binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 30} if budgeted else {}
     actual = runner.run(
         binary,
@@ -95,20 +101,8 @@ def test_frontier_live_limit_is_forwarded_and_verified(tmp_path, budgeted):
 
 @pytest.mark.parametrize(("error", "passed"), [(0.0001, True), (0.1, False), (float("nan"), False)])
 def test_runner_checks_errors_independently_of_native_passed(tmp_path, error, passed):
-    result = {
-        "schema": "fhemamba-packed-result-v1",
-        "encrypted": True,
-        "passed": True,
-        "max_abs_error_vs_polynomial": error,
-        "max_abs_error_vs_exact": error,
-        "per_output_errors": [{}],
-        "non_finite": 0,
-    }
-    body = (
-        "import json, sys\nfrom pathlib import Path\n"
-        f"Path(sys.argv[2]).write_text({json.dumps(result)!r})\n"
-    )
-    binary, payload = fixture_files(tmp_path, body)
+    result = native_result(error)
+    binary, payload = fixture_files(tmp_path, native=result)
     actual = runner.run(binary, payload, tmp_path / "result")
     assert actual["passed"] is passed
     assert actual["binary_sha256"] == runner.digest(binary)
@@ -116,24 +110,10 @@ def test_runner_checks_errors_independently_of_native_passed(tmp_path, error, pa
 
 @pytest.mark.parametrize("tokens", [[5, 6], [5, 9]])
 def test_generation_gate_checks_actual_client_tokens(tmp_path, tokens):
-    result = {
-        "schema": "fhemamba-packed-result-v1",
-        "encrypted": True,
-        "passed": True,
-        "max_abs_error_vs_polynomial": 1e-5,
-        "max_abs_error_vs_exact": 1e-5,
-        "per_output_errors": [{}],
-        "non_finite": 0,
-        "evaluation_decryptions": 0,
-        "client_output_decrypt_count": 2,
-        "generated_token_ids": tokens,
-    }
-    body = (
-        "import json,sys\nfrom pathlib import Path\n"
-        "assert '--client-head' in sys.argv\n"
-        f"Path(sys.argv[2]).write_text({json.dumps(result)!r})\n"
+    result = native_result(
+        1e-5, evaluation_decryptions=0, client_output_decrypt_count=2, generated_token_ids=tokens
     )
-    binary, payload = fixture_files(tmp_path, body)
+    binary, payload = fixture_files(tmp_path, "assert '--client-head' in sys.argv\n", native=result)
     (payload / "client_head.f32").write_bytes(b"head")
     manifest = json.loads((payload / "manifest.json").read_text())
     manifest.update(
@@ -251,33 +231,39 @@ def test_invalid_refresh_options_do_not_start_a_run(tmp_path, options):
 
 @pytest.mark.parametrize("budgeted", [False, True])
 def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
-    body = (
-        "import sys\n"
-        "assert '--planned-refresh' in sys.argv\n"
-        "assert '--batch-refresh' in sys.argv\n"
-        "assert '--trace-levels' in sys.argv\n"
-        "assert '--profile-evaluation' in sys.argv\n"
-        "assert '--inplace-ops' in sys.argv\n"
-        "assert '--cache-plaintexts' in sys.argv\n"
-        "assert '--fast-plaintext-upload' in sys.argv\n"
-        "assert '--gpu-plaintext-ntt' in sys.argv\n"
-        "assert '--direct-plaintext-upload' in sys.argv\n"
-        "assert '--move-plaintext-coefficients' in sys.argv\n"
-        "assert '--borrow-plaintext-upload' in sys.argv\n"
-        "assert '--bsgs-routing-stages' in sys.argv\n"
-        "assert '--naf-rotations' in sys.argv\n"
-        "assert '--reuse-dead-inputs' in sys.argv\n"
-        "assert '--compact-weights' in sys.argv\n"
-        "assert '--frontier-refresh' in sys.argv\n"
-        "assert '--s2c-first' in sys.argv\n"
-        "assert '--gpu-plaintext-rns' in sys.argv\n"
-        "assert '--fuse-plaintext-rns-ntt' in sys.argv\n"
-        "assert '--prefetch-plaintexts' in sys.argv\n"
-        "assert sys.argv[sys.argv.index('--prefetch-workers') + 1] == '2'\n"
-        "assert '--hoist-rotations' in sys.argv\n"
-        "assert '--share-chebyshev' in sys.argv\n"
-        "assert '--gpu-dual-ring' in sys.argv\n"
-    )
+    expected_flags = [
+        "--trace-levels",
+        "--planned-refresh",
+        "--batch-refresh",
+        "--profile-evaluation",
+        "--inplace-ops",
+        "--cache-plaintexts",
+        "--indexed-mask-cache",
+        "--fast-plaintext-upload",
+        "--gpu-plaintext-ntt",
+        "--direct-plaintext-upload",
+        "--move-plaintext-coefficients",
+        "--borrow-plaintext-upload",
+        "--bsgs-routing-stages",
+        "--naf-rotations",
+        "--reuse-dead-inputs",
+        "--reuse-public-ciphertexts",
+        "--compact-weights",
+        "--frontier-refresh",
+        "--s2c-first",
+        "--gpu-plaintext-rns",
+        "--gpu-addend-rns",
+        "--fuse-plaintext-rns-ntt",
+        "--prefetch-plaintexts",
+        "--hoist-rotations",
+        "--share-chebyshev",
+        "--gpu-dual-ring",
+        "--prefetch-workers",
+        "2",
+        "--plaintext-cache-capacity",
+        "128",
+    ]
+    body = "import sys\n" + f"assert sys.argv[-{len(expected_flags)}:] == {expected_flags!r}\n"
     binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
     result = runner.run(
@@ -315,38 +301,6 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         **budget,
     )
     assert result["returncode"] == 0
-    expected_flags = [
-        "--trace-levels",
-        "--planned-refresh",
-        "--batch-refresh",
-        "--profile-evaluation",
-        "--inplace-ops",
-        "--cache-plaintexts",
-        "--indexed-mask-cache",
-        "--fast-plaintext-upload",
-        "--gpu-plaintext-ntt",
-        "--direct-plaintext-upload",
-        "--move-plaintext-coefficients",
-        "--borrow-plaintext-upload",
-        "--bsgs-routing-stages",
-        "--naf-rotations",
-        "--reuse-dead-inputs",
-        "--reuse-public-ciphertexts",
-        "--compact-weights",
-        "--frontier-refresh",
-        "--s2c-first",
-        "--gpu-plaintext-rns",
-        "--gpu-addend-rns",
-        "--fuse-plaintext-rns-ntt",
-        "--prefetch-plaintexts",
-        "--hoist-rotations",
-        "--share-chebyshev",
-        "--gpu-dual-ring",
-        "--prefetch-workers",
-        "2",
-        "--plaintext-cache-capacity",
-        "128",
-    ]
     assert result["command"][-len(expected_flags) :] == expected_flags
     assert result["passed"] is False  # No native result; flags cannot bypass the gate.
 
@@ -356,19 +310,13 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
     "failure", [None, "missing_flag", "missing_count", "bad_total", "negative", "boolean"]
 )
 def test_refresh_merge_requires_matching_native_evidence(tmp_path, budgeted, failure):
-    native = {
-        "schema": "fhemamba-packed-result-v1",
-        "encrypted": True,
-        "passed": True,
-        "max_abs_error_vs_polynomial": 1e-6,
-        "max_abs_error_vs_exact": 1e-6,
-        "per_output_errors": [{}],
-        "non_finite": 0,
-        "merge_refresh_correction": True,
-        "merged_refreshes": 2,
-        "merge_refresh_fallbacks": 1,
-        "bootstraps": 6,
-    }
+    native = native_result(
+        1e-6,
+        merge_refresh_correction=True,
+        merged_refreshes=2,
+        merge_refresh_fallbacks=1,
+        bootstraps=6,
+    )
     if failure == "missing_flag":
         native.pop("merge_refresh_correction")
     elif failure == "missing_count":
@@ -379,12 +327,9 @@ def test_refresh_merge_requires_matching_native_evidence(tmp_path, budgeted, fai
         native["merge_refresh_fallbacks"] = -1
     elif failure == "boolean":
         native["merged_refreshes"] = True
-    body = (
-        "import sys\nfrom pathlib import Path\n"
-        "assert '--merge-refresh-correction' in sys.argv\n"
-        f"Path(sys.argv[2]).write_text({json.dumps(native)!r})\n"
+    binary, payload = fixture_files(
+        tmp_path, "assert '--merge-refresh-correction' in sys.argv\n", native=native
     )
-    binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
     result = runner.run(
         binary,
@@ -402,19 +347,9 @@ def test_refresh_merge_requires_matching_native_evidence(tmp_path, budgeted, fai
     "failure", [None, "flag", "missing", "empty", "negative", "boolean", "total"]
 )
 def test_gpu_fft_requires_executed_native_path(tmp_path, budgeted, failure):
-    native = {
-        "schema": "fhemamba-packed-result-v1",
-        "encrypted": True,
-        "passed": True,
-        "max_abs_error_vs_polynomial": 1e-6,
-        "max_abs_error_vs_exact": 1e-6,
-        "per_output_errors": [{}],
-        "non_finite": 0,
-        "gpu_plaintext_fft": True,
-        "gpu_fft_encodes": 8,
-        "gpu_fft_fallbacks": 2,
-        "host_encodes": 10,
-    }
+    native = native_result(
+        1e-6, gpu_plaintext_fft=True, gpu_fft_encodes=8, gpu_fft_fallbacks=2, host_encodes=10
+    )
     if failure == "flag":
         native["gpu_plaintext_fft"] = False
     elif failure == "missing":
@@ -427,12 +362,9 @@ def test_gpu_fft_requires_executed_native_path(tmp_path, budgeted, failure):
         native["gpu_fft_encodes"] = True
     elif failure == "total":
         native["host_encodes"] = 1
-    body = (
-        "import sys\nfrom pathlib import Path\n"
-        "assert '--gpu-plaintext-fft' in sys.argv\n"
-        f"Path(sys.argv[2]).write_text({json.dumps(native)!r})\n"
+    binary, payload = fixture_files(
+        tmp_path, "assert '--gpu-plaintext-fft' in sys.argv\n", native=native
     )
-    binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
     result = runner.run(
         binary,
@@ -475,21 +407,15 @@ def test_classical128_requires_matching_security_evidence(tmp_path, budgeted, fa
         "hybrid": True,
         "hybrid_digits": 4,
     }
-    result = {
-        "schema": "fhemamba-packed-result-v1",
-        "encrypted": True,
-        "passed": True,
-        "max_abs_error_vs_polynomial": 1e-5,
-        "max_abs_error_vs_exact": 1e-5,
-        "per_output_errors": [{}],
-        "non_finite": 0,
-        "security": "128-classic",
-        "ring_dimension": 131072,
-        "refresh_ring_dimension": 131072,
-        "gpu_dual_ring": False,
-        "evaluation_decryptions": 0,
-        "security_audit": audit,
-    }
+    result = native_result(
+        1e-5,
+        security="128-classic",
+        ring_dimension=131072,
+        refresh_ring_dimension=131072,
+        gpu_dual_ring=False,
+        evaluation_decryptions=0,
+        security_audit=audit,
+    )
     if failure == "missing_audit":
         result.pop("security_audit")
     elif failure == "not_set":
@@ -512,13 +438,12 @@ def test_classical128_requires_matching_security_evidence(tmp_path, budgeted, fa
         audit["hybrid_digits"] = 6
     elif failure == "evaluator_decrypts":
         result["evaluation_decryptions"] = 1
-    body = (
-        "import json, sys\nfrom pathlib import Path\n"
+    binary, payload = fixture_files(
+        tmp_path,
         "assert sys.argv[sys.argv.index('--security') + 1] == '128-classic'\n"
-        "assert sys.argv[sys.argv.index('--security-digits') + 1] == '4'\n"
-        f"Path(sys.argv[2]).write_text({json.dumps(result)!r})\n"
+        "assert sys.argv[sys.argv.index('--security-digits') + 1] == '4'\n",
+        native=result,
     )
-    binary, payload = fixture_files(tmp_path, body)
     options = {"budget_file": tmp_path / "budget.json", "budget_seconds": 30} if budgeted else {}
     actual = runner.run(
         binary, payload, tmp_path / "result", security="128-classic", security_digits=4, **options
