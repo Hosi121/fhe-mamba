@@ -1,19 +1,11 @@
 from __future__ import annotations
 
-import importlib.util
 import json
 from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location(
-    "manage_dgx_build", ROOT / "experiments/manage_dgx_build.py"
-)
-assert spec is not None
-assert spec.loader is not None
-manager = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(manager)
+from fhemamba.benchmarks import builds as manager
 
 
 def test_payload_hash_binds_contents_and_names(tmp_path: Path) -> None:

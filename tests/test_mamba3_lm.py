@@ -84,3 +84,58 @@ def test_extended_packing_handles_model_width_and_feedback_without_replay(tmp_pa
     text = (tmp_path / "program.txt").read_text()
     assert text.startswith("fhemamba-packed-v2")
     assert "0.12345678" not in text
+
+
+def test_generation_prefix_preserves_frozen_nodes_and_feedback(tmp_path):
+    from fhemamba.workloads import mamba3_export as exporter
+
+    source, destination = tmp_path / "source", tmp_path / "prefix"
+    source.mkdir()
+    program = PackedProgram({}, slots=8, extended=True)
+    hidden = None
+    values = np.arange(16).reshape(4, 4).astype(float)
+    for step, value in enumerate(values):
+        hidden = program.input(value) if step < 2 else program.client_input(hidden, value)
+        program.output(hidden, value)
+    program.write(source / "program.txt")
+    (source / "client_head.f32").write_bytes(b"public head")
+    np.savez(
+        source / "fixture.npz",
+        prompt_ids=[1, 2],
+        exact_token_ids=[3, 4, 5],
+        polynomial_token_ids=[3, 4, 5],
+        exact_hidden=values,
+        polynomial_hidden=values,
+    )
+    manifest = {
+        "schema": "fhemamba-mamba3-lm-v1",
+        "generated_tokens": 3,
+        "prompt_ids": [1, 2],
+        "tokens": 4,
+        "exact_token_ids": [3, 4, 5],
+        "polynomial_token_ids": [3, 4, 5],
+        "reference_text": "entire source",
+        "output_names": [f"step{i}" for i in range(4)],
+        "program": program.summary(),
+        "polynomials": {"sentinel": "unchanged"},
+        "files_sha256": {
+            name: exporter.digest(source / name)
+            for name in ("program.txt", "fixture.npz", "client_head.f32")
+        },
+    }
+    (source / "manifest.json").write_text(json.dumps(manifest))
+    before = (source / "program.txt").read_text().splitlines()
+    result = exporter.prefix_payload(source, destination, 2)
+    after = (destination / "program.txt").read_text().splitlines()
+    assert after[0].split()[3:] == ["3", "3"]
+    assert after[1:4] == before[1:4]
+    assert after[4:] == before[5:8]
+    assert result["program"]["operations"]["feedback"] == 1
+    assert result["generated_tokens"] == 2
+    assert result["polynomials"] == manifest["polynomials"]
+    assert "reference_text" not in result
+    assert exporter.digest(source / "program.txt") == manifest["files_sha256"]["program.txt"]
+    with np.load(destination / "fixture.npz") as fixture:
+        np.testing.assert_array_equal(fixture["exact_hidden"], values[:3])
+        np.testing.assert_array_equal(fixture["prompt_ids"], [1, 2])
+        np.testing.assert_array_equal(fixture["exact_token_ids"], [3, 4])

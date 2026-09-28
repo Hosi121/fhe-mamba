@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "command": [
-    "${python}", "${repo}/experiments/run_packed_probe.py",
+    "${python}", "-m", "fhemamba", "benchmark", "packed",
     "--binary", "${binary}", "--payload", "${payload}",
     "--output", "${output}/validation.json",
     "--security", "128-classic", "--security-digits", "4",

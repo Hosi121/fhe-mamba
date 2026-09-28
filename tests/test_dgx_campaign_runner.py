@@ -29,7 +29,7 @@ def test_cli_environment_overrides_are_recorded(tmp_path: Path) -> None:
     subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--output-json",
@@ -157,7 +157,7 @@ def test_campaign_continues_on_candidate_failure_and_applies_promotion_gate(tmp_
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -197,7 +197,7 @@ def test_campaign_fails_fast_when_runner_produces_no_artifact(tmp_path: Path) ->
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -239,7 +239,7 @@ def test_campaign_terminates_timed_out_process_group(tmp_path: Path) -> None:
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -281,7 +281,7 @@ def test_campaign_resume_reuses_complete_artifact(tmp_path: Path) -> None:
     )
     command = [
         sys.executable,
-        "experiments/run_dgx_campaign.py",
+        "experiments/execution/run_dgx_campaign.py",
         "--manifest",
         str(manifest),
         "--runner",
@@ -318,7 +318,7 @@ def test_campaign_resume_rejects_changed_effective_environment(tmp_path: Path) -
     manifest.write_text(json.dumps(manifest_payload), encoding="utf-8")
     command = [
         sys.executable,
-        "experiments/run_dgx_campaign.py",
+        "experiments/execution/run_dgx_campaign.py",
         "--manifest",
         str(manifest),
         "--runner",
@@ -362,7 +362,7 @@ def test_campaign_resume_hashes_and_rechecks_current_binary(tmp_path: Path) -> N
     )
     command = [
         sys.executable,
-        "experiments/run_dgx_campaign.py",
+        "experiments/execution/run_dgx_campaign.py",
         "--manifest",
         str(manifest),
         "--runner",
@@ -416,7 +416,7 @@ def test_promoted_campaign_enforces_acceptance_contract(tmp_path: Path) -> None:
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -487,7 +487,7 @@ def test_promoted_campaign_fails_closed_on_acceptance_miss(
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -549,7 +549,7 @@ def test_campaign_resume_rejects_stale_artifact_identity(
     )
     command = [
         sys.executable,
-        "experiments/run_dgx_campaign.py",
+        "experiments/execution/run_dgx_campaign.py",
         "--manifest",
         str(manifest),
         "--runner",
@@ -613,7 +613,7 @@ def test_campaign_gpu_preflight_blocks_launch_on_occupied_gpu(tmp_path: Path) ->
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -667,7 +667,7 @@ def test_campaign_gpu_preflight_blocks_unreported_gpu_utilization(tmp_path: Path
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -723,7 +723,7 @@ def test_campaign_gpu_preflight_targets_manifest_gpu(tmp_path: Path) -> None:
     completed = subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",
@@ -774,7 +774,7 @@ def test_campaign_sighup_terminates_active_runner_group(tmp_path: Path) -> None:
     process = subprocess.Popen(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest),
             "--runner",

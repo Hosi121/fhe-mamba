@@ -5,9 +5,10 @@ ROOT="${FHEMAMBA_REMOTE_ROOT:-$HOME/fhemamba}"
 expected_binary="$ROOT/spark/kernel/stage1_mamba2_decode_fideslib"
 BINARY="${BINARY:-$expected_binary}"
 [[ "$BINARY" == "$expected_binary" ]] || { echo 'Use the validated Spark binary' >&2; exit 2; }
-manager="$REPO_DIR/experiments/manage_dgx_build.py"
+manager=(python3 -m fhemamba benchmark spark-build --repo "$REPO_DIR")
 export LD_LIBRARY_PATH
-LD_LIBRARY_PATH="$(python3 "$manager" library-path --root "$ROOT"):/usr/local/cuda-13.0/lib64"
+export PYTHONPATH="${REPO_DIR}/src${PYTHONPATH:+:$PYTHONPATH}"
+LD_LIBRARY_PATH="$("${manager[@]}" library-path --root "$ROOT"):/usr/local/cuda-13.0/lib64"
 export CUDA_LAUNCH_BLOCKING="${CUDA_LAUNCH_BLOCKING:-1}"
 FIDESLIB_SYNC_PROFILE=full
 INPUT_CHAIN="${INPUT_CHAIN:-$ROOT/payloads/mamba2-130m}"
@@ -24,7 +25,7 @@ mkdir -p "$RESULTS_DIR" "$ROOT/logs"
 actual_sha="$(sha256sum "$BINARY" | cut -d' ' -f1)"
 [[ "${BINARY_SHA256:-$actual_sha}" == "$actual_sha" ]] || { echo 'Binary hash mismatch' >&2; exit 2; }
 build_dgx_mamba2_args "$LAYERS" "$TOKENS"
-payload_sha="$(python3 "$manager" payload-hash --payload "$INPUT_CHAIN")"
+payload_sha="$("${manager[@]}" payload-hash --payload "$INPUT_CHAIN")"
 [[ "${INPUT_CHAIN_SHA256:-$payload_sha}" == "$payload_sha" ]] || {
   echo 'Input payload changed after campaign validation' >&2; exit 2;
 }
@@ -40,7 +41,7 @@ fi
   > >(tee "$ROOT/logs/$(basename "$OUTPUT_JSON" .json).log") 2>&1 || status=$?
 # Attach to failed numerical gates too; a failed experiment is still evidence.
 if [[ -s "$OUTPUT_JSON" ]]; then
-  python3 "$manager" attach --root "$ROOT" --artifact "$OUTPUT_JSON" --payload-sha256 "$payload_sha"
+  "${manager[@]}" attach --root "$ROOT" --artifact "$OUTPUT_JSON" --payload-sha256 "$payload_sha"
 else
   echo "No backend artifact: $OUTPUT_JSON" >&2
   exit 1

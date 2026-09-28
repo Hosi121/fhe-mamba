@@ -4,17 +4,32 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
+
+from fhemamba._commands import dispatch
 
 from .comparison import compare
 from .evidence import Redactor, extract_provenance, publish, verify
 from .io import read_object
 from .jobs import run_job
 
+TOOLS = {
+    "packed": ("fhemamba.benchmarks.packed", "main", "run and qualify packed inference"),
+    "generation-report": ("fhemamba.benchmarks.generation", "main", "qualify generated tokens"),
+    "spark-build": ("fhemamba.benchmarks.builds", "main", "validate Spark build identity"),
+    "b300-build": ("fhemamba.benchmarks.b300_build", "main", "legacy B300 build identity"),
+}
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+
+def main(argv=None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] in TOOLS:
+        return dispatch("fhemamba benchmark", TOOLS, argv)
+    parser = argparse.ArgumentParser(prog="fhemamba benchmark", description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
+    for name, (_, _, description) in TOOLS.items():
+        commands.add_parser(name, help=description)
     run = commands.add_parser("run", help="execute one job and write a completion event")
     run.add_argument("spec", type=Path)
     run.add_argument("--output", type=Path, required=True)
@@ -36,7 +51,7 @@ def main() -> int:
     extract = commands.add_parser("extract", help="inspect archived provenance in a new directory")
     extract.add_argument("root", type=Path)
     extract.add_argument("destination", type=Path)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     try:
         if args.command == "run":
             result = run_job(

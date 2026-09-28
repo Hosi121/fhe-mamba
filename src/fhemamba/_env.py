@@ -1,13 +1,8 @@
-"""Environment workarounds. Import before transformers.
+"""Opt out of unused vision dependencies in text-only Transformers commands.
 
-The .venv ships torchvision 0.25 against torch 2.11 — a C++ op-registration
-mismatch that makes ``import torchvision`` raise RuntimeError. transformers'
-lazy loader then fails to import any modeling class. Nothing in this project
-uses torchvision, so we block the import outright: a ``None`` entry in
-sys.modules makes ``import torchvision`` raise ImportError immediately, which
-transformers handles as "torchvision not installed".
-
-Remove once the environment pins a matching torchvision (or drops it).
+Call explicitly before importing Transformers. A preloaded torchvision module
+is left alone; otherwise Python reports it as unavailable. This keeps optional
+vision-extension compatibility from preventing text-only checkpoint loading.
 """
 
 from __future__ import annotations

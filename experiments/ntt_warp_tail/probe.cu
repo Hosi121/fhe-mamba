@@ -79,24 +79,32 @@ int main(int argc, char** argv) {
   try {
     if (argc < 4) throw std::invalid_argument("usage: ntt_warp_tail REPORT GOLDEN RING [--record] [--bench-only]");
     const int ring = std::stoi(argv[3]);
-    if (ring != 1024 && ring != 2048 && ring != 4096 && ring != 32768 && ring != 65536)
+    if (ring != 1024 && ring != 2048 && ring != 4096 && ring != 32768 && ring != 65536 && ring != 131072)
       throw std::invalid_argument("unsupported ring");
     bool record = false, bench_only = false;
+    bool special_primes = false;
+    int digits = 3;
     for (int i = 4; i < argc; ++i) {
       const std::string flag = argv[i];
       if (flag == "--record") record = true;
       else if (flag == "--bench-only") bench_only = true;
+      else if (flag == "--special-primes") special_primes = true;
+      else if (flag == "--digits" && i + 1 < argc) digits = std::stoi(argv[++i]);
       else throw std::invalid_argument("unknown option");
     }
+    if (digits < 1 || digits > 4 || (special_primes && bench_only))
+      throw std::invalid_argument("invalid digits or incompatible probe modes");
     CCParams<CryptoContextCKKSRNS> p;
     p.SetSecurityLevel(HEStd_NotSet); p.SetSecretKeyDist(UNIFORM_TERNARY);
     p.SetCKKSDataType(REAL); p.SetRingDim(ring); p.SetBatchSize(ring / 2);
     p.SetMultiplicativeDepth(44); p.SetScalingModSize(59); p.SetFirstModSize(60);
     p.SetScalingTechnique(FLEXIBLEAUTO); p.SetKeySwitchTechnique(HYBRID);
-    p.SetNumLargeDigits(3); p.SetDevices({0});
+    p.SetNumLargeDigits(digits); p.SetDevices({0});
     auto cc = GenCryptoContext(p);
     for (auto feature : {fideslib::PKE, fideslib::KEYSWITCH, fideslib::LEVELEDSHE}) cc->Enable(feature);
     auto keys = cc->KeyGen();
+    // Include an evaluation key in the hybrid-basis diagnostic context.
+    if (special_primes) cc->EvalMultKeyGen(keys.secretKey);
     cc->LoadContext(keys.publicKey);
     auto& gpu = std::any_cast<FIDESlib::CKKS::Context&>(cc->gpu);
     FIDESlib::CKKS::SetCurrentContext(gpu);
@@ -120,11 +128,26 @@ int main(int argc, char** argv) {
       if (!golden) throw std::runtime_error("golden stream IO failed");
       words += count;
     };
-    const uint64_t header[] = {0x4648454e54543031ull, static_cast<uint64_t>(ring), static_cast<uint64_t>(bench_only)};
-    compare(header, 3);
+    const uint64_t header[] = {0x4648454e54543032ull, static_cast<uint64_t>(ring),
+                              static_cast<uint64_t>(bench_only), static_cast<uint64_t>(digits),
+                              static_cast<uint64_t>(special_primes)};
+    compare(header, 5);
     std::vector<uint64_t> primes;
     for (int i = 0; i <= source_prime; ++i) primes.push_back(gpu->prime[i].p);
     compare(primes.data(), primes.size());
+    std::vector<uint64_t> all_primes = primes;
+    std::vector<std::pair<int, uint64_t>> scalar_primes{{source_prime, primes[source_prime]}};
+    if (special_primes) {
+      if (gpu->specialPrime.empty() || gpu->specialMeta.at(0).size() != gpu->specialPrime.size())
+        throw std::runtime_error("special-prime probe has no complete P metadata");
+      for (std::size_t i = 0; i < gpu->specialPrime.size(); ++i) {
+        const uint64_t q = gpu->specialPrime[i].p;
+        if (q <= 1) throw std::runtime_error("invalid P prime");
+        all_primes.push_back(q);
+        scalar_primes.emplace_back(gpu->specialMeta.at(0).at(i).id, q);
+      }
+      compare(all_primes.data() + primes.size(), all_primes.size() - primes.size());
+    }
     words = 0;
 
     std::vector<std::unique_ptr<Buffer>> in, out, pt, out2, k;
@@ -181,6 +204,31 @@ int main(int argc, char** argv) {
           }
         }
       }
+    int special_cases = 0;
+    if (special_primes) {
+      // Vector-fused cases above cover the Q targets. Exercise the remaining
+      // Q source and every P prime through the scalar ordinary-NTT entry too.
+      for (const auto& [prime, q] : scalar_primes) {
+        if (q >= (uint64_t(1) << 62)) throw std::runtime_error("probe prime exceeds lazy bound");
+        if (q < (uint64_t(1) << 32)) throw std::runtime_error("probe expects 64-bit primes");
+        for (bool second : {false, true}) for (int pattern = 0; pattern < 4; ++pattern) {
+          in[0]->set(values(ring, q, pattern, 700 + prime));
+          const unsigned block = 1u << (second ? gpu->logN / 2 - 1 : (gpu->logN + 1) / 2 - 1);
+          const dim3 grid(ring / (block * 8));
+          if (second)
+            NTT_<uint64_t, true, ALGO_SHOUP, NTT_NONE><<<grid, block, 8 * block * 10>>>(
+                globals, in[0]->data, prime, out[0]->data);
+          else
+            NTT_<uint64_t, false, ALGO_SHOUP, NTT_NONE><<<grid, block, 8 * block * 10>>>(
+                globals, in[0]->data, prime, out[0]->data);
+          check(cudaGetLastError()); check(cudaDeviceSynchronize());
+          std::vector<uint64_t> result(ring);
+          check(cudaMemcpy(result.data(), out[0]->data, ring * sizeof(uint64_t), cudaMemcpyDeviceToHost));
+          compare(result.data(), result.size());
+          ++special_cases;
+        }
+      }
+    }
     check(cudaEventDestroy(begin)); check(cudaEventDestroy(end));
     if (!record && golden.peek() != std::char_traits<char>::eof())
       throw std::runtime_error("extra golden data");
@@ -190,6 +238,10 @@ int main(int argc, char** argv) {
     report << std::setprecision(12) << "{\"passed\":true,\"ring\":" << ring
            << ",\"record\":" << (record ? "true" : "false") << ",\"cases\":" << cases
            << ",\"output_words\":" << words << ",\"bench_only\":" << (bench_only ? "true" : "false")
+           << ",\"digits\":" << digits << ",\"special_prime_cases\":" << special_cases
+           << ",\"all_primes\":[";
+    for (std::size_t i = 0; i < all_primes.size(); ++i) { if (i) report << ','; report << all_primes[i]; }
+    report << ']'
            << ",\"samples\":[";
     for (std::size_t i = 0; i < samples.size(); ++i) {
       const auto& s = samples[i]; if (i) report << ',';

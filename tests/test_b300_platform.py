@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MANAGER = ROOT / "experiments" / "manage_b300_build_metadata.py"
+MANAGER = [sys.executable, "-m", "fhemamba", "benchmark", "b300-build"]
 
 
 def _platform_values() -> dict[str, str]:
@@ -100,8 +100,7 @@ def test_b300_build_metadata_validates_and_attaches(tmp_path: Path) -> None:
     expectation = _expectation(binary)
     subprocess.run(
         [
-            sys.executable,
-            str(MANAGER),
+            *MANAGER,
             "write",
             *expectation,
             "--output",
@@ -125,8 +124,7 @@ def test_b300_build_metadata_validates_and_attaches(tmp_path: Path) -> None:
 
     subprocess.run(
         [
-            sys.executable,
-            str(MANAGER),
+            *MANAGER,
             "attach",
             *expectation,
             "--metadata",
@@ -179,8 +177,7 @@ def test_b300_build_metadata_rejects_image_identity_mismatch(tmp_path: Path) -> 
 
     completed = subprocess.run(
         [
-            sys.executable,
-            str(MANAGER),
+            *MANAGER,
             "validate",
             *_expectation(binary, image_id="new"),
             "--metadata",

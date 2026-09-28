@@ -1,16 +1,9 @@
 import hashlib
-import importlib.util
 import json
-from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
-SPEC = importlib.util.spec_from_file_location(
-    "packed_runner", ROOT / "experiments/run_packed_probe.py"
-)
-RUNNER = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(RUNNER)
+from fhemamba.benchmarks import packed as runner
 
 
 def fixture_files(tmp_path, body):
@@ -38,7 +31,7 @@ def fixture_files(tmp_path, body):
 
 def test_timeout_is_bounded_and_recorded(tmp_path):
     binary, payload = fixture_files(tmp_path, "import time\ntime.sleep(20)\n")
-    result = RUNNER.run(binary, payload, tmp_path / "result", timeout=0.05)
+    result = runner.run(binary, payload, tmp_path / "result", timeout=0.05)
     assert result["timed_out"] is True
     assert result["passed"] is False
     assert result["wall_seconds"] < 5
@@ -49,8 +42,55 @@ def test_tampered_payload_rejected_before_execution(tmp_path):
     binary, payload = fixture_files(tmp_path, "raise RuntimeError('must not run')\n")
     (payload / "program.txt").write_text("different fixture")
     with pytest.raises(ValueError, match="digest differs"):
-        RUNNER.run(binary, payload, tmp_path / "result")
+        runner.run(binary, payload, tmp_path / "result")
     assert not (tmp_path / "result").exists()
+
+
+@pytest.mark.parametrize("limit", [-1, 1000001, True, 1.5])
+def test_invalid_frontier_live_limit_rejected_before_execution(tmp_path, limit):
+    binary, payload = fixture_files(tmp_path, "raise RuntimeError('must not run')\n")
+    with pytest.raises(ValueError, match="frontier live limit"):
+        runner.run(binary, payload, tmp_path / "result", frontier_live_limit=limit)
+    assert not (tmp_path / "result").exists()
+
+
+def test_frontier_live_limit_requires_frontier_schedule(tmp_path):
+    binary, payload = fixture_files(tmp_path, "raise RuntimeError('must not run')\n")
+    with pytest.raises(ValueError, match="requires frontier refresh"):
+        runner.run(binary, payload, tmp_path / "result", frontier_live_limit=128)
+
+
+@pytest.mark.parametrize("budgeted", [False, True])
+def test_frontier_live_limit_is_forwarded_and_verified(tmp_path, budgeted):
+    result = {
+        "schema": "fhemamba-packed-result-v1",
+        "encrypted": True,
+        "passed": True,
+        "max_abs_error_vs_polynomial": 1e-5,
+        "max_abs_error_vs_exact": 1e-5,
+        "per_output_errors": [{}],
+        "non_finite": 0,
+        "frontier_refresh": True,
+        "frontier_live_limit": 128,
+    }
+    body = (
+        "import sys\nfrom pathlib import Path\n"
+        "assert sys.argv[sys.argv.index('--frontier-live-limit')+1] == '128'\n"
+        f"Path(sys.argv[2]).write_text({json.dumps(result)!r})\n"
+    )
+    binary, payload = fixture_files(tmp_path, body)
+    budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 30} if budgeted else {}
+    actual = runner.run(
+        binary,
+        payload,
+        tmp_path / "result",
+        planned_refresh=True,
+        batch_refresh=True,
+        frontier_refresh=True,
+        frontier_live_limit=128,
+        **budget,
+    )
+    assert actual["passed"]
 
 
 @pytest.mark.parametrize(("error", "passed"), [(0.0001, True), (0.1, False), (float("nan"), False)])
@@ -69,9 +109,9 @@ def test_runner_checks_errors_independently_of_native_passed(tmp_path, error, pa
         f"Path(sys.argv[2]).write_text({json.dumps(result)!r})\n"
     )
     binary, payload = fixture_files(tmp_path, body)
-    actual = RUNNER.run(binary, payload, tmp_path / "result")
+    actual = runner.run(binary, payload, tmp_path / "result")
     assert actual["passed"] is passed
-    assert actual["binary_sha256"] == RUNNER.digest(binary)
+    assert actual["binary_sha256"] == runner.digest(binary)
 
 
 @pytest.mark.parametrize("tokens", [[5, 6], [5, 9]])
@@ -103,16 +143,16 @@ def test_generation_gate_checks_actual_client_tokens(tmp_path, tokens):
         complete_backbone=True,
         reference_text="example",
     )
-    manifest["files_sha256"]["client_head.f32"] = RUNNER.digest(payload / "client_head.f32")
+    manifest["files_sha256"]["client_head.f32"] = runner.digest(payload / "client_head.f32")
     (payload / "manifest.json").write_text(json.dumps(manifest))
-    actual = RUNNER.run(binary, payload, tmp_path / "result")
+    actual = runner.run(binary, payload, tmp_path / "result")
     assert actual["passed"] is (tokens == [5, 6])
 
 
 def test_budget_charges_failed_runs_and_preserves_limit(tmp_path):
     binary, payload = fixture_files(tmp_path, "import time\ntime.sleep(20)\n")
     ledger = tmp_path / "budget.json"
-    actual = RUNNER.run(
+    actual = runner.run(
         binary, payload, tmp_path / "result", timeout=0.05, budget_file=ledger, budget_seconds=30
     )
     budget = json.loads(ledger.read_text())
@@ -120,11 +160,11 @@ def test_budget_charges_failed_runs_and_preserves_limit(tmp_path):
     assert 0 < actual["wall_seconds"] <= budget["used_seconds"] < 5
     assert actual["campaign_used_seconds"] == budget["used_seconds"]
     with pytest.raises(ValueError, match="cannot change"):
-        RUNNER.run(binary, payload, tmp_path / "next", budget_file=ledger, budget_seconds=60)
+        runner.run(binary, payload, tmp_path / "next", budget_file=ledger, budget_seconds=60)
     budget["used_seconds"] = 16
     ledger.write_text(json.dumps(budget))
     with pytest.raises(ValueError, match="exhausted"):
-        RUNNER.run(binary, payload, tmp_path / "next", budget_file=ledger, budget_seconds=30)
+        runner.run(binary, payload, tmp_path / "next", budget_file=ledger, budget_seconds=30)
     assert not (tmp_path / "next").exists()
 
 
@@ -136,9 +176,9 @@ def test_budget_caps_native_timeout_and_keeps_routing_option(tmp_path, monkeypat
         output.mkdir()
         return {"passed": True}
 
-    monkeypatch.setattr(RUNNER, "_run", fake_run)
+    monkeypatch.setattr(runner, "_run", fake_run)
     ledger = tmp_path / "budget.json"
-    RUNNER.run(
+    runner.run(
         None,
         None,
         tmp_path / "result",
@@ -154,7 +194,23 @@ def test_budget_caps_native_timeout_and_keeps_routing_option(tmp_path, monkeypat
 @pytest.mark.parametrize("kwargs", [{"budget_seconds": 30}, {"budget_file": "unused"}])
 def test_budget_requires_both_path_and_limit(kwargs):
     with pytest.raises(ValueError, match=r"requires|budget is required"):
-        RUNNER.run(None, None, None, **kwargs)
+        runner.run(None, None, None, **kwargs)
+
+
+def test_unknown_option_does_not_touch_budget_or_output(tmp_path):
+    ledger = tmp_path / "budget.json"
+    output = tmp_path / "result"
+    with pytest.raises(TypeError, match="unexpected keyword"):
+        runner.run(
+            None,
+            None,
+            output,
+            budget_file=ledger,
+            budget_seconds=60,
+            misspelled_option=True,
+        )
+    assert not ledger.exists()
+    assert not output.exists()
 
 
 @pytest.mark.parametrize(
@@ -189,7 +245,7 @@ def test_budget_requires_both_path_and_limit(kwargs):
 def test_invalid_refresh_options_do_not_start_a_run(tmp_path, options):
     binary, payload = fixture_files(tmp_path, "raise RuntimeError('must not execute')\n")
     with pytest.raises(ValueError, match=r"requires|must be|choose one"):
-        RUNNER.run(binary, payload, tmp_path / "result", **options)
+        runner.run(binary, payload, tmp_path / "result", **options)
     assert not (tmp_path / "result").exists()
 
 
@@ -224,7 +280,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
     )
     binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
-    result = RUNNER.run(
+    result = runner.run(
         binary,
         payload,
         tmp_path / "result",
@@ -234,6 +290,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         profile_evaluation=True,
         inplace_ops=True,
         cache_plaintexts=True,
+        indexed_mask_cache=True,
         plaintext_cache_capacity=128,
         fast_plaintext_upload=True,
         gpu_plaintext_ntt=True,
@@ -243,6 +300,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         bsgs_routing_stages=True,
         naf_rotations=True,
         reuse_dead_inputs=True,
+        reuse_public_ciphertexts=True,
         compact_weights=True,
         frontier_refresh=True,
         s2c_first=True,
@@ -264,6 +322,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "--profile-evaluation",
         "--inplace-ops",
         "--cache-plaintexts",
+        "--indexed-mask-cache",
         "--fast-plaintext-upload",
         "--gpu-plaintext-ntt",
         "--direct-plaintext-upload",
@@ -272,6 +331,7 @@ def test_refresh_options_reach_native_and_are_recorded(tmp_path, budgeted):
         "--bsgs-routing-stages",
         "--naf-rotations",
         "--reuse-dead-inputs",
+        "--reuse-public-ciphertexts",
         "--compact-weights",
         "--frontier-refresh",
         "--s2c-first",
@@ -326,7 +386,7 @@ def test_refresh_merge_requires_matching_native_evidence(tmp_path, budgeted, fai
     )
     binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
-    result = RUNNER.run(
+    result = runner.run(
         binary,
         payload,
         tmp_path / "result",
@@ -374,7 +434,7 @@ def test_gpu_fft_requires_executed_native_path(tmp_path, budgeted, failure):
     )
     binary, payload = fixture_files(tmp_path, body)
     budget = {"budget_file": tmp_path / "budget.json", "budget_seconds": 60} if budgeted else {}
-    result = RUNNER.run(
+    result = runner.run(
         binary,
         payload,
         tmp_path / "result",
@@ -460,7 +520,7 @@ def test_classical128_requires_matching_security_evidence(tmp_path, budgeted, fa
     )
     binary, payload = fixture_files(tmp_path, body)
     options = {"budget_file": tmp_path / "budget.json", "budget_seconds": 30} if budgeted else {}
-    actual = RUNNER.run(
+    actual = runner.run(
         binary, payload, tmp_path / "result", security="128-classic", security_digits=4, **options
     )
     assert actual["returncode"] == 0
@@ -481,5 +541,5 @@ def test_classical128_requires_matching_security_evidence(tmp_path, budgeted, fa
 def test_invalid_security_options_rejected_before_execution(tmp_path, options):
     binary, payload = fixture_files(tmp_path, "raise RuntimeError('must not run')\n")
     with pytest.raises(ValueError, match=r"security|classical-128|GPU addend RNS"):
-        RUNNER.run(binary, payload, tmp_path / "result", **options)
+        runner.run(binary, payload, tmp_path / "result", **options)
     assert not (tmp_path / "result").exists()

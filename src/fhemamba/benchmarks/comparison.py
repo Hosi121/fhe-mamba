@@ -40,18 +40,16 @@ def _same(actual: Any, expected: Any) -> bool:
     return actual == expected
 
 
-def compare(
-    baseline: list[Path], candidate: list[Path], contract: dict[str, Any]
-) -> dict[str, Any]:
-    """Validate every sample before deriving a descriptive mean reduction."""
+def validate_samples(paths: list[Path], contract: dict[str, Any]) -> list[float]:
+    """Validate even an unpaired successful run, without claiming a comparison."""
     if contract.get("schema_version") != 1:
         raise ValueError("unsupported comparison schema_version")
     allowed = {"schema_version", "metric", "equal", "require", "maximum", "minimum_reduction"}
     if set(contract) - allowed:
         raise ValueError("unknown comparison contract field")
-    if not baseline or not candidate:
-        raise ValueError("baseline and candidate must both contain samples")
-    if len({path.resolve() for path in baseline + candidate}) != len(baseline + candidate):
+    if not paths:
+        raise ValueError("at least one sample is required")
+    if len({path.resolve() for path in paths}) != len(paths):
         raise ValueError("a sample cannot occur twice or in both arms")
     metric = contract.get("metric", "eval_seconds")
     equal = contract.get("equal", [])
@@ -68,7 +66,7 @@ def compare(
     threshold = _number(contract.get("minimum_reduction", 0), "minimum_reduction")
     if not 0 <= threshold < 1:
         raise ValueError("minimum_reduction must be in [0, 1)")
-    reports = [read_object(path) for path in baseline + candidate]
+    reports = [read_object(path) for path in paths]
     timings = []
     for report in reports:
         for name in equal:
@@ -87,6 +85,18 @@ def compare(
         if timing <= 0:
             raise ValueError("timing must be positive")
         timings.append(timing)
+    return timings
+
+
+def compare(
+    baseline: list[Path], candidate: list[Path], contract: dict[str, Any]
+) -> dict[str, Any]:
+    """Validate every sample before deriving a descriptive mean reduction."""
+    if not baseline or not candidate:
+        raise ValueError("baseline and candidate must both contain samples")
+    timings = validate_samples(baseline + candidate, contract)
+    metric = contract.get("metric", "eval_seconds")
+    threshold = contract.get("minimum_reduction", 0)
     groups = (timings[: len(baseline)], timings[len(baseline) :])
     means = [statistics.mean(group) for group in groups]
     reduction = 1 - means[1] / means[0]

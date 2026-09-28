@@ -90,7 +90,8 @@ metadata_expectation=(
   --binary-relative-path "${binary_relative_path}"
   --binary "${BINARY_PATH}"
 )
-python3 "${REPO_DIR}/experiments/manage_b300_build_metadata.py" \
+export PYTHONPATH="${REPO_DIR}/src${PYTHONPATH:+:$PYTHONPATH}"
+python3 -m fhemamba benchmark b300-build \
   validate "${metadata_expectation[@]}"
 
 mkdir -p "${RESULTS_DIR}"
@@ -157,7 +158,7 @@ docker run --rm \
       --binary-sha256 "${BINARY_SHA256}"
   '
 
-python3 "${REPO_DIR}/experiments/manage_b300_build_metadata.py" \
+python3 -m fhemamba benchmark b300-build \
   attach "${metadata_expectation[@]}" --artifact "${OUTPUT_JSON}"
 
 echo "output_json=${OUTPUT_JSON}"

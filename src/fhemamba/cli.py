@@ -1,17 +1,30 @@
-"""Command-line interface for the active FHE Mamba-2 package."""
+"""Command-line interface for FHE Mamba and its reusable research tools."""
 
 from __future__ import annotations
 
 import argparse
 import json
+import sys
 from collections.abc import Sequence
 from pathlib import Path
 
 from fhemamba import __version__
+from fhemamba._commands import dispatch
 from fhemamba.artifacts import validate_artifact_file
+
+GROUPS = {
+    "benchmark": ("fhemamba.benchmarks.__main__", "main", "jobs, qualification and evidence"),
+    "diagnose": ("fhemamba.diagnostics.__main__", "main", "frozen-circuit error diagnosis"),
+    "profile": ("fhemamba.profiling.__main__", "main", "Nsight CSV/SQLite analysis"),
+    "recurrent": ("fhemamba.recurrent.__main__", "main", "recurrent-state component studies"),
+    "workload": ("fhemamba.workloads.__main__", "main", "Mamba-3 export and upstream parity"),
+}
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] in GROUPS:
+        return dispatch("fhemamba", GROUPS, argv)
     parser = _build_parser()
     args = parser.parse_args(argv)
     return int(args.handler(args))
@@ -40,6 +53,8 @@ def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="fhemamba")
     parser.add_argument("--version", action="version", version=__version__)
     subparsers = parser.add_subparsers(dest="command", required=True)
+    for name, (_, _, description) in GROUPS.items():
+        subparsers.add_parser(name, help=description)
 
     validate = subparsers.add_parser(
         "validate-artifacts",

@@ -1,14 +1,12 @@
 import importlib
 from copy import deepcopy
-from pathlib import Path
 
 import pytest
 
 
 @pytest.fixture
 def profile(monkeypatch):
-    monkeypatch.syspath_prepend(str(Path(__file__).parents[1] / "experiments/level_schedule"))
-    return importlib.import_module("polynomials").summarize
+    return importlib.import_module("fhemamba.diagnostics.polynomials").summarize
 
 
 @pytest.fixture

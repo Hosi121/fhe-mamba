@@ -1,7 +1,6 @@
 """Serialized small qualification and matched inference, with durable status."""
 
 import argparse
-import hashlib
 import json
 import math
 import os
@@ -9,15 +8,13 @@ import subprocess
 import time
 from pathlib import Path
 
+from fhemamba.benchmarks.io import file_sha256 as sha
+
 
 def save(path, data):
     temp = path.with_suffix(".tmp")
     temp.write_text(json.dumps(data, indent=2, allow_nan=False) + "\n")
     temp.replace(path)
-
-
-def sha(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def main():

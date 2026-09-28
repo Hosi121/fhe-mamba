@@ -61,6 +61,7 @@ cmake -S "$REPO_DIR/native/fideslib_stage0" -B "$SPARK_DIR/kernel" \
   -DCMAKE_CUDA_ARCHITECTURES="$SPARK_FIDESLIB_ARCH"
 cmake --build "$SPARK_DIR/kernel" -j "$BUILD_JOBS"
 ctest --test-dir "$SPARK_DIR/kernel" --output-on-failure
-python3 "$REPO_DIR/experiments/manage_dgx_build.py" write \
+export PYTHONPATH="${REPO_DIR}/src${PYTHONPATH:+:$PYTHONPATH}"
+python3 -m fhemamba benchmark spark-build --repo "$REPO_DIR" write \
   --root "$ROOT" --fideslib-prefix "$prefix" --openfhe-prefix "$OPENFHE_PREFIX" \
   --patch-set-sha256 "$patch_hash"

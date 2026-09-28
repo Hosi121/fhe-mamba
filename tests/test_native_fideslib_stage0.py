@@ -44,7 +44,7 @@ def test_b300_sync_profiles_keep_experimental_builds_isolated() -> None:
     assert 'checkout --detach "${B300_FIDESLIB_COMMIT}"' in build_script
     assert '--env FIDESLIB_SOURCE_DIR="/workspace/src/${FIDESLIB_SOURCE_NAME}"' in launch_script
     assert '--env B300_SYNC_PROFILE="${B300_SYNC_PROFILE}"' in launch_script
-    assert "manage_b300_build_metadata.py" in runner
+    assert "python3 -m fhemamba benchmark b300-build" in runner
     assert 'validate "${metadata_expectation[@]}"' in runner
     assert "set(CMAKE_CXX_COMPILER" not in cmake
     assert '-DCMAKE_CXX_COMPILER="${CXX_COMPILER}"' in build_script
@@ -66,7 +66,7 @@ def test_b300_long_horizon_manifest_pins_promoted_path(tmp_path: Path) -> None:
     subprocess.run(
         [
             sys.executable,
-            "experiments/run_dgx_campaign.py",
+            "experiments/execution/run_dgx_campaign.py",
             "--manifest",
             str(manifest_path),
             "--output-json",

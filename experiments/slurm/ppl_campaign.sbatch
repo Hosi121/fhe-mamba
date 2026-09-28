@@ -17,7 +17,7 @@ mkdir -p results_b200
 
 for CKPT in mamba-130m-hf mamba2-130m-hf; do
   for DEG in 64 96; do
-    $PY experiments/run_ppl_ladder.py \
+    $PY experiments/quality/run_ppl_ladder.py \
       --checkpoint "checkpoints/$CKPT" \
       --tokens-pt "tokens/tokens_$CKPT" \
       --max-windows 280 --cal-windows 64 \

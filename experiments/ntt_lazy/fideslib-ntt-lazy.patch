@@ -1,0 +1,66 @@
+--- a/src/NTT.cu
++++ b/src/NTT.cu
+@@ -469,7 +469,7 @@
+ 					T& aux1 = A[j1];
+ 					T& aux2 = A[j2];
+ 					if constexpr (algo == 3) {
+-						CT_butterfly<T, algo>(aux1, aux2, psiaux, primeid, psiaux_barret);
++						CT_butterfly_lazy<T, algo>(aux1, aux2, psiaux, primeid, psiaux_barret);
+ 					} else {
+ 						CT_butterfly<T, algo>(aux1, aux2, psiaux, primeid);
+ 					}
+@@ -603,6 +603,24 @@
+ 				}
+ 			}
+ 
++            // Each lane owns the same adjacent pair as the final m=1 stage.
++            // Restore canonical residues before cross-twiddles and every fused
++            // consumer. Both halves therefore retain the existing public ABI.
++            if constexpr (sizeof(T) == 8 && algo == ALGO_SHOUP) {
++                const uint64_t p = C_.primes[primeid];
++                if (p < (uint64_t(1) << 62)) {
++                    for (int i = 0; i < M; ++i) {
++                        T* row = (T*)(buffer + (i << logBD));
++                        for (int k = 0; k < 2; ++k) {
++                            T x = row[2 * tid + k];
++                            if (x >= 2 * p) x -= 2 * p;
++                            if (x >= p) x -= p;
++                            row[2 * tid + k] = x;
++                        }
++                    }
++                }
++            }
++
+ 			// Idea: calcular full_psi en función de ambos arrays psi
+ 			if (!second) {
+ 
+--- a/src/NTThelper.cuh
++++ b/src/NTThelper.cuh
+@@ -45,6 +45,27 @@
+ 	}
+ }
+ 
++// Harvey's inverse butterfly (Algorithm 4), with canonical boundaries.
++// The forward CT network retains residues in [0,4p) between stages. Shoup's
++// quotient bound holds for its full word-sized input, not only inputs < p.
++template <typename T, ALGO algo>
++__device__ __forceinline__ void CT_butterfly_lazy(T& c, T& d, T psi, int primeid, T shoup_psi) {
++    if constexpr (sizeof(T) == 8 && algo == ALGO_SHOUP) {
++        const uint64_t p = C_.primes[primeid];
++        if (p < (uint64_t(1) << 62)) {
++            const uint64_t twice = p + p;
++            uint64_t a = c;
++            if (a >= twice) a -= twice;
++            const uint64_t q = __umul64hi(d, shoup_psi);
++            const uint64_t t = d * psi - q * p;
++            c = a + t;
++            d = a + twice - t;
++            return;
++        }
++    }
++    CT_butterfly<T, algo>(c, d, psi, primeid, shoup_psi);
++}
++
+ template <typename T, ALGO algo = ALGO_SHOUP> __device__ __forceinline__ void GS_butterfly(T& c, T& d, T psi, const int primeid, T shoup_psi = 2) {
+ 	T a = c;
+ 	T b = d;

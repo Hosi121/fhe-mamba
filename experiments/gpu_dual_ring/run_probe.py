@@ -1,16 +1,13 @@
 """Record a standalone DGX ring-switch probe, including failed runs."""
 
 import argparse
-import hashlib
 import json
 import os
 import subprocess
 import time
 from pathlib import Path
 
-
-def sha(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+from fhemamba.benchmarks.io import file_sha256 as sha
 
 
 def main():
