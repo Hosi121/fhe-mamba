@@ -9,6 +9,17 @@ int main() {
   std::istringstream stream(valid);
   auto p = fhemamba::read_packed_program(stream);
   assert(p.slots == 8 && p.nodes.size() == 2 && p.outputs[0].exact[0] == 2);
+  const auto errors = fhemamba::packed_output_errors({2.0005, 1}, p.outputs[0]);
+  assert(errors.passes(.001, .001) && !errors.passes(.0001, .001));
+  assert(!errors.passes(.001, .0001));
+  assert(!errors.passes(std::numeric_limits<double>::infinity(), .001));
+  const auto nonfinite = fhemamba::packed_output_errors(
+      {std::numeric_limits<double>::quiet_NaN(), 1}, p.outputs[0]);
+  assert(nonfinite.non_finite == 1 && !nonfinite.passes(.001, .001));
+  bool width_failed = false;
+  try { fhemamba::packed_output_errors({2}, p.outputs[0]); }
+  catch (const std::invalid_argument&) { width_failed = true; }
+  assert(width_failed);
   const std::string extended = "fhemamba-packed-v2 8 64 4 1\n"
       "input 2 8 0 2 1 2\nlinear 2 16 1 0 4 1 0 0 1\n"
       "linear_ref 2 16 1 0 1 1\nfeedback 2 8 1 2 0\n2 2 1 2 1 2\n";
@@ -16,6 +27,17 @@ int main() {
   auto v2 = fhemamba::read_packed_program(v2_stream);
   assert(v2.nodes[2].operation == "linear_ref" && v2.nodes[2].bound == 16);
   assert(v2.nodes[3].operation == "feedback" && v2.nodes[3].data.empty());
+  // A generation-sized dependency chain must parse beyond the old probe cap.
+  const int long_nodes = 197330;
+  std::ostringstream long_text;
+  long_text << "fhemamba-packed-v2 8 64 " << long_nodes << " 1\ninput 1 8 0 1 1\n";
+  for (int i = 1; i < long_nodes; ++i)
+    long_text << "addp 1 8 1 " << i - 1 << " 1 0\n";
+  long_text << long_nodes - 1 << " 1 1 1\n";
+  std::istringstream long_stream(long_text.str());
+  auto long_program = fhemamba::read_packed_program(long_stream);
+  assert(long_program.nodes.size() == long_nodes);
+  assert(long_program.outputs[0].node == long_nodes - 1);
   std::istringstream compact_stream(extended);
   auto compact = fhemamba::read_packed_program(compact_stream, true);
   assert(compact.nodes[1].data.empty() && compact.nodes[1].bf16_weights.size() == 4);
@@ -43,6 +65,7 @@ int main() {
   }
   for (const std::string invalid : std::vector<std::string>{
       "fhemamba-packed-v1 3 64 1 1", // non-power-of-two slots
+      "fhemamba-packed-v2 8 64 1000001 1", // bounded node allocation
       "fhemamba-packed-v1 8 64 1 1 input 2 0 2 1 nan", // invalid constants
       "fhemamba-packed-v1 8 64 1 1 add 2 2 0 0 0", // future dependency
       "fhemamba-packed-v1 8 64 2 1 input 2 0 2 1 2 gather 1 1 0 1 2", // index overflow

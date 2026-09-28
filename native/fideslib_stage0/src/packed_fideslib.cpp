@@ -5,10 +5,12 @@
 #include "packed_depth.hpp"
 #include "packed_lifetime.hpp"
 #include "packed_schedule.hpp"
+#include "packed_diagnostics.hpp"
 #include "fideslib_rotation_batch.hpp"
 #include "chebyshev_basis_cache.hpp"
 #include "fideslib_owned_arithmetic.hpp"
 #include "plaintext_cache.hpp"
+#include "public_ciphertext_reuse.hpp"
 #include "bounded_prefetch.hpp"
 #include "fideslib_plaintext_ops.hpp"
 #include "fideslib_plaintext_encoder.hpp"
@@ -72,6 +74,9 @@ struct PackedEvaluator {
   std::map<int, fhemamba::ChebyshevBasisState<Ct>> shared_bases;
   long long frontier_deferrals = 0;
   std::size_t maximum_ready_nodes = 0;
+  std::size_t frontier_live_limit = 0, maximum_live_dag_values = 0;
+  std::size_t frontier_limit_selections = 0;
+  std::size_t sampled_peak_device_bytes = 0, device_total_bytes = 0;
   long long optimized_routing_stages = 0, routing_stage_rotations_saved = 0;
   long long scratch_clones_eliminated = 0;
   fhemamba::OwnedArithmeticStats owned_arithmetic;
@@ -80,6 +85,8 @@ struct PackedEvaluator {
   double host_encoding_seconds = 0, mask_preparation_seconds = 0;
   long long host_encodes = 0;
   bool cache_plaintexts = false, prefetch_plaintexts = false;
+  bool reuse_public_ciphertexts = false;
+  std::size_t public_encryptions = 0, public_encryption_reuses = 0, peak_public_seeds = 0;
   bool gpu_plaintext_fft = false;
   int prefetch_workers = 1;
   long long prefetched_encodes = 0, prefetch_groups = 0;
@@ -98,6 +105,10 @@ struct PackedEvaluator {
   struct PolynomialStats { int node; double seconds, bootstrap_seconds; long long bootstraps; };
   std::vector<PolynomialStats> polynomial_stats;
   std::function<Ct(const Ct&)> client_feedback;
+  std::function<void(int, const char*, const Ct&)> diagnostic_observer;
+  std::pair<int, int> diagnostic_refresh_pair{-1, -1};
+  std::function<void(const std::vector<int>&, const std::vector<Ct>&,
+                     const std::vector<Ct>&)> diagnostic_refresh_replay;
   double current_bound = 64;
 #ifdef FHEMAMBA_GPU_DUAL_RING
   fhemamba::dual_ring::RingBridge* ring_bridge = nullptr;
@@ -602,6 +613,10 @@ struct PackedEvaluator {
       std::cout << "planned_logical_refreshes=" << depth_plan.refreshes << std::endl;
     }
     auto sharing = fhemamba::plan_chebyshev_sharing(program, depth_plan.live);
+    std::unique_ptr<fhemamba::PublicCiphertextReuse<Ct>> public_values;
+    if (reuse_public_ciphertexts)
+      public_values = std::make_unique<fhemamba::PublicCiphertextReuse<Ct>>(
+          fhemamba::plan_public_ciphertexts(program, depth_plan.live));
     shared_bases.clear();
     std::vector<Ct> values(program.nodes.size());
     std::vector<bool> dirty(program.nodes.size());
@@ -634,11 +649,27 @@ struct PackedEvaluator {
         group.push_back(j); occupied += program.nodes[j].size;
       }
       if (group.size() > 1) {
+        const auto [first, second] = diagnostic_refresh_pair;
+        const bool replay = diagnostic_refresh_replay && group.size() == 2 &&
+            ((group[0] == first && group[1] == second) || (group[0] == second && group[1] == first));
+        std::vector<Ct> original;
+        if (replay) for (int index : group) original.push_back(values[index]);
+        if (diagnostic_observer) for (int index : group)
+          diagnostic_observer(index, "before_refresh", values[index]);
         refresh_group(group, values, program);
+        if (diagnostic_observer) for (int index : group)
+          diagnostic_observer(index, "after_refresh", values[index]);
+        if (replay) {
+          std::vector<Ct> refreshed;
+          for (int index : group) refreshed.push_back(values[index]);
+          diagnostic_refresh_replay(group, original, refreshed);
+        }
         for (int index : group) dirty[index] = false;
       } else {
         clean(requested); // Never bootstrap unmasked replica/guard coordinates.
+        if (diagnostic_observer) diagnostic_observer(requested, "before_refresh", values[requested]);
         values[requested] = refresh(values[requested], program.nodes[requested].bound);
+        if (diagnostic_observer) diagnostic_observer(requested, "after_refresh", values[requested]);
       }
     };
     const int live_nodes = planned_refresh
@@ -650,17 +681,14 @@ struct PackedEvaluator {
       int i = sequential++;
       if (schedule) {
         maximum_ready_nodes = std::max(maximum_ready_nodes, schedule->ready().size());
-        i = *schedule->ready().begin();
-        for (int ready : schedule->ready()) {
+        i = schedule->select([&](int ready) {
           const auto& candidate = program.nodes[ready];
           bool fits = true;
           if (candidate.operation != "feedback") for (int parent : candidate.parents)
             fits = fits && values[parent]->GetLevel() + depth_plan.cost[ready] <= refresh_ceiling;
-          if (fits) {
-            if (ready != i) ++frontier_deferrals;
-            i = ready; break;
-          }
-        }
+          return fits;
+        }, frontier_live_limit);
+        if (i != *schedule->ready().begin()) ++frontier_deferrals;
       } else if (planned_refresh && !depth_plan.live[i]) continue;
       const auto& n = program.nodes[i];
       const auto operation_start = Clock::now();
@@ -691,7 +719,16 @@ struct PackedEvaluator {
         std::cout << " refreshed=" << bootstraps - prior_bootstraps << std::endl;
       }
       Ct out;
-      if (op == "input" || op == "public") out = encrypt(n.data);
+      if (op == "public") {
+        if (public_values) {
+          out = public_values->get(i, [&] { return encrypt(n.data); },
+              [&](const Ct& seed) { auto value = seed->Clone(); sync_gpu(); return value; });
+          public_encryptions = public_values->encryptions;
+          public_encryption_reuses = public_values->reuses;
+          peak_public_seeds = public_values->peak_seeds;
+        } else { out = encrypt(n.data); ++public_encryptions; }
+      }
+      else if (op == "input") out = encrypt(n.data);
       else if (op == "feedback") {
         if (!client_feedback) throw std::runtime_error("client feedback requires --client-head");
         out = client_feedback(x);
@@ -751,9 +788,14 @@ struct PackedEvaluator {
         out = values[i];
       }
       sync_gpu();
+      if (diagnostic_observer) diagnostic_observer(i, "node_output", out);
       if (trace_levels) std::cout << "level_output node=" << i << " level=" << out->GetLevel()
           << " degree=" << out->GetNoiseScaleDeg() << " bootstraps=" << bootstraps - prior_bootstraps << std::endl;
-      if (schedule) schedule->complete(i);
+      if (schedule) {
+        schedule->complete(i);
+        maximum_live_dag_values = schedule->peak_live_values();
+        frontier_limit_selections = schedule->limit_selections();
+      }
       for (int parent : n.parents)
         if (schedule ? schedule->releasable(parent) : last[parent] == i) values[parent].reset();
       ++completed;
@@ -769,10 +811,23 @@ struct PackedEvaluator {
                                     bootstraps - prior_bootstraps});
       if (completed % 10 == 0 || completed == live_nodes) {
         const auto seconds = elapsed(start);
+        std::size_t free_bytes = 0;
+        if (profile_evaluation) {
+          if (cudaMemGetInfo(&free_bytes, &device_total_bytes) != cudaSuccess)
+            throw std::runtime_error("could not sample GPU memory");
+          sampled_peak_device_bytes = std::max(sampled_peak_device_bytes, device_total_bytes - free_bytes);
+        }
         std::cout << "node=" << completed << '/' << live_nodes << " op=" << op
                   << " seconds=" << seconds << " eta_seconds="
                   << seconds * (live_nodes - completed) / completed
-                  << " bootstraps=" << bootstraps << std::endl;
+                  << " bootstraps=" << bootstraps;
+        if (profile_evaluation)
+          std::cout << " live_values=" << (schedule ? schedule->live_values() : 0)
+                    << " peak_live_values=" << maximum_live_dag_values
+                    << " cache_entries=" << plaintext_cache.size()
+                    << " device_used_bytes=" << device_total_bytes - free_bytes
+                    << " sampled_peak_device_bytes=" << sampled_peak_device_bytes;
+        std::cout << std::endl;
       }
     }
     std::vector<Ct> outputs;
@@ -783,6 +838,8 @@ struct PackedEvaluator {
 
 // Protocol client: the evaluator receives only an encrypted-embedding callback.
 // Public BF16 checkpoint weights are exported losslessly as little-endian FP32.
+#ifndef FHEMAMBA_PACKED_EVALUATOR_ONLY
+#include "diagnostic_refresh_replay.hpp"
 struct GenerationClient {
   uint32_t vocabulary = 0, width = 0;
   std::vector<float> weights;
@@ -824,7 +881,7 @@ struct GenerationClient {
 
 auto main(int argc, char** argv) -> int {
   try {
-    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--compact-weights] [--cache-plaintexts] [--plaintext-cache-capacity N] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--s2c-first] [--gpu-plaintext-rns] [--gpu-addend-rns] [--batch-plaintext-rns | --fuse-plaintext-rns-ntt] [--prefetch-plaintexts] [--prefetch-workers 1|2] [--hoist-rotations] [--share-chebyshev] [--gpu-dual-ring] [--security not-set|128-classic] [--security-digits N] [--client-head FILE]");
+    if (argc < 5) throw std::invalid_argument("usage: packed_fideslib PROGRAM RESULT POLY_TOL EXACT_TOL [--direct-linear] [--legacy-routing] [--planned-refresh] [--batch-refresh] [--bootstrap-passes 1|2] [--trace-levels] [--profile-evaluation] [--inplace-ops] [--naf-rotations] [--reuse-dead-inputs] [--reuse-public-ciphertexts] [--compact-weights] [--cache-plaintexts] [--indexed-mask-cache] [--plaintext-cache-capacity N] [--fast-plaintext-upload] [--direct-plaintext-upload] [--gpu-plaintext-ntt] [--move-plaintext-coefficients] [--borrow-plaintext-upload] [--bsgs-routing-stages] [--frontier-refresh] [--frontier-live-limit N] [--s2c-first] [--gpu-plaintext-rns] [--gpu-addend-rns] [--batch-plaintext-rns | --fuse-plaintext-rns-ntt] [--prefetch-plaintexts] [--prefetch-workers 1|2] [--hoist-rotations] [--share-chebyshev] [--gpu-dual-ring] [--security not-set|128-classic] [--security-digits N] [--client-head FILE] [--diagnostic-reference FILE --diagnostic-output FILE] [--diagnostic-refresh-pair FIRST SECOND]");
     bool replicated_linear = true;
     bool legacy_routing = false;
     bool trace_levels = false;
@@ -835,7 +892,8 @@ auto main(int argc, char** argv) -> int {
     bool inplace_ops = false;
     bool naf_rotations = false, reuse_dead_inputs = false;
     bool compact_weights = false;
-    bool cache_plaintexts = false, prefetch_plaintexts = false;
+    bool cache_plaintexts = false, prefetch_plaintexts = false, indexed_mask_cache = false;
+    bool reuse_public_ciphertexts = false;
     int prefetch_workers = 1;
     bool fast_plaintext_upload = false, gpu_plaintext_ntt = false;
     bool direct_plaintext_upload = false;
@@ -843,6 +901,7 @@ auto main(int argc, char** argv) -> int {
     bool borrow_plaintext_upload = false;
     bool bsgs_routing_stages = false;
     bool frontier_refresh = false;
+    std::size_t frontier_live_limit = 0;
     bool s2c_first = false;
     bool gpu_plaintext_rns = false;
     bool gpu_addend_rns = false;
@@ -856,12 +915,21 @@ auto main(int argc, char** argv) -> int {
     int bootstrap_passes = 2;
     std::size_t plaintext_cache_capacity = 64;
     bool plaintext_cache_capacity_set = false;
-    std::string client_path;
+    std::string client_path, diagnostic_reference_path, diagnostic_output_path;
+    std::pair<int, int> diagnostic_refresh_pair{-1, -1};
     for (int i = 5; i < argc; ++i) {
       const std::string option = argv[i];
       if (option == "--direct-linear") replicated_linear = false;
       else if (option == "--legacy-routing") legacy_routing = true;
       else if (option == "--trace-levels") trace_levels = true;
+      else if (option == "--diagnostic-reference" && i + 1 < argc) diagnostic_reference_path = argv[++i];
+      else if (option == "--diagnostic-output" && i + 1 < argc) diagnostic_output_path = argv[++i];
+      else if (option == "--diagnostic-refresh-pair" && i + 2 < argc) {
+        diagnostic_refresh_pair.first = std::stoi(argv[++i]);
+        diagnostic_refresh_pair.second = std::stoi(argv[++i]);
+        if (diagnostic_refresh_pair.first < 0 || diagnostic_refresh_pair.second < 0)
+          throw std::invalid_argument("diagnostic refresh node IDs must be nonnegative");
+      }
       else if (option == "--planned-refresh") planned_refresh = true;
       else if (option == "--batch-refresh") batch_refresh = true;
       else if (option == "--merge-refresh-correction") merge_refresh_correction = true;
@@ -869,8 +937,10 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--inplace-ops") inplace_ops = true;
       else if (option == "--naf-rotations") naf_rotations = true;
       else if (option == "--reuse-dead-inputs") reuse_dead_inputs = true;
+      else if (option == "--reuse-public-ciphertexts") reuse_public_ciphertexts = true;
       else if (option == "--compact-weights") compact_weights = true;
       else if (option == "--cache-plaintexts") cache_plaintexts = true;
+      else if (option == "--indexed-mask-cache") indexed_mask_cache = true;
       else if (option == "--plaintext-cache-capacity" && i + 1 < argc) {
         plaintext_cache_capacity = std::stoull(argv[++i]); plaintext_cache_capacity_set = true;
       }
@@ -883,6 +953,8 @@ auto main(int argc, char** argv) -> int {
       else if (option == "--borrow-plaintext-upload") borrow_plaintext_upload = true;
       else if (option == "--bsgs-routing-stages") bsgs_routing_stages = true;
       else if (option == "--frontier-refresh") frontier_refresh = true;
+      else if (option == "--frontier-live-limit" && i + 1 < argc)
+        frontier_live_limit = std::stoull(argv[++i]);
       else if (option == "--s2c-first") s2c_first = true;
       else if (option == "--gpu-plaintext-rns") gpu_plaintext_rns = true;
       else if (option == "--gpu-addend-rns") gpu_addend_rns = true;
@@ -913,11 +985,16 @@ auto main(int argc, char** argv) -> int {
     if (security != "not-set" && security != "128-classic")
       throw std::invalid_argument("security must be not-set or 128-classic");
     const bool classical128 = security == "128-classic";
+    if (diagnostic_refresh_pair.first >= 0 &&
+        (diagnostic_reference_path.empty() || diagnostic_output_path.empty() || !classical128 || !batch_refresh))
+      throw std::invalid_argument("refresh replay requires classical-128 batch refresh and explicit diagnostics");
     if (security_digits < 1 || security_digits > 16 || (security_digits_set && !classical128))
       throw std::invalid_argument("security digits must be 1..16 and require 128-classic");
     if (classical128 && gpu_dual_ring)
       throw std::invalid_argument("classical-128 uses one audited ring; the experimental dual-ring bridge is not supported");
     gpu_plaintext_ntt |= move_plaintext_coefficients;
+    if (indexed_mask_cache && !cache_plaintexts)
+      throw std::invalid_argument("indexed mask cache requires --cache-plaintexts");
     if (plaintext_cache_capacity > 4096 || (plaintext_cache_capacity_set && !cache_plaintexts))
       throw std::invalid_argument("plaintext cache capacity must be 0..4096 and requires --cache-plaintexts");
     if (gpu_addend_rns && !gpu_plaintext_rns)
@@ -951,6 +1028,8 @@ auto main(int argc, char** argv) -> int {
 #endif
     if (frontier_refresh && !batch_refresh)
       throw std::invalid_argument("frontier refresh requires batch refresh");
+    if (frontier_live_limit > 1000000 || (frontier_live_limit && !frontier_refresh))
+      throw std::invalid_argument("frontier live limit must be 0..1000000 and requires frontier refresh");
     if (planned_refresh && (legacy_routing || !replicated_linear))
       throw std::invalid_argument("planned refresh requires replicated linear and radix8 routing");
     if (!std::isfinite(poly_tol) || !std::isfinite(exact_tol) || poly_tol <= 0 || exact_tol <= 0)
@@ -1045,14 +1124,16 @@ auto main(int argc, char** argv) -> int {
     evaluator.inplace_ops = inplace_ops;
     evaluator.naf_rotations = naf_rotations;
     evaluator.reuse_dead_inputs = reuse_dead_inputs;
+    evaluator.reuse_public_ciphertexts = reuse_public_ciphertexts;
     evaluator.bsgs_routing_stages = bsgs_routing_stages;
     evaluator.frontier_refresh = frontier_refresh;
+    evaluator.frontier_live_limit = frontier_live_limit;
     // Moving four StC levels before ModRaise also returns four extra levels.
     // Keep the usable interval and the two-pass wrapper's safety margin equal.
     evaluator.refresh_ceiling = s2c_first ? 35 : 39;
     evaluator.refreshed_level = s2c_first ? 18 : 22;
     evaluator.cache_plaintexts = cache_plaintexts;
-    evaluator.plaintext_cache = decltype(evaluator.plaintext_cache)(plaintext_cache_capacity);
+    evaluator.plaintext_cache = decltype(evaluator.plaintext_cache)(plaintext_cache_capacity, indexed_mask_cache);
     evaluator.prefetch_plaintexts = prefetch_plaintexts;
     evaluator.gpu_plaintext_fft = gpu_plaintext_fft;
     evaluator.prefetch_workers = prefetch_workers;
@@ -1068,20 +1149,76 @@ auto main(int argc, char** argv) -> int {
     evaluator.share_chebyshev = share_chebyshev;
     const double setup_seconds = elapsed(setup);
     std::cout << "setup_seconds=" << setup_seconds << std::endl;
+    if (diagnostic_reference_path.empty() != diagnostic_output_path.empty())
+      throw std::invalid_argument("diagnostic-reference and diagnostic-output must be supplied together");
+    std::unique_ptr<fhemamba::PackedDiagnostics> diagnostics;
+    std::ofstream diagnostic_output;
+    if (!diagnostic_reference_path.empty()) {
+      std::ifstream diagnostic_input(diagnostic_reference_path, std::ios::binary);
+      diagnostics = std::make_unique<fhemamba::PackedDiagnostics>(diagnostic_input, program);
+      diagnostic_output.open(diagnostic_output_path);
+      if (!diagnostic_output) throw std::runtime_error("could not open diagnostic output");
+      std::cout << "diagnostic_only=true intermediate_decryptions_enabled=true" << std::endl;
+    }
     auto decrypt_client = [&](const Ct& value, int size) {
       Plaintext plain; auto handle = value->Clone();
       cc->Decrypt(keys.secretKey, handle, &plain);
       plain->SetLength(size); return plain->GetRealPackedValue();
     };
+    if (diagnostics) evaluator.diagnostic_observer = [&](int node, const char* event, const Ct& value) {
+      if (!diagnostics->contains(node)) return;
+      sync_gpu();
+      try {
+        diagnostics->record(diagnostic_output, node, event, value->GetLevel(), value->GetNoiseScaleDeg(),
+                            decrypt_client(value, program.nodes.at(node).size));
+      } catch (const std::exception& error) {
+        if (!fhemamba::diagnostic_decode_rejected(error)) throw;
+        diagnostics->record_decode_rejection(diagnostic_output, node, event, value->GetLevel(), value->GetNoiseScaleDeg());
+        std::cout << "diagnostic_decode_rejected node=" << node << " event=" << event << std::endl;
+      }
+    };
+    if (diagnostic_refresh_pair.first >= 0) {
+      if (!diagnostics->contains(diagnostic_refresh_pair.first) || !diagnostics->contains(diagnostic_refresh_pair.second))
+        throw std::invalid_argument("refresh replay nodes must have diagnostic references");
+      install_refresh_replay(evaluator, program, diagnostic_refresh_pair,
+          diagnostic_output_path + ".refresh-replay.json", decrypt_client, diagnostics->decryptions,
+          [&](int node) -> const std::vector<double>& { return diagnostics->reference(node); });
+    }
+    std::map<int, std::size_t> output_positions;
+    for (std::size_t i = 0; i < program.outputs.size(); ++i)
+      output_positions.emplace(program.outputs[i].node, i);
+    std::vector<int> feedback_outputs;
+    for (const auto& node : program.nodes) if (node.operation == "feedback") {
+      const auto found = output_positions.find(node.parents.at(0));
+      feedback_outputs.push_back(found == output_positions.end() ? -1 : found->second);
+    }
+    auto checked_client_hidden = [&](const Ct& hidden, int output) {
+      const auto values = decrypt_client(hidden, client.width);
+      // Reuse the protocol decryption. A failed retained reference can never
+      // pass final validation, so stop before feeding it into later steps.
+      if (output >= 0) {
+        const auto errors = fhemamba::packed_output_errors(values, program.outputs.at(output));
+        if (profile_evaluation)
+          std::cout << "client_hidden token=" << client.tokens.size() + 1
+                    << " polynomial_error=" << errors.polynomial << " exact_error=" << errors.exact
+                    << " non_finite=" << errors.non_finite
+                    << " level=" << hidden->GetLevel() << std::endl;
+        if (!errors.passes(poly_tol, exact_tol))
+          throw std::runtime_error("client hidden fails reference tolerance before token " +
+                                   std::to_string(client.tokens.size() + 1));
+      }
+      return values;
+    };
     if (!client_path.empty()) evaluator.client_feedback = [&](const Ct& hidden) {
-      return evaluator.encrypt(client.select(decrypt_client(hidden, client.width)));
+      return evaluator.encrypt(client.select(checked_client_hidden(
+          hidden, feedback_outputs.at(client.tokens.size()))));
     };
     if (profile_evaluation && cudaProfilerStart() != 0) throw std::runtime_error("could not start CUDA profiler");
     const auto start = Clock::now();
     const auto encrypted_outputs = evaluator.evaluate(program);
     sync_gpu(); const double eval_seconds = elapsed(start);
     if (profile_evaluation && cudaProfilerStop() != 0) throw std::runtime_error("could not stop CUDA profiler");
-    if (!client_path.empty()) client.select(decrypt_client(encrypted_outputs.back(), client.width));
+    if (!client_path.empty()) client.select(checked_client_hidden(encrypted_outputs.back(), program.outputs.size() - 1));
     double polynomial_error = 0, exact_error = 0;
     int non_finite = 0;
     std::vector<double> per_output_poly, per_output_exact;
@@ -1090,14 +1227,11 @@ auto main(int argc, char** argv) -> int {
       cc->Decrypt(keys.secretKey, handle, &plaintext);
       plaintext->SetLength(program.outputs[i].polynomial.size());
       const auto values = plaintext->GetRealPackedValue();
-      double pe = 0, ee = 0;
-      for (std::size_t j = 0; j < program.outputs[i].polynomial.size(); ++j) {
-        if (!std::isfinite(values[j])) { ++non_finite; continue; }
-        pe = std::max(pe, std::abs(values[j] - program.outputs[i].polynomial[j]));
-        ee = std::max(ee, std::abs(values[j] - program.outputs[i].exact[j]));
-      }
-      polynomial_error = std::max(polynomial_error, pe); exact_error = std::max(exact_error, ee);
-      per_output_poly.push_back(pe); per_output_exact.push_back(ee);
+      const auto errors = fhemamba::packed_output_errors(values, program.outputs[i]);
+      non_finite += errors.non_finite;
+      polynomial_error = std::max(polynomial_error, errors.polynomial);
+      exact_error = std::max(exact_error, errors.exact);
+      per_output_poly.push_back(errors.polynomial); per_output_exact.push_back(errors.exact);
     }
     const bool passed = non_finite == 0 && polynomial_error <= poly_tol && exact_error <= exact_tol;
     if (classical128) fhemamba::audit_ckks_context(cc).require_classical128();
@@ -1142,6 +1276,11 @@ auto main(int argc, char** argv) -> int {
            << ",\"refreshed_level\":" << evaluator.refreshed_level
            << ",\"frontier_deferrals\":" << evaluator.frontier_deferrals
            << ",\"maximum_ready_nodes\":" << evaluator.maximum_ready_nodes
+           << ",\"frontier_live_limit\":" << evaluator.frontier_live_limit
+           << ",\"frontier_limit_selections\":" << evaluator.frontier_limit_selections
+           << ",\"maximum_live_dag_values\":" << evaluator.maximum_live_dag_values
+           << ",\"sampled_peak_device_bytes\":" << evaluator.sampled_peak_device_bytes
+           << ",\"device_total_bytes\":" << evaluator.device_total_bytes
            << ",\"evaluated_nodes\":" << evaluator.evaluated_nodes
            << ",\"eval_seconds\":" << eval_seconds << ",\"bootstrap_seconds\":" << evaluator.bootstrap_seconds
            << ",\"bootstraps\":" << evaluator.bootstraps << ",\"ct_ct_mul\":" << evaluator.ct_ct
@@ -1170,6 +1309,10 @@ auto main(int argc, char** argv) -> int {
            << ",\"profile_evaluation\":" << (profile_evaluation ? "true" : "false")
            << ",\"inplace_ops\":" << (inplace_ops ? "true" : "false")
            << ",\"cache_plaintexts\":" << (cache_plaintexts ? "true" : "false")
+           << ",\"reuse_public_ciphertexts\":" << (reuse_public_ciphertexts ? "true" : "false")
+           << ",\"public_encryptions\":" << evaluator.public_encryptions
+           << ",\"public_encryption_reuses\":" << evaluator.public_encryption_reuses
+           << ",\"peak_public_seeds\":" << evaluator.peak_public_seeds
            << ",\"fast_plaintext_upload\":" << (fast_plaintext_upload ? "true" : "false")
            << ",\"direct_plaintext_upload\":" << (direct_plaintext_upload ? "true" : "false")
            << ",\"direct_plaintext_uploads\":" << evaluator.plaintexts->direct_uploads
@@ -1188,6 +1331,7 @@ auto main(int argc, char** argv) -> int {
            << ",\"batched_rns_uploads\":" << evaluator.plaintexts->batched_rns_uploads
            << ",\"fused_rns_uploads\":" << evaluator.plaintexts->fused_rns_uploads
            << ",\"plaintext_cache_capacity\":" << evaluator.plaintext_cache.capacity()
+           << ",\"indexed_mask_cache\":" << (indexed_mask_cache ? "true" : "false")
            << ",\"plaintext_cache_entries\":" << evaluator.plaintext_cache.size()
            << ",\"plaintext_cache_hits\":" << evaluator.plaintext_cache.hits
            << ",\"plaintext_cache_misses\":" << evaluator.plaintext_cache.misses
@@ -1219,7 +1363,9 @@ auto main(int argc, char** argv) -> int {
       if (i) report << ',';
       report << "{\"polynomial\":" << per_output_poly[i] << ",\"exact\":" << per_output_exact[i] << '}';
     }
-    report << "],\"evaluation_decryptions\":0,\"client_output_decrypt_count\":" << client.tokens.size()
+    report << "],\"diagnostic_only\":" << (diagnostics ? "true" : "false")
+           << ",\"evaluation_decryptions\":" << (diagnostics ? diagnostics->decryptions : 0)
+           << ",\"client_output_decrypt_count\":" << client.tokens.size()
            << ",\"generated_token_ids\":[";
     for (std::size_t i = 0; i < client.tokens.size(); ++i) {
       if (i) report << ',';
@@ -1256,3 +1402,4 @@ auto main(int argc, char** argv) -> int {
     std::cerr << error.what() << std::endl; return 2;
   }
 }
+#endif  // FHEMAMBA_PACKED_EVALUATOR_ONLY

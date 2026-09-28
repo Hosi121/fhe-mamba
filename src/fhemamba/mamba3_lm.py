@@ -78,9 +78,9 @@ class Mamba3LM(nn.Module):
         model.lm_head.weight = model.backbone.embedding.weight
         return model.to(device=device, dtype=dtype).eval()
 
-    def initial_states(self, *, factored=True):
+    def initial_states(self, *, factored=True, rotary="angle"):
         initialize = init_factored_mamba3_state if factored else init_mamba3_state
-        return [initialize(layer.mixer) for layer in self.backbone.layers]
+        return [initialize(layer.mixer, rotary=rotary) for layer in self.backbone.layers]
 
     def step(self, embedding, states, ops=None):
         ops = TensorOps() if ops is None else ops
@@ -90,23 +90,25 @@ class Mamba3LM(nn.Module):
         for index, (layer, state) in enumerate(zip(self.backbone.layers, states, strict=True)):
             x = rms_normalize(hidden, layer.norm.weight, layer.norm.eps, ops, (index, "block_rms"))
             mixed, state = mamba3_step(layer.mixer, x, state, ops, index)
-            hidden = hidden + mixed
+            hidden = ops.checkpoint(hidden + mixed, (index, "mixer_residual"))
             x = rms_normalize(hidden, layer.norm2.weight, layer.norm2.eps, ops, (index, "mlp_rms"))
             projection = ops.linear(x, layer.mlp.fc1.weight)
             width = layer.mlp.fc2.in_features
             gated = projection[..., :width] * ops.nonlinear(
                 projection[..., width:], "silu", (index, "mlp_silu")
             )
-            hidden = hidden + ops.linear(gated, layer.mlp.fc2.weight)
+            hidden = ops.checkpoint(
+                hidden + ops.linear(gated, layer.mlp.fc2.weight), (index, "layer_output")
+            )
             carry.append(state)
         norm = self.backbone.norm_f
         return rms_normalize(hidden, norm.weight, norm.eps, ops, (-1, "final_rms")), carry
 
     @torch.no_grad()
-    def generate(self, prompt_ids, new_tokens, ops=None):
+    def generate(self, prompt_ids, new_tokens, ops=None, *, factored=True, rotary="angle"):
         if not prompt_ids or new_tokens < 1:
             raise ValueError("nonempty prompt and positive generation length are required")
-        states = self.initial_states()
+        states = self.initial_states(factored=factored, rotary=rotary)
         generated, trace = [], []
         token_ids = list(prompt_ids)
         for step in range(len(prompt_ids) + new_tokens - 1):

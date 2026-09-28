@@ -2,6 +2,7 @@
 #include "packed_depth.hpp"
 #include "packed_lifetime.hpp"
 #include "packed_routing.hpp"
+#include "public_ciphertext_reuse.hpp"
 #include "stage1_mamba2_plan.hpp"
 #include <fstream>
 #include <iostream>
@@ -90,6 +91,9 @@ int main(int argc, char** argv) {
     const auto program = fhemamba::read_packed_program(input, true);
     const auto depth = fhemamba::plan_packed_depth(program);
     const auto uses = fhemamba::plan_packed_uses(program, depth.live);
+    const auto public_plan = fhemamba::plan_public_ciphertexts(program, depth.live);
+    std::size_t public_nodes = 0;
+    for (auto count : public_plan.uses) public_nodes += count;
     long long binary = 0, naf = 0, arithmetic = 0, final_arithmetic = 0;
     long long weights = 0, weight_bytes = 0, compact_weights = 0;
     long long peak_handles = 0, peak_handle_slots = 0, live_slots = 0, peak_slots = 0;
@@ -119,6 +123,8 @@ int main(int argc, char** argv) {
         << "\"bsgs_routing_stages\":" << (bsgs_stages ? "true" : "false") << ","
         << "\"binary_rotations\":" << binary << ",\"naf_rotations\":" << naf
         << ",\"arithmetic_nodes\":" << arithmetic << ",\"arithmetic_with_final_input\":" << final_arithmetic
+        << ",\"public_source_nodes\":" << public_nodes
+        << ",\"unique_padded_public_values\":" << public_plan.uses.size()
         << ",\"public_weights\":" << weights << ",\"double_weight_bytes\":" << weights * sizeof(double)
         << ",\"compact_weight_bytes\":" << weight_bytes << ",\"bf16_weights\":" << compact_weights
         << ",\"peak_live_dag_handles\":" << peak_handles << ",\"slots_at_peak_handles\":" << peak_handle_slots

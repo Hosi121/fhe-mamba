@@ -17,7 +17,7 @@ import numpy as np
 import torch
 
 from .ops import ChebPoly, fit_chebyshev
-from .tensor_ops import TensorOps, nonlinear_function
+from .tensor_ops import HeadTiledState, TensorOps, nonlinear_function
 
 
 def _array(value):
@@ -40,16 +40,31 @@ class Calibration(TensorOps):
         return super().nonlinear(x, kind, site, parameter)
 
     def fit(
-        self, *, margin=0.5, tolerance=1e-6, max_degree=255, quadrature=False, kind_tolerances=None
+        self,
+        *,
+        margin=0.5,
+        tolerance=1e-6,
+        max_degree=255,
+        quadrature=False,
+        kind_tolerances=None,
+        positive_lower_fraction=0.5,
+        kind_margins=None,
     ):
+        if not math.isfinite(margin) or margin < 0:
+            raise ValueError("calibration margin must be finite and nonnegative")
+        if not math.isfinite(positive_lower_fraction) or not 0 < positive_lower_fraction <= 1:
+            raise ValueError("positive lower fraction must be in (0, 1]")
         polys, metadata = {}, {}
         for site, (lo, hi) in self.ranges.items():
             kind, parameter = self.functions[site]
             target = (kind_tolerances or {}).get(kind, tolerance)
-            pad = max(hi - lo, 0.05) * margin
+            site_margin = (kind_margins or {}).get(kind, margin)
+            if not math.isfinite(site_margin) or site_margin < 0:
+                raise ValueError("calibration margins must be finite and nonnegative")
+            pad = max(hi - lo, 0.05) * site_margin
             lo, hi = lo - pad, hi + pad
             if kind == "inv_sqrt":
-                lo = max(self.ranges[site][0] * 0.5, 1e-6)
+                lo = max(self.ranges[site][0] * positive_lower_fraction, 1e-6)
             function = nonlinear_function(kind, parameter)
             grid = torch.linspace(lo, hi, 8193, dtype=torch.float64)
             degree = 7
@@ -177,6 +192,22 @@ class PackedProgram(TensorOps):
 
     def constant(self, value):
         return self.node("public", [], _array(value), value)
+
+    def recurrent_state(self, value, *, encrypted=False):
+        """Store a fixed-size SSM tensor in as many whole-head blocks as needed."""
+        value = _array(value)
+        if value.ndim != 4 or min(value.shape) < 1:
+            raise ValueError("recurrent state must be (batch, head, channel, state)")
+        batch, heads, channels, states = value.shape
+        per_block = self.slots // (batch * channels * states)
+        if per_block < 1:
+            raise ValueError("one recurrent state head must fit in a ciphertext")
+        create = self.input if encrypted else self.constant
+        return HeadTiledState(
+            tuple(
+                create(value[:, start : start + per_block]) for start in range(0, heads, per_block)
+            )
+        )
 
     def client_input(self, hidden, reference_embedding):
         """Client decrypts final hidden, selects a token, encrypts its embedding.

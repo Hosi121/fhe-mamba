@@ -2,6 +2,7 @@
 
 #include "public_weights.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <istream>
 #include <stdexcept>
@@ -9,6 +10,9 @@
 #include <vector>
 
 namespace fhemamba {
+// Finite unrolled generation exceeds the old 100k-node probe limit. Keep a
+// bounded parser allocation while admitting the 64-token candidate circuit.
+inline constexpr int packed_max_nodes = 1000000;
 struct PackedNode {
   std::string operation;
   int size;
@@ -24,6 +28,29 @@ struct PackedOutput {
   int node;
   std::vector<double> polynomial, exact;
 };
+struct PackedOutputErrors {
+  double polynomial = 0, exact = 0;
+  int non_finite = 0;
+  bool passes(double polynomial_tolerance, double exact_tolerance) const {
+    return !non_finite && std::isfinite(polynomial_tolerance) && std::isfinite(exact_tolerance) &&
+        polynomial_tolerance >= 0 && exact_tolerance >= 0 &&
+        polynomial <= polynomial_tolerance && exact <= exact_tolerance;
+  }
+};
+inline auto packed_output_errors(const std::vector<double>& values, const PackedOutput& reference)
+    -> PackedOutputErrors {
+  if (values.size() < reference.polynomial.size() || reference.exact.size() != reference.polynomial.size())
+    throw std::invalid_argument("packed output/reference width mismatch");
+  PackedOutputErrors errors;
+  for (std::size_t j = 0; j < reference.polynomial.size(); ++j) {
+    if (!std::isfinite(values[j]) || !std::isfinite(reference.polynomial[j]) || !std::isfinite(reference.exact[j])) {
+      ++errors.non_finite; continue;
+    }
+    errors.polynomial = std::max(errors.polynomial, std::abs(values[j] - reference.polynomial[j]));
+    errors.exact = std::max(errors.exact, std::abs(values[j] - reference.exact[j]));
+  }
+  return errors;
+}
 struct PackedProgram {
   int slots;
   double bound;
@@ -37,8 +64,10 @@ inline auto read_packed_program(std::istream& stream, bool compact_weights = fal
   if (!(stream >> magic >> p.slots >> p.bound >> nodes >> outputs) ||
       (magic != "fhemamba-packed-v1" && magic != "fhemamba-packed-v2") || p.slots < 2 || p.slots > 32768 ||
       (p.slots & (p.slots - 1)) || !std::isfinite(p.bound) || p.bound <= 0 ||
-      nodes < 1 || nodes > 100000 || outputs < 1 || outputs > nodes)
+      nodes < 1 || nodes > packed_max_nodes || outputs < 1 || outputs > nodes)
     throw std::invalid_argument("invalid packed program header");
+  p.nodes.reserve(nodes);
+  p.outputs.reserve(outputs);
   for (int i = 0; i < nodes; ++i) {
     PackedNode n;
     int parents, count;

@@ -14,7 +14,7 @@ from dataclasses import dataclass
 import torch
 from torch import nn
 
-from .tensor_ops import TensorOps, rms_normalize, ssm_readout
+from .tensor_ops import TensorOps, rms_normalize, ssm_update_readout
 
 
 @dataclass
@@ -23,6 +23,35 @@ class Mamba3State:
     ssm: object
     k: object
     v: object
+
+
+@dataclass(frozen=True)
+class RotaryPhase:
+    """Carry a rotation by its cosine and sine, without an unbounded angle.
+
+    Composition uses the angle-addition identities. This is the same rotation
+    in exact arithmetic; polynomial and CKKS drift still require qualification.
+    """
+
+    cosine: object
+    sine: object
+
+    def __post_init__(self):
+        if self.cosine.shape != self.sine.shape:
+            raise ValueError("rotary cosine and sine must have the same shape")
+
+    @property
+    def shape(self):
+        return self.cosine.shape
+
+
+def _initial_angle(mixer, batch_size, rotary):
+    zeros = mixer.in_proj.weight.new_zeros(batch_size, mixer.nheads, mixer.num_rope_angles)
+    if rotary == "angle":
+        return zeros
+    if rotary == "phasor":
+        return RotaryPhase(torch.ones_like(zeros), zeros)
+    raise ValueError("rotary representation must be angle or phasor")
 
 
 @dataclass
@@ -40,11 +69,9 @@ class FactoredMamba3State:
     weights: tuple = ()
 
 
-def init_factored_mamba3_state(mixer, batch_size=1):
+def init_factored_mamba3_state(mixer, batch_size=1, *, rotary="angle"):
     validate_mamba3(mixer)
-    return FactoredMamba3State(
-        mixer.in_proj.weight.new_zeros(batch_size, mixer.nheads, mixer.num_rope_angles)
-    )
+    return FactoredMamba3State(_initial_angle(mixer, batch_size, rotary))
 
 
 def validate_mamba3(mixer):
@@ -58,12 +85,12 @@ def validate_mamba3(mixer):
         raise ValueError("invalid Mamba-3 rotary dimensions")
 
 
-def init_mamba3_state(mixer, batch_size=1):
+def init_mamba3_state(mixer, batch_size=1, *, rotary="angle"):
     validate_mamba3(mixer)
     w = mixer.in_proj.weight
     h, p, n = mixer.nheads, mixer.headdim, mixer.d_state
     return Mamba3State(
-        w.new_zeros(batch_size, h, mixer.num_rope_angles),
+        _initial_angle(mixer, batch_size, rotary),
         w.new_zeros(batch_size, h, p, n),
         w.new_zeros(batch_size, h, n),
         w.new_zeros(batch_size, h, p),
@@ -81,6 +108,33 @@ def _rotate_bc(value, cosine, sine, angles, ops):
     if 2 * angles < value.shape[-1]:
         rotated = ops.concatenate((rotated, value[..., 2 * angles :]), axis=-1)
     return rotated
+
+
+def mamba3_state_step(state, b, c, v, decay, lag, write, skip, ops):
+    """Exponential-trapezoidal state update, shared by the mixer and probes.
+
+    Inputs are the already projected/rotated vectors and scalar coefficients.
+    The caller updates the rotary angle separately. Dense and tiled states have
+    bounded size; the exact factored representation retains every past write.
+    """
+    if isinstance(state, FactoredMamba3State):
+        weights = [weight * decay for weight in state.weights]
+        if weights:
+            weights[-1] = weights[-1] + lag
+        carry = FactoredMamba3State(
+            state.angle, (*state.keys, b), (*state.values, v), (*weights, write)
+        )
+        y = skip
+        for key, value, weight in zip(carry.keys, carry.values, carry.weights, strict=True):
+            score = ops.sum_last(key * c)[..., 0] * weight
+            y = y + value * score[..., None]
+    else:
+        ssm, readout = ssm_update_readout(
+            state.ssm, decay, ((state.k, state.v, lag), (b, v, write)), c, ops
+        )
+        y = readout + skip
+        carry = Mamba3State(state.angle, ssm, b, v)
+    return y, carry
 
 
 def mamba3_step(mixer, x, state: Mamba3State, ops, layer_idx=0):
@@ -122,9 +176,17 @@ def mamba3_step(mixer, x, state: Mamba3State, ops, layer_idx=0):
     decay = ops.nonlinear(rate * dt, "exp", (layer_idx, "decay_exp"))
     mixing = ops.nonlinear(mixing, "sigmoid", (layer_idx, "m3_mixing"))
     phase = ops.nonlinear(phase, "tanh", (layer_idx, "m3_angle_tanh"))
-    angle = state.angle + (phase[:, None, :] * dt[..., None]) * math.pi
-    cosine = ops.nonlinear(angle, "cos", (layer_idx, "m3_cos"))
-    sine = ops.nonlinear(angle, "sin", (layer_idx, "m3_sin"))
+    increment = (phase[:, None, :] * dt[..., None]) * math.pi
+    if isinstance(state.angle, RotaryPhase):
+        delta_cos = ops.nonlinear(increment, "cos", (layer_idx, "m3_delta_cos"))
+        delta_sin = ops.nonlinear(increment, "sin", (layer_idx, "m3_delta_sin"))
+        cosine = state.angle.cosine * delta_cos - state.angle.sine * delta_sin
+        sine = state.angle.sine * delta_cos + state.angle.cosine * delta_sin
+        angle = RotaryPhase(cosine, sine)
+    else:
+        angle = state.angle + increment
+        cosine = ops.nonlinear(angle, "cos", (layer_idx, "m3_cos"))
+        sine = ops.nonlinear(angle, "sin", (layer_idx, "m3_sin"))
     b = rms_normalize(b, mixer.B_norm.weight, mixer.B_norm.eps, ops, (layer_idx, "m3_b_rms"))
     c = rms_normalize(c, mixer.C_norm.weight, mixer.C_norm.eps, ops, (layer_idx, "m3_c_rms"))
     b = b[:, None, :] + mixer.B_bias[:, 0, :]
@@ -132,22 +194,8 @@ def mamba3_step(mixer, x, state: Mamba3State, ops, layer_idx=0):
     b, c = (_rotate_bc(value, cosine, sine, a, ops) for value in (b, c))
     lag = (1 - mixing) * dt * decay
     write = mixing * dt
-    if factored:
-        weights = [weight * decay for weight in state.weights]
-        if weights:
-            weights[-1] = weights[-1] + lag
-        carry = FactoredMamba3State(angle, (*state.keys, b), (*state.values, v), (*weights, write))
-        y = v * mixer.D[:, None]
-        for key, value, weight in zip(carry.keys, carry.values, carry.weights, strict=True):
-            score = ops.sum_last(key * c)[..., 0] * weight
-            y = y + value * score[..., None]
-    else:
-        # k/v are the previous rotated B and x, including the lag write at t>0.
-        ssm = state.ssm * decay[..., None, None]
-        ssm = ssm + (state.v[..., None] * state.k[..., None, :]) * lag[..., None, None]
-        ssm = ssm + (v[..., None] * b[..., None, :]) * write[..., None, None]
-        y = ssm_readout(ssm, c, ops) + v * mixer.D[:, None]
-        carry = Mamba3State(angle, ssm, b, v)
+    y, carry = mamba3_state_step(state, b, c, v, decay, lag, write, v * mixer.D[:, None], ops)
+    carry.angle = angle
     if mixer.is_outproj_norm:
         weight = mixer.norm.weight.reshape(h, p)
         y = rms_normalize(y, weight, mixer.norm.eps, ops, (layer_idx, "m3_output_rms"))

@@ -2,6 +2,7 @@
 
 #include "packed_lifetime.hpp"
 #include <algorithm>
+#include <iterator>
 #include <set>
 
 namespace fhemamba {
@@ -14,7 +15,7 @@ class PackedReadySchedule {
       : program_(program), uses_(plan_packed_uses(program, live)),
         pending_(program.nodes.size()), remaining_uses_(program.nodes.size()),
         epoch_(program.nodes.size()), done_(program.nodes.size()),
-        pinned_(program.nodes.size()) {
+        pinned_(program.nodes.size()), retained_(program.nodes.size()) {
     int epoch = 0;
     for (int i = 0; i < static_cast<int>(program.nodes.size()); ++i) {
       if (program.nodes[i].operation == "feedback") ++epoch;
@@ -31,6 +32,26 @@ class PackedReadySchedule {
     activate_epoch();
   }
   const std::set<int>& ready() const { return ready_; }
+  // A soft admission threshold: once enough DAG values are retained, finish
+  // the oldest ready branch (including its normal refresh) before speculating
+  // on later branches. Necessary source-order work and pinned outputs may
+  // exceed the threshold; this is not an allocator or byte cap.
+  template <class Fits>
+  int select(Fits&& fits, std::size_t live_limit = 0) {
+    if (ready_.empty()) throw std::logic_error("cannot select from an empty frontier");
+    const int first = *ready_.begin();
+    if (fits(first)) return first;
+    if (live_limit && live_values_ >= live_limit) {
+      ++limit_selections_;
+      return first;
+    }
+    for (auto it = std::next(ready_.begin()); it != ready_.end(); ++it)
+      if (fits(*it)) return *it;
+    return first;
+  }
+  std::size_t live_values() const { return live_values_; }
+  std::size_t peak_live_values() const { return peak_live_values_; }
+  std::size_t limit_selections() const { return limit_selections_; }
   bool done(int i) const { return done_[i]; }
   bool empty() const { return remaining_ == 0; }
   bool final_use(int parent, int operation) const {
@@ -44,8 +65,14 @@ class PackedReadySchedule {
   }
   void complete(int i) {
     if (!ready_.erase(i)) throw std::logic_error("completed node was not ready");
+    retained_[i] = true;
+    peak_live_values_ = std::max(peak_live_values_, ++live_values_);
     done_[i] = true; --remaining_; --epoch_remaining_[active_epoch_];
     for (int parent : program_.nodes[i].parents) --remaining_uses_[parent];
+    for (int parent : program_.nodes[i].parents) if (retained_[parent] && releasable(parent)) {
+      retained_[parent] = false;
+      --live_values_;
+    }
     for (int consumer : uses_.consumers[i]) {
       if (!--pending_[consumer] && epoch_[consumer] == active_epoch_) ready_.insert(consumer);
     }
@@ -62,8 +89,9 @@ class PackedReadySchedule {
   const PackedProgram& program_;
   PackedUsePlan uses_;
   std::vector<int> pending_, remaining_uses_, epoch_, epoch_remaining_;
-  std::vector<bool> done_, pinned_;
+  std::vector<bool> done_, pinned_, retained_;
   std::set<int> ready_;
   int active_epoch_ = 0, remaining_ = 0;
+  std::size_t live_values_ = 0, peak_live_values_ = 0, limit_selections_ = 0;
 };
 }  // namespace fhemamba
