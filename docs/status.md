@@ -72,6 +72,11 @@ Frozen gate/state calibration and normalization planning/export now use
 `fhemamba benchmark normalization`. Train-window calibration and PPL evaluation
 are shared by the quality ladder and gated-normalization sweep. These are
 maintenance changes, with small CPU before/after checks; they add no GPU claim.
+Runner options, Mamba-2 reference export and test fixtures now follow the
+[shared Python contracts](maintenance.md#shared-python-contracts). Command names,
+frozen payload formats and numerical acceptance gates are unchanged.
+The [test scope](maintenance.md#test-scope) now separates budget-wrapper checks
+from native-result validation and removes source-fragment and retired-name checks.
 
 For local checks run `CHECK_JOBS=2 scripts/run_checks.sh`; GPU verification
 is a separate step. The maintenance reorganization did not rerun encrypted

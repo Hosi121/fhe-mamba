@@ -673,57 +673,45 @@ def _nvidia_smi_command(nvidia_smi: str, gpu_index: int | None, *args: str) -> l
     return command
 
 
-def _gpu_processes(
-    nvidia_smi: str,
-    gpu_index: int | None,
-) -> tuple[list[dict[str, int]], str | None]:
+def _gpu_query(nvidia_smi, gpu_index, query, label, convert):
     completed = subprocess.run(
-        _nvidia_smi_command(
-            nvidia_smi,
-            gpu_index,
-            "--query-compute-apps=pid,used_memory",
-            "--format=csv,noheader,nounits",
-        ),
+        _nvidia_smi_command(nvidia_smi, gpu_index, query, "--format=csv,noheader,nounits"),
         check=False,
         capture_output=True,
         text=True,
     )
     if completed.returncode != 0:
         message = completed.stderr.strip() or f"{nvidia_smi} exited {completed.returncode}"
-        return [], f"GPU preflight failed: {message}"
-    processes = []
-    for line in completed.stdout.splitlines():
-        fields = [field.strip() for field in line.split(",")]
-        if len(fields) != 2 or not fields[0]:
-            continue
-        try:
-            processes.append({"pid": int(fields[0]), "used_memory_mib": int(fields[1])})
-        except ValueError:
-            return [], f"GPU preflight returned an invalid row: {line!r}"
-    return processes, None
-
-
-def _gpu_utilization(nvidia_smi: str, gpu_index: int | None) -> tuple[float, str | None]:
-    completed = subprocess.run(
-        _nvidia_smi_command(
-            nvidia_smi,
-            gpu_index,
-            "--query-gpu=utilization.gpu",
-            "--format=csv,noheader,nounits",
-        ),
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if completed.returncode != 0:
-        message = completed.stderr.strip() or f"{nvidia_smi} exited {completed.returncode}"
-        return 0.0, f"GPU utilization preflight failed: {message}"
+        return [], f"{label} failed: {message}"
     values = []
     for line in completed.stdout.splitlines():
         try:
-            values.append(float(line.strip()))
+            value = convert(line)
         except ValueError:
-            return 0.0, f"GPU utilization preflight returned an invalid row: {line!r}"
+            return [], f"{label} returned an invalid row: {line!r}"
+        if value is not None:
+            values.append(value)
+    return values, None
+
+
+def _gpu_processes(nvidia_smi: str, gpu_index: int | None):
+    def process(line):
+        fields = [value.strip() for value in line.split(",")]
+        if len(fields) == 2 and fields[0]:
+            return {"pid": int(fields[0]), "used_memory_mib": int(fields[1])}
+        return None
+
+    return _gpu_query(
+        nvidia_smi, gpu_index, "--query-compute-apps=pid,used_memory", "GPU preflight", process
+    )
+
+
+def _gpu_utilization(nvidia_smi: str, gpu_index: int | None) -> tuple[float, str | None]:
+    values, issue = _gpu_query(
+        nvidia_smi, gpu_index, "--query-gpu=utilization.gpu", "GPU utilization preflight", float
+    )
+    if issue:
+        return 0.0, issue
     if not values:
         return 0.0, "GPU utilization preflight returned no GPUs"
     return max(values), None

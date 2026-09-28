@@ -10,14 +10,6 @@ ROOT = Path(__file__).resolve().parents[1]
 MANAGER = [sys.executable, "-m", "fhemamba", "benchmark", "b300-build"]
 
 
-def _platform_values() -> dict[str, str]:
-    return dict(
-        line.split("=", 1)
-        for raw_line in (ROOT / "config" / "b300-platform.env").read_text().splitlines()
-        if (line := raw_line.strip()) and not line.startswith("#")
-    )
-
-
 def _expectation(binary: Path, image_id: str = "sha256:image") -> list[str]:
     return [
         "--platform-config-version",
@@ -55,12 +47,15 @@ def test_b300_platform_resolves_variants_and_distinct_patch_sets() -> None:
     completed = subprocess.run(
         [
             "bash",
+            "-eu",
             "-c",
             'source "$1/scripts/b300_platform.sh"; '
             'b300_load_platform "$1"; '
             "for profile in full bootstrap-lifetime lifetime none; do "
-            'printf "%s %s %s\\n" "$profile" "$(b300_variant "$profile")" '
-            '"$(b300_patchset_sha256 "$1" "$profile")"; done',
+            'b300_select_patches "$1" "$profile"; '
+            'printf "%s %s %s" "$profile" "$(b300_variant "$profile")" '
+            '"$(b300_patchset_sha256 "$1" "$profile")"; '
+            'printf " %s" "${B300_PATCH_PATHS[@]##*/}"; printf "\\n"; done',
             "bash",
             str(ROOT),
         ],
@@ -77,19 +72,59 @@ def test_b300_platform_resolves_variants_and_distinct_patch_sets() -> None:
     ]
     assert len({row[2] for row in rows}) == 4
     assert all(len(row[2]) == 64 for row in rows)
+    required = {
+        "fideslib-v2.1.0-linear-transform-api.patch",
+        "fideslib-v2.1.0-conjugate-api.patch",
+        "fideslib-v2.1.0-ckks-data-type-api.patch",
+    }
+    assert all(required <= set(row[3:]) for row in rows)
 
 
-def test_b300_image_defaults_match_authoritative_platform() -> None:
-    platform = _platform_values()
-    dockerfile = (ROOT / "docker" / "b300-fideslib.Dockerfile").read_text()
-    image_builder = (ROOT / "scripts" / "build_b300_fideslib_image.sh").read_text()
-    launcher = (ROOT / "scripts" / "launch_b300_fideslib_build.sh").read_text()
-    runner = (ROOT / "scripts" / "run_b300_mamba2.sh").read_text()
-
-    assert f"ARG CUDA_IMAGE={platform['B300_CUDA_BASE_IMAGE']}" in dockerfile
-    for script in (image_builder, launcher, runner):
-        assert "b300_load_platform" in script
-        assert "${B300_IMAGE}" in script
+def test_historical_mamba2_campaign_resolves_promoted_options(tmp_path: Path) -> None:
+    manifest_path = ROOT / "experiments/manifests/b300_autoregressive_prompt2_generate4.json"
+    manifest = json.loads(manifest_path.read_text())
+    output = tmp_path / "dry-run.json"
+    subprocess.run(
+        [
+            sys.executable,
+            "experiments/execution/run_dgx_campaign.py",
+            "--manifest",
+            str(manifest_path),
+            "--output-json",
+            str(output),
+            "--dry-run",
+        ],
+        cwd=ROOT,
+        check=True,
+    )
+    defaults = json.loads(output.read_text())["experiments"][0]["environment"]
+    expected = {
+        "LAYERS": "24",
+        "TOKENS": "5",
+        "SECURITY": "not-set",
+        "IMAGE": "fhemamba-b300:cuda12.8-fideslib",
+        "B300_CUDA_VERSION": "12.8",
+        "FIDESLIB_ARCH": "100-real",
+        "FIDESLIB_SM": "100",
+        "FIDESLIB_VARIANT": "sm100",
+        "FIDESLIB_SYNC_PROFILE": "full",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM": "1",
+        "FUSED_REPLICATED_LINEAR_TRANSFORM_SCOPE": "out-proj",
+        "COMPLEX_STATE_PAIRING": "1",
+        "SHARED_HEAD_EXPANSION": "0",
+        "STATE_REFRESH_INTERVAL": "1",
+        "PT_CACHE_GIB": "65",
+    }
+    assert {name: defaults[name] for name in expected} == expected
+    assert len(defaults["B300_PLATFORM_CONFIG_SHA256"]) == 64
+    assert defaults["BINARY_PATH"].endswith(
+        "/build/fideslib-stage0-sm100/stage1_mamba2_decode_fideslib"
+    )
+    assert manifest["gpu_preflight"]["gpu_index"] == int(defaults["GPU_DEVICE"])
+    assert manifest["gpu_preflight"]["min_mem_available_gib"] > 120.24
+    assert manifest["acceptance"]["max_abs_error_lte"] == 0.05
+    assert manifest["acceptance"]["all_tokens_decrypt"] is True
+    assert manifest["acceptance"]["zero_intermediate_decrypts"] is True
 
 
 def test_b300_build_metadata_validates_and_attaches(tmp_path: Path) -> None:

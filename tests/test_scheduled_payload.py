@@ -13,30 +13,10 @@ from fhemamba.m1_payload import _normalization_specs, _poly_ops_from_export, exp
 from fhemamba.normalization import ScheduledInvSqrt, plan_invsqrt
 from fhemamba.payload_surrogate import public_gate_domains, stabilized_specs
 
-transformers = pytest.importorskip("transformers")
-
 
 @pytest.fixture
-def scheduled_model():
-    torch.manual_seed(19)
-    model = (
-        transformers.Mamba2ForCausalLM(
-            transformers.Mamba2Config(
-                vocab_size=97,
-                hidden_size=32,
-                expand=2,
-                num_heads=4,
-                head_dim=16,
-                state_size=8,
-                n_groups=1,
-                num_hidden_layers=2,
-                conv_kernel=4,
-                chunk_size=8,
-            )
-        )
-        .float()
-        .eval()
-    )
+def scheduled_model(model_factory):
+    model = model_factory()
     bundle = {
         "format": "fhemamba-normalization-schedules-v1",
         "operators": [
@@ -54,22 +34,17 @@ def scheduled_model():
 
 
 @pytest.mark.parametrize("joint", [False, True])
-def test_scheduled_payload_uses_dedicated_final_norm(tmp_path, scheduled_model, joint):
+def test_scheduled_payload_uses_dedicated_final_norm(
+    tokenizer_factory, tmp_path, scheduled_model, joint
+):
     model, bundle = scheduled_model
     bundle_path = tmp_path / "schedules.json"
     bundle_path.write_text(json.dumps(bundle))
     gate_path = write_gate_bundle(tmp_path, model) if joint else None
 
-    class Tokenizer:
-        def __call__(self, text, return_tensors=None):
-            class Result:
-                input_ids = torch.tensor([[(ord(c) % 90) + 3 for c in text[:16]]])
-
-            return Result()
-
     out = export_chain_payload(
         model,
-        Tokenizer(),
+        tokenizer_factory(16),
         tmp_path / "payload",
         n_test_tokens=2,
         cal_tokens=16,
@@ -102,7 +77,7 @@ def test_scheduled_payload_uses_dedicated_final_norm(tmp_path, scheduled_model, 
         values = np.fromfile(out / f"{name}.bin", dtype="<f4").reshape(shape)
         assert np.isfinite(values).all(), name
     with pytest.raises(ValueError, match="new output directory"):
-        export_chain_payload(model, Tokenizer(), out, normalization_bundle=bundle_path)
+        export_chain_payload(model, tokenizer_factory(16), out, normalization_bundle=bundle_path)
 
 
 @pytest.mark.parametrize("defect", ["missing", "duplicate", "uncertified", "epsilon"])
@@ -163,19 +138,12 @@ def test_joint_bundle_must_match_checkpoint_and_certify(tmp_path, scheduled_mode
 
 
 @pytest.fixture
-def generation_payload(tmp_path, scheduled_model):
+def generation_payload(tokenizer_factory, tmp_path, scheduled_model):
     model, bundle = scheduled_model
     bundle_path = tmp_path / "schedules.json"
     bundle_path.write_text(json.dumps(bundle))
 
-    class Tokenizer:
-        def __call__(self, text, return_tensors=None):
-            class Result:
-                input_ids = torch.tensor([[(ord(c) % 90) + 3 for c in text[:16]]])
-
-            return Result()
-
-    tokenizer = Tokenizer()
+    tokenizer = tokenizer_factory(16)
     source = export_chain_payload(
         model,
         tokenizer,

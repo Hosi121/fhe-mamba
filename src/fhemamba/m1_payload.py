@@ -66,11 +66,32 @@ DEFAULT_CAL_TEXT = (
 )
 
 
-def _save(out: Path, name: str, tensor: torch.Tensor, manifest: dict) -> None:
-    host = tensor.detach().to(device="cpu", dtype=torch.float32)
-    arr = host.numpy().astype("<f4", copy=False)
-    arr.tofile(out / f"{name}.bin")
-    manifest[name] = list(arr.shape)
+def _save(out: Path, manifest: dict, **tensors: torch.Tensor) -> None:
+    """Write named tensors and shapes using the native little-endian float32 format."""
+    for name, tensor in tensors.items():
+        host = tensor.detach().to(device="cpu", dtype=torch.float32)
+        arr = host.numpy().astype("<f4", copy=False)
+        arr.tofile(out / f"{name}.bin")
+        manifest[name] = list(arr.shape)
+
+
+def _save_layer_references(out, directories, tensors, notes, token_ids=None):
+    """Update layer references without changing frozen weights or polynomial specs."""
+    for layer, directory in enumerate(directories):
+        layer_dir = out / directory
+        path = layer_dir / "meta.json"
+        meta = json.loads(path.read_text())
+        if token_ids is not None:
+            if meta.get("test_token_ids") not in (None, token_ids):
+                raise ValueError(f"test_token_ids mismatch in {layer_dir}")
+            meta["test_token_ids"] = token_ids
+        _save(
+            layer_dir, meta["tensors"], **{name: values[layer] for name, values in tensors.items()}
+        )
+        for note in notes:
+            if note not in meta["notes"]:
+                meta["notes"].append(note)
+        path.write_text(json.dumps(meta, indent=2))
 
 
 def _require_native_kernel_compatible(m) -> None:
@@ -215,17 +236,8 @@ class _RecurrenceRecordingOps:
             self.records.setdefault(site, []).append(sample.clone())
         return value
 
-    def silu(self, x: torch.Tensor, site: tuple[int, str]) -> torch.Tensor:
-        return self.base.silu(x, site)
-
-    def softplus(self, x: torch.Tensor, site: tuple[int, str]) -> torch.Tensor:
-        return self.base.softplus(x, site)
-
-    def exp(self, x: torch.Tensor, site: tuple[int, str]) -> torch.Tensor:
-        return self.base.exp(x, site)
-
-    def inv_sqrt(self, x: torch.Tensor, site: tuple[int, str]) -> torch.Tensor:
-        return self.base.inv_sqrt(x, site)
+    def __getattr__(self, name):
+        return getattr(self.base, name)
 
     def mamba2_gates(self, z, a_cont, layer, time_step_limit):
         # The base dispatches its own checkpoints. Capture the returned decay
@@ -237,125 +249,59 @@ class _RecurrenceRecordingOps:
 
 
 @torch.no_grad()
-def _collect_test_vectors_from_ids(model, ids: torch.Tensor, ops=None) -> _TestVectors:
-    ids = ids.to(model.get_input_embeddings().weight.device)
-    embeddings = model.backbone.embeddings(ids)[0]
-    states = init_states(model)
-    layer_inputs: list[list[torch.Tensor]] = [[] for _ in model.backbone.layers]
-    layer_outputs: list[list[torch.Tensor]] = [[] for _ in model.backbone.layers]
-    layer_states: list[list[torch.Tensor]] = [[] for _ in model.backbone.layers]
-    expected_final = []
-    for token in range(ids.shape[1]):
-        hidden_states = model_forward(
-            model,
-            ids[:, token : token + 1],
-            ops=ops,
-            states=states,
-            output_hidden_states=True,
-            output_logits=False,
-        )["hidden_states"]
-        for layer in range(len(model.backbone.layers)):
-            layer_input = embeddings[token] if layer == 0 else hidden_states[layer - 1][0, 0]
-            layer_inputs[layer].append(layer_input)
-            layer_outputs[layer].append(hidden_states[layer][0, 0])
-            layer_states[layer].append(states[layer].ssm[0].clone())
-        expected_final.append(hidden_states[-1][0, 0])
-    return _TestVectors(
-        token_ids=[int(value) for value in ids[0].tolist()],
-        embeddings=embeddings,
-        layer_inputs=[torch.stack(values) for values in layer_inputs],
-        layer_outputs=[torch.stack(values) for values in layer_outputs],
-        layer_states=[torch.stack(values) for values in layer_states],
-        expected_final=torch.stack(expected_final),
-    )
-
-
-@torch.no_grad()
-def _collect_test_vectors(
-    model, tokenizer, prompt: str, n_test_tokens: int, ops=None
-) -> _TestVectors:
-    ids = tokenizer(prompt, return_tensors="pt").input_ids[:, :n_test_tokens]
-    return _collect_test_vectors_from_ids(model, ids, ops=ops)
-
-
-@torch.no_grad()
-def _collect_autoregressive_trace(
-    model,
-    tokenizer,
-    prompt: str,
-    prompt_tokens: int,
-    generate_tokens: int,
-    ops=None,
-    record_recurrence: bool = False,
-    record_layer_details: bool = True,
+def _trace_from_ids(
+    model, ids, ops=None, *, generate_tokens=0, record_recurrence=False, record_layer_details=True
 ) -> _AutoregressiveTrace:
-    if prompt_tokens < 1 or generate_tokens < 1:
-        raise ValueError("autoregressive prompt/generate token counts must be positive")
-    tokenized = tokenizer(prompt, return_tensors="pt").input_ids
-    if tokenized.shape[1] < prompt_tokens:
-        raise ValueError("prompt does not contain enough tokens for autoregressive export")
+    """One stateful decode loop for fixed inputs and client-selected continuations."""
     device = model.get_input_embeddings().weight.device
-    prompt_ids = [int(value) for value in tokenized[0, :prompt_tokens].tolist()]
-    evaluated_ids = list(prompt_ids)
-    generated_ids: list[int] = []
-    expected_final: list[torch.Tensor] = []
-    layer_outputs: list[list[torch.Tensor]] = [[] for _ in model.backbone.layers]
-    layer_states: list[list[torch.Tensor]] = [[] for _ in model.backbone.layers]
-    recurrence_ops = _RecurrenceRecordingOps(ops) if record_recurrence else None
-    active_ops = recurrence_ops if recurrence_ops is not None else ops
+    ids = ids.to(device)
+    prompt_ids = [int(value) for value in ids[0].tolist()]
+    evaluated_ids, generated_ids, expected_final = list(prompt_ids), [], []
+    layer_outputs = [[] for _ in model.backbone.layers]
+    layer_states = [[] for _ in model.backbone.layers]
+    recorder = _RecurrenceRecordingOps(ops) if record_recurrence else None
     states = init_states(model)
-    logits = None
-
-    def record_step(output) -> None:
-        hidden_states = output["hidden_states"]
+    for step in range(len(prompt_ids) + max(0, generate_tokens - 1)):
+        token = (
+            ids[:, step : step + 1]
+            if step < len(prompt_ids)
+            else torch.tensor([[evaluated_ids[step]]], device=device)
+        )
+        output = model_forward(
+            model,
+            token,
+            ops=recorder if recorder is not None else ops,
+            states=states,
+            output_hidden_states=True,
+            output_logits=bool(generate_tokens),
+        )
+        hidden = output["hidden_states"]
         if record_layer_details:
-            for layer in range(len(model.backbone.layers)):
-                layer_outputs[layer].append(hidden_states[layer][0, 0])
-                layer_states[layer].append(states[layer].ssm[0].clone())
-        expected_final.append(hidden_states[-1][0, 0])
-
-    for token_id in prompt_ids:
-        step = torch.tensor([[token_id]], device=device)
-        output = model_forward(
-            model,
-            step,
-            ops=active_ops,
-            states=states,
-            output_hidden_states=True,
-        )
-        record_step(output)
-        logits = output["logits"][0, -1]
-    for generated_index in range(generate_tokens):
-        if logits is None or not torch.isfinite(logits).all():
-            raise ValueError("autoregressive export produced non-finite client logits")
-        token_id = int(logits.argmax())
-        generated_ids.append(token_id)
-        if generated_index + 1 == generate_tokens:
-            break
-        evaluated_ids.append(token_id)
-        step = torch.tensor([[token_id]], device=device)
-        output = model_forward(
-            model,
-            step,
-            ops=active_ops,
-            states=states,
-            output_hidden_states=True,
-        )
-        record_step(output)
-        logits = output["logits"][0, -1]
-    evaluated = torch.tensor([evaluated_ids], device=device)
+            for layer, state in enumerate(states):
+                layer_outputs[layer].append(hidden[layer][0, 0])
+                layer_states[layer].append(state.ssm[0].clone())
+        expected_final.append(hidden[-1][0, 0])
+        if generate_tokens and step >= len(prompt_ids) - 1:
+            logits = output["logits"][0, -1]
+            if not torch.isfinite(logits).all():
+                raise ValueError("autoregressive export produced non-finite client logits")
+            generated_ids.append(int(logits.argmax()))
+            if len(generated_ids) < generate_tokens:
+                evaluated_ids.append(generated_ids[-1])
+    evaluated = torch.tensor([evaluated_ids], device=device) if generate_tokens else ids
     embeddings = model.backbone.embeddings(evaluated)[0]
-    final_tensor = torch.stack(expected_final)
-    if not torch.isfinite(embeddings).all() or not torch.isfinite(final_tensor).all():
+    final = torch.stack(expected_final)
+    if generate_tokens and (
+        not torch.isfinite(embeddings).all() or not torch.isfinite(final).all()
+    ):
         raise ValueError("autoregressive export produced non-finite embeddings/hidden states")
 
-    def recurrence_values(name: str) -> list[torch.Tensor]:
-        if recurrence_ops is None:
-            return []
-        return [
-            torch.stack(recurrence_ops.records[(layer, name)])
-            for layer in range(len(model.backbone.layers))
-        ]
+    def recurrence_values(name):
+        return (
+            [torch.stack(recorder.records[(layer, name)]) for layer in range(len(states))]
+            if recorder is not None
+            else []
+        )
 
     return _AutoregressiveTrace(
         prompt_ids=prompt_ids,
@@ -371,7 +317,49 @@ def _collect_autoregressive_trace(
         layer_decays=recurrence_values("decay_output"),
         layer_state_updates=recurrence_values("state_update"),
         layer_state_decayed=recurrence_values("state_decayed"),
-        expected_final=final_tensor,
+        expected_final=final,
+    )
+
+
+def _collect_test_vectors_from_ids(model, ids: torch.Tensor, ops=None) -> _TestVectors:
+    trace = _trace_from_ids(model, ids, ops)
+    return _TestVectors(
+        token_ids=trace.evaluated_ids,
+        embeddings=trace.embeddings,
+        layer_inputs=[value.clone() for value in (trace.embeddings, *trace.layer_outputs[:-1])],
+        layer_outputs=trace.layer_outputs,
+        layer_states=trace.layer_states,
+        expected_final=trace.expected_final,
+    )
+
+
+def _collect_test_vectors(model, tokenizer, prompt: str, n_test_tokens: int, ops=None):
+    ids = tokenizer(prompt, return_tensors="pt").input_ids[:, :n_test_tokens]
+    return _collect_test_vectors_from_ids(model, ids, ops=ops)
+
+
+def _collect_autoregressive_trace(
+    model,
+    tokenizer,
+    prompt: str,
+    prompt_tokens: int,
+    generate_tokens: int,
+    ops=None,
+    record_recurrence: bool = False,
+    record_layer_details: bool = True,
+) -> _AutoregressiveTrace:
+    if prompt_tokens < 1 or generate_tokens < 1:
+        raise ValueError("autoregressive prompt/generate token counts must be positive")
+    ids = tokenizer(prompt, return_tensors="pt").input_ids
+    if ids.shape[1] < prompt_tokens:
+        raise ValueError("prompt does not contain enough tokens for autoregressive export")
+    return _trace_from_ids(
+        model,
+        ids[:1, :prompt_tokens],
+        ops,
+        generate_tokens=generate_tokens,
+        record_recurrence=record_recurrence,
+        record_layer_details=record_layer_details,
     )
 
 
@@ -492,29 +480,24 @@ def export_state_debug_references(model, chain_dir: str | Path, tokens: int | No
     boundary_note = (
         "test_layer_output_poly stores the polynomial-circuit layer boundary for debug attribution"
     )
-    for layer, directory in enumerate(chain["layer_dirs"]):
-        layer_dir = out / directory
-        meta_path = layer_dir / "meta.json"
-        meta = json.loads(meta_path.read_text())
-        if meta.get("test_token_ids") not in (None, token_ids):
-            raise ValueError(f"test_token_ids mismatch in {layer_dir}")
-        meta["test_token_ids"] = token_ids
-        _save(
-            layer_dir,
-            "test_layer_output_poly",
-            poly.layer_outputs[layer],
-            meta["tensors"],
-        )
-        _save(layer_dir, "test_state_output", exact.layer_states[layer], meta["tensors"])
-        _save(layer_dir, "test_state_output_poly", poly.layer_states[layer], meta["tensors"])
-        if boundary_note not in meta["notes"]:
-            meta["notes"].append(boundary_note)
-        if state_note not in meta["notes"]:
-            meta["notes"].append(state_note)
-        meta_path.write_text(json.dumps(meta, indent=2))
+    _save_layer_references(
+        out,
+        chain["layer_dirs"],
+        {
+            "test_layer_output_poly": poly.layer_outputs,
+            "test_state_output": exact.layer_states,
+            "test_state_output_poly": poly.layer_states,
+        },
+        [boundary_note, state_note],
+        token_ids=token_ids,
+    )
     if tokens is None:
-        _save(out, "chain_expected_final", exact.expected_final, chain["tensors"])
-        _save(out, "chain_expected_poly_final", poly.expected_final, chain["tensors"])
+        _save(
+            out,
+            chain["tensors"],
+            chain_expected_final=exact.expected_final,
+            chain_expected_poly_final=poly.expected_final,
+        )
         (out / "chain.json").write_text(json.dumps(chain, indent=2))
     return out
 
@@ -564,64 +547,44 @@ def _export_autoregressive_assets(
     output_embeddings = model.get_output_embeddings()
     lm_head_weight = output_embeddings.weight
     weights_tied = embedding_weight.data_ptr() == lm_head_weight.data_ptr()
-    _save(out, "client_embedding_w", embedding_weight, manifest)
-    if not weights_tied:
-        _save(out, "client_lm_head_w", lm_head_weight, manifest)
-    if output_embeddings.bias is not None:
-        _save(out, "client_lm_head_b", output_embeddings.bias, manifest)
-    _save(out, "autoregressive_poly_embeddings", poly_trace.embeddings, manifest)
     _save(
         out,
-        "autoregressive_poly_expected_final",
-        poly_trace.expected_final,
         manifest,
+        client_embedding_w=embedding_weight,
     )
+    if not weights_tied:
+        _save(
+            out,
+            manifest,
+            client_lm_head_w=lm_head_weight,
+        )
+    if output_embeddings.bias is not None:
+        _save(
+            out,
+            manifest,
+            client_lm_head_b=output_embeddings.bias,
+        )
     _save(
         out,
-        "autoregressive_exact_expected_final",
-        exact_trace.expected_final,
         manifest,
+        autoregressive_poly_embeddings=poly_trace.embeddings,
+        autoregressive_poly_expected_final=poly_trace.expected_final,
+        autoregressive_exact_expected_final=exact_trace.expected_final,
     )
     if len(layer_dirs) != n_layers:
         raise ValueError("chain layer_dirs does not match n_layers")
-    note = "autoregressive polynomial layer/state references support debug attribution"
-    for layer, directory in enumerate(layer_dirs):
-        layer_dir = out / directory
-        meta_path = layer_dir / "meta.json"
-        meta = json.loads(meta_path.read_text())
-        _save(
-            layer_dir,
-            "autoregressive_poly_layer_output",
-            poly_trace.layer_outputs[layer],
-            meta["tensors"],
-        )
-        _save(
-            layer_dir,
-            "autoregressive_poly_state_output",
-            poly_trace.layer_states[layer],
-            meta["tensors"],
-        )
-        _save(
-            layer_dir,
-            "autoregressive_poly_decay_output",
-            poly_trace.layer_decays[layer],
-            meta["tensors"],
-        )
-        _save(
-            layer_dir,
-            "autoregressive_poly_state_update",
-            poly_trace.layer_state_updates[layer],
-            meta["tensors"],
-        )
-        _save(
-            layer_dir,
-            "autoregressive_poly_state_decayed",
-            poly_trace.layer_state_decayed[layer],
-            meta["tensors"],
-        )
-        if note not in meta["notes"]:
-            meta["notes"].append(note)
-        meta_path.write_text(json.dumps(meta, indent=2))
+    _save_layer_references(
+        out,
+        layer_dirs,
+        {
+            "autoregressive_poly_layer_output": poly_trace.layer_outputs,
+            "autoregressive_poly_state_output": poly_trace.layer_states,
+            "autoregressive_poly_decay_output": poly_trace.layer_decays,
+            "autoregressive_poly_state_update": poly_trace.layer_state_updates,
+            "autoregressive_poly_state_decayed": poly_trace.layer_state_decayed,
+        },
+        ["autoregressive polynomial layer/state references support debug attribution"],
+    )
     return {
         "protocol": "client-in-loop-greedy-v1",
         "prompt_tokens": prompt_tokens,
@@ -716,8 +679,12 @@ def export_m1_payload(
     manifest: dict[str, list[int]] = {}
 
     # --- weights -----------------------------------------------------------
-    _save(out, "in_proj_w", m.in_proj.weight, manifest)
-    _save(out, "conv_w", m.conv1d.weight.squeeze(1), manifest)
+    _save(
+        out,
+        manifest,
+        in_proj_w=m.in_proj.weight,
+        conv_w=m.conv1d.weight.squeeze(1),
+    )
     conv_b = (
         m.conv1d.bias
         if m.conv1d.bias is not None
@@ -727,13 +694,17 @@ def export_m1_payload(
             device=m.conv1d.weight.device,
         )
     )
-    _save(out, "conv_b", conv_b, manifest)
-    _save(out, "dt_bias", m.dt_bias, manifest)
-    _save(out, "a_log", m.A_log, manifest)
-    _save(out, "d_skip", m.D, manifest)
-    _save(out, "block_norm_w", block.norm.weight, manifest)
-    _save(out, "gated_norm_w", m.norm.weight, manifest)
-    _save(out, "out_proj_w", m.out_proj.weight, manifest)
+    _save(
+        out,
+        manifest,
+        conv_b=conv_b,
+        dt_bias=m.dt_bias,
+        a_log=m.A_log,
+        d_skip=m.D,
+        block_norm_w=block.norm.weight,
+        gated_norm_w=m.norm.weight,
+        out_proj_w=m.out_proj.weight,
+    )
 
     # --- calibration on real text, poly fits (frozen config) ----------------
     cal_text = cal_text or DEFAULT_CAL_TEXT
@@ -827,9 +798,13 @@ def export_m1_payload(
 
     # --- test vectors: stateful reference decode through this layer ---------
     test_vectors = _test_vectors or _collect_test_vectors(model, tokenizer, prompt, n_test_tokens)
-    _save(out, "test_layer_input", test_vectors.layer_inputs[layer_index], manifest)
-    _save(out, "test_layer_output", test_vectors.layer_outputs[layer_index], manifest)
-    _save(out, "test_state_output", test_vectors.layer_states[layer_index], manifest)
+    _save(
+        out,
+        manifest,
+        test_layer_input=test_vectors.layer_inputs[layer_index],
+        test_layer_output=test_vectors.layer_outputs[layer_index],
+        test_state_output=test_vectors.layer_states[layer_index],
+    )
 
     meta = {
         "format": "fhemamba-m1-v1",
@@ -1010,36 +985,28 @@ def export_chain_payload(
         raise ValueError("normalization reference inputs leave the certified domains")
     if gates and any(count[0] for count in reference_ops.violations.values()):
         raise ValueError("stabilized reference inputs leave the declared polynomial domains")
-    for layer in range(n_layers):
-        layer_dir = out / f"layer_{layer:02d}"
-        meta_path = layer_dir / "meta.json"
-        meta = json.loads(meta_path.read_text())
-        _save(
-            layer_dir,
-            "test_layer_output_poly",
-            poly_test_vectors.layer_outputs[layer],
-            meta["tensors"],
-        )
-        _save(
-            layer_dir,
-            "test_state_output_poly",
-            poly_test_vectors.layer_states[layer],
-            meta["tensors"],
-        )
-        meta["notes"].append(
-            "test_layer_output_poly is the plaintext polynomial-circuit correctness reference"
-        )
-        meta["notes"].append(
-            "test_state_output[_poly] stores post-update recurrent state for debug attribution"
-        )
-        meta_path.write_text(json.dumps(meta, indent=2))
+    _save_layer_references(
+        out,
+        [f"layer_{layer:02d}" for layer in range(n_layers)],
+        {
+            "test_layer_output_poly": poly_test_vectors.layer_outputs,
+            "test_state_output_poly": poly_test_vectors.layer_states,
+        },
+        [
+            "test_layer_output_poly is the plaintext polynomial-circuit correctness reference",
+            "test_state_output[_poly] stores post-update recurrent state for debug attribution",
+        ],
+    )
 
     manifest: dict[str, list[int]] = {}
-    _save(out, "final_norm_w", model.backbone.norm_f.weight, manifest)
-
-    _save(out, "chain_input_embeddings", test_vectors.embeddings, manifest)
-    _save(out, "chain_expected_final", test_vectors.expected_final, manifest)
-    _save(out, "chain_expected_poly_final", poly_test_vectors.expected_final, manifest)
+    _save(
+        out,
+        manifest,
+        final_norm_w=model.backbone.norm_f.weight,
+        chain_input_embeddings=test_vectors.embeddings,
+        chain_expected_final=test_vectors.expected_final,
+        chain_expected_poly_final=poly_test_vectors.expected_final,
+    )
 
     autoregressive = None
     if autoregressive_prompt_tokens or autoregressive_generate_tokens:

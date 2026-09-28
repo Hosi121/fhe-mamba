@@ -6,44 +6,10 @@ import torch
 from fhemamba.generate import generate_greedy
 from fhemamba.reference import init_states, model_forward
 
-transformers = pytest.importorskip("transformers")
 
-
-def _tiny_mamba1():
-    torch.manual_seed(7)
-    config = transformers.MambaConfig(
-        vocab_size=97,
-        hidden_size=32,
-        intermediate_size=64,
-        state_size=8,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        time_step_rank=4,
-        use_mambapy=False,
-    )
-    return transformers.MambaForCausalLM(config).float().eval()
-
-
-def _tiny_mamba2():
-    torch.manual_seed(19)
-    config = transformers.Mamba2Config(
-        vocab_size=97,
-        hidden_size=32,
-        expand=2,
-        num_heads=4,
-        head_dim=16,
-        state_size=8,
-        n_groups=2,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        chunk_size=8,
-    )
-    return transformers.Mamba2ForCausalLM(config).float().eval()
-
-
-@pytest.mark.parametrize("factory", [_tiny_mamba1, _tiny_mamba2])
-def test_token_by_token_decode_matches_full_forward(factory) -> None:
-    model = factory()
+@pytest.mark.parametrize("architecture", [1, 2])
+def test_token_by_token_decode_matches_full_forward(model_factory, architecture) -> None:
+    model = model_factory(architecture, **({"n_groups": 2} if architecture == 2 else {}))
     torch.manual_seed(29)
     ids = torch.randint(0, 97, (1, 17))
     full = model_forward(model, ids)["logits"]
@@ -58,9 +24,9 @@ def test_token_by_token_decode_matches_full_forward(factory) -> None:
     assert diff < 1e-4, f"decode path diverged from full forward by {diff}"
 
 
-@pytest.mark.parametrize("factory", [_tiny_mamba1, _tiny_mamba2])
-def test_stateful_prefill_then_decode_matches_full_forward(factory) -> None:
-    model = factory()
+@pytest.mark.parametrize("architecture", [1, 2])
+def test_stateful_prefill_then_decode_matches_full_forward(model_factory, architecture) -> None:
+    model = model_factory(architecture, **({"n_groups": 2} if architecture == 2 else {}))
     torch.manual_seed(31)
     ids = torch.randint(0, 97, (1, 21))
     full = model_forward(model, ids)["logits"]
@@ -76,10 +42,10 @@ def test_stateful_prefill_then_decode_matches_full_forward(factory) -> None:
     assert torch.allclose(full[:, 13:], got_last, atol=1e-4)
 
 
-@pytest.mark.parametrize("factory", [_tiny_mamba1, _tiny_mamba2])
+@pytest.mark.parametrize("architecture", [1, 2])
 @pytest.mark.parametrize("length", [1, 64, 129])
-def test_prefill_state_owns_only_its_logical_storage(factory, length) -> None:
-    model = factory()
+def test_prefill_state_owns_only_its_logical_storage(model_factory, architecture, length) -> None:
+    model = model_factory(architecture, **({"n_groups": 2} if architecture == 2 else {}))
     torch.manual_seed(31)
     ids = torch.randint(0, 97, (1, length + 1))
     states = init_states(model)
@@ -93,9 +59,9 @@ def test_prefill_state_owns_only_its_logical_storage(factory, length) -> None:
     assert torch.allclose(decoded, full, atol=1e-4)
 
 
-@pytest.mark.parametrize("factory", [_tiny_mamba1, _tiny_mamba2])
-def test_greedy_generation_matches_hf_generate(factory) -> None:
-    model = factory()
+@pytest.mark.parametrize("architecture", [1, 2])
+def test_greedy_generation_matches_hf_generate(model_factory, architecture) -> None:
+    model = model_factory(architecture, **({"n_groups": 2} if architecture == 2 else {}))
     torch.manual_seed(37)
     ids = torch.randint(0, 97, (1, 9))
     hf_tokens = model.generate(ids, max_new_tokens=6, do_sample=False, pad_token_id=0)[

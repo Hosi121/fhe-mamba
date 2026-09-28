@@ -99,6 +99,43 @@ are unchanged. The ladder and gated-norm sweep share `QualityStudy` recording,
 closed-loop fitting and evaluation; state coverage and gate ablations reuse the
 payload/provenance helpers as well.
 
+## Shared Python contracts
+
+The packed runner's function signature owns option defaults, CLI argument types
+and native flag order. Keep preflight and result validation explicit; deriving
+arguments must not bypass either gate. DGX generation uses one mode mapping for
+request metadata, environment switches and the corresponding native evidence.
+
+Fixed-input and autoregressive Mamba-2 exports share a stateful trace collector
+and layer-reference writer in `m1_payload.py`. The writer preserves the native
+float32 format, tensor names and legacy metadata representation. Noise probes
+share a prefill/decode boundary, with private state copies for each perturbation.
+
+Test model/tokenizer factories live in `tests/conftest.py`. Reference tests cover
+both architectures with their original tolerances; native-evidence cases retain
+separate parameterized failures for missing fields, booleans, invalid counts and
+security mismatches. Expected results must remain independent of production
+validation predicates. Preserve these distinctions when reducing duplication.
+
+## Test scope
+
+Keep tests for independently observable failures: reference arithmetic, state
+ownership, frozen payloads, security and precision gates, provenance, and process
+lifecycle. A test count is not a quality target. Parameterize distinct inputs;
+share setup without importing the production validator as the expected answer.
+
+Native-result defects are checked once through the packed runner. Budget tests
+separately check option forwarding, unchanged success/failure results, deadlines
+and charging, with real subprocess cases for success, missing output and timeout.
+Do not cross every evidence defect with both budget modes. Campaign acceptance
+and GPU preflight cases share setup while retaining each distinct failure.
+
+Source-fragment assertions and one-time retired-name checks have been removed.
+Keep executable platform/CLI contracts, published-evidence availability and
+private-file boundaries. CPU checks compile and run native CPU contracts; they
+do not establish GPU build correctness, patch semantics or encrypted accuracy.
+Those still require native build and GPU qualification.
+
 ## Native decomposition queue
 
 `stage1_mamba2_decode_fideslib.cpp` currently combines orchestration, cache

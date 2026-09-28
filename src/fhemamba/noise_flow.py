@@ -51,6 +51,26 @@ def _linf_noise(shape: torch.Size, delta: float, gen: torch.Generator, like: tor
     return noise.to(device=like.device, dtype=like.dtype)
 
 
+class _DecodePoint:
+    """Prefill once; every baseline or perturbation starts from a private state copy."""
+
+    def __init__(self, model, prompt_ids):
+        self.model, self.token = model, prompt_ids[:, -1:]
+        self.states = init_states(model, batch_size=prompt_ids.shape[0])
+        model_forward(
+            model, prompt_ids[:, :-1], scan="chunked", states=self.states, output_logits=False
+        )
+
+    def decode(self, states):
+        return model_forward(
+            self.model, self.token, states=states, output_hidden_states=True, output_logits=False
+        )["hidden_states"]
+
+
+def _gain(value, reference, delta):
+    return float((value - reference).abs().amax()) / delta
+
+
 @torch.no_grad()
 def measure_amplification(
     model,
@@ -69,27 +89,9 @@ def measure_amplification(
     """
     _validate_probe_args(prompt_ids, delta, probes)
     gen = torch.Generator().manual_seed(seed)
-    next_tok = prompt_ids[:, -1:]
-
-    # Prefill ONCE; per-probe states are cheap clones (re-prefilling per probe
-    # would cost n_layers x probes full prefills).
-    prefill_states = init_states(model, batch_size=prompt_ids.shape[0])
-    model_forward(
-        model,
-        prompt_ids[:, :-1],
-        scan="chunked",
-        states=prefill_states,
-        output_logits=False,
-    )
-
-    base_states = _clone_states(prefill_states)
-    base_hidden = model_forward(
-        model,
-        next_tok,
-        states=base_states,
-        output_hidden_states=True,
-        output_logits=False,
-    )["hidden_states"][-1][0, -1]
+    point = _DecodePoint(model, prompt_ids)
+    base_states = _clone_states(point.states)
+    base_hidden = point.decode(base_states)[-1][0, -1]
 
     n_layers = len(model.backbone.layers)
     lambda_out = []
@@ -98,26 +100,17 @@ def measure_amplification(
         out_amps = []
         carry_amps = []
         for _ in range(probes):
-            states = _clone_states(prefill_states)
+            states = _clone_states(point.states)
             # Generate on CPU so a fixed seed gives the same direction on CPU
             # and CUDA, then normalize the actual perturbation. Dividing an
             # unnormalized randn probe by ``delta`` folds the random tensor's
             # maximum coordinate into the reported gain.
             noise = _linf_noise(states[layer].ssm.shape, delta, gen, states[layer].ssm)
             states[layer].ssm = states[layer].ssm + noise
-            hidden = model_forward(
-                model,
-                next_tok,
-                states=states,
-                output_hidden_states=True,
-                output_logits=False,
-            )["hidden_states"][-1][0, -1]
-            out_amps.append(float((hidden - base_hidden).abs().max()) / delta)
-            # carry = how much of the perturbation survives in the SAME
-            # layer's state after one token step.
-            carry_amps.append(
-                float((states[layer].ssm - base_states[layer].ssm).abs().max()) / delta
-            )
+            hidden = point.decode(states)[-1][0, -1]
+            out_amps.append(_gain(hidden, base_hidden, delta))
+            # Carry measures the perturbation surviving in the same layer.
+            carry_amps.append(_gain(states[layer].ssm, base_states[layer].ssm, delta))
         lambda_out.append(sum(out_amps) / probes)
         lambda_carry.append(sum(carry_amps) / probes)
     return {
@@ -158,15 +151,8 @@ def measure_group_amplification(
         raise ValueError("heads_per_group must be at least one")
 
     gen = torch.Generator().manual_seed(seed)
-    next_tok = prompt_ids[:, -1:]
-    prefill_states = init_states(model, batch_size=prompt_ids.shape[0])
-    model_forward(
-        model,
-        prompt_ids[:, :-1],
-        scan="chunked",
-        states=prefill_states,
-        output_logits=False,
-    )
+    point = _DecodePoint(model, prompt_ids)
+    prefill_states = point.states
 
     group_counts = []
     for layer, state in enumerate(prefill_states):
@@ -191,14 +177,8 @@ def measure_group_amplification(
             if any(not math.isfinite(scale) or scale <= 0 for scale in scales):
                 raise ValueError(f"state_group_scales[{layer}] must be positive and finite")
 
-    base_states = _clone_states(prefill_states)
-    base_outputs = model_forward(
-        model,
-        next_tok,
-        states=base_states,
-        output_hidden_states=True,
-        output_logits=False,
-    )["hidden_states"]
+    base_states = _clone_states(point.states)
+    base_outputs = point.decode(base_states)
     base_final = base_outputs[-1][..., -1, :]
 
     records = []
@@ -210,36 +190,21 @@ def measure_group_amplification(
             carry_gains = []
             final_gains = []
             for _ in range(probes):
-                states = _clone_states(prefill_states)
+                states = _clone_states(point.states)
                 target = states[layer].ssm[:, head_start:head_end]
                 target.add_(_linf_noise(target.shape, delta, gen, target))
-                outputs = model_forward(
-                    model,
-                    next_tok,
-                    states=states,
-                    output_hidden_states=True,
-                    output_logits=False,
-                )["hidden_states"]
+                outputs = point.decode(states)
                 boundary_gains.append(
-                    float(
-                        (outputs[layer][..., -1, :] - base_outputs[layer][..., -1, :]).abs().amax()
-                    )
-                    / delta
+                    _gain(outputs[layer][..., -1, :], base_outputs[layer][..., -1, :], delta)
                 )
                 carry_gains.append(
-                    float(
-                        (
-                            states[layer].ssm[:, head_start:head_end]
-                            - base_states[layer].ssm[:, head_start:head_end]
-                        )
-                        .abs()
-                        .amax()
+                    _gain(
+                        states[layer].ssm[:, head_start:head_end],
+                        base_states[layer].ssm[:, head_start:head_end],
+                        delta,
                     )
-                    / delta
                 )
-                final_gains.append(
-                    float((outputs[-1][..., -1, :] - base_final).abs().amax()) / delta
-                )
+                final_gains.append(_gain(outputs[-1][..., -1, :], base_final, delta))
 
             scale = state_group_scales[layer][group] if state_group_scales is not None else 1.0
             final_gain = sum(final_gains) / probes

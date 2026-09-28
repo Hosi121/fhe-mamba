@@ -13,14 +13,30 @@ from pathlib import Path
 
 from fhemamba._env import block_broken_torchvision
 from fhemamba.benchmarks.io import file_sha256 as sha256
-from fhemamba.benchmarks.io import payload_sha256, repository_root
+from fhemamba.benchmarks.io import payload_sha256, repository_root, write_json
 from fhemamba.generation import generation_report, prepare_generation
 
 ROOT = repository_root()
 
 
-def write_json(path, value):
-    path.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
+# Each option owns its request field, environment switch and native evidence path.
+_MODES = {
+    "joint_periodic_coefficients": (
+        "periodic_coefficient_mode",
+        "schedule",
+        "periodic_coefficients",
+    ),
+    "joint_subring_encoding": ("subring_encoding_mode", "schedule", "subring_encoding"),
+    "fast_plaintext_upload": ("fast_plaintext_upload_mode", "encoding", "fast_upload"),
+    "direct_plaintext_upload": ("direct_plaintext_upload_mode", "encoding", "direct_upload"),
+    "gpu_plaintext_ntt": ("gpu_plaintext_ntt_mode", "encoding", "gpu_ntt"),
+    "move_plaintext_coefficients": (
+        "move_plaintext_coefficients_mode",
+        "encoding",
+        "move_coefficients",
+    ),
+    "borrow_plaintext_upload": ("borrow_plaintext_upload_mode", "encoding", "borrow_upload"),
+}
 
 
 def main():
@@ -95,13 +111,8 @@ def main():
     )
     del model
     request["input_payload_sha256"] = payload_sha256(payload)
-    request["joint_periodic_coefficients"] = args.joint_periodic_coefficients
-    request["joint_subring_encoding"] = args.joint_subring_encoding
-    request["fast_plaintext_upload"] = args.fast_plaintext_upload
-    request["direct_plaintext_upload"] = args.direct_plaintext_upload
-    request["gpu_plaintext_ntt"] = args.gpu_plaintext_ntt
-    request["move_plaintext_coefficients"] = args.move_plaintext_coefficients
-    request["borrow_plaintext_upload"] = args.borrow_plaintext_upload
+    modes = {name: getattr(args, name) for name in _MODES}
+    request.update(modes)
     write_json(args.output_dir / "request.json", request)
     manifest = json.loads(
         (ROOT / "experiments/manifests/dgx_spark_stabilized_generation.json").read_text()
@@ -111,13 +122,7 @@ def main():
         {
             "TOKENS": str(evaluations),
             "LAYERS": str(request["n_layers"]),
-            "JOINT_PERIODIC_COEFFICIENTS": "1" if args.joint_periodic_coefficients else "0",
-            "JOINT_SUBRING_ENCODING": "1" if args.joint_subring_encoding else "0",
-            "FAST_PLAINTEXT_UPLOAD": "1" if args.fast_plaintext_upload else "0",
-            "DIRECT_PLAINTEXT_UPLOAD": "1" if args.direct_plaintext_upload else "0",
-            "GPU_PLAINTEXT_NTT": "1" if args.gpu_plaintext_ntt else "0",
-            "MOVE_PLAINTEXT_COEFFICIENTS": "1" if args.move_plaintext_coefficients else "0",
-            "BORROW_PLAINTEXT_UPLOAD": "1" if args.borrow_plaintext_upload else "0",
+            **{name.upper(): str(int(enabled)) for name, enabled in modes.items()},
         }
     )
     manifest["acceptance"].update({"tokens": evaluations, "layers": request["n_layers"]})
@@ -199,29 +204,13 @@ def main():
     report = generation_report(
         native, chain, request, tokenizer, payload_sha256=payload_sha256(payload)
     )
-    report["checks"]["periodic_coefficient_mode"] = (
-        native["parameters"]["joint_gate_schedule"].get("periodic_coefficients", False)
-        is args.joint_periodic_coefficients
-    )
-    report["checks"]["subring_encoding_mode"] = (
-        native["parameters"]["joint_gate_schedule"].get("subring_encoding", False)
-        is args.joint_subring_encoding
-    )
-    encoding = native["measurements"].get("plaintext_encoding", {})
-    report["checks"]["fast_plaintext_upload_mode"] = (
-        encoding.get("fast_upload", False) is args.fast_plaintext_upload
-    )
-    report["checks"]["gpu_plaintext_ntt_mode"] = (
-        encoding.get("gpu_ntt", False) is args.gpu_plaintext_ntt
-    )
-    report["checks"]["direct_plaintext_upload_mode"] = (
-        encoding.get("direct_upload", False) is args.direct_plaintext_upload
-    )
-    report["checks"]["move_plaintext_coefficients_mode"] = (
-        encoding.get("move_coefficients", False) is args.move_plaintext_coefficients
-    )
-    report["checks"]["borrow_plaintext_upload_mode"] = (
-        encoding.get("borrow_upload", False) is args.borrow_plaintext_upload
+    evidence = {
+        "schedule": native["parameters"]["joint_gate_schedule"],
+        "encoding": native["measurements"].get("plaintext_encoding", {}),
+    }
+    report["checks"].update(
+        (check, evidence[group].get(field, False) is modes[name])
+        for name, (check, group, field) in _MODES.items()
     )
     campaign = json.loads((local_results / "campaign.json").read_text())
     report["checks"]["campaign_passed"] = (

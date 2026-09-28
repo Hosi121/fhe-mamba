@@ -28,19 +28,19 @@ def _run(
     *,
     timeout=600,
     tolerance=0.001,
+    frontier_live_limit=0,
     legacy_routing=False,
     trace_levels=False,
     planned_refresh=False,
     bootstrap_passes=2,
     batch_refresh=False,
-    merge_refresh_correction=False,
     profile_evaluation=False,
     inplace_ops=False,
     cache_plaintexts=False,
     indexed_mask_cache=False,
-    plaintext_cache_capacity=None,
     fast_plaintext_upload=False,
     gpu_plaintext_ntt=False,
+    merge_refresh_correction=False,
     direct_plaintext_upload=False,
     move_plaintext_coefficients=False,
     borrow_plaintext_upload=False,
@@ -50,7 +50,6 @@ def _run(
     reuse_public_ciphertexts=False,
     compact_weights=False,
     frontier_refresh=False,
-    frontier_live_limit=0,
     s2c_first=False,
     gpu_plaintext_rns=False,
     gpu_addend_rns=False,
@@ -58,13 +57,15 @@ def _run(
     batch_plaintext_rns=False,
     fuse_plaintext_rns_ntt=False,
     prefetch_plaintexts=False,
-    prefetch_workers=1,
     hoist_rotations=False,
     share_chebyshev=False,
     gpu_dual_ring=False,
+    prefetch_workers=1,
     security="not-set",
     security_digits=None,
+    plaintext_cache_capacity=None,
 ):
+    options = locals().copy()
     binary, payload, output = binary.resolve(), payload.resolve(), output.resolve()
     if not math.isfinite(timeout) or timeout <= 0 or not math.isfinite(tolerance) or tolerance <= 0:
         raise ValueError("timeout and tolerance must be finite and positive")
@@ -143,62 +144,17 @@ def _run(
     ]
     if client:
         command.extend(["--client-head", str(payload / "client_head.f32")])
-    if frontier_live_limit:
-        command.extend(["--frontier-live-limit", str(frontier_live_limit)])
-    if legacy_routing:
-        command.append("--legacy-routing")
-    if trace_levels:
-        command.append("--trace-levels")
-    if planned_refresh:
-        command.append("--planned-refresh")
-    if bootstrap_passes != 2:
-        command.extend(["--bootstrap-passes", str(bootstrap_passes)])
-    if batch_refresh:
-        command.append("--batch-refresh")
-    if profile_evaluation:
-        command.append("--profile-evaluation")
-    if inplace_ops:
-        command.append("--inplace-ops")
-    if cache_plaintexts:
-        command.append("--cache-plaintexts")
-    if indexed_mask_cache:
-        command.append("--indexed-mask-cache")
-    if fast_plaintext_upload:
-        command.append("--fast-plaintext-upload")
-    if gpu_plaintext_ntt:
-        command.append("--gpu-plaintext-ntt")
-    for enabled, flag in (
-        (merge_refresh_correction, "--merge-refresh-correction"),
-        (direct_plaintext_upload, "--direct-plaintext-upload"),
-        (move_plaintext_coefficients, "--move-plaintext-coefficients"),
-        (borrow_plaintext_upload, "--borrow-plaintext-upload"),
-        (bsgs_routing_stages, "--bsgs-routing-stages"),
-        (naf_rotations, "--naf-rotations"),
-        (reuse_dead_inputs, "--reuse-dead-inputs"),
-        (reuse_public_ciphertexts, "--reuse-public-ciphertexts"),
-        (compact_weights, "--compact-weights"),
-        (frontier_refresh, "--frontier-refresh"),
-        (s2c_first, "--s2c-first"),
-        (gpu_plaintext_rns, "--gpu-plaintext-rns"),
-        (gpu_addend_rns, "--gpu-addend-rns"),
-        (gpu_plaintext_fft, "--gpu-plaintext-fft"),
-        (batch_plaintext_rns, "--batch-plaintext-rns"),
-        (fuse_plaintext_rns_ntt, "--fuse-plaintext-rns-ntt"),
-        (prefetch_plaintexts, "--prefetch-plaintexts"),
-        (hoist_rotations, "--hoist-rotations"),
-        (share_chebyshev, "--share-chebyshev"),
-        (gpu_dual_ring, "--gpu-dual-ring"),
-    ):
-        if enabled:
-            command.append(flag)
-    if prefetch_workers != 1:
-        command.extend(["--prefetch-workers", str(prefetch_workers)])
-    if security != "not-set":
-        command.extend(["--security", security])
-    if security_digits is not None:
-        command.extend(["--security-digits", str(security_digits)])
-    if plaintext_cache_capacity is not None:
-        command.extend(["--plaintext-cache-capacity", str(plaintext_cache_capacity)])
+    # The callable signature owns defaults for both native forwarding and the CLI.
+    for name, parameter in inspect.signature(_run).parameters.items():
+        if name in {"binary", "payload", "output", "timeout", "tolerance"}:
+            continue
+        value, default = options[name], parameter.default
+        flag = "--" + name.replace("_", "-")
+        if isinstance(default, bool):
+            if value:
+                command.append(flag)
+        elif value != default:
+            command.extend((flag, str(value)))
     record = {
         "schema": "fhemamba-packed-run-v1",
         "requested_security": security,
@@ -357,48 +313,27 @@ def run(binary, payload, output, *, timeout=600, budget_file=None, budget_second
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="fhemamba benchmark packed", description=__doc__)
-    parser.add_argument("--binary", type=Path, required=True)
-    parser.add_argument("--payload", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--timeout", type=float, default=600)
-    parser.add_argument("--tolerance", type=float, default=0.001)
-    parser.add_argument("--legacy-routing", action="store_true")
-    parser.add_argument("--trace-levels", action="store_true")
-    parser.add_argument("--planned-refresh", action="store_true")
-    parser.add_argument("--bootstrap-passes", type=int, choices=(1, 2), default=2)
-    parser.add_argument("--batch-refresh", action="store_true")
-    parser.add_argument("--merge-refresh-correction", action="store_true")
-    parser.add_argument("--profile-evaluation", action="store_true")
-    parser.add_argument("--inplace-ops", action="store_true")
-    parser.add_argument("--cache-plaintexts", action="store_true")
-    parser.add_argument("--indexed-mask-cache", action="store_true")
-    parser.add_argument("--plaintext-cache-capacity", type=int)
-    parser.add_argument("--fast-plaintext-upload", action="store_true")
-    parser.add_argument("--gpu-plaintext-ntt", action="store_true")
-    parser.add_argument("--direct-plaintext-upload", action="store_true")
-    parser.add_argument("--move-plaintext-coefficients", action="store_true")
-    parser.add_argument("--borrow-plaintext-upload", action="store_true")
-    parser.add_argument("--bsgs-routing-stages", action="store_true")
-    parser.add_argument("--naf-rotations", action="store_true")
-    parser.add_argument("--reuse-dead-inputs", action="store_true")
-    parser.add_argument("--reuse-public-ciphertexts", action="store_true")
-    parser.add_argument("--compact-weights", action="store_true")
-    parser.add_argument("--frontier-refresh", action="store_true")
-    parser.add_argument("--frontier-live-limit", type=int, default=0)
-    parser.add_argument("--s2c-first", action="store_true")
-    parser.add_argument("--gpu-plaintext-rns", action="store_true")
-    parser.add_argument("--gpu-addend-rns", action="store_true")
-    parser.add_argument("--gpu-plaintext-fft", action="store_true")
+    choices = {
+        "bootstrap_passes": (1, 2),
+        "prefetch_workers": (1, 2),
+        "security": ("not-set", "128-classic"),
+    }
     rns = parser.add_mutually_exclusive_group()
-    rns.add_argument("--batch-plaintext-rns", action="store_true")
-    rns.add_argument("--fuse-plaintext-rns-ntt", action="store_true")
-    parser.add_argument("--prefetch-plaintexts", action="store_true")
-    parser.add_argument("--prefetch-workers", type=int, choices=(1, 2), default=1)
-    parser.add_argument("--hoist-rotations", action="store_true")
-    parser.add_argument("--share-chebyshev", action="store_true")
-    parser.add_argument("--gpu-dual-ring", action="store_true")
-    parser.add_argument("--security", choices=("not-set", "128-classic"), default="not-set")
-    parser.add_argument("--security-digits", type=int)
+    for name, parameter in inspect.signature(_run).parameters.items():
+        default = parameter.default
+        if default is inspect.Parameter.empty:
+            settings = {"type": Path, "required": True}
+        elif isinstance(default, bool):
+            settings = {"action": "store_true"}
+        else:
+            settings = {
+                "default": default,
+                "type": float if name in {"timeout", "tolerance"} else type(default or 0),
+            }
+        if name in choices:
+            settings["choices"] = choices[name]
+        group = rns if name in {"batch_plaintext_rns", "fuse_plaintext_rns_ntt"} else parser
+        group.add_argument("--" + name.replace("_", "-"), **settings)
     parser.add_argument("--budget-file", type=Path)
     parser.add_argument("--budget-seconds", type=float)
     args = parser.parse_args(argv)

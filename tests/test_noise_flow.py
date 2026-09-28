@@ -11,28 +11,11 @@ from fhemamba.noise_flow import (
     reanchor_cadence,
 )
 
-transformers = pytest.importorskip("transformers")
 
-
-def _tiny():
-    torch.manual_seed(19)
-    config = transformers.Mamba2Config(
-        vocab_size=97,
-        hidden_size=32,
-        expand=2,
-        num_heads=4,
-        head_dim=16,
-        state_size=8,
-        n_groups=1,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        chunk_size=8,
-    )
-    return transformers.Mamba2ForCausalLM(config).float().eval()
-
-
-def test_amplification_is_positive_and_finite() -> None:
-    model = _tiny()
+def test_amplification_is_positive_and_finite(
+    model_factory,
+) -> None:
+    model = model_factory()
     torch.manual_seed(5)
     ids = torch.randint(0, 97, (1, 8))
     amp = measure_amplification(model, ids, probes=2)
@@ -45,8 +28,10 @@ def test_amplification_is_positive_and_finite() -> None:
         assert 0.0 <= lc <= 1.01
 
 
-def test_group_amplification_matches_packed_groups_and_scales() -> None:
-    model = _tiny()
+def test_group_amplification_matches_packed_groups_and_scales(
+    model_factory,
+) -> None:
+    model = model_factory()
     ids = torch.arange(8).unsqueeze(0)
     scales = [[2.0, 3.0], [5.0, 7.0]]
     result = measure_group_amplification(
@@ -83,9 +68,11 @@ def test_group_amplification_matches_packed_groups_and_scales() -> None:
         ),
     ],
 )
-def test_group_amplification_rejects_incompatible_geometry(kwargs, message: str) -> None:
+def test_group_amplification_rejects_incompatible_geometry(
+    model_factory, kwargs, message: str
+) -> None:
     with pytest.raises(ValueError, match=message):
-        measure_group_amplification(_tiny(), torch.arange(8).unsqueeze(0), **kwargs)
+        measure_group_amplification(model_factory(), torch.arange(8).unsqueeze(0), **kwargs)
 
 
 def test_observed_state_impact_joins_group_telemetry() -> None:

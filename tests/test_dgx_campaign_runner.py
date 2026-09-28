@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shlex
 import signal
 import subprocess
 import sys
@@ -14,37 +15,24 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_cli_environment_overrides_are_recorded(tmp_path: Path) -> None:
-    manifest = tmp_path / "manifest.json"
-    manifest.write_text(
-        json.dumps(
-            {
-                "name": "portable-spark",
-                "defaults": {"PT_CACHE_GIB": "5"},
-                "experiments": [{"name": "candidate", "env": {"LOGARITHMIC_REPLICATION": "1"}}],
-            }
-        )
+def test_cli_environment_overrides_are_recorded(campaign) -> None:
+    campaign.configure(
+        {
+            "name": "portable-spark",
+            "defaults": {"PT_CACHE_GIB": "5"},
+            "experiments": [{"name": "candidate", "env": {"LOGARITHMIC_REPLICATION": "1"}}],
+        }
     )
-    output = tmp_path / "campaign.json"
-    subprocess.run(
-        [
-            sys.executable,
-            "experiments/execution/run_dgx_campaign.py",
-            "--manifest",
-            str(manifest),
-            "--output-json",
-            str(output),
-            "--dry-run",
-            "--env",
-            "INPUT_CHAIN=/payloads/with spaces",
-            "--env",
-            "PT_CACHE_GIB=7",
-        ],
-        cwd=ROOT,
+    campaign.run(
+        "--dry-run",
+        "--env",
+        "INPUT_CHAIN=/payloads/with spaces",
+        "--env",
+        "PT_CACHE_GIB=7",
         check=True,
         capture_output=True,
     )
-    environment = json.loads(output.read_text())["experiments"][0]["environment"]
+    environment = campaign.report["experiments"][0]["environment"]
     assert environment["INPUT_CHAIN"] == "/payloads/with spaces"
     assert environment["PT_CACHE_GIB"] == "7"
     assert environment["LOGARITHMIC_REPLICATION"] == "1"
@@ -284,35 +272,10 @@ def test_campaign_resume_hashes_and_rechecks_current_binary(tmp_path: Path, camp
     assert artifact["binary_sha256"] == record["environment"]["BINARY_SHA256"]
 
 
-def test_promoted_campaign_enforces_acceptance_contract(campaign) -> None:
-    campaign.configure(
-        {
-            "acceptance": {
-                "layers": 24,
-                "tokens": 2,
-                "max_abs_error_lte": 0.05,
-                "all_tokens_decrypt": True,
-                "autoregressive_tokens_match": True,
-                "zero_intermediate_decrypts": True,
-                "required_sync_profile": "full",
-            },
-            "defaults": {"LAYERS": "24", "FIDESLIB_SYNC_PROFILE": "full"},
-            "experiments": [{"name": "promoted"}],
-        }
-    )
-    completed = campaign.run(check=False)
-    payload = campaign.report
-    assert completed.returncode == 0
-    assert payload["passed"] is True
-    assert payload["infrastructure_ok"] is True
-    assert payload["promotion_passed"] is True
-    assert payload["acceptance"]["evaluated"] is True
-    assert payload["acceptance"]["issues"] == []
-
-
 @pytest.mark.parametrize(
     ("override", "issue_fragment", "infrastructure_ok"),
     [
+        ({}, None, True),
         ({"FAKE_ERROR": "0.2"}, "maximum error", True),
         ({"FAKE_ERROR": "nan"}, "maximum error", False),
         ({"FAKE_DECRYPT_FAILURE": "1"}, "successful decryption", True),
@@ -322,8 +285,8 @@ def test_promoted_campaign_enforces_acceptance_contract(campaign) -> None:
         ({"FAKE_SYNC_PROFILE": "bootstrap-lifetime"}, "sync profile", False),
     ],
 )
-def test_promoted_campaign_fails_closed_on_acceptance_miss(
-    override: dict[str, str], issue_fragment: str, infrastructure_ok: bool, campaign
+def test_promoted_campaign_enforces_acceptance_contract(
+    override: dict[str, str], issue_fragment: str | None, infrastructure_ok: bool, campaign
 ) -> None:
     campaign.configure(
         {
@@ -342,11 +305,16 @@ def test_promoted_campaign_fails_closed_on_acceptance_miss(
     )
     completed = campaign.run(check=False)
     payload = campaign.report
-    assert completed.returncode == 1
-    assert payload["passed"] is False
+    passed = issue_fragment is None
+    assert completed.returncode == (0 if passed else 1)
+    assert payload["passed"] is passed
     assert payload["infrastructure_ok"] is infrastructure_ok
-    assert payload["promotion_passed"] is False
-    assert any(issue_fragment in issue for issue in payload["acceptance"]["issues"])
+    assert payload["promotion_passed"] is passed
+    assert payload["acceptance"]["evaluated"] is True
+    if passed:
+        assert payload["acceptance"]["issues"] == []
+    else:
+        assert any(issue_fragment in issue for issue in payload["acceptance"]["issues"])
 
 
 @pytest.mark.parametrize(
@@ -395,13 +363,23 @@ def test_campaign_resume_rejects_stale_artifact_identity(
     assert record["issues"] == []
 
 
-def test_campaign_gpu_preflight_blocks_launch_on_occupied_gpu(tmp_path: Path, campaign) -> None:
+@pytest.mark.parametrize(
+    ("processes", "utilization", "gpu_index", "issue"),
+    [
+        pytest.param("123, 4096", 99, None, "GPU remained occupied", id="occupied"),
+        pytest.param("", 94, None, "utilization=94.0%", id="unreported-utilization"),
+        pytest.param("", 0, 3, None, id="selected-gpu"),
+    ],
+)
+def test_campaign_gpu_preflight(tmp_path, campaign, processes, utilization, gpu_index, issue):
+    calls = tmp_path / "nvidia-smi-calls.txt"
     nvidia_smi = tmp_path / "nvidia-smi"
     nvidia_smi.write_text(
         "#!/bin/sh\n"
-        'case "$1" in\n'
-        "  --query-compute-apps=*) printf '123, 4096\\n' ;;\n"
-        "  --query-gpu=*) printf '99\\n' ;;\n"
+        f"printf '%s\\n' \"$*\" >> {shlex.quote(str(calls))}\n"
+        'case "$*" in\n'
+        f"  *--query-compute-apps=*) printf '%s\\n' {shlex.quote(processes)} ;;\n"
+        f"  *--query-gpu=*) printf '{utilization}\\n' ;;\n"
         "esac\n",
         encoding="utf-8",
     )
@@ -414,82 +392,28 @@ def test_campaign_gpu_preflight_blocks_launch_on_occupied_gpu(tmp_path: Path, ca
                 "nvidia_smi": str(nvidia_smi),
                 "poll_seconds": 0.01,
                 "timeout_seconds": 0,
+                "max_utilization_percent": 5,
+                **({"gpu_index": gpu_index} if gpu_index is not None else {}),
             },
             "defaults": {"COUNTER_FILE": str(counter)},
-            "experiments": [{"name": "blocked", "env": {"LAYERS": "2"}}],
+            "experiments": [{"name": "preflight", "env": {"LAYERS": "2"}}],
         }
     )
     completed = campaign.run(check=False)
-    payload = campaign.report
-    assert completed.returncode == 1
-    assert not counter.exists()
-    assert payload["experiments"][0]["state"] == "preflight-failed"
-    assert "GPU remained occupied" in payload["experiments"][0]["issues"][0]
-
-
-def test_campaign_gpu_preflight_blocks_unreported_gpu_utilization(tmp_path: Path, campaign) -> None:
-    nvidia_smi = tmp_path / "nvidia-smi"
-    nvidia_smi.write_text(
-        "#!/bin/sh\n"
-        'case "$1" in\n'
-        "  --query-compute-apps=*) exit 0 ;;\n"
-        "  --query-gpu=*) printf '94\\n' ;;\n"
-        "esac\n",
-        encoding="utf-8",
-    )
-    nvidia_smi.chmod(0o755)
-    campaign.configure(
-        {
-            "gpu_preflight": {
-                "required": True,
-                "nvidia_smi": str(nvidia_smi),
-                "poll_seconds": 0.01,
-                "timeout_seconds": 0,
-                "max_utilization_percent": 5,
-            },
-            "experiments": [{"name": "blocked", "env": {"LAYERS": "2"}}],
-        }
-    )
-    completed = campaign.run(check=False)
-    payload = campaign.report
-    assert completed.returncode == 1
-    issue = payload["experiments"][0]["issues"][0]
-    assert "utilization=94.0%" in issue
-
-
-def test_campaign_gpu_preflight_targets_manifest_gpu(tmp_path: Path, campaign) -> None:
-    calls = tmp_path / "nvidia-smi-calls.txt"
-    nvidia_smi = tmp_path / "nvidia-smi"
-    nvidia_smi.write_text(
-        "#!/bin/sh\n"
-        f"printf '%s\\n' \"$*\" >> {calls}\n"
-        'if [ "$1" != "-i" ] || [ "$2" != "3" ]; then exit 9; fi\n'
-        'case "$3" in\n'
-        "  --query-compute-apps=*) exit 0 ;;\n"
-        "  --query-gpu=*) printf '0\\n' ;;\n"
-        "esac\n",
-        encoding="utf-8",
-    )
-    nvidia_smi.chmod(0o755)
-    campaign.configure(
-        {
-            "gpu_preflight": {
-                "required": True,
-                "gpu_index": 3,
-                "nvidia_smi": str(nvidia_smi),
-                "poll_seconds": 0.01,
-                "timeout_seconds": 0,
-            },
-            "experiments": [{"name": "targeted", "env": {"LAYERS": "2"}}],
-        }
-    )
-    completed = campaign.run(check=False)
-    payload = campaign.report
-    assert completed.returncode == 0
-    assert payload["experiments"][0]["candidate_passed"] is True
+    record = campaign.report["experiments"][0]
+    if issue is None:
+        assert completed.returncode == 0
+        assert record["candidate_passed"] is True
+        assert counter.read_text() == "1"
+    else:
+        assert completed.returncode == 1
+        assert not counter.exists()
+        assert record["state"] == "preflight-failed"
+        assert issue in record["issues"][0]
     recorded_calls = calls.read_text(encoding="utf-8").splitlines()
     assert len(recorded_calls) == 2
-    assert all(call.startswith("-i 3 --query-") for call in recorded_calls)
+    prefix = "--query-" if gpu_index is None else f"-i {gpu_index} --query-"
+    assert all(call.startswith(prefix) for call in recorded_calls)
 
 
 def test_campaign_sighup_terminates_active_runner_group(tmp_path: Path, campaign) -> None:

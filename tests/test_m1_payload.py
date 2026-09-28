@@ -12,36 +12,9 @@ from fhemamba.ops import PolyOps
 transformers = pytest.importorskip("transformers")
 
 
-class _IdTokenizer:
-    def __call__(self, text, return_tensors=None):
-        ids = torch.tensor([[(ord(c) % 90) + 3 for c in text[:64]]])
-
-        class R:
-            input_ids = ids
-
-        return R()
-
-
-def _tiny_model(seed=19, n_groups=1):
-    torch.manual_seed(seed)
-    config = transformers.Mamba2Config(
-        vocab_size=97,
-        hidden_size=32,
-        expand=2,
-        num_heads=4,
-        head_dim=16,
-        state_size=8,
-        n_groups=n_groups,
-        num_hidden_layers=2,
-        conv_kernel=4,
-        chunk_size=8,
-    )
-    return transformers.Mamba2ForCausalLM(config).float().eval()
-
-
-def test_export_round_trip(tmp_path) -> None:
-    model = _tiny_model()
-    out = export_m1_payload(model, _IdTokenizer(), tmp_path / "payload", n_test_tokens=3)
+def test_export_round_trip(model_factory, tokenizer_factory, tmp_path) -> None:
+    model = model_factory()
+    out = export_m1_payload(model, tokenizer_factory(), tmp_path / "payload", n_test_tokens=3)
 
     meta = json.loads((out / "meta.json").read_text())
     assert meta["dims"]["d_inner"] == 64
@@ -88,8 +61,8 @@ def test_export_round_trip(tmp_path) -> None:
     assert states.shape == (3, 4, 16, 8)
 
 
-def test_chain_export(tmp_path, monkeypatch) -> None:
-    model = _tiny_model()
+def test_chain_export(model_factory, tokenizer_factory, tmp_path, monkeypatch) -> None:
+    model = model_factory()
     import fhemamba.m1_payload as payload_module
 
     monkeypatch.setattr(
@@ -97,7 +70,7 @@ def test_chain_export(tmp_path, monkeypatch) -> None:
     )
     out = payload_module.export_chain_payload(
         model,
-        _IdTokenizer(),
+        tokenizer_factory(),
         tmp_path / "chain",
         n_test_tokens=2,
         autoregressive_prompt_tokens=2,
@@ -110,7 +83,9 @@ def test_chain_export(tmp_path, monkeypatch) -> None:
     assert chain["gated_norm"] == {"init_degree": 15, "newton_iterations": 3}
     assert (
         chain["test_token_ids"]
-        == _IdTokenizer()("The capital of France is", return_tensors="pt").input_ids[0, :2].tolist()
+        == tokenizer_factory()("The capital of France is", return_tensors="pt")
+        .input_ids[0, :2]
+        .tolist()
     )
     for d in chain["layer_dirs"]:
         meta = json.loads((out / d / "meta.json").read_text())
@@ -211,8 +186,10 @@ def test_chain_export(tmp_path, monkeypatch) -> None:
     assert selected == autoregressive["poly_generated_ids"]
 
 
-def test_add_autoregressive_assets_to_existing_chain(tmp_path, monkeypatch) -> None:
-    model = _tiny_model(seed=23)
+def test_add_autoregressive_assets_to_existing_chain(
+    model_factory, tokenizer_factory, tmp_path, monkeypatch
+) -> None:
+    model = model_factory(seed=23)
     import fhemamba.m1_payload as payload_module
 
     monkeypatch.setattr(
@@ -220,7 +197,7 @@ def test_add_autoregressive_assets_to_existing_chain(tmp_path, monkeypatch) -> N
     )
     out = payload_module.export_chain_payload(
         model,
-        _IdTokenizer(),
+        tokenizer_factory(),
         tmp_path / "chain",
         n_test_tokens=2,
     )
@@ -230,7 +207,7 @@ def test_add_autoregressive_assets_to_existing_chain(tmp_path, monkeypatch) -> N
 
     payload_module.export_autoregressive_client_payload(
         model,
-        _IdTokenizer(),
+        tokenizer_factory(),
         out,
         prompt_tokens=2,
         generate_tokens=4,
@@ -271,27 +248,31 @@ def test_legacy_const_newton_payload_spec() -> None:
     assert torch.equal(operation(values), expected)
 
 
-def test_export_rejects_native_incompatible_groups(tmp_path) -> None:
-    model = _tiny_model(n_groups=2)
+def test_export_rejects_native_incompatible_groups(
+    model_factory, tokenizer_factory, tmp_path
+) -> None:
+    model = model_factory(n_groups=2)
     with pytest.raises(ValueError, match="n_groups == 1"):
-        export_m1_payload(model, _IdTokenizer(), tmp_path / "payload")
+        export_m1_payload(model, tokenizer_factory(), tmp_path / "payload")
 
 
-def test_carried_bounds_do_not_depend_on_evaluation_prompt(tmp_path) -> None:
-    model = _tiny_model()
-    first = export_m1_payload(model, _IdTokenizer(), tmp_path / "first", prompt="first")
-    second = export_m1_payload(model, _IdTokenizer(), tmp_path / "second", prompt="second")
+def test_carried_bounds_do_not_depend_on_evaluation_prompt(
+    model_factory, tokenizer_factory, tmp_path
+) -> None:
+    model = model_factory()
+    first = export_m1_payload(model, tokenizer_factory(), tmp_path / "first", prompt="first")
+    second = export_m1_payload(model, tokenizer_factory(), tmp_path / "second", prompt="second")
     first_meta = json.loads((first / "meta.json").read_text())
     second_meta = json.loads((second / "meta.json").read_text())
     assert first_meta["carried_bounds"] == second_meta["carried_bounds"]
 
 
-def test_ppl_ladder_excludes_checkpoint_observations(tmp_path, monkeypatch):
+def test_ppl_ladder_excludes_checkpoint_observations(model_factory, tmp_path, monkeypatch):
     import runpy
     import sys
     from pathlib import Path
 
-    model = _tiny_model()
+    model = model_factory()
     monkeypatch.setattr(transformers.AutoModelForCausalLM, "from_pretrained", lambda *_: model)
     monkeypatch.setattr(transformers.AutoTokenizer, "from_pretrained", lambda *_: None)
     monkeypatch.setattr("fhemamba.benchmarks.io.repository_root", lambda: tmp_path)
