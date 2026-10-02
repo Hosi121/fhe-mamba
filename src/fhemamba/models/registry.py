@@ -72,6 +72,11 @@ class ModelRegistry:
 registry = ModelRegistry(
     [
         ModelRegistration(
+            "mamba1",
+            "fhemamba.models.mamba1:ADAPTER",
+            lambda config: config.get("model_type") == "mamba",
+        ),
+        ModelRegistration(
             "mamba2",
             "fhemamba.models.mamba2:ADAPTER",
             lambda config: config.get("model_type") == "mamba2",

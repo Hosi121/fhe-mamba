@@ -62,6 +62,9 @@ Model loading, preparation and native adapters now use an explicit registry;
 model-specific arithmetic and acceptance remain in their integrations.
 `inspect-model` reports capabilities without loading weights. See the
 [integration contract](model-integration.md) for adding models and preparation options.
+Mamba-1 Transformers checkpoints now support exact CPU generation through this
+registry, checked against upstream generation at three small geometries and a
+local 130M CPU smoke run. Mamba-1 polynomial and CKKS execution remain unsupported.
 
 Mamba-3 client heads now use verified read-only blobs shared by sibling payloads;
 original paths remain readable through relative symlinks. See the

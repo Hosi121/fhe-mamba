@@ -48,6 +48,9 @@ uv run --no-sync fhemamba validate-artifacts --require-commit \
 
 ## Capabilities and limits
 
+- The common API accepts local Mamba-1, Mamba-2 and Mamba-3 SISO checkpoints.
+  Mamba-1 supports CPU exact generation; inspect backend requirements with
+  `fhemamba inspect-model --model /path/to/checkpoint`.
 - Encrypted runs cover Mamba-2-130M and Mamba-3 SISO 187M on the recorded
   prompts. Native GPU builds are separate from Python installation.
 - The current classical-128 Mamba-3 configuration qualifies **16 generated

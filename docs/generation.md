@@ -1,10 +1,16 @@
 # Generate from your own input
 
-The public API detects local **Mamba-2** and **Mamba-3 SISO** checkpoints from
-`config.json`. Inputs are token IDs; the CLI can also tokenize text.
+The public API detects local checkpoints from `config.json`.
+Inputs are token IDs; the CLI can also tokenize text.
 All backends use greedy, fixed-length generation:
 `max_new_tokens` excludes the prompt, and EOS does **not** stop generation early.
 There is no automatic download, sampling or plaintext fallback from CKKS.
+
+| Model | Checkpoint format | CPU exact | Polynomial / CKKS |
+| --- | --- | --- | --- |
+| Mamba-1 | Transformers (`model_type: mamba`), SiLU | Implemented | Not implemented |
+| Mamba-2 | Transformers (`model_type: mamba2`) | Implemented | Frozen joint-gate chain; experimental profile |
+| Mamba-3 SISO | State Spaces (`ssm_cfg.layer: Mamba3`) | Implemented | Pinned 187M preparation; classical-128 profile |
 
 Inspect a checkpoint before loading weights:
 
@@ -20,8 +26,9 @@ The Python equivalent is `fhemamba.inspect_model(path)`.
 
 Follow the [Python setup](reproducing.md#1-install-the-python-environment) and
 download a [Mamba-2](reproducing.md#2-obtain-the-exact-public-checkpoint) or
-[Mamba-3](mamba3.md#trained-checkpoint-and-generation) checkpoint. Mamba-2 and
-text input require the `experiments` extra. The CLI finds a tokenizer in
+[Mamba-3](mamba3.md#trained-checkpoint-and-generation) checkpoint. Mamba-1 accepts
+local Transformers checkpoints such as [mamba-130m-hf](https://huggingface.co/state-spaces/mamba-130m-hf).
+Mamba-1/2 and text input require the `experiments` extra. The CLI finds a tokenizer in
 `MODEL/tokenizer` or `MODEL`; override it with `--tokenizer`.
 
 ```bash
@@ -50,13 +57,15 @@ assert result.passed and not result.encrypted
 
 `input_ids` accepts a nonempty list, tuple, or one-dimensional integer NumPy/Torch
 array. IDs must fit the checkpoint vocabulary. Each call starts fresh recurrent
-state. The CPU references retain their existing arithmetic: float32 for Mamba-2,
-float64 for Mamba-3. Both use the same API; token IDs belong to each model's tokenizer.
+state. The CPU references retain their existing arithmetic: float32 for Mamba-1/2,
+float64 for Mamba-3. All use the same API; token IDs belong to each model's tokenizer.
 
 ## Prepare once for one input
 
 Preparation requires a source checkout and a fresh output directory. Each
 architecture retains its own coefficients, security settings and acceptance gates.
+Mamba-1 currently supports exact CPU generation only; preparation fails before
+loading weights or creating output in the CLI.
 
 For Mamba-3, use the pinned 187M checkpoint and local tokenizer. Preparation
 calibrates on six independent prompts and checks the requested input:

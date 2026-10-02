@@ -22,7 +22,7 @@ Both examples use random weights, perform plaintext calculations and print
 
 | Next step | Guide and requirements |
 | --- | --- |
-| Generate from your own text or token IDs | [Common Mamba-2/3 API and CLI](generation.md); local checkpoint, CPU for exact/polynomial generation |
+| Generate from your own text or token IDs | [Common Mamba-1/2/3 API and CLI](generation.md); local checkpoint, backend support varies by model |
 | Trained Mamba-3 SISO 187M | [Load, export and run](mamba3.md); checkpoint download, plus native GPU build for encryption |
 | Small encrypted Mamba-3 mixer | [Probe](mamba3.md#reproduce-the-encrypted-probe); Spark build, random weights, experimental `not-set` security |
 | CPU CKKS primitives | [Recipes](../experiments/local_ckks/README.md); separate OpenFHE Python installation, toy security |

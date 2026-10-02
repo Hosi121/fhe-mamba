@@ -17,7 +17,8 @@ output paths and result persistence.
 The protocols live in [`models/contracts.py`](../src/fhemamba/models/contracts.py).
 Mamba-2 and Mamba-3 keep their own state, arithmetic, layouts and calibration paths.
 Their native adapters reuse the existing job runners and validators. A CPU-only
-adapter sets `fhe = None`; the public API then rejects polynomial/CKKS requests
+adapter sets `fhe = None`, as in [Mamba-1](../src/fhemamba/models/mamba1.py);
+the public API then rejects polynomial/CKKS requests
 before preparation. Shared helpers remain useful without requiring identical
 model internals.
 
