@@ -5,8 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
-import struct
 from pathlib import Path
 
 import numpy as np
@@ -14,9 +12,11 @@ import torch
 
 from fhemamba.benchmarks.io import file_sha256 as digest
 from fhemamba.benchmarks.io import repository_root
+from fhemamba.inputs import generation_length, token_ids
 from fhemamba.mamba3 import FactoredMamba3State, Mamba3State, RotaryPhase
 from fhemamba.mamba3_lm import Mamba3LM
 from fhemamba.packed_program import Calibration, PackedProgram
+from fhemamba.workloads.client_head import share_client_head, write_client_head
 
 MODEL_ID = "state-spaces/mamba3-siso-187m"
 MODEL_REVISION = "6792c27c00f3bb41506db1066dcd1c51bb0f4b02"
@@ -59,7 +59,7 @@ def prefix_payload(source, output, new_tokens):
             operations[line.split(maxsplit=1)[0]] += 1
             dest.write(line)
         dest.writelines(outputs)
-    shutil.copyfile(source / "client_head.f32", output / "client_head.f32")
+    share_client_head(source / "client_head.f32", output / "client_head.f32")
     with np.load(source / "fixture.npz", allow_pickle=False) as fixture:
         arrays = {
             key: fixture[key][: evaluations if key.endswith("_hidden") else new_tokens]
@@ -94,7 +94,8 @@ def export(
     tokenizer_path,
     output,
     *,
-    prompt="The capital",
+    prompt=None,
+    input_ids=None,
     new_tokens=4,
     probe_layers=None,
     state_representation="factored",
@@ -106,8 +107,14 @@ def export(
 ):
     from transformers import AutoTokenizer
 
-    if not 1 <= new_tokens <= 64:
-        raise ValueError("session export supports 1 to 64 generated tokens")
+    generation_length(new_tokens, input_length=1)
+    if input_ids is not None and prompt is not None:
+        raise ValueError("choose prompt or input_ids, not both")
+    if input_ids is not None:
+        input_ids = token_ids(input_ids)
+        generation_length(new_tokens, input_length=len(input_ids))
+    elif prompt is None:
+        prompt = "The capital"
     if state_representation not in ("factored", "tiled") or rotary not in ("angle", "phasor"):
         raise ValueError("invalid state or rotary representation")
     calibration_tokens = new_tokens + 1 if calibration_tokens is None else calibration_tokens
@@ -121,7 +128,6 @@ def export(
     for name in ("config.json", "pytorch_model.bin"):
         if digest(checkpoint / name) != pins["files_sha256"][name]:
             raise ValueError(f"checkpoint differs from the pinned trained model: {name}")
-    output.mkdir(parents=True, exist_ok=False)
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, local_files_only=True)
     model = Mamba3LM.from_pretrained(checkpoint)
     original_layers = len(model.backbone.layers)
@@ -129,9 +135,13 @@ def export(
         if not 1 <= probe_layers <= original_layers:
             raise ValueError("invalid probe layer count")
         model.backbone.layers = model.backbone.layers[:probe_layers]
-    prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
-    if not prompt_ids or len(prompt_ids) + new_tokens - 1 > 128:
-        raise ValueError("prompt plus generation must fit the 128-evaluation session limit")
+    prompt_ids = token_ids(
+        tokenizer.encode(prompt, add_special_tokens=False) if input_ids is None else input_ids,
+        vocab_size=model.backbone.embedding.num_embeddings,
+    )
+    generation_length(new_tokens, input_length=len(prompt_ids))
+    if output.exists():
+        raise FileExistsError(f"output already exists: {output}")
     recorder = Calibration()
     for text in CALIBRATION_PROMPTS:
         model.generate(
@@ -161,6 +171,7 @@ def export(
     )
     if not np.isfinite(hidden_error) or hidden_error > 0.001:
         raise ValueError(f"polynomial hidden error exceeds 0.001: {hidden_error}")
+    output.mkdir(parents=True, exist_ok=False)
     program = PackedProgram(poly.polynomials, slots=32768, bound=1e8, extended=True)
     states = []
     for state in model.initial_states(factored=state_representation == "factored", rotary=rotary):
@@ -195,10 +206,7 @@ def export(
         names.append(f"step{step}.final_hidden")
         print(f"compiled_step={step + 1}/{len(exact_trace)} nodes={len(program.nodes)}", flush=True)
     program.write(output / "program.txt")
-    with (output / "client_head.f32").open("wb") as stream:
-        weight = model.lm_head.weight.detach().numpy().astype("<f4")
-        stream.write(struct.pack("<II", *weight.shape))
-        weight.tofile(stream)
+    write_client_head(output / "client_head.f32", model.lm_head.weight.detach().numpy())
     np.savez(
         output / "fixture.npz",
         prompt_ids=prompt_ids,
@@ -233,7 +241,14 @@ def export(
         "polynomial_token_ids": poly_ids,
         "reference_text": tokenizer.decode(prompt_ids + exact_ids),
         "calibration_prompts": list(CALIBRATION_PROMPTS),
-        "calibration_excludes_evaluation_prompt": prompt not in CALIBRATION_PROMPTS,
+        "calibration_excludes_evaluation_prompt": (
+            prompt not in CALIBRATION_PROMPTS
+            if input_ids is None
+            else all(
+                prompt_ids != tokenizer.encode(text, add_special_tokens=False)
+                for text in CALIBRATION_PROMPTS
+            )
+        ),
         "calibration_generated_tokens": calibration_tokens,
         "calibration_margin": calibration_margin,
         "calibration_positive_lower_fraction": positive_lower_fraction,

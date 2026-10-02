@@ -13,6 +13,16 @@ from fhemamba._commands import dispatch
 from fhemamba.artifacts import validate_artifact_file
 
 GROUPS = {
+    "generate": (
+        "fhemamba.inference_cli",
+        "generate_main",
+        "generate from text or token IDs",
+    ),
+    "prepare": (
+        "fhemamba.inference_cli",
+        "prepare_main",
+        "prepare one Mamba-3 request for polynomial/CKKS generation",
+    ),
     "calibrate": (
         "fhemamba.calibration.__main__",
         "main",

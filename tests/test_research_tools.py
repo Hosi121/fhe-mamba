@@ -40,7 +40,8 @@ def test_lightweight_tools_work_outside_checkout_without_loading_models(tmp_path
     code = """
 import sys
 from fhemamba.cli import main
-for args in [['--help'], ['diagnose', 'verify', '--help'],
+for args in [['--help'], ['generate', '--help'], ['prepare', '--help'],
+             ['diagnose', 'verify', '--help'],
              ['diagnose', 'ckks', '--help'], ['benchmark', 'packed', '--help'],
              ['calibrate', 'state', '--help'], ['calibrate', 'normalization', '--help'],
              ['benchmark', 'normalization', 'probe', '--help'],

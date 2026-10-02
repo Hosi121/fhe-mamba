@@ -21,6 +21,19 @@ from fhemamba.benchmarks.io import file_sha256 as digest
 from fhemamba.benchmarks.process import run_process
 
 
+def read_payload(payload):
+    """Read a packed manifest and verify the files consumed by the runner."""
+    payload = Path(payload)
+    manifest = json.loads((payload / "manifest.json").read_text())
+    names = ["program.txt", "fixture.npz"]
+    if manifest.get("schema") == "fhemamba-mamba3-lm-v1":
+        names.append("client_head.f32")
+    for name in names:
+        if digest(payload / name) != manifest["files_sha256"][name]:
+            raise ValueError(f"payload digest differs: {name}")
+    return manifest
+
+
 def _run(
     binary,
     payload,
@@ -124,16 +137,8 @@ def _run(
         raise ValueError("frontier live limit must be 0..1000000")
     if frontier_live_limit and not frontier_refresh:
         raise ValueError("frontier live limit requires frontier refresh")
-    manifest = json.loads((payload / "manifest.json").read_text())
+    manifest = read_payload(payload)
     client = manifest.get("schema") == "fhemamba-mamba3-lm-v1"
-    names = (
-        ("program.txt", "fixture.npz", "client_head.f32")
-        if client
-        else ("program.txt", "fixture.npz")
-    )
-    for name in names:
-        if digest(payload / name) != manifest["files_sha256"][name]:
-            raise ValueError(f"payload digest differs: {name}")
     output.mkdir(parents=True, exist_ok=False)
     command = [
         str(binary),
@@ -175,9 +180,18 @@ def _run(
     record.update(returncode=returncode, wall_seconds=time.monotonic() - started, passed=False)
     native = output / "native.json"
     if native.exists():
-        result = json.loads(native.read_text())
-        errors = [result["max_abs_error_vs_polynomial"], result["max_abs_error_vs_exact"]]
         record["native_sha256"] = digest(native)
+        try:
+            result = json.loads(native.read_text())
+            if not isinstance(result, dict):
+                raise ValueError("native result must be a JSON object")
+            errors = [result["max_abs_error_vs_polynomial"], result["max_abs_error_vs_exact"]]
+            if any(type(error) not in (int, float) for error in errors):
+                raise ValueError("native errors must be numeric")
+        except (ValueError, KeyError) as exc:
+            record["native_error"] = str(exc)
+            (output / "run.json").write_text(json.dumps(record, indent=2) + "\n")
+            return record
         record["passed"] = (
             returncode == 0
             and not record["timed_out"]

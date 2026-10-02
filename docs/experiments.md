@@ -1,5 +1,22 @@
 # Running and publishing experiments
 
+## Shared local client heads
+
+Mamba-3 exports and prefix payloads store `client_head.f32` as a relative symlink
+to `<output-parent>/.client-heads/<sha256>.f32`. Byte-identical heads in sibling
+payloads share one read-only file. The native FP32 format and manifest hashes
+are unchanged; normal readers and the native runner follow the link directly.
+The exporter refuses existing destinations, verifies existing blobs, and never
+writes through a payload link. Do not make a shared blob writable to regenerate
+a head: use a new output directory.
+
+Keep `.client-heads` when moving or backing up the whole output group. When
+copying just one payload elsewhere, dereference links (`cp -rL` or `rsync -aL`)
+to make a standalone copy. Removing one payload does not remove its shared blob;
+there is no automatic garbage collection of shared heads. Old payloads with
+ordinary files remain readable. This changes storage only, not model arithmetic
+or GPU qualification.
+
 The maintained interface is the installed `fhemamba.benchmarks` module and the
 workload runners in [`experiments/`](../experiments/README.md). A study consists
 of a versioned job specification, local machine settings, raw output, and a
