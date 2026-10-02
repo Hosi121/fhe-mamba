@@ -48,9 +48,9 @@ def test_exact_generation_matches_hf_and_resets_state(tmp_path, model_factory, g
         assert result.report["architecture"] == "mamba1"
         assert result.stop_reason == "length"
     for backend in ("polynomial", "ckks"):
-        with pytest.raises(ValueError, match="no registered polynomial/CKKS"):
+        with pytest.raises(ValueError, match=r"requires model\.prepare"):
             model.generate([5, 7], backend=backend)
-    with pytest.raises(ValueError, match="no registered polynomial/CKKS"):
+    with pytest.raises(ValueError, match="requires explicit profile"):
         model.prepare([5, 7], output=tmp_path / "unsupported")
     assert not (tmp_path / "unsupported").exists()
 
@@ -83,17 +83,18 @@ def test_cli_uses_mamba1_registration_and_sharded_weights(tmp_path, model_factor
     assert len(result["generated_ids"]) == 2
     support = inspect_model(checkpoint)
     assert support.backends["exact"].status == "implemented"
-    assert support.backends["ckks"].status == "unsupported"
-    assert not support.profiles
+    assert support.backends["ckks"].status == "requires_preparation"
+    assert support.profiles[0].name == "mamba1-experimental"
+    assert support.profiles[0].security == "128-classic"
 
 
-def test_unsupported_modes_fail_before_weights_or_optional_imports(tmp_path):
+def test_preparation_requires_explicit_profile_before_weights_or_optional_imports(tmp_path):
     write_json(tmp_path / "config.json", {"model_type": "mamba"})
     code = """
 import sys
 from fhemamba.cli import main
 from fhemamba import inspect_model
-assert inspect_model(sys.argv[1]).backends['polynomial'].status == 'unsupported'
+assert inspect_model(sys.argv[1]).backends['polynomial'].status == 'requires_preparation'
 try:
     main(['prepare', '--model', sys.argv[1], '--input-ids', 'absent.json',
           '--output', sys.argv[2]])
@@ -110,7 +111,7 @@ assert not {'torch', 'numpy', 'transformers'} & sys.modules.keys()
         text=True,
     )
     assert completed.returncode == 0, completed.stderr
-    assert "no registered polynomial/CKKS" in completed.stderr
+    assert "requires explicit profile" in completed.stderr
     assert not (tmp_path / "request").exists()
 
 
@@ -120,3 +121,13 @@ def test_unsupported_activation_is_reported_before_loading_weights(tmp_path):
     assert support.backends["exact"].status == "unsupported"
     with pytest.raises(ValueError, match="requires SiLU"):
         load_model(tmp_path)
+
+
+@pytest.mark.parametrize("config", [{"tie_word_embeddings": False}, {"hidden_size": 16385}])
+def test_unsupported_fhe_geometry_preserves_cpu_support(tmp_path, config):
+    write_json(tmp_path / "config.json", {"model_type": "mamba", **config})
+    support = inspect_model(tmp_path)
+    assert support.backends["exact"].status == "implemented"
+    assert support.backends["polynomial"].status == "unsupported"
+    assert support.backends["ckks"].status == "unsupported"
+    assert not support.profiles

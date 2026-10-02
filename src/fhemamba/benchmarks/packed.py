@@ -21,12 +21,20 @@ from fhemamba.benchmarks.io import file_sha256 as digest
 from fhemamba.benchmarks.process import run_process
 
 
+def uses_client_head(manifest):
+    """Packed client protocol, including the unchanged legacy Mamba-3 schema."""
+    return (
+        manifest.get("client_protocol") == "packed-greedy-v1"
+        or manifest.get("schema") == "fhemamba-mamba3-lm-v1"
+    )
+
+
 def read_payload(payload):
     """Read a packed manifest and verify the files consumed by the runner."""
     payload = Path(payload)
     manifest = json.loads((payload / "manifest.json").read_text())
     names = ["program.txt", "fixture.npz"]
-    if manifest.get("schema") == "fhemamba-mamba3-lm-v1":
+    if uses_client_head(manifest):
         names.append("client_head.f32")
     for name in names:
         if digest(payload / name) != manifest["files_sha256"][name]:
@@ -138,7 +146,7 @@ def _run(
     if frontier_live_limit and not frontier_refresh:
         raise ValueError("frontier live limit requires frontier refresh")
     manifest = read_payload(payload)
-    client = manifest.get("schema") == "fhemamba-mamba3-lm-v1"
+    client = uses_client_head(manifest)
     output.mkdir(parents=True, exist_ok=False)
     command = [
         str(binary),

@@ -8,7 +8,7 @@ There is no automatic download, sampling or plaintext fallback from CKKS.
 
 | Model | Checkpoint format | CPU exact | Polynomial / CKKS |
 | --- | --- | --- | --- |
-| Mamba-1 | Transformers (`model_type: mamba`), SiLU | Implemented | Not implemented |
+| Mamba-1 | Transformers (`model_type: mamba`), SiLU | Implemented | Packed circuit with tied embeddings; experimental classical-128 profile |
 | Mamba-2 | Transformers (`model_type: mamba2`) | Implemented | Frozen joint-gate chain; experimental profile |
 | Mamba-3 SISO | State Spaces (`ssm_cfg.layer: Mamba3`) | Implemented | Pinned 187M preparation; classical-128 profile |
 
@@ -57,15 +57,44 @@ assert result.passed and not result.encrypted
 
 `input_ids` accepts a nonempty list, tuple, or one-dimensional integer NumPy/Torch
 array. IDs must fit the checkpoint vocabulary. Each call starts fresh recurrent
-state. The CPU references retain their existing arithmetic: float32 for Mamba-1/2,
-float64 for Mamba-3. All use the same API; token IDs belong to each model's tokenizer.
+state. Exact CPU references use float32 for Mamba-1/2 and float64 for Mamba-3.
+Mamba-1's polynomial/packed lowering uses float64 and is checked against its
+original float32 reference. Token IDs belong to each model's tokenizer.
 
 ## Prepare once for one input
 
-Preparation requires a source checkout and a fresh output directory. Each
-architecture retains its own coefficients, security settings and acceptance gates.
-Mamba-1 currently supports exact CPU generation only; preparation fails before
-loading weights or creating output in the CLI.
+Preparation requires a fresh output directory; Mamba-2/3 also need the source
+checkout for their existing recipes. Each architecture owns its coefficients,
+security settings and acceptance gates.
+
+For Mamba-1, explicitly select the experimental profile:
+
+```bash
+fhemamba prepare --model checkpoints/mamba-130m-hf \
+  --profile mamba1-experimental --prompt 'The capital' \
+  --max-new-tokens 4 --output runs/m1-request
+```
+
+This compiles the full backbone, convolution history and channel-tiled selective
+SSM to the shared packed CKKS backend. It requires SiLU and tied embedding/output
+weights with no head bias. Calibration uses six independent prompts and 16 new
+tokens by default. For raw-ID calibration, supply `--prepare-options options.json`:
+
+```json
+{"calibration_input_ids": [[34, 2475], [510, 3418]], "calibration_new_tokens": 16}
+```
+
+Use independent sequences from the same tokenizer; these example IDs are not a
+qualified calibration set. The Python equivalent is
+`Mamba1Preparation(calibration_input_ids=..., calibration_new_tokens=16)` from
+`fhemamba.models.mamba1`. Explicit IDs need no tokenizer. Calibration must cover
+the requested generation length and exclude the evaluation prompt. Domain
+violations, changed greedy IDs or hidden error above `0.001` stop preparation.
+Requests are limited to 64 new tokens and 128 evaluations.
+
+`mamba1-experimental` uses the existing classical-128 parameters and precision
+gates. **Mamba-1 has no GPU-qualified request yet**; calibration and CPU/circuit
+tests do not establish encrypted accuracy or practical runtime on a checkpoint.
 
 For Mamba-3, use the pinned 187M checkpoint and local tokenizer. Preparation
 calibrates on six independent prompts and checks the requested input:
@@ -115,7 +144,7 @@ fhemamba generate --model checkpoints/mamba2-130m-hf \
 | Backend | Computation | Validation |
 | --- | --- | --- |
 | `exact` | Original nonlinearities, plaintext | Finite hidden states, requested length |
-| `polynomial` | Frozen polynomial coefficients, plaintext | Mamba-2: domains, polynomial IDs/error ≤ `0.05`; Mamba-3: exact and polynomial IDs, exact hidden error ≤ `0.001` |
+| `polynomial` | Frozen polynomial coefficients, plaintext | Mamba-2: domains, polynomial IDs/error ≤ `0.05`; Mamba-1/3: exact and polynomial IDs, exact hidden error ≤ `0.001` |
 | `ckks` | Encrypted polynomial program | Model-specific precision, protocol and security gates |
 
 Polynomial execution evaluates the model again; it does not replay saved IDs or
@@ -131,9 +160,16 @@ fhemamba generate --prepared runs/m2-request --backend ckks \
   --output runs/m2-run --timeout 2400 --json
 ```
 
-Mamba-3 uses [`packed_fideslib`](mamba3.md#classical-128-16-token-configuration)
-with its recorded classical-128 settings: two S2C-first refresh passes, merged
-correction and frontier limit 256. Each invocation starts a native process with
+Mamba-1/3 use [`packed_fideslib`](mamba3.md#classical-128-16-token-configuration)
+with the classical-128 settings: two S2C-first refresh passes, merged correction
+and frontier limit 256. For Mamba-1:
+
+```bash
+fhemamba generate --prepared runs/m1-request --backend ckks \
+  --binary /path/to/packed_fideslib --output runs/m1-run --timeout 2400 --json
+```
+
+Each invocation starts a native process with
 fresh keys. GPU selection uses the native environment;
 there is no automatic remote connection. The client selects tokens from decrypted
 final hidden vectors in that process; client/server process separation is not

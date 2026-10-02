@@ -15,12 +15,20 @@ output paths and result persistence.
 | `ModelRegistration` | Configuration predicate, lazy implementation import and owned prepared schemas |
 
 The protocols live in [`models/contracts.py`](../src/fhemamba/models/contracts.py).
-Mamba-2 and Mamba-3 keep their own state, arithmetic, layouts and calibration paths.
-Their native adapters reuse the existing job runners and validators. A CPU-only
-adapter sets `fhe = None`, as in [Mamba-1](../src/fhemamba/models/mamba1.py);
-the public API then rejects polynomial/CKKS requests
-before preparation. Shared helpers remain useful without requiring identical
-model internals.
+Each model keeps its own state, arithmetic, layouts and calibration path.
+Mamba-1 and Mamba-3 share the packed native runner and classical-128 gates;
+Mamba-2 retains its separate frozen-chain implementation. A CPU-only adapter
+sets `fhe = None`; the API then rejects polynomial/CKKS before preparation.
+Shared helpers remain useful without requiring identical model internals.
+
+Mamba-1 lowers its convolution FIFO and channel-specific selective recurrence
+through `TensorOps`/`PackedProgram`, with the original FP32 reference as its
+acceptance oracle. Channel tiling preserves every state coordinate. Its
+decay uses `exp(x / 2**s)` followed by `s` squarings, with per-layer counts frozen
+from independent calibration. This handles the trained model's large negative
+exponents without clipping the recurrence or fitting an overflowing interval. Its
+`mamba1-experimental` profile is explicit because GPU qualification is pending;
+the classical-128 parameters and `0.001` precision gates are unchanged.
 
 ## Registration
 
@@ -64,6 +72,11 @@ the reference's agreement with the request. The core writes `request.json` with
 the selected profile and manifest digest. Loading a request uses its registered
 schema and never loads model weights. Legacy Mamba-3 exports retain their default
 profile without changing their bytes.
+
+New packed integrations set `client_protocol: packed-greedy-v1` and provide
+`client_head.f32` with tied embedding/head weights. This selects actual client
+feedback in the shared runner without architecture switches. Other client layouts
+need their own protocol implementation; cached reference IDs are never feedback.
 
 Native execution returns actual tokens and failed/partial results in
 `GenerationResult`; the core persists `generation.json`. Use the shared subprocess

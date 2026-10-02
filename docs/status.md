@@ -62,9 +62,13 @@ Model loading, preparation and native adapters now use an explicit registry;
 model-specific arithmetic and acceptance remain in their integrations.
 `inspect-model` reports capabilities without loading weights. See the
 [integration contract](model-integration.md) for adding models and preparation options.
-Mamba-1 Transformers checkpoints now support exact CPU generation through this
-registry, checked against upstream generation at three small geometries and a
-local 130M CPU smoke run. Mamba-1 polynomial and CKKS execution remain unsupported.
+Mamba-1 adds polynomial preparation and packed CKKS execution through the
+`mamba1-experimental` profile, using the same classical-128 parameters and
+`0.001` hidden-error gates. Convolution history and the full selective SSM are
+lowered without state truncation; the client uses actual greedy feedback.
+The profile requires SiLU and tied embeddings. CPU checks cover upstream parity,
+channel tiling, polynomial/packed parity and native failure handling.
+There is no GPU-qualified Mamba-1 request or arbitrary-prompt accuracy claim.
 
 Mamba-3 client heads now use verified read-only blobs shared by sibling payloads;
 original paths remain readable through relative symlinks. See the

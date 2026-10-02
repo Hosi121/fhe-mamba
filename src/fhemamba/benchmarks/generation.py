@@ -9,6 +9,7 @@ import math
 from pathlib import Path
 
 from fhemamba.benchmarks.io import file_sha256 as digest
+from fhemamba.benchmarks.packed import uses_client_head
 
 
 def validate_generation(payload, run, *, security=None):
@@ -20,7 +21,7 @@ def validate_generation(payload, run, *, security=None):
     manifest = json.loads((payload / "manifest.json").read_text())
     record = json.loads((run / "run.json").read_text())
     native = json.loads((run / "native.json").read_text())
-    if manifest.get("schema") != "fhemamba-mamba3-lm-v1":
+    if not uses_client_head(manifest):
         raise ValueError("not a language-model payload")
     if record.get("schema_version") == 1:
         if record.get("state") != "completed" or record.get("exit_code") != 0:
