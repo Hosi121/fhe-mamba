@@ -6,6 +6,16 @@ All backends use greedy, fixed-length generation:
 `max_new_tokens` excludes the prompt, and EOS does **not** stop generation early.
 There is no automatic download, sampling or plaintext fallback from CKKS.
 
+Inspect a checkpoint before loading weights:
+
+```bash
+fhemamba inspect-model --model checkpoints/mamba2-130m-hf --json
+```
+
+This reports implemented backends, preparation requirements and security profiles
+from configuration alone. It does not validate weights or qualify GPU execution.
+The Python equivalent is `fhemamba.inspect_model(path)`.
+
 ## CPU generation
 
 Follow the [Python setup](reproducing.md#1-install-the-python-environment) and
@@ -128,9 +138,12 @@ a failed generation with its reference completion.
 The corresponding Python operations are:
 
 ```python
+from fhemamba.models.mamba2 import Mamba2Preparation
+
 prepared = model.prepare(
     [510, 5347], max_new_tokens=4, output="runs/m2-request",
-    base_chain="runs/stabilized-payload", profile="mamba2-experimental",
+    options=Mamba2Preparation(base_chain="runs/stabilized-payload"),
+    profile="mamba2-experimental",
 )
 polynomial = model.generate(
     [510, 5347], max_new_tokens=4, backend="polynomial", prepared=prepared,
@@ -140,6 +153,12 @@ encrypted = prepared.generate(
     binary="/path/to/stage1_mamba2_decode_fideslib", output="runs/m2-run", timeout=2400,
 )
 ```
+
+Preparation options belong to the model integration. The CLI accepts the same
+fields through `--prepare-options options.json`, for example
+`{"base_chain": "runs/stabilized-payload"}` for Mamba-2. Paths resolve from the
+working directory. Unknown fields are rejected. The existing `base_chain=` and
+`--base-chain` remain supported; use either these or `options`, not both.
 
 `load_prepared` also accepts complete legacy `workload export-mamba3` payloads.
 Loading and CKKS execution work outside the checkout without Torch/Transformers

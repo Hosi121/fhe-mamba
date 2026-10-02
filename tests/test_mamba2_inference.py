@@ -358,3 +358,27 @@ def test_checkpoint_hash_includes_safetensor_shards(mamba2_case, tmp_path):
     }
     for name, digest in identity.items():
         assert digest == file_sha256(tmp_path / "shards" / name)
+
+
+def test_typed_preparation_options_keep_the_same_payload(mamba2_case, tmp_path):
+    from fhemamba.models.mamba2 import Mamba2Preparation
+
+    _, model, _, source, previous = mamba2_case
+    prepared = model.prepare(
+        [5, 7],
+        max_new_tokens=2,
+        output=tmp_path / "typed",
+        profile="mamba2-experimental",
+        options=Mamba2Preparation(base_chain=source),
+    )
+    assert prepared.manifest() == previous.manifest()
+    assert payload_sha256(prepared.path / "payload") == payload_sha256(previous.path / "payload")
+    with pytest.raises(ValueError, match="choose options or base_chain"):
+        model.prepare(
+            [5, 7],
+            output=tmp_path / "invalid",
+            profile="mamba2-experimental",
+            options=Mamba2Preparation(source),
+            base_chain=source,
+        )
+    assert not (tmp_path / "invalid").exists()

@@ -10,6 +10,8 @@ and `fhemamba.load_prepared`. The matching commands are `fhemamba generate`
 and `fhemamba prepare`. Both detect Mamba-2 or Mamba-3 SISO from the checkpoint;
 see the [generation guide](generation.md) for inputs,
 backend selection and the request-specific preparation contract.
+`fhemamba.inspect_model` / `fhemamba inspect-model` describe capabilities without
+loading weights. To add a model, follow the [integration guide](model-integration.md).
 
 ## Modules
 
@@ -17,7 +19,8 @@ Paths below are relative to `src/fhemamba/`.
 
 | Area | Modules | Responsibility |
 | --- | --- | --- |
-| Public generation | `inference.py`, `inference_cli.py`, `inputs.py`, `checkpoints.py`, `mamba2_inference.py` | Checkpoint detection, token requests, model-specific preparation/execution and common results |
+| Public generation | `inference.py`, `inference_cli.py`, `inputs.py`, `checkpoints.py` | Token requests, model discovery, identity checks and common results |
+| Model integrations | `models/contracts.py`, `models/registry.py`, `models/mamba2.py`, `models/mamba3.py` | Model-owned loading, arithmetic adapters, typed preparation options and FHE profiles |
 | Model and decode | `reference.py`, `ops.py`, `tensor_ops.py`, `packed_program.py` | Model formulas, exact/polynomial operations and packed circuit export |
 | Architecture and Mamba-3 | `architectures.py`, `mamba3.py`, `mamba3_lm.py`, `tensor_ops.py`, `packed_program.py` | Architecture-specific state, trained SISO model, shared tensor operations and packed FHE programs |
 | Payload and generation | `m1_payload.py`, `generation.py`, `generate.py`, `ppl.py`, `payload_surrogate.py` | Checkpoint export, prompt preparation, text reports and plaintext quality |

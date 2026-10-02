@@ -8,39 +8,48 @@ from pathlib import Path
 from fhemamba.benchmarks.io import file_sha256, read_object
 
 
-def architecture(path: Path) -> str:
+def read_config(path: Path) -> dict:
     # HF Mamba-2 configs can contain an unbounded time_step_limit (Infinity).
     config = json.loads((path / "config.json").read_text())
-    if config.get("model_type") == "mamba2":
-        return "mamba2"
-    ssm = config.get("ssm_cfg", {})
-    if ssm.get("layer") == "Mamba3" and not ssm.get("is_mimo", False):
-        return "mamba3"
-    raise ValueError("supported checkpoints are Mamba-2 and Mamba-3 SISO")
+    if not isinstance(config, dict):
+        raise ValueError("checkpoint config.json must be an object")
+    if config.get("ssm_cfg") is not None and not isinstance(config["ssm_cfg"], dict):
+        raise ValueError("checkpoint ssm_cfg must be an object")
+    return config
+
+
+def architecture(path: Path) -> str:
+    from fhemamba.models.registry import registry
+
+    return registry.detect(read_config(path)).architecture
 
 
 def checkpoint_identity(path: Path, kind: str) -> dict[str, str]:
+    from fhemamba.models.registry import registry
+
+    return registry.get(kind).checkpoint_identity(path)
+
+
+def hf_checkpoint_identity(path: Path) -> dict[str, str]:
+    """Hash the single or sharded weight files selected by Transformers."""
     names = ["config.json"]
-    if kind == "mamba3":
-        names.append("pytorch_model.bin")
+    for filename in (
+        "model.safetensors",
+        "model.safetensors.index.json",
+        "pytorch_model.bin",
+        "pytorch_model.bin.index.json",
+    ):
+        if not (path / filename).is_file():
+            continue
+        names.append(filename)
+        if filename.endswith(".index.json"):
+            shards = set(read_object(path / filename)["weight_map"].values())
+            if any(not isinstance(s, str) or Path(s).name != s for s in shards):
+                raise ValueError("checkpoint shards must be files in the checkpoint directory")
+            names.extend(sorted(shards))
+        break
     else:
-        for filename in (
-            "model.safetensors",
-            "model.safetensors.index.json",
-            "pytorch_model.bin",
-            "pytorch_model.bin.index.json",
-        ):
-            if not (path / filename).is_file():
-                continue
-            names.append(filename)
-            if filename.endswith(".index.json"):
-                shards = set(read_object(path / filename)["weight_map"].values())
-                if any(not isinstance(s, str) or Path(s).name != s for s in shards):
-                    raise ValueError("checkpoint shards must be files in the checkpoint directory")
-                names.extend(sorted(shards))
-            break
-        else:
-            raise ValueError("checkpoint has no local safetensors or PyTorch weights")
+        raise ValueError("checkpoint has no local safetensors or PyTorch weights")
     return {name: file_sha256(path / name) for name in names}
 
 

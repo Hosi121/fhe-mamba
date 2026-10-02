@@ -7,10 +7,11 @@ import json
 import sys
 from pathlib import Path
 
-from fhemamba.benchmarks.io import file_sha256
-from fhemamba.checkpoints import tokenizer_directory
-from fhemamba.inference import load_model, load_prepared
+from fhemamba.benchmarks.io import file_sha256, read_object
+from fhemamba.checkpoints import read_config, tokenizer_directory
+from fhemamba.inference import _preparation_options, inspect_model, load_model, load_prepared
 from fhemamba.inputs import generation_length, token_ids
+from fhemamba.models.registry import registry
 
 
 def _parser(command):
@@ -19,7 +20,7 @@ def _parser(command):
         "--model",
         type=Path,
         required=command == "prepare",
-        help="local Mamba-2 or Mamba-3 SISO checkpoint directory (detected from config)",
+        help="local checkpoint directory (architecture detected from config)",
     )
     parser.add_argument(
         "--tokenizer", type=Path, help="local tokenizer; defaults to MODEL/tokenizer or MODEL"
@@ -38,11 +39,13 @@ def _parser(command):
         parser.add_argument("--output", type=Path, required=True, help="fresh payload directory")
         parser.add_argument(
             "--profile",
-            choices=("classical-128", "mamba2-experimental"),
-            help="Mamba-3 defaults to classical-128; Mamba-2 needs explicit experimental selection",
+            help="model-specific preparation profile; see fhemamba inspect-model",
         )
         parser.add_argument(
             "--base-chain", type=Path, help="frozen joint-gate chain required for Mamba-2"
+        )
+        parser.add_argument(
+            "--prepare-options", type=Path, help="JSON object of model-specific preparation options"
         )
     else:
         parser.add_argument("--backend", choices=("exact", "polynomial", "ckks"), default="exact")
@@ -120,6 +123,15 @@ def prepare_main(argv=None):
     parser = _parser("prepare")
     args = parser.parse_args(argv)
     try:
+        config = read_config(args.model)
+        adapter = registry.detect(config)
+        adapter.capabilities(config).backends["polynomial"].require()
+        profile, options = _preparation_options(
+            adapter,
+            args.profile,
+            read_object(args.prepare_options) if args.prepare_options is not None else None,
+            args.base_chain,
+        )
         tokenizer = _tokenizer(args)
         ids, length = _inputs(args, tokenizer)
         _cpu_threads(args.threads)
@@ -128,8 +140,8 @@ def prepare_main(argv=None):
             max_new_tokens=length,
             output=args.output,
             tokenizer=args.tokenizer,
-            profile=args.profile,
-            base_chain=args.base_chain,
+            profile=profile.name,
+            options=options,
         )
         print(
             json.dumps(
@@ -163,6 +175,8 @@ def generate_main(argv=None):
             raise ValueError("--binary and --output are CKKS execution options")
         if args.backend == "polynomial" and args.prepared is None:
             raise ValueError("polynomial generation requires --prepared")
+        if args.model is not None:
+            inspect_model(args.model).backends[args.backend].require()
         prepared = load_prepared(args.prepared) if args.prepared is not None else None
         manifest = prepared.manifest() if prepared is not None else None
         tokenizer = _tokenizer(args, manifest)
@@ -196,5 +210,28 @@ def generate_main(argv=None):
                 file=sys.stderr,
             )
         return 0 if result.passed else 1
+    except (OSError, ValueError, KeyError) as exc:
+        parser.error(str(exc))
+
+
+def inspect_main(argv=None):
+    parser = argparse.ArgumentParser(prog="fhemamba inspect-model")
+    parser.add_argument("--model", type=Path, required=True, help="local checkpoint directory")
+    parser.add_argument("--json", action="store_true", help="emit structured capabilities")
+    args = parser.parse_args(argv)
+    try:
+        result = inspect_model(args.model)
+        if args.json:
+            print(json.dumps(result.to_dict(), indent=2, allow_nan=False))
+        else:
+            print(f"{result.architecture} ({result.checkpoint_format})")
+            for name, capability in result.backends.items():
+                print(f"{name}: {capability.status} — {capability.reason}")
+            for profile in result.profiles:
+                print(f"profile: {profile.name} (security={profile.security})")
+                for requirement in profile.requirements:
+                    print(f"  {requirement}")
+            print("Configuration inspection only; weights and execution are not validated.")
+        return 0
     except (OSError, ValueError, KeyError) as exc:
         parser.error(str(exc))

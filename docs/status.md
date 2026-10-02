@@ -58,6 +58,11 @@ their existing acceptance gates. CPU tests cover request identity, reference
 parity and failed native reports. This adds no GPU qualification or
 arbitrary-prompt accuracy claim.
 
+Model loading, preparation and native adapters now use an explicit registry;
+model-specific arithmetic and acceptance remain in their integrations.
+`inspect-model` reports capabilities without loading weights. See the
+[integration contract](model-integration.md) for adding models and preparation options.
+
 Mamba-3 client heads now use verified read-only blobs shared by sibling payloads;
 original paths remain readable through relative symlinks. See the
 [storage and transfer rules](experiments.md#shared-local-client-heads) before

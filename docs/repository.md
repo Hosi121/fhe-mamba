@@ -7,6 +7,7 @@ backend. Numerical implementations and shared experiment utilities live in
 | Location | Ownership |
 | --- | --- |
 | `src/fhemamba/` | Python package, including the CLI and version source |
+| `src/fhemamba/models/` | Registered model adapters, preparation options and model/backend-specific FHE implementations |
 | `native/fideslib_stage0/` | C++/FIDESlib backend, patches, probes and native contracts |
 | `tests/` | Python unit tests and repository/native integration tests |
 | `examples/` | Small runnable examples for new users |

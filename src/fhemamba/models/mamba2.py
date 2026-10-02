@@ -7,6 +7,7 @@ import math
 import os
 import subprocess
 import tempfile
+from dataclasses import dataclass
 from pathlib import Path
 
 from fhemamba._version import __version__
@@ -17,8 +18,10 @@ from fhemamba.benchmarks.io import (
     repository_root,
     write_json,
 )
-from fhemamba.checkpoints import tokenizer_identity
+from fhemamba.checkpoints import hf_checkpoint_identity, tokenizer_identity
 from fhemamba.inputs import generation_length, token_ids
+
+from .contracts import PreparationProfile, capabilities, parse_options
 
 PROFILE = "mamba2-experimental"
 
@@ -318,5 +321,59 @@ def run(prepared, manifest, binary, output, timeout):
             "client_server_process_separated": False,
         },
     )
-    write_json(output / "generation.json", result.to_dict())
     return result
+
+
+@dataclass(frozen=True)
+class Mamba2Preparation:
+    """Frozen coefficients and bounds from a matching stabilized joint-gate chain."""
+
+    base_chain: str | Path
+
+    def __post_init__(self):
+        if not isinstance(self.base_chain, (str, Path)) or not str(self.base_chain).strip():
+            raise ValueError(
+                "Mamba-2 preparation requires base_chain with frozen joint-gate coefficients"
+            )
+
+
+class Mamba2FHE:
+    profiles = (
+        PreparationProfile(
+            PROFILE,
+            "not-set",
+            (
+                "Matching frozen stabilized joint-gate base_chain; coefficients are not refitted",
+                "Source checkout for preparation; polynomial-reference error <=0.05",
+                "Experimental security=not-set; no classical-128 claim",
+            ),
+        ),
+    )
+    default_profile = None
+    validate_manifest = staticmethod(validate_manifest)
+    run = staticmethod(run)
+
+    def parse_options(self, value):
+        return parse_options(Mamba2Preparation, value)
+
+    def prepare(
+        self, model, checkpoint, identity, ids, length, output, tokenizer, options, profile
+    ):
+        prepare(model, identity, ids, length, output, options.base_chain, tokenizer)
+
+
+class Mamba2Adapter:
+    architecture = "mamba2"
+    fhe = Mamba2FHE()
+    checkpoint_identity = staticmethod(hf_checkpoint_identity)
+    load = staticmethod(load_checkpoint)
+    generate_cpu = staticmethod(generate)
+
+    def capabilities(self, config):
+        return capabilities(self.architecture, "transformers", self.fhe)
+
+    def vocab_size(self, model):
+        return model.get_input_embeddings().num_embeddings
+
+
+ADAPTER = Mamba2Adapter()
