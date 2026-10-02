@@ -1,146 +1,89 @@
 # Contributing
 
-This repository is an implementation-first FHE research prototype. A claim is
-complete only when code, tests, configuration, and evidence agree.
+Start with the [current state](docs/status.md) and [backlog](docs/backlog.md).
+Useful changes include CPU examples, reference/layout tests, diagnostics and
+GPU work with reproducible evidence.
 
 ## Development setup
 
-Start with [the reproduction guide](docs/reproducing.md) for an example,
-checkpoint and public coefficient bundles. The repository's active package
-is `fhemamba`; native GPU builds are separate from Python installation.
-Local native contracts require CMake 3.25.2+ and a C++20 compiler.
+Requires Python 3.10+, uv, CMake >= 3.25.2 and a C++20 compiler:
 
 ```bash
 uv sync --locked --extra dev
 uv run --no-sync pre-commit install
+CHECK_JOBS=2 scripts/run_fast_checks.sh
 ```
 
-Use the fast gate while iterating:
-
-```bash
-scripts/run_fast_checks.sh
-```
-
-Before a release, tag, or claim-changing merge, run:
+Before a release, tag or claim-changing merge:
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
   CHECK_JOBS=2 scripts/run_checks.sh
 ```
 
-GPU probes are separate because they require OpenFHE/FIDESlib, dedicated
-hardware, and substantial memory. A passing local suite does not validate an
-encrypted GPU claim. Use the [Spark runbook](docs/dgx-spark.md) or the pinned
-CUDA 13 / SM103 build recorded in the
-[B300 study](docs/research/2026-09-26-b300-nsight-ifft.md).
-The older B300 build helpers target a different CUDA/SM configuration;
-historical evidence recovery remains separate from new measurements.
+See [testing](docs/testing.md) for focused checks and coverage.
+GPU validation requires a separate [native build](docs/dgx-spark.md#build)
+and [qualification](docs/validation.md). The historical B300 helpers target
+CUDA 12 / SM100; current B300 studies record CUDA 13 / SM103 separately.
 
 ## Active code
 
-Read [current state](docs/status.md) when resuming work. It is the short handoff;
-dated reports supply evidence only for the question being investigated.
+- Put reusable Python in `src/fhemamba/`, native code in `native/fideslib_stage0/`,
+  and specialized studies in grouped `experiments/` directories.
+- Use installed package imports and shared job/provenance helpers.
+- Keep machine settings in `config/local/`, fresh outputs in `runs/`,
+  and private handoff notes in `.local/`.
 
-- `src/fhemamba/` and `native/fideslib_stage0/` contain the active model paths
-  and shared arithmetic backend for Mamba-2 and Mamba-3 SISO.
-- All Python tests live in `tests/`; see the [repository map](docs/repository.md)
-  for experiments, manifests, results and archives.
-- New Mamba-2 formula, lowering, packing, and runtime work belongs in the
-  active path. Do not restore the retired pre-rebuild implementation.
-- Historical code is preserved on `archive/pre-compat-retirement-20260811`;
-  follow the [maintenance boundary](docs/maintenance.md) before salvaging code.
+See [repository ownership](docs/repository.md) and
+[maintenance contracts](docs/maintenance.md) for implementation boundaries.
 
 ## Definition of done
 
-A change is done when:
+- State the problem, change and supported scope.
+- Pass the relevant local checks. For hardware-dependent behavior, include
+  measured evidence or explicitly identify pending qualification.
+- Preserve model arithmetic, frozen data, security and acceptance gates during
+  maintenance. Numerical changes need their own comparison.
+- Record source, binary and input identities for claim-bearing results.
+- Update the affected guide and current status when behavior or claims change.
 
-- the write scope and claim boundary are explicit;
-- code and tests pass the appropriate local gate;
-- hardware-backed changes have a measured artifact, or clearly state why one
-  is pending;
-- direct result JSON records repository commit and binary identity;
-- README, evidence registry, roadmap, and backlog are updated when behavior or
-  claims change;
-- the next measured bottleneck is named.
-
-Documentation is not a substitute for missing raw evidence. When a measurement
-is known only from notes, label it as documented and create a recovery/rerun
-PBI instead of reconstructing a fake backend artifact.
+Review model approximation error separately from CKKS execution error.
+Check slot layouts, levels, refresh placement, rotation keys and operand
+ownership; diagnostic decryptions must never influence encrypted execution.
+A component probe does not qualify the full model.
 
 ## Benchmark artifacts
 
-Write fresh output under ignored `runs/<experiment>/`. Use the shared
-[experiment workflow](docs/experiments.md) for execution, completion events and
-publication. Preserve original bytes locally and publish reviewed derivatives
-with separate original/public hashes. Keep local paths and host settings in
-ignored `config/local/`, and session notes in `.local/`. The
-[result index](results/README.md) separates current measurements from archived
-evidence. Large payloads, checkpoints and transient logs stay outside Git.
+Use the [experiment workflow](docs/experiments.md) for execution, comparison
+and publication. Keep original bytes locally, publish reviewed derivatives
+with distinct original/public hashes, and retain failures and measured sources.
+Delete superseded operational scripts rather than creating another archive.
 
-Delete superseded controllers, watchers and cleanup scripts after moving useful
-behavior into maintained tools. Do not preserve disposable scripts in another
-archive. Keep the measured implementation and records needed to assess a result,
-including failed controls and explicit reproduction requirements.
-
-A direct backend artifact should include:
-
-- artifact/package version and repository commit;
-- native binary SHA-256 where applicable;
-- backend, hardware, CKKS parameters, and security mode;
-- exact input/payload identity;
-- pass/fail status and numerical tolerance;
-- per-token error and decrypt status;
-- setup/evaluation/decrypt timing;
-- rotations, ct-pt/ct-ct products, and bootstrap counts;
-- peak RSS and key/cache configuration;
-- explicit measurement scope and non-claims.
-
-Validate curated artifacts with:
+Artifacts identify configuration/security, numerical gates, per-output errors,
+token IDs, operation counts, timing scope and memory. Validate them with:
 
 ```bash
 fhemamba validate-artifacts --require-commit path/to/result.json
 ```
 
+Label derived reports and prose-only observations. Do not reconstruct a raw
+measurement from notes.
+
 ## Versioning and tags
 
-Use SemVer for package versions.
+Use SemVer. Patch versions cover fixes and changes within a capability;
+minor versions mark new runnable capabilities or breaking changes before 1.0.
+Version 0.5.0 retired the old distribution, import package and command.
+Version 1.0.0 is reserved for reproducible interactive generation at 128-bit
+parameters with an explicit protocol-security statement.
 
-- Patch versions cover fixes, tests, process updates, and narrow optimizations
-  inside a capability boundary.
-- Minor versions mark a new runnable capability such as a longer encrypted
-  horizon, process-separated full-kernel execution, or 128-bit full-chain
-  execution.
-- Minor versions also mark compatibility-breaking removals while the project is
-  below `1.0.0`; `0.5.0` is the boundary that retired the old distribution,
-  `fhe_native_mamba3` import package, and `fhe-mamba3` command.
-- `1.0.0` is reserved for reproducible interactive generation at 128-bit
-  parameters with an explicit protocol-security statement.
-
-Do not create a release tag until:
-
-1. the package version is consistent;
-2. the full local gate passes;
-3. claim-bearing raw artifacts are tracked and validator-clean;
-4. the evidence registry links every headline result.
-
-Historical version `0.4.5` has no tag because the corresponding
-three-token B300 success artifact is still awaiting recovery or an exact rerun.
+Create a release tag only when versions agree, the full local gate passes,
+claim-bearing artifacts validate and the [evidence registry](docs/evidence.md)
+links every headline result. Historical missing-evidence work stays in the
+[backlog](docs/backlog.md).
 
 ## Review priorities
 
-For low-level FHE changes, review these first:
-
-- Is each ciphertext slot layout explicit and type-safe?
-- Does the rotation inventory match the executing implementation?
-- Are level drops and bootstrap placement visible in telemetry?
-- Are reference and encrypted paths evaluating the same polynomial circuit?
-- Are exact-model approximation and CKKS execution errors separated?
-- Can a debug decrypt influence subsequent encrypted execution?
-- Is a partial probe described as partial?
-
-For documentation and artifacts:
-
-- Does every number have a source?
-- Is the source raw execution, a derived report, or prose-only measurement?
-- Are security and process-separation boundaries stated next to the result?
-- Does the backlog contain the next executable gate?
+Explain the numerical or user-visible consequence of a change, how it was
+checked, and any remaining limits. Link the relevant evidence rather than
+repeating the experiment history in each guide.

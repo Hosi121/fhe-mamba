@@ -1,41 +1,34 @@
 # Documentation
 
-For a development handoff, read [current state](status.md), then the relevant
-tool or evidence link. There is no need to load every dated report.
-Start with [reproduction](reproducing.md) to run the model from a checkout.
-Commands use the repository root as their working directory.
+Start with [getting started](reproducing.md). Commands run from the repository
+root unless a guide names another working directory.
 
-## Guides
+## Use the project
 
-| Document | Use it for |
+| Goal | Guide |
 | --- | --- |
-| [Current state](status.md) | Qualified baseline, unresolved failure and next investigation |
-| [Reproduction](reproducing.md) | A complete path from checkout to the measured workload |
-| [DGX Spark](dgx-spark.md) | Native dependencies, builds, machine requirements and campaigns |
-| [Python package](package.md) | Model, operator, layout and CLI modules |
-| [Mamba-3](mamba3.md) | Trained SISO model, common arithmetic backend and complete encrypted generation |
-| [Repository layout](repository.md) | File ownership, generated outputs and previous paths |
-| [Testing](testing.md) | Formatting, Python tests, coverage, C++ contracts and artifact checks |
-| [Experiment workflow](experiments.md) | Reusable job execution, local settings, completion events and public evidence |
-| [Optimization mechanisms](optimizations.md) | Shared implementations, optional kernels and qualification suites |
-| [Research validation](validation.md) | Approximation quality, encrypted probes and GPU promotion gates |
-| [Contributing](../CONTRIBUTING.md) | Development setup, review and evidence requirements |
+| Install Python dependencies and run a CPU example | [Getting started](reproducing.md) |
+| Generate from text or token IDs with Python or CLI | [Generation](generation.md) |
+| Load Mamba-3, export a workload and run encrypted generation | [Mamba-3](mamba3.md) |
+| Build the native backend on DGX Spark | [Spark build and execution](dgx-spark.md) |
+| Find importable APIs and CLI commands | [Python package](package.md) |
+| Run, compare and publish an experiment | [Experiment workflow](experiments.md) |
+| Choose a specialized research tool | [Experiment index](../experiments/README.md) |
 
-## Design and evidence
+## Develop and validate
 
-| Document | Use it for |
+| Goal | Guide |
 | --- | --- |
-| [Design](design.md) | Protocol invariants, state recurrence and algorithm choices |
-| [Evidence registry](evidence.md) | Trace headline claims to raw/derived artifacts and failed controls |
-| [Research index](research/README.md) | Read the studies by topic and date |
-| [Result index](../results/README.md) | Find recorded measurements without running a GPU |
-| [Roadmap](roadmap.md) | Research direction and capability milestones |
-| [Backlog](backlog.md) | Concrete next experiments and current status |
-| [Maintenance](maintenance.md) | Implementation boundaries and technical debt |
-| [Archive](archive/README.md) | Historical designs, ledgers and the retired implementation |
+| Understand the current baseline and next investigation | [Current state](status.md) |
+| Set up development and submit a change | [Contributing](../CONTRIBUTING.md) · [Testing](testing.md) |
+| Find implementation ownership and conventions | [Repository map](repository.md) · [Maintenance](maintenance.md) |
+| Understand the model and protocol | [Design](design.md) |
+| Qualify numerical or GPU changes | [Research validation](validation.md) · [Optimizations](optimizations.md) |
+| Choose future work | [Roadmap](roadmap.md) · [Backlog](backlog.md) |
 
-Published measurements retain numerical values and failure statuses. Environment
-identifiers are normalized, with original and published hashes recorded separately.
-Relevant logs and measured source snapshots are archived provenance. Disposable
-operational scripts are removed; use the [experiment workflow](experiments.md)
-for shared execution, comparison and verification.
+## Read the evidence
+
+The [evidence registry](evidence.md) connects claims to measurements and failed
+controls. Use the [research index](research/README.md) for detailed studies,
+the [result index](../results/README.md) for artifacts, and the
+[archive](archive/README.md) for historical designs.

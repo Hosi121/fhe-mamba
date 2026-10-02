@@ -5,12 +5,18 @@ distribution name and command name are all `fhemamba`. Run the
 [CPU example](../examples/cpu_smoke.py) after following the
 [installation guide](reproducing.md#1-install-the-python-environment).
 
+For generation, use `fhemamba.load_model`, `model.generate`, `model.prepare`
+and `fhemamba.load_prepared`. The matching commands are `fhemamba generate`
+and `fhemamba prepare`; see the [generation guide](generation.md) for inputs,
+backend selection and the request-specific preparation contract.
+
 ## Modules
 
 Paths below are relative to `src/fhemamba/`.
 
 | Area | Modules | Responsibility |
 | --- | --- | --- |
+| Public generation | `inference.py`, `inference_cli.py`, `inputs.py` | Token requests, prepared payloads, common results and CLI adapters |
 | Model and decode | `reference.py`, `ops.py`, `tensor_ops.py`, `packed_program.py` | Model formulas, exact/polynomial operations and packed circuit export |
 | Architecture and Mamba-3 | `architectures.py`, `mamba3.py`, `mamba3_lm.py`, `tensor_ops.py`, `packed_program.py` | Architecture-specific state, trained SISO model, shared tensor operations and packed FHE programs |
 | Payload and generation | `m1_payload.py`, `generation.py`, `generate.py`, `ppl.py`, `payload_surrogate.py` | Checkpoint export, prompt preparation, text reports and plaintext quality |

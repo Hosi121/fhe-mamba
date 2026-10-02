@@ -1,195 +1,22 @@
 # Mamba-3 SISO support
 
-Mamba-3 now has a complete mixer and trained-model encrypted generation path.
-Model math is shared between the exact PyTorch reference, its frozen
-polynomial surrogate and a packed FIDESlib program. The measured Mamba-2-130M
-generation path remains available through its existing optimized native kernel.
+The trained **Mamba-3 SISO 187M** path shares model arithmetic between the
+PyTorch reference, polynomial surrogate and packed CKKS executor.
+Start with [Python installation](reproducing.md#1-install-the-python-environment).
 
-The trained **Mamba-3 SISO 187M** loader, all 12 blocks and client generation
-loop pass full CPU/reference parity and complete encrypted generation: five
-evaluations and four actual client-selected tokens.
-An opt-in [long-session configuration](research/2026-09-28-long-generation.md)
-also qualifies 16 generated tokens; its 64-token encrypted candidate fails the
-hidden-error gate. These use different calibration and state representations
-from the short-request performance studies below.
-The ready-node refresh implementation completes in **12.68 minutes**.
-The final-source comparison measures **941.95 → 761.00 seconds (19.21% reduction)**,
-with bootstrap calls falling from 726 to 476. All four generated IDs and both
-`0.001` gates are preserved; maximum exact/polynomial errors are
-`0.0000809575` / `0.0000607799`. The 20% target remains unmet. The three-way
-polynomial/layout/scheduling combination takes 792.40 seconds and is not
-retained in the active executor. See the
-[refresh scheduling study](research/2026-09-25-packed-frontiers.md) for all
-samples, rejected candidates and final-source qualification.
-
-The preceding upload/routing comparison saves 9,120 model rotations
-(59,900 → 50,780); the selected configuration also retains the 64-entry cache.
-See the [upload/routing study](research/2026-09-24-borrowed-plaintext.md)
-and [cache integration](research/2026-09-24-packed-cache-integration.md).
-
-The [recorded small probes](research/2026-09-24-mamba3-siso.md) pass at 4 and 8
-steps: 102.68 s and 195.71 s of encrypted evaluation respectively on Spark.
-
-## Supported boundary
-
-| Component | Mamba-2 | Mamba-3 |
-| --- | --- | --- |
-| Architecture dispatch and state allocation | `architectures.py` | `architectures.py` |
-| State | Convolution FIFO, SSM | Accumulated angle, SSM, previous rotated B, previous x |
-| Plaintext formula | `reference.py` | `mamba3.py` |
-| Shared arithmetic | `tensor_ops.py`, `ops.py` | `tensor_ops.py`, `ops.py` |
-| Encrypted execution | Optimized Mamba-2 native kernel | Architecture-independent `packed_fideslib` executor |
-| Validation scope | Recorded 130M generation experiments | Synthetic mixer; trained 187M CPU parity and complete 12-layer encrypted client generation |
-
-The Mamba-3 formula includes input/output projections, B/C RMSNorm and learned
-biases, input-dependent negative A (including its floor), softplus dt, sigmoid
-trapezoidal mixing, tanh/dt rotary angles, lagged and current writes, D skip and
-SiLU output gating. Both rotary fractions (0.5 and 1.0) and optional headwise
-normalization before the output gate are implemented in the reference.
-MIMO and multiple B/C groups raise explicit errors. Chunked Mamba-3 prefill is
-not implemented; its supported scan schedule is `loop`.
-
-The native executor knows arithmetic operations and slot maps, not Mamba model
-versions. It packs each tensor into one ciphertext and frees values after their
-last use. Broadcasts use sparse placement followed by doubling rotations. It
-uses balanced Chebyshev evaluation and can refresh ciphertexts as levels run
-low. Encrypted export requires batch size one. The extended format supports
-non-power-of-two widths through zero padding. The trained path keeps the SSM
-as exact rank-one writes, so a 196608-coordinate state does not need to be
-expanded into one ciphertext. This is a finite-history representation with
-storage and readout cost growing with the number of tokens; no ranks are dropped.
-
-Monotone slot maps use radix-8 routing: each stage partitions coordinates by
-up to three displacement bits and evaluates the masks at the same ciphertext
-level. Small maps (at most 32 diagonals) use a direct transform. This reduces
-multiplicative depth at the cost of extra rotations; `--legacy-routing` on the
-runner restores the original bitwise routing for matched comparisons. Native
-reports include time and refresh counts by operation.
-On the same trained one-layer fixture, routing reduced evaluation time from
-130.17 to 100.83 seconds (22.5%). That routing comparison is separate from
-the later full-model depth/batching comparison.
-
-The runner also accepts `--planned-refresh --batch-refresh`. The depth planner
-accounts for each operation, eliminates unused nodes and hoists selected
-refreshes before fan-out. Algebraic rewrites save levels without changing the
-frozen polynomials; small routing maps reuse baby-step/giant-step rotations.
-Batch refresh packs live tensors into disjoint slot ranges using their public
-bounds, applies the existing two-pass correction and unpacks them. These flags
-require replicated linear transforms, radix-8 routing and two bootstrap passes.
-One-pass refresh is an experimental native option and fails the trained
-one-layer accuracy gate; it is not a supported acceleration setting.
-
-`--frontier-refresh` advances ready nodes that fit their actual CKKS levels
-before refreshing a blocked branch. It requires `--planned-refresh --batch-refresh`
-and preserves the two-pass refresh. Runtime use counts protect pinned outputs
-and duplicate input edges under the changed order; feedback epochs remain
-barriers. Omitting this option retains the sequential schedule. The native
-report includes `frontier_deferrals` and `maximum_ready_nodes`.
-
-`--hoist-rotations` shares existing signed-digit prefixes and sibling ModUp
-preparation within BSGS baby rotations, without adding rotation keys.
-`--share-chebyshev` shares the normalized argument and requested basis terms
-between compatible polynomial nodes, including sin/cos pairs. A refresh or
-level/degree change invalidates that basis; its last consumer releases it.
-Both switches are opt-in and preserve the frozen model coefficients. See the
-[four-candidate comparison](research/2026-09-25-structural-four.md) for measured
-scope, correctness probes and alternative-backend trials.
-
-`--gpu-dual-ring` moves ordinary encrypted arithmetic to N=32,768 while
-keeping the existing N=65,536 S2C-first refresh circuit. It requires
-`--s2c-first --planned-refresh --batch-refresh` and the matching Spark build.
-Logical node widths must fit 16,384 slots; the executor regenerates its
-replicated layouts for that capacity. Model coefficients and error gates
-stay fixed. See the [GPU dual-ring study](research/2026-09-26-gpu-dual-ring.md)
-for qualification and the limitations of this experimental parameter set.
-
-`--profile-evaluation` adds host encoding and mask preparation timers and CUDA
-profiler start/stop markers around evaluation. Use an Nsight Systems wrapper
-with `--capture-range=cudaProfilerApi --capture-range-end=stop` to exclude setup
-from the trace. Profiled timings include instrumentation overhead and should
-not be compared directly with unprofiled throughput measurements.
-
-`--inplace-ops` reuses privately cloned GPU scratch ciphertexts during add,
-multiply and composite rotations. It leaves original program values intact.
-It reduced a matched short trained prefix by 1.8% and a one-layer generation
-loop by 2.2% in separate ABBA comparisons; it is
-opt-in and is not included in the 24.95-minute full-generation measurement.
-Both modes of the later 21.87/18.59-minute encoding comparison include it.
-The shared coefficient-mask helper now uses contiguous SIMD-capable copies,
-with bitwise parity and a 12.4× local CPU result at 32768 coefficients. See the
-[microkernel study](research/2026-09-24-mamba3-microkernels.md) for scope and profiles.
-
-The same `--inplace-ops` option now consumes final-use accumulator terms
-through the shared ownership helper. Aliases detach before alignment and
-right-input storage stays live through GPU completion. The
-[ownership comparison](research/2026-09-24-owned-arithmetic.md) records
-exact-RNS checks and a fresh full baseline/candidate pair.
-
-`--reuse-public-ciphertexts` optionally encrypts each distinct public source
-vector once per evaluation, then clones that ciphertext for subsequent equal
-sources. Equality includes every coefficient bit after positive-zero padding;
-negative zero remains distinct. Secret inputs and client feedback never use
-this reuse path. Each caller receives its own mutable handle, and the seed is
-released after its final public source. The cache does not cross requests or
-keys. Results record `public_encryptions`, `public_encryption_reuses` and
-`peak_public_seeds`. This reduces repeated initialization work, not the cost
-of each later token; encryption-error correlation still requires numerical
-qualification for the workload. The [16-token comparison](research/2026-09-28-public-state-reuse.md)
-passes all gates in two matched pairs and reduces mean evaluation by 6.87%.
-
-`--cache-plaintexts` is an optional, evaluator-local cache for multiplication
-masks containing zeros and one finite nonzero coefficient. It retains up to
-64 encoded plaintexts, including their GPU handles, and uses LRU eviction.
-Only exact coefficient bits at the same CKKS level can hit; dense weight
-diagonals and additive plaintexts keep their original encoding paths. The
-existing GPU barriers protect evicted handles. Capacity limits entry count,
-not RSS bytes; native results record hits, misses, bypasses, evictions and RSS.
-`host_encodes` counts uncached plaintext preparation requests regardless of
-profiling; `host_encoding_seconds` requires `--profile-evaluation`.
-The [cache study](research/2026-09-24-mamba3-plaintext-cache.md) measures a 1.4%
-reduction on a matched trained prefix and passes a four-step state regression.
-See the latest [cache integration study](research/2026-09-24-packed-cache-integration.md)
-for its controls, full follow-up decision and final recommendation.
-
-`--gpu-plaintext-ntt` prepares coefficients with OpenFHE, then runs their RNS
-NTT on the GPU in batches of 16 limbs. FFT, rounding, scale, coefficients and
-cryptographic parameters are preserved. It includes `--fast-plaintext-upload`,
-which independently removes two CPU limb-vector copies from the standard
-upload path. The new encoder also creates additive constants at their required
-scale degree directly. Both paths are opt-in and use the pinned FIDESlib API;
-existing device barriers protect staging and cached plaintext lifetimes.
-Native reports include `gpu_ntt_encodes`, `fast_plaintext_uploads` and
-`plaintext_ntt_batch`. Upload timing requires `--profile-evaluation`; its zero
-value in the standard path means uninstrumented, not zero work. Exact RNS
-probes and matched model measurements are in the
-[encoding study](research/2026-09-24-mamba3-gpu-encoding.md).
-
-Further opt-in controls are `--naf-rotations`, `--reuse-dead-inputs`,
-`--direct-plaintext-upload` and `--compact-weights`. They respectively use
-signed-power rotation keys, consume uniquely owned final DAG inputs, remove
-redundant upload staging copies, and store exactly representable matrix weights
-as BF16. Weight expansion and all arithmetic remain double precision. The
-[native guide](../native/README.md) describes their counters and CPU inventory
-tool. The [resource study](research/2026-09-24-packed-resources.md) records
-the complete 18.58→17.58-minute comparison, separate prefix controls and
-673.3→168.3 MiB matrix storage. Reuse and compact storage alone do not show
-isolated latency gains in the prefix control. Persistent state co-location
-remains an inventory result, without a new encrypted layout.
-
-Additional measured controls are `--move-plaintext-coefficients`,
-`--borrow-plaintext-upload` and `--bsgs-routing-stages`. They remove
-coefficient/staging copies and reuse rotations inside radix-8 stages.
-The [upload/routing study](research/2026-09-24-borrowed-plaintext.md)
-records their separate/combined controls and full-model validation.
-The shared policy checks layout and lifetime, falls back when necessary,
-and records actual dispatch.
+The current classical-128 baseline qualifies **16 generated tokens on B300**
+for the recorded prompt. The 64-token candidate fails at selection 24;
+arbitrary prompts remain unqualified. See [current state](status.md) for
+parameters and the open numerical problem.
 
 ## CPU usage
 
 ```bash
-uv sync --locked --extra experiments
 uv run --no-sync python examples/mamba3_cpu_smoke.py
 ```
+
+This plaintext example checks prefill/decode parity with random weights.
+To use the mixer directly:
 
 ```python
 import torch
@@ -203,36 +30,62 @@ with torch.no_grad():
     next_output = mixer(torch.randn(1, 1, 32), state=state)
 ```
 
-`mixer3_forward` can also read weights directly from an upstream `Mamba3`
-module. The local module uses matching parameter names/shapes, so a compatible
-SISO mixer's `state_dict` can be loaded with `strict=True`.
+Compatible upstream SISO mixer weights load with `strict=True`.
+`mixer3_forward` can also read weights from an upstream `Mamba3` module.
+
+## Supported boundary
+
+| Area | Scope |
+| --- | --- |
+| Architecture | SISO; rotary fractions 0.5/1.0 and optional headwise output normalization |
+| Unsupported variants | MIMO and multiple B/C groups raise errors; prefill uses `loop`, not chunked scan |
+| Encrypted export | Batch size one; up to 64 generated tokens and 128 total evaluations |
+| State | Default exact rank-one history; optional fixed-size tiles and phasor rotation |
+| Numerical gates | Final-hidden error <= 0.001 against both exact and polynomial references; identical generated IDs |
+| Protocol | Public weights; encrypted activations/state; inline client token selection |
+
+Export limits are resource bounds, not accuracy guarantees. The default exact
+history grows with session length. Tiled state retains every SSM coordinate;
+neither representation drops ranks.
+
+Polynomial fits use independent calibration inputs and sampled error checks,
+not interval certificates. Export rejects observed domain violations or changed
+greedy IDs. Refresh bounds use empirical headroom, so new prompts still need
+domain and encrypted validation.
 
 ## Trained checkpoint and generation
 
-Download the pinned public weights and Llama-3.1 tokenizer:
+Download the pinned weights and tokenizer:
 
 ```bash
 uv run --no-sync python scripts/download_mamba3_checkpoint.py
 ```
 
-The [reproduction manifest](../config/mamba3-reproduction.json) pins the official
-State Spaces checkpoint and NVIDIA's public Llama-3.1 tokenizer files. No chat
-template or BOS token is added in this example. The client embedding/vocabulary
-head is tied exactly as in the checkpoint.
+[config/mamba3-reproduction.json](../config/mamba3-reproduction.json) pins the
+State Spaces checkpoint and compatible Llama-3.1 tokenizer. Plaintext generation:
 
 ```python
 from transformers import AutoTokenizer
-from fhemamba.mamba3_lm import Mamba3LM
+from fhemamba import load_model
 
-model = Mamba3LM.from_pretrained("checkpoints/mamba3-siso-187m")
-tokenizer = AutoTokenizer.from_pretrained("checkpoints/mamba3-siso-187m/tokenizer")
+model = load_model("checkpoints/mamba3-siso-187m")
+tokenizer = AutoTokenizer.from_pretrained(
+    "checkpoints/mamba3-siso-187m/tokenizer", local_files_only=True,
+)
 prompt = tokenizer.encode("The capital", add_special_tokens=False)
-tokens, hidden_trace = model.generate(prompt, 4)
-print(tokenizer.decode(prompt + tokens))
+result = model.generate(prompt, max_new_tokens=4)
+print(tokenizer.decode(prompt + result.generated_ids, clean_up_tokenization_spaces=False))
 # The capital of the state of
 ```
 
-Compile all layers on the development host:
+No chat template or BOS token is added. The embedding/vocabulary head is tied
+as in the checkpoint.
+
+Use the [generation API and CLI](generation.md) for text files, raw token IDs,
+request preparation and exact/polynomial/CKKS comparison. The recipes below
+retain the specialized export and research controls.
+
+### Export a four-token workload
 
 ```bash
 OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 \
@@ -240,21 +93,26 @@ OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 \
     --output runs/mamba3-lm --prompt 'The capital' --new-tokens 4
 ```
 
-This writes a full-backbone program, lossless FP32 client vocabulary weights,
-references and their hashes. The default payload is about 1.6 GiB. Independent
-calibration prompts determine polynomial domains; the chosen evaluation prompt
-is then checked without refitting. The compiler rejects domain violations and
-changed greedy tokens. A per-node refresh bound is derived from the compiler
-proxy with eightfold headroom; this is an empirical fixture assumption, **not**
-an interval certificate for arbitrary prompts.
+The default payload is about 1.6 GiB: a full-backbone program, FP32 client
+weights, references and hashes. Use fresh output directories. Follow the
+[client-head copy rules](experiments.md#shared-local-client-heads) when
+transferring a payload to another host.
 
-Transfer that directory to the GPU host. Use the build and library environment
-shown below, then run with an explicit wall-time cap (seconds):
+`--probe-layers 1` exports a component for diagnosis; its
+`complete_backbone=false` output is not full-model generation.
+
+### Run on Spark
+
+Build the [pinned native backend](dgx-spark.md#build) and install `fhemamba`
+on the GPU host. The following four-token recipe uses experimental
+**`security=not-set`**, separate from the classical-128 configuration below:
 
 ```bash
+export LD_LIBRARY_PATH="$HOME/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 OMP_NUM_THREADS=4 python -m fhemamba benchmark packed \
-  --binary /path/to/packed_fideslib --payload /path/to/mamba3-lm \
-  --output /path/to/mamba3-lm-run --planned-refresh --batch-refresh --frontier-refresh \
+  --binary "$HOME/fhemamba/spark/kernel/packed_fideslib" \
+  --payload /path/to/mamba3-lm --output runs/mamba3-lm-run \
+  --security not-set --planned-refresh --batch-refresh --frontier-refresh \
   --inplace-ops --gpu-plaintext-ntt \
   --naf-rotations --reuse-dead-inputs --direct-plaintext-upload --compact-weights \
   --move-plaintext-coefficients --borrow-plaintext-upload --bsgs-routing-stages --cache-plaintexts \
@@ -262,23 +120,16 @@ OMP_NUM_THREADS=4 python -m fhemamba benchmark packed \
   --budget-file /path/to/campaign-budget.json --budget-seconds 21600
 ```
 
-The recorded full comparison also pins Spark CPUs 15–19 and enables
-`--profile-evaluation` in both modes; CPU numbering is machine-specific.
-The example cap is a command-line setting, not a measured runtime. Reuse the
-same budget file for every attempt in a campaign: the runner serializes access,
-charges elapsed runner time (including setup and failed attempts), and caps the
-next process timeout by the remaining allowance. It rejects changes to an
-existing budget limit. Keep the runner alive until its child exits so the
-charge is recorded. The runner
-requires hidden-vector errors below `0.001` against both frozen polynomials and
-the original float64 model, and exact equality of all generated token IDs.
-The server arithmetic has no secret key. An inline client callback decrypts
-only the final hidden vector, computes the full vocabulary head, chooses the
-actual greedy token and freshly encrypts its embedding. Reference next-token
-embeddings are **not** serialized into feedback nodes. State is never decrypted
-or re-encrypted. Process isolation is not provided by this feasibility runner.
+Set an explicit timeout and campaign budget. The shared budget file charges
+elapsed runner time, including failed attempts, and limits subsequent runs.
+Keep the runner alive until its child exits so charging completes.
 
-Copy the run results back and decode the actual encrypted-client token IDs:
+The inline client decrypts final hidden vectors, computes vocabulary logits,
+chooses actual greedy tokens and freshly encrypts their embeddings.
+Reference next-token embeddings are not substituted into feedback. State stays
+encrypted; process-separated client/server deployment is not implemented.
+
+Copy results back and decode the measured IDs:
 
 ```bash
 uv run --no-sync python -m fhemamba benchmark generation-report \
@@ -287,14 +138,9 @@ uv run --no-sync python -m fhemamba benchmark generation-report \
   --output runs/mamba3-generation.json
 ```
 
-`--probe-layers 1` compiles only a component for debugging and cost measurement.
-Its `complete_backbone` flag is false and its text is not full-model generation.
-The exporter accepts up to 64 generated tokens and 128 total evaluations. These
-are resource limits, not a guarantee that a prompt stays inside fitted domains.
-The default still uses exact history and accumulated rotary angles.
+### Classical-128, 16-token configuration
 
-For longer sessions, an opt-in path retains the complete SSM state in fixed-size
-head tiles and carries each rotary phase as its cosine and sine:
+Export fixed-size state tiles with phasor rotation:
 
 ```bash
 OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 \
@@ -304,39 +150,31 @@ OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 \
     --normalization-margin 1 --positive-lower-fraction 0.25
 ```
 
-The phase update uses the sine/cosine addition identities, so the polynomials
-see one step's angular increment instead of the entire accumulated angle.
-It neither drops state coordinates nor wraps angles with a discontinuous
-encrypted modulo operation. The complete backbone still evaluates all original
-normalizations. Calibration spans six independent 65-token generations and
-widens their positive normalization domains; no evaluation-prompt values enter
-the fit. The compiler requires matching greedy IDs and a final-hidden maximum
-absolute error of at most `0.001` before writing a usable payload. Numerical
-drift, domain coverage and encrypted execution must still pass separately.
+Calibration uses six independent 65-token generations. Phasor updates keep
+polynomial inputs at one step's angular increment; all original normalizations
+and state coordinates remain.
 
-Use the classical-128 flags and the qualified GPU preparation options when
-running this payload; the exact command is retained with each measurement.
-`fhemamba benchmark packed` forwards `--frontier-live-limit 256` when frontier
-refresh is enabled. This threshold passes the complete 16-token generation;
-128 fails client decoding on the full model despite passing the separate
-one-layer recurrence probe. It is a soft limit on speculative retained values,
-not a GPU allocation cap. The result reporter accepts either this runner's record or
-a generic benchmark job and supports `--validate-only --security 128-classic`
-as a completion hook without installing a tokenizer on the GPU host.
+The recorded [B300 job](../results/b300/2026-09-28/public-state-reuse/jobs/full-b1.json)
+specifies the native options. Reproduction requires the matching
+[build and settings](../results/b300/2026-09-28/public-state-reuse/README.md),
+adapted to your paths and allocated device through the
+[job workflow](experiments.md). This is a different hardware and security
+profile from the Spark recipe above. The measured request uses about
+179.41 GiB of GPU memory; see its
+[timing and resource scope](research/2026-09-28-public-state-reuse.md).
 
-The [fixed-state recurrence probe](../experiments/recurrent_state/README.md)
-uses the same mixer update with whole heads split across ciphertexts. It compares
-bounded state storage against exact history on identical captured inputs and
-audits the existing polynomial domains on longer plaintext traces. Component
-results alone do not qualify the complete generation path above.
-The [memory-admission qualification](research/2026-09-27-recurrent-memory.md)
-completes both recurrence representations at 64 steps with the classical-128
-profile and unchanged 0.001 gates. It limits speculative executor work, while
-leaving the default short-generation schedule unchanged.
+Retain two S2C-first refresh passes, merged correction and frontier limit 256.
+A limit of 128 fails on the full model despite passing a component probe.
+The limit controls speculative live values, not GPU allocation.
+The result reporter supports `--validate-only --security 128-classic` for
+qualification without a tokenizer.
+
+The separate [64-step recurrence probe](../experiments/recurrent_state/README.md)
+qualifies a component, not 64-token full-model generation.
 
 ## Reproduce the encrypted probe
 
-Export on the Python development host:
+Export a small random mixer on the Python host:
 
 ```bash
 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
@@ -344,49 +182,48 @@ OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 \
     --output runs/mamba3-probe --tokens 4
 ```
 
-The default is width 32, inner width 64, two heads, state size 16 and 1024 slots.
-Weights are random and public. 128 independent calibration inputs determine
-polynomials; held-out inputs drive encrypted evaluation. Every nonlinear site
-must have a polynomial and stay in its frozen domain. The fit report gives
-sampled errors on 8193 points, **not** an interval certificate. Exact-reference
-error and CKKS-to-polynomial error are measured separately for output, angle,
-SSM, previous B and previous x after every step.
+Defaults are width 32, inner width 64, two heads, state size 16 and 1024 slots.
+Independent calibration and held-out inputs are used. Both exact-reference
+and CKKS-to-polynomial errors cover output and every carried state.
 
-Build on Spark with the [existing pinned dependencies](dgx-spark.md#build):
+Transfer the payload to Spark and use the build/library setup above:
 
 ```bash
-scripts/build_dgx_spark.sh
-```
-
-This also builds `~/fhemamba/spark/kernel/packed_fideslib`. Transfer the complete
-payload directory to the Spark host. From the repository checkout on that host:
-
-```bash
-export LD_LIBRARY_PATH="$HOME/fhe-deps/openfhe-fides/lib:/usr/local/cuda-13.0/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 OMP_NUM_THREADS=4 python -m fhemamba benchmark packed \
   --binary "$HOME/fhemamba/spark/kernel/packed_fideslib" \
   --payload /path/to/mamba3-probe \
-  --output runs/mamba3-encrypted-001 --timeout 600
+  --output runs/mamba3-encrypted-001 --timeout 600 --security not-set
 ```
 
-Use a new output directory for every attempt. The runner verifies payload
-hashes, records the executable hash, retains native output and terminates the
-process group at the timeout. The native log prints progress and a rough ETA.
-The error gate is `0.001` for both exact and polynomial references, including
-the carried states. This is a bounded feasibility check, not a throughput claim.
+This feasibility probe uses N=65,536, depth 44, scale 59 and uniform ternary
+keys. Both error gates are 0.001. The runner verifies payload hashes, records
+binary identity and terminates the process group on timeout. Use a fresh
+output directory per attempt.
 
-The context uses ring dimension 65536, depth 44, scale 59, uniform ternary keys
-and `security=not-set`. The client fixture encrypts inputs and decrypts recorded
-outputs after evaluation; the evaluator never decrypts or re-encrypts a carried
-state. It is an inline test, not a deployed client/server protocol. Public
-refresh bounds are fixed for the synthetic probe and checked by the exporter;
-they do not certify arbitrary user inputs or long-context accuracy.
+## Runner controls
+
+Use `python -m fhemamba benchmark packed --help` for options and the
+[native guide](../native/README.md) for mechanisms and counters.
+
+| Control | Requirement or boundary |
+| --- | --- |
+| `--planned-refresh --batch-refresh` | Replicated transforms, radix-8 routing and two bootstrap passes |
+| `--frontier-refresh` | Planned/batched refresh; preserves feedback and dependency barriers |
+| `--reuse-public-ciphertexts` | Reuses only identical public sources within one request/key; requires workload qualification |
+| `--cache-plaintexts` | Exact coefficient bits/levels; entry count is not a memory-byte limit |
+| GPU encoding/upload and operand reuse | Opt-in; follow the matching native build and qualification suite |
+| `--hoist-rotations --share-chebyshev` | Opt-in sharing with fixed coefficients and compatible inputs |
+| `--gpu-dual-ring` | Experimental profile; requires S2C-first, planned/batched refresh and matching build; incompatible with classical-128 |
+| `--profile-evaluation` | Adds timers and CUDA capture markers; instrumented timings have a different scope |
+
+One-pass refresh fails the trained one-layer accuracy gate. Indexed mask
+lookup remains unqualified and disabled by default. Use the
+[optimization map](optimizations.md) and [research index](research/README.md)
+for candidate-specific comparisons.
 
 ## Upstream reference parity
 
-The independent parity runner loads the original upstream CPU reference
-functions without importing Triton or CuteDSL. It tests both rotary fractions,
-both output-normalization settings, nontrivial B/C biases and carried states.
+The independent runner loads upstream CPU functions without Triton or CuteDSL:
 
 ```bash
 git clone https://github.com/state-spaces/mamba.git /tmp/mamba-reference
@@ -395,7 +232,6 @@ uv run --no-sync python -m fhemamba workload check-mixer \
   --source /tmp/mamba-reference --output runs/mamba3-upstream-parity.json
 ```
 
-The runner records all three source hashes and the checkout revision. It uses
-a `1e-7` tolerance because upstream preprocessing casts A to float32 while the
-local float64 oracle retains double precision. Fused CUDA-kernel compatibility
-on GB10 is not needed by this FHE executor.
+It covers both rotary fractions, output-normalization modes, B/C biases and
+carried states, recording source hashes and revision. The 1e-7 tolerance
+accounts for upstream float32 preprocessing of A versus the float64 oracle.
