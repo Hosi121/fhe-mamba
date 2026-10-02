@@ -1,4 +1,4 @@
-"""Public generation API for local Mamba-3 SISO checkpoints.
+"""Public generation API for local Mamba-2 and Mamba-3 SISO checkpoints.
 
 Prepared requests bind one prompt and one fixed generation length. They are
 research payloads containing plaintext references, not deployable server models.
@@ -16,6 +16,7 @@ from typing import Any
 
 from fhemamba._version import __version__
 from fhemamba.benchmarks.io import file_sha256, read_object, write_json
+from fhemamba.checkpoints import architecture, checkpoint_identity, tokenizer_directory
 from fhemamba.inputs import generation_length, token_ids
 
 # Settings from the recorded public-state-reuse B300 candidate. This selects
@@ -77,11 +78,20 @@ class PreparedRequest:
     path: Path
     manifest_sha256: str
 
+    @property
+    def profile(self) -> str:
+        return self.manifest().get("profile", "classical-128")
+
     def manifest(self) -> dict[str, Any]:
         from fhemamba.benchmarks.packed import read_payload
 
         if file_sha256(self.path / "manifest.json") != self.manifest_sha256:
             raise ValueError("prepared manifest changed; prepare a new request")
+        manifest = read_object(self.path / "manifest.json")
+        if manifest.get("schema") == "fhemamba-mamba2-generation-v1":
+            from fhemamba.mamba2_inference import validate_manifest
+
+            return validate_manifest(self.path, manifest)
         manifest = read_payload(self.path)
         if manifest.get("schema") != "fhemamba-mamba3-lm-v1":
             raise ValueError("a Mamba-3 language-model payload is required")
@@ -109,7 +119,7 @@ class PreparedRequest:
         output: str | Path,
         timeout: float = 2400,
     ) -> GenerationResult:
-        """Execute CKKS locally with fresh keys and the existing acceptance gates."""
+        """Execute the model-specific CKKS profile with its existing acceptance gates."""
         from fhemamba.benchmarks.generation import validate_generation
         from fhemamba.benchmarks.packed import run
 
@@ -117,6 +127,10 @@ class PreparedRequest:
         binary, output = Path(binary).resolve(), Path(output).resolve()
         if output.is_relative_to(self.path):
             raise ValueError("run output must be outside the prepared request")
+        if manifest["architecture"] == "mamba2":
+            from fhemamba.mamba2_inference import run as run_mamba2
+
+            return run_mamba2(self, manifest, binary, output, timeout)
         record = run(binary, self.path, output, timeout=timeout, **_CKKS_OPTIONS)
         native_path = output / "native.json"
         native = {}
@@ -173,12 +187,14 @@ def load_prepared(path: str | Path) -> PreparedRequest:
         request = read_object(metadata)
         if (
             request.get("schema") != "fhemamba-prepared-request-v1"
-            or request.get("profile") != "classical-128"
+            or request.get("profile") not in ("classical-128", "mamba2-experimental")
             or request.get("manifest_sha256") != identity
         ):
             raise ValueError("prepared request identity or profile differs")
     prepared = PreparedRequest(path, identity)
-    prepared.manifest()
+    profile = prepared.profile
+    if metadata.exists() and request["profile"] != profile:
+        raise ValueError("prepared request profile differs from the model manifest")
     return prepared
 
 
@@ -186,14 +202,19 @@ class GenerationModel:
     """One local CPU model, with token-based generation and explicit FHE preparation."""
 
     def __init__(self, checkpoint: str | Path):
-        from fhemamba.mamba3_lm import Mamba3LM
-
         self.checkpoint = Path(checkpoint).resolve()
-        self._identity = {
-            name: file_sha256(self.checkpoint / name)
-            for name in ("config.json", "pytorch_model.bin")
-        }
-        self._model = Mamba3LM.from_pretrained(self.checkpoint)
+        self.architecture = architecture(self.checkpoint)
+        self._identity = checkpoint_identity(self.checkpoint, self.architecture)
+        if self.architecture == "mamba2":
+            from fhemamba.mamba2_inference import load_checkpoint
+
+            self._model = load_checkpoint(self.checkpoint)
+            self._vocab_size = self._model.get_input_embeddings().num_embeddings
+        else:
+            from fhemamba.mamba3_lm import Mamba3LM
+
+            self._model = Mamba3LM.from_pretrained(self.checkpoint)
+            self._vocab_size = self._model.backbone.embedding.num_embeddings
 
     def generate(
         self,
@@ -215,11 +236,13 @@ class GenerationModel:
 
         if backend not in ("exact", "polynomial", "ckks"):
             raise ValueError("backend must be exact, polynomial or ckks")
-        ids = token_ids(input_ids, vocab_size=self._model.backbone.embedding.num_embeddings)
+        ids = token_ids(input_ids, vocab_size=self._vocab_size)
         length = generation_length(max_new_tokens)
         manifest = None
         if prepared is not None:
             manifest = prepared.manifest()
+            if manifest["architecture"] != self.architecture:
+                raise ValueError("model architecture differs from the prepared request")
             if ids != manifest["prompt_ids"] or length != manifest["generated_tokens"]:
                 raise ValueError("input IDs or generation length differ from the prepared request")
             if self._identity != manifest["checkpoint"]["files_sha256"]:
@@ -234,6 +257,10 @@ class GenerationModel:
             return prepared.generate(binary=binary, output=output, timeout=timeout)
         if binary is not None or output is not None:
             raise ValueError("binary and output are CKKS execution options")
+        if self.architecture == "mamba2":
+            from fhemamba.mamba2_inference import generate
+
+            return generate(self._model, ids, length, backend, prepared, manifest)
         ops = None
         settings = {"factored": False, "rotary": "angle"}
         if backend == "polynomial":
@@ -255,7 +282,12 @@ class GenerationModel:
         if not all(bool(torch.isfinite(hidden).all()) for hidden in trace):
             raise ValueError("generation produced non-finite hidden states")
         checks = {"finite_hidden_states": True, "complete_generation": len(generated) == length}
-        report = {"checks": checks, "selection": "greedy", "stopping": "length"}
+        report = {
+            "architecture": "mamba3",
+            "checks": checks,
+            "selection": "greedy",
+            "stopping": "length",
+        }
         if backend == "polynomial":
             import numpy as np
 
@@ -288,40 +320,45 @@ class GenerationModel:
         max_new_tokens: int = 16,
         output: str | Path,
         tokenizer: str | Path | None = None,
-        profile: str = "classical-128",
+        profile: str | None = None,
+        base_chain: str | Path | None = None,
     ) -> PreparedRequest:
-        """Export one request using the existing pinned-checkpoint compiler.
+        """Export one request using the architecture's existing preparation path.
 
-        Run from a source checkout. The tokenizer is used for the independent
-        calibration prompts and display, never to reinterpret input_ids.
+        Mamba-2 requires a frozen base_chain and explicit mamba2-experimental
+        profile. Mamba-3 uses the pinned checkpoint and independent calibration.
+        Run preparation from a checkout; input_ids are never retokenized.
         """
-        from fhemamba.workloads.mamba3_export import export
-
-        ids = token_ids(input_ids, vocab_size=self._model.backbone.embedding.num_embeddings)
-        generation_length(max_new_tokens, input_length=len(ids))
-        if profile != "classical-128":
-            raise ValueError("the public generation profile is classical-128")
-        if any(
-            file_sha256(self.checkpoint / name) != value for name, value in self._identity.items()
-        ):
+        ids = token_ids(input_ids, vocab_size=self._vocab_size)
+        generation_length(max_new_tokens)
+        if checkpoint_identity(self.checkpoint, self.architecture) != self._identity:
             raise ValueError("checkpoint files changed after loading the model")
         output = Path(output).resolve()
-        tokenizer = Path(tokenizer) if tokenizer is not None else self.checkpoint / "tokenizer"
-        # The exporter owns model arithmetic, calibration gates and payload
-        # writing. Preserve its legacy stdout while keeping this API's stdout clean.
-        with contextlib.redirect_stdout(sys.stderr):
-            export(
-                self.checkpoint,
-                tokenizer,
+        tokenizer = (
+            Path(tokenizer) if tokenizer is not None else tokenizer_directory(self.checkpoint)
+        )
+        if self.architecture == "mamba2":
+            from fhemamba.mamba2_inference import PROFILE, prepare
+
+            if profile != PROFILE:
+                raise ValueError(
+                    "Mamba-2 requires explicit profile='mamba2-experimental' (security=not-set)"
+                )
+            prepare(
+                self._model,
+                self._identity,
+                ids,
+                max_new_tokens,
                 output,
-                input_ids=ids,
-                new_tokens=max_new_tokens,
-                state_representation="tiled",
-                rotary="phasor",
-                calibration_tokens=65,
-                normalization_margin=1,
-                positive_lower_fraction=0.25,
+                base_chain,
+                tokenizer,
             )
+        else:
+            profile = profile or "classical-128"
+            if profile != "classical-128" or base_chain is not None:
+                raise ValueError("Mamba-3 uses classical-128 preparation without base_chain")
+            generation_length(max_new_tokens, input_length=len(ids))
+            self._prepare_mamba3(ids, max_new_tokens, output, tokenizer)
         write_json(
             output / "request.json",
             {
@@ -334,7 +371,28 @@ class GenerationModel:
         )
         return load_prepared(output)
 
+    def _prepare_mamba3(self, ids, length, output, tokenizer):
+        from fhemamba.workloads.mamba3_export import export
+
+        if tokenizer is None:
+            raise ValueError("Mamba-3 preparation requires a local tokenizer for calibration")
+        # The exporter owns model arithmetic, calibration gates and payload
+        # writing. Preserve its legacy stdout while keeping this API's stdout clean.
+        with contextlib.redirect_stdout(sys.stderr):
+            export(
+                self.checkpoint,
+                tokenizer,
+                output,
+                input_ids=ids,
+                new_tokens=length,
+                state_representation="tiled",
+                rotary="phasor",
+                calibration_tokens=65,
+                normalization_margin=1,
+                positive_lower_fraction=0.25,
+            )
+
 
 def load_model(checkpoint: str | Path) -> GenerationModel:
-    """Load a local Mamba-3 SISO checkpoint on CPU; no automatic downloads."""
+    """Detect and load a local Mamba-2 or Mamba-3 SISO checkpoint on CPU."""
     return GenerationModel(checkpoint)

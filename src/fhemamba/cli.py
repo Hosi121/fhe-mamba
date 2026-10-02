@@ -21,7 +21,7 @@ GROUPS = {
     "prepare": (
         "fhemamba.inference_cli",
         "prepare_main",
-        "prepare one Mamba-3 request for polynomial/CKKS generation",
+        "prepare one Mamba-2/3 request for polynomial/CKKS generation",
     ),
     "calibrate": (
         "fhemamba.calibration.__main__",

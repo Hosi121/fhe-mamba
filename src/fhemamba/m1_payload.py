@@ -22,6 +22,7 @@ from pathlib import Path
 
 import torch
 
+from fhemamba.inputs import token_ids as normalize_token_ids
 from fhemamba.normalization import ScheduledInvSqrt, certify_schedule
 from fhemamba.ops import (
     SITE_NAMES,
@@ -347,10 +348,22 @@ def _collect_autoregressive_trace(
     ops=None,
     record_recurrence: bool = False,
     record_layer_details: bool = True,
+    input_ids=None,
 ) -> _AutoregressiveTrace:
     if prompt_tokens < 1 or generate_tokens < 1:
         raise ValueError("autoregressive prompt/generate token counts must be positive")
-    ids = tokenizer(prompt, return_tensors="pt").input_ids
+    ids = (
+        tokenizer(prompt, return_tensors="pt").input_ids
+        if input_ids is None
+        else torch.tensor(
+            [
+                normalize_token_ids(
+                    input_ids, vocab_size=model.get_input_embeddings().num_embeddings
+                )
+            ],
+            dtype=torch.long,
+        )
+    )
     if ids.shape[1] < prompt_tokens:
         raise ValueError("prompt does not contain enough tokens for autoregressive export")
     return _trace_from_ids(
@@ -514,6 +527,7 @@ def _export_autoregressive_assets(
     n_layers: int,
     layer_dirs: list[str],
     final_norm_spec: dict | None = None,
+    input_ids=None,
 ) -> dict:
     if prompt_tokens < 1 or generate_tokens < 1:
         raise ValueError("autoregressive prompt/generate token counts must be positive")
@@ -524,6 +538,7 @@ def _export_autoregressive_assets(
         prompt_tokens,
         generate_tokens,
         record_layer_details=False,
+        input_ids=input_ids,
     )
     reference_ops = _poly_ops_from_export(out, n_layers, final_norm_spec)
     poly_trace = _collect_autoregressive_trace(
@@ -534,6 +549,7 @@ def _export_autoregressive_assets(
         generate_tokens,
         ops=reference_ops,
         record_recurrence=True,
+        input_ids=input_ids,
     )
     if final_norm_spec is not None and any(
         reference_ops.violations[site][0] for site in ("rms_invsqrt", "gated_rms_invsqrt")
@@ -609,6 +625,8 @@ def export_autoregressive_client_payload(
     prompt: str = "The capital of France is",
     prompt_tokens: int = 2,
     generate_tokens: int = 4,
+    *,
+    input_ids=None,
 ) -> Path:
     """Add client-loop generation assets to an existing chain export.
 
@@ -635,6 +653,7 @@ def export_autoregressive_client_payload(
         n_layers,
         chain["layer_dirs"],
         chain.get("final_norm_poly"),
+        input_ids=input_ids,
     )
     chain["tensors"] = manifest
     note = "autoregressive assets support client decrypt/lm_head/argmax/re-encrypt"

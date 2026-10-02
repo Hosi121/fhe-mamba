@@ -49,11 +49,14 @@ retains controls, profiles, diagnostic vectors and source identities.
 
 ## Continuing development
 
-The [generation API and CLI](generation.md) accept text or token IDs for Mamba-3.
-Preparation binds one input and generation length; exact and polynomial CPU
-execution share a result format with the classical-128 CKKS adapter. CPU tests
-cover request identity, export parity and failed native reports. This adds no
-GPU qualification or arbitrary-prompt accuracy claim.
+The [generation API and CLI](generation.md) accept text or token IDs for Mamba-2
+and Mamba-3, detected from the local checkpoint. Preparation binds one input and
+generation length. Mamba-2 requires a frozen base chain and explicit
+`mamba2-experimental` profile (`security=not-set`); Mamba-3 retains classical-128.
+Exact, polynomial and CKKS execution share a result format while preserving
+their existing acceptance gates. CPU tests cover request identity, reference
+parity and failed native reports. This adds no GPU qualification or
+arbitrary-prompt accuracy claim.
 
 Mamba-3 client heads now use verified read-only blobs shared by sibling payloads;
 original paths remain readable through relative symlinks. See the

@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from fhemamba.benchmarks.io import file_sha256
+from fhemamba.checkpoints import tokenizer_directory
 from fhemamba.inference import load_model, load_prepared
 from fhemamba.inputs import generation_length, token_ids
 
@@ -18,10 +19,10 @@ def _parser(command):
         "--model",
         type=Path,
         required=command == "prepare",
-        help="local Mamba-3 SISO checkpoint directory",
+        help="local Mamba-2 or Mamba-3 SISO checkpoint directory (detected from config)",
     )
     parser.add_argument(
-        "--tokenizer", type=Path, help="local tokenizer; defaults to MODEL/tokenizer when present"
+        "--tokenizer", type=Path, help="local tokenizer; defaults to MODEL/tokenizer or MODEL"
     )
     inputs = parser.add_mutually_exclusive_group(required=command == "prepare")
     inputs.add_argument("--prompt", help="text encoded without added special tokens")
@@ -35,13 +36,18 @@ def _parser(command):
     parser.add_argument("--threads", type=int, default=4, help="CPU model threads (default: 4)")
     if command == "prepare":
         parser.add_argument("--output", type=Path, required=True, help="fresh payload directory")
-        parser.add_argument("--profile", choices=("classical-128",), default="classical-128")
+        parser.add_argument(
+            "--profile",
+            choices=("classical-128", "mamba2-experimental"),
+            help="Mamba-3 defaults to classical-128; Mamba-2 needs explicit experimental selection",
+        )
+        parser.add_argument(
+            "--base-chain", type=Path, help="frozen joint-gate chain required for Mamba-2"
+        )
     else:
         parser.add_argument("--backend", choices=("exact", "polynomial", "ckks"), default="exact")
         parser.add_argument("--prepared", type=Path, help="request produced by fhemamba prepare")
-        parser.add_argument(
-            "--binary", type=Path, help="native packed_fideslib executable for CKKS"
-        )
+        parser.add_argument("--binary", type=Path, help="model-specific native executable for CKKS")
         parser.add_argument("--output", type=Path, help="fresh CKKS run directory")
         parser.add_argument("--timeout", type=float, default=2400, help="CKKS timeout in seconds")
         parser.add_argument("--json", action="store_true", help="emit the structured result")
@@ -54,8 +60,8 @@ def _read(path):
 
 def _tokenizer(args, manifest=None):
     path = args.tokenizer
-    if path is None and args.model is not None and (args.model / "tokenizer").is_dir():
-        path = args.model / "tokenizer"
+    if path is None and args.model is not None:
+        path = tokenizer_directory(args.model)
     if path is None:
         return None
     if manifest is not None:
@@ -81,7 +87,10 @@ def _inputs(args, tokenizer, manifest=None):
         ids = token_ids(json.loads(_read(args.input_ids)))
     elif args.prompt is not None or args.prompt_file is not None:
         if tokenizer is None:
-            raise ValueError("text input requires --tokenizer or a MODEL/tokenizer directory")
+            raise ValueError(
+                "text input requires a local tokenizer in MODEL/tokenizer or MODEL, "
+                "or an explicit --tokenizer"
+            )
         prompt = args.prompt if args.prompt is not None else _read(args.prompt_file)
         ids = token_ids(tokenizer.encode(prompt, add_special_tokens=False))
     elif manifest is not None:
@@ -113,7 +122,6 @@ def prepare_main(argv=None):
     try:
         tokenizer = _tokenizer(args)
         ids, length = _inputs(args, tokenizer)
-        generation_length(length, input_length=len(ids))
         _cpu_threads(args.threads)
         prepared = load_model(args.model).prepare(
             ids,
@@ -121,6 +129,7 @@ def prepare_main(argv=None):
             output=args.output,
             tokenizer=args.tokenizer,
             profile=args.profile,
+            base_chain=args.base_chain,
         )
         print(
             json.dumps(
@@ -128,7 +137,7 @@ def prepare_main(argv=None):
                     "prepared": str(prepared.path),
                     "input_ids": ids,
                     "max_new_tokens": length,
-                    "profile": args.profile,
+                    "profile": prepared.profile,
                     "manifest_sha256": prepared.manifest_sha256,
                 },
                 indent=2,

@@ -8,16 +8,27 @@ import shutil
 from pathlib import Path
 
 from fhemamba import __version__
+from fhemamba.inputs import generation_length, token_ids
 
 
-def prepare_generation(model, tokenizer, source, destination, *, prompt, generate_tokens):
+def prepare_generation(
+    model, tokenizer, source, destination, *, prompt=None, input_ids=None, generate_tokens
+):
     """Copy a frozen payload, then add references for the entire input prompt."""
     import numpy as np
 
     from fhemamba.m1_payload import export_autoregressive_client_payload
 
-    if not prompt.strip() or generate_tokens < 1:
-        raise ValueError("a nonempty prompt and positive generation length are required")
+    generation_length(generate_tokens)
+    if (prompt is None) == (input_ids is None):
+        raise ValueError("choose exactly one of prompt or input_ids")
+    if input_ids is None:
+        if not prompt.strip():
+            raise ValueError("a nonempty prompt is required")
+        prompt_ids = tokenizer(prompt, return_tensors="pt").input_ids[0].tolist()
+    else:
+        prompt_ids = input_ids
+    prompt_ids = token_ids(prompt_ids, vocab_size=model.get_input_embeddings().num_embeddings)
     source, destination = Path(source), Path(destination)
     if destination.resolve().is_relative_to(source.resolve()):
         raise ValueError("generation destination must be outside the source payload")
@@ -61,9 +72,6 @@ def prepare_generation(model, tokenizer, source, destination, *, prompt, generat
                 raise ValueError(f"checkpoint differs from payload: {directory}/conv_b")
         else:
             check_weight(source / directory, "conv_b", mixer.conv1d.bias)
-    prompt_ids = tokenizer(prompt, return_tensors="pt").input_ids[0].tolist()
-    if not prompt_ids:
-        raise ValueError("prompt tokenization is empty")
     # Never modify the measured source or share writable hard links with it.
     shutil.copytree(source, destination)
     export_autoregressive_client_payload(
@@ -73,6 +81,7 @@ def prepare_generation(model, tokenizer, source, destination, *, prompt, generat
         prompt=prompt,
         prompt_tokens=len(prompt_ids),
         generate_tokens=generate_tokens,
+        input_ids=prompt_ids,
     )
     prepared = json.loads((destination / "chain.json").read_text())
     if prepared["autoregressive"]["prompt_ids"] != prompt_ids:
@@ -163,7 +172,9 @@ def generation_report(native, chain, request, tokenizer, *, payload_sha256):
         "passed": passed,
         "parameters": {**request, "security": parameters["security"], "selection": "greedy"},
         "checks": checks,
-        "text": {
+        "text": None
+        if tokenizer is None
+        else {
             "prompt": decode(request["prompt_ids"]),
             "generated": decode(selected),
             "full": decode(request["prompt_ids"] + selected),
